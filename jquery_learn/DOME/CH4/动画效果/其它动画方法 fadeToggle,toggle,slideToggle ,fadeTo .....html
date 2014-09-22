@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+	<title>其它动画元素dome</title>
+</head>
+
+<style type="text/css">
+*{margin:0;padding:0;}	
+body { font-size: 13px; line-height: 130%; padding: 60px }
+.panel,.pane2,.pane3,.pane4{ width: 300px;margin-left:10px;float: left;}
+.head { height:24px;line-height:24px;text-indent:10px;background: #96E555; cursor: pointer; width:100%; }
+.content { padding: 10px; text-indent:24px; border-top: 1px solid #0050D0;display:block; }
+</style>
+<body>
+
+<div class="panel">
+	Toggle() ，切换显示和隐藏状态<br>
+	<h5 class="head">什么是jQuery?</h5>
+	<div class="content">
+		jQuery是继Prototype之后又一个优秀的JavaScript库，它是一个由 John Resig 创建于2006年1月的开源项目。jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax。它独特而又优雅的代码风格改变了JavaScript程序员的设计思路和编写程序的方式。
+	</div>
+</div>
+
+<div class="pane2">
+	slideToggle() ，切换显示和隐藏状态<br>
+	<h5 class="head">什么是jQuery?</h5>
+	<div class="content">
+		jQuery是继Prototype之后又一个优秀的JavaScript库，它是一个由 John Resig 创建于2006年1月的开源项目。jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax。它独特而又优雅的代码风格改变了JavaScript程序员的设计思路和编写程序的方式。
+	</div>
+</div>
+
+<div class="pane3">
+	fadeToggle() ，切换显示和隐藏状态<br>
+	<h5 class="head">什么是jQuery?</h5>
+	<div class="content">
+		jQuery是继Prototype之后又一个优秀的JavaScript库，它是一个由 John Resig 创建于2006年1月的开源项目。jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax。它独特而又优雅的代码风格改变了JavaScript程序员的设计思路和编写程序的方式。
+	</div>
+</div>
+
+<div class="pane4">
+	fadeTo(),切换显示和隐藏状态<br>
+	<h5 class="head">什么是jQuery?</h5>
+	<div class="content">
+		jQuery是继Prototype之后又一个优秀的JavaScript库，它是一个由 John Resig 创建于2006年1月的开源项目。jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax。它独特而又优雅的代码风格改变了JavaScript程序员的设计思路和编写程序的方式。
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".panel h5.head").click(function(){
+			$(this).next().toggle();
+		})
+
+		$(".pane2 h5.head").click(function(){
+			$(this).next().slideToggle();
+		})
+
+		$(".pane3 h5.head").click(function(){
+			$(this).next().fadeToggle();
+		})
+
+		$(".pane4 h5.head").click(function(){
+			$(this).next().fadeTo("fast",0.2);
+		})
+
+	})
+
+</script>
+</body>
+</html>

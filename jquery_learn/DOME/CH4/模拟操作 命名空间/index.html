@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>模拟事件</title>
+	<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+</head>
+<body>
+	<div style="width:100%;height:100%;overflow:heidde">
+		<button id="btn1">点击我</button>
+		<button id="btn2">trigger触发自定义事件</button>
+		<button id="btn3">trigger触发事件带参数</button>
+	</div>
+	<div id="test" style="float:left"></div>
+	<div id="test2" style="float:left;margin-left:20px;"></div>
+	<div id="test3" style="float:left;margin-left:20px;"></div>
+	<div style="clear: both;"></div>
+	<div style="width:100%;background: rgb(236, 236, 236);">
+		<button id="old">trigger</button>
+		<button id="new">triggerHandler</button>
+		<input type="text"/>
+	</div>
+	<div style="margin-top:10px;width:100%;background: rgb(236, 236, 236);">
+		bind 多事件类型案例再次简写 之前 ，mouseover mouseout事件
+		<p id="p1">鼠标移动上来 bind("mouseover mouseout",function(){</p>
+		<style type="text/css">
+			.colorred{
+				color: red;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$("#p1").bind("mouseover mouseout",function(){
+					$(this).toggleClass("colorred");
+				})
+			})
+		</script>
+	</div>
+
+	<div style="margin-top:10px;width:100%;background: rgb(236, 236, 236);">
+		bind 使用时间命名空间，删除时间操作
+		<button id="unbindtest">删除时间命名空间为  testt1 的事件</button>
+		<button id="triggerno">只是触发木有命名空间的事件</button>
+		<div style="width:200px;height:200px;background:red" id="mcdb">
+			mouseover , click ,dblclick 
+		</div>
+
+		<script type="text/javascript">
+			$(function(){
+				$("div#mcdb").bind("mouseover.testt1",function(){
+					$(this).after("<p>我是mouseover事件</p>");
+				});
+				$("div#mcdb").bind("click.testt1",function(){
+					$(this).after("<p>我是click事件testt1</p>")
+				})
+				$("div#mcdb").bind("click",function(){
+					$(this).after("<p>我是click事件木有命名空间</p>");
+				});
+				$("div#mcdb").bind("dblclick.testt1",function(){
+					$(this).after("<p>我是dblclick事件</p>");
+				});
+
+				$("#unbindtest").click(function(){
+					$("div#mcdb").unbind(".testt1");
+				})
+
+				$("#triggerno").click(function(){
+					$("#mcdb").trigger("click!");	//后面  click! 的 感叹号作用就是不触发具有命名空间的事件 
+				})
+			})
+		</script>
+		
+	</div>	
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#btn1").bind("click", fun1 = function() {
+				$("#test").append("<p>我是绑定函数1</p>");
+			}).bind("click", fun2 = function() {
+				$("#test").append("<p>我是绑定函数2</p>");
+			}).click(fun3 = function() {
+				$("#test").append("<p>我是绑定函数3</p>");
+			});
+
+			$("#btn1").trigger("click");	// trigger 执行后触发事件后，会执行浏览器上的操作
+
+			$("#btn2").bind("myClick",function(){
+				$("#test2").append("<p>我是myClick事件，通过trigger触发</p>");
+			});
+
+			$("#btn2").click(function(){
+				$(this).trigger("myClick");
+			}).trigger("myClick");
+
+
+			$("#btn3").bind("myClick",function(event,message1,message2){
+				$("#test3").append("<p>" + message1 +message2 + "</p>")
+			});
+			$("#btn3").click(function(){
+				$(this).trigger("myClick",["点击事件通过 trigger触发myclick事件","触发的"]);
+			}).trigger("myClick",["代码触发的","触发的"]);
+
+			$("#old").click(function(){
+				$("input").trigger("focus"); //  触发input框的 focus 事件,trigger不仅会触发事件同时会执行浏览器操作，input会获取焦点
+			})
+
+			$("#new").bind("click",function(){
+				$("input").triggerHandler("focus");	//触发input框的 focus 时间, triggerHandler只会触发 focus 时间而不会执行浏览器操作将光标焦点移动到 input框
+			})
+
+			$("input").focus(function(){
+				$(this).after("<p>获取焦点事件</p>")
+			})
+		})
+	</script>
+</body>
+</html>

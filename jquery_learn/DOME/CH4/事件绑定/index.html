@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>事件绑定操作</title>
+<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+<script type="text/javascript" src="js.js"></script>
+</head>
+<style type="text/css">
+	body{
+		margin:0;
+		padding: 0;
+		font-size: 12px;
+	}
+	.diva{
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+	}
+
+	#panel { 
+		width: 300px; 
+		margin-left: 300px;
+	}
+	.head { height:24px;line-height:24px;text-indent:10px;background: #96E555; cursor: pointer;width:100%; }
+	.content {
+		padding: 10px;
+		text-indent:24px; 
+		display: none;
+	}
+
+	.div1,.div2{
+		width: 700px;
+		height: 100%;
+		overflow: hidden;
+		margin: 10px;
+		float: left;
+	}
+
+	.div2{
+		width: 500px;
+	}
+
+	.div1 div,.div2 div{	
+		background: rgb(243, 237, 237);
+		width: auto;
+		height: 100%;
+		overflow: hidden;
+		padding: 5px;
+		margin-bottom: 5px;
+	}
+	div h3{
+		font-size: 14px;
+		font-weight: bolder;
+		text-align: center;
+		margin: 0;
+	}
+
+.highlight{ 
+	background:#FF3300; 
+}	
+</style>
+
+<body>
+	<div class="diva">
+		<div id="panel">
+			<h5 class="head">什么是jQuery?</h5>
+			<div class="content">
+				jQuery是继Prototype之后又一个优秀的JavaScript库，它是一个由 John Resig 创建于2006年1月的开源项目。jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax。它独特而又优雅的代码风格改变了JavaScript程序员的设计思路和编写程序的方式。
+			</div>
+		</div>
+	</div>
+
+	<div class="div1">
+		<div>
+			<h3>全局操作</h3>
+			<button id="reset">清空所有事件</button>
+			<input type="checkbox" id="isreset"><label for="isreset">点击下面按钮时先执行清空事件操作</label>
+		</div>
+
+		<div>
+			<h3>添加事件</h3>
+			<button id="click1">点击展开</button>
+			<button id="click2">:visible判断点击隐藏显示</button>
+			<button id="click3">mouseover-out滑动隐藏显示</button>
+			<button id="click4">hover()方法简写滑动隐藏显示</button>
+			<button id="click5">toggle()方法简写click隐藏显示</button>
+			<button id="click6">toggle()方法切换可见性</button>
+			<button id="click7">toggle()加强高亮版本</button>
+		</div>
+	</div>
+
+	<div class="div2">
+		<div>
+			
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>表格展开关闭</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<style type="text/css">
+table		{ border:0;border-collapse:collapse;}
+td	{ font:normal 12px/17px Arial;padding:2px;width:100px;}
+th			{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px solid #333;width:100px;}
+.parent		{ background:#FFF38F;cursor:pointer;}  
+.odd		{ background:#FFFFEE;}  
+.selected		{ background:#FF6500;color:#fff;}
+.div1,.div2{
+	float:left;
+	margin-left:10px;
+}
+</style>
+</head>
+<body>
+<div class="div1">
+	<table>
+		<thead>
+			<tr><th>姓名</th><th>性别</th><th>暂住地</th></tr>
+		</thead>
+		<tbody>
+			<tr class="parent" id="row_01"><td colspan="3">前台设计组</td></tr>
+			<tr class="child_row_01"><td>张山</td><td>男</td><td>浙江宁波</td></tr>
+			<tr class="child_row_01"><td>李四</td><td>女</td><td>浙江杭州</td></tr>
+
+			<tr class="parent" id="row_02"><td colspan="3">前台开发组</td></tr>
+			<tr class="child_row_02"><td>王五</td><td>男</td><td>湖南长沙</td></tr>
+			<tr class="child_row_02"><td>找六</td><td>男</td><td>浙江温州</td></tr>
+
+			<tr class="parent" id="row_03"><td colspan="3">后台开发组</td></tr>
+			<tr class="child_row_03"><td>Rain</td><td>男</td><td>浙江杭州</td></tr>
+			<tr class="child_row_03"><td>MAXMAN</td><td>女</td><td>浙江杭州</td></tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="div2">
+	<table>
+		<thead>
+			<tr><th>姓名</th><th>性别</th><th>暂住地</th></tr>
+		</thead>
+		<tbody>
+			<tr class="parent" id="row_01"><td colspan="3">前台设计组</td></tr>
+			<tr class="child_row_01"><td>张山</td><td>男</td><td>浙江宁波</td></tr>
+			<tr class="child_row_01"><td>李四</td><td>女</td><td>浙江杭州</td></tr>
+
+			<tr class="parent" id="row_02"><td colspan="3">前台开发组</td></tr>
+			<tr class="child_row_02"><td>王五</td><td>男</td><td>湖南长沙</td></tr>
+			<tr class="child_row_02"><td>找六</td><td>男</td><td>浙江温州</td></tr>
+
+			<tr class="parent" id="row_03"><td colspan="3">后台开发组</td></tr>
+			<tr class="child_row_03"><td>Rain</td><td>男</td><td>浙江杭州</td></tr>
+			<tr class="child_row_03"><td>MAXMAN</td><td>女</td><td>浙江杭州</td></tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".div1 .parent").click(function(){
+			$(this).toggleClass("selected");
+			$(".div1 .child_" + this.id).toggle();
+		})
+		
+		$(".div2 .parent").click(function(){
+			$(this).toggleClass("selected");
+			$(".div2 .child_" + this.id).toggle();
+		}).trigger("click");
+		
+		
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<title>图片滚动案例</title>
+	<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+	<script type="text/javascript" src="jquery.imgCarousel.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="v_show">
+		<div class="v_caption">
+			<h2 class="cartoon" title="卡通动漫">卡通动漫</h2>
+			<div id="highlight_tip"></div>
+			<div class="change_btn">
+				<span id="prev">上一页</span>
+				<span id="next">下一页</span>
+			</div>
+			<em><a href="#">More>></a></em>
+		</div>
+
+		<div class="l_content">
+			<div class="l_content_list">
+				<ul>
+					<li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>28,456</em></span></li>
+					<li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>45,642</em></span></li>
+					<li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>45,642</em></span></li>
+					<li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>45,642</em></span></li>
+
+					<li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+					<li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+					<li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+					<li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+
+					<li><a href="#"><img src="img/03.jpg" alt="火影忍者" /></a><h4><a href="#">火影忍者</a></h4><span>播放:<em>28,276</em></span></li>
+					<li><a href="#"><img src="img/03.jpg" alt="火影忍者" /></a><h4><a href="#">火影忍者</a></h4><span>播放:<em>28,276</em></span></li>
+					<li><a href="#"><img src="img/03.jpg" alt="火影忍者" /></a><h4><a href="#">火影忍者</a></h4><span>播放:<em>28,276</em></span></li>
+					<li><a href="#"><img src="img/03.jpg" alt="火影忍者" /></a><h4><a href="#">火影忍者</a></h4><span>播放:<em>28,276</em></span></li>
+
+					<li><a href="#"><img src="img/04.jpg" alt="龙珠" /></a><h4><a href="#">龙珠</a></h4><span>播放 <em>57,865</em></span></li>
+					<li><a href="#"><img src="img/04.jpg" alt="龙珠" /></a><h4><a href="#">龙珠</a></h4><span>播放 <em>57,865</em></span></li>
+					<li><a href="#"><img src="img/04.jpg" alt="龙珠" /></a><h4><a href="#">龙珠</a></h4><span>播放 <em>57,865</em></span></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+		function setTime(){
+			setTimeout("setTime()", 1000);
+			alert("message");
+		}
+		$(document).ready(function(){
+			$(".l_content").l_carousel({
+				isAutoPlay : true,				// 是否自动轮播
+				interval : '6000',				// 如果自动轮播 设置间隔时间 (ms)
+				imgPageNums : '4',				// 每页显示的图片张数
+				prevBtnId : 'prev',				// 上一页按钮 Id 名称
+				nextBtnId : 'next' ,			// 下一页按钮 Id 名称
+				switchDivId : 'highlight_tip' 	// 指示器放在那个div中
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>animate()自定义动画 </title>
+<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+<style type="text/css">
+	*{
+		margin:0;padding:0;
+	}
+
+	body {
+		font-size: 12px;
+		padding: 60px;
+	 }
+
+	.panel{
+		position: relative;
+		width: 100px;
+		height: 100px;
+		border: 1px solid #0050D0;
+		background: #96E555;
+		cursor: pointer;
+		top: 10px;
+		left: 10px;
+	}
+
+</style>
+</head>
+<body>
+	<h5>animate(params,speed,callback)</h5>
+	<p>
+		params: 一个包含样式属性及值的映射,比如{property1:"value1",property2:"value2"}。
+	</p>
+	<p><span>speed:速度参数，可选。</span>
+	<span>callback:在动画完成时执行的函数，可选。</span></p><br>
+	<button id="reset">手动清空动画</button>
+	<input type="checkbox"  id="isreset" checked="checked"/>
+	<label for="isreset">是否在添加其它事件的时候先清空</label><br><br>
+	<button id="btn1">添加简单的移动事件</button>
+	<button id="btn2">累加累减动画</button>
+	<button id="btn3">多动画同时执行</button>
+	<button id="btn4">多动画依次执行</button>
+	<button id="btn5">综合动画</button>
+	<button id="btn6">css()不排队</button>
+	<button id="btn7">css()排队 -queue() -dequeue()</button>
+	<button id="btn8">css()排队 -queue(next)</button>
+	<button id="btn9">css()排队使用回调函数</button>
+	
+	<br><br>
+	<div class="div1">
+		<div class="panel"></div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			function isreset(){
+				if ($("#isreset").is(":checked")){
+					$(".div1 .panel").unbind().css({
+								"background": "#96E555",
+								"top": "10px",
+								"left": "10px",
+								"width": "100px",
+								"height": "100px"
+					})
+				}
+			}
+
+			$("#reset").click(function(){
+				$(".div1 .panel").unbind().css({
+					"background": "#96E555",
+					"top": "10px",
+					"left": "10px",
+					"width": "100px",
+					"height": "100px",					
+				})
+			});
+
+			$("#btn1").click(function(){
+				isreset();
+				$(".div1 .panel").bind("click",function(){
+					$(this).animate({"left":"500px"},300);	//滑动到left:500px  时间300毫秒
+				})
+			});
+
+			$("#btn2").click(function(){
+				isreset();
+				$(".div1 .panel").bind("click",function(){	//滑动累加 每次left + 100px
+					$(this).animate({"left":"+=100px"},400);
+				})
+			});
+
+			$("#btn3").click(function(){
+				isreset();
+				$(".div1 .panel").click(function(){	// 同时 滑动到left:500px height变为200px
+					$(this).animate({"left":"500px","height":"200px"},400);
+				})
+			})
+
+			$("#btn4").click(function(){
+				isreset();
+				$(".div1 .panel").click(function(){	// 先滑动到left :500 在调整height为200px;
+					$(this).animate({"left":"500px"},400).animate({"height":"200px"},400);
+				})
+			})
+
+			$("#btn5").click(function(){
+				isreset();
+				$(".div1 .panel").click(function(){ 
+				// 向右移动同时增高并且不透明度50%变为100%,然后再从上到下移动，同时宽度变大。完成之后淡出的方式隐藏
+					$(this).animate({"left":"500px","height":"200px","opacity":"0.5"},3000).animate({"top":"200px","width":"200px"},400).fadeOut("slow");
+				})
+			})
+
+			$("#btn6").click(function(){
+				isreset();
+				$(".div1 .panel").click(function(){ 
+					// 动画完成后执行 css方法改变样式，但是css不会被加入到动画列队而是会立即执行
+					$(this).animate({"left":"500px","height":"200px","opacity":"0.5"},3000).animate({"top":"200px","width":"200px"},400).css("border","5px solid blue");
+				})
+			})
+
+			$("#btn7").click(function(){
+				isreset();
+				$(".div1 .panel").click(function(){
+					// 动画完成后执行 css方法改变样式,通过 jQuery queue()方法列队
+					$(this).animate({"left":"500px","height":"200px","opacity":"0.5"},3000)
+							.animate({"top":"200px","width":"200px"},400)
+							.queue(function(){
+								$(this).css("border","5px solid blue").dequeue();	//不加 dequeue()结束语句 后面的动画将无法执行
+							})
+							.slideUp("slow");
+
+					})
+			})
+
+			$("#btn8").click(function(){
+				isreset();
+				$(".div1 .panel").click(function(){
+					$(this).animate({"left":"500px","height":"200px","opacity":"0.5"},3000)
+							.animate({"top":"200px","width":"200px"},400)
+							.queue(function(next){
+								$(this).css("border","5px solid blue");
+								next(); // 通过function(next) 参数和 next(); 确保能够继续执行下面的 slideUp 动画
+							})
+							.slideUp("slow");
+				})
+			})
+
+			$("#btn9").click(function(){
+				isreset();
+				$(".div1 .panel").click(function(){
+					$(this).animate({"left":"500px","height":"200px","opacity":"0.5"},3000)
+							.animate({"top":"200px","width":"200px"},400,function(){
+								$(this).css("border","5px solid blue");	//当动画执行完后回调执行该函数,slideUp(),show(),fadeIn() 等 。。。 都可使用同样会方法
+							})
+							.slideUp("slow");
+				})
+			})
+		})
+	</script>
+</body>
+</html>

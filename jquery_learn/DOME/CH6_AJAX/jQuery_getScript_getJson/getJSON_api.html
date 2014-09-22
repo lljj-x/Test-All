@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>$.getJSON 获取flickr pic</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<style type="text/css">
+* { margin:0; padding:0;}
+body { font-size:12px;}
+.comment { margin-top:10px; padding:10px; border:1px solid #ccc;background:#DDD;}
+.comment h6 { font-weight:700; font-size:14px;}
+.para { margin-top:5px; text-indent:2em;background:#DDD;}
+</style>
+
+</head>
+<body>
+	<p><input type="button" id="send" value="加载" /></p>
+	<div id="images"></div>
+	
+<script type="text/javascript">
+	// $.getJSON(jsonfile,callback)	//	注意 getJSON 为大写 JSON
+
+	/*
+		教程源码 
+		创建一个 img 标签循环输出
+	
+	$(document).ready(function() {
+		$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?",
+		function(data){
+		  $.each(data.items, function(i,item){
+		    $("<img/>").attr("src", 
+		item.media.m).appendTo("#images");
+		    if ( i == 3 ) return false;
+		  });
+		}); 
+
+	})
+	*/
+	
+	
+	/*
+		循环得到最终html结果 然后输出
+	*/
+
+	$(document).ready(function() {
+
+		$("#send").click(function() {
+			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=cat&tagmode=any&format=json&jsoncallback=?", function(data) {
+				$.each(data.items, function(dataindex, item) {
+					var imgsrc = item.media.m;
+					var html = "<img src='" + imgsrc + "'/>";
+					$("#images").append(html);
+					if (dataindex == 5) {
+						return false; // 控制循环 ，如果索引到 3 就退出,因为索引是从 0 开始，所以会得到 4张图片
+					}
+				})
+			})
+		})
+	})
+
+</script>
+</body>
+</html>			

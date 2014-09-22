@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>停止元素的动画 stop</title>
+<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+<style type="text/css">
+	.divtest{
+		width: 100px;
+		height: 100px;
+		border: 1px solid #0050D0;
+		background: #96E555;
+		cursor: pointer;
+		top: 10px;
+		left: 10px;
+		float: left;
+		margin-left: 20px;
+		font-size: 12px;
+	}
+</style>
+
+</head>
+<body>
+	<div>
+		<div style="height:50px;">
+			<span style="font-size: 16px;color: #000;font-weight: bold;padding:20px;">
+				stop(clearQueue,gotoEnd) stop使用方法: 两个参数均为bool类型,如果直接使用stop()方法，会立即停止当前动画，如果还有动画需要执行，会直接从当前状态开始执行接下来的动画
+			</span>
+		</div>
+		
+		<div class="divtest" id="museover1">快速移入移出你的鼠标,没有stop()</div>
+		<div class="divtest" id="museover2">快速移入移出你的鼠标,加上 stop()</div>
+		<div class="divtest" id="museover3">快速移入移出你的鼠标,组合动画 stop()木有参数</div>
+		<div class="divtest" id="museover4">快速移入移出你的鼠标,组合动画 stop(true),会清楚列队所有动画然后接着执行</div>
+		<div class="divtest" id="museover5" style="width:150px; height:150px">需要注意的是 stop(true,true)的方法清空列队动画的同事，并且返回到当前状态的最终状态，仅仅只能是当前动画，暂时不能到所有列队的最终状态</div>
+
+	</div>
+
+	<script type="text/javascript">
+		$(function(){
+			$("#museover1").hover(function(){	//木有加 stop 一直会按顺序执行完列队里面所有的动画
+				$(this).animate({"height":"200px","width":"200px"},300);
+			},function(){
+				$(this).animate({"height":"100px","width":"100px"},300);
+			})
+
+			$("#museover2").hover(function(){	// 加上stop() 会立即停止当前动画，接着执行列队后面的动画
+				$(this).stop().animate({"height":"200px","width":"200px"},300);
+			},function(){
+				$(this).stop().animate({"height":"100px","width":"100px"},300);
+			})
+
+			$("#museover3").hover(function(){	// 组合动画加上stop() 会立即停止当前动画,后面的动画会继续执行 
+				$(this).stop()
+						.animate({"height":"200px"},500)	//假设当执行到当前位置时，执行了鼠标移除事件,会立即停止当前的动画，然后执行列队里面的动画 即为：.animate({"width","200px"},500);
+						.animate({"width":"200px"},500);
+			},function(){
+				$(this).stop()
+						.animate({"height":"100px"},500)
+						.animate({"width":"100px"},500);
+			})
+
+			$("#museover4").hover(function(){	// 组合动画加上stop() 会立即停止当前动画,后面的动画会继续执行 
+				$(this).stop(true)
+						.animate({"height":"200px"},500)	//假设当执行到当前位置时，执行了鼠标移除事件,会立即停止当前的动画，然后执行列队里面的动画 即为：.animate({"width","200px"},500);
+						.animate({"width":"200px"},500);
+			},function(){
+				$(this).stop(true)
+						.animate({"height":"100px"},500)
+						.animate({"width":"100px"},500);
+			})
+
+
+			$("#museover5").hover(function(){	// 组合动画加上stop(true,true) goEnd 为 true 只能到当前动画的最终状态 而不能返回当前列队的最终状态
+				$(this).stop(true,true)
+						.animate({"height":"200px"},500)	
+	//假设当执行到当前位置时
+						.animate({"width":"200px"},500);
+			},function(){
+				$(this).stop(true,true)
+						.animate({"height":"150px"},500)
+						.animate({"width":"150px"},500);
+			})
+		})
+
+	</script>
+</body>
+</html>

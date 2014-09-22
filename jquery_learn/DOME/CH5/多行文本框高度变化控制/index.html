@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>多行文本框高度变化</title>
+	<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+	<style type="text/css">
+
+		* { 
+			margin:0; 
+			padding:0;
+			font:normal 12px/17px Arial; 
+		}
+		body{
+			padding: 50px;
+		}
+
+		.msg {
+			width:300px;
+		}
+
+		.msg_caption { 
+			width:100%; 
+			overflow:hidden; 
+			margin-bottom:1px;
+		}
+
+		.msg_caption span { 
+			display:block; 
+			float:left; 
+			margin:0 2px; 
+			padding:4px 10px; 
+			background:#898989; 
+			cursor:pointer;
+			color:white; 
+		}
+
+		.msg textarea{ 
+			width:300px; 
+			height:100px;
+			border:1px solid #000;
+		}
+
+		.div1,.div2,.div3{
+			width: 320px;
+			padding: 10px;
+			margin-left: 10px;
+			float: left;
+			background: rgb(240, 240, 240);
+		}
+
+	</style>
+
+</head>
+<body>
+	<div class="div1">
+		<p>直接改变文本框的高度</p>
+		<form action="#" method="get">
+			<div class="msg">
+				<div class="msg_caption">
+					<span class="bigger">放大</span>
+					<span class="smaller">缩小</span>
+				</div>
+				<div>
+					<textarea id="comment" rows="8" cols="20">多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.</textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="div2">
+		<p>使用animate 方法滑动改变文本框的高度</p>
+		<form action="#" method="get">
+			<div class="msg">
+				<div class="msg_caption">
+					<span class="bigger">放大</span>
+					<span class="smaller">缩小</span>
+				</div>
+				<div>
+					<textarea id="comment" rows="8" cols="20">多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.</textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="div3">
+		<p>使用animate({scrollTop: "-=50"},400) 方法滑动该变滚动条位置</p>
+		<form action="#" method="get">
+			<div class="msg">
+				<div class="msg_caption">
+					<span class="up">向上</span>
+					<span class="down">向下</span>
+				</div>
+				<div>
+					<textarea id="comment" rows="8" cols="20">多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.多行文本框高度变化.</textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			var $comment = $(".div1 #comment");
+			$(".div1 .bigger").click(function() {
+				if ($comment.height() < 500) {
+					$comment.height($comment.height() + 50);
+				}
+			})
+
+			$(".div1 .smaller").click(function() {
+				if ($comment.height() > 50) {
+					$comment.height($comment.height() - 50);
+				}
+			})
+
+			var $comment1 = $(".div2 #comment");
+			$(".div2 .bigger").click(function() {
+
+				if (!$comment1.is(":animated")) {
+					if ($comment1.height() < 500) {
+						$comment1.animate({
+							"height": "+=50"
+						}, 500);
+					}
+				}
+			})
+
+			$(".div2 .smaller").click(function() {
+				if (!$comment1.is(":animated")) {
+					if ($comment1.height() > 50) {
+						$comment1.animate({
+							"height": "-=50"
+						}, 500);
+					}
+				}
+			})
+
+			var $comment2 = $(".div3 #comment");
+			$(".div3 .up").click(function(){
+				if (!$comment2.is(":animated")){
+					$comment2.animate({scrollTop:"-=50"},500); //500毫秒内滚动条上移50px
+				}
+			})
+			$(".div3 .down").click(function(){
+				if (!$comment2.is(":animated")){
+					$comment2.animate({scrollTop:"+=50"},500);	//500毫秒内滚动条下移50px
+				}
+			})
+
+
+
+
+
+
+		})
+	</script>
+</body>
+</html>

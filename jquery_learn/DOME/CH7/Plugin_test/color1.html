@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+<title>DIY Plugin</title>
+<style type="text/css">
+	body{
+		background: rgb(207, 184, 184);
+		margin: 0;
+		padding: 100px;
+	}
+	.div1{
+		position: relative;
+		background: rgb(209, 206, 206);
+		width: 500px;
+		height: 500px;
+	}
+</style>
+</head>
+<body>
+	<H1>获取 color 颜色的值 </H1>
+	<H3>通过插件  $.fn.extend() 方法扩展插件</H3>
+	<H3><font font-color="red">注意：插件中获取的 this 直接为当前的jQuery对象，而非正常事件中的 DOM 对象</font></H3>
+	<div>
+		<ul>
+			<li style="color:red">red</li>
+			<li style="color:yellow">yellow</li>
+			<li style="color:blue">blue</li>
+		</ul>
+	</div>
+	<button class="bt1">点击li获取颜色值获取颜色</button>
+	<input type="text" class="getcolor" />
+	<button class="bt2">设置第一个 li 颜色</button>
+</body>
+
+<script type="text/javascript">
+	/*
+	$(document).ready(function(){
+		$("li").click(function(){
+			var color = $(this).color();
+			$("input[type='text']").val(color);
+		});
+		$(".bt2").click(function(){
+			var color = $(".getcolor").val();
+			if (color.length>0) {
+				$("li:first").color(color);
+			}else{
+				alert("输入颜色值");
+			}
+		});
+
+	})
+	;(function($){
+		$.fn.extend({
+			"color":function(value){	//判断是否设置了 value 返回不同的内容，实际上 jQuery .css 方法本来就会根据是否传递了参数而返回不同的内容，所以可以不用设置 . dome将使用这种方法 
+				if (value == undefined) {
+					return this.css("color");
+				}else{
+					return this.css("color",value);
+				}
+			}
+		});
+	})(jQuery);
+	*/
+	
+	$(function(){
+		$("li").on("click",function(){
+			alert($(this).color());	//无参数获取颜色 
+		});
+		
+		$(".bt2").on("click",function(){
+			if($("input.getcolor").val() == ""){
+				$("body").append($("<p>请先输入颜色值</p>"));
+				$("input.getcolor").getFocus("我要获取焦点");
+			}else{
+				$("li :first").color($("input.getcolor").val());
+			}
+		});
+	});
+	
+	// 等同于下面方法，单个定义插件 
+	;(function($){
+		$.fn.extend({
+			"color":function(value){
+				if(value == undefined){
+					return this.css("color");
+				}else{
+					return this.css("color",value);
+				}
+			},
+			"getFocus":function(){
+				return this[0].focus();
+			}
+		});
+		
+	})(jQuery);
+	
+	// 和上面  $.fn.extend 中getFocus 方法相同 
+	$.fn.newGetFocus = function(value){
+		alert(value);
+		return this[0].focus();
+	};
+	
+	// 和上面  $.fn.extend 中color 方法相同 
+	$.fn.newColor = function(value){
+		if(value == undefined){
+			return this.css("color");
+		}else{
+			return this.css("color",value)
+		}
+	}
+	
+</script>
+</html>

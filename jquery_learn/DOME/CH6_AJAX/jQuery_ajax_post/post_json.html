@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<style type="text/css">
+* { margin:0; padding:0;}
+body { font-size:12px;}
+.comment { margin-top:10px; padding:10px; border:1px solid #ccc;background:#DDD;}
+.comment h6 { font-weight:700; font-size:14px;}
+.para { margin-top:5px; text-indent:2em;background:#DDD;}
+</style>
+
+</head>
+<body>
+	<form id="form1" aciton="#">
+		<p>评论:</p> 
+		<p>姓名:<input name="username" id="username"></p>
+		<p>内容:<textarea name="content" id="content" rows="2" cols="20"></textarea></p>
+		<p><input type="button" id="send" value="提交" /></p>
+	</form>
+	<div class='comment'>已有评论:</div>
+	<div id="resText"></div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				$.post(url,data,callback,type)	//
+					url : ajax 请求的地址
+					data : 可选 
+					callback : 可选 , 回调函数，注意于 load()  方法不同的是，只有当 response的放回状态为 success 时才会调用该方法.
+								function(data,textStatus){
+									// data: 返回的内容包含格式和下面相同，
+									   textStatus: success error notmodified timeout 4种状态
+								}
+					type : 可选 ，服务器返回内容的格式 , 包含 ： xml , html , script , json , text , _default
+			*/
+
+			$("#send").click(function(){
+				$.post("post_json.php",{
+					username:$("#username").val(),
+					content:$("#content").val()
+				},function(data,textSTatus){
+					var username = data.username;
+					var content = data.content;
+					var htmlInsert = "<div class = 'comment'><h6>" + username + ":</h6><p class='para'>" + content + "</p></div>";
+					$("#resText").append(htmlInsert);
+				},"json");
+
+
+			})
+			})
+		</script>
+	</body>
+	</html>			

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>jquery表单单行文本框操作</title>
+	<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+	<style type="text/css">
+		.div1 input:focus,.div1 textarea:focus{
+			border: 1px solid #f00;
+			background: #fcc;
+		}
+
+		.div1 input,.div1 textarea,.div2 input,.div2 textarea,.div3 input,.div3 textarea{
+			border: 1px solid #888;
+		}
+
+		.div1,.div2,.div3{
+			width:300px;
+			margin-left: 10px;
+			padding: 10px;
+			background: rgb(241, 228, 228);
+			float: left;
+		}
+
+		p{
+			font-size: 12px;
+		}
+		
+		.focus{
+			border: 1px solid #f00;
+			background: #fcc;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="div1">
+		<p>通过css控制单行文本框获取焦点变色</p>
+		<form action="#" method="get" id="regForm">
+			<fieldset>
+				<legend>个人信息</legend>
+				<div>
+					<label for="username">name:</label>
+					<input id="username" type="text"/>
+				</div>
+				<div>
+					<label for="pass">pass:</label>
+					<input id="pass" type="password" />
+				</div>
+				<div>
+					<label for="msg">详细信息</label>
+					<textarea id="msg"></textarea>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	<div class="div2">
+		<p>通过jQuery控制单行文本框获取焦点变色</p>
+		<form action="#" method="GET" id="regForm">
+			<fieldset>
+				<legend>个人信息</legend>
+				<div>
+					<label for="username">name:</label>
+					<input id="username" type="text"/>
+				</div>
+				<div>
+					<label for="pass">pass:</label>
+					<input id="pass" type="password" />
+				</div>
+				<div>
+					<label for="msg">详细信息</label>
+					<textarea id="msg"></textarea>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	<div class="div3">
+		<p>通过jQuery控制单行文本框获取焦点变色,并且控制默认内容</p>
+		<form action="#" method="GET" id="regForm">
+			<fieldset>
+				<legend>个人信息</legend>
+				<div>
+					<label for="username">name:</label>
+					<input id="username" value="name" type="text"/>
+				</div>
+				<div>
+					<label for="pass">pass:</label>
+					<input id="pass" type="password" value="pass" />
+				</div>
+				<div>
+					<label for="msg">详细信息</label>
+					<textarea id="msg">详细信息</textarea>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".div2 :input").focus(function() {
+				$(this).addClass("focus");
+			}).blur(function() {
+				$(this).removeClass("focus");
+			})
+
+
+			$(".div3 :input").focus(function() {
+				$(this).addClass("focus");
+				if ($(this).val() == this.defaultValue) {
+					$(this).val("");
+				}
+			}).blur(function() {
+				$(this).removeClass("focus");
+				if ($(this).val() == "") {
+					$(this).val(this.defaultValue);
+				}
+			})
+		})
+	</script>
+</body>
+</html>

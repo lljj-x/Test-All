@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>简单聊天</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<style type="text/css">
+	body{
+		margin:0;
+		padding: 0;
+		font-size: 12px;
+	}
+	#messagewindow{
+		height: 250px;
+		border: 1px solid ;
+		padding: 5px;
+		overflow: auto;
+	}
+	#wrapper{
+		margin: auto;
+		width: 438px;
+	}
+
+</style>
+</head>
+<body>
+	<div id="wrapper">
+		<p id="messagewindow"><span id="loading">loading.....</span></p>
+		<form id="chatform" action="#">
+			<label for="author">姓名:</label><input type="text" id="author" size="50" /><br>
+			<label for="msg">内容:</label><input type="text" id="msg" size="50" /><br>
+			<input type="submit" value="发送"/><br>
+		</form>
+	</div>
+
+<script type="text/javascript">
+	var timestamp = 0;	//初始化时间戳
+	updateChat(); //调用自动刷新消息
+	$(document).ready(function(){
+		$("#chatform").submit(function(){
+			$.ajax({
+				url: "chat.php",
+				type: "POST",
+				data:{
+					author: $("#author").val(),
+					msg: $("#msg").val(),
+					isSubmit: "true",
+					time: timestamp
+				},
+				dataType: "xml",
+				success: function(xml,textStatus){
+					$("#msg").val("");
+					addChat(xml);
+				}
+			});
+			return false;
+		});
+	})
+	
+	function addChat(xml){
+		timestamp = $("time",xml).text();	//获取返回的时间戳 更新时间戳 
+		isUpdate = $("status",xml).text();	//获取是否有新信息要更新
+		if (isUpdate == "1"){
+			$("message",xml).each(function(){
+				var author = $("author",this).text();
+				var msg = $("text",this).text();
+				var htmlAdd = "<strong>" + author + "</strong>:" + msg +"<br>";
+				$("#loading").hide();
+				$("#messagewindow").prepend(htmlAdd);
+			})
+		}
+	}
+
+	function updateChat(){
+		$.post("chat.php",{
+			time:timestamp
+		},function(xml){
+			$("#loading").hide();
+			addChat(xml);
+		},"xml")
+		$("#loading").hide();
+		setTimeout("updateChat()", 3000);
+	}
+</script>
+</body>
+</html>

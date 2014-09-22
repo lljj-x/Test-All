@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>默认原生的javascript ajax 例子</title>
+</head>
+<body>
+<input type="button" value="原生Ajax提交" onclick="Ajax();" />
+<div id="resText" ></div>
+	<script type="text/javascript">
+		function Ajax() {
+			var xmlHttpreq = null;
+			if (window.ActiveXObject) { //IE5 IE6是以ActiveXObject的方式引入XMLHttpRequest的
+				xmlHttpreq = new ActiveXObject("Microsoft.XMLHTTP");
+			} else if (window.XMLHttpRequest) { //除IE5 IE6 以外的浏览器XMLHttpRequest是window的子对象
+				xmlHttpreq = new XMLHttpRequest(); //实例化一个XMLHttpRequest
+			}
+
+			if (xmlHttpreq != null ){
+				xmlHttpreq.open("GET","get.php",true);
+				xmlHttpreq.send(null);
+				xmlHttpreq.onreadystatechange = function(){
+					if (xmlHttpreq.readyState == 4 && xmlHttpreq.status == 200) {
+						document.getElementById("resText").innerHTML = xmlHttpreq.responseText ;
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

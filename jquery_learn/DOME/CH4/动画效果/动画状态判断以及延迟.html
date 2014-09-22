@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>通过 is(":animate") 判断是否动画状态</title>
+	<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<style type="text/css">
+	.divtest{
+		width:100px; 
+		height:100px; 
+		background:#96E555; 
+		margin-left: 10px;
+		font-size: 12px;
+		position:relative;
+	}
+</style>
+</head>
+<body>
+	<button id="clickStop">点击暂停</button>
+	<div style="clear:both;width:100;height:20px"></div>
+	<div class="divtest">is(:"animated")判断动画状态</div>
+	<div class="divtest">delay()延迟动画</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		function fun1(){
+			$("div:eq(1)").slideToggle(5000,fun1);
+		}
+		fun1();
+		function fun2(){
+			$("div:eq(1)").fadeToggle(5000,fun2);
+		}
+		$("#clickStop").click(function(){
+			if($("div:eq(1)").is(":animated")){	//当进行动画时 停止操作，否则执行 fun2 动画
+				$("div:eq(1)").stop();
+			}else{
+				fun2();
+			}
+		})
+
+		$("div:eq(2)").css("opacity","0.5");	//设置透明度
+		$("div:eq(2)").click(function(){
+			$(this).animate({"left":"400px","height":"200px","opacity":"1"},1000)
+					.delay(1000)	//延迟1s钟
+					.animate({"top":"200px","width":"200px"},1000)
+					.delay(1000)	//延迟1s钟
+					.fadeOut("slow");
+		})
+
+
+	})
+</script>
+</html>

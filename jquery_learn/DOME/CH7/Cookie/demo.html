@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cookie demo 记住用户名</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+</head>
+<body>
+	<div>
+		<label for="username" >用户名:</label>
+		<input type="text" id="username" /><br>
+		<label for="rename">记住用户名</label>
+		<input type="checkbox" id="rename"/>
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		if ($.cookie("saveuser")) {
+			$("#rename").attr("checked",true);
+			$("#username").val($.cookie("saveuser"));
+		};
+		$("#rename").click(function(){
+			if(this.checked){	//判断选中 设置cookie
+				$.cookie("saveuser",$("#username").val(),{
+					path: '/',
+					expires: 10
+				});
+			}else{	//删cookie
+				$.cookie("saveuser",null,{
+					path: '/',
+					expires: -1
+				})
+			}
+		})
+
+	})
+</script>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>最简单.ajaxform提交返回</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<script type="text/javascript" src="../../../js/jquery.form.js"></script>
+</head>
+<body>
+	<form id="myForm" action="get1.php" method="post">
+		名称: <input type="text" name="name" /><br>
+		地址: <input type="text" name="address" /><br>
+		自我介绍: <input type="text" name="comment"><br>
+		<input type="submit" id="test" value="提交" /><br>
+		<div id="output1"></div>
+	</form>
+	<style type="text/css">
+		body{
+			/*overflow: hidden;*/
+		}
+	</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		/*
+			.ajaxForm(),.ajaxSubmit() 都可以介绍一个或者0个参数，可以直接是一个函数回掉，或者一个options对象 
+
+		var options={
+			target: 	"#ouput1"	//用服务器返回的数据 更新id 为output1 的内容,ajax成功后自动更新 html 格式
+			beforeSubmit: 	showRequest,	//提交前的回调函数
+			success: showResponse,	//提交后的回调函数
+
+			// 其它的属性
+			url ：	url //默认form的action ，添加的话会覆盖默认的action
+			type: 	type //默认的method 如果写的话覆盖form的method
+			dataType: 	null // 'xml','script','json' ,服务器返回的类型 
+			clearFrom: 	true	//成功提交后 清除所有的表单元素值
+			resetForm: 	true	//成功提交后 重置所有的表单元素值
+			timeout: 	3000	//超时
+		};
+
+		// 'ajaxForm'
+		$('#myForm').ajaxForm(options);	// ajaxForm方式的提交
+	或者$('#myForm').ajaxSubmit(options);	//ajaxSubmit	
+			
+			function showRequest(formData,jqForm,options){
+				formData: 	数组对象 $.param()可以转为字符串 //类似 ： name=1&add=2 
+				jqForm: 	jQ对象，封装了表单元素, 
+							var formElement = jqForm[0];	//转化为dom对象
+							var address = formElement.address.value; //获取值
+				options: 	即为前面声明了 options对象里面的一些属性
+			}	
+		
+			function showResponse(responseText,statusText){
+				responseText: 返回的内容
+				statusText:   状态	//success error
+
+			}
+		*/
+		var options = {
+			target: "#output1",
+			beforeSubmit: showRequest,
+			success: showResponse,
+			resetForm: true
+		};
+
+		function showRequest(formData,jqForm,options){
+			alert($("#myForm").formSerialize());	//.formSerizlize()  和$.param() 方法解析出来相同
+			alert($.param(formData));
+			return true;
+		}	
+
+		function showResponse(responseText,textStatus){
+			alert("状态" + textStatus + "\n返回的内容" + responseText);
+		}
+
+		$("#myForm").submit(function(){
+			$(this).ajaxSubmit(options);
+			return false;
+		})
+	})
+	
+</script>
+</body>
+</html>

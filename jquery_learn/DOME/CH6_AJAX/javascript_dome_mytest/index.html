@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>原生js ajax 示例 2</title>
+</head>
+<body>
+	<label for="input1">输入数字，返回2倍</label>
+	<input type="text" id="input1" />
+	<button id="ajax">点击我</button>
+	<input type="text" id="input2" />
+</body>
+
+<script type="text/javascript">
+	
+	document.getElementById("ajax").onclick = ajaxtest;
+
+
+	function ajaxtest() {
+		var XMLHTTP;
+		var sendtext = document.getElementById("input1").value;
+		if (window.ActiveXObject) { //IE5 IE6是以ActiveXObject的方式引入XMLHttpRequest的
+			XMLHTTP = new ActiveXObject("Microsoft.XMLHTTP");
+		} else if (window.XMLHttpRequest) { //除IE5 IE6 以外的浏览器XMLHttpRequest是window的子对象
+			XMLHTTP = new XMLHttpRequest(); //实例化一个XMLHttpRequest
+		}
+
+		/*
+			GET 数据的方法
+		*/
+		// XMLHTTP.open("GET", "get.php?date=" + sendtext , true);
+		// XMLHTTP.send(null);
+
+
+		//POST
+		XMLHTTP.open("POST","get.php",true);
+		var postdate="mydate=" + sendtext;	// 设置post 数据
+		XMLHTTP.setRequestHeader("Content-Type","application/x-www-form-urlencoded");  //必须设置 http 头信息
+		XMLHTTP.send(postdate);	//send
+
+		XMLHTTP.onreadystatechange = function() {
+			if (XMLHTTP.readyState == 4 && XMLHTTP.status == 200) {
+				document.getElementById("input2").value = XMLHTTP.responseText;
+			}
+		}
+	}
+</script>
+</html>

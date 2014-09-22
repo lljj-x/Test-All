@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>dom节点操作 </title>
+	<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+</head>
+<body>
+	<div style="width:auto; height:100%; overflow:hidden;float:left">
+	<div class="test1">
+		<p id="pp" title="选择你最喜欢的水果?"><strong>选择你最喜欢的水果?</strong></p>
+		<p title="选择你最喜欢的水果?"><strong>选择你最喜欢的水果?</strong></p>
+		<ul>
+			<li title="苹果">苹果</li>
+			<li title="橘子">橘子</li>
+			<li title="菠萝">菠萝</li>
+		</ul>
+	</div>
+
+	<div style="width:700px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;">全局设置</p>
+		<button id="reset">手动重置所有接点</button>
+		<input type="checkbox" id="isreset"><label for="isreset">点击下列按钮时先自动重置页面</label>
+
+	</div>
+
+	<div style="width:700px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;font-size:12px;">查找接点操作</p>
+		<button id="find1">p节点属性title</button>
+		<button id="find2">第二个li title</button>
+		<button id="find3">第二个li文本内容</button>
+	</div>
+
+	<div style="width:700px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;font-size:12px;">创建接点操作</p>
+		<button id="create1">创建元素借点</button>
+		<button id="create2">创建文本属性借点</button>
+	</div>
+
+	<div style="width:700px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;font-size:12px;">插入接点操作</p>
+		<button id="insertto1">append()</button>
+		<button id="insertto2">appendTo()</button>
+		<button id="insertto3">prepend()</button>
+		<button id="insertto4">prependTo()</button>
+		<button id="insertto5">after()</button>
+		<button id="insertto6">insertAfter()</button>
+		<button id="insertto7">before()</button>
+		<button id="insertto8">insertBefore()</button>
+	</div>
+
+	<div style="width:700px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;font-size:12px;">移动接点操作</p>
+		<button id="move1">append() 移动元素节点</button>
+		<button id="move2">insertAfter() 移动元素节点</button>
+		<span>其它 prepend() before() 等移动元素节点的方法雷同</span>
+	</div>
+
+	<div style="width:700px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;font-size:12px;">删除接点操作</p>
+		<button id="remove1">remove() 删除元素节点</button>
+		<button id="remove2">恢复remove() 删除元素节点</button>
+		<button id="remove3">remove()带参数删除元素节点</button>
+		<button id="remove4">恢复remove()带参数删除元素节点</button>
+	</div>
+
+	<div style="width:700px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;font-size:12px;">empty()清空接点操作</p>
+		<button id="empty1">empty() 删除元素节点</button>
+	</div>
+
+	<div style="width:700px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;font-size:12px;">复制节点操作</p>
+		<ol>
+			<li>点击我1</li>
+			<li>点击我2</li>
+			<li>点击我3</li>
+		</ol>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("ol li").click(function() {
+					$(this).clone().prependTo("ol");
+				})
+			})
+		</script>
+		获取被点击的元素复制 并且添加到ol最前面,新复制出来的元素是不具备事件的，如果需要连同时间一起复制 可以 使用 clone(true); 加上true参数即可,如下面所示:
+		<div id="clone">
+			<p>点击我1</p>
+			<p>点击我2</p>
+			<p>点击我3</p>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#clone p").click(function() {
+					$(this).clone(true).prependTo("#clone");
+				})
+			})
+		</script>
+	</div>
+</div>
+
+<div style="width:auto; height:100%; overflow:hidden;float:left;background: rgb(194, 194, 194);margin-left: 10px;padding:10px;">
+	<div style="width:400px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;font-size:12px;">替换接点操作</p>
+		<button id="replace1">replaceWith替换节点</button>
+		<button id="replace2">replaceAll 替换节点</button>
+	</div>
+	
+	<div style="width:400px;height:100%;background: rgb(207, 206, 206);overflow: hidden;margin-bottom:10px;font-size:12px;">
+		<p style="text-align:center;font-size:12px;">包裹接点操作</p>
+		<button id="wrap1">wrap()包裹节点</button>
+		<button id="wrap2">wrapAll()包裹节点</button>
+		<button id="wrap3">wrapInner()包裹节点</button>
+	</div>
+
+
+</div>
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#reset").click(function() {
+				$(".test1").html("<p id='pp' title='选择你最喜欢的水果?'><strong>选择你最喜欢的水果?</strong></p><p id='pp' title='选择你最喜欢的水果?'><strong>选择你最喜欢的水果?</strong></p><ul><li title='苹果'>苹果</li><li title='橘子'>橘子</li><li title='菠萝'>菠萝</li></ul>")
+			});
+
+			function isreset() {
+				if ($("#isreset").is(":checked")) {
+					$(".test1").html("<p id='pp' title='选择你最喜欢的水果?'><strong>选择你最喜欢的水果?</strong></p><p id='pp' title='选择你最喜欢的水果?'><strong>选择你最喜欢的水果?</strong></p><ul><li title='苹果'>苹果</li><li title='橘子'>橘子</li><li title='菠萝'>菠萝</li></ul>")
+				}
+			}
+
+			$("#find1").click(function() {
+				isreset();
+				alert($("p").attr("title")); //输出p借点title属性值
+			});
+
+			$("#find2").click(function() {
+				isreset();
+				alert($("ul li:eq(1)").attr("title")); //输出第二个li 的title属性值
+			});
+
+			$("#find3").click(function() {
+				isreset();
+				alert($("ul li:eq(1)").text());
+			});
+
+			$("#create1").click(function() {
+				isreset();
+				var $li_1 = $("<li></li>");
+				var $li_2 = "<li></li>";
+				$("ul").append($li_1).append($li_2);
+			});
+
+			$("#create2").click(function() {
+				isreset();
+				var $li_1 = $("<li title='香蕉'>香蕉</li>"); //创建一个<li>元素
+				var $li_2 = $("<li title='雪梨'>雪梨</li>"); //创建一个<li>元素
+				$("ul").append($li_1, $li_2);
+			});
+
+			$("#insertto1").click(function(){
+				isreset();
+				var $li_1 = $("<li title='香蕉'>香蕉</li>");	//  创建第一个<li>元素
+				$("ul").append($li_1);	//匹配元素内部追加内容 
+			});
+
+			$("#insertto2").click(function(){
+				isreset();
+				var $li_1 = $("<li title='香蕉'>香蕉</li>");	//  创建第一个<li>元素
+				$li_1.appendTo("ul");	//颠倒追加顺序，前面的追加到 appendTo 后面的
+			})
+
+			$("#insertto3").click(function(){
+				isreset();
+				var $li_1 = $("<li title='香蕉'>香蕉</li>");	//  创建第一个<li>元素
+				$("ul").prepend($li_1);	//向匹配元素前置内容，append() 添加在后面
+			})
+
+			$("#insertto4").click(function(){
+				isreset();
+				var $li_1 = $("<li title='香蕉'>香蕉</li>");
+				$li_1.prependTo($("ul"));	// 和appendTo 同样道理只是prependTo前置
+			})
+
+			$("#insertto5").click(function(){
+				isreset();
+				var $li_1 = $("<ul><li title='香蕉'>香蕉</li></ul>");
+				$("ul").after($li_1);	//向匹配元素后面插入内容
+			})
+
+			$("#insertto6").click(function(){
+				isreset();
+				var $li_1 = $("<ul><li title='香蕉'>香蕉</li></ul>");
+				$li_1.insertAfter("ul");	//同前面 appendTo() 和 prependTo() 同样的道理
+			})
+
+			$("#insertto7").click(function(){
+				isreset();
+				var $li_1 = $("<ul><li title='香蕉'>香蕉</li></ul>");
+				$("ul").before($li_1);	//向匹配元素前面插入内容
+			})
+
+			$("#insertto8").click(function(){
+				isreset();
+				var $li_1 = $("<ul><li title='香蕉'>香蕉</li></ul>");
+				$li_1.insertBefore("ul");
+			})
+
+			$("#move1").click(function(){
+				isreset();
+				$("ul").append($("ul li:eq(0)"));	// 还是append 找到 ul 在标签内追加 $("ul li:eq(0)")的内容 即实现了 移动
+			})
+
+			$("#move2").click(function(){
+				isreset();
+				$("ul li:eq(0)").insertAfter("ul li:last");	//移动 第一个li标签到 最后一个li标签的后面
+			})
+
+			$("#remove1").click(function(){
+				isreset();
+				$removereturn = $("ul li:eq(0)").remove();
+			})
+
+			$("#remove2").click(function(){
+				isreset();
+				$removereturn.prependTo("ul");
+			})
+
+			$("#remove3").click(function(){
+				isreset();
+				$removereturn1 = $("ul li").remove("li[title != 菠萝]");
+			})
+
+			$("#remove4").click(function(){
+				isreset();
+				$("ul").append($removereturn1);
+			})
+
+			$("#empty1").click(function(){
+				isreset();
+				$("ul li:eq(1)").empty();
+			})
+
+			$("#replace1").click(function(){
+				isreset();
+				$("#pp").replaceWith("<p id='pp' title='选择你最喜欢的水果?'>选择你最不喜欢的水果?</p>");	//替换会连同 p 标签一起替换成 replaceWith() 里面的内容
+			})
+
+			$("#replace2").click(function(){
+				isreset();
+				$("<p id='pp' title='选择你最喜欢的水果?'>选择你最不喜欢的水果?</p>").replaceAll($('#pp')); 
+				// 和之前 appendTo() insertAfter() 都是一样的道理,需要注意的是，绑定了事件的元素替换后事件需要重新绑定
+			})
+
+			$("#wrap1").click(function(){
+				isreset();
+				$("strong").wrap("<i></i>"); //strong 分别被 i 标签包裹起来
+			})
+
+			$("#wrap2").click(function(){
+				isreset();
+				$("strong").wrapAll("<i></i>");	//strong 所有一起被 i 标签包裹起来
+			})
+
+			$("#wrap3").click(function(){
+				isreset();
+				$("strong").wrapInner("<i></i>");	//strong 内的内容分别被 i 标签包裹起来
+			})
+
+		})
+	</script>
+</body>
+</html>

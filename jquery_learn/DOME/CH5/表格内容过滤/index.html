@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+
+
+
+<title>表单内容过滤</title>
+<style type="text/css">
+table		{ border:0;border-collapse:collapse;}
+div{font:normal 12px/17px Arial;}
+td	{ font:normal 12px/17px Arial;padding:2px;width:100px;}
+th			{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px solid #333;width:100px;}
+.even		{ background:#FFF38F;} 
+.odd		{ background:#FFFFEE;}  
+.selected		{ background:#FF6500;color:#fff;}
+.div1,.div2{
+	float:left;
+	margin-left:20px;
+}
+</style>
+</head>
+<body>
+	<div class="div1">
+		<table>
+			<thead>
+				<tr><th>姓名</th><th>性别</th><th>暂住地</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>张山</td><td>男</td><td>浙江宁波</td></tr>
+				<tr><td>李四</td><td>女</td><td>浙江杭州</td></tr>
+				<tr><td>王五</td><td>男</td><td>湖南长沙</td></tr>
+				<tr><td>找六</td><td>男</td><td>浙江温州</td></tr>
+				<tr><td>Rain</td><td>男</td><td>浙江杭州</td></tr>
+				<tr><td>MAXMAN</td><td>女</td><td>浙江杭州</td></tr>
+				<tr><td>王六</td><td>男</td><td>浙江杭州</td></tr>
+				<tr><td>李字</td><td>女</td><td>浙江杭州</td></tr>
+				<tr><td>李四</td><td>男</td><td>湖南长沙</td></tr>
+			</tbody>
+		</table>
+		<p>
+			.fliter(":contains(李)"); 过滤到  包含 李 的数据 
+		</p>
+	</div>
+	
+	<div class="div2">
+		<label for="in_filter">筛选</label>
+		<input type="text" id="in_filter"/>
+		<table>
+			<thead>
+				<tr><th>姓名</th><th>性别</th><th>暂住地</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>张山</td><td>男</td><td>浙江宁波</td></tr>
+				<tr><td>李四</td><td>女</td><td>浙江杭州</td></tr>
+				<tr><td>王五</td><td>男</td><td>湖南长沙</td></tr>
+				<tr><td>找六</td><td>男</td><td>浙江温州</td></tr>
+				<tr><td>Rain</td><td>男</td><td>浙江杭州</td></tr>
+				<tr><td>MAXMAN</td><td>女</td><td>浙江杭州</td></tr>
+				<tr><td>王六</td><td>男</td><td>浙江杭州</td></tr>
+				<tr><td>李字</td><td>女</td><td>浙江杭州</td></tr>
+				<tr><td>李四</td><td>男</td><td>湖南长沙</td></tr>
+			</tbody>
+		</table>
+	</div>	
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".div1 tbody tr").hide();
+		$(".div1 tbody tr").filter(":contains('李')").show(); // 等价于下面的方法
+		// $(".div1 tbody tr:contains('李')").show(); 
+		
+		/*
+			div2  注 $(".div2 tbody tr").filter(':contains("")') 在jquery1.8中会返回为空 
+					 $(".div2 tbody tr").filter(':contains("")') 在jquery1.7中会返回所有数据
+					 所以为了兼容 可以加上this.value是否为空的判断
+
+		*/
+
+	$(".div2 #in_filter").keyup(function() {
+		if (this.value == "") {
+			$(".div2 tbody tr").show();
+		} else {
+			$(".div2 tbody tr")
+				.hide()
+				// .filter(":contains('"+(this.value)+"')")
+				.filter(":contains('" + (this.value) + "')")
+				.show();
+		}
+	}).keyup();
+
+})
+
+</script>	
+</body>
+</html>

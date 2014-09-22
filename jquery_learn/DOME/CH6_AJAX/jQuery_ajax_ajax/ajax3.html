@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<style type="text/css">
+* { margin:0; padding:0;}
+body { font-size:12px;}
+.comment { margin-top:10px; padding:10px; border:1px solid #ccc;background:#DDD;}
+.comment h6 { font-weight:700; font-size:14px;}
+.para { margin-top:5px; text-indent:2em;background:#DDD;}
+</style>
+
+</head>
+<body>
+	<form id="form1" aciton="#">
+		<p>评论:</p> 
+		<p>姓名:<input name="username" id="username"></p>
+		<p>内容:<textarea name="content" id="content" rows="2" cols="20"></textarea></p>
+		<p><input type="button" id="send" value="提交" /></p>
+	</form>
+	<div class='comment'>已有评论:</div>
+	<div id="resText"></div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+		/*
+			$.ajax({
+				type:"GET",
+				url:"test.php",
+				dataType:"json",
+				success:function(){
+					..
+				}
+			})
+
+		$.ajax 基本参数解释
+			type 		请求方式 如 GET POST
+			url 		请求地址 默认为当前页面
+			timeout 	设置请求超时时间
+			data 		发送到服务器的数据,不是字符串会自动转换为字符串.get请求会自动附加在 url 后
+			dataType 	预期服务器返回的数据类型，如 xml html script json jsonp text
+			beforeSend	发送请求之前可以修改 XMLHttpRequest 对象的函数,例如添加自定义HTTP头 ,返回flase 取消本次Ajax
+			complete	完成后调用的函数，类似.load()方法的回调函数，不论 ajax 是否成功都会调用
+			success		请求成功后回调函数,由服务器返回并且经过 dataType 处理过的数据 ，两个参数
+						function(data,textStatus){
+							// data 可能是xmlDoc jsonObj html text 等等
+						}
+			error		请求失败后调用的函数,function(XMLHttpRequest,textStatus,errorThrown);
+			global		bool类型，默认为 true ,设置是否触发全局 ajax事件			
+		*/
+
+		$("#send").bind("click",function(){
+			$.ajax({
+				type: "POST",
+				url: "get3.php",
+				data:{
+					username: $("#username").val(),
+					content: $("#content").val()
+				},
+				dataType: "xml",
+				success: function(data,textStatus){
+					var username = $(data).find("comment").attr("username");
+					var content = $(data).find("comment content").text();
+					var htmlIn = "<div class='comment'><h6>" + username + "</h6><p>" + content + "</p></div>";
+					$("#resText").append(htmlIn);
+				}
+			})
+		})
+	})
+	</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>表单复选框的操作</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+</head>
+<style type="text/css">
+	.div1,.div2,.div3{
+		width: 300px;
+		height: 100%;
+		overflow: hidden;
+		background-color: rgb(247, 247, 247);
+		border: 1px solid #000;
+		float: left;
+		margin-left: 20px;
+		padding: 5px; 
+	}
+	body{
+		padding: 50px;
+		margin: 0;
+	}
+	p{
+		font-size: 12px;
+		font-weight: bold;
+	}
+</style>
+
+<body>
+	<div class="div1">
+		<p>通过 attr('checked',true)来选中多选框 </p>
+		<form>
+			你爱好的运动是? <br/>
+			<input type="checkbox" name="items" value="足球" />足球
+			<input type="checkbox" name="items" value="篮球" />篮球
+			<input type="checkbox" name="items" value="羽毛球" />羽毛球
+			<input type="checkbox" name="items" value="乒乓球" />乒乓球<br>
+			<input type="button" id="CheckedAll" value="全选" />
+			<input type="button" id="CheckedNo" value="全不选" />
+			<input type="button" id="CheckedRev" value="反选" />
+			<input type="button" id="send" value="if判断获取选中 提交" />
+			<input type="button" id="send1" value="jQuery选择器获取选中 提交" /><br>
+			<input type="button" id="CheckedRev1" value="反选 js原生方法" />
+
+		</form>
+	</div>
+
+	<div class="div2">
+		<p>通过控制框选择或者取消复选框组 </p>
+		<form>
+			你爱好的运动是?<br>
+			<input type="checkbox" id="CheckedAllmy1" />if 判断全选/全不选<br/>
+			<input type="checkbox" id="CheckedAllmy2" />同步下面的checked值 全选/全不选<br/><br/>
+			<input type="checkbox" name="items1" value="足球" />足球
+			<input type="checkbox" name="items1" value="篮球" />篮球
+			<input type="checkbox" name="items1" value="羽毛球" />羽毛球
+			<input type="checkbox" name="items1" value="乒乓球" />乒乓球<br>
+			<input type="button" id="sendmy" value="提交" />
+		</form>
+	</div>
+
+
+
+		<div class="div3">
+		<p>通过控制框选择或者取消复选框组,复选框组取消带动控制框</p>
+		<form>
+			你爱好的运动是?
+			<input type="checkbox" id="CheckedAllmyhui" />全选/全不选<br/>
+			<input type="checkbox" name="itemshui" value="足球" />足球
+			<input type="checkbox" name="itemshui" value="篮球" />篮球
+			<input type="checkbox" name="itemshui" value="羽毛球" />羽毛球
+			<input type="checkbox" name="itemshui" value="乒乓球" />乒乓球<br>
+			<input type="button" id="sendhui" value="提交" />
+		</form>
+	</div>
+
+</body>
+
+<script type="text/javascript">
+	$(function(){
+		$("#CheckedAll").click(function(){	//设置所有复选空选中
+			$("[name = items]:checkbox").attr("checked",true);
+		})
+
+		$("#CheckedNo").click(function(){	//设置所有复选空为false
+			$("[name = items]:checkbox").attr("checked",false);
+		})
+
+		$("#CheckedRev").click(function(){
+			$("[name=items]:checkbox").each(function(){	//通过each循环来设置 多选框的值和当前相反 jQuery attr 方法
+				$(this).attr("checked",(!$(this).attr("checked")));
+			})
+		})
+
+		$("#CheckedRev1").click(function(){	//通过each循环来设置 多选框的值和当前相反  原生js
+			$("[name = items]:checkbox").each(function(){
+				this.checked=!this.checked;
+			})
+		})
+
+		$("#send").click(function(){	// if 判断是否选中输出选中个值
+			var msg="你选中的结果为 \n\r";
+			$("[name = items]:checkbox").each(function(){
+				if (this.checked == true){
+					msg = msg + $(this).val() + "\n\r" ;
+				}
+			})
+			alert(msg);
+		})
+
+		$("#send1").click(function(){	//jQuery 选择器直接获取到选中的项
+			var msg="你选中的结果为 \n\r";
+			$("[name = items]:checkbox:checked").each(function(){
+				msg = msg + $(this).val() + "\n\r";
+			})
+			alert(msg);
+		})
+
+		$("#sendmy").click(function(){	//div2 jQuery 选择器直接获取到选中的项
+			var mymsg = "你选中的为 \n\r"
+			$("[name = items1]:checkbox:checked").each(function(){
+				mymsg = mymsg + $(this).val() + "\n\r" ;
+			})
+			alert(mymsg);
+		})
+
+		$("#CheckedAllmy1").click(function(){	//div2 判断控制按钮是否选中对多选框组进行赋值
+			if (this.checked){
+				$("[name = items1]:checkbox").attr("checked",true);
+			}else{
+				$("[name = items1]:checkbox").attr("checked",false);
+			}
+		})
+
+		$("#CheckedAllmy2").click(function(){
+			$("[name = items1]:checkbox").attr("checked",(this.checked));
+		})
+
+		// -- - - - - 
+		$("#CheckedAllmyhui").click(function(){
+			$("[name = itemshui]:checkbox").attr("checked",(this.checked));
+
+		})
+
+		$("[name = itemshui]:checkbox").click(function(){	//对复选框组绑定click 事件，控制控制控的选中与否
+
+
+			/*
+				方法 1 if 判断是否全选 
+			*/
+			// var boolcheck = true;	//对复选框组绑定click 事件，控制控制控的选中与否
+			// $("[name = itemshui]:checkbox").each(function(){	
+			// 	if (this.checked == false){	// if 判断是否全选 
+			// 		boolcheck = false;
+			// 		return false;	// 终止循环
+			// 	}
+			// })
+			// $("#CheckedAllmyhui").attr("checked",boolcheck);
+
+
+			/*
+				方法 2 if 判断是否选中的等于总数 
+			*/
+
+			// var lengthAll = $("[name = itemshui]:checkbox").length;
+			// var lengthaAllChecked = $("[name = itemshui]:checkbox:checked").length;
+			// if (lengthAll == lengthaAllChecked) {
+			// 	$("#CheckedAllmyhui").attr("checked",true);
+			// }else{
+			// 	$("#CheckedAllmyhui").attr("checked",false);
+			// }
+
+
+
+			/*
+				方法 2 if 判断是否选中的等于总数 通过filter()方法筛选选中的项
+			*/
+
+			var $lengthAll = $("[name = itemshui]:checkbox");
+			if ($lengthAll.length == $lengthAll.filter(":checked").length){
+				$("#CheckedAllmyhui").attr("checked",true);
+			}else{
+				$("#CheckedAllmyhui").attr("checked",false);
+			}
+		})
+
+	})
+
+
+</script>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>jQuery queue和delay实例</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<style>
+	.div{
+		width:800px;
+		height:200px;
+		background:rgb(241, 241, 241);
+		margin-bottom:20px;
+		position: relative;
+		font-size:12px;
+	}
+	
+	.div>div{
+		/*
+		left:50%;
+		margin-left:-100px;
+		*/
+		top:50%;
+		margin-top:-75px;
+		background:red;
+		width:200px;
+		height:150px;
+		position: absolute;
+	}
+	
+	.div>div>div{
+		background: #FFF;
+		margin: 10px;
+		padding: 5px;
+	}
+	
+</style>
+<script type="text/javascript">
+	$("document").ready(function(){
+		$("#bt1").on("click",function(){
+			// 不加列队异常
+			// $("#cs1").fadeOut().appendTo($("#to12")).fadeIn();
+			$("#cs1").fadeOut()
+					 .queue(function(next){
+						 $(this).appendTo($("#to12"))
+						 next();
+					 })
+					 .fadeIn();
+		});
+		
+		
+		$("#bt2").click(function(){
+			$("#to21").slideUp()
+			  .slideDown()
+			  .queue(function(next){
+				  $(this).css('background','#000');
+				  next();
+			  });
+		});
+		
+		$("#bt3").click(function(){
+			// $("#to31").animate({top:"-=60",opacity:0},{duration:2000});
+			$("#to31").delay(1000, "fader")
+						.queue("fader", function(next) {
+						    $(this).animate({opacity: 0}, 
+						        {duration: 1000, queue: false});	//queue: false 不让fader 队列进入默认 fx 队列
+						    next();
+						})
+						.dequeue("fader")	//这是一个关键的语句  必须加入的 
+						.animate({top: "-=40"}, {duration: 2000})
+		});
+		
+		$("#bt41").click(function(){
+			$("#to41").width('200')
+					  .slideUp(1000)
+					  .slideDown(1000)
+					  .animate({width:'50px'},{duration:2000,queue:true});
+		});
+		
+		$("#bt42").click(function(){
+			$("#to41").width('200')
+					  .slideUp(1000)
+					  .slideDown(1000)
+					  .animate({width:'50px'},{duration:2000,queue:false});
+		});
+		
+		$("#bt51").click(animatelength = function(){
+			$("#to51").slideToggle('3000')
+					  .slideToggle('3000')
+					  .hide('3000')
+					  .show('3000')
+					  .animate({left:'+=200'},2000)
+					  .hide('3000')
+					  .show('3000')
+					  .animate({left:'-=200'},2000,animatelength);
+			
+		});
+		
+		$("#bt52").click(function(){
+			$("#fx_num").text($("#to51").queue('fx').length);
+		});
+	});
+
+</script>
+
+
+</head>
+<body>
+	<div class="div">
+		<div id="to11">
+			<button id="bt1">点击我实现列队</button>
+			<div id="cs1">
+				点击按钮实现先左边淡出然后右边淡入
+			</div>
+		</div>
+		<div style="left:250px;" id="to12">
+		</div>
+		<pre>
+										$("#cs1").fadeOut()
+										 .queue(function(next){
+											 $(this).appendTo($("#to12"))
+											 next();
+										 })
+										 .fadeIn();
+		</pre>
+	</div>
+	
+	<div class="div">
+		<div id="to21">
+			<button id="bt2">点击我实现列队</button>
+			<div>
+				点击按钮实现 先收起(slideUp)，在放下(SlideDown)，背景再变成黑色，
+			</div>
+		</div>
+						<pre>
+							方法1 queue 动画列队
+							$("#to21").slideUp()
+									  .slideDown()
+									  .queue(function(next){
+										  $(this).css('background','#000');
+										  next();
+									  });
+							方法2 使用回调函数
+							$("#to21").slideUp()
+									  .slideDown('slow',function(){
+											  $(this).css('background','#000');
+									  });										
+						</pre>
+	</div>
+	
+	<div class="div">
+		<div id="to31">
+			<button id="bt3">点击我实现列队</button>
+			<div>
+				浮动2000毫秒(2秒)，并且在前1000毫秒完全不透明，而在后1000毫秒物体从完全不透明变成完全透明
+			</div>
+		</div>
+		<pre>
+					$("#to31").delay(1000, "fader")
+								.queue("fader", function(next) {
+								    $(this).animate({opacity: 0}, 
+								        {duration: 1000, queue: false});	//queue: false 不让fader 队列进入默认 fx 队列
+								    next();
+								})
+								.dequeue("fader")	//这是一个关键的语句  必须加入的 
+								.animate({top: "-=60"}, {duration: 2000})		
+		</pre>
+	</div>
+	
+	<div class="div">
+		<div id="to41">
+			<button id="bt41">queue:true</button>
+			<button id="bt42">queue:false</button>
+			<div>
+				queue:true queue:false 的分别<br>
+				queue:false，目的是让这个animate不进入默认的"fx"队列中 可以自己插队的感觉
+			</div>
+
+		</div>
+			<pre>
+					$("#to41").width('200')
+					  .slideUp(1000)
+					  .slideDown(1000)
+					  .animate({width:'50px'},{duration:2000,queue:false});			
+			</pre>		
+	</div>
+	
+	<div class="div" style="height: 400px;width:900px">
+		<button id="bt52">显示队列数</button>
+		<div id="to51">
+			<button id="bt51">开始动画</button>
+			<div>
+				点击显示队列长度
+				<div id="fx_num">
+				</div>
+			</div>
+		</div>
+		<pre>
+									$("#bt51").click(animatelength = function(){
+										$("#to51").slideToggle('3000')
+												  .slideToggle('3000')
+												  .hide('3000')
+												  .show('3000')
+												  .animate({left:'+=200'},2000)
+												  .hide('3000')
+												  .show('3000')
+												  .animate({left:'-=200'},2000,animatelength);
+										
+									});
+									
+									$("#bt52").click(function(){
+										$("#fx_num").text($("#to51").queue('fx').length);
+									});		
+		</pre>
+	</div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>最简单.ajaxform提交返回</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<script type="text/javascript" src="../../../js/jquery.form.js"></script>
+<style type="text/css">
+	.mydiv{
+		overflow: hidden;
+		height: 100%;
+		width: 30%;
+		float: left;
+
+	}
+	p{
+		font-weight: bold;
+		font-size: 16px;
+	}
+
+</style>
+</head>
+<body>
+	<div class="mydiv">
+		<p>利用formData参数获取输入内容</p>
+		<form id="myForm1" action="get1.php" method="post">
+			名称: <input type="text" name="name" /><br>
+			地址: <input type="text" name="address" /><br>
+			自我介绍: <input type="text" name="comment"><br>
+			<input type="submit" id="test" value="提交" /><br>
+			<div id="output1" style="display:none;"></div>
+		</form>
+	</div>
+	<div class="mydiv">
+		<p>利用jqForm参数获取输入内容</p>
+		<form id="myForm2" action="get1.php" method="post">
+			名称: <input type="text" name="name" /><br>
+			地址: <input type="text" name="address" /><br>
+			自我介绍: <input type="text" name="comment"><br>
+			<input type="submit" id="test" value="提交" /><br>
+			<div id="output2" style="display:none;"></div>
+		</form>
+	</div>
+	<div class="mydiv">
+		<p>利用fieldValue参数获取输入内容</p>
+		<form id="myForm3" action="get1.php" method="post">
+			名称: <input type="text" name="name" /><br>
+			地址: <input type="text" name="address" /><br>
+			自我介绍: <input type="text" name="comment"><br>
+			<input type="submit" id="test" value="提交" /><br>
+			<div id="output3" style="display:none;"></div>
+		</form>
+</div>
+			
+<script type="text/javascript">
+	$(document).ready(function(){
+		/*
+			.ajaxForm(),.ajaxSubmit() 都可以介绍一个或者0个参数，可以直接是一个函数回掉，或者一个options对象 
+
+		var options={
+			target: 	"#ouput1"	//用服务器返回的数据 更新id 为output1 的内容 。
+			beforeSubmit: 	showRequest,	//提交前的回调函数
+			success: showResponse,	//提交后的回调函数
+
+			// 其它的属性
+			url ：	url //默认form的action ，添加的话会覆盖默认的action
+			type: 	type //默认的method 如果写的话覆盖form的method
+			dataType: 	null // 'xml','script','json' ,服务器返回的类型 
+			clearFrom: 	true	//成功提交后 清除所有的表单元素值
+			resetForm: 	true	//成功提交后 重置所有的表单元素值
+			timeout: 	3000	//超时
+		};
+
+		// 'ajaxForm'
+		$('#myForm').ajaxForm(options);	// ajaxForm方式的提交
+	或者$('#myForm').ajaxSubmit(options);	//ajaxSubmit	
+			
+			function showRequest(formData,jqForm,options){
+				formData: 	数组对象 $.param()可以转为字符串 //类似 ： name=1&add=2 
+				jqForm: 	jQ对象，封装了表单元素, 
+							var formElement = jqForm[0];	//转化为dom对象
+							var address = formElement.address.value; //获取值
+				options: 	即为前面声明了 options对象里面的一些属性
+			}
+		
+			function showResponse(responseText,statusText){
+				responseText: 返回的内容
+				statusText:   状态	//success error
+			}
+		*/
+
+		var options1 = {
+			target: "#output1",
+			beforeSubmit: checkForm1,
+			success: updateDate1
+		};
+
+		function checkForm1(formData,jqForm,options){
+
+			/*
+				formData 是数组对象,每个对象拥有名称和值
+				[
+					{name:username,value=usernameValue},
+					{name:password,value=passwordVale}
+				]
+			*/
+
+			/*
+				$.each(formData,function(dataIndex,datade){
+					if(datade.value == ""){
+						alert("所有文本框都必须填写");
+						return false;	//$.each 和上面for 循环等价
+					}
+				});
+			*/			
+
+// ----------------------- 方法1 formData获取输入框的内容
+
+			for (var i=0;i<formData.length;i++){	//通过formData获取输入框的内容
+				if (formData[i].value == ""){
+					alert("所有文本框都必须填写");
+					return false;
+				}
+			}
+		}
+
+		function updateDate1(textResponse,textStatus){
+			alert("成功返回");
+		}
+		// $("#myForm1").ajaxForm(options1);
+		$("#myForm1").submit(function(event){
+			$(this).ajaxSubmit(options1);
+			event.preventDefault();
+		})
+
+// ----------------------- 方法2 jqForm 参数获取文本框的内容
+		var options2 = {
+			target: "#output2",
+			beforeSubmit: checkForm2,
+			success: updateDate2
+		}
+
+		function updateDate2(textResponse,textStatus){
+			alert("成功返回");
+		}
+
+		function checkForm2(formData,jqForm,options){
+			// 利用 jqForm 参数获取文本框的内容
+
+			/*
+				不转为 dom 对象,直接通过jq对象获取文本框的内容
+				if (jqForm.find("[name='name']").val() == "" || jqForm.find("[name='address']").val() == "") {
+					alert("不能为空");
+					return false;	
+				}
+			*/
+
+			var form = jqForm[0];	//jq对象转为 dom对象获取文本框的值
+			if (form.name.value == "" || form.address.value==""){
+				alert("不能为空");
+				return false;
+			}
+		}
+
+		$("#myForm2").ajaxForm(options2);
+
+
+// -------------------------- 方法 3 fieldValue() 方法获取文本框的内容
+		var options3 = {
+			target: "#output3",
+			beforeSubmit: checkForm3,
+			success: updateDate3
+		}
+
+		function checkForm3(formData,jqForm,options){
+			// 通过 fieldValue 获取文本框的内容
+			if ($("#myForm3 input[name='name']").fieldValue() == "" || $("#myForm3 input[name='address']").fieldValue()=="") {
+				alert("message");
+				return false;
+			};
+		}
+
+		function updateDate3(textReSponse,sut){
+			alert("success");
+		}
+
+		$("#myForm3").submit(function(){
+			$(this).ajaxSubmit(options3);
+			return false;
+		})
+
+	})
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>冒泡事件测试</title>
+	<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+	<script type="text/javascript" src="js.js"></script>
+	<style type="text/css">
+		* {
+			margin:0;
+			padding:0;
+		}
+
+		body {
+			font-size:13px;
+			line-height:130%;
+			padding:60px;
+		}
+
+		.content {
+			width:220px;
+			border:1px solid #0050D0;
+			background:#96E555
+		}
+
+		span {
+			width:200px;
+			margin:10px;
+			background:#666666;
+			cursor:pointer;
+			color:white;
+			display:block;
+		}
+
+		p {
+			width:200px;
+			background:#888;
+			color:white;
+			height:16px;
+		}
+		
+		.div1,.div2,.div3{
+			width: 230px;
+			height: 400px;
+			float: left;
+			margin-left: 5px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="div1">	<!-- 冒泡测试 -->
+		<div class="content">
+			外层div元素,会冒泡的div
+			<span>内层span元素</span>
+			外层div元素
+		</div>
+		<div class="msg"></div>
+	</div>
+
+	<div class="div2">	<!-- 阻止冒泡 StopPropagation-->
+		<div class="content">
+			外层div元素,StopPropagation()阻止冒泡
+			<span>内层span元素</span>
+			外层div元素
+		</div>
+		<div class="msg"></div>
+	</div>
+
+	<div class="div3">	<!-- 阻止冒泡 preventDefault-->
+		<form action="test.html">
+			用户名：<input type="text" id="username" /><br/>
+			<input type="submit" value="提交" id="sub"/>
+		</form>
+		<div id="msg"></div>
+
+	</div>
+
+
+
+</body>
+</html>

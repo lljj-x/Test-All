@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+<title>cookie api</title>
+</head>
+<style type="text/css">
+	body{
+		padding: 100px;
+		margin: 0;
+	}
+	a {
+		text-decoration: none;
+		color: #000;
+		font-size: 18px;
+		line-height: 22px;
+		letter-spacing: 1.5px;
+	}
+	a:hover{
+		color: red;
+		text-decoration: underline;
+	}
+</style>
+
+<body>
+	<label for="username">cookie 设置的内容</label>
+	<input type="text" id="username" /><br>
+	<br>
+	<div>
+		<a href="#">设置cookie (设置有效期天数为10天)</a><br>
+		<a href="#">设置cookie (通过date对象设置过期日期为3天后)</a><br>
+		<a href="#">设置cookie (获取cookie)</a><br>
+		<a href="#">设置cookie (删除cookie)</a><br>
+		<a href="#">设置cookie (设置另一个cookie)</a><br>
+		<a href="#">设置cookie (获取另一个cookie)</a><br>
+		<a href="#">设置cookie (删除另一个cookie)</a><br>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var cookieName1 = "cookie1";
+			var cookieName2 = "cookie2";
+				
+			// 默认将cookie的信息写入到 input 框
+			if ($.cookie(cookieName1)) {
+				$("#username").val($.cookie(cookieName1));
+			};
+
+			$("a").eq(0).click(function(event){	//设置cookie1有效期天数为10天
+				$.cookie(cookieName1,$("input").val(),{	
+					path: '/',
+					expires: 10
+				});
+				event.preventDefault();
+			})
+
+			$("a").eq(1).click(function(){		// 通过date对象设置过期日期为3天后
+				var date = new Data();
+				date.setTime(data.getTime() + (3 * 24 * 60 * 60 *1000));
+				$.cookie(cookieName1,$("input").val(),{
+					path: '/',
+					expires: date
+				});
+				return false;
+			})
+
+			$("a:eq(2)").bind("click",function(){		// 获取cookie1
+				alert($.cookie(cookieName1));
+				return false;
+			})
+
+			$("a").eq(3).click(function(event){	//删除cookie1
+				$.cookie(cookieName1,null,{
+					path: '/',
+					expires: -1
+				});
+				event.preventDefault();
+			})
+
+			$("a").eq(4).click(function(){		//设置 cookie2
+				$.cookie(cookieName2,$("input").val(),{
+					path: '/',
+					expires: 10
+				})
+			})
+
+			$("a").eq(5).click(function(){	//获取 cookie2
+				alert($.cookie(cookieName2));
+			})
+
+			$("a").eq(6).click(function(){	//删除 cookie2
+				$.cookie(cookieName2,null,{
+					path: '/',
+					expires: -1
+				});
+			})
+
+		})
+	</script>
+</body>
+</html>

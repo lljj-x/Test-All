@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>表格变色操作</title>
+<style type="text/css">
+body 		{ margin: 0px; padding: 20px;}
+table		{ border:0;border-collapse:collapse;}
+td			{ font:normal 12px/17px Arial;padding:2px;width:100px;}
+th			{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px solid #333;}
+.even		{ background:#FFF38F;} 
+.odd		{ background:#FFFFEE;} 
+.selected	{ background:#FF6500;color:#fff;}
+.div1,.div2,.div3{
+	width: auto;
+	float: left;
+	margin-left: 10px;
+	background: whiteSmoke;
+}
+</style>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+</head>
+<body>
+	<div class="div1">
+		<table>
+			<thead>
+				<tr><th>姓名</th> <th>性别</th> <th>暂住地</th> </tr>
+			</thead>
+			<tbody>
+				<tr><td>张山</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td>李四</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td>王五</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td>赵六</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td>rain</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td>jack</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td>maxm</td> <td>男</td> <td>浙江宁波</td> </tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="div2">
+		<table>
+			<thead>
+				<tr><th></th><th>姓名</th> <th>性别</th> <th>暂住地</th> </tr>
+			</thead>
+			<tbody>
+				<tr><td><input type="radio" name="choice" value=""/><td>张山</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="radio" name="choice" value=""/><td>李四</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="radio" name="choice" checked="checked" value=""/><td>王五</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="radio" name="choice" value=""/><td>赵六</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="radio" name="choice" value=""/><td>rain</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="radio" name="choice" value=""/><td>jack</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="radio" name="choice" value=""/><td>maxm</td> <td>男</td> <td>浙江宁波</td> </tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="div3">
+		<table>
+			<thead>
+				<tr><th></th><th>姓名</th> <th>性别</th> <th>暂住地</th> </tr>
+			</thead>
+			<tbody>
+				<tr><td><input type="checkbox" name="choice" value=""/><td>张山</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="checkbox" name="choice" value=""/><td>李四</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="checkbox" name="choice" value="" checked="checked"/><td>王五</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="checkbox" name="choice" value=""/><td>赵六</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="checkbox" name="choice" value=""/><td>rain</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="checkbox" name="choice" value=""/><td>jack</td> <td>男</td> <td>浙江宁波</td> </tr>
+				<tr><td><input type="checkbox" name="choice" value=""/><td>maxm</td> <td>男</td> <td>浙江宁波</td> </tr>
+			</tbody>
+		</table>
+	</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".div1 tbody tr:even,.div2 tbody tr:even,.div3 tbody tr:even").addClass("even");	//偶数行 添加 even 
+		$(".div1 tbody tr:odd,.div2 tbody tr:odd,.div3 tbody tr:odd").addClass("odd");
+		$(".div1 tbody tr:contains('王五')").addClass("selected");	// 为包含王五的 tr 添加 selected 
+
+		$(".div2 tbody tr").click(function(){	//为选中的行 添加 单选按钮选择 和 高亮同时去掉其它高亮 
+			$(this).addClass("selected").find(":radio").attr("checked",true).end().siblings().removeClass("selected");
+		})
+
+		// div2 表格初始化的时候 ， 高亮选中项
+
+		/*
+			 方法1
+		*/
+
+		// $(".div2 tbody tr :radio:checked").parent().parent().addClass("selected"); //返回两次父级到 tr 
+		
+		/*
+			 方法2 parents
+		*/
+		$(".div2 tbody tr :radio:checked").parents("tr").addClass("selected");
+
+		/*
+			方法2 jQuery 选择器 has 方法
+		*/
+		$(".div2 tbody tr:has(':checked')").addClass("selected");
+
+
+		/*
+			div3
+		*/
+		$(".div3 tbody tr:has(':checked')").addClass("selected"); //初始化选中项颜色
+		/*
+			方法1
+			多选框选中且变色，判断 tr class 是否包含了  selected 
+		*/
+		// $(".div3 tbody tr").click(function(){
+		// 	if ($(this).hasClass("selected")){
+		// 		// $(this).removeClass("selected");	//等价于 下面的方法
+		// 		$(this)["removeClass"]("selected");
+		// 		$(this).find(":checkbox").attr("checked",false);
+		// 	}else{
+		// 		$(this).addClass("selected");
+		// 		$(this).find(":checkbox").attr("checked",true);
+		// 	}
+		// })
+
+		/*
+			方法1
+			l利用三元运算，直接判断 移除或者 添加 css
+		*/
+
+		$(".div3 tbody tr").click(function(){
+			var $hasclasss=$(this).hasClass("selected");
+			$(this)[$hasclasss?"removeClass":"addClass"]('selected');
+			$(this).find(":checkbox").attr("checked",!$hasclasss);
+		})
+	})
+</script>
+</body>
+</html>

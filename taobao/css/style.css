@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+body{
+	position: relative;
+	padding-top: 90px;
+}
+#form-haibao{
+	height:100%;
+	overflow:hidden;
+}
+.demo-panel-title {
+padding-top: 20px;
+margin: 2px 0 20px;
+font: bold 23px/40px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.clear-float{
+	height:1px;
+	margin-top:-1px;
+	clear:both;
+	overflow:hidden;
+}
+.content{
+	position: relative;
+}
+.error{
+	color:#e74c3c;
+}
+.mb20{
+	margin-bottom: 20px;
+}
+
+.hoverShow:hover{
+	background: rgb(241, 241, 241);
+}
+.showClose{
+	color: black;
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	display:none;
+}

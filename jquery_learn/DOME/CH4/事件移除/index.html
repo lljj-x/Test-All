@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+</head>
+<body>
+	<button id="btn1">点击我</button>
+	<button id="btn2">点击我移除所有事件</button>
+	<button id="btn3">点击我移除第一个事件</button>
+	<button id="btn4">点击我只会触发一次事件</button>
+	<div id="test"></div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){	//首先为button 绑定三个click时间
+		$("#btn1").bind("click",fun1=function(){
+			$("#test").append("<p>我是绑定函数1</p>");
+		}).bind("click",fun2=function(){
+			$("#test").append("<p>我是绑定函数2</p>");
+		}).click(fun3=function(){
+			$("#test").append("<p>我是绑定函数3</p>");
+		});
+
+		$("#btn2").bind("click",function(){
+			$("#btn1").unbind("click");	 //unbind(type,date) type事件类型,date函数的名称，如果没有参数直接移除所有事件
+		})
+
+		$("#btn3").bind("click",function(){
+			$("#btn1").unbind("click",fun1);
+		})
+
+		$("#btn4").one("click",function(){
+			$("#test").append("<p>我是绑定函数1</p>");
+		})
+	})
+</script>
+</html>

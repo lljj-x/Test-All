@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<script type="text/javascript" src="../../../js/jquery.form.js"></script>
+</head>
+<body>
+	<h3>Demo 3 : form插件的使用--formSerialize()组装表单数据,用于jQuery中的.ajax(). </h3>
+	<form id="myForm" action="get1.php" method="post">
+		名称: <input type="text" name="name" /><br>
+		地址: <input type="text" name="address" /><br>
+		自我介绍: <input type="text" name="comment" /><br>
+		<input type="submit" id="test" value="提交" /><br>
+		<div id="output1" style="display:none"></div>
+	</form>
+	<br><br><br>
+	<form id="myForm2" action="get1.php" method="post"> 
+    名称： <input type="text" name="name2" class="special"/> <br/>
+	地址： <input type="text" name="address2" /><br/> 
+    自我介绍： <textarea name="comment2" class="special"></textarea> <br/>
+    单选：男<input type="radio" name="a" value="男" checked/> 
+       女<input type="radio" name="a" value="女"/><br/>
+    <input type="submit" id="test2" value="提交" /> <br/>
+	</form>
+	<br><br><br>
+	<input type="button" id="test3" value="重置所有表单" /><br>
+	<input type="button" id="test2" value="清除所有表单" />
+	<script type="text/javascript">
+		$(function(){
+			$("#test").bind("click",function(event){
+				var $queryString = $("#myForm").formSerialize();
+				alert($queryString); 
+				// .formSerialize()组装的数据可以用于 $.get,$.post,$.ajax .. 
+				// 木有发现 和 jq .serialize()方法的区别
+				$.get("get1.php",$("#myForm").formSerialize(),function(data,textStatus){
+					alert("你输入的名称为:" + data);
+				})
+				event.preventDefault();
+			});
+
+			$("form :eq(1)").submit(function() {
+				// var queryString = $('#myForm2 *').fieldValue(); 
+				// alert(queryString);
+				// return false;
+				// fieldValue() 返回所有域的值，用, 隔开
+
+				var queryString = $("#myForm2 *").fieldValue();
+				alert(queryString);
+				// var $data = $(":checkbox,:radio").serialize();
+				// alert($data);
+				return false;
+			})
+
+			$("input:button").eq(0).click(function(){
+				$("#myForm2,#myForm").resetForm();	//重置表单，类似于type = reset 按钮
+			})
+
+			$("input:button:last").click(function(){
+				$("#myForm2,#myForm").clearForm();	//清空form的信息
+			})
+		})
+
+	</script>
+</body>
+</html>

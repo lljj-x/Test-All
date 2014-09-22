@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+<title>DIY Plugin</title>
+<style type="text/css">
+	body{
+		background: rgb(207, 184, 184);
+		margin: 0;
+		padding: 100px;
+	}
+	.div1{
+		position: relative;
+		background: rgb(209, 206, 206);
+		width: 500px;
+		height: 500px;
+	}
+	pre{
+		background: #fff;
+	}
+</style>
+</head>
+<body>
+	<H1>jQuery.fn.extend() 插件相关</H1>
+	<H2>jQuery.fn.extend() 插件相关</H2>
+	<H3>jQuery.fn.extend() 插件相关</H3>
+	相关代码：
+<pre>
+$.fn.extend({
+	setColor:function(value){
+		this.each(function(){
+			$(this).css("color",value);
+			return $(this);
+		});
+	},
+});
+<span style="background:rgb(206, 206, 206)">等同于下面</span>
+$.fn.setColor = function(value){
+	this.each(function(){
+		$(this).css("color",value);
+		return $(this);
+	});
+}
+</pre>
+本页代码：
+<pre>
+(function($){
+	$.fn.extend({
+		setFontColor:function(value){
+			return this.each(function(){
+				$(this).css("color",value);
+				return $(this);
+			});
+		},
+		setColor:function(options){
+			var defaults = {
+				color:'red',
+				bgColor:'yellow'
+			},
+			options = $.extend(defaults,options);
+
+			return this.each(function(){
+				$(this).css({'color':options.color,'background':options.bgColor});
+				return $(this);
+			});
+		},
+	});
+
+	$.fn.setH3Color=function(options){
+		// options = $.extend({},$.fn.setH3Color.defaults,options);
+		options = $.extend($.fn.setH3Color.defaults,options);
+		return this.each(function(){
+			$(this).css({'color':options.color,'background':options.bgColor});
+			privateMothed();
+			return $(this);
+		});
+	};
+	$.fn.setH3Color.defaults={
+		color : 'red',
+		bgColor : 'yellow'
+	}
+
+	function privateMothed() {
+		alert("这是一个使用的方法，外部不能直接调用")
+	}
+
+}(jQuery));
+
+$("h1").setFontColor('red');
+$("h2").setColor({
+	color:'#fff',
+	bgColor:'#000'
+});
+
+$.fn.setH3Color.defaults.color = '#000';
+$("h3").setH3Color();
+</pre>
+</body>
+
+<script type="text/javascript">
+	(function($){
+		$.fn.extend({
+			setFontColor:function(value){
+				return this.each(function(){
+					$(this).css("color",value);
+					return $(this);
+				});
+			},
+			setColor:function(options){
+				var defaults = {
+					color:'red',
+					bgColor:'yellow'
+				},
+				options = $.extend(defaults,options);
+
+				return this.each(function(){
+					$(this).css({'color':options.color,'background':options.bgColor});
+					return $(this);
+				});
+			},
+		});
+
+		$.fn.setH3Color=function(options){
+			// options = $.extend({},$.fn.setH3Color.defaults,options);
+			options = $.extend($.fn.setH3Color.defaults,options);
+			return this.each(function(){
+				$(this).css({'color':options.color,'background':options.bgColor});
+				privateMothed();
+				return $(this);
+			});
+		};
+		$.fn.setH3Color.defaults={
+			color : 'red',
+			bgColor : 'yellow'
+		}
+
+		function privateMothed() {
+			alert("这是一个使用的方法，外部不能直接调用")
+		}
+	}(jQuery));
+
+	$("h1").setFontColor('red');
+	$("h2").setColor({
+		color:'#fff',
+		bgColor:'#000'
+	});
+
+	$.fn.setH3Color.defaults.color = '#000';
+	$("h3").setH3Color();
+
+// privateMothed(); // 这里是无法直接调用
+</script>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+<title>DIY Plugin</title>
+<style type="text/css">
+	body{
+		background: rgb(207, 184, 184);
+		margin: 0;
+		padding: 100px;
+	}
+	.div1{
+		position: relative;
+		background: rgb(209, 206, 206);
+		width: 500px;
+		height: 500px;
+	}
+	pre{
+		background: #fff;
+	}
+</style>
+</head>
+<body>
+	<H1>jQuery.extend() 插件相关</H1>
+	代码部分：
+<pre>
+jQuery.test = {
+	test1:function(){
+		alert("test1");
+	},
+	test2:function(){
+		alert("test2");
+	}
+};
+
+jQuery.thisTest = function(){
+
+	alert("this message");
+}
+
+$.test.test1();
+$.thisTest();
+</pre>
+</body>
+
+<script type="text/javascript">
+	jQuery.test = {
+		test1:function(){
+			alert("test1");
+		},
+		test2:function(){
+			alert("test2");
+		}
+	};
+
+	jQuery.thisTest = function(inputValue){
+		alert("你输入的内容为 " + inputValue);
+	}
+	
+	$.test.test1();
+	$.thisTest("你是煞笔吗 ？ ");
+
+</script>
+</html>

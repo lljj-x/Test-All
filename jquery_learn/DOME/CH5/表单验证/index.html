@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>表单验证</title>
+<!-- <script type="text/javascript" src="../../../js/jQuery.1.8.js"></script> -->
+<script  type="text/javascript"
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+</script>
+
+<style type="text/css">
+	body { font:12px/19px Arial, Helvetica, sans-serif; color:#666;}
+	.div1,.div2{
+		float: left;
+		height: 100%;
+		overflow: hidden;
+	}
+	form div { margin:5px 0;}
+	.int label { float:left; width:100px; text-align:right;}
+	.int input { padding:1px 1px; border:1px solid #ccc;height:16px;}
+	.sub { padding-left:100px;}
+	.sub input { margin-right:10px; }
+	.formtips{width: 200px;margin:2px;padding:2px;}
+	.onError{
+	    background:#FFE0E9 url(img/reg3.gif) no-repeat 0 center;
+		padding-left:25px;
+	}
+
+	.onSuccess{
+	    background:#E9FBEB url(img/reg4.gif) no-repeat 0 center;
+		padding-left:25px;
+	}
+
+	p{
+		clear: both;
+		display: block;
+	}
+
+</style>
+</head>
+<body>
+	<div class="div1">
+		<form action="http://www.google.com" method="GET" id="form1">
+			<div class="int">
+				<label for="username">用户名:</label>
+				<input type="text" id="username" class="required"/>
+			</div>
+
+			<div class="int">
+				<label for="email">邮箱:</label>
+				<input type="text" id="email" class="required"/>
+			</div>
+
+			<div class="int">
+				<label for="personinfo">个人资料:</label>
+				<input type="text" id="personinfo" />
+			</div>
+
+			<div class="sub">
+				<input type="submit" value="提交" id="send" />
+				<input type="reset" value="重置" id="res"/>
+			</div>
+		</form>
+	</div>
+
+<p>
+	第一个当你鼠标移出的时候触发事件
+
+</p>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".required").after("<strong style='color:red;'>*</strong>");	//必填框加红
+
+		$("#form1 :input").blur(function(){
+			$(this).siblings(".formtips").remove();	//文本框失去焦点的时候 先移除掉之前可能加载过了的  .formtips 
+
+			if ($(this).is('#username') ){
+				if($(this).val()=="" || $(this).val().length<6){	//判断用户是否为空或者 长度小于6
+					 var errorMsg = '请输入至少6位的用户名.';
+					 $(this).parent().append($("<span class='formtips onError'>" + errorMsg + "</span>"));
+				}else{
+					var okMsg = "输入正确.";
+					$(this).parent().append('<span class="formtips onSuccess">'+okMsg+'</span>');
+				}
+			}
+
+			if($(this).is("#email")){
+				if ($(this).val() == "" || (this.value!="" && !/.+@.+\.[a-zA-Z]{2,4}$/.test(this.value))){
+					var errorMsg = '邮箱不能为空，或者格式错误';
+					$(this).parent().append($("<span class='formtips onError'>" + errorMsg + "</span>"));
+				}else{
+					var okMsg = "输入正确." ;
+					$(this).parent().append('<span class="formtips onSuccess">'+okMsg+'</span>');
+				}
+			}
+		}).keyup(function(){
+			$(this).triggerHandler("blur");
+		}).focus(function(){
+			$(this).triggerHandler("blur");
+		})
+
+		$("#send").click(function(){
+			$("#form1 :input").trigger('blur');	// 执行失去焦点事件
+			if ($(".onError").length>0){
+				return false;
+			}
+		})
+
+		$("#res").click(function(){
+			$(".formtips").remove();
+		})
+
+	})
+</script>
+
+</body>
+</html>

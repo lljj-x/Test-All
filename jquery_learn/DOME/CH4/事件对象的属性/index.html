@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+		<title>事件对象的属性</title>
+	</head>
+
+	<body>
+		<a href="http://www.google.com" id="a1">event.type 返回事件属性</a>
+		<a href="http://www.google.com" id="a2">event.target 返回触发事件的元素</a>
+		<a href="http://www.google.com" id="a3">event.target 返回光标相对于页面的pageX pageY</a>
+		<a href="http://www.google.com" id="a4">event.which返回鼠标按键 左1，中2，右3</a>
+		<input type="text"/>
+		<label>返回键盘按键</label>
+	</body>
+
+	<script type="text/javascript">
+		$("#a1").click(function(event){
+			alert(event.type + 'event.preventDefault()阻止了默认跳转事件');
+			event.preventDefault();
+		});
+
+		$("#a2").click(function(event){
+			alert(event.target.href);
+			$(event.target).css("color","red");
+			return false;
+		});
+
+		$("#a3").click(function(event){
+			alert("光标相对于页面的位置 x:" + event.pageX + " Y: " + event.pageY);
+			return false;
+		});
+
+		$("#a4").mousedown(function(event){
+			alert(event.which);
+			return false;
+		});
+
+		$("input").keyup(function(e){
+			alert(e.which);
+		});
+
+
+
+	</script>
+</html>

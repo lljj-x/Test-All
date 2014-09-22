@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>最简单.ajaxform提交返回</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<script type="text/javascript" src="../../../js/jquery.form.js"></script>
+	<style type="text/css">
+		.div{
+			width: auto;
+			height: 100%;
+			overflow: hidden;
+			float: left;
+			border: 1px solid red;
+			margin-left: 30px;
+		}
+		p{
+			font-weight: bold;
+			font-size: 14px;
+		}
+	</style>
+</head>
+<body>
+	<h3>form插件的使用--dataType的其他方式.</h3>
+
+	<div class="div">
+		<p>
+			json方式返回
+		</p>
+		<form id="myForm_json" action="json.php" method="post">
+			名称: <input type="text" name="name" /><br>
+			地址: <input type="text" name="address" /><br>
+			自我介绍: <input type="text" name="comment"><br>
+			<input type="submit" id="test" value="提交" /><br>
+			<div id="output_json"></div>
+		</form>
+	</div>
+
+	<div class="div">
+		<p>
+			xml方式返回
+		</p>
+		<form id="myForm_xml" action="xml.php" method="post">
+			名称: <input type="text" name="name" /><br>
+			地址: <input type="text" name="address" /><br>
+			自我介绍: <input type="text" name="comment"><br>
+			<input type="submit" id="test" value="提交" /><br>
+			<div id="output_xml"></div>
+		</form>
+	</div>
+
+	<div class="div">
+		<p>
+			html方式返回
+		</p>
+		<form id="myForm_html" action="html.php" method="post">
+			名称: <input type="text" name="name" /><br>
+			地址: <input type="text" name="address" /><br>
+			自我介绍: <input type="text" name="comment"><br>
+			<input type="submit" id="test" value="提交" /><br>
+			<div id="output_html"></div>
+		</form>
+	</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		/*
+		.ajaxForm(),.ajaxSubmit() 都可以介绍一个或者0个参数，可以直接是一个函数回掉，或者一个options对象 
+
+		var options={
+			target: 	"#ouput1"	//用服务器返回的数据 更新id 为output1 的内容,ajax成功后自动更新 html 格式
+			beforeSubmit: 	showRequest,	//提交前的回调函数
+			success: showResponse,	//提交后的回调函数
+
+			// 其它的属性
+			url ：	url //默认form的action ，添加的话会覆盖默认的action
+			type: 	type //默认的method 如果写的话覆盖form的method
+			dataType: 	null // 'xml','script','json' ,服务器返回的类型 
+			clearFrom: 	true	//成功提交后 清除所有的表单元素值
+			resetForm: 	true	//成功提交后 重置所有的表单元素值
+			timeout: 	3000	//超时
+		};
+			// 'ajaxForm'
+			$('#myForm').ajaxForm(options);	// ajaxForm方式的提交
+			$('#myForm').ajaxSubmit(options);	//ajaxSubmit	
+			
+			function showRequest(formData,jqForm,options){
+				formData: 	数组对象 $.param()可以转为字符串 //类似 ： name=1&add=2 
+				jqForm: 	jQ对象，封装了表单元素, 
+							var formElement = jqForm[0];	//转化为dom对象
+							var address = formElement.address.value; //获取值
+				options: 	即为前面声明了 options对象里面的一些属性
+			}	
+		
+			function showResponse(responseText,statusText){
+				responseText: 返回的内容
+				statusText:   状态	//success error
+			}
+		*/
+//  -    - --  - - - - - - - - -   json 格式返回
+
+			function success_json(textResponse,status){
+				$("#output_json").html("name: " + textResponse.name + "<br>address: " + textResponse.address + "<br>comment: " + textResponse.comment);
+			}
+
+			$("#myForm_json").submit(function(event){
+				$(this).ajaxSubmit({
+					dataType: 'json',
+					success: success_json
+				});
+				event.preventDefault();
+			})
+
+//  -    - --  - - - - - - - - -   xml 格式返回
+			
+			function success_xml(textResponse,status){
+				var name =$(textResponse).find("name").text();
+				var address = $('address',textResponse).text();
+				var comment = $("comment",textResponse).text();
+				$("#output_xml").empty().append("name: " + name + "<br>address: " + address + "<br>comment: " + comment);
+			}
+
+			$("#myForm_xml").ajaxForm({
+				dataType: 'xml',
+				success: success_xml
+			})
+
+//  -    - --  - - - - - - - - -   html 格式返回
+			
+			$("#myForm_html").ajaxForm({
+				target: "#output_html"
+			});
+	})
+	
+</script>
+</body>
+</html>

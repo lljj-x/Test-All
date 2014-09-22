@@ -1,0 +1,59 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+<title>DIY Plugin</title>
+<style type="text/css">
+	body{
+		background: rgb(207, 184, 184);
+		margin: 0;
+		padding: 100px;
+	}
+	.div1{
+		position: relative;
+		background: rgb(209, 206, 206);
+		width: 500px;
+		height: 500px;
+	}
+</style>
+</head>
+<body>
+	<H1>点击设置div1文字颜色</H1>
+	<div>
+		<ul>
+			<li style="color:red">red</li>
+			<li style="color:yellow">yellow</li>
+			<li style="color:blue">blue</li>
+		</ul>
+	</div>
+	<button>点击我返回 div1 的颜色值</button>
+	<div class="div1" style="color:black">
+		这里是div1,注意我的颜色
+	</div>
+</body>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("button").click(function(){
+			alert($(".div1").color());
+		})
+
+		$("li").click(function(){
+			$(".div1").color($(this).text());
+		})
+	})
+	;(function($){
+		$.fn.extend({
+			"color":function(value){	//不加 value 判断英文 .css 方法会自动判断,不用只会返回  object
+				if (value == undefined) {
+					return this.css("color");	
+				}else{
+					return this.css("color",value);
+				}
+			}
+		});
+	})(jQuery);
+</script>
+</html>

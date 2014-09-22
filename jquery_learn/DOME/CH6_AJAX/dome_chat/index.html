@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<title>DOME _ ajax 聊天室</title>
+<style type="text/css">
+	body{
+		margin:0;
+		padding :0;
+		font-size: 12px;
+	}
+	#messagewindow{
+		height: 250px;
+		border: 1px solid;
+		padding:5px;
+		overflow: auto;
+	}
+	#wrapper{
+		margin: auto;
+		width: 438px;
+	}
+</style>
+</head>
+<body>
+	<div id="wrapper">
+		<p id="messagewindow"><span id="loading">loading....</span></p>
+		<form id="chatform" action="#">
+			<label for="author">姓名:</label><input type="text" id="author" size="50"/><br>
+			<label for="msg">内容:</label><input type="text" id="msg" size="50"/><br>
+			<input type="submit" value="发送" /><br />
+		</form>
+		
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			timestamp = 0;	//定义时间戳 初始值，首次加载页面用于获取
+			updateMsg();	//首页加载时候加载聊天内容
+
+			$("#chatform").submit(function(){	//提交表单
+				$.post("backend.php",{
+					name: $("#author").val(),
+					message: $("#msg").val(),
+					action: "postmsg",
+					time: timestamp
+					},function(xml){
+					$("#msg").val("");	//清空 内容框
+					addMessages(xml);	//addMessages 函数用于添加数据
+				},"xml");
+				return false;
+			});
+
+		});
+
+		function addMessages(xml){
+			// 判断返回状态是否为2
+			if ($("status",xml).text() == 2) return;
+			timestamp = $("time",xml).text();
+			$("message",xml).each(function(){	// each 循环数据
+				var author = $("author",this).text();
+				var content = $("text",this).text();
+				var htmlcode = "<strong>" + author + "</strong>:" + content +"<br>";
+				$("#messagewindow").prepend(htmlcode);	//讲内容前置
+
+			});
+		}
+
+		function updateMsg(){
+			$.post("backend.php",{
+				time: timestamp
+			},function(xml){
+				$("#loading").remove();	// 移除等待
+				addMessages(xml);
+			});
+			setTimeout("updateMsg()",3000);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html charset=utf-8" />
+	<title>超链接提示图片案例 - 锋利的jquery</title>
+	<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+	<style type="text/css">
+		body{
+		margin:0;
+		padding:40px;
+		background:#fff;
+		font:80% Arial, Helvetica, sans-serif;
+		color:#555;
+		line-height:180%;
+		}
+
+		img{
+			border:none;
+		}
+
+		ul,li{
+			margin:0;
+			padding:0;
+		}
+
+		li{
+			list-style:none;
+			float:left;
+			display:inline;
+			margin-right:10px;
+			border:1px solid #AAAAAA;
+		}
+
+		/* tooltip */
+		#tooltip{
+			position:absolute;
+			border:1px solid #ccc;
+			background:#333;
+			padding:2px;
+			display:none;
+			color:#fff;
+		}
+
+	</style>
+</head>
+<body>
+	<h3>有效果:</h3>
+	<ul>
+		<li><a href="images/1_1.jpg" class="tooltip" title="苹果 iPod" onclick="return false;"><img src="images/1.jpg"></a></li>
+		<li><a href="images/2_2.jpg" class="tooltip" title="苹果 iPod nano" onclick="return false;"><img src="images/2.jpg"></a></li>
+		<li><a href="images/3_3.jpg" class="tooltip" title="苹果 iPhone" onclick="return false;"><img src="images/3.jpg"></a></li>
+		<li><a href="images/4_4.jpg" class="tooltip" title="苹果 Mac" onclick="return false;"><img src="images/4.jpg"></a></li>
+	</ul>
+	<br><br><br><br><br>
+	<h3>无效果: </h3>
+		<ul>
+			<li><a href="images/1_1.jpg"><img src="images/1.jpg"></a></li>
+			<li><a href="images/2_1.jpg"><img src="images/2.jpg"></a></li>
+			<li><a href="images/3_1.jpg"><img src="images/3.jpg"></a></li>
+			<li><a href="images/4_1.jpg"><img src="images/4.jpg"></a></li>
+		</ul>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var x=10;
+				var y=20;
+				$("a.tooltip").mouseover(function(e){
+					this.myTitle=this.title;
+					this.title="";
+					var imgTitle=this.myTitle? "<br>"+this.myTitle : "";	//三元运算,boolean?值1:值2 boolean必须为布尔类型，true返回值1，false 返回值2
+					var tooltip = "<div id='tooltip'><img src='" + this.href + "' alt='产品预览'/>" + imgTitle +"</div>"; //创建 div 
+					$("body").append(tooltip);
+					$("#tooltip").css({
+						"top": (e.pageY+y) + "px",
+						"left": (e.pageX+x) + "px"
+					}).show("fast");
+				}).mousemove(function(e){
+					$("#tooltip").css({
+						"top":(e.pageY + y) + "px",
+						"left":(e.pageX + x) + "px"
+					})
+				}).mouseout(function(){
+					this.title=this.myTitle;
+					$("#tooltip").remove();
+				})
+			})
+		</script>
+</body>
+</html>

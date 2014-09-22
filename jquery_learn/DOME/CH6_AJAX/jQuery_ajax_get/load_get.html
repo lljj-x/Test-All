@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<style type="text/css">
+* { margin:0; padding:0;}
+body { font-size:12px;}
+.comment { margin-top:10px; padding:10px; border:1px solid #ccc;background:#DDD;}
+.comment h6 { font-weight:700; font-size:14px;}
+.para { margin-top:5px; text-indent:2em;background:#DDD;}
+</style>
+
+</head>
+<body>
+	<form id="form1" aciton="#">
+		<p>评论:</p> 
+		<p>姓名:<input name="username" id="username"></p>
+		<p>内容:<textarea name="content" id="content" rows="2" cols="20"></textarea></p>
+		<p><input type="button" id="send" value="提交" /></p>
+	</form>
+	<div class='comment'>已有评论:</div>
+	<div id="resText"></div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/*
+			load() 方法通过 AJAX 请求从服务器加载数据，并把返回的数据放置到指定的元素中。 后两个参数为可选
+			 load (url,date,callback)	URL地址，date发送至服务器的数据 ,callback完成后回调的函数无论成功与否 后两个参数为可选
+
+			传递方式根据 参数 data 来自动指定。如果没有就采用GET方式；反之则自动采用 post 方式
+			$("#resText").load("test.php",function(){
+					// 没有参数  get 方式
+			})
+
+			$("#resText").load("test.php",{name:"rain",age:"22"},function(){
+				// 有参数 自动 POST 方式
+			})
+		*/
+		
+		$("#send").click(function(){	// GET
+			$("#resText").load("get1.php?username=" + $("#username").val() + "&content=" + $("#content").val());
+		})
+
+	})
+</script>
+</body>
+</html>

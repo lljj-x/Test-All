@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="height:100%;overfolow:hidden;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="w3school.com.cn" />
+<meta name="Copyright" content="Copyright W3school.com.cn All Rights Reserved." />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <!-- Loading Bootstrap -->
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+<!-- Loading Flat UI -->
+<link href="css/flat-ui.css" rel="stylesheet">
+
+<!-- Loading Font Awesome -->
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+
+<!-- Loading My Css -->
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<!-- Load JS here for greater good =============================-->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script src="js/bootstrap-switch.js"></script>
+<script src="js/flatui-checkbox.js"></script>
+<script src="js/flatui-radio.js"></script>
+<script src="js/jquery.tagsinput.js"></script>
+<script src="js/jquery.placeholder.js"></script>
+<!-- <script src="http://vjs.zencdn.net/4.3/video.js"></script> -->
+<script src="js/application.js"></script>
+<script src="js/liu/js.js"></script>
+<title>天猫客服老样式代码生成</title>
+<meta name="description" content="天猫客服老样式代码生成,只生成大概的框架,具体细节,可能需要自己稍作调整 !">
+<meta name="keywords" content="天猫客服老样式代码生成,天猫客服代码,天猫客服老样式代码生成,天猫代码生成">
+</head>
+<body>
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="index.html" class="navbar-brand">Tmall</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="index.html">超990活动海报</a>
+        </li>
+        <li>
+          <a href="lunbo.html">全屏轮播</a>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">客服代码生成<b class="caret"></b></a>
+          <span class="dropdown-arrow"></span>
+          <ul class="dropdown-menu">
+            <li class="active">
+              <a href="kefu1.html">老样式</a>
+            </li>
+            <li>
+              <a href="kefu.html">新样式</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="http://ljj.me">关于</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header> 
+
+<div class="container">
+  <form class="form-horizontal" id="form" role="form" aciton="#">
+    <h3 class="demo-panel-title">全局设置</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="getFocus" class="col-sm-4 control-label">旺旺ID:</label>
+          <div class="col-sm-8">
+            <input type="input" class="form-control" inputType="required" placeholder="输入客服旺旺ID" id="kefuId">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="getFocus" class="col-sm-4 control-label">提示信息:</label>
+          <div class="col-sm-8">
+            <input type="input" class="form-control" inputType="" placeholder="鼠标放上去显示文字(可选)" id="kefuMessage">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="insert-before">
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="col-md-4">
+          </div>
+          <div class = "col-md-3" style="margin-top:10px">
+              <button type="submit" class="btn btn-primary" id="submit-haibao">代码生成</button>
+          </div>
+          <div class = "col-md-3" style="margin-top:10px">
+          </div>          
+        </div>
+      </div>
+      <div class="col-md-6">
+      </div>
+    </div>
+
+    <div class="row mb20">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-10">
+        <textarea class="form-control" rows="5" placeholder="代码生成区" id="code"></textarea>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+
+<script type="text/javascript">
+  $(function(){
+    $("#submit-haibao").click(function(event){
+      event.preventDefault();
+      var isCheck = checkForm("form");
+      if (isCheck) {
+        getCode();
+      };
+    });
+
+    // 修改时重置错误
+    $("#form").on("change","input",function(){
+      checkEm($(this));
+    });
+  })
+
+  function getCode(){
+    var kefuId = encodeURIComponent($("#kefuId").val());
+    var kefuMessage = "点击联系客服";
+    if ($("#kefuMessage").val() != "") {
+      kefuMessage = $("#kefuMessage").val();
+    };
+    var code = '<a title="' + kefuMessage + '" target="_blank" href="http://www.taobao.com/webww/ww.php?spm=0.0.0.0.fbfQjF&amp;ver=3&amp;touid=' + kefuId + '&amp;siteid=cntaobao&amp;status=2&amp;charset=utf-8" data-spm-anchor-id="0.0.0.0"><img border="0" src="http://amos.im.alisoft.com/online.aw?v=2&amp;uid=' + kefuId + '&amp;site=cntaobao&amp;s=2&amp;charset=utf-8" alt="' + kefuMessage + '"/></a>';
+    $("#code").text(code)[0].focus();
+  }
+
+</script>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		/*
+			$.param(); 用原来对一个数组或者对象按照key/value进行序列化
+		*/
+
+
+		var obj = {a:1,b:2,c:3};
+		var k = $.param(obj);
+		alert(k);
+		
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../../js/jQuery.1.8.js"></script>
+<style type="text/css">
+* { margin:0; padding:0;}
+body { font-size:12px;}
+.comment { margin-top:10px; padding:10px; border:1px solid #ccc;background:#DDD;}
+.comment h6 { font-weight:700; font-size:14px;}
+.para { margin-top:5px; text-indent:2em;background:#DDD;}
+.block{width:80px;height:80px;background:#DDD;}
+
+</style>
+
+</head>
+<body>
+	<p><input type="button" id="send" value="加载jquery.color.js文件" /></p>
+	<div class="block"></div>
+<script type="text/javascript">
+	// $.getScript(jsfile,callback); callback 回调函数为可选
+
+	$(document).ready(function() {
+		$("#send").click(function(){
+			$.getScript("jquery.color.js",function(){	// $.getScript 加载 jquery.color.js 并回调函数 ;
+					   $(".block").animate({"background-color": 'red' }, 2000)
+					   				.animate({"background-color":"blue"},2000)
+					   				.animate({"background-color":"black"},4000);
+
+			});	
+		})
+	})
+</script>
+</body>
+</html>			

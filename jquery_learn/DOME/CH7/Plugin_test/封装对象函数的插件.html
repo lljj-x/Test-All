@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>$.extend 封装对象函数</title>
+<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+(function($){
+	$.extend({
+		ltrim : function(text){
+			return (text || "").replace(/^\s+/g,"");
+		},
+		rtrim : function(text){
+			return (text || "").replace(/\s+$/g,"");
+		}
+	});
+}(jQuery));
+
+innerHtmll = "xxx" + $.ltrim('   fasdf   ') + "xxx";
+innerHtmlr = "xxx" + $.rtrim('   fasdf     ') + "xxx";
+alert(innerHtmll);
+alert(innerHtmlr);
+</script>
+</body>
+</html>

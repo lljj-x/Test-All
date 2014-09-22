@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../../../js/jquery.1.8.js"></script>
+<title>DIY Plugin</title>
+<style type="text/css">
+	body{
+		background: rgb(207, 184, 184);
+		margin: 0;
+		padding: 100px;
+	}
+	table {border: 0;border-collapse: collapse;}
+	td{font:normal 12px/17px Arial; padding: 2px; width: 100px}
+	th{font:bold 12px/17px Arial; text-align: left;padding: 4px;border-bottom: 1px solid #333}
+	.odd{background: #FFF;}
+	.even{background: #FFF38F;}
+	.selected{background:#FF6500;color:#fff;}
+</style>
+</head>
+<body>
+	<H1>原始代码</H1>
+	<div style="margin-bottom:20px;">
+		<table>
+			<thead>
+				<tr>
+				<th></th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>暂住地</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>张三</td>
+					<td>三</td>
+					<td>张</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>四</td>
+					<td>李</td>
+					<td>李</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check" checked="checked" value=""/></td>
+					<td>五</td>
+					<td>王</td>
+					<td>王</td>
+				</tr>
+
+				<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>张三</td>
+					<td>三</td>
+					<td>张</td>
+				</tr>
+												<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>张三</td>
+					<td>三</td>
+					<td>张</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>张三</td>
+					<td>三</td>
+					<td>张</td>
+				</tr>				
+			</tbody>
+		</table>
+	</div>
+			<table>
+			<thead>
+				<tr>
+				<th></th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>暂住地</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>张三</td>
+					<td>三</td>
+					<td>张</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>四</td>
+					<td>李</td>
+					<td>李</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>五</td>
+					<td>王</td>
+					<td>王</td>
+				</tr>
+
+				<tr>
+					<td><input type="checkbox" name="check" checked="checked" value=""/></td>
+					<td>张三</td>
+					<td>三</td>
+					<td>张</td>
+				</tr>
+												<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>张三</td>
+					<td>三</td>
+					<td>张</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check" value=""/></td>
+					<td>张三</td>
+					<td>三</td>
+					<td>张</td>
+				</tr>				
+			</tbody>
+		</table>
+</body>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("table").alertBgColor().find("th").css("background","rgb(221, 221, 221)");
+	});
+	
+	;(function($){
+		$.fn.extend({
+			"alertBgColor":function(options){
+				// 默认值
+				options = $.extend({
+					odd:"odd",
+					even:"even",
+					selected:"selected"
+				},options);
+				
+				// 附加 高亮行
+				$("tbody>tr :odd",this).addClass(options.odd);	//偶数行
+				$("tbody>tr :even",this).addClass(options.even);	// 奇数行
+				// $("tbody>tr",this).find("input:checked").parents("tr").addClass(options.selected);	//选择行 
+				$("tbody>tr",this).has(":checked").addClass(options.selected);	//选择行  和上面效果相同 
+				$("tbody>tr",this).on("click",function(){
+					var isSelected = $(this).hasClass(options.selected);
+					// $(this).toggleClass(options.selected).find("input:checkbox").attr('checked',!isSelected);	//通过jq去设置选中
+					$(this).toggleClass(options.selected).find("input:checkbox")[0].checked = !isSelected;	//通过Dom对象 checked 方法设置选中,等同于上吗的方法
+					
+				});
+				return this;
+			}
+		});
+	}(jQuery));
+
+</script>
+</html>
