@@ -13,3 +13,5 @@ $xxx = (int)$val ? 4 : 5;
 echo "xxx";
 
 echo $xxx;
+
+echo "20141028";

@@ -52,12 +52,15 @@
 		}
 		$(document).ready(function(){
 			$(".l_content").l_carousel({
-				isAutoPlay : true,				// 是否自动轮播
-				interval : '6000',				// 如果自动轮播 设置间隔时间 (ms)
-				imgPageNums : '4',				// 每页显示的图片张数
-				prevBtnId : 'prev',				// 上一页按钮 Id 名称
-				nextBtnId : 'next' ,			// 下一页按钮 Id 名称
-				switchDivId : 'highlight_tip' 	// 指示器放在那个div中
+                isAutoPlay : true,				// 是否自动轮播
+                idDisControllBtn : true,
+                interval : '3000',				// 如果自动轮播 设置间隔时间 (ms)
+                imgPageNums : '4',				// 每页显示的图片张数
+                prevBtnId : 'prev',				// 上一页按钮 Id 名称
+                nextBtnId : 'next' ,			// 下一页按钮 Id 名称
+                switchDivId : 'highlight_tip', 	// 指示器放在那个div中
+                speed : 500 ,   // 动画时间
+                easing : 'swing'    //需要animate easing 扩展，或者jquery ui
 			});
 		});
 	</script>
