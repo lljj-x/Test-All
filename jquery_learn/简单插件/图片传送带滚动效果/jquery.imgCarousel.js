@@ -23,7 +23,7 @@
                 if(options.idDisControllBtn){
                     // 添加指示器
                     $contentList.width(viewSize * imgPages);
-                    var htmlInnerSwitch = '<span class="current">1</span>';;
+                    var htmlInnerSwitch = '<span class="current">1</span>';
                     for (var i = 1; i <= imgPages; i++) {
                         if(i > 1){
                             htmlInnerSwitch = htmlInnerSwitch + '<span>' + i + '</span>';
@@ -102,12 +102,14 @@
                 // 移出指示器
                 if(options.idDisControllBtn){
                     $("#" + options.switchDivId).children("span").unbind("click");
-                    // $("#" + options.switchDivId).remove();
+                    $("#" + options.switchDivId).html("");
                 }
                 // 取消翻页按钮事件
                 $("#" + options.prevBtnId).unbind("click");
                 $("#" + options.nextBtnId).unbind("click");
 
+                // 恢复到原来的位置
+                $(".l_content_list",$(this)).css({"left":"0"});
             });
         }
 	});
