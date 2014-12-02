@@ -3,6 +3,7 @@
 		"l_carousel" : function(options){
 			var options = $.extend({
 				isAutoPlay : true,				// 是否自动轮播
+                isLoop: false,
 				idDisControllBtn : true,
                 interval : '3000',				// 如果自动轮播 设置间隔时间 (ms)
 				imgPageNums : '4',				// 每页显示的图片张数
@@ -37,6 +38,7 @@
                         $contentList.animate({"left" : - (viewSize * (thisIndex))},options.speed,options.easing);
                         $(this).addClass("current").siblings().removeClass("current");
                         imgCurrentPage = thisIndex + 1;
+                        checkDisable(options,imgCurrentPage,imgPages);
                     });
                 }
 
@@ -45,14 +47,19 @@
 					// 上一页事件
 					if (!$contentList.is(":animated")) {
 						if (imgCurrentPage == 1) {
-							$contentList.animate({"left" : "-=" +  (viewSize * (imgPages-1))},"slow")
-							imgCurrentPage = imgPages;
+                            if(options.isLoop){
+                                $contentList.animate({"left" : "-=" +  (viewSize * (imgPages-1))},options.speed,options.easing)
+                                imgCurrentPage = imgPages;
+                            }else{
+                                return false;
+                            }
 						}else{
-							$contentList.animate({"left" : "+=" +  viewSize},"slow")
+							$contentList.animate({"left" : "+=" +  viewSize},options.speed,options.easing)
 							imgCurrentPage --;
 						}
 						$("#" + options.switchDivId).children("span").eq(imgCurrentPage-1).addClass("current").siblings().removeClass("current");
 					}
+                    checkDisable(options,imgCurrentPage,imgPages);
 				});
 
 				$("#" + options.nextBtnId).on("click",function(event){
@@ -60,16 +67,38 @@
 					// 下一页事件
 					if (!$contentList.is(":animated")) {
 						if (imgCurrentPage == imgPages) {
-							$contentList.animate({"left" : "+=" +  viewSize * (imgPages-1)},"slow")
-							imgCurrentPage = 1;
+                            if(options.isLoop){
+                                $contentList.animate({"left" : "+=" +  viewSize * (imgPages-1)},options.speed,options.easing)
+                                imgCurrentPage = 1;
+                            }else{
+                                return false;
+                            }
 						}else{
-							$contentList.animate({"left" : "-=" +  viewSize},"slow")
+							$contentList.animate({"left" : "-=" +  viewSize},options.speed,options.easing)
 							imgCurrentPage ++;
 						}
 						$("#" + options.switchDivId).children("span").eq(imgCurrentPage-1).addClass("current").siblings().removeClass("current");
 					}
+                    checkDisable(options,imgCurrentPage,imgPages);
+
 				});
 
+                var checkDisable = function (options,imgCurrentPage,imgPages){
+                    if(imgCurrentPage == 1){
+                        $("#" + options.prevBtnId).addClass("disable");
+                    }else{
+                        if($("#" + options.prevBtnId).hasClass("disable")){
+                            $("#" + options.prevBtnId).removeClass("disable");
+                        }
+                    }
+                    if(imgCurrentPage == imgPages){
+                        $("#" + options.nextBtnId).addClass("disable");
+                    }else{
+                        if($("#" + options.nextBtnId).hasClass("disable")){
+                            $("#" + options.nextBtnId).removeClass("disable");
+                        }
+                    }
+                }
 				// 自动轮播
 				if (options.isAutoPlay) {
 					function autoPlay(){
