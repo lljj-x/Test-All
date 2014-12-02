@@ -6,7 +6,7 @@
                 isLoop: false,
 				idDisControllBtn : true,
                 interval : '3000',				// 如果自动轮播 设置间隔时间 (ms)
-				imgPageNums : '4',				// 每页显示的图片张数
+				imgPageNums : '4',				// 每次滚动多少张图片
 				prevBtnId : 'prev',				// 上一页按钮 Id 名称
 				nextBtnId : 'next' ,			// 下一页按钮 Id 名称
 				switchDivId : 'highlight_tip', 	// 指示器放在那个div中
@@ -15,12 +15,31 @@
 			},options);
 
 			return this.each(function(){
-				var viewSize = $(this).width();
+				// var viewSize = $(this).width();
+
+                var viewSize = $(".l_content_list li",$(this)).outerWidth(true) * options.imgPageNums;
+
 				var $contentList = $(".l_content_list",$(this));
 				var imgNums = $(".l_content_list li",$(this)).length;
 				var imgPages = Math.ceil(imgNums/options.imgPageNums);
 				var imgCurrentPage = 1; //从1开始自加
-
+                var checkDisable = function (options,imgCurrentPage,imgPages){
+                    if(imgCurrentPage == 1){
+                        $("#" + options.prevBtnId).addClass("disable");
+                    }else{
+                        if($("#" + options.prevBtnId).hasClass("disable")){
+                            $("#" + options.prevBtnId).removeClass("disable");
+                        }
+                    }
+                    if(imgCurrentPage == imgPages){
+                        $("#" + options.nextBtnId).addClass("disable");
+                    }else{
+                        if($("#" + options.nextBtnId).hasClass("disable")){
+                            $("#" + options.nextBtnId).removeClass("disable");
+                        }
+                    }
+                }
+                checkDisable(options,imgCurrentPage,imgPages);
                 if(options.idDisControllBtn){
                     // 添加指示器
                     $contentList.width(viewSize * imgPages);
@@ -83,22 +102,6 @@
 
 				});
 
-                var checkDisable = function (options,imgCurrentPage,imgPages){
-                    if(imgCurrentPage == 1){
-                        $("#" + options.prevBtnId).addClass("disable");
-                    }else{
-                        if($("#" + options.prevBtnId).hasClass("disable")){
-                            $("#" + options.prevBtnId).removeClass("disable");
-                        }
-                    }
-                    if(imgCurrentPage == imgPages){
-                        $("#" + options.nextBtnId).addClass("disable");
-                    }else{
-                        if($("#" + options.nextBtnId).hasClass("disable")){
-                            $("#" + options.nextBtnId).removeClass("disable");
-                        }
-                    }
-                }
 				// 自动轮播
 				if (options.isAutoPlay) {
 					function autoPlay(){

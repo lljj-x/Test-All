@@ -45,17 +45,16 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-
 		function setTime(){
 			setTimeout("setTime()", 1000);
 			alert("message");
 		}
 		$(document).ready(function(){
 			$(".l_content").l_carousel({
-                isAutoPlay : true,				// 是否自动轮播
+                isAutoPlay : false,				// 是否自动轮播
                 idDisControllBtn : true,
                 interval : '3000',				// 如果自动轮播 设置间隔时间 (ms)
-                imgPageNums : '4',				// 每页显示的图片张数
+                imgPageNums : 4,				// 每页显示的图片张数
                 prevBtnId : 'prev',				// 上一页按钮 Id 名称
                 nextBtnId : 'next' ,			// 下一页按钮 Id 名称
                 switchDivId : 'highlight_tip', 	// 指示器放在那个div中
