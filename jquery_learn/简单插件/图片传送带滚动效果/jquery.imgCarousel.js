@@ -18,11 +18,16 @@
 				// var viewSize = $(this).width();
 
                 var viewSize = $(".l_content_list li",$(this)).outerWidth(true) * options.imgPageNums;
-
 				var $contentList = $(".l_content_list",$(this));
 				var imgNums = $(".l_content_list li",$(this)).length;
 				var imgPages = Math.ceil(imgNums/options.imgPageNums);
 				var imgCurrentPage = 1; //从1开始自加
+                $contentList.css({
+                    position: "absolute",
+                    top: "0px",
+                    left: "0px",
+                    width: viewSize * imgPages + "px"
+                });
                 var checkDisable = function (options,imgCurrentPage,imgPages){
                     if(imgCurrentPage == 1){
                         $("#" + options.prevBtnId).addClass("disable");
@@ -42,7 +47,6 @@
                 checkDisable(options,imgCurrentPage,imgPages);
                 if(options.idDisControllBtn){
                     // 添加指示器
-                    $contentList.width(viewSize * imgPages);
                     var htmlInnerSwitch = '<span class="current">1</span>';
                     for (var i = 1; i <= imgPages; i++) {
                         if(i > 1){
