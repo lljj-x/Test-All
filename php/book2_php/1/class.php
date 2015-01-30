@@ -65,7 +65,7 @@ $person1->say();
 
 
 
-
+echo "test coding.net";
 
 
 include_once('../footer.php');
