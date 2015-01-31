@@ -53,9 +53,10 @@ preg_match_all("/{dede:img (.*)}(.*){\/dede:img/isU", $imgurls, $wordcount);
 
 preg_match_all("/text='(.*)' width/isU", $imgurls, $texts);
 
-
-
+echo "<pre>";
+print_r($wordcount[2]);
+echo "</pre>";
 
 echo "<pre>";
-print_r($texts);
+print_r($texts[1]);
 echo "</pre>";
