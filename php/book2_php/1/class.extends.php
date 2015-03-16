@@ -76,7 +76,6 @@ class MyTest{
         printR("我的姓名" . $this->name . " 我的性别" . $this->sex . " 我的年龄" . $this->age );
     }
 
-
     public function say(){
         printR("我是父类中的say");
     }
