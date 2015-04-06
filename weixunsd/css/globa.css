@@ -1,0 +1,106 @@
+/**
+ * by liu.jun
+ * 2015.04.05 21:27
+ * www.weixunsd.com
+**/
+
+/*::-webkit-scrollbar              { *//* 1 *//*  width:9px; background-color:#333;}*/
+/*::-webkit-scrollbar-button       { *//* 2 *//* }*/
+/*::-webkit-scrollbar-track        { *//* 3 *//* }*/
+/*::-webkit-scrollbar-track-piece  { *//* 4 *//* }*/
+/*::-webkit-scrollbar-thumb        { *//* 5 *//* border:solid 2px #333; width:5px;  border-radius:4px; background-color:#fff;}*/
+/*::-webkit-scrollbar-corner       { *//* 6 *//* background-color:#333;}*/
+/*::-webkit-resizer                { *//* 7 *//* }*/
+/*::-webkit-scrollbar:horizontal   { height:9px;}*/
+
+html {-ms-overflow-style:-ms-autohiding-scrollbar;}
+html,body {-webkit-overflow-scrolling : touch; background-color:#16171C;font-family: \5FAE\8F6F\96C5\9ED1,"Helvetica Neue",Tohoma;font-size: 12px;}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    outline:none;
+    -webkit-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+    letter-spacing: 1px;
+}
+a{ text-decoration:none;font-size: 12px;}
+.txa_l {text-align:left;}
+.txa_r {text-align:right;}
+.txa_c {text-align:center;}
+.left{float: left;}
+.right{float: right;}
+.clear {clear: both;display: block;overflow: hidden;visibility: hidden;width: 0;height: 0;}
+.dis-block{display: block;}
+.hardware-acceleration {
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+}
+:focus { outline: 0; }
+a {text-decoration: none;color: #666;}
+a:hover{text-decoration: underline;}
+img {border: none;border: 0;}
+.container-bg{
+    width: 1170px;
+    margin: 0 auto;
+}
+.display-none{
+    display:none
+}
+.display-inline-block{
+    display: inline-block;
+}
+.pos-absolute{
+    display: black;
+    position: absolute;
+}
+.font-title{
+    font-size:50px;
+}
+.font-content{
+    font-size:16px;
+}
+.fs-30{
+    font-size: 30px;
+}
+.fs-20{
+    font-size:20px;
+}
+.fs-14{
+    font-size: 14px;
+}
+.fs-16{
+    font-size:16px;
+}
+.fs-12{
+    font-size: 12px;
+}
+
+.fc-fff{
+    color: #FFF;
+}
+.fc-green{
+    color: #7CE77D;
+}
+.fc-51{
+    color: rgb(51,44,43);
+}
+.thumbnail>img{
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+.absolute-img>img{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.mt15{
+    margin-top: 15px;
+}

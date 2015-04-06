@@ -1,0 +1,61 @@
+/**
+ * by liu.jun
+ * 2015.04.05 21:27
+ * www.weixunsd.com
+**/
+
+.section .weixun-content{
+    padding: 20px 50px;
+}
+
+.section .section-title{
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.ajax-content>a{
+    color: #C0C0C0;
+    text-decoration: none;
+}
+.ajax-content>a:hover{
+    color: #fff;
+}
+
+.section .section-content,.ajax-content>a{
+    font-size: 20px;
+}
+
+/*weixunsd slide */
+.slide-close{
+    position: absolute;
+    top: 50px;
+    right: 60px;
+    width: 40px;
+    z-index: 4;
+    opacity: 1;
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.slide-close:hover{
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+.slide-close>img{
+    width: 100%;
+    height: auto;
+}
+.transition-none{
+    -webkit-transition: none !important;
+    transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    transition: none !important;
+}
+
+/*weixunsd slide end*/
