@@ -1627,11 +1627,12 @@
         function addAnimation(element){
             // var transition = 'all ' + options.scrollingSpeed + 'ms ' + options.easingcss3;
             var transition = 'transform ' + options.scrollingSpeed + 'ms ' + options.easingcss3;
+			var wkTransition = '-webkit-transform ' + options.scrollingSpeed + 'ms ' + options.easingcss3;
 
             element.removeClass(NO_TRANSITION);
             return element.css({
-                '-webkit-transition': transition,
-                'transition': transition
+                '-webkit-transition': wkTransition,
+                'transition': transition,
             });
         }
 
