@@ -72,6 +72,9 @@
     var WEIXUN_TMP_REMOVE_SLIDE;
     var WEIXUN_SLIDE_TIMER_1;
     var WEIXUN_SLIDE_TIMER_2;
+    var WEIXUN_SLIDE_TIMER_3;
+    var WEIXUN_SLIDE_TIMER_4;
+    var WEIXUN_IS_SCROLLPAGE = true;
 
     var $window = $(window);
     var $document = $(document);
@@ -372,6 +375,7 @@
 
         // liu.jun - weixun 添加横向滚动内容
         FP.weixunAddSlide = function(afterOnElm,afterData,thisIndex){
+            WEIXUN_IS_SCROLLPAGE = false;
             var $thisParent = $(afterOnElm).parent();
             $(afterOnElm).after(afterData);
             var $slides_wrapper = $(afterOnElm).closest("." + SLIDES_WRAPPER);
@@ -431,16 +435,17 @@
         }
 
         FP.weixunRemoveSlide = function(parentElm,thisIndex){
+            WEIXUN_IS_SCROLLPAGE = true;
             WEIXUN_TMP_REMOVE_SLIDE.prependTo(parentElm);
             WEIXUN_TMP_REMOVE_SLIDE.siblings().remove();
             var $slides_wrapper = WEIXUN_TMP_REMOVE_SLIDE.closest("." + SLIDES_WRAPPER);
-            WEIXUN_TMP_REMOVE_SLIDE.parent().css({
-                width: "100%"
-            });
-            WEIXUN_TMP_REMOVE_SLIDE.parent().children().css({
+            $slides_wrapper.scrollLeft(0);
+            WEIXUN_TMP_REMOVE_SLIDE.css({
                 width: '100%'
             });
-            $slides_wrapper.scrollLeft(0);
+            parentElm.css({
+                'width': "100%"
+            });
 
             checkSlideArrow($slides_wrapper.siblings("." + SLIDES_ARROW),1);
             $slides_wrapper.siblings("." + SLIDES_NAV).find('a.' + ACTIVE).parent().siblings().remove();
@@ -1131,6 +1136,10 @@
         * Scrolls the site to the given element and scrolls to the slide if a callback is given.
         */
         function scrollPage(element, callback, isMovementUp){
+            //liu.jun
+            if(! WEIXUN_IS_SCROLLPAGE){
+                return false;
+            }
             var dest = element.position();
             if(typeof dest === 'undefined'){ return; } //there's no element to scroll, leaving the function
 

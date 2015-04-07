@@ -35,7 +35,8 @@ $.supports = function(prop){
 $(function () {
     $('#fullpage').fullpage({
         'verticalCentered': false,
-        'css3': $.supports('animation'),
+        // 'css3': $.supports('animation'),
+        'css3': true,
         'sectionsColor': ['#254875', '#00FF00', '#254587', '#695684'],
 
         slidesNavigation: true,
@@ -62,8 +63,8 @@ $(function () {
         controlArrows: true,
         verticalCentered: true,
 
-        paddingTop: 0,
-        paddingBottom: 0,
+        paddingTop: '10px',
+        paddingBottom: '10px',
         responsive: 0,
 
         sectionSelector: '.section',
