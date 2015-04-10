@@ -1579,7 +1579,6 @@
 
         //when resizing the site, we adjust the heights of the sections, slimScroll...
         $window.resize(resizeHandler);
-
         var previousHeight = windowsHeight;
         var resizeId;
         function resizeHandler(){
