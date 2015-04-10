@@ -11,7 +11,6 @@
     // keeping central set of classnames and selectors
     var WRAPPER =               'fullpage-wrapper';
     var WRAPPER_SEL =           '.' + WRAPPER;
-
     // slimscroll
     var SCROLLABLE =            'fp-scrollable';
     var SCROLLABLE_SEL =        '.' + SCROLLABLE;
@@ -75,6 +74,7 @@
     var WEIXUN_SLIDE_TIMER_3;
     var WEIXUN_SLIDE_TIMER_4;
     var WEIXUN_IS_SCROLLPAGE = true;
+    var WEIXUN_BG = 'body';
 
     var $window = $(window);
     var $document = $(document);
@@ -457,11 +457,12 @@
         function weixunShowCloseButton($thisParent,thisIndex){
             var $slideClose = $("<div />").attr({
                 "class": "slide-close"
-            }).append($("<img />").attr({
-                    "src": "images/close.png",
-                    "alt": "关闭"
+            }).append($("<span />").attr({
+                    "class" : "icon-remove icon-3x"
                 }));
-            $thisParent.parent().before($slideClose);
+
+            $("#header").after($slideClose);
+
             $slideClose.click(function(){
                 $.fn.fullpage.weixunRemoveSlide($thisParent,thisIndex);
                 $(this).remove();
@@ -560,7 +561,10 @@
 
                 slides.wrapAll('<div class="' + SLIDES_CONTAINER + '" />');
                 slides.parent().wrap('<div class="' + SLIDES_WRAPPER + '" />');
-                $(this).find(SLIDES_CONTAINER_SEL).css('width', sliderWidth + '%');
+                $(this).find(SLIDES_CONTAINER_SEL).css({
+                    'width' : sliderWidth + '%',
+                    'overflow' : 'auto'
+                });
 
                 // liu.jun
                 /**
@@ -2067,10 +2071,12 @@
         * After this function is called, the mousewheel and trackpad movements won't scroll through sections.
         */
         function removeMouseWheelHandler(){
-            var wrapper = $(WRAPPER_SEL)[0];
+            // var wrapper = $(WRAPPER_SEL)[0];
+            var wrapper = $(WEIXUN_BG)[0];
+
             if (document.addEventListener) {
                 wrapper.removeEventListener('mousewheel', MouseWheelHandler, false); //IE9, Chrome, Safari, Oper
-                wrapper.removeEventListener('wheel', MouseWheelHandler, false); //Firefox
+                wrapper.removeEventListener('wheel', MouseWheelHandlefr, false); //Firefox
             } else {
                 wrapper.detachEvent('onmousewheel', MouseWheelHandler); //IE 6/7/8
             }
@@ -2082,7 +2088,9 @@
         * After this function is called, the mousewheel and trackpad movements will scroll through sections
         */
         function addMouseWheelHandler(){
-            var wrapper = $(WRAPPER_SEL)[0];
+            // var wrapper = $(WRAPPER_SEL)[0];
+            var wrapper = $(WEIXUN_BG)[0];
+
             if (document.addEventListener) {
                 wrapper.addEventListener('mousewheel', MouseWheelHandler, false); //IE9, Chrome, Safari, Oper
                 wrapper.addEventListener('wheel', MouseWheelHandler, false); //Firefox

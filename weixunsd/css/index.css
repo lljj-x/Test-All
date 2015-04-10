@@ -4,12 +4,48 @@
  * www.weixunsd.com
 **/
 
-.section .weixun-content{
-    padding: 20px 50px;
+.section .fp-tableCell .weixun-content-bg{
+    height: 100%;
+    width: 700px;
+    margin: 0 auto;
+    display: table;
+    position: relative;
+    overflow: auto;
 }
 
+.section .fp-tableCell .weixun-content{
+    margin: 0 auto;
+    color: #FFF;
+    display: table-cell;
+    vertical-align: middle;
+}
+.section .fp-tableCell .weixun-content-fade{
+    opacity:0;
+    pointer-events: none;
+    -webkit-transform:translate3d(0,-150%,0);
+    -ms-transform:translate3d(0,-150%,0);
+    transform:translate3d(0,-150%,0)
+}
+.section .weixun-content-fade.fadeInDown{
+    -webkit-transition: -webkit-transform 1s ;
+    -moz-transition: -moz-transform 1s;
+    -o-transition: -o-transform 1s;
+    transition: transform 1s;
+    pointer-events: auto;
+    opacity:1;
+    -webkit-transform:none;
+    -ms-transform:none;
+    transform:none
+}
+.section#weixun-youshi .weixun-content{
+    width: 550px;
+}
+.section#weixun-lianxi .weixun-content{
+    width: 590px;
+}
 .section .section-title{
-    font-size: 36px;
+    text-align: center;
+    font-size: 28px;
     margin-bottom: 20px;
 }
 
@@ -22,22 +58,77 @@
 }
 
 .section .section-content,.ajax-content>a{
-    font-size: 20px;
+    font-size: 18px;
 }
+.section .weixun-icon{
+    text-align: center;
+    margin-top: 50px;
+    position: relative;
+}
+.section .weixun-icon.p-bottom{
+    position: absolute;
+    bottom: 2%;
+    left: 0;
+    width: 100%;
+    margin: auto;
+}
+
+
+.section .weixun-icon>a{
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    position: relative;
+    text-decoration: none;
+    font-size: 40px;
+    line-height: 77px;
+    color: #fff;
+    border: solid 4px #fff;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    display: block;
+
+}
+.section .weixun-icon>a.a-center{
+    margin: 0 auto;
+}
+.section .weixun-icon>a.a-left,.section .weixun-icon>a.a-right{
+    position: absolute;
+    bottom: 0;
+}
+.section .weixun-icon>a.a-left{
+    left: 0;
+}
+.section .weixun-icon>a.a-right{
+    right: 0;
+}
+
+.section .weixun-icon>a:hover{
+    background-color: #FFF;
+    color: #000;
+    border-color: rgb(203, 203, 203);
+}
+#section_5 .fp-controlArrow,#section_5 .fp-slidesNav,#section_7 .fp-controlArrow,#section_7 .fp-slidesNav,#section_8 .fp-controlArrow,#section_8 .fp-slidesNav{
+    display: none !important;
+}
+
 
 /*weixunsd slide */
 .slide-close{
     position: absolute;
-    top: 50px;
-    right: 60px;
-    width: 40px;
-    z-index: 4;
+    top: 100px;
+    right: 20px;
+    z-index: 99;
     opacity: 1;
     cursor: pointer;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
+    color: #FFF;
 }
 .slide-close:hover{
     -webkit-transform: rotate(-180deg);

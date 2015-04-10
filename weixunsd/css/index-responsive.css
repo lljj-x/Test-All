@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+/*最小分辨率*/
+@media only screen and (min-width: 1200px) {
+
+}
+
+@media only screen and (min-width: 992px) {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 481px) {
+
+}
+
+/*区间*/
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+    #header #weixun-logo{padding: 8px 8px 0px;}
+    #header .weixun-logo-img,#header.section_1_out .weixun-logo-img{width: 50px;}
+    #header.section_1_out .weixun-logo-img{width: 40px;}
+    #header .right-menu li>a{width: 65px;height: 60px;}
+    #header .right-menu li>a>div>span{font-size: 18px}
+    #header #drop-menu{top:60px;}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .section .weixun-icon>a{transform: scale(0.6);-webkit-transform: scale(0.6)}
+}
+
+/*最大*/
+@media only screen and (max-width: 1199px) {
+    #header #weixun-logo{padding: 12px 12px 0px;}
+    #header .right-menu li>a{width: 75px;height: 70px;}
+    #header .logo-txt{font-size: 12px;}
+    #header .weixun-logo-img{width: 60px;}
+    #header.section_1_out .weixun-logo-img{width: 50px;}
+    #header.section_1_out .weixun-logo-img{width: 40px;}
+    #header .logo-txt-big,#header.section_1_out .logo-txt-small{margin-left: 10px;margin-top: 12px;}
+    #header .right-menu li>a>div>span{font-size: 22px}
+    #header #drop-menu{top:70px;}
+    #header #weixun-logo .logo-txt{display: block;}
+    #menu .menu-list>ul>li>a{font-size: 14px;}
+    #menu .menu-footer{font-size: 12px;}
+    .section .section-title{font-size: 22px;margin-bottom: 10px;}
+    .section .section-content, .ajax-content>a{font-size: 16px;}
+    .fp-controlArrow.fp-prev{left: 0;}
+    .fp-controlArrow.fp-next{right: 0;}
+    .slide-close,.fp-controlArrow{transform: scale(0.5);-webkit-transform: scale(0.5);}
+    .slide-close{top: 70px;right: 10px;}
+}
+
+@media only screen and (max-width: 991px) {
+    .section .weixun-icon>a{font-size: 20px; line-height: 39px; border: solid 3px #fff; width: 40px; height: 40px;}
+}
+
+@media only screen and (max-width: 767px) {
+    .section .weixun-content-bg{width: auto !important;padding: 10px 40px 50px !important;}
+    #header #weixun-logo .logo-txt{display: none;}
+    .section .section-title{font-size: 20px;margin-bottom: 10px;}
+    .section .section-content, .ajax-content>a{font-size: 14px;}
+    .slide-close,.fp-controlArrow{transform: scale(0.5);-webkit-transform: scale(0.5);}
+    .slide-close{top: 60px;right: 10px;}
+    .fp-tableCell{position: relative;}
+    .section .fp-tableCell .weixun-content-bg{
+        position: static;
+    }
+    .section .weixun-icon.p-bottom{
+        background-color: #fff;
+        bottom: 0;
+        height: 46px;
+    }
+    .section .weixun-icon.p-bottom>a{
+        color: #3A3A3A;
+        border: solid 3px #343434;
+        transform: scale(.8);
+    }
+    .section .weixun-icon>a.a-right{
+        right: 40px;
+    }
+    .section .weixun-icon>a.a-left{
+        left: 40px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #header #weixun-logo{padding: 8px 8px 0px;}
+    #header .weixun-logo-img,#header.section_1_out .weixun-logo-img{width: 32px;}
+    #header .right-menu li>a{width: 55px;height: 50px;}
+    #header .right-menu li>a>div>span{font-size: 16px}
+    #header #drop-menu{top:50px;}
+}
