@@ -81,13 +81,13 @@
     transition: all 0.3s;
     position: relative;
     text-decoration: none;
-    font-size: 40px;
-    line-height: 77px;
+    font-size: 30px;
+    line-height: 58px;
     color: #fff;
     border: solid 4px #fff;
     border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     text-align: center;
     display: block;
 

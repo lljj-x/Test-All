@@ -73,6 +73,7 @@
     var WEIXUN_SLIDE_TIMER_2;
     var WEIXUN_SLIDE_TIMER_3;
     var WEIXUN_SLIDE_TIMER_4;
+    var WEIXUN_IS_RESIZE = false;
     var WEIXUN_IS_SCROLLPAGE = true;
     var WEIXUN_BG = 'body';
 
@@ -376,6 +377,7 @@
         // liu.jun - weixun 添加横向滚动内容
         FP.weixunAddSlide = function(afterOnElm,afterData,thisIndex){
             WEIXUN_IS_SCROLLPAGE = false;
+
             var $thisParent = $(afterOnElm).parent();
             $(afterOnElm).after(afterData);
             var $slides_wrapper = $(afterOnElm).closest("." + SLIDES_WRAPPER);
@@ -947,6 +949,9 @@
 
                     //vertical scrolling (only when autoScrolling is enabled)
                     else if(options.autoScrolling){
+                        if(! WEIXUN_IS_SCROLLPAGE){
+                            return false;
+                        }
 
                         //is the movement greater than the minimum resistance to scroll?
                         if (Math.abs(touchStartY - touchEndY) > ($window.height() / 100 * options.touchSensitivity)) {
@@ -1030,6 +1035,9 @@
 
         function MouseWheelHandler(e) {
             var curTime = new Date().getTime();
+            if(! WEIXUN_IS_SCROLLPAGE){
+                return ;
+            }
 
             if(options.autoScrolling){
                 // cross-browser wheel delta
@@ -1140,10 +1148,6 @@
         * Scrolls the site to the given element and scrolls to the slide if a callback is given.
         */
         function scrollPage(element, callback, isMovementUp){
-            //liu.jun
-            if(! WEIXUN_IS_SCROLLPAGE){
-                return false;
-            }
             var dest = element.position();
             if(typeof dest === 'undefined'){ return; } //there's no element to scroll, leaving the function
 
@@ -1363,7 +1367,6 @@
         var keydownId;
         function keydownHandler(e) {
             clearTimeout(keydownId);
-
             var activeElement = $(document.activeElement);
 
             if(!activeElement.is('textarea') && !activeElement.is('input') && !activeElement.is('select') &&
@@ -1384,7 +1387,9 @@
 
         function onkeydown(e){
             var shiftPressed = e.shiftKey;
-
+            if(! WEIXUN_IS_SCROLLPAGE && $.inArray(e.which,[38,33,32,40,34,36]) > -1){
+                return false;
+            }
             switch (e.which) {
                 //up
                 case 38:
