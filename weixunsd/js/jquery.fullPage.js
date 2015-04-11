@@ -269,12 +269,13 @@
         function weixunCheckScroll(){
             var $currentDiv;
 
+            // $(".section.active").find(".table-bg-absolute").scrollTop()
+
             if($(".section.active").find(".slide.active").length > 0){
 
             }
 
         }
-
 
 
         FP.moveSectionUp = function(){
