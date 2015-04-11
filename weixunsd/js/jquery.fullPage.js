@@ -266,7 +266,21 @@
             options.keyboardScrolling = value;
         };
 
+        function weixunCheckScroll(){
+            var $currentDiv;
+
+            if($(".section.active").find(".slide.active").length > 0){
+
+            }
+
+        }
+
+
+
         FP.moveSectionUp = function(){
+
+
+
             var prev = $(SECTION_ACTIVE_SEL).prev(SECTION_SEL);
 
             //looping to the bottom if there's no more sections above
