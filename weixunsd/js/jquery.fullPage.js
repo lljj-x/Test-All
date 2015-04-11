@@ -438,6 +438,7 @@
 
         FP.weixunRemoveSlide = function(parentElm,thisIndex){
             WEIXUN_IS_SCROLLPAGE = true;
+            WEIXUN_TMP_REMOVE_SLIDE.children(".fp-tableCell").css("height","100%");
             WEIXUN_TMP_REMOVE_SLIDE.prependTo(parentElm);
             WEIXUN_TMP_REMOVE_SLIDE.siblings().remove();
             var $slides_wrapper = WEIXUN_TMP_REMOVE_SLIDE.closest("." + SLIDES_WRAPPER);

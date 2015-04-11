@@ -66,7 +66,6 @@ $(function () {
     $('#fullpage').fullpage({
         'verticalCentered': false,
         'css3': $.supports('animation'),
-        'sectionsColor': ['#254875', '#00FF00', '#254587', '#695684'],
         slidesNavigation: true,
         navigation: false,
         navigationPosition: 'right',
@@ -84,7 +83,7 @@ $(function () {
         touchSensitivity: 15,
         normalScrollElementTouchThreshold: 3,
         anchors: ['Slide1', 'Slide2', 'Slide3', 'Slide4', 'Slide5', 'Slide6', 'Slide7', 'Slide8', 'Slide9', 'Slide10', 'Slide11'],
-        sectionsColor: ['#254875', '#00FF00', '#254587', '#695684', '#254875', '#00FF00', '#254587', '#695684', '#254875', '#00FF00', '#254587'],
+        sectionsColor: ['rgb(250, 168, 47)', '#00FF00', '#254587', '#695684', '#254875', '#00FF00', '#254587', '#695684', '#254875', '#00FF00', '#254587'],
         keyboardScrolling: true,
         animateAnchor: true,
         recordHistory: true,
