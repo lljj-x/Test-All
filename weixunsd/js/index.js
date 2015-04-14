@@ -66,6 +66,7 @@ $(function () {
     $('#fullpage').fullpage({
         'verticalCentered': false,
         'css3': $.supports('animation'),
+//        'css3': false,
         slidesNavigation: true,
         navigation: false,
         navigationPosition: 'right',

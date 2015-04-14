@@ -6,6 +6,7 @@
 .table-bg-relative{
     position: relative;
     height: 100%;
+    margin: 0 auto;
 }
 .table-bg-relative>.table-bg-absolute{
     overflow-y: auto;
@@ -15,6 +16,7 @@
     bottom: 0;
     left: 0;
 }
+
 
 .section .fp-tableCell .weixun-content-bg{
     height: 100%;
@@ -34,20 +36,22 @@
 .section .fp-tableCell .weixun-content-fade{
     opacity:0;
     pointer-events: none;
-    -webkit-transform:translate3d(0,-150%,0);
-    -ms-transform:translate3d(0,-150%,0);
-    transform:translate3d(0,-150%,0)
+    -webkit-transform:translate3d(0,-100%,0);
+    -ms-transform:translate3d(0,-100%,0);
+    transform:translate3d(0,-100%,0)
 }
 .section .weixun-content-fade.fadeInDown{
     -webkit-transition: -webkit-transform 1s ;
     -moz-transition: -moz-transform 1s;
     -o-transition: -o-transform 1s;
+    -ms-transition: -ms-transform 1s;
     transition: transform 1s;
     pointer-events: auto;
+
     opacity:1;
-    -webkit-transform:none;
-    -ms-transform:none;
-    transform:none
+    -webkit-transform:translate3d(0,0,0);
+    -ms-transform:translate3d(0,0,0);
+    transform:translate3d(0,0,0)
 }
 .section#weixun-youshi .weixun-content{
     width: 550px;
@@ -78,11 +82,11 @@
     position: relative;
 }
 .section .weixun-icon.p-bottom{
-    position: absolute;
-    bottom: 2%;
-    left: 0;
-    width: 100%;
-    margin: auto;
+	position: absolute;
+	bottom: 2%;
+	left: 50%;
+	margin-left: -350px;
+	width: 700px;
 }
 
 

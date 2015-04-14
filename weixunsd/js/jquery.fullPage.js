@@ -71,10 +71,8 @@
     var WEIXUN_TMP_REMOVE_SLIDE;
     var WEIXUN_SLIDE_TIMER_1;
     var WEIXUN_SLIDE_TIMER_2;
-    var WEIXUN_SLIDE_TIMER_3;
-    var WEIXUN_SLIDE_TIMER_4;
-    var WEIXUN_IS_RESIZE = false;
     var WEIXUN_IS_SCROLLPAGE = true;
+    var WEIXUN_IS_TOUCH = true;
     var WEIXUN_BG = 'body';
 
     var $window = $(window);
@@ -266,24 +264,51 @@
             options.keyboardScrolling = value;
         };
 
-        function weixunCheckScroll(){
+        /**
+         * 有滚动条的时候阻止滚动屏幕事件
+         *
+         */
+
+        function weixunCheckScroll(type,isTouch){
             var $currentDiv;
-
             // $(".section.active").find(".table-bg-absolute").scrollTop()
-
             if($(".section.active").find(".slide.active").length > 0){
-
+                $currentDiv = $(".section.active").find(".slide.active").find(".table-bg-absolute");
+            }else{
+                $currentDiv = $(".section.active").find(".table-bg-absolute");
             }
-
+            var _curScrollTop = $currentDiv.scrollTop();
+            if(type === 'up'){
+                // 滚动条到达顶部
+                if(_curScrollTop >= 1){
+					if(isTouch){
+						console.log(_curScrollTop);
+						$currentDiv.stop(true,false).animate({
+							scrollTop : _curScrollTop - 150
+						},300)
+					}
+                    return false;
+                }else{
+                    return true;
+                }
+            }else{
+                // 滚动条到达底部
+                if(_curScrollTop - ($currentDiv.children(".weixun-content-bg").height() - $currentDiv.height()) >= 0){
+                    // 到达底部
+                    return true;
+                }else{
+					if(isTouch){
+						$currentDiv.stop(true,false).animate({
+							scrollTop : _curScrollTop + 150
+						},300)
+					}
+                    return false;
+                }
+            }
         }
-
-
+		
         FP.moveSectionUp = function(){
-
-
-
             var prev = $(SECTION_ACTIVE_SEL).prev(SECTION_SEL);
-
             //looping to the bottom if there's no more sections above
             if (!prev.length && (options.loopTop || options.continuousVertical)) {
                 prev = $(SECTION_SEL).last();
@@ -296,7 +321,6 @@
 
         FP.moveSectionDown = function (){
             var next = $(SECTION_ACTIVE_SEL).next(SECTION_SEL);
-
             //looping to the top if there's no more sections below
             if(!next.length &&
                 (options.loopBottom || options.continuousVertical)){
@@ -928,15 +952,13 @@
         */
         function touchMoveHandler(event){
             var e = event.originalEvent;
-
             // additional: if one of the normalScrollElements isn't within options.normalScrollElementTouchThreshold hops up the DOM chain
-            if (!checkParentForNormalScrollElement(event.target) && isReallyTouch(e) ) {
 
+            if (!checkParentForNormalScrollElement(event.target) && isReallyTouch(e) ) {
                 if(options.autoScrolling){
                     //preventing the easing on iOS devices
                     event.preventDefault();
                 }
-
                 var activeSection = $(SECTION_ACTIVE_SEL);
                 var scrollable = isScrollable(activeSection);
 
@@ -945,10 +967,8 @@
 
                     touchEndY = touchEvents.y;
                     touchEndX = touchEvents.x;
-
                     //if movement in the X axys is greater than in the Y and the currect section has slides...
                     if (activeSection.find(SLIDES_WRAPPER_SEL).length && Math.abs(touchStartX - touchEndX) > (Math.abs(touchStartY - touchEndY))) {
-
                         //is the movement greater than the minimum resistance to scroll?
                         if (Math.abs(touchStartX - touchEndX) > ($window.width() / 100 * options.touchSensitivity)) {
                             if (touchStartX > touchEndX) {
@@ -972,15 +992,27 @@
                         //is the movement greater than the minimum resistance to scroll?
                         if (Math.abs(touchStartY - touchEndY) > ($window.height() / 100 * options.touchSensitivity)) {
                             if (touchStartY > touchEndY) {
-                                scrolling('down', scrollable);
+                                if(! weixunCheckScroll('down',true)){
+									// 
+                                }else{
+                                    scrolling('down', scrollable);
+                                }
+                                // scrolling('down', scrollable);
+								
                             } else if (touchEndY > touchStartY) {
-                                scrolling('up', scrollable);
+								
+								if(! weixunCheckScroll('up',true)){
+                                    //
+                                }else{
+                                    scrolling('up', scrollable);
+                                }
+                                // scrolling('up', scrollable);
+								
                             }
                         }
                     }
                 }
             }
-
         }
 
         /**
@@ -1097,10 +1129,12 @@
                     if(isAccelerating){
                         //scrolling down?
                         if (delta < 0) {
+                            if(! weixunCheckScroll('down')) return;
                             scrolling('down', scrollable);
 
                         //scrolling up?
                         }else {
+                            if(! weixunCheckScroll('up')) return;
                             scrolling('up', scrollable);
                         }
                     }
@@ -1390,6 +1424,7 @@
                 var keyCode = e.which;
 
                 //preventing the scroll with arrow keys & spacebar & Page Up & Down keys
+
                 var keyControls = [40, 38, 32, 33, 34];
                 if($.inArray(keyCode, keyControls) > -1){
                     e.preventDefault();
@@ -1406,6 +1441,7 @@
             if(! WEIXUN_IS_SCROLLPAGE && $.inArray(e.which,[38,33,32,40,34,36]) > -1){
                 return false;
             }
+
             switch (e.which) {
                 //up
                 case 38:
