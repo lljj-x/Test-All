@@ -72,16 +72,20 @@
         width: auto;
         margin: auto;
     }
-    .section .weixun-content-bg{width: auto !important;padding: 10px 40px 50px 40px!important;}
+    .section .weixun-content-bg{width: auto !important;padding-left: 40px !important;padding-right: 40px !important;padding-bottom: 30px !important;}
     #header #weixun-logo .logo-txt{display: none;}
     .section .section-title{font-size: 20px;margin-bottom: 10px;}
     .section .section-content, .ajax-content>a{font-size: 14px;}
     .slide-close,.fp-controlArrow{transform: scale(0.5);-webkit-transform: scale(0.5);}
     .slide-close{top: 60px;right: 10px;}
+
+    /***
     .fp-tableCell{position: relative;}
     .section .fp-tableCell .weixun-content-bg{
         position: static;
     }
+    **/
+    
     .section .weixun-icon.p-bottom{
 		width: 100%;
 		margin: 0;

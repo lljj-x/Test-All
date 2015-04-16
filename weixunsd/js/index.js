@@ -14,8 +14,9 @@ weixunData = {
 
     'weixun-ceo-chuangyi' : '<div class="slide fp-slide fp-table" data-anchor="slide-ceo1" style=""><div class="fp-tableCell" style="height:100%"><div class="weixun-content"><div class="section-title">创意</div><div class="section-content">通过图文并茂的搞笑自黑方式，结合最新技术手段开发html 5 live app 的应用，以85后CEO的自黑向一起正在奋斗的人们致敬。</div></div></div></div>',
     'weixun-ceo-jieguo' : '<div class="slide fp-slide fp-table" data-anchor="slide-ceo2" style=""><div class="fp-tableCell" style="height:100%"><div class="weixun-content"><div class="section-title">结果</div><div class="section-content">微博通过建立#85的30岁危机#话题，成功吸引到大量受众群体的关注与互动，达到阅读量：153.7万，转发1087，评论1049。 微信阅读量：1万阅读 转发：2千</div></div></div></div>'
-
 };
+weixunResizeTimer = null;
+
 $.supports = function(prop){
     var div = document.createElement('div'),
         vendors = 'Khtml O Moz Webkit'.split(' '),
@@ -33,16 +34,22 @@ $.supports = function(prop){
     return false;
 };
 var getResizePaddingTop = function(){
-    return ($("#header>.weixun-top-bg").height() >90) ? 90 : $("#header>.weixun-top-bg").height() + "px" ;
+    return ($("#header>.weixun-top-bg").height() >90) ? 90 : $("#header>.weixun-top-bg").height();
 }
 
 $.fn.resizeOverFlow = function(){
-    $(".section").css({
-        "paddingTop" : getResizePaddingTop()
+    var $_wbg = $(".weixun-content-bg");
+    var parentHeight = $(window).height();
+    $(".weixun-content-bg").css({
+        "paddingTop" : getResizePaddingTop() + "px",
+        "height" : (parentHeight - getResizePaddingTop()) + "px"
     })
 }
 $(window).resize(function(){
-    $.fn.resizeOverFlow();
+    clearTimeout(weixunResizeTimer);
+    weixunResizeTimer = setTimeout(function(){
+        $.fn.resizeOverFlow();
+    },300);
 });
 
 $.fn.addWeixunEvent = function(){
@@ -63,6 +70,7 @@ $.fn.addWeixunEvent = function(){
 
 $(function () {
     var scrollingSpeed = 700;
+    var arrBgColor = ['rgb(255,108,0)', 'rgb(0,186,255)', 'rgb(14,237,189)', 'rgb(255,140,28)', 'rgb(37,72,117)', '#00FF00', '#254587', '#695684', '#254875', '#00FF00', '#254587'];
     $('#fullpage').fullpage({
         'verticalCentered': false,
         'css3': $.supports('animation'),
@@ -84,14 +92,14 @@ $(function () {
         touchSensitivity: 15,
         normalScrollElementTouchThreshold: 3,
         anchors: ['Slide1', 'Slide2', 'Slide3', 'Slide4', 'Slide5', 'Slide6', 'Slide7', 'Slide8', 'Slide9', 'Slide10', 'Slide11'],
-        sectionsColor: ['rgb(250, 168, 47)', '#00FF00', '#254587', '#695684', '#254875', '#00FF00', '#254587', '#695684', '#254875', '#00FF00', '#254587'],
+        sectionsColor: arrBgColor,
         keyboardScrolling: true,
         animateAnchor: true,
         recordHistory: true,
         controlArrows: true,
         verticalCentered: true,
-
-        paddingTop: getResizePaddingTop(),
+        // paddingTop: getResizePaddingTop(),
+        paddingTop: 0,
         paddingBottom: '0',
         responsive: 0,
 
@@ -102,7 +110,11 @@ $(function () {
             $("#preloader").fadeOut();
             if($("#section_1").hasClass("active")){
                 $("#fullpage").children(".section").first().find(".weixun-content").addClass("fadeInDown");
+                $(".bg-color").css({
+                    "background-color" : arrBgColor[0]
+                });
             }
+            $.fn.resizeOverFlow();
             $.fn.addWeixunEvent();
         },
         afterLoad: function(anchorLink, index){
@@ -116,7 +128,9 @@ $(function () {
             setTimeout(function(){
                 $("#fullpage").children(".section").eq(nextIndex -1).find(".weixun-content-fade").addClass("fadeInDown");
                 $("#fullpage").children(".section").eq(index -1).find(".weixun-content-fade").removeClass("fadeInDown");
-
+                $(".bg-color").css({
+                    "background-color" : arrBgColor[nextIndex - 1]
+                });
             },scrollingSpeed);
         }
     });
