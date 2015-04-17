@@ -466,8 +466,12 @@
                         width: 100/(numSlides -1) + '%'
                     });
                     $slides_wrapper.scrollLeft(0);
+
+                    /**
+                     * 取消显示自带箭头
                     checkSlideArrow($slides_wrapper.siblings("." + SLIDES_ARROW),numSlides -1);
                     checkSlideNav($slides_wrapper.siblings("." + SLIDES_NAV),numSlides -1);
+                    **/
 
                     weixunShowCloseButton($thisParent,thisIndex);
                     next();

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ls1</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="xxxx"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        canvas{
+        }
+    </style>
+</head>
+<body onload="draw();">
+<img src="images/Canvas_picture_frame.png" id="frame" />
+<img src="images/rhino.jpg" id="source" />
+
+<canvas id="myCanvas" width="578" height="400">
+    你的浏览器不支持
+</canvas>
+</body>
+
+<script type="text/javascript">
+    function draw(){
+        var canvas = document.getElementById("myCanvas");
+        if(canvas.getContext){
+            var ctx = canvas.getContext("2d");
+            var imgObj = new Image();
+
+            /**
+            imgObj.onload = function(){
+                ctx.drawImage(imgObj,69, 50);
+                ctx.moveTo(30,96);
+                ctx.lineTo(70,66);
+                ctx.lineTo(107,76);
+                ctx.lineTo(170,15);
+                ctx.stroke();
+            }
+            imgObj.src = 'images/darth-vader.jpg';
+            **/
+
+            /**
+             * 循环输出一组图像
+            imgObj.onload = function () {
+                for (i = 0; i < 4; i++) {
+                    for (j = 0; j < 4; j++) {
+                        ctx.drawImage(imgObj, i * 73, j * 50, 73, 50);
+                    }
+                }
+            }
+            imgObj.src = 'images/darth-vader.jpg';
+            **/
+
+            /**
+             * drawImage(图片源,开始剪裁图片的x坐标,开始剪裁图片的y坐标,剪裁的宽度,剪裁的高度,剪裁后图片放置在画布上的x坐标，剪裁后图片放置在画布上的y坐标,剪裁后图片的宽度,剪裁后图片的高度)
+             */
+            ctx.drawImage(document.getElementById('source'),33,71,104,124,21,20,87,104);
+            // Draw frame
+            ctx.drawImage(document.getElementById('frame'),0,0);
+
+        }else{
+            document.write("浏览器不支持 canvas");
+        }
+    }
+
+</script>
+
+</html>

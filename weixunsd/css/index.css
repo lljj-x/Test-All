@@ -28,10 +28,9 @@
     height: 100%;
     left: 0%;
     top: 0;
-    background: rgba(237,177,132,0.7);
-    opacity: 0.7;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-    filter: alpha(opacity=70);
+    opacity: 0.8;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
 }
 
 .section .fp-tableCell .weixun-content-bg{
@@ -41,6 +40,9 @@
     display: table;
     position: relative;
     overflow: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .section .fp-tableCell .weixun-content{
@@ -48,6 +50,7 @@
     color: #FFF;
     display: table-cell;
     vertical-align: middle;
+    text-align: center;
 }
 .section .fp-tableCell .weixun-content-fade{
     opacity:0;
@@ -79,14 +82,30 @@
     text-align: center;
     font-size: 28px;
     margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.section .section-title.has-line:after{
+    display: block;
+    content: "";
+    width: 100px;
+    margin: 15px auto;
+    height: 2px;
+    background-color: #fff;
 }
 
 .ajax-content>a{
-    color: #C0C0C0;
+    color: #E8E8E8;
     text-decoration: none;
 }
 .ajax-content>a:hover{
     color: #fff;
+}
+
+.section .section-title-2{
+    font-size: 22px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .section .section-content,.ajax-content>a{
@@ -143,7 +162,7 @@
     color: #000;
     border-color: rgb(203, 203, 203);
 }
-#section_5 .fp-controlArrow,#section_5 .fp-slidesNav,#section_7 .fp-controlArrow,#section_7 .fp-slidesNav,#section_8 .fp-controlArrow,#section_8 .fp-slidesNav{
+.fp-controlArrow,.fp-slidesNav{
     display: none !important;
 }
 

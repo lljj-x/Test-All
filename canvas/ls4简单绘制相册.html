@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>Canvas Art gallery</title>
+    <meta name="DC.creator" content="Kamiel Martinet, http://www.martinet.nl/">
+    <meta name="DC.publisher" content="Mozilla Developer Center, http://developer.mozilla.org">
+    <style type="text/css">
+        body { background: 0 -100px repeat-x url(images/bg_gallery.png) #4F191A; margin:10px; }
+        img { display:none; }
+        table { margin: 0 auto; }
+        td { padding:15px; }
+    </style>
+</head>
+<body onload="draw();">
+<table>
+    <tr>
+        <td><img src="images/gallery_1.jpg"></td>
+        <td><img src="images/gallery_2.jpg"></td>
+        <td><img src="images/gallery_3.jpg"></td>
+        <td><img src="images/gallery_4.jpg"></td>
+    </tr>
+    <tr>
+        <td><img src="images/gallery_5.jpg"></td>
+        <td><img src="images/gallery_6.jpg"></td>
+        <td><img src="images/gallery_7.jpg"></td>
+        <td><img src="images/gallery_8.jpg"></td>
+    </tr>
+</table>
+<img src="images/picture_frame.png" width="132" height="150" id="frame">
+</body>
+<script type="text/javascript">
+    function draw() {
+        for(i=0;i<document.images.length;i++){
+            if(document.images[i].getAttribute("id") != 'frame'){
+                canvas = document.createElement('CANVAS');
+                canvas.setAttribute('width',132).setAttribute('height',150);
+
+                // insert before
+                document.images[i].parentNode.insertBefore(canvas,document.images[i]);
+
+                ctx = canvas.getContext("2d");
+
+                // 绘制图形到 canvas
+                ctx.drawImage(document.images[i],15,20);
+
+                // add frame
+                ctx.drawImage(document.getElementById('frame'),0,0);
+
+            }
+        }
+    }
+</script>
+</html>
