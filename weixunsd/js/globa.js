@@ -52,26 +52,6 @@ $(document).ready(function(){
     });
 });
 
-var getImgNum = function(){
-    var currentWidth = $().getBgWidth();
-    var imgNum ;
-    if(currentWidth >= 1500){
-        imgNum = 6;
-    }else if(currentWidth < 1499 && currentWidth >= 1200){
-        imgNum = 5;
-    }else if(currentWidth < 1199 && currentWidth >=992 ){
-        imgNum = 5;
-    }else if(currentWidth < 991 && currentWidth >=768 ){
-        imgNum = 4;
-    }else if(currentWidth < 767 && currentWidth >=480 ){
-        imgNum = 2;
-    }else{
-        imgNum = 1;
-    }
-    return imgNum;
-};
-
-/**
 (function (window, document, exportName, $) {
     var defaults = {
         isAutoPlay: false,				    // 是否自动轮播

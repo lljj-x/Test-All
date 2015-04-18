@@ -62,7 +62,7 @@ $.fn.addWeixunEvent = function(){
 
 
 //
-//    var myCarousel = new Carousel($("#index-top-pro"));
+    var myCarousel = new Carousel($("#anli-img-list-bg"));
 //    $("#index-top-pro").css("width","100%");
 //    imgNum = getImgNum();
 //    myCarousel.changeParams({
