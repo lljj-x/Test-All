@@ -2,7 +2,15 @@
 
 /*最小分辨率*/
 @media only screen and (min-width: 1200px) {
-
+    .weixun-anli-bg .weixun-anli-img-bg{
+        width: 1200px;
+        height: 500px;
+        border-radius: 40px;
+    }
+    .weixun-anli-bg .weixun-anli-img-bg #anli-img-list-bg{
+        width: 1048px;
+        height: 396px;
+    }
 }
 
 @media only screen and (min-width: 992px) {
