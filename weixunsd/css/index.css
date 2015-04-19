@@ -41,16 +41,16 @@
     height: 100%;
     top: 0;
     left: 0;
-    overflow: auto;
+    overflow: hidden;
 }
 .weixun-anli-bg .weixun-anli-img-bg{
     position: absolute;
-    background: red;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
     margin: auto;
+    background-color: rgb(255, 255, 255);
     background-color: rgba(255, 255, 255, 0.5);
 }
 .weixun-anli-bg .weixun-anli-img-bg #anli-img-list-bg{
@@ -76,6 +76,33 @@
     width: 100%;
     height: auto;
 }
+.con_button{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: 50%;
+    margin-top: -35px;
+    text-align: center;
+    font-size: 30px;
+    color: #FFF;
+    line-height: 70px;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,.5);
+    cursor: pointer;
+}
+.con_button.disable{
+    display: none;
+}
+.con_button:hover{
+    background-color: rgba(0,0,0,.9);
+}
+.con_button#left_button{
+    left: 0;
+}
+.con_button#right_button{
+    right: 0;
+}
+
 
 
 .table-bg-relative>.table-bg-absolute.column-2>.weixun-content-bg{

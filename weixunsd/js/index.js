@@ -37,6 +37,14 @@ $(window).resize(function(){
     weixunResizeTimer = setTimeout(function(){
         $.fn.resizeOverFlow();
     },300);
+
+
+    // 案例显示列表 resize 事件
+    if($("#anli-img-list-bg").length>0){
+        $.fn.fullpage.weixunCarouselChangePrams({
+
+        });
+    }
 });
 
 $.fn.addWeixunEvent = function(){
@@ -62,7 +70,7 @@ $.fn.addWeixunEvent = function(){
 
 
 //
-    var myCarousel = new Carousel($("#anli-img-list-bg"));
+//    var myCarousel = new Carousel($("#anli-img-list-bg"));
 //    $("#index-top-pro").css("width","100%");
 //    imgNum = getImgNum();
 //    myCarousel.changeParams({

@@ -76,6 +76,7 @@ $(document).ready(function(){
 
         this.viewSize = 0;
         this.imgPages = 0;
+        this.hammerCon = null;
         this.imgCurrentPage = 1;
 //        jQueryElement.css({
 //            "overflow" : "hidden"
@@ -123,13 +124,13 @@ $(document).ready(function(){
 
             // 触屏手势
             if (myThis.options.isTouch) {
-                var hammerCon = new Hammer(myThis.jQelement[0]);
-                hammerCon.get("pan").set({direction: Hammer.DIRECTION_HORIZONTAL});
+                this.hammerCon = new Hammer(myThis.jQelement[0]);
+                this.hammerCon.get("pan").set({direction: Hammer.DIRECTION_HORIZONTAL});
                 var _left = 0;
-                hammerCon.on("panstart", function () {
+                this.hammerCon.on("panstart", function () {
                     _left = parseInt(myThis.contentList.css("left").replace("px", ""));
                 });
-                hammerCon.on("panend pancancel", function (ev) {
+                this.hammerCon.on("panend pancancel", function (ev) {
                     if (Math.abs(ev.deltaX) >= ((myThis.viewSize / 2 >= 50) ? 50 : (myThis.viewSize / 2))) {
                         if (ev.deltaX > 0) {
                             gotoSection(myThis.imgCurrentPage - 2);
@@ -140,7 +141,7 @@ $(document).ready(function(){
                         myThis.contentList.stop().animate({"left": _left + "px"}, myThis.options.speed, myThis.options.easing);
                     }
                 });
-                hammerCon.on("panmove", function (ev) {
+                this.hammerCon.on("panmove", function (ev) {
                     myThis.contentList.css({
                         left: (_left + ev.deltaX) + "px"
                     });
@@ -224,6 +225,29 @@ $(document).ready(function(){
                 width: this.viewSize * this.imgPages + "px"
             });
             this.checkDisable();
+        },
+        destroy : function(isTrue){
+            if(isTrue){
+                // 移除css
+            }
+            //
+            if(this.options.isAutoPlay){
+                clearInterval(this.jQelement.attr("intervalid"));
+            }
+
+            // 触屏事件
+            if(this.options.isTouch){
+                this.hammerCon.off("pan panstart panend pancancel panmove");
+            }
+
+            // 鼠标点击事件
+            $("#" + this.options.nextBtnId).off("click");
+            $("#" + this.options.prevBtnId).off("click");
+
+            // 指示器事件
+            if(this.options.idDisControllBtn){
+                $("#" + this.options.switchDivId).children("span").off();
+            }
         }
     };
     window[exportName] = Carousel;

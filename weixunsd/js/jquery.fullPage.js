@@ -73,6 +73,7 @@
     var WEIXUN_SLIDE_TIMER_2;
     var WEIXUN_IS_SCROLLPAGE = true;
     var WEIXUN_IS_TOUCH = true;
+    var WEIXUN_Carousel ;
     var WEIXUN_BG = 'body';
 
     var $window = $(window);
@@ -452,9 +453,15 @@
                     checkSlideNav($slides_wrapper.siblings("." + SLIDES_NAV),numSlides -1);
                     weixunShowCloseButton($thisParent,thisIndex)
                     clearTimeout(WEIXUN_SLIDE_TIMER_2);
-                    WEIXUN_SLIDE_TIMER_2 = setTimeout(function(){
-                        $thisParent.removeClass("transition-none");
-                    }, options.scrollingSpeed);
+
+                    $thisParent.removeClass("transition-none");
+
+
+//                    WEIXUN_SLIDE_TIMER_2 = setTimeout(function(){
+//                        $thisParent.removeClass("transition-none");
+//                    }, options.scrollingSpeed);
+
+
                 }, options.scrollingSpeed);
             }else{
                 $slides_wrapper.queue(function(next){
@@ -477,6 +484,14 @@
                     next();
                 });
             }
+
+            if($("#anli-img-list-bg").length>0){
+                WEIXUN_Carousel = new Carousel($("#anli-img-list-bg"));
+            }
+        }
+
+        FP.weixunCarouselChangePrams = function(params){
+            WEIXUN_Carousel.changeParams(params);
         }
 
         FP.weixunRemoveSlide = function(parentElm,thisIndex){
