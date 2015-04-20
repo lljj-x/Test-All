@@ -30,10 +30,13 @@
 .table-bg-relative>.table-bg-absolute.column-2>.left-image{
     width: 41.66666667%;
     height: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 .anli-left-content{
     color: #FFF;
-    padding: 20px;
+    padding: 0 20px;
 }
 .weixun-anli-bg{
     position: absolute;
@@ -51,7 +54,7 @@
     bottom: 0;
     margin: auto;
     background-color: rgb(255, 255, 255);
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 .weixun-anli-bg .weixun-anli-img-bg #anli-img-list-bg{
     position: relative;
@@ -59,8 +62,14 @@
     top: 50px;
     overflow: hidden;
 }
-.weixun-anli-bg .weixun-anli-img-bg .anli-img_list{
-
+.weixun-anli-bg .weixun-anli-img-bg{
+    width: 1200px;
+    height: 500px;
+    border-radius: 40px;
+}
+.weixun-anli-bg .weixun-anli-img-bg #anli-img-list-bg{
+    width: 1048px;
+    height: 396px;
 }
 .weixun-anli-bg .weixun-anli-img-bg .anli-img_list ul,.weixun-anli-bg .weixun-anli-img-bg .anli-img_list li{
     list-style: none;
@@ -76,6 +85,11 @@
     width: 100%;
     height: auto;
 }
+
+.my_button{
+    opacity: 0.5;
+}
+
 .con_button{
     position: absolute;
     width: 70px;
@@ -86,15 +100,15 @@
     font-size: 30px;
     color: #FFF;
     line-height: 70px;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,.5);
     cursor: pointer;
+    opacity: 0.5;
 }
+
 .con_button.disable{
     display: none;
 }
-.con_button:hover{
-    background-color: rgba(0,0,0,.9);
+.my_button:hover{
+    opacity: 1;
 }
 .con_button#left_button{
     left: 0;
@@ -116,21 +130,19 @@
 }
 
 .section .anli-bottom-controls .weixun-icon.p-bottom{
-    width: 70%;
-    left: 15%;
+    width: 80%;
+    left: 10%;
     bottom: 4%;
     margin-left: 0;
 }
 
-
-
-
-.section,.slide{
+.section,.slide,#section_6 .fp-slides{
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
     background-position: 50% 50%;
 }
+
 .section .bg-color{
     position: absolute;
     width: 100%;
@@ -164,6 +176,7 @@
 .section .fp-tableCell .column-2 .weixun-content{
     padding: 0 120px;
     text-align: left;
+    vertical-align: top;
 }
 .section .column-2 .section-title{
     text-align: left;
@@ -189,15 +202,10 @@
     -ms-transform:translate3d(0,0,0);
     transform:translate3d(0,0,0)
 }
-.section#weixun-youshi .weixun-content{
-    width: 550px;
-}
-.section#weixun-lianxi .weixun-content{
-    width: 590px;
-}
+
 .section .section-title{
     text-align: center;
-    font-size: 28px;
+    font-size: 24px;
     margin: 20px 0;
     font-weight: bold;
 }
@@ -205,28 +213,28 @@
 .section .section-title.has-line:after{
     display: block;
     content: "";
-    width: 100px;
+    width: 80px;
     margin: 15px auto;
     height: 2px;
     background-color: #fff;
 }
 
-.ajax-content>a{
+.ajax-content>a,.section-content a{
     color: #E8E8E8;
     text-decoration: none;
 }
-.ajax-content>a:hover{
+.ajax-content>a:hover,.section-content a:hover{
     color: #fff;
 }
 
 .section .section-title-2{
-    font-size: 22px;
+    font-size: 18px;
     margin-bottom: 10px;
     text-align: center;
 }
 
-.section .section-content,.ajax-content>a{
-    font-size: 18px;
+.section .section-content,.ajax-content>a,.section .section-content a{
+    font-size: 16px;
 }
 .section .section-content{
     display: inline-block;
@@ -289,20 +297,19 @@
     display: none !important;
 }
 
-
 /*weixunsd slide */
 .slide-close{
     position: absolute;
     top: 100px;
-    right: 20px;
+    right: 35px;
     z-index: 99;
-    opacity: 1;
     cursor: pointer;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
     color: #FFF;
+    display: none;
 }
 .slide-close:hover{
     -webkit-transform: rotate(-180deg);

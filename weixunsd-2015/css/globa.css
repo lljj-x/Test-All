@@ -17,9 +17,9 @@
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 300;
-    src: url('../font/open-sans/OpenSans-Light.eot');
-    src:url('../font/open-sans/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
-    url('../font/open-sans/OpenSans-Light.woff') format('woff');
+    src: url('../fonts/open-sans/OpenSans-Light.eot');
+    src:url('../fonts/open-sans/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/open-sans/OpenSans-Light.woff') format('woff');
 }
 
 html {-ms-overflow-style:-ms-autohiding-scrollbar;}
@@ -213,7 +213,7 @@ img {border: none;border: 0;}
 }
 
 #header #weixun-logo{
-    padding: 13px;
+    padding: 18px 20px 13px 55px;
 }
 #header .weixun-logo-img{
     width: 90px;
@@ -257,10 +257,10 @@ img {border: none;border: 0;}
     position: relative;
 }
 #header .right-menu li>a{
-    width: 75px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     text-decoration: none;
     display: table;
     -webkit-transition: all .3s;
@@ -275,7 +275,7 @@ img {border: none;border: 0;}
 }
 #header .right-menu li>a>div>span{
     display: block;
-    font-size: 32px;
+    font-size: 40px;
 }
 
 
@@ -286,18 +286,18 @@ img {border: none;border: 0;}
 #header.even #menu,#header.even .right-menu li>a:hover,#header.even .right-menu li>a.current{
     background-color: #00679d;
 }
-
-
-#mainMenu.current .icon-reorder:before{
+#header .right-menu li>a.current{color: #FFF !important;}
+#mainMenu.current .fa-reorder:before{
     content: "\f00d";
 }
 #header #drop-menu{
     position: absolute;
-    top: 90px;
+    top: 100px;
     left: 0;
     background: rgba(0,0,0,0.1);
-    box-shadow: 0 3px 3px rgba(0,0,0,.5);
+    box-shadow: 0 3px 3px rgba(0,0,0,.3);
 }
+
 #header #drop-menu>ul>li{
     border-top: solid 1px #737373;
 }
@@ -344,11 +344,12 @@ img {border: none;border: 0;}
 }
 #menu .menu-list>ul>li>a{
     padding: 10px 5px;
-    font-size: 16px;
+    font-size: 14px;
     color: #FFF;
     display: block;
     font-weight: bold;
     text-decoration: none;
+    letter-spacing: 1px;
 }
 #menu .menu-list>ul>li>a:hover{
     background-color: #005784;
@@ -368,41 +369,14 @@ img {border: none;border: 0;}
 }
 
 /*section1 以外*/
-#header.section_1_out .weixun-logo-img{
-    width: 55px;
-}
-#header.section_1_out .weixun-logo-img>.weixun-logo-w{
-    opacity: 0;
-    pointer-events: none;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-}
-#header.section_1_out .weixun-logo-img>.weixun-logo-b{
-    opacity: 1;
-    pointer-events: auto;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    filter: alpha(opacity=100);
-}
+
 #header.section_1_out .logo-txt-big{display: none}
 #header.section_1_out .logo-txt-small{
     display: block;
     margin-left: 15px;
     margin-top: 20px;
 }
-#header.section_1_out .weixun-top-bg {
-    background-color: rgb(255,255,255);
-}
 
-#header.section_1_out .right-menu li>a{
-    color: #000;
-}
-
-#header.section_1_out .right-menu>li{
-    border-left: solid 1px #dfdadb;
-}
-#header.section_1_out #drop-menu{
-    background-color: #FFF;
-}
 /*section1 以外 end*/
 /*header end*/
 

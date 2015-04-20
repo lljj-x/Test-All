@@ -285,7 +285,7 @@
 					if(isTouch){
 						console.log(_curScrollTop);
 						$currentDiv.stop(true,false).animate({
-							scrollTop : _curScrollTop - 150
+							scrollTop : _curScrollTop - 100
 						},300)
 					}
                     return false;
@@ -294,13 +294,13 @@
                 }
             }else{
                 // 滚动条到达底部
-                if(_curScrollTop - ($currentDiv.children(".weixun-content-bg").height() - $currentDiv.height()) >= 0){
+                if(_curScrollTop - ($currentDiv.children(".weixun-content-bg").outerHeight() - $currentDiv.height()) >= 0){
                     // 到达底部
                     return true;
                 }else{
 					if(isTouch){
 						$currentDiv.stop(true,false).animate({
-							scrollTop : _curScrollTop + 150
+							scrollTop : _curScrollTop + 100
 						},300)
 					}
                     return false;
@@ -415,11 +415,24 @@
         };
 
         // liu.jun - weixun 添加横向滚动内容
+        function changeBgImag(afterOnElm,type){
+            if(type === "add"){
+                $(afterOnElm).closest(".fp-slides").css({
+                    backgroundImage : $(afterOnElm).next(".slide").css("background-image")
+                });
+                $(afterOnElm).next(".slide").css("background-image","none");
+            }else{
+                $(afterOnElm).closest(".fp-slides").css("background-image","none");
+            }
+        }
+
         FP.weixunAddSlide = function(afterOnElm,afterData,thisIndex){
             WEIXUN_IS_SCROLLPAGE = false;
 
             var $thisParent = $(afterOnElm).parent();
             $(afterOnElm).after(afterData);
+            //
+            $.fn.resizeOverFlow();;
             var $slides_wrapper = $(afterOnElm).closest("." + SLIDES_WRAPPER);
             var numSlides = $(afterOnElm).siblings().length + 1;
             $thisParent.css({
@@ -434,9 +447,14 @@
             }
             $.fn.fullpage.moveSlideRight();
             $slides_wrapper.siblings("." + SLIDES_NAV).find('a.active').parent("li").siblings().first().remove();
+
+            // hide logo
+            weixunLogoShowHide('add');
             if(options.css3){
                 clearTimeout(WEIXUN_SLIDE_TIMER_1);
                 WEIXUN_SLIDE_TIMER_1 = setTimeout(function(){
+                    // 改变背景图片
+                    changeBgImag(afterOnElm,"add");
                     WEIXUN_TMP_REMOVE_SLIDE = $(afterOnElm).remove();
                     $thisParent.addClass("transition-none").css({
                         'width': 100 * (numSlides -1) + "%",
@@ -451,11 +469,12 @@
 
                     checkSlideArrow($slides_wrapper.siblings("." + SLIDES_ARROW),numSlides -1);
                     checkSlideNav($slides_wrapper.siblings("." + SLIDES_NAV),numSlides -1);
+
                     weixunShowCloseButton($thisParent,thisIndex)
+
                     clearTimeout(WEIXUN_SLIDE_TIMER_2);
 
                     $thisParent.removeClass("transition-none");
-
 
 //                    WEIXUN_SLIDE_TIMER_2 = setTimeout(function(){
 //                        $thisParent.removeClass("transition-none");
@@ -465,6 +484,7 @@
                 }, options.scrollingSpeed);
             }else{
                 $slides_wrapper.queue(function(next){
+                    changeBgImag(afterOnElm,"add");
                     WEIXUN_TMP_REMOVE_SLIDE = $(afterOnElm).remove();
                     $thisParent.css({
                         'width': 100 * (numSlides -1) + "%"
@@ -499,6 +519,7 @@
             WEIXUN_TMP_REMOVE_SLIDE.children(".fp-tableCell").css("height","100%");
             WEIXUN_TMP_REMOVE_SLIDE.prependTo(parentElm);
             WEIXUN_TMP_REMOVE_SLIDE.siblings().remove();
+            changeBgImag("#" + WEIXUN_TMP_REMOVE_SLIDE.attr("id"),"remove");
             var $slides_wrapper = WEIXUN_TMP_REMOVE_SLIDE.closest("." + SLIDES_WRAPPER);
             $slides_wrapper.scrollLeft(0);
             WEIXUN_TMP_REMOVE_SLIDE.css({
@@ -513,13 +534,29 @@
             checkSlideNav($slides_wrapper.siblings("." + SLIDES_NAV),1);
             WEIXUN_TMP_REMOVE_SLIDE.addClass(ACTIVE);
             $.fn.fullpage.moveTo(thisIndex, 0);
+
+            // show logo
+            weixunLogoShowHide('remove');
+            if(WEIXUN_Carousel instanceof Carousel){
+                WEIXUN_Carousel.destroy();
+            }
+            return;
+        }
+
+        function weixunLogoShowHide(type){
+            if(type === 'add'){
+                $("#weixun-logo").hide();
+            }else{
+                $("#weixun-logo").show();
+            }
         }
 
         function weixunShowCloseButton($thisParent,thisIndex){
+            // hide weixun-logo
             var $slideClose = $("<div />").attr({
-                "class": "slide-close"
+                "class": "slide-close my_button"
             }).append($("<span />").attr({
-                    "class" : "icon-remove icon-3x"
+                    "class" : "fa fa-remove fa-3x"
                 }));
 
             $("#header").after($slideClose);
@@ -1004,25 +1041,28 @@
 
                     //vertical scrolling (only when autoScrolling is enabled)
                     else if(options.autoScrolling){
-                        if(! WEIXUN_IS_SCROLLPAGE){
-                            return false;
-                        }
-
                         //is the movement greater than the minimum resistance to scroll?
                         if (Math.abs(touchStartY - touchEndY) > ($window.height() / 100 * options.touchSensitivity)) {
                             if (touchStartY > touchEndY) {
                                 if(! weixunCheckScroll('down',true)){
-									// 
+									//
+
                                 }else{
+                                    if(! WEIXUN_IS_SCROLLPAGE){
+                                        return false;
+                                    }
                                     scrolling('down', scrollable);
                                 }
                                 // scrolling('down', scrollable);
 								
                             } else if (touchEndY > touchStartY) {
-								
+
 								if(! weixunCheckScroll('up',true)){
                                     //
                                 }else{
+                                    if(! WEIXUN_IS_SCROLLPAGE){
+                                        return false;
+                                    }
                                     scrolling('up', scrollable);
                                 }
                                 // scrolling('up', scrollable);
@@ -1217,6 +1257,9 @@
         * Scrolls the site to the given element and scrolls to the slide if a callback is given.
         */
         function scrollPage(element, callback, isMovementUp){
+            if(! WEIXUN_IS_SCROLLPAGE){
+                return false;
+            }
             var dest = element.position();
             if(typeof dest === 'undefined'){ return; } //there's no element to scroll, leaving the function
 
@@ -2200,7 +2243,6 @@
                 $(WRAPPER_SEL).off('touchmove ' + MSPointer.move);
             }
         }
-
 
         /*
         * Returns and object with Microsoft pointers (for IE<11 and for IE >= 11)

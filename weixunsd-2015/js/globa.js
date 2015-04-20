@@ -114,7 +114,7 @@ $(document).ready(function(){
                     thisIndex = 0;
                 }
 
-                myThis.contentList.stop().animate({"left": -(myThis.viewSize * (thisIndex))}, myThis.options.speed, myThis.options.easing);
+                myThis.contentList.stop().animate({"left": -(myThis.viewSize * (thisIndex))}, myThis.options.speed / 2, myThis.options.easing);
                 myThis.imgCurrentPage = thisIndex + 1;
                 if (myThis.options.idDisControllBtn) {
                     $("#" + myThis.options.switchDivId).children("span").eq(thisIndex).addClass("current").siblings().removeClass("current");
@@ -124,7 +124,12 @@ $(document).ready(function(){
 
             // 触屏手势
             if (myThis.options.isTouch) {
-                this.hammerCon = new Hammer(myThis.jQelement[0]);
+                // 阻止默认事件 待改进
+                myThis.jQelement.on("touchstart touchmove",function(event){
+                    event.stopPropagation();
+                });
+                this.hammerCon = new Hammer(myThis.jQelement[0],{
+                });
                 this.hammerCon.get("pan").set({direction: Hammer.DIRECTION_HORIZONTAL});
                 var _left = 0;
                 this.hammerCon.on("panstart", function () {
