@@ -1,0 +1,88 @@
+<html>
+<head>
+    <title>Canvas Art gallery</title>
+    <meta name="DC.creator" content="Kamiel Martinet, http://www.martinet.nl/">
+    <meta name="DC.publisher" content="Mozilla Developer Center, http://developer.mozilla.org">
+    <meta http-equiv="content-type" content="text/html" charset=utf-8" />
+
+    <style type="text/css">
+        body{padding: 0;margin: 0;background-color: #FFF;}
+        img { display:none; }
+        table { margin: 0 auto; }
+        td { padding:15px; }
+    </style>
+</head>
+<body onload="draw();">
+    <img src="images/picture_frame.png" width="132" height="150" id="frame">
+    <canvas width="500" height="500" id="my-canvas">
+        你的浏览器不支持
+    </canvas>
+</body>
+<script type="text/javascript">
+    function draw() {
+        var canvas = document.getElementById("my-canvas");
+        if(canvas.getContext){
+            var ctx = canvas.getContext("2d");
+            /**
+             *  矩形色块
+            for(var i=0;i<6;i++){
+                for(var j=0;j<6;j++){
+                    ctx.fillStyle = 'rgb(' + Math.floor(255-42.5 * i) + ',' + Math.floor(255 - 42.5 * j) + ',0)';
+                    ctx.fillRect(j * 25,i * 25 ,25 ,25);
+                }
+            }
+
+            // 圆心
+            for(var i=0; i<6 ;i++){
+                for (var j=0;j<6;j++){
+                    ctx.beginPath();
+                    ctx.strokeStyle = 'rgb(' + Math.floor(255-42.5 * i) + ',' + Math.floor(255 - 42.5 * j) + ',0)';
+                    ctx.arc(12.5+j*25,12.5+i*25,10,0,Math.PI*2,true);
+                    ctx.stroke();
+                }
+            }
+
+            // 圆形加矩形
+            ctx.fillStyle = '#FD0';
+            ctx.fillRect(0,0,100,100);
+
+            ctx.fillStyle = '#6C0';
+            ctx.fillRect(100,0,100,100);
+
+            ctx.fillStyle = '#09F';
+            ctx.fillRect(0,100,100,100);
+
+            ctx.fillStyle = '#F30';
+            ctx.fillRect(100,100,100,100);
+
+            ctx.globalAlpha = 0.2;
+            ctx.fillStyle = '#FFF';
+            for(var i =0;i<9;i++){
+                ctx.beginPath();
+                ctx.arc(100,100,20+10*i,0,Math.PI * 2,true);
+                ctx.fill();
+            }
+            */
+
+            ctx.fillStyle = 'rgb(255,221,0)';
+            ctx.fillRect(0,0,150,37.5);
+
+            ctx.fillStyle = 'rgb(102,204,0)';
+            ctx.fillRect(0,37.5,150,37.5);
+
+            ctx.fillStyle = 'rgb(0,153,255)';
+            ctx.fillRect(0,75,150,37.5);
+
+            ctx.fillStyle = 'rgb(255,51,0)';
+            ctx.fillRect(0,112.5,150,37.5);
+
+            for (var i=0;i<10;i++){
+                ctx.fillStyle = 'rgba(255,255,255,'+(i+1)/10+')';
+                for (var j=0;j<4;j++){
+                    ctx.fillRect(5+i*14,5+j*37.5,14,27.5)
+                }
+            }
+        }
+    }
+</script>
+</html>

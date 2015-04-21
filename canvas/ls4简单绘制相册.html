@@ -31,19 +31,23 @@
     function draw() {
         for(i=0;i<document.images.length;i++){
             if(document.images[i].getAttribute("id") != 'frame'){
-                canvas = document.createElement('CANVAS');
-                canvas.setAttribute('width',132).setAttribute('height',150);
+                canvas = document.createElement("CANVAS");
+                canvas.setAttribute('width',132);
+                canvas.setAttribute('height',150);
 
-                // insert before
+                // insert before the image
                 document.images[i].parentNode.insertBefore(canvas,document.images[i]);
+                ctx = canvas.getContext('2d');
 
-                ctx = canvas.getContext("2d");
+                ctx.mozImageSmoothingEnabled = false;
+                ctx.imageSmoothingEnabled = true;
 
-                // 绘制图形到 canvas
+                // draw image to canvas
                 ctx.drawImage(document.images[i],15,20);
 
-                // add frame
-                ctx.drawImage(document.getElementById('frame'),0,0);
+                // draw frame to canvas
+                ctx.drawImage(document.getElementById("frame"),0,0)
+
 
             }
         }
