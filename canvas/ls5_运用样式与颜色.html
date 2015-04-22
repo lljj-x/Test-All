@@ -213,12 +213,17 @@
                 ctx.fillStyle = ptrn;
                 ctx.fillRect(0,0,250,250);
             };
-             **/
+            . **/
 
             // 阴影 Shadows
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.shadowBlur = 5;
+            ctx.shadowColor = 'rgba(0,0,0,0.8)';
 
-
-
+            ctx.font = '20px Times New Roman';
+            ctx.fillStyle = '#000';
+            ctx.fillText("Sample String",20,40);
 
         }
     }
