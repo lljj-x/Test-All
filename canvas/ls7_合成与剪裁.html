@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Ls7 合成与剪裁 - HTML5 Learn Test</title>
+
+    <style type="text/css">
+        body{padding: 0;margin: 0;background-color: #888;}
+        img { display:none; }
+        table { margin: 0 auto; }
+        td { padding:15px; }
+        #my-canvas{
+            position: relative;
+            margin: 50px auto;
+            width: 500px;
+            display: block;
+            border: 1px solid #B6B6B6;
+        }
+    </style>
+</head>
+<body onload="darw();">
+<canvas id="my-canvas" width="300" height="300"></canvas>
+</body>
+<script type="text/javascript">
+    var compositeTypes = [
+        'source-over','source-in','source-out','source-atop',
+        'destination-over','destination-in','destination-out','destination-atop',
+        'lighter','darker','copy','xor'];
+
+    function darw(){
+        var canvas = document.getElementById("my-canvas");
+        if(canvas.getContext){
+
+            /**
+            // ctx.globalCompositeOperation 组合方法
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle = 'red';
+            ctx.fillRect(20,20,70,70);
+            ctx.globalCompositeOperation = compositeTypes[3];
+            ctx.fillStyle = 'yellow';
+            ctx.beginPath();
+            ctx.arc(90,90,40,Math.PI * 2,0,true);
+            ctx.closePath();
+            ctx.fill();
+            **/
+
+            // Clipping paths 裁切路径
+            ctx.fillRect(0,0,150,150);
+            ctx.translate(75,75);
+
+            // Create a circular clipping path
+            ctx.beginPath();
+            ctx.arc(0,0,60,0,Math.PI*2,true);
+            ctx.clip();
+
+            // draw background
+            var lingrad = ctx.createLinearGradient(0,-75,0,75);
+            lingrad.addColorStop(0, '#232256');
+            lingrad.addColorStop(1, '#143778');
+
+            ctx.fillStyle = lingrad;
+            ctx.fillRect(-75,-75,150,150);
+
+            // draw stars
+            for (j=1;j<50;j++){
+                ctx.save();
+                ctx.fillStyle = '#fff';
+                ctx.translate(75-Math.floor(Math.random()*150),75-Math.floor(Math.random()*150));
+                drawStar(ctx,Math.floor(Math.random()*4)+2);
+                ctx.restore();
+            }
+
+            function drawStar(ctx,r){
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(r,0);
+                for (i=0;i<9;i++){
+                    ctx.rotate(Math.PI/5);
+                    if(i%2 == 0) {
+                        ctx.lineTo((r/0.525731)*0.200811,0);
+                    } else {
+                        ctx.lineTo(r,0);
+                    }
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+        }else{
+            canvas.innerText = "你的浏览器不支持";
+        }
+    }
+</script>
+</html>
