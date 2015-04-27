@@ -30,10 +30,9 @@
     function darw(){
         var canvas = document.getElementById("my-canvas");
         if(canvas.getContext){
-
+            var ctx = canvas.getContext("2d");
             /**
             // ctx.globalCompositeOperation 组合方法
-            var ctx = canvas.getContext("2d");
             ctx.fillStyle = 'red';
             ctx.fillRect(20,20,70,70);
             ctx.globalCompositeOperation = compositeTypes[3];
@@ -53,9 +52,10 @@
             ctx.arc(0,0,60,0,Math.PI*2,true);
             ctx.clip();
 
+
             // draw background
             var lingrad = ctx.createLinearGradient(0,-75,0,75);
-            lingrad.addColorStop(0, '#232256');
+            lingrad.addColorStop(0, 'red');
             lingrad.addColorStop(1, '#143778');
 
             ctx.fillStyle = lingrad;

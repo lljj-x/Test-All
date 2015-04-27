@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Ls7 合成与剪裁 - HTML5 Learn Test</title>
+
+    <style type="text/css">
+        body{padding: 0;margin: 0;background-color: #888;}
+        img { display:none; }
+        table { margin: 0 auto; }
+        td { padding:15px; }
+        #my-canvas{
+            position: relative;
+            margin: 50px auto;
+            width: 500px;
+            display: block;
+            border: 1px solid #B6B6B6;
+        }
+    </style>
+</head>
+<body onload="darw();">
+<canvas id="my-canvas" width="300" height="300"></canvas>
+</body>
+<script type="text/javascript">
+    var compositeTypes = [
+        'source-over','source-in','source-out','source-atop',
+        'destination-over','destination-in','destination-out','destination-atop',
+        'lighter','darker','copy','xor'];
+
+    function darw(){
+        var canvas = document.getElementById("my-canvas");
+        if(canvas.getContext){
+            var ctx = canvas.getContext("2d");
+
+
+
+
+        }else{
+            canvas.innerText = "你的浏览器不支持";
+        }
+    }
+</script>
+</html>
