@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Ls8 全景动画</title>
+    <style type="text/css">
+        body{padding: 0;margin: 0;background-color: #888;}
+        img { display:none; }
+        table { margin: 0 auto; }
+        td { padding:15px; }
+        #canvas{
+            position: relative;
+            margin: 50px auto;
+            display: block;
+            border: 1px solid #B6B6B6;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="200"></canvas>
+</body>
+<script type="text/javascript">
+    var img = new Image();
+    //User Variables
+
+    var CanvasXSize = 800;
+    var CanvasYSize = 200;
+    var speed = 30; //lower is faster
+    var scale = 1.05;
+    var y = -4.5; //vertical offset
+    //End User Variables
+    var clearX;
+    var clearY;
+    var dx = 0.75;
+    var x = 0;
+    var ctx;
+    var imgW;
+    var imgH;
+
+    img.onload = function(){
+        imgW = img.width*scale;
+        imgH = img.height*scale;
+        if (imgW > CanvasXSize) {
+            x = CanvasXSize - imgW;
+        }
+        if (imgW > CanvasXSize) {
+            clearX = imgW;
+        }
+        else {
+            clearX = CanvasXSize;
+        }
+        if (imgH > CanvasYSize) {
+            clearY = imgH;
+        }
+        else {
+            clearY = CanvasYSize;
+        }
+        init();
+    }
+
+    img.src = 'images/Yosemite_National_Park.jpg';
+
+    function init() {
+        ctx = document.getElementById('canvas').getContext('2d');
+        return setInterval(draw, speed);
+    }
+
+    function draw() {
+        //Clear Canvas
+        ctx.clearRect(0,0,clearX,clearY);
+        //If image is <= Canvas Size
+        if (imgW <= CanvasXSize) {
+            // 图片宽度 小于画布的宽度
+            if (x > (CanvasXSize)) {
+                x = 0;
+            }
+            if (x > (CanvasXSize - imgW)) {
+                ctx.drawImage(img, x - CanvasXSize + 1, y, imgW, imgH);
+            }
+        }else {
+            if (x > (CanvasXSize)) {
+                x = CanvasXSize - imgW;
+            }
+
+            if (x > (CanvasXSize - imgW)) {
+                ctx.drawImage(img, x - imgW + 1, y, imgW, imgH);
+            }
+        }
+        //draw image
+        ctx.drawImage(img,x,y,imgW,imgH);
+        //amount to move
+        x += dx;
+    }
+
+</script>
+</html>
