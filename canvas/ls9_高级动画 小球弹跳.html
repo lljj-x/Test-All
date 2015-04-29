@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Ls9 高级动画</title>
+    <style type="text/css">
+        body{padding: 0;margin: 0;background-color: #888;}
+        img { display:none; }
+        table { margin: 0 auto; }
+        td { padding:15px; }
+        #canvas{
+            position: relative;
+            margin: 50px auto;
+            display: block;
+            border: 1px solid #B6B6B6;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="600" height="300"></canvas>
+</body>
+<script type="text/javascript">
+    /**
+    // test
+    var myObj = function(){
+        this.name = 'name';
+    }
+    myObj.prototype = {
+        init: function(){
+            alert("INIT");
+        },
+        stop: function(){
+            alert("STOP");
+        }
+    }
+
+    var thisObj = new myObj();
+    thisObj.init();
+    thisObj.stop();
+     **/
+
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var raf;
+
+    var ball = {
+        x: 100,
+        y: 100,
+        vx: 5,
+        vy: 3,
+        radius: 25,
+        color: 'blue',
+        draw: function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.shadowColor = 'black';
+            ctx.shadowBlur = 5;
+            ctx.fill();
+        }
+    };
+
+    function draw(){
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        // ctx.clearRect(0,0,600,300);
+
+        ball.draw();
+
+        ball.vy *= .99;
+        ball.vy += .25;
+
+        if(ball.y + ball.vy > canvas.height || ball.y + ball.vy < 0){
+            ball.vy = -ball.vy;
+        }
+
+        if(ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0){
+            ball.vx = -ball.vx;
+        }
+
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+
+        raf = window.requestAnimationFrame(draw);
+    }
+
+    canvas.addEventListener("mouseover",function(e){
+        raf = window.requestAnimationFrame(draw);
+    },false);
+
+    canvas.addEventListener("mouseout",function(){
+        window.cancelAnimationFrame(raf);
+    },false);
+
+    ball.draw();
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
