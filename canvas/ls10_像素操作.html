@@ -1,10 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Ls10 像素操作</title>
+    <style type="text/css">
+        body{padding: 0;margin: 0;background-color: #888;}
+        img { display:none; }
+        table { margin: 0 auto; }
+        td { padding:15px; }
+        #canvas{
+            position: relative;
+            margin: 50px auto;
+            display: block;
+            border: 1px solid #B6B6B6;
+        }
+    </style>
 </head>
 <body>
-
+<div class="">
+<canvas id="canvas" width="300" height="227"></canvas>
+    <button id="grayscalebtn">Grayscale</button>
+    <button id="invertbtn">invert</button>
+<div id="color" style="width: 100%;margin-top:10px;padding: 20px 0;"></div>
+</div>
 </body>
+<script type="text/javascript">
+    (function(){
+        /**
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        // 获取一点的坐标
+        function getColor(event){
+            var x = event.offsetX;
+            var y = event.offsetY;
+
+            var imageDataObj = ctx.getImageData(x,y,1,1);
+            var data = imageDataObj.data;
+            var currentRgba = 'rgba(' + data[0] + ',' + data[1] + ',' + data[2] + ',' + data[3] + ')';
+            // console.log(currentRgba);
+            var color = document.getElementById("color");
+            color.innerText = "当前鼠标指针位置的颜色值为" + currentRgba ;
+            color.style.background = currentRgba;
+        }
+
+        var img = new Image();
+        img.onload = function(){
+            ctx.drawImage(img,0,0);
+            canvas.addEventListener("mousemove",getColor);
+        }
+        img.src = "images/rhino.jpg";
+        **/
+
+        var img = new Image();
+        img.onload = function(){
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img,0,0);
+            img.style.display = 'none';
+            var imageDataObj = ctx.getImageData(0,0,canvas.width,canvas.height);
+            var data = imageDataObj.data;
+
+            var invert = function(){
+                for (var i = 0; i < data.length; i += 4) {
+                    data[i] = 225 - data[i];
+                    data[i + 1] = 255 - data[i + 1];
+                    data[i + 2] = 255 - data[i + 2];
+                }
+                ctx.putImageData(imageDataObj,0,0);
+            }
+
+            var grayscale = function(){
+                for (var i = 0;i<data.length;i+=4){
+                    var avg = (data[i] + data[i +1] + data[i +2]) / 3;
+                    data[i]     = avg; // red
+                    data[i + 1] = avg; // green
+                    data[i + 2] = avg; // blue
+                }
+                ctx.putImageData(imageDataObj,0,0);
+            }
+
+            var invertbtn = document.getElementById('invertbtn');
+            invertbtn.addEventListener('click', invert);
+            var grayscalebtn = document.getElementById('grayscalebtn');
+            grayscalebtn.addEventListener('click', grayscale);
+
+        }
+
+        img.src = "images/rhino.jpg";
+
+    })();
+</script>
+
 </html>
