@@ -98,7 +98,7 @@ var has3d,
 
     // Size of the active zone of each corner
 
-    cornerSize: 400
+    cornerSize: 100
 
   },
 
@@ -150,13 +150,11 @@ turnMethods = {
 
     // Add event listeners
 
-    if (options.when){
-      for (i in options.when){
-        if (has(i, options.when)){
+    if (options.when)
+      for (i in options.when)
+        if (has(i, options.when))
           this.bind(i, options.when[i]);
-		}
-	}
-  }
+
     // Set the css
 
     this.css({position: 'relative', width: options.width, height: options.height});
@@ -191,6 +189,7 @@ turnMethods = {
       bind('pressed', turnMethods._eventPressed).
       bind('released', turnMethods._eventReleased).
       bind('flip', turnMethods._flip);
+
     $(this).parent().bind('start', data.eventHandlers.start);
 
     $(document).bind(mouseEvents.move, data.eventHandlers.touchMove).
@@ -745,6 +744,7 @@ turnMethods = {
   // Moves pages
 
   _movePages: function(from, change) {
+
     var page,
       that = this,
       data = this.data(),
@@ -1341,11 +1341,11 @@ turnMethods = {
 
   // Turns to the next view
 
-  next: function() { 
+  next: function() {
 
     return this.turn('page', Math.min(this.data().totalPages,
       turnMethods._view.call(this, this.data().page).pop() + 1));
-
+  
   },
 
   // Turns to the previous view
@@ -1490,6 +1490,7 @@ turnMethods = {
   // This event is called in context of flip
 
   _eventPressed: function(e) {
+
     var page,
       data = $(e.target).data().f,
       turn = data.opts.turn,
@@ -1538,20 +1539,15 @@ turnMethods = {
   _flip: function(e) {
 
     e.stopPropagation();
+
     var opts = $(e.target).data().f.opts;
-	var div_id = e.target.id;
 
     opts.turn.trigger('turn', [opts.next]);
 
     if (opts.turn.data().opts.autoCenter) {
       opts.turn.turn('center', opts.next);
     }
-	$(".fanye").show();	
-	if(div_id == "last"){
-		$("#loading").remove();
-		$(".flipbook-viewport").hide();
-		$("#end").show();
-	}
+
   },
 
  //
@@ -1578,11 +1574,6 @@ turnMethods = {
   //
   _touchEnd: function() {
     var data = this.data();
-	if($(".fanye").css("display")=="block"){
-		$(".fanye").hide();		
-	}else{
-		$(".fanye").show();	
-	}
     for (var page in data.pages) {
       if (has(page, data.pages)) {
         flipMethods._eventEnd.apply(data.pages[page], arguments);
@@ -1864,6 +1855,7 @@ turnMethods = {
             this.unbind(eventName).
               bind(eventName, options.when[eventName]);
           }
+
       return this;
     }
 
@@ -1895,6 +1887,7 @@ flipMethods = {
     this.flip('options', opts);
 
     flipMethods._addPageWrapper.call(this);
+
     return this;
   },
 
@@ -1989,7 +1982,7 @@ flipMethods = {
     switch (data.effect) {
       case 'hard':
         
-        if (point.x>width-csz/2)
+        if (point.x>width-csz)
           point.corner = 'r';
         else if (point.x<csz)
           point.corner = 'l';
@@ -2007,9 +2000,9 @@ flipMethods = {
         else
           return false;
     
-        if (point.x<=csz/2)
+        if (point.x<=csz)
           point.corner+= 'l';
-        else if (point.x>=width-csz/2)
+        else if (point.x>=width-csz)
           point.corner+= 'r';
         else
           return false;
@@ -2944,6 +2937,7 @@ flipMethods = {
 
     var data = this.data().f,
       corner = data.corner;
+
     if (!data.disabled && corner) {
       if (trigger('released', this, [data.point || corner])!='prevented') {
         flipMethods.hideFoldedPage.call(this, true);
@@ -3356,4 +3350,3 @@ $.cssTransitionEnd = getTransitionEnd;
 $.findPos = findPos;
 
 })(jQuery);
-/*  |xGv00|fdd3a42a6ea3657585187d564800bb23 */
