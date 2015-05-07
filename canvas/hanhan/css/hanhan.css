@@ -1,0 +1,301 @@
+/**
+ * Created by Liu.Jun on 15-5-6.
+ */
+@charset "utf-8";
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    outline:none;
+    -webkit-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+    letter-spacing: 1px;
+}
+body{position: relative;}
+body,html{height: 100%; background: #000;color: #000;}
+a{ text-decoration:none;font-size: 12px;font-family: 'Open Sans', \5FAE\8F6F\96C5\9ED1,"Helvetica Neue",sans-serif,HelveticaNeue-Light, Helvetica;}
+.txa_l {text-align:left;}
+.txa_r {text-align:right;}
+.txa_c {text-align:center;}
+.left{float: left;}
+.right{float: right;}
+.txt-left{text-align: left;}
+.txt-right{text-align: right;}
+.txt-center{text-align: center;}
+.clear {clear: both;display: block;overflow: hidden;visibility: hidden;width: 0;height: 0;}
+.dis-block{display: block;}
+.hardware-acceleration {
+    -webkit-transform:translateZ(0);
+    transform:-webkit-translateZ(0);
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+}
+:focus { outline: 0; }
+a {text-decoration: none;color: #666;}
+a:hover{text-decoration: underline;}
+img {border: none;border: 0;}
+.container-bg{
+    width: 1170px;
+    margin: 0 auto;
+}
+.display-none{
+    display:none
+}
+.display-inline-block{
+    display: inline-block;
+}
+.pos-absolute{
+    display: black;
+    position: absolute;
+}
+.font-title{
+    font-size:50px;
+}
+.font-content{
+    font-size:16px;
+}
+.fs-30{
+    font-size: 30px;
+}
+.fs-20{
+    font-size:20px;
+}
+.fs-14{
+    font-size: 14px;
+}
+.fs-16{
+    font-size:16px;
+}
+.fs-12{
+    font-size: 12px;
+}
+
+.fc-fff{
+    color: #FFF;
+}
+.fc-green{
+    color: #7CE77D;
+}
+.fc-51{
+    color: rgb(51,44,43);
+}
+
+.thumbnail>img{
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+.absolute-img>img{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.mt15{
+    margin-top: 15px;
+}
+.clearfix:after{
+    clear: both;
+    content: " ";
+    display: table;
+}
+.clear-float{
+    height: 0px;
+    margin-top: -1px;
+    overflow: hidden;
+    clear: both;
+}
+.wrap{
+    width: 640px;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    height: 100%;
+    -webkit-perspective: 800px;
+    -moz-perspective: 800px;
+    perspective: 800px;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+}
+.pos-absolute-100{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.display-table{
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+.display-table-cell{
+    display: table-cell;
+}
+.v-middle{
+    vertical-align: middle;
+}
+
+#loading{
+    z-index: 9999998;
+    text-align: center;
+    background-color: #888;
+}
+#box-content{
+    background-image: url(../images/bj.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+#box-content{
+
+}
+
+#box-content #gamebox{
+    width: 550px;
+    height: 7710px;
+    background: url(../images/bg.jpg) repeat;
+    left: 45px;
+    position: absolute;
+    bottom: -7350px;
+    transition-duration: 400ms;
+    -webkit-transition-duration: 400ms;
+}
+
+.wg-bg {
+    position: absolute;
+    background: url(../images/l.jpg) repeat;
+    width: 550px;
+    left: 0;
+}
+.wg-bg1{
+    height: 1001px;
+    top: 555px;
+}
+.wg-bg2 {
+    height: 1262px;
+    top: 1681px;
+}
+.wg-bg3 {
+    height: 1125px;
+    top: 3063px;
+}
+.wg-bg4 {
+    height: 1252px;
+    top: 4320px;
+}
+.wg-bg5 {
+    height: 1000px;
+    top: 5700px;
+}
+.wg-bg6 {
+    height: 748px;
+    top: 6870px;
+}
+
+
+
+
+#box-content .box-1{
+    position: absolute;
+    width: 551px;
+    height: 172px;
+    left: 50%;
+    margin-left: -275px;
+    bottom: 145px;
+}
+#box-content .box-1 .sl-2-1{
+    position: absolute;
+    background: url(../images/5.png) no-repeat;
+    left: 0;
+    bottom: 0;
+    width: 551px;
+    height: 90px;
+}
+
+#box-content .box-1 .sl-2-2{
+    position: absolute;
+    width: 295px;
+    height: 122px;
+    left: 130px;
+    top: 90px;
+    overflow: hidden;
+}
+.sl-2-2 .szhen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: url(../images/png2.png);
+    left: 0;
+    top: -2px;
+}
+
+#box-content .box-1 .sl-2-3{
+    position: absolute;
+    background: url(../images/4.png) no-repeat;
+    width: 38px;
+    height: 144px;
+    left: 12px;
+    top: 0;
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform-origin: 50% 100% 0;
+    -webkit-transform-origin: 50% 100% 0;
+
+}
+#box-content .box-1 .sl-2-4{
+    position: absolute;
+    background: url(../images/3.png) no-repeat;
+    width: 38px;
+    height: 144px;
+    right: 12px;
+    top: 0;
+    transform: rotate(0);
+    -webkit-transform: rotate(0);
+    transform-origin: 50% 100% 0;
+    -webkit-transform-origin: 50% 100% 0;
+}
+
+#box-content .box-2{
+    position: absolute;
+    background-image: url(../images/1.png);
+    background-repeat: no-repeat;
+    width: 603px;
+    height: 374px;
+    left: 50%;
+    margin-left: -301px;
+    bottom: 0;
+}
+
+#box-content .box-3{
+    background-image: url(../images/btn1.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 288px;
+    height: 90px;
+    left: 50%;
+    margin-left: -144px;
+    bottom: 20px;
+}
+
+.box-3.on {
+    background-position: 0 -90px;
+}
+
+#box-content .box-sound{
+    position: absolute;
+    background-image: url(../images/btn2.png);
+    background-repeat: no-repeat;
+    width: 55px;
+    height: 90px;
+    right: 40px;
+    bottom: 19px;
+}
+.box-sound.off{ background-position:0 -90px;}

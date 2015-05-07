@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Ls10 像素操作</title>
+    <style type="text/css">
+        body{padding: 0;margin: 0;background-color: #888;}
+        img { display:none; }
+        table { margin: 0 auto; }
+        td { padding:15px; }
+        canvas{
+            border: 1px solid #B6B6B6;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+<div class="" style="width: 550px;position: relative;margin: 100px auto;">
+    <canvas id="canvas" width="300" height="227"></canvas>
+    <canvas id="zoom" width="200" height="200"></canvas>
+    <br>
+    <input type="checkbox" id="smoothbtn" checked="checked"> 选择是否开启反锯齿
+</div>
+</body>
+<script type="text/javascript">
+    (function(){
+        var img = new Image();
+        var canvasOrg = document.getElementById("canvas");
+        var ctxOrg = canvasOrg.getContext("2d");
+        var ctxZoom = document.getElementById("zoom").getContext("2d");
+
+        function eventChange(){
+            ctxZoom.imageSmoothingEnabled = this.checked;
+            ctxZoom.mozimageSmoothingEnabled = this.checked;
+            ctxZoom.webkitImageSmoothingEnabled  = this.checked;
+            ctxZoom.msImageSmoothingEnabled  = this.checked;
+        }
+
+        function eventMousemove(event){
+            var x = event.offsetX;
+            var y= event.offsetY;
+            ctxZoom.drawImage(canvasOrg,Math.abs(x - 5),Math.abs(y - 5),10,10,0,0,200,200);
+
+        }
+
+        img.onload = function(){
+            ctxOrg.drawImage(img,0,0);
+            // 开启反锯齿事件
+            var smoothbtn = document.getElementById("smoothbtn");
+
+            var testImage = new Image();
+            testImage.src = canvasOrg.toDataURL("image/jpeg",1);
+
+            testImage.onload = function(){
+                canvasOrg.parentNode.insertBefore(testImage,canvasOrg);
+                testImage.style.display = 'block';
+            }
+
+
+            smoothbtn.addEventListener("change",eventChange);
+            canvasOrg.addEventListener("mousemove",eventMousemove);
+        }
+
+        img.src = 'images/rhino.jpg';
+    })();
+</script>
+
+</html>
