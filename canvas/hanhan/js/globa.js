@@ -37,7 +37,7 @@
             return this;
         }
     });
-})(Zepto);
+})(jQuery);
 
 
 (function($,window,document){
@@ -45,9 +45,6 @@
     var HTIMER2;
 
     var S = $("#stratbtn");
-
-
-
 
 
     function startBtnChange(type){
@@ -75,4 +72,4 @@
         startBtnChange('off');
 
     }
-})(Zepto,window,document);
+})(jQuery,window,document);
