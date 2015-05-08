@@ -18,7 +18,8 @@
     <!-- webkit内核渲染页面-->
     <meta name="renderer" content="webkit">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=640, target-densitydpi=device-dpi,user-scalable=no,maximum-scale=1">
+
     <meta name="format-detection" content="telephone=no">
 
     <!-- Le styles -->
@@ -41,6 +42,23 @@
                     加载中.....
                 </div>
             </div>
+        </div>
+
+        <div style="position: absolute;left: -9999px;overflow: hidden;width: 0;height: 0;display: none">
+            <img id="img1" src="images/pages/1.png">
+            <img id="img2" src="images/pages/2.png">
+            <img id="img3" src="images/pages/3.png">
+            <img id="img4" src="images/pages/4.png">
+            <img id="img5" src="images/pages/5.png">
+            <img id="img6" src="images/pages/6.png">
+            <audio id="sound"  src="audio/back.mp3" preload="preload" autoplay="autoplay" loop></audio>
+            <audio id="s2" src="audio/img_01.mp3" preload="preload" ></audio>
+            <audio id="s3" src="audio/img_02.mp3" preload="preload" ></audio>
+            <audio id="s4" src="audio/img_04.mp3" preload="preload" ></audio>
+            <audio id="s5" src="audio/img_03.mp3" preload="preload" ></audio>
+            <audio id="s6" src="audio/img_05.mp3" preload="preload" ></audio>
+            <audio id="s7" src="audio/up.mp3" preload="preload" loop></audio>
+            <audio id="s8" src="audio/upend.mp3" preload="preload" ></audio>
         </div>
 
         <div id="box-content" class="pos-absolute-100">
@@ -73,8 +91,8 @@
 
 
             <div class="box-1">
-                <div class="sl-2-2">
-                    <div class="szhen"></div>
+                <div id="szhen-bg" class="sl-2-2">
+                    <div id="szhen" class="szhen"></div>
                 </div>
                 <div class="sl-2-1">
 
@@ -93,7 +111,7 @@
 
             </div>
 
-            <div class="box-sound">
+            <div id="box-sound" class="box-sound">
 
             </div>
 

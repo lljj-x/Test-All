@@ -41,38 +41,58 @@
 
 
 (function($,window,document){
-    var HTIMER1;
-    var HTIMER2;
+    'use strice';
+    var ZhenTimer,HTimer2,
+        DX = 0,
+        DY = 0,
+        IsAnimation = false;
+        MainTranslateY = 0,
+        ZhenPosition = 0;
+        ZhenNum = -121;
 
-    var S = $("#stratbtn");
-
-
-
-
+    var startBtnId = 'stratbtn';
 
     function startBtnChange(type){
         if(type === 'on'){
-            S.addClass('on');
+            $("#" + startBtnId).addClass("on");
         }else{
-            S.removeClass("on");
+            $("#" + startBtnId).removeClass("on");
         }
     }
 
+    function zhenAnimaion(){
+        ZhenPosition  += ZhenNum;
+        (ZhenPosition === 0) ? (ZhenPosition += ZhenNum) : ZhenPosition;
+        if(ZhenNum < 0 && ZhenPosition === -2299 || ZhenNum > 0 && ZhenPosition === 2299){
+            ZhenNum = -ZhenNum;
+        }
+        $("#szhen").css({
+            backgroundPosition : "0px " + ZhenPosition + "px"
+        })
+    }
 
-
-
-
-
+    function
 
 
     $.fn.startAnimation = function(){
         startBtnChange('on');
 
+        $("#szhen-bg").animate({
+            top : "13px"
+        },100,'ease-out',function(){
+            ZhenTimer = setInterval(zhenAnimaion,70);
+        })
 
+        return;
     }
 
     $.fn.stopAnimation = function(){
         startBtnChange('off');
+        $("#szhen-bg").css({top : "90px"});
+        $("#szhen").css({backgroundPosition:"0px 0px"});
 
+        clearInterval(ZhenTimer);
+
+        return;
     }
 })(Zepto,window,document);
