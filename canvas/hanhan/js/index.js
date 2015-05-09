@@ -32,7 +32,6 @@ $(function(){
         }else{
             $(this).addClass("off");
         }
-
     })
 
 });

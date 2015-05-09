@@ -71,9 +71,6 @@
         })
     }
 
-    function
-
-
     $.fn.startAnimation = function(){
         startBtnChange('on');
 
@@ -88,7 +85,7 @@
 
     $.fn.stopAnimation = function(){
         startBtnChange('off');
-        $("#szhen-bg").css({top : "90px"});
+        $("#szhen-bg").stop();
         $("#szhen").css({backgroundPosition:"0px 0px"});
 
         clearInterval(ZhenTimer);

@@ -911,6 +911,19 @@ window.Zepto = Zepto
     if (duration) duration = duration / 1000
     return this.anim(properties, duration, ease, callback)
   }
+    // 自定义一个stop 方法
+    $.fn.stop = function(toEnd) {
+        toEnd = toEnd || false;
+        var endEvent = $.fx.transitionEnd;
+        $(this).each(function() {
+            $(this).off(endEvent);
+            if(toEnd){
+                $(this).css(clearProperties);
+            }else{
+                $(this).get(0).style.cssText = "";
+            }
+        })
+    }
 
   $.fn.anim = function(properties, duration, ease, callback){
     var transforms, cssProperties = {}, key, that = this, wrappedCallback, endEvent = $.fx.transitionEnd
