@@ -233,6 +233,10 @@ img {border: none;border: 0;}
     left: 130px;
     top: 90px;
     overflow: hidden;
+    transition-duration: 80ms;
+    -webkit-transition-duration: 80ms;
+    transition-timing-function: linear;
+    -webkit-transition-timing-function: linear;
 }
 .sl-2-2 .szhen {
     width: 100%;

@@ -25,11 +25,12 @@ $(function(){
     // 背景音乐开关
     $("#box-sound").on("touchstart",function(event){
         event.preventDefault();
-
-        var bgAudio = $("#bgAudio")[0];
+        var bgAudio = $("#sound")[0];
         if($(this).hasClass("off")){
+            bgAudio.play();
             $(this).removeClass("off");
         }else{
+            bgAudio.pause();
             $(this).addClass("off");
         }
     })
