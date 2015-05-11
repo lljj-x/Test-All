@@ -9,13 +9,37 @@ $(function(){
         }
     });
 
-    //  bind event
-    $("#stratbtn").on("touchstart",function(event){
+
+
+
+
+    /* ua */
+    /**
+    var UA = function(){
+        var userAgent = navigator.userAgent.toLowerCase();
+        return {
+            ipad: /ipad/.test(userAgent),
+            iphone: /iphone/.test(userAgent),
+            android: /android/.test(userAgent),
+            qqnews: /qqnews/.test(userAgent),
+            weixin: /micromessenger/.test(userAgent)
+        };
+    }
+    **/
+
+    var isTouch = false;
+    if( /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+        isTouch = true;
+    }
+
+    var startEvent = isTouch ? "touchstart" : "mousedown" ;
+    var endEvent = isTouch ? "touchend" : "mouseup mouseout" ;
+    $("#stratbtn").on(startEvent,function(event){
         // 开始动画
         event.preventDefault();
         $.fn.startAnimation();
 
-        $(document).one("touchend",function(event){
+        $(document).one(endEvent,function(event){
             // 结束动画
             event.preventDefault();
             $.fn.stopAnimation();
@@ -23,7 +47,7 @@ $(function(){
     });
 
     // 背景音乐开关
-    $("#box-sound").on("touchstart",function(event){
+    $("#box-sound").on(startEvent,function(event){
         event.preventDefault();
         var bgAudio = $("#sound")[0];
         if($(this).hasClass("off")){
