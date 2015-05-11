@@ -9,10 +9,6 @@ $(function(){
         }
     });
 
-
-
-
-
     /* ua */
     /**
     var UA = function(){
@@ -58,5 +54,4 @@ $(function(){
             $(this).addClass("off");
         }
     })
-
 });

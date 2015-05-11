@@ -915,14 +915,15 @@ window.Zepto = Zepto
     $.fn.stop = function(toEnd) {
         toEnd = toEnd || false;
         var endEvent = $.fx.transitionEnd;
-        $(this).each(function() {
+        this.each(function() {
             $(this).off(endEvent);
             if(toEnd){
                 $(this).css(clearProperties);
             }else{
                 $(this).get(0).style.cssText = "";
             }
-        })
+        });
+        return this;
     }
 
   $.fn.anim = function(properties, duration, ease, callback){

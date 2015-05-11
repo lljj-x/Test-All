@@ -11,7 +11,7 @@
             options = $.extend(defaults,options);
 
             var myThis = this;
-            imagesLoaded(this[0],function(){
+            imagesLoaded(myThis.get(0),function(){
                 var image;
                 var hasBgSection = myThis.find("." + options.bgimageClassName);
                 if(hasBgSection.length > 0){
@@ -38,7 +38,6 @@
         }
     });
 })(Zepto);
-
 
 (function($,window,document){
     'use strice';
@@ -71,6 +70,23 @@
         }
     }
 
+    function deAnimation(){
+        $("#sl-2-3").animate({
+            transform: "rotate(5deg)"
+        },100,'ease-out',function(){
+            $(this).animate({
+                transform: "rotate(0deg)"
+            },50,'ease-out')
+        })
+        $("#sl-2-4").animate({
+            transform: "rotate(-5deg)"
+        },100,'ease-out',function(){
+            $(this).animate({
+                transform: "rotate(0deg)"
+            },50,'ease-out')
+        })
+    }
+
     function zhenAnimaion(){
         ZhenPosition  += ZhenNum;
         (ZhenPosition === 0) ? (ZhenPosition += ZhenNum) : ZhenPosition;
@@ -80,25 +96,6 @@
         $("#szhen").css({
             backgroundPosition : "0px " + ZhenPosition + "px"
         })
-
-//        console.log(ZhenPosition);
-
-        if(Math.abs(ZhenPosition) === 2299){
-            $("#sl-2-3").animate({
-                transform: "rotate(8deg)"
-            },100,'ease-out',function(){
-                $(this).animate({
-                    transform: "rotate(0deg)"
-                },50,'ease-out')
-            })
-            $("#sl-2-4").animate({
-                transform: "rotate(-8deg)"
-            },100,'ease-out',function(){
-                $(this).animate({
-                    transform: "rotate(0deg)"
-                },50,'ease-out')
-            })
-        }
     }
 
     function drawCanvas(){
@@ -124,7 +121,6 @@
             objImgsArr[i].onload = function(){
                 ctxArr[i] = $canvasArr[i].get(0).getContext("2d");
                 ctxArr[i].clearRect(0,0,$canvasArr[i].width(),$canvasArr[i].height());
-                // ctxArr[i].drawImage(objImgsArr[i],0,0,$canvasArr[i].width(),$canvasArr[i].height());
             }
         })
     }
@@ -137,26 +133,67 @@
 
     function setCss(){
         $("#szhen-bg").css({
-            left: (DX * 45) + "px"
+            left: ((DX * 45) >= 280 ) ? 280 : (DX * 45)  + "px"
         });
         $("#gamebox").css({
             transform: "translate(0px, " + MainTranslateY + "px)"
         });
     }
 
-    function specialAnimation(){
-        MainTranslateY = 0 - (parseInt($("#canvas" + (CurrentNum + 1)).css("top").replace("px","")) - 66);
-        switch (CurrentNum - 1){
-            case 0 :
-                alert("第一页观看结束");
+    $.fn.bgAnimation = function(a,b,d,c){
+        var myThis = this;
+        var i = 0;
+        var bt = setInterval(function(){
+            if(i >= b){
+                clearInterval(bt);
+            }
+            this[0].style.backgroundPosition = "0px " + (-a * i) + "px"
+            i ++;
+        },d);
+        c.call();
+    }
 
+    function specialAnimation(){
+        DY += 2; //跳过三行空格
+        MainTranslateY -= (44 * 2);
+        IsAnimation = true;
+
+        var $curXlz = $(".xlz" + CurrentNum);
+        $curXlz.addClass("back");
+        $(".special-" + CurrentNum).chenkImagesIsLoaded({
+            bgimageClassName : 'back',
+            callback : function(){
+                $curXlz.children("img").remove();
+                $curXlz.bgAnimation(20,20,function(){
+                    alert("xx");
+                });
+            }
+        });
+
+
+        switch (CurrentNum){
+            case 0 :
                 break;
             case 1:
-                alert("第二页观看结束");
+
+
                 break;
 
             default :
-                alert("第三页观看结束");
+                // 默认特殊动画
+                break;
+        }
+    }
+
+    function pageEndAnimation(){
+        MainTranslateY = 0 - (parseInt($("#canvas" + (CurrentNum + 1)).css("top").replace("px","")) - 66);
+        switch (CurrentNum - 1){
+            case 0 :
+                break;
+            case 1:
+                break;
+
+            default :
                 break;
         }
     }
@@ -169,59 +206,71 @@
     function drawMain(){
         // 默认位置
         setCss();
-
         drawTimer = setInterval(function(){
             if((DY + 1) <= data[CurrentNum].length ){
                 // 没有超过最后一行
-                console.log(DY + 1);
-                console.log(data[CurrentNum].length);
-
-
+//                console.log(DY + 1);
+//                console.log(data[CurrentNum].length);
                 setCss();
-                if(DX <= data[CurrentNum][DY]){
+                if(data[CurrentNum][DY] === 11){
+                    // 特殊动画
+                    $.fn.stopAnimation();
+                    MainTranslateY -= 44;
+                    DY++;
+                    setCss();
+                    specialAnimation();
+                    return;
+                }
+
+                if(DX < data[CurrentNum][DY]){
                     drawText(CurrentNum, DX , DY);
                 }else{
                     // 换行
                     DY ++ ; //  加一行
                     DX = -1; //  移动到第一列
+                    deAnimation(); //   两边爪子动一下
                     MainTranslateY -= 44; // 页面往上滚一行
                     clearInterval(drawTimer);
                     drawMain(); // 回调
                 }
                 DX ++ ;
             }else{
-                // 当前页面结束
-                $.fn.stopAnimation();
-
                 // 到达下一页
                 CurrentNum ++;
                 DY = 0 ; //  移动到第一行
                 DX = 0; //  移动到第一列
-                specialAnimation();
+                pageEndAnimation();
             }
-        },200);
+        },50);
     }
 
     /** fn **/
-
     $.fn.startAnimation = function(){
+        if(IsAnimation) return false;
+
         startBtnChange('on');
+        $("#szhen-bg").stop();
         $("#szhen-bg").animate({
             top : "13px"
         },100,'ease-out',function(){
             ZhenTimer = setInterval(zhenAnimaion,70);
             drawMain();
         });
-
         return;
     }
 
     $.fn.stopAnimation = function(){
-        startBtnChange('off');
-        $("#szhen-bg").stop();
-        $("#szhen").css({backgroundPosition:"0px 0px"});
+        if(IsAnimation) return false;
 
+        startBtnChange('off');
         clearTimer();
+        $("#szhen-bg").animate({
+            left : "131px"
+        },100,"ease-out",function(){
+            $(this).stop();
+            clearTimer();
+            $("#szhen").css({backgroundPosition:"0px 0px"});
+        });
         return;
     }
 
