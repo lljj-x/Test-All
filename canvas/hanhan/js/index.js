@@ -5,29 +5,34 @@ $(function(){
     //ready
     $("#box-content").chenkImagesIsLoaded({
         callback: function(){
+            // 准备画布
+            $.fn.drawCanvas();
             $("#loading").fadeOut(300);
         }
     });
 
-    /* ua */
-    /**
-    var UA = function(){
-        var userAgent = navigator.userAgent.toLowerCase();
-        return {
-            ipad: /ipad/.test(userAgent),
-            iphone: /iphone/.test(userAgent),
-            android: /android/.test(userAgent),
-            qqnews: /qqnews/.test(userAgent),
-            weixin: /micromessenger/.test(userAgent)
-        };
-    }
-    **/
-
     var isTouch = false;
+
+    // 桌面端缩放
+    if(!isTouch){
+        function setResetIframe(){
+            var bW = $(window).width();
+            if(bW < 640){
+                // 设置缩放
+                var ox = bW / 640;
+                $("html").css({
+                    zoom: ox
+                })
+            }
+        }
+        setResetIframe();
+        $(window).resize(setResetIframe);
+    }
+
+
     if( /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
         isTouch = true;
     }
-
     var startEvent = isTouch ? "touchstart" : "mousedown" ;
     var endEvent = isTouch ? "touchend" : "mouseup mouseout" ;
     $("#stratbtn").on(startEvent,function(event){
@@ -54,4 +59,17 @@ $(function(){
             $(this).addClass("off");
         }
     })
+
+    /**
+     var UA = function(){
+        var userAgent = navigator.userAgent.toLowerCase();
+        return {
+            ipad: /ipad/.test(userAgent),
+            iphone: /iphone/.test(userAgent),
+            android: /android/.test(userAgent),
+            qqnews: /qqnews/.test(userAgent),
+            weixin: /micromessenger/.test(userAgent)
+        };
+    }
+     **/
 });

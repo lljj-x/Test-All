@@ -43,7 +43,6 @@
     'use strice';
     var ZhenTimer,
         drawTimer,
-
         ctxArr = [],
         objImgsArr = [],
 
@@ -98,33 +97,6 @@
         })
     }
 
-    function drawCanvas(){
-        var $canvasBg = $("#spanbox");
-        var $canvasArr = [];
-        $.each(canvasH,function(i,v){
-            $canvas = $("<canvas />").attr({
-                id: "canvas" + (i + 1),
-                width: "450",
-                height: canvasH[i]
-            }).css({
-                left: canvasT[0] + "px",
-                top: canvasT[i + 1] + "px",
-                position : "absolute",
-                display: "block"
-            });
-            $canvasBg.append($canvas);
-            $canvasArr[i] = $canvas;
-
-            objImgsArr[i]  = new Image();
-            objImgsArr[i].src = 'http://test.local/canvas/hanhan/images/pages/' + (i + 1) + '.png';
-
-            objImgsArr[i].onload = function(){
-                ctxArr[i] = $canvasArr[i].get(0).getContext("2d");
-                ctxArr[i].clearRect(0,0,$canvasArr[i].width(),$canvasArr[i].height());
-            }
-        })
-    }
-
     function drawText(index, DX , DY){
         var ctx = ctxArr[index],
             image = objImgsArr[index];
@@ -140,17 +112,19 @@
         });
     }
 
-    $.fn.bgAnimation = function(a,b,d,c){
+    $.fn.bgAnimation = function(s,a,b,d,c){
+        c = c || function(){};
         var myThis = this;
         var i = 0;
         var bt = setInterval(function(){
-            if(i >= b){
+            if(i >= b - 1){
                 clearInterval(bt);
+                c.call();
             }
-            this[0].style.backgroundPosition = "0px " + (-a * i) + "px"
+            myThis[0].style.backgroundPosition = "0px " + (s - a * i) + "px"
             i ++;
         },d);
-        c.call();
+
     }
 
     function specialAnimation(){
@@ -159,26 +133,74 @@
         IsAnimation = true;
 
         var $curXlz = $(".xlz" + CurrentNum);
-        $curXlz.addClass("back");
-        $(".special-" + CurrentNum).chenkImagesIsLoaded({
-            bgimageClassName : 'back',
-            callback : function(){
-                $curXlz.children("img").remove();
-                $curXlz.bgAnimation(20,20,function(){
-                    alert("xx");
-                });
-            }
-        });
+        var $curSound = $("#s" + (CurrentNum + 1));
 
+        $curXlz.addClass("back");
+        if($curSound.length>0){
+            $curSound.get(0).play();
+        }
 
         switch (CurrentNum){
-            case 0 :
-                break;
             case 1:
-
-
+                $(".special-" + CurrentNum).chenkImagesIsLoaded({
+                    bgimageClassName : 'back',
+                    callback : function(){
+                        $curXlz.children("img").remove();
+                        $curXlz.bgAnimation(0,139,18,50,function(){
+                            $curXlz.prev().show();
+                            $curXlz.bgAnimation(-556,-139,5,120,function(){
+                                IsAnimation = false;
+                            });
+                        });
+                    }
+                });
+                break;
+            case 2:
+                $(".special-" + CurrentNum).chenkImagesIsLoaded({
+                    bgimageClassName : 'back',
+                    callback : function(){
+                        $curXlz.children("img").remove();
+                        $curXlz.bgAnimation(0,139,22,50,function(){
+                            $curXlz.prev().show();
+                            $curXlz.bgAnimation(-2919,-139,21,50,function(){
+                                IsAnimation = false;
+                            });
+                        });
+                    }
+                });
                 break;
 
+            case 3:
+                $(".special-" + CurrentNum).chenkImagesIsLoaded({
+                    bgimageClassName : 'back',
+                    callback : function(){
+                        $curXlz.children("img").remove();
+                        $curXlz.bgAnimation(0,139,33,50);
+                        IsAnimation = false;
+                    }
+                });
+                break;
+
+            case 4:
+                $(".special-" + CurrentNum).chenkImagesIsLoaded({
+                    bgimageClassName : 'back',
+                    callback : function(){
+                        $curXlz.children("img").remove();
+                        $curXlz.bgAnimation(0,139,35,50);
+                        IsAnimation = false;
+                    }
+                });
+                break;
+            case 5:
+                $(".special-" + CurrentNum).chenkImagesIsLoaded({
+                    bgimageClassName : 'back',
+                    callback : function(){
+                        $curXlz.children("img").remove();
+                        $curXlz.bgAnimation(0,139,36,50);
+                        IsAnimation = false;
+                    }
+                });
+                break;
             default :
                 // 默认特殊动画
                 break;
@@ -186,13 +208,17 @@
     }
 
     function pageEndAnimation(){
+        if((CurrentNum + 1) > data.length){
+            // 结束
+            alert("观看完毕!!");
+            $.fn.stopAnimation();
+            IsAnimation = true;
+        }
+
         MainTranslateY = 0 - (parseInt($("#canvas" + (CurrentNum + 1)).css("top").replace("px","")) - 66);
         switch (CurrentNum - 1){
             case 0 :
                 break;
-            case 1:
-                break;
-
             default :
                 break;
         }
@@ -244,10 +270,47 @@
         },50);
     }
 
+    function playSound(type){
+        var upSound = $("#s7").get(0);
+        var upendSound = $("#s8").get(0);
+        if(type === 'start'){
+            upendSound.pause();
+            upendSound.currentTime = 0;
+            upSound.play();
+        }else{
+            upSound.pause();
+            upSound.currentTime = 0;
+            upendSound.play();
+        }
+    }
+
     /** fn **/
+    $.fn.drawCanvas = function(){
+        var $canvasBg = $("#spanbox");
+        var $canvasArr = [];
+        $.each(canvasH,function(i,v){
+            $canvas = $("<canvas />").attr({
+                id: "canvas" + (i + 1),
+                width: "450",
+                height: canvasH[i]
+            }).css({
+                left: canvasT[0] + "px",
+                top: canvasT[i + 1] + "px",
+                position : "absolute",
+                display: "block"
+            });
+            $canvasBg.append($canvas);
+            $canvasArr[i] = $canvas;
+
+            objImgsArr[i]  = document.getElementById("img" + (i + 1));
+            ctxArr[i] = $canvasArr[i].get(0).getContext("2d");
+            ctxArr[i].clearRect(0,0,$canvasArr[i].width(),$canvasArr[i].height());
+        })
+    }
+
     $.fn.startAnimation = function(){
         if(IsAnimation) return false;
-
+        playSound('start');
         startBtnChange('on');
         $("#szhen-bg").stop();
         $("#szhen-bg").animate({
@@ -261,7 +324,7 @@
 
     $.fn.stopAnimation = function(){
         if(IsAnimation) return false;
-
+        playSound('end');
         startBtnChange('off');
         clearTimer();
         $("#szhen-bg").animate({
@@ -273,8 +336,4 @@
         });
         return;
     }
-
-    $(document).ready(function(){
-        drawCanvas();
-    });
 })(Zepto,window,document);
