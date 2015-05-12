@@ -1,59 +1,21 @@
 /**
  * Created by Liu.Jun on 15-5-6.
  */
-(function($){
-    $.extend($.fn,{
-        chenkImagesIsLoaded: function(options){
-            var defaults = {
-                bgimageClassName : 'has-bg-image',
-                callback : function(){}
-            }
-            options = $.extend(defaults,options);
-
-            var myThis = this;
-            imagesLoaded(myThis.get(0),function(){
-                var image;
-                var hasBgSection = myThis.find("." + options.bgimageClassName);
-                if(hasBgSection.length > 0){
-                    // 有背景图片
-                    var tmpImages = $("<div />");
-
-                    // 将背景图片以图片的形式插入到 div 中
-                    hasBgSection.each(function(){
-                        image = $(this).css("background-image").match(/url\((['"])?(.*?)\1\)/);
-                        if(image){
-                            tmpImages.append($("<img />").attr({
-                                "src" : $(this).css("background-image").match(/url\((['"])?(.*?)\1\)/).pop()
-                            }))
-                        }
-                    });
-                    imagesLoaded(tmpImages[0],options.callback);
-
-                }else{
-                    // 没有背景图片 直接回调
-                    options.callback.call();
-                }
-            })
-            return this;
-        }
-    });
-})(Zepto);
-
 (function($,window,document){
     'use strice';
     var ZhenTimer,
         drawTimer,
+        VendorPrefix,
         ctxArr = [],
         objImgsArr = [],
-
         DX = 0,
         DY = 0,
         CurrentNum = 0; // 0 - - - 5
-        IsAnimation = false;
-        MainTranslateY = -20,
+    IsAnimation = false;
+    MainTranslateY = -20,
 
         ZhenPosition = 0;
-        ZhenNum = -121,
+    ZhenNum = -121,
 
         canvasT = [48, 86, 594, 1708, 3103, 4355, 5730],
         canvasH = [440, 963, 1400, 1147, 1152, 988],
@@ -70,19 +32,12 @@
     }
 
     function deAnimation(){
-        $("#sl-2-3").animate({
-            transform: "rotate(5deg)"
-        },100,'ease-out',function(){
-            $(this).animate({
-                transform: "rotate(0deg)"
-            },50,'ease-out')
+        var data = {};
+        $("#sl-2-3").animate($.getCss3Data(data,"transform","rotate(5deg)"),100,'ease-out',function(){
+            $(this).animate($.getCss3Data(data,"transform","rotate(0deg)"),50,'ease-out')
         })
-        $("#sl-2-4").animate({
-            transform: "rotate(-5deg)"
-        },100,'ease-out',function(){
-            $(this).animate({
-                transform: "rotate(0deg)"
-            },50,'ease-out')
+        $("#sl-2-4").animate($.getCss3Data(data,"transform","rotate(-5deg)"),100,'ease-out',function(){
+            $(this).animate($.getCss3Data(data,"transform","rotate(0deg)"),50,'ease-out')
         })
     }
 
@@ -107,9 +62,8 @@
         $("#szhen-bg").css({
             left: ((DX * 45) >= 280 ) ? 280 : (DX * 45)  + "px"
         });
-        $("#gamebox").css({
-            transform: "translate(0px, " + MainTranslateY + "px)"
-        });
+        var data = {};
+        $("#gamebox").css($.getCss3Data(data,"transform","translate(0px, " + MainTranslateY + "px)"));
     }
 
     $.fn.bgAnimation = function(s,a,b,d,c){
@@ -124,7 +78,6 @@
             myThis[0].style.backgroundPosition = "0px " + (s - a * i) + "px"
             i ++;
         },d);
-
     }
 
     function specialAnimation(){
@@ -285,7 +238,66 @@
     }
 
     /** fn **/
+    $.fn.chenkImagesIsLoaded = function(options){
+        var defaults = {
+            bgimageClassName : 'has-bg-image',
+            callback : function(){}
+        }
+        options = $.extend(defaults,options);
+
+        var myThis = this;
+        imagesLoaded(myThis.get(0),function(){
+            var image;
+            var hasBgSection = myThis.find("." + options.bgimageClassName);
+            if(hasBgSection.length > 0){
+                // 有背景图片
+                var tmpImages = $("<div />");
+
+                // 将背景图片以图片的形式插入到 div 中
+                hasBgSection.each(function(){
+                    image = $(this).css("background-image").match(/url\((['"])?(.*?)\1\)/);
+                    if(image){
+                        tmpImages.append($("<img />").attr({
+                            "src" : $(this).css("background-image").match(/url\((['"])?(.*?)\1\)/).pop()
+                        }))
+                    }
+                });
+                imagesLoaded(tmpImages[0],options.callback);
+
+            }else{
+                // 没有背景图片 直接回调
+                options.callback.call();
+            }
+        })
+        return this;
+    }
+
+    $.getVendorPrefix = function() {
+        // 使用body是为了避免在还需要传入元素
+        var body = document.body || document.documentElement,
+            style = body.style,
+            vendor = ['webkit', 'khtml', 'moz', 'ms', 'o'],
+            i = 0;
+
+        while (i < vendor.length) {
+            // 此处进行判断是否有对应的内核前缀
+            if (typeof style[vendor[i] + 'Transition'] === 'string') {
+                return vendor[i];
+            }
+            i++;
+        }
+    }
+
+    $.getCss3Data = function(data,t,v){
+        data[t] = v;
+        data[VendorPrefix + t] = v;
+        return data;
+    }
+
     $.fn.drawCanvas = function(){
+        // 获取到浏览器前缀
+        VendorPrefix = "-" + $.getVendorPrefix() + "-";
+
         var $canvasBg = $("#spanbox");
         var $canvasArr = [];
         $.each(canvasH,function(i,v){
@@ -310,6 +322,7 @@
 
     $.fn.startAnimation = function(){
         if(IsAnimation) return false;
+
         playSound('start');
         startBtnChange('on');
         $("#szhen-bg").stop();
@@ -324,9 +337,9 @@
 
     $.fn.stopAnimation = function(){
         if(IsAnimation) return false;
+        clearTimer();
         playSound('end');
         startBtnChange('off');
-        clearTimer();
         $("#szhen-bg").animate({
             left : "131px"
         },100,"ease-out",function(){

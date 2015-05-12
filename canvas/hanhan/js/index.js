@@ -3,13 +3,19 @@
  */
 $(function(){
     //ready
-    $("#box-content").chenkImagesIsLoaded({
-        callback: function(){
-            // 准备画布
-            $.fn.drawCanvas();
-            $("#loading").fadeOut(300);
-        }
-    });
+//    $("#box-content").chenkImagesIsLoaded({
+//        callback: function(){
+//            // 准备画布
+//            $.fn.drawCanvas();
+//            $("#loading").fadeOut(300);
+//        }
+//    });
+
+    $(window).on("load",function(){
+        // 准备画布
+        $.fn.drawCanvas();
+        $("#loading").fadeOut(300);
+    })
 
     var isTouch = false;
 
@@ -59,17 +65,4 @@ $(function(){
             $(this).addClass("off");
         }
     })
-
-    /**
-     var UA = function(){
-        var userAgent = navigator.userAgent.toLowerCase();
-        return {
-            ipad: /ipad/.test(userAgent),
-            iphone: /iphone/.test(userAgent),
-            android: /android/.test(userAgent),
-            qqnews: /qqnews/.test(userAgent),
-            weixin: /micromessenger/.test(userAgent)
-        };
-    }
-     **/
 });
