@@ -58,10 +58,16 @@ $(function(){
         event.preventDefault();
         var bgAudio = $("#sound")[0];
         if($(this).hasClass("off")){
-            bgAudio.play();
+            if(bgAudio.paused){
+                bgAudio.play();
+            }else{
+            }
             $(this).removeClass("off");
         }else{
-            bgAudio.pause();
+            if(bgAudio.paused){
+            }else{
+                bgAudio.pause();
+            }
             $(this).addClass("off");
         }
     })
