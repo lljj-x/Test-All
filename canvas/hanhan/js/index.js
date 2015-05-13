@@ -60,12 +60,10 @@ $(function(){
         if($(this).hasClass("off")){
             if(bgAudio.paused){
                 bgAudio.play();
-            }else{
             }
             $(this).removeClass("off");
         }else{
-            if(bgAudio.paused){
-            }else{
+            if(! bgAudio.paused){
                 bgAudio.pause();
             }
             $(this).addClass("off");
