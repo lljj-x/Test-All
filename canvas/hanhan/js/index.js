@@ -58,14 +58,10 @@ $(function(){
         event.preventDefault();
         var bgAudio = $("#sound")[0];
         if($(this).hasClass("off")){
-            if(bgAudio.paused){
-                bgAudio.play();
-            }
+            bgAudio.play();
             $(this).removeClass("off");
         }else{
-            if(! bgAudio.paused){
-                bgAudio.pause();
-            }
+            bgAudio.pause();
             $(this).addClass("off");
         }
     })

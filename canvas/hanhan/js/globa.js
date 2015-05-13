@@ -11,11 +11,11 @@
         DX = 0,
         DY = 0,
         CurrentNum = 0; // 0 - - - 5
-    IsAnimation = false;
-    MainTranslateY = -20,
+        IsAnimation = false;
+        MainTranslateY = -20,
 
         ZhenPosition = 0;
-    ZhenNum = -121,
+        ZhenNum = -121,
 
         canvasT = [48, 86, 594, 1708, 3103, 4355, 5730],
         canvasH = [440, 963, 1400, 1147, 1152, 988],
@@ -163,9 +163,10 @@
     function pageEndAnimation(){
         if((CurrentNum + 1) > data.length){
             // 结束
-            alert("观看完毕!!");
             $.fn.stopAnimation();
             IsAnimation = true;
+            alert("观看完毕!!");
+            return false;
         }
 
         MainTranslateY = 0 - (parseInt($("#canvas" + (CurrentNum + 1)).css("top").replace("px","")) - 66);
@@ -198,7 +199,7 @@
                     DY++;
                     setCss();
                     specialAnimation();
-                    return;
+                    return false;
                 }
 
                 if(DX < data[CurrentNum][DY]){
@@ -224,15 +225,19 @@
     }
 
     function playSound(type){
-        var upSound = $("#s7").get(0);
-        var upendSound = $("#s8").get(0);
+        var upSound = $("#s7")[0];
+        var upendSound = $("#s8")[0];
         if(type === 'start'){
-            upendSound.pause();
-            upendSound.currentTime = 0;
+            if(! upendSound.paused){
+                upendSound.pause();
+                upendSound.currentTime = 0;
+            }
             upSound.play();
         }else{
-            upSound.pause();
-            upSound.currentTime = 0;
+            if(! upSound.paused){
+                upSound.pause();
+                upSound.currentTime = 0;
+            }
             upendSound.play();
         }
     }
@@ -263,7 +268,6 @@
                     }
                 });
                 imagesLoaded(tmpImages[0],options.callback);
-
             }else{
                 // 没有背景图片 直接回调
                 options.callback.call();
@@ -332,7 +336,6 @@
             ZhenTimer = setInterval(zhenAnimaion,70);
             drawMain();
         });
-        return;
     }
 
     $.fn.stopAnimation = function(){
@@ -347,6 +350,5 @@
             clearTimer();
             $("#szhen").css({backgroundPosition:"0px 0px"});
         });
-        return;
     }
 })(Zepto,window,document);
