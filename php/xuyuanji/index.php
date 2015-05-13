@@ -8,7 +8,7 @@
  */
 include_once("mysql.php");
 
-$mysql = new Mysql('localhost','test','root','liujun','xuyuan');
+$mysql = new Mysql('localhost','test','root','','xuyuan');
 $dataArr = $mysql->select('',30);
 ?>
 
@@ -89,23 +89,22 @@ $dataArr = $mysql->select('',30);
             </table>
         </div>
         <div id="add-form" class="">
-            <form action="add.php" method="post">
+            <form action="add.php" method="post" id="xuyuan-form">
                 <label for="name">
                     姓名：
                 </label>
                 <input type="text" name="name" id="name"/>
-
                 <label for="number">
                     号码：
                 </label>
                 <input type="text" name="number" id="number"/>
-
                 <label for="str">
                     愿望：
                 </label>
-                <textarea rows="3" cols="20">
-
+                <textarea rows="3" cols="20" name="str" id="str">
                 </textarea>
+                <input id="submit" name="submit" type="submit" value="许愿">
+                <input id="reset" name="reset" type="reset" value="重新输入">
             </form>
         </div>
     </div>
@@ -114,6 +113,30 @@ $dataArr = $mysql->select('',30);
     <?php
         echo "var jsonData = " . json_encode($dataArr) . ";" ;
     ?>
+
+    $(function(){
+        // ajax
+        $("#submit").click(function(event){
+            event.preventDefault();
+            $.ajax({
+                type : "POST",
+                url : "add.php",
+                data : $("#xuyuan-form").serialize(),
+                dataType : "text",
+                success : function(data,textStatus){
+                    if(data == 'success'){
+                        alert("添加成功");
+                    }else{
+                        alert(data);
+                    }
+                }
+            })
+        });
+    })
+
+
+
+
 </script>
 </html>
 
