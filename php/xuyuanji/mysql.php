@@ -37,10 +37,11 @@ class Mysql {
 
     }
 
-    public function select($array,$limit){
+    public function select($array,$limit,$order,$seq){
         // SELECT * FROM `user` WHERE `Host` = 'localhost'
 
         $limit = $limit ? (" limit 0," . $limit) : "";
+        $order = $order ? " order by " . $order . " " . $seq : "";
 
         if(is_array($array)){
             $selectStr = "";
@@ -54,15 +55,15 @@ class Mysql {
                 $i ++;
             }
             if($selectStr){
-                $sql = "select * from " . $this->table . " where " . $selectStr . $limit;
+                $sql = "select * from " . $this->table . " where " . $selectStr . $order . $limit;
             }else{
-                $sql = "select * from " . $this->table . $limit;
+                $sql = "select * from " . $this->table . $order. $limit;
             }
         }else{
-            $sql = "select * from " . $this->table . $limit;
+            $sql = "select * from " . $this->table . $order . $limit;
         }
-        $re = $this->pdo->query($sql);
 
+        $re = $this->pdo->query($sql);
         $reArr = array();
         foreach($re as $row){
             $reArr[] = $row;

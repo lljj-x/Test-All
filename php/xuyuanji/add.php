@@ -26,10 +26,10 @@ if(! empty($_POST["name"])){
     }
 
     function addData(){
-        $mysql = new Mysql('localhost','test','root','','xuyuan');
+        $mysql = new Mysql('localhost','test','root','liujun','xuyuan');
         $re = $mysql->insert(array(
             "name" => trim($_POST["name"]),
-            "number" => (int)$_POST["number"],
+            "number" => $_POST["number"],
             "str" => $_POST["str"]
         ));
         return $re;

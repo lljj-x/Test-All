@@ -3544,7 +3544,9 @@ if ( !jQuery.support.changeBubbles ) {
 
 // Create "bubbling" focus and blur events
 if ( !jQuery.support.focusinBubbles ) {
-	jQuery.each({ focus: "focusin", blur: "focusout" }, function( orig, fix ) {
+	jQuery.each({
+
+        focus: "focusin", blur: "focusout" }, function( orig, fix ) {
 
 		// Attach a single capturing handler while someone wants focusin/focusout
 		var attaches = 0,

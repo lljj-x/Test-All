@@ -133,14 +133,206 @@ img {border: none;border: 0;}
     height: 100%;
 }
 .wrap .tree{
-    /*position: absolute;*/
-    /*width: 100%;*/
-    /*height: 100%;*/
+    position: relative;
+    max-width: 85%;
+    margin: 20px auto 0;
+}
+.wrap .tree #yu-bg{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
 }
 .wrap .tree>img{
-    /*width: 100%;*/
+    width: 100%;
     height: auto;
+    display: block;
 }
+
+@keyframes yao{
+    0%{
+        transform:rotate(-5deg);
+    }
+    50%{
+        transform:rotate(5deg);
+    }
+    100%{
+        transform:rotate(-5deg);
+    }
+}
+@-webkit-keyframes yao{
+    0%{
+        -webkit-transform:rotate(-5deg);
+    }
+    50%{
+        -webkit-transform:rotate(5deg);
+    }
+    100%{
+        -webkit-transform:rotate(-5deg);
+    }
+}
+.yao-animation{
+    -webkit-animation: yao 2s infinite linear;
+    animation: yao 2s infinite linear;
+}
+
+.yuan{
+    position: absolute;
+    background-color: rgb(223, 223, 223);
+    border-radius: 4px;
+    border: 1px solid #ccc;
+
+    opacity: 0;
+    pointer-events: none;
+
+    -webkit-transition: all .4s cubic-bezier(0, 0.48, 0.71, 1.21);
+    -moz-transition: all .4s cubic-bezier(0, 0.48, 0.71, 1.21);
+    -ms-transition: all .4s cubic-bezier(0, 0.48, 0.71, 1.21);
+    -o-transition: all .4s cubic-bezier(0, 0.48, 0.71, 1.21);
+    transition: all .4s cubic-bezier(0, 0.48, 0.71, 1.21);
+
+    -webkit-transform: scale(0.5) translateY(-30%);
+    -moz-transform: scale(0.5) translateY(-30%);
+    -ms-transform: scale(0.5) translateY(-30%);
+    -o-transform: scale(0.5) translateY(-30%);
+    transform: scale(0.5) translateY(-30%);
+
+    -webkit-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    -o-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+}
+.yuan.show{
+    opacity: 1;
+    pointer-events: auto;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+
+.yuan .img-g{
+    position: relative;
+    width: 50%;
+    margin: -34% auto 0;
+    height: auto;
+    display: block;
+    padding: 0;
+}
+.yuan .yu-txt{
+    text-overflow: ellipsis;
+    position: relative;
+    height: 80%;
+    font-size: 12px;
+    padding: 3px;
+    overflow: hidden;
+}
+.yuan .yu-name{
+
+}
+.yuan .yu-str{
+
+}
+.bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 8;
+    background-color: rgba(255,255,255,0.4);
+    left: 0;
+    top: 0;
+    display: none;
+}
+#de-yuanwang:before{
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent rgb(223,223,223) transparent transparent;
+    left: -10px;
+    top: 10px;
+}
+#de-yuanwang{
+    border-radius: 5px;
+    padding: 5px !important;
+}
+
+#de-yuanwang,#add-form{
+    z-index: 9;
+    position: absolute;
+    height: auto;
+    background-color: rgb(223, 223, 223);
+    padding: 1%;
+    font-size: 14px;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+    -webkit-transform: translateY(-30%);
+    -moz-transform: translateY(-30%);
+    -ms-transform: translateY(-30%);
+    -o-transform: translateY(-30%);
+    transform: translateY(-30%);
+    -webkit-transform-origin: 50% 0;
+    -moz-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    -o-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+#add-form{
+    top: 50%;
+    left: 50%;
+    margin-left: -149px;
+    margin-top: -203px;
+    border-radius: 10px;
+}
+#add-form.show,#de-yuanwang.show{
+    opacity: 1;
+    pointer-events: auto;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+
+#add-form label{
+    display: block;
+    padding: 10px 0 4px;
+    width: 250px;
+}
+#add-form input,#add-form textarea{
+    padding: 3px;
+    display: block;
+    width: 250px;
+    font-family: 'Open Sans', \5FAE\8F6F\96C5\9ED1,"Helvetica Neue",sans-serif,HelveticaNeue-Light, Helvetica;
+}
+
+#add-form input#submit,#add-form input#reset{
+    display: inline-block;
+    width: auto;
+    padding: 2px 10px;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.btn{
+    position: fixed;
+    top: 10%;
+    right: 10%;
+}
+
+
 
 table{
 

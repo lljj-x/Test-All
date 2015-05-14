@@ -7,9 +7,8 @@
  * Wetsite: buhuida.com
  */
 include_once("mysql.php");
-
-$mysql = new Mysql('localhost','test','root','','xuyuan');
-$dataArr = $mysql->select('',30);
+$mysql = new Mysql('localhost','test','root','liujun','xuyuan');
+$dataArr = $mysql->select('',10,"id","DESC");
 ?>
 
 <!DOCTYPE html>
@@ -40,72 +39,51 @@ $dataArr = $mysql->select('',30);
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/jquery.min.1.7.js"></script>
-    <script type="text/javascript" src="js/js.js"></script>
 </head>
 <body>
     <div class="wrap">
-        <div class="tree">
-            <img src="images/tree.jpg" border="0" usemap="#Maptree"/>
-            <map name="Maptree">
-                <area id="yu1" shape="poly" coords="720,101,715,184,737,260,790,276,831,196,804,143" href="#">
-                <area id="yu2" shape="poly" coords="302,287,382,277,414,280,449,311,466,374,465,399,415,412,370,393"
-                      href="#">
-                <area id="yu3" shape="poly" coords="458,220,529,239,553,275,541,331,494,325,477,303" href="#">
-                <area id="yu4" shape="poly" coords="1072,69,982,114,956,155,959,196,987,253,1027,243,1068,171,1064,119"
-                      href="#">
-                <area id="yu5" shape="poly" coords="1297,256,1207,298,1182,337,1184,365,1218,436,1275,412,1297,374"
-                      href="#">
-                <area id="yu6" shape="poly" coords="1507,561,1439,527,1381,530,1342,564,1325,622,1378,650,1423,637,1472,588"
-                      href="#">
-                <area id="yu7" shape="poly" coords="249,496,345,488,388,512,404,541,411,609,368,619,317,605" href="#">
-                <area id="yu8" shape="poly" coords="925,180,866,223,846,259,851,301,894,350,931,326,949,292,929,217"
-                      href="#">
-                <area id="yu9" shape="poly"
-                      coords="674,153,630,193,609,219,611,256,625,287,656,316,692,289,704,259,681,192,676,182" href="#">
-                <area id="yu10" shape="poly"
-                      coords="350,631,326,630,303,637,284,656,251,720,274,716,349,722,383,708,401,674,406,657" href="#">
-            </map>
+        <div id="tree" class="tree">
+            <img src="images/tree.png" border="0"/>
+            <div id="yu-bg"></div>
+            <div class="bg"></div>
+            <div id="add-form" class="">
+                <form action="add.php" method="post" id="xuyuan-form">
+                    <label for="name">
+                        姓名：
+                    </label>
+                    <input type="text" name="name" id="name" placeholder="请输入你的名称"/>
+                    <label for="number">
+                        号码：
+                    </label>
+                    <input type="text" name="number" id="number" placeholder="请输入你的号码(保密,用于中奖通知)"/>
+                    <label for="str">
+                        愿望：
+                    </label>
+                    <textarea rows="5" cols="20" name="str" id="str" placeholder="请输入你的愿望"></textarea>
+                    <input id="submit" name="submit" type="submit" value="许愿">
+                    <input id="reset" name="reset" type="reset" value="重新输入">
+                </form>
+            </div>
+
+            <div id="de-yuanwang">
+                <div class="de-name">
+
+                </div>
+                <div class="de-str">
+
+                </div>
+            </div>
+
+            <div class="btn">
+                <button id="btn-add-yu">我要许愿</button>
+                <button id="btn-weixin">关注我们</button>
+            </div>
         </div>
-        <div>
-            <table>
-                <thead>
-                <tr>
-                    <td>名称</td>
-                    <td>号码</td>
-                    <td>愿望</td>
-                    <td>时间</td>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($dataArr as $value): ?>
-                    <tr>
-                        <td><?php echo $value['name'] ?></td>
-                        <td><?php echo $value['number'] ?></td>
-                        <td><?php echo $value['str'] ?></td>
-                        <td><?php echo date("Y-m-d H:i:t", $value['time']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
+        <div class="guize">
+            这里显示活动的规则
         </div>
-        <div id="add-form" class="">
-            <form action="add.php" method="post" id="xuyuan-form">
-                <label for="name">
-                    姓名：
-                </label>
-                <input type="text" name="name" id="name"/>
-                <label for="number">
-                    号码：
-                </label>
-                <input type="text" name="number" id="number"/>
-                <label for="str">
-                    愿望：
-                </label>
-                <textarea rows="3" cols="20" name="str" id="str">
-                </textarea>
-                <input id="submit" name="submit" type="submit" value="许愿">
-                <input id="reset" name="reset" type="reset" value="重新输入">
-            </form>
+        <div class="lipin">
+            这里显示礼品
         </div>
     </div>
 </body>
@@ -113,31 +91,9 @@ $dataArr = $mysql->select('',30);
     <?php
         echo "var jsonData = " . json_encode($dataArr) . ";" ;
     ?>
-
-    $(function(){
-        // ajax
-        $("#submit").click(function(event){
-            event.preventDefault();
-            $.ajax({
-                type : "POST",
-                url : "add.php",
-                data : $("#xuyuan-form").serialize(),
-                dataType : "text",
-                success : function(data,textStatus){
-                    if(data == 'success'){
-                        alert("添加成功");
-                    }else{
-                        alert(data);
-                    }
-                }
-            })
-        });
-    })
-
-
-
-
 </script>
+<script type="text/javascript" src="js/js.js"></script>
+
 </html>
 
 
