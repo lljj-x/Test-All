@@ -1,0 +1,181 @@
+// 变量
+
+@color : #4D926F;
+
+#header{
+  color : @color;
+}
+
+h2{
+  color: @color;
+}
+
+// 混合 继承 (function 的感觉)
+.rounded-corners(@radius: 5px){
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+#header{
+  .rounded-corners;
+}
+#footer{
+  .rounded-corners(20px);
+}
+
+// 嵌套规则
+#header{
+  h1{
+    font-size: 26px;
+    font-weight: bold;
+  }
+  p{
+    font-size: 12px;
+      a{
+        text-decoration: none;
+        &:hover{
+          border-width: 1px;
+        }
+      }
+  }
+}
+
+//函数 运算
+@the-border: 1px;
+@base-color: #111;
+@red: #842210;
+
+#header{
+  color: @base-color * 3;
+  border-left-width: @the-border;
+  border-right-width: @the-border * 3;
+}
+#footer{
+  color: @base-color + #003300;
+  border-color: desaturate(@red,10%);
+}
+
+//
+/* 变量名为变量 */
+@fnord : "I am fnord.";
+@var : 'fnord';
+.test:before{
+  content: @var;
+}
+
+.content{
+  position: relative;
+  margin: 0 auto;
+  width: 1000px;
+  height: auto;
+  overflow: hidden;
+  z-index: 9;
+  p{
+    margin: 5px 0;
+    color: #000;
+    &>a{
+      text-decoration: none;
+      color: #888;
+      &:hover{
+        color: #000;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* 混合 */
+.bordered(@borderColor: red){
+  border-top: solid 1px @borderColor;
+  border-bottom: solid 1px @borderColor;
+}
+
+.myTestBorder{
+  .bordered(#000);
+  color: #888888;
+  a{
+    .bordered(#ccc);
+    background-color: #1E86AB;
+  }
+}
+
+.box-shadow(@x: 0,@y:0,@blur:1px,@color:#000){
+  -webkit-box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  box-shadow: @arguments;
+}
+.myBoxShadow{
+  .box-shadow(2px,5px);
+}
+.mixin(dark,@color: #000){
+  color: darken(@color,10%);
+}
+.mixin(light,@color: #000){
+  color: lighten(@color,10%);
+}
+.mixin(@_,@color: #000){
+  display: block;
+}
+
+.myDarkMiXin{
+  .mixin(dark,red);
+}
+.myLightMiXin{
+  .mixin(light,#ccc);
+}
+
+/* when 条件判断 */
+.when(@a,@and) when (lightness(@a) >= 50%),(@and = 'true'){
+  background-color: #000000;
+}
+.when(@a,@and) when (lightness(@a) < 50%){
+  background-color: #ffffff;
+}
+.when(@a,@and){
+  color: @a;
+}
+
+.qx{
+  color: #000;
+  &.red{
+    color: red;
+  }
+  &:hover{
+    text-decoration: underline;
+  }
+  .blue{
+    color: blue;
+  }
+  width: 100px + 10;
+  background-color: #888 / 4;
+  border: (1px + 1) solid #000000;
+}
+#bundle(){
+  .button{
+    padding: 4px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+  }
+}
+
+.mybutton{
+  #bundle>.button;
+}
+
+.myTest:after{
+  content: ~'"@xxxx"';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

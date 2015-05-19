@@ -1,0 +1,111 @@
+#header {
+  color: #4d926f;
+}
+h2 {
+  color: #4d926f;
+}
+#header {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+#footer {
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+}
+#header h1 {
+  font-size: 26px;
+  font-weight: bold;
+}
+#header p {
+  font-size: 12px;
+}
+#header p a {
+  text-decoration: none;
+}
+#header p a:hover {
+  border-width: 1px;
+}
+#header {
+  color: #333333;
+  border-left-width: 1px;
+  border-right-width: 3px;
+}
+#footer {
+  color: #114411;
+  border-color: #7d2717;
+}
+/* 变量名为变量 */
+.test:before {
+  content: 'fnord';
+}
+.content {
+  position: relative;
+  margin: 0 auto;
+  width: 1000px;
+  height: auto;
+  overflow: hidden;
+  z-index: 9;
+}
+.content p {
+  margin: 5px 0;
+  color: #000;
+}
+.content p > a {
+  text-decoration: none;
+  color: #888;
+}
+.content p > a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+/* 混合 */
+.myTestBorder {
+  border-top: solid 1px #000000;
+  border-bottom: solid 1px #000000;
+  color: #888888;
+}
+.myTestBorder a {
+  border-top: solid 1px #cccccc;
+  border-bottom: solid 1px #cccccc;
+  background-color: #1E86AB;
+}
+.myBoxShadow {
+  -webkit-box-shadow: 2px 5px 1px #000000;
+  -moz-box-shadow: 2px 5px 1px #000000;
+  box-shadow: 2px 5px 1px #000000;
+}
+.myDarkMiXin {
+  color: #cc0000;
+  display: block;
+}
+.myLightMiXin {
+  color: #e6e6e6;
+  display: block;
+}
+/* when 条件判断 */
+.qx {
+  color: #000;
+  width: 110px;
+  background-color: #222222;
+  border: 2px solid #000000;
+}
+.qx.red {
+  color: red;
+}
+.qx:hover {
+  text-decoration: underline;
+}
+.qx .blue {
+  color: blue;
+}
+.mybutton {
+  padding: 4px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+}
+.myTest:after {
+  content: "@xxxx";
+}
