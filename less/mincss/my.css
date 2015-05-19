@@ -1,0 +1,10 @@
+#header {
+  color: red;
+}
+#header .title {
+  color: #000;
+  border: 1px solid red;
+}
+body {
+  color: red;
+}
