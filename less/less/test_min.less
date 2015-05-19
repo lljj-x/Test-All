@@ -125,13 +125,13 @@ h2{
 }
 
 /* when 条件判断 */
-.when(@a,@and) when (lightness(@a) >= 50%),(@and = 'true'){
+.whenx(@a,@and) when (lightness(@a) >= 50%),(@and = 'true'){
   background-color: #000000;
 }
-.when(@a,@and) when (lightness(@a) < 50%){
+.whenx(@a,@and) when (lightness(@a) < 50%){
   background-color: #ffffff;
 }
-.when(@a,@and){
+.whenx(@a,@and){
   color: @a;
 }
 
@@ -157,6 +157,11 @@ h2{
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
   }
+  .xx{
+
+    display: block;
+    position: relative;
+  }
 }
 
 .mybutton{
@@ -166,16 +171,3 @@ h2{
 .myTest:after{
   content: ~'"@xxxx"';
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
