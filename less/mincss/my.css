@@ -9,3 +9,8 @@ body {
   color: red;
   background-color: transparent;
 }
+.css {
+  position: relative;
+  width: 90%;
+  height: 20%;
+}
