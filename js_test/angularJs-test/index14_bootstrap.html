@@ -24,8 +24,8 @@
                             <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
                         </button>
                     </td>
-                    <td>{{user.firstName}}</td>
-                    <td>{{user.lastName}}</td>
+                    <td>{{user.fName}}</td>
+                    <td>{{user.lName}}</td>
                 </tr>
             </tbody>
         </table>
@@ -48,7 +48,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Last Name: </label>
                 <div class="col-sm-10">
-                    <input type="text" ng-model="lName" ng-disabled="edit" placeholder="Last Name" />
+                    <input type="text" ng-model="lName" ng-disabled="!edit" placeholder="Last Name" />
                 </div>
             </div>
             <div class="form-group">
@@ -115,6 +115,8 @@
                     $scope.incomplete = true;
                     $scope.fName = "";
                     $scope.lName = "";
+                    $scope.passw1 = "";
+                    $scope.passw2 = "";
                 }else{
                     $scope.edit = false;
                     $scope.fName = $scope.users[id - 1].fName;
@@ -122,19 +124,24 @@
                 }
             };
 
-            $scope.$watch("passw1", function () {
-                alert("xx");
-                $scope.test();
-            });
-            
+            $scope.$watch('passw1',function() {$scope.test();});
+            $scope.$watch('passw2',function() {$scope.test();});
+            $scope.$watch('fName', function() {$scope.test();});
+            $scope.$watch('lName', function() {$scope.test();});
+
             $scope.test = function () {
-
+                if ($scope.passw1 !== $scope.passw2) {
+                    $scope.error = true;
+                } else {
+                    $scope.error = false;
+                }
+                $scope.incomplete = false;
+                if ($scope.edit && (!$scope.fName.length ||
+                        !$scope.lName.length ||
+                        !$scope.passw1.length || !$scope.passw2.length)) {
+                    $scope.incomplete = true;
+                }
             }
-
-
-
-
-
         }
     </script>
 </body>
