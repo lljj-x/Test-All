@@ -6,4 +6,5 @@ var myApp = angular.module("myApp",[]);
 
 var FormApp = angular.module("formApp",[]);
 
+var formValidation = angular.module("formValidation",[]);
 
