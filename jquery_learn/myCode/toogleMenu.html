@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>My Plugin ToogleMenu</title>
+    <script src="js/jquery-1.4.2.min.js"></script>
+    <script src="js/myPlugins/jquery.toogleMenu.js"></script>
+    <style>
+        .warp{
+            width: 900px;
+            margin: 0 auto;
+            padding: 100px auto;
+        }
+        .menu>li{
+            position: relative;
+            float: left;
+            list-style: none;
+        }
+        .menu>li>a{
+            padding: 10px 20px;
+        }
+        .menu ul{
+            position: absolute;
+            left: 0px;
+            top: 20px;
+            display: none;
+        }
+        .show{
+            display: block !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="warp">
+        <ul id="menu" class="menu">
+            <li>
+                <a href="#" class="hasDropMenu">11111111</a>
+                <ul class="dropMenuClass">
+                    <li>xx</li>
+                    <li>xx</li>
+                    <li>ddd</li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="hasDropMenu">22222222</a>
+                <ul class="dropMenuClass">
+                    <li>xx</li>
+                    <li>xx</li>
+                    <li>ddd</li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="hasDropMenu">3333333</a>
+                <ul class="dropMenuClass">
+                    <li>33</li>
+                    <li>333</li>
+                    <li>dd333d</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

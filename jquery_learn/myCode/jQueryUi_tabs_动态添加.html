@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>jQuery tabs 动态添加删除</title>
+    <link rel="stylesheet" href="js/jquery-ui.min.css"/>
+    <script src="js/jquery-1.4.2.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <style>
+        .tabsContent>div{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="warp">
+        <button id="addButton">add new tab</button>
+        <div id="tabs">
+            <ul class="tabsBtn">
+                <li>
+                    <a href="#tabs-1">1111</a><span class="ui-icon ui-icon-close">Remove Tab</span>
+                </li>
+
+                <li>
+                    <a href="#tabs-2">22222</a><span class="ui-icon ui-icon-close">Remove Tab</span>
+                </li>
+
+                <li>
+                    <a href="#tabs-3">333</a><span class="ui-icon ui-icon-close">Remove Tab</span>
+                </li>
+            </ul>
+            <ul class="tabsContent">
+                <li id="tabs-1">
+                    <iframe src="http://jq_learn/" width="100%"></iframe>
+                </li>
+                <li id="tabs-2">
+                    <iframe src="http://jq_learn/myCode/" width="100%"></iframe>
+                </li>
+                <li id="tabs-3">
+                    <iframe src="http://jq_learn/" width="100%"></iframe>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            var $tabs = $( "#tabs").tabs({
+                tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>",
+                add: function( event, ui ) {
+                    var tab_content = '<iframe src="' + 'http://jq_learn/myCode' + '" width="100%"><\/iframe>';
+                    $( ui.panel ).append( "<li>" + tab_content + "</li>" );
+                    console.log("trigger");
+                }
+            });
+
+            var tab_counter = 1;
+            $("#addButton").click(function(e){
+                var tab_title = "xxxxxx" + Math.ceil(Math.round() * 10);
+                $tabs.tabs( "add", "#tabs-" + tab_counter, tab_title );
+                console.log("event");
+                tab_counter++;
+            });
+
+            $( "#tabs span.ui-icon-close" ).live( "click", function() {
+                var index = $( "li", $tabs ).index( $( this ).parent() );
+                $tabs.tabs( "remove", index );
+            });
+
+        })
+    </script>
+</body>
+</html>
