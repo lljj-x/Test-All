@@ -18,12 +18,13 @@
             -ms-transition: all 0.6s ease;
             -o-transition: all 0.6s ease;
             transition: all 0.6s ease;
-
-
         }
     </style>
 </head>
 <body>
+
+
+
     <div class="warp" ng-app="myApp" ng-controller="myController">
         <div ng-click="myClick()"></div>
         <p>{{w +  " * " + h}}</p>
@@ -36,6 +37,8 @@
     var myApp = angular.module("myApp",[]);
 
     myApp.controller("myController", function ($scope,$element) {
+//        console.log($element);
+
         $e = $element.children().first();
         $scope.w = $e.width();
         $scope.h = $e.height();
@@ -47,6 +50,7 @@
 
         $scope.$watch("w",function(to,from){
             $e.width($scope.w);
+//            alert("from " + from + " to " + to);
         });
         $scope.$watch("h", function (to, from) {
             $e.height($scope.h);
