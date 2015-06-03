@@ -9,9 +9,9 @@
             margin: 300px auto;
         }
         .warp>div{
-            width: 200px;
+            background-color: #0000cc;
+            width: 100px;
             height: 100px;
-            border: 1px solid red;
             text-align: center;
             -webkit-transition: all 0.6s ease;
             -moz-transition: all 0.6s ease;
@@ -28,6 +28,27 @@
         <p>{{w +  " * " + h}}</p>
         <p><input type="text" ng-model="w"/></p>
         <p><input type="text" ng-model="h"/></p>
+
+        <hr/>
+        <p>通过 ng-style + ng-modle 直接双向绑定</p>
+        <div style="width: 10px;height: 10px;background-color: red;" ng-style="style"></div>
+        <p><input type="text" name="width" ng-model="style.width"/></p>
+        <p><input type="text" name="height" ng-model="style.height"/></p>
+        <hr/>
+        <p>ng-include 使用</p>
+        <ul>
+            <li><span>引入同域下的文件</span></li>
+            <li>
+                <div ng-include src="'includeFile.html'" style="background-color: #0089d0">
+                    看不到我的 (ˇˍˇ）
+                </div>
+            </li>
+            <li>
+                <div ng-include="'includeFile.html'" style="background-color: #39b3d7">
+                </div>
+            </li>
+        </ul>
+        <p>引入 script内部文件</p>
     </div>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/angular-1.0.1.min.js"></script>
@@ -38,21 +59,24 @@
 //        console.log($element);
 
         $e = $element.children().first();
-        $scope.w = $e.width();
-        $scope.h = $e.height();
+        $scope.w = 200;
+        $scope.h = 200;
 
         $scope.myClick = function () {
-            $scope.w = parseInt($scope.w) + 10 ;
-            $scope.h = parseInt($scope.h) + 10 ;
+            $scope.w = $scope.w + 10;
+            $scope.h = $scope.h + 10;
         }
-
         $scope.$watch("w",function(to,from){
             $e.width($scope.w);
-//            alert("from " + from + " to " + to);
         });
         $scope.$watch("h", function (to, from) {
             $e.height($scope.h);
         });
+
+        $scope.style = {
+            width : 100 + "px",
+            height : 200 + "px"
+        };
     });
 
 </script>

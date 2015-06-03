@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angularjs ng-template</title>
+    <style>
+        body{
+            font-family: "微软雅黑","Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        .warp{
+            width: 1000px;
+            height: auto;
+            position: relative;
+            margin: 100px auto;
+            padding: 30px;
+            border: 1px solid #C7C4C4;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+        hr{
+            color: #003300;
+            margin: 20px 0;
+        }
+        h1{
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        div.link{
+            background-color: #cccccc;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="warp" ng-app="myTemplateTest">
+        <h1>https://www.zybuluo.com/bornkiller/note/6023</h1>
+        <div class="controller" ng-controller="myController">
+            <p><input type="text" ng-model="myTestData.name"/></p>
+            <p><input type="text" ng-model="myTestData.age"/></p>
+            <p>姓名: {{myTestData.name}} <br/> 年龄: {{myTestData.age}}</p>
+            <hr/>
+            <div>
+                <h1>ng-include $templateCache service 方式来实现</h1>
+                <div ng-include="'lovestoryService.html'" class="link"></div>
+                <hr/>
+
+                <h1>script 标签上引入</h1>
+                <div ng-include="'lovestory.html'" class="link"></div>
+                <script type="text/ng-template" id="lovestory.html">
+                    <h4>lovestory</h4>
+                    <p>这是script标签获取模板文件的方式</p>
+                    <a href="http://www.baidu.com">标签启用templateCache方式</a>
+                </script>
+                <hr/>
+
+                <h1>ng-include Ajax 方式来实现</h1>
+                <div ng-include="'ajaxtest.html'" class="link"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/angular-1.0.1.min.js"></script>
+    <script>
+        var myApp = angular.module('myTemplateTest',[]);
+
+        myApp.controller('myController', ['$scope', '$templateCache', function ($scope, $templateCache) {
+            $scope.myTestData = {
+                name: "LiuJun",
+                age: "18"
+            };
+            // $templateCache service 方式来实现
+            var tmp = '<h4>lovestory</h4>'
+                    + '<p>这是直接调用 $templateCache 服务获取模板文件的方式</p>'
+                    + '<a href="http;://www.baidu.com">服务器用templateCache方式</a>';
+            $templateCache.put('lovestoryService.html', tmp);
+
+        }]);
+    </script>
+</body>
+</html>

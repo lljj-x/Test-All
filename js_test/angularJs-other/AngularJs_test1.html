@@ -28,7 +28,7 @@
     </style>
 </head>
 <body>
-    <div class="warp" ng-app="" ng-controller="TestCtrl">
+    <div class="warp" ng-app="" ng-controller="TestCtrl" ng-init="person.name = 'xxxx'">
         <p>
             <span class="first">first</span>
             <span class="even">even</span>
@@ -67,9 +67,10 @@
             </li>
         </ul>
         <p>ng-switch(2)</p>
-        <ul ng-switch on="person.name">
-            <li ng-switch-default class="cb">And the winner is</li>
-            <h1 ng-switch-when="Ari">{{ person.name }}</h1>
+        <ul ng-switch on="person.name" ng-init="person.name = 'xxxx'">
+
+            <li ng-switch-default class="cb">我是default</li>
+            <li ng-switch-when="Ari" class="cb">{{ person.name }}</li>
         </ul>
 
         <!--<p>ng-style</p>-->
