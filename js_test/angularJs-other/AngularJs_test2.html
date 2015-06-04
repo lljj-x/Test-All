@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Angular Js Test3</title>
     <style>
-        body{
-            font-family: "微软雅黑","Helvetica Neue", Helvetica, Arial, sans-serif;
+        body {
+            font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
-        .warp{
+
+        .warp {
             width: 1000px;
             height: auto;
             position: relative;
@@ -18,65 +19,152 @@
             -moz-border-radius: 5px;
             border-radius: 5px;
         }
-        h1,h2{
+
+        h1, h2 {
             font-size: 24px;
             font-weight: bold;
             margin: 20px 0;
         }
+
         h2 {
             font-size: 16px;
         }
-        hr{
+
+        hr {
             color: #003300;
             margin: 20px 0;
         }
-        div.div{
+
+        div.div {
             background-color: #cccccc;
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
             border-radius: 5px;
             padding: 10px 15px;
         }
-        .fcred{
+        .fcblack {
+            color: #000;
+        }
+        .fcred {
             color: red;
         }
+
         .fcw {
             color: white;
         }
-        .fcb{
+
+        .fcb {
             color: blue;
         }
-        .fch{
+
+        .fch {
             color: #cccccc;
         }
-        img,div{
+
+        img, div {
             display: block;
             margin: 0;
             padding: 0;
         }
+        li>img{
+            max-width: 150px;
+            height: auto;
+        }
+        li{
+            position: relative;
+            margin: 10px 0;
+            list-style: none;
+        }
+        li:hover>.span_hover{
+            opacity: 1 !important;
+        }
     </style>
 </head>
 <body>
-    <div class="warp">
-        <H1>Anjular JS</H1>
-        <div class="div">
-            <h2>ng-src</h2>
-            <ul>
-                <li>
-                    <img src="./images/1.jpg" alt=""/>
-                </li>
-                <li></li>
-                <li></li>
-            </ul>
-        </div>
-    </div>
+<div class="warp" ng-app="myApp">
+    <H1>Anjular JS</H1>
 
+    <div class="div" ng-controller="myController">
+        <h2>ng-src</h2>
+        <ul>
+            <li>
+                <img src="./images/3.jpg" alt=""/>
+            </li>
+            <li>
+                <span>直接 src 标签会被浏览器先解析报错</span>
+                <img src="./images/{{myImg.src}}.jpg" alt=""/>
+            </li>
+            <li>
+                <span class="span_hover" style="z-index:9;display:block;position: absolute;top:20px;left:20px;opacity:0;pointer-events:none;-webkit-transition: all 0.4s;-moz-transition: all 0.4s;-ms-transition: all 0.4s;-o-transition: all 0.4s;transition: all 0.4s;">点击我 试试看</span>
+                <img ng-src="./images/{{myImg.src}}.jpg" alt="" ng-click="changeImg()"/>
+            </li>
+        </ul>
+        <!-- -->
+        <h2>ng-href</h2>
+        <ul>
+            <li>
+                <a href="http://www.baidu.com" target="_blank">百度</a>
+            </li>
+            <li>
+                <a href="{{myLink.href}}" target="_blank">百度</a></li>
+            </li>
+            <li>
+                <a ng-href="{{myLink.href}}" target="_blank">百度</a>
+            </li>
+        </ul>
+        <!-- -->
+        <h2>ng-click</h2>
+        <ul>
+            <li><span>获取当前元素 可以使用 $event.currenTarget 类似jQ this</span></li>
+            <li><a href="javascript:void(0);" ng-click="ngClick($event)">ng-click 绑定事件</a></li>
+            <li><a href="javascript:void(0);" ng-mouseover="ngMouseover($event,'xxxx')">ng-mouseover 绑定事件</a></li>
+            <li><a href="javascript:void(0);" ng-dblclick="ngDblclick($event)">ng-dblclick 绑定事件</a></li>
+        </ul>
+
+        <!-- -->
+        <h2>ng-form</h2>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</div>
 
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/angular-1.0.1.min.js"></script>
 <script>
+    var myApp = angular.module('myApp',[]);
+    myApp.controller('myController',['$scope',function($scope){
+        $scope.myImg = {
+            src : 3
+        }
+        $scope.changeImg = function(){
+            $scope.myImg.src ++ ;
+            $scope.myImg.src  = ($scope.myImg.src > 9) ? 1 : $scope.myImg.src;
+        };
 
+        // ng-src
+        $scope.myLink = {
+            href : 'http://www.baidu.com'
+        }
+
+        // ng-envet (click change dblclick mousedown
+        $scope.ngClick = function (e) {
+            e.preventDefault();
+            $(e.currentTarget).toggleClass("fcred");
+        }
+        $scope.ngMouseover = function (e,userData) {
+            alert("Mouseover" + " " + userData);
+        }
+        $scope.ngDblclick = function (e) {
+            $(e.currentTarget).toggleClass("fcblack");
+        }
+
+        // ng-form
+
+    }])
 </script>
 </body>
 </html>
