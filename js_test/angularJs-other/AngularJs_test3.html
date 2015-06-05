@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AnjularJs Test 3</title>
+	    <style>
+        body {
+            font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .warp {
+            width: 1000px;
+            height: auto;
+            position: relative;
+            margin: 100px auto;
+            padding: 30px;
+            border: 1px solid #C7C4C4;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        h1, h2 ,h3{
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 16px;
+        }
+
+        hr {
+            color: #003300;
+            margin: 20px 0;
+        }
+
+        div.div {
+            background-color: #cccccc;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
+        .fcblack {
+            color: #000;
+        }
+        .fcred {
+            color: red;
+        }
+
+        .fcw {
+            color: white;
+        }
+
+        .fcb {
+            color: blue;
+        }
+
+        .fch {
+            color: #cccccc;
+        }
+
+        img, div {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        li>img{
+            max-width: 150px;
+            height: auto;
+        }
+        li{
+            position: relative;
+            margin: 10px 0;
+            list-style: none;
+        }
+        li:hover>.span_hover{
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+	<div class="warp" ng-app="myApp">
+    	<H1>Anjular JS</H1>
+    	<div class="div" ng-controller="myController">
+			<h2>锚点路由</h2>
+			<ul>
+				<li>
+					
+				</li>
+			</ul>
+            <div ng-view="">
+
+            </div>
+    	</div>
+    </div>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/angular-1.0.1.min.js"></script>
+    <script>
+        var myApp = angular.module('myApp',[],function($routeProvider){
+            $routeProvider.when('/test',{
+                template: 'test'
+            })
+            .when('/test1',{
+                template: 'test1'
+            });
+        });
+
+        myApp.controller('myController',function($scope,$http){
+
+        });
+    </script>
+</body>
+</html>
