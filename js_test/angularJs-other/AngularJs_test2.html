@@ -20,7 +20,7 @@
             border-radius: 5px;
         }
 
-        h1, h2 {
+        h1, h2 ,h3{
             font-size: 24px;
             font-weight: bold;
             margin: 20px 0;
@@ -124,9 +124,155 @@
         <!-- -->
         <h2>ng-form</h2>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>
+                <h3>ng-form 1</h3>
+                <p>验证数据时候根据 From 中元素的name 来做判断<br />就类似于格式 formName.ElmName.$dirty($error ..)</p>
+                <form action="" name="myNgForm">
+                    <p>Username:</p>
+                    <p><input type="text" name="username" ng-model="myForm.username" required /></p>
+                    <span style="color:red;" ng-show="myNgForm.username.$dirty && myNgForm.username.$error">
+                        <span ng-show="myNgForm.username.$error.required">必填选项</span>
+                    </span>
+
+                    <p><input type="email" name="email" ng-model="myForm.email" required /></p>
+                    <span style="color:red" ng-show="myNgForm.email.$dirty && myNgForm.email.$error">
+                        <span ng-show="myNgForm.email.$error.email">必须为Email格式</span>
+                        <span ng-show="myNgForm.email.$error.required">必填选项</span>
+                    </span>
+                    
+                    <p>
+                        <input type="submit" ng-disabled="myNgForm.username.$dirty && myNgForm.username.$error.required || myNgForm.email.$dirty && (myNgForm.email.$error.required || myNgForm.email.$error.email)">
+                    </p>
+                    <p>{{myNgForm.$error}}</p>
+                </form>
+
+            </li>
+            <li>
+                <h3>ng-form 2</h3>
+                <form action="" name="myNgForm2">
+                    <p>input:text </p>
+                    <p><input type="text" name="username" ng-model="myForm2.username"/></p>
+                    <button ng-click="myForm2.see($event)">Click</button>
+                    <p>password: </p>
+                    <p><input type="text" name="pass" ng-model="myForm2.pass" ng-required/></p>
+                    <p>
+                        <span style="color:red;" ng-show="myNgForm2.pass.$dirty">
+                            <span ng-show="myNgForm2.pass.$error.required">不能为空</span>
+                        </span>
+                    </p>
+                    <p><span>{{myNgForm.$error}}</span></p>
+                    <p>
+                        <p>input:checkbox </p>
+                        <input type="checkbox" name="checkbox" id="check" value="1" ng-model="myForm2.checkboxVal" ng-true-value="AA" ng-false-value="BB" />
+                        <span>{{myForm2.checkboxVal}}</span>
+                    </p>
+
+                    <p>
+                        <p>input:radio </p>
+                        <input type="radio" name="radio" ng-model="myForm2.checkboxVal" value="AA" /> <br />
+                        <input type="radio" name="radio" ng-model="myForm2.checkboxVal" value="BB" />
+                        <span ng-bind="myForm2.checkboxVal"></span>
+                    </p>
+                    <p>
+                        <p>select:option</p>
+                        <span>x for x in list</span>
+                        <p ng-init="os=[1,2,3,4];a=os[1]" >
+                            <select name="" id="" ng-model="a" ng-options="x for x in os" ng-change="myForm2.change()">
+                                <option value="">可以加上这个</option>
+                            </select>
+                        </p>
+                        <span>obj.key as obj.value for obj in objArray</span>
+                        <p ng-init="objArr=[{id:1,name:'Jun',qu:'2'},{id:2,name:'Zhang',qu:1},{id:3,name:'Si',qu:5},{id:4,name:'La',qu:5}]; b=os[2]">
+                            <select name="" id="" ng-model="b" ng-options="obj.id as obj.name for obj in objArr">
+                                <option value="xx">嘻嘻嘻</option>
+                            </select>
+
+                            <br>
+                            <select name="" id="" ng-model="b" ng-options="obj.id as obj.name group by obj.qu for obj in objArr">
+                                <option value="xx">嘻嘻嘻</option>
+                            </select>
+                        </p>
+
+                        <span>obj.key as obj.value for (obj.k obj.v)) in obj</span>
+                        <p ng-init="objobj = {a:{id:1,name:'Jun',qu:'2'},b:{id:2,name:'Zhang',qu:1},c:{id:3,name:'Si',qu:5},d:{id:4,name:'La',qu:5}}; c=os[2]">
+                            <select name="" id="" ng-model="c" ng-options="value.id as value.name for (key,value) in objobj">
+                            </select>
+                        </p>
+                    </p>
+                </form>
+            </li>
+            <li>
+                <h3>排序 orderBy</h3>
+                <p><span>原数组{{orderData.data}}</span>: <br/></p>
+                <p><span>按age + </span>: <br/>{{orderData.data | orderBy: 'age'}}</p>
+                <p><span>按age - </span>: <br/>{{orderData.data | orderBy : '-age'}}</p>
+                <p><span>按age- limitTo 2取前两行数据</span>: <br/>{{orderData.data | orderBy : '-age' | limitTo : 2}}</p>
+                <p><span>按age>name 排序，排序参数接受一个数组</span>: <br/>{{orderData.data | orderBy:['-age','name']}}</p>
+            </li>
+            <li>
+                <h3>过滤 filter</h3>
+                <p><span>过滤参数为字符串 orderData.data | filter: '1'</span>: <br>
+                    {{orderData.data | filter: '1'}} <br>
+                    {{orderData.data | filter: '!1'}}
+                </p>
+                <p><span>过滤参数为对象 orderData.data | filter:{name : 'A'}  </span>: <br>
+                    {{orderData.data | filter:{name : 'A'} }}
+                </p>
+                <p><span>$表示任意属性 orderData.data | filter: {$ :'a'} </span>: <br>
+                    {{orderData.data | filter: {$ :'a'} }}
+                </p>
+                <p>
+                    <span>自定义过滤函数</span>: <br>
+                    {{orderData.data | filter: orderData.myFilter}}
+                </p>
+                <p>
+                    <span>其它 格式化时间戳 date 、 截取 limitTo 、 大小写 lowercase uppercase</span>
+                    <p>
+                        {{orderData.currentTime | date: 'yyyy-MM-dd HH:mm:ss' }}
+                    </p>
+                </p>
+            </li>
+            <li>
+                <h3>例子: 表头点击排序</h3>
+                <style>
+                    table{
+                        width: 400px;
+                        border: 1px solid #F5F5F5;
+                    }
+                    table>thead tr{
+                        text-align: center;
+                        border-bottom: 1px solid #F5F5F5;
+                        cursor: pointer;
+                    }
+                    td{
+                        text-align: center;
+                        padding: 5px 10px;
+                    }
+                </style>
+                <table>
+                    <thead>
+                        <tr>
+                            <th ng-click="f='name' ; reverse = !reverse">姓名</th>
+                            <th ng-click="f='age' ; reverse = !reverse ">年龄</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in orderData.data | orderBy : f : reverse" >
+                            <td>{{x.name}}</td>
+                            <td>{{x.age}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li>
+                <h3>例子： 搜索</h3>
+                <p ng-init="findStr='';s=orderData.data[3].age">
+                    <input ng-model="findStr" />
+                    <select name="" id="" ng-multiple="true" ng-model="s" ng-options="x.age as x.name for x in orderData.data | filter: {$ : findStr}">
+                        
+                    </select>
+                </p>
+            </li>
         </ul>
     </div>
 </div>
@@ -140,6 +286,7 @@
         $scope.myImg = {
             src : 3
         }
+
         $scope.changeImg = function(){
             $scope.myImg.src ++ ;
             $scope.myImg.src  = ($scope.myImg.src > 9) ? 1 : $scope.myImg.src;
@@ -163,7 +310,41 @@
         }
 
         // ng-form
+        $scope.myForm = {
+            username : "LiuJun",
+            email: "liujun@163.com"
+        }
 
+        $scope.myForm2 = {
+            username : "LiuJun",
+            pass: "123456",
+            checkboxVal: "AA",
+            email: "liujun@163.com",
+            see : function(e){
+                console.log($scope.myNgForm2.$error);
+            },
+            change: function(e) {
+                alert($scope.a);
+            }
+        }
+
+        $scope.orderData = {
+            data : [
+                {name: 'B', age: 4},  
+                {name: 'A', age: 1},  
+                {name: 'D', age: 3},  
+                {name: 'C', age: 2}
+            ],
+            myFilter : function (e) {
+                return e.age > 1 && e.age < 4;
+            },
+            currentTime : (new Date()).getTime()
+        }
+
+        setInterval(function(){
+            $scope.orderData.currentTime = (new Date()).getTime();
+            $scope.$apply();
+        }, 1000);
     }])
 </script>
 </body>
