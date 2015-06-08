@@ -177,25 +177,25 @@
                         <p>select:option</p>
                         <span>x for x in list</span>
                         <p ng-init="os=[1,2,3,4];a=os[1]" >
-                            <select name="" id="" ng-model="a" ng-options="x for x in os" ng-change="myForm2.change()">
+                            <select name="" ng-model="a" ng-options="x for x in os" ng-change="myForm2.change()">
                                 <option value="">可以加上这个</option>
                             </select>
                         </p>
                         <span>obj.key as obj.value for obj in objArray</span>
                         <p ng-init="objArr=[{id:1,name:'Jun',qu:'2'},{id:2,name:'Zhang',qu:1},{id:3,name:'Si',qu:5},{id:4,name:'La',qu:5}]; b=os[2]">
-                            <select name="" id="" ng-model="b" ng-options="obj.id as obj.name for obj in objArr">
+                            <select name="" ng-model="b" ng-options="obj.id as obj.name for obj in objArr">
                                 <option value="xx">嘻嘻嘻</option>
                             </select>
 
                             <br>
-                            <select name="" id="" ng-model="b" ng-options="obj.id as obj.name group by obj.qu for obj in objArr">
+                            <select name="" ng-model="b" ng-options="obj.id as obj.name group by obj.qu for obj in objArr">
                                 <option value="xx">嘻嘻嘻</option>
                             </select>
                         </p>
 
                         <span>obj.key as obj.value for (obj.k obj.v)) in obj</span>
                         <p ng-init="objobj = {a:{id:1,name:'Jun',qu:'2'},b:{id:2,name:'Zhang',qu:1},c:{id:3,name:'Si',qu:5},d:{id:4,name:'La',qu:5}}; c=os[2]">
-                            <select name="" id="" ng-model="c" ng-options="value.id as value.name for (key,value) in objobj">
+                            <select name="" ng-model="c" ng-options="value.id as value.name for (key,value) in objobj">
                             </select>
                         </p>
                     </p>
@@ -268,7 +268,7 @@
                 <h3>例子： 搜索</h3>
                 <p ng-init="findStr='';s=orderData.data[3].age">
                     <input ng-model="findStr" />
-                    <select name="" id="" ng-multiple="true" ng-model="s" ng-options="x.age as x.name for x in orderData.data | filter: {$ : findStr}">
+                    <select name="" ng-multiple="true" ng-model="s" ng-options="x.age as x.name for x in orderData.data | filter: {$ : findStr}">
                         
                     </select>
                 </p>
