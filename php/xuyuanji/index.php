@@ -7,8 +7,8 @@
  * Wetsite: buhuida.com
  */
 include_once("mysql.php");
-$mysql = new Mysql('localhost','test','root','liujun','xuyuan');
-$dataArr = $mysql->select('',10,"id","DESC");
+$mysql = new Mysql('localhost','test','root','','xuyuan');
+$dataArr = $mysql->select('',20,"id","DESC");
 ?>
 
 <!DOCTYPE html>
@@ -39,13 +39,18 @@ $dataArr = $mysql->select('',10,"id","DESC");
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/jquery.min.1.7.js"></script>
+    <script type="text/javascript" src="js/snow.js"></script>
 </head>
 <body>
     <div class="wrap">
         <div id="tree" class="tree">
-            <img src="images/tree.png" border="0"/>
+            <img src="images/ss.jpg" border="0"/>
             <div id="yu-bg"></div>
             <div class="bg"></div>
+            <div id="show" style="width: 480px; height: auto; position: fixed; border-radius: 10px; top: 30%; left: 50%; margin-left: -250px; padding: 20px; display: block; background: #C6EAF9; font-size: 16px; line-height: 30px;">
+                <p class="name"></p>
+                <p class="content"></p>
+            </div>
             <div id="add-form" class="">
                 <form action="add.php" method="post" id="xuyuan-form">
                     <label for="name">

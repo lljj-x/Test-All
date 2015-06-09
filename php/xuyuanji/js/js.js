@@ -1,102 +1,54 @@
 /**
  * Created by Liu.Jun on 15-5-13.
  */
-var currentNum = 0,
-    maxNum = 10;
-var yuData = {
-    size:{
-        w: 80,
-        h: 105,
-        dW: 80,
-        dH: 105
-    },
-    0:{
-        left:"7%",top:"21%"
-    },
-    1:{
-        left:"68%",top:"19%"
-    },
-    2:{
-        left:"22%",top:"18%"
-    },
-    3:{
-        left:"36%",top:"32%"
-    },
-    4:{
-        left:"79%",top:"25%"
-    },
-    5:{
-        left:"62%",top:"20%"
-    },
-    6:{
-        left:"27%",top:"25%"
-    },
-    7:{
-        left:"52%",top:"6%"
-    },
-    8:{
-        left:"34%",top:"22%"
-    },
-    9:{
-        left:"10%",top:"16%"
-    },
-    10:{
-        left:"10%",top:"10%"
-    }
-}
+// var currentNum = 0,
+//     maxNum = 10;
+// var yuData = {
+//     size:{
+//         w: 80,
+//         h: 105,
+//         dW: 80,
+//         dH: 105
+//     },
+//     0:{
+//         left:"7%",top:"21%"
+//     },
+//     1:{
+//         left:"68%",top:"19%"
+//     },
+//     2:{
+//         left:"22%",top:"18%"
+//     },
+//     3:{
+//         left:"36%",top:"32%"
+//     },
+//     4:{
+//         left:"79%",top:"25%"
+//     },
+//     5:{
+//         left:"62%",top:"20%"
+//     },
+//     6:{
+//         left:"27%",top:"25%"
+//     },
+//     7:{
+//         left:"52%",top:"6%"
+//     },
+//     8:{
+//         left:"34%",top:"22%"
+//     },
+//     9:{
+//         left:"10%",top:"16%"
+//     },
+//     10:{
+//         left:"10%",top:"10%"
+//     }
+// }
 
 $.fn.myshow = function(){
     $(this).addClass("show");
 }
-
-$(function(){
-    var cW,
-        defaultWidth = 1920;
-    function resizeData(){
-        cW = $(window).width();
-        var xx = cW / defaultWidth;
-        yuData.size.w = Math.round(yuData.size.dW * xx);
-        yuData.size.h = Math.round(yuData.size.dH * xx);
-    }
-
-    function addYu(i,name,str){
-        if($("#yuanwang_" + i).length > 0){
-            $("#yuanwang_" + i).removeClass("show");
-            $("#yuanwang_" + i).find(".yu-name").text(name + "：");
-            $("#yuanwang_" + i).find(".yu-str").attr("my-title",str).text(str.substr(0,15));
-            setTimeout(function(){
-                $("#yuanwang_" + i).myshow();
-            },300);
-        }else{
-            $("<div />").attr({
-                'id' : "yuanwang_" + i,
-                'class' : "yuan"
-            }).css({
-                width: yuData.size.w,
-                height: yuData.size.h
-            }).css(yuData[i]).appendTo("#yu-bg")
-                .append(
-                    $("<img />").attr({"src": "images/g.png", "class": "img-g"})
-                )
-                .append(
-                    $("<div />").attr({"class":"yu-txt"})
-                        .append($("<div />").attr("class","yu-name").text(name + "："))
-                        .append($("<div />").attr({"class":"yu-str","my-title" : str}).text(str.substr(0,15)))
-                );
-        }
-        $("#yuanwang_" + i).addClass("yao-animation");
-    }
-
-    function init(){
-        // 初始化数据
-        resizeData();
-        $.each(jsonData,function(i,v){
-            addYu(i, v.name, v.str);
-            currentNum = i;
-        });
-    }
-
-    $.fn.mySlideFadeIn = function(outCall){
+  $.fn.mySlideFadeIn = function(outCall){
         this.each(function(){
             $(this).show();
             var $this = $(this);
@@ -123,28 +75,97 @@ $(function(){
         })
     }
 
+$(function(){
+    // var cW,
+    //     defaultWidth = 1920;
+    // function resizeData(){
+    //     cW = $(window).width();
+    //     var xx = cW / defaultWidth;
+    //     yuData.size.w = Math.round(yuData.size.dW * xx);
+    //     yuData.size.h = Math.round(yuData.size.dH * xx);
+    // }
+
+    // function addYu(i,name,str){
+    //     if($("#yuanwang_" + i).length > 0){
+    //         $("#yuanwang_" + i).removeClass("show");
+    //         $("#yuanwang_" + i).find(".yu-name").text(name + "：");
+    //         $("#yuanwang_" + i).find(".yu-str").attr("my-title",str).text(str.substr(0,15));
+    //         setTimeout(function(){
+    //             $("#yuanwang_" + i).myshow();
+    //         },300);
+    //     }else{
+    //         $("<div />").attr({
+    //             'id' : "yuanwang_" + i,
+    //             'class' : "yuan"
+    //         }).css({
+    //             width: yuData.size.w,
+    //             height: yuData.size.h
+    //         }).css(yuData[i]).appendTo("#yu-bg")
+    //             .append(
+    //                 $("<img />").attr({"src": "images/g.png", "class": "img-g"})
+    //             )
+    //             .append(
+    //                 $("<div />").attr({"class":"yu-txt"})
+    //                     .append($("<div />").attr("class","yu-name").text(name + "："))
+    //                     .append($("<div />").attr({"class":"yu-str","my-title" : str}).text(str.substr(0,15)))
+    //             );
+    //     }
+    //     $("#yuanwang_" + i).addClass("yao-animation");
+    // }
+
+    // function init(){
+    //     // 初始化数据
+    //     resizeData();
+    //     $.each(jsonData,function(i,v){
+    //         addYu(i, v.name, v.str);
+    //         currentNum = i;
+    //     });
+    // }
+
+ 
+
     // resize
-    var resizeTimer = null;
-    $(window).resize(function(){
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function(){
-            resizeData();
-            var $yuan = $(".yuan");
-            if($yuan.length > 0){
-                $yuan.each(function(){
-                    $(this).css({
-                        width : yuData.size.w,
-                        height: yuData.size.h
-                    })
-                })
-            }
-        },70);
+    // var resizeTimer = null;
+    // $(window).resize(function(){
+    //     clearTimeout(resizeTimer);
+    //     resizeTimer = setTimeout(function(){
+    //         resizeData();
+    //         var $yuan = $(".yuan");
+    //         if($yuan.length > 0){
+    //             $yuan.each(function(){
+    //                 $(this).css({
+    //                     width : yuData.size.w,
+    //                     height: yuData.size.h
+    //                 })
+    //             })
+    //         }
+    //     },70);
+    // });
+
+    // init();
+    // setTimeout(function(){
+    //     $(".yuan").myshow();
+    // },400);
+
+
+    //雪花
+    createSnow(1000,20);
+
+    function sbSnow () {
+        var jsLength  = jsonData.length;
+        if (jsLength) {
+            var getCur = Math.floor(Math.random() * (jsLength - 1));
+            $("#show").find('.name').text(jsonData[getCur].name + "说：");
+            $("#show").find('.content').text(jsonData[getCur].str);
+            $("#show").mySlideFadeIn();
+        };
+    }
+
+    $("body").on('click', '.sbSnow', function(event) {
+        event.preventDefault();
+        sbSnow();
     });
 
-    init();
-    setTimeout(function(){
-        $(".yuan").myshow();
-    },400);
 
     // event
     $("#btn-add-yu").click(function(){
@@ -156,26 +177,26 @@ $(function(){
     })
     $("#btn-weixin").click(function(){});
 
-    $("#yu-bg").on("click",".yuan",function(){
-        $("#de-yuanwang").css({
-            left : (yuData.size.w + 15) + "px",
-            top : 0,
-            width: yuData.size.w * 3 + "px"
-        })
-        $this = $(this);
-        $(this).removeClass("yao-animation");
-        $(this).append($("#de-yuanwang"));
-        var name = $(this).find(".yu-name").text();
-        var str = $(this).find(".yu-str").attr("my-title");
+    // $("#yu-bg").on("click",".yuan",function(){
+    //     $("#de-yuanwang").css({
+    //         left : (yuData.size.w + 15) + "px",
+    //         top : 0,
+    //         width: yuData.size.w * 3 + "px"
+    //     })
+    //     $this = $(this);
+    //     $(this).removeClass("yao-animation");
+    //     $(this).append($("#de-yuanwang"));
+    //     var name = $(this).find(".yu-name").text();
+    //     var str = $(this).find(".yu-str").attr("my-title");
 
-        $("#de-yuanwang").find(".de-name").text(name);
-        $("#de-yuanwang").find(".de-str").text(str);
+    //     $("#de-yuanwang").find(".de-name").text(name);
+    //     $("#de-yuanwang").find(".de-str").text(str);
 
-        var curId = $this.attr("id");
-        $("#de-yuanwang").mySlideFadeIn(function(){
-            $("#" + curId).addClass("yao-animation");
-        });
-    })
+    //     var curId = $this.attr("id");
+    //     $("#de-yuanwang").mySlideFadeIn(function(){
+    //         $("#" + curId).addClass("yao-animation");
+    //     });
+    // })
 
     // ajax
     function check() {
@@ -217,13 +238,18 @@ $(function(){
                 success : function(data,textStatus){
                     if(data == 'success'){
                         // 添加
-                        var ci = (currentNum + 1 >= maxNum) ? Math.ceil(Math.random() * maxNum) : currentNum + 1;
-                        addYu(ci, $.trim($("#name").val()), $.trim($("#str").val()));
+
+                        var curData = {
+                            name: $("#name").val(),
+                            number: $("#number").val(),
+                            str:$("#str").val()
+                        };
+                        jsonData.push(curData);
+
                         $("#add-form").mySlideFadeOut(function(){
                             $("#name").val("");
                             $("#number").val("");
                             $("#str").val("");
-                            $("#yuanwang_" + (++ currentNum)).addClass("show");
                         });
                     }else{
                         alert(data);

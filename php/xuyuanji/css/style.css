@@ -134,8 +134,9 @@ img {border: none;border: 0;}
 }
 .wrap .tree{
     position: relative;
-    max-width: 85%;
-    margin: 20px auto 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 .wrap .tree #yu-bg{
     display: block;
@@ -263,7 +264,7 @@ img {border: none;border: 0;}
     padding: 5px !important;
 }
 
-#de-yuanwang,#add-form{
+#de-yuanwang,#add-form,#show{
     z-index: 9;
     position: absolute;
     height: auto;
@@ -296,7 +297,7 @@ img {border: none;border: 0;}
     margin-top: -203px;
     border-radius: 10px;
 }
-#add-form.show,#de-yuanwang.show{
+#add-form.show,#de-yuanwang.show,#show.show{
     opacity: 1;
     pointer-events: auto;
     -webkit-transform: none;

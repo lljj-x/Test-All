@@ -26,7 +26,7 @@ if(! empty($_POST["name"])){
     }
 
     function addData(){
-        $mysql = new Mysql('localhost','test','root','liujun','xuyuan');
+        $mysql = new Mysql('localhost','test','root','','xuyuan');
         $re = $mysql->insert(array(
             "name" => trim($_POST["name"]),
             "number" => $_POST["number"],
