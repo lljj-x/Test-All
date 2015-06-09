@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AnjularJs Test 3</title>
+    <style>
+        body {
+            font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .warp {
+            width: 1000px;
+            height: auto;
+            position: relative;
+            margin: 100px auto;
+            padding: 30px;
+            border: 1px solid #C7C4C4;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        h1, h2, h3 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 16px;
+        }
+
+        hr {
+            color: #003300;
+            margin: 20px 0;
+        }
+
+        div.div {
+            background-color: #cccccc;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
+
+        .fcblack {
+            color: #000;
+        }
+
+        .fcred {
+            color: red;
+        }
+
+        .fcw {
+            color: white;
+        }
+
+        .fcb {
+            color: blue;
+        }
+
+        .fch {
+            color: #cccccc;
+        }
+
+        img, div {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        li > img {
+            max-width: 150px;
+            height: auto;
+        }
+
+        li {
+            position: relative;
+            margin: 10px 0;
+            list-style: none;
+        }
+
+        li:hover > .span_hover {
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+<div class="warp" ng-app="myApp">
+    <H1>Anjular JS</H1>
+
+    <div class="div" ng-controller="myController">
+        <h2>angular.forEach</h2>
+        <br/>
+        <h2>
+            $cacheFactory
+        </h2>
+        <p>
+            <button ng-click="setCache()">点击设置cache</button>
+            <button ng-click="showCache()">点击显示cache</button>
+        </p>
+        <hr/>
+        <p>
+            <input type="text" placeholder="输入 key " ng-model="cacheKey"/>
+            <input type="text" placeholder="输入 value" ng-model="cacheVal"/>
+            <button ng-click="cachePut()">添加cache</button>
+        </p>
+        <!--所有缓存内容-->
+        <h3 ng-show="cacheKeys.length">Chahe Content</h3>
+        <ul>
+            <li ng-repeat="key in cacheKeys">
+                {{key + ': ' + myTestCache.get(key)}} <span ng-click="myTestCache.remove(key);" style="text-decoration: underline;cursor: pointer;">删除cache的值</span>
+            </li>
+            <li>
+                <span ng-click="myTestCache.removeAll()" style="text-decoration: underline;cursor: pointer;">移除全部</span>
+            </li>
+        </ul>
+
+        <!--缓存信息-->
+        <h3>Cache Info</h3>
+        <div ng-repeat="(key , value) in myTestCache.info()">
+            <span>{{key}}</span> :
+            <b>{{value}}</b>
+        </div>
+
+        <!--$timeOut-->
+        <h3>$timeOut</h3>
+        <p>当前时间 ： {{currentTime | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
+
+        <!--$compile-->
+        <h3>$compile</h3>
+
+        <p>
+            <button ng-click="set()">点击我添加一个 compile</button>
+        </p>
+
+    </div>
+
+
+</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/angular-1.0.1.min.js"></script>
+<script>
+    var myApp = angular.module("myApp",[]);
+
+    myApp.controller("myController",function($scope,$log,$cacheFactory,$timeout,$parse,$compile,$element){
+        // obj
+        var l = {a: '1',b:'2'};
+        angular.forEach(l,function(v, k){
+            console.log('key: ' + k + ' value: ' + v);
+        });
+
+        // arr
+        var l = ['a','b','c'];
+        angular.forEach(l,function(v,i,o){
+            console.log(i + ' ' + v + ' | ' + o);
+        });
+
+        console.log("-- -- --- - - --- ");
+
+        var context = {'t' : 'xx'};
+        angular.forEach(l,function(v,i,o){
+            console.log(this.t);
+        },context);
+
+        // isArray isData
+        console.log("-- -- --- - - --- ");
+        var myArray = ['x','dd'];
+        var myDate = new Date();
+        var myObj = {'1' : 'a' ,'2' : 'b'};
+        var myInt = 123;
+        var myFloat = '125.26';
+        var myString = 'fasdf';
+        var myEle = document.getElementsByTagName("div")[0];
+        var f;
+        console.log(angular.isArray(myArray));
+        console.log(angular.isDate(myDate));
+        console.log(angular.isDefined(myArray));
+        console.log(angular.isElement(myEle));
+        console.log(angular.isObject(myObj));
+        console.log(angular.isString(myString));
+        console.log(angular.isNumber(myInt));
+        console.log(angular.isUndefined(f));
+
+        console.log("-- -- --- - - --- ");
+        $log.error('error');
+        $log.info('info');
+        $log.log('log');
+        $log.warn('warn');
+
+        // 缓存
+        console.log("-- -- - 缓存 - - - --- ");
+        console.log($scope.$id);
+        $scope.cache = $cacheFactory('s_' + $scope.$id, {capacity:3});
+
+        $scope.setCache = function(){
+            $scope.cache.put('key','我是被cache的内容');
+        }
+        $scope.showCache = function(){
+            console.log($scope.cache);
+            console.log($scope.cache.get('key'));
+            console.log($scope.cache.info());
+        }
+
+        $scope.myTestCache = $cacheFactory('cacheId');
+        $scope.cacheKey = '';
+        $scope.cacheVal = '';
+        $scope.cacheKeys = [];
+
+        $scope.cachePut = function(){
+            if($scope.myTestCache.get($scope.cacheKey) === undefined){
+                $scope.cacheKeys.push($scope.cacheKey);
+            }
+            $scope.myTestCache.put($scope.cacheKey,$scope.cacheVal === undefined ? null : $scope.cacheVal);
+        }
+
+        // $timeOut 计时器
+        $scope.currentTime;
+        var timeFn = function(){
+            $scope.currentTime = (new Date()).getTime();
+
+            var p = $timeout(function(){
+                timeFn();
+            },1000);
+            p.then(function(){
+                // console.log($scope.currentTime);
+            });
+        }
+        timeFn();
+
+        // $parse
+        console.log("-- -- - $parse - - - --- ");
+        $scope.getName = $parse('name');
+        $scope.show = function(){
+            console.log($scope.getName($scope));
+        };
+        $scope.set = function(){
+            $scope.name = '123'
+        }
+
+        // $compile
+        console.log("-- -- - $compile - - - --- ");
+        $scope.a = '123';
+        $scope.set = function(){
+            var tpl = $compile("<p>hellow,<br> 当前时间{{currentTime | date: 'YYYY-MM-dd hh-mm-ss'}}</p>");
+            var e = tpl($scope);
+            $element.append(e);
+            console.log($element);
+        }
+    });
+</script>
+
+
+</body>
+</html>
