@@ -26,11 +26,12 @@ class Mysql {
     }
 
     public function insert($array){
-        $sql = "insert into " . $this->table . "(name,number,str,time) values (:name,:number,:str," . time() . ")";
-
+        // $sql = "insert into " . $this->table . "(name,number,str,time) values (:name,:number,:str," . time() . ")";
+        $sql = "insert into " . $this->table . "(str,time) values (:str," . time() . ")";
+        
         $sth = $this->pdo->prepare($sql);
-        $sth->bindParam(":name",$array['name']);
-        $sth->bindParam(":number",$array['number']);
+        // $sth->bindParam(":name",$array['name']);
+        // $sth->bindParam(":number",$array['number']);
         $sth->bindParam(":str",$array['str']);
         $re = $sth->execute();
         return $re ? $this->pdo->lastInsertId() : false;

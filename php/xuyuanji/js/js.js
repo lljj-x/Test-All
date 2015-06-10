@@ -154,10 +154,17 @@ $(function(){
     function sbSnow () {
         var jsLength  = jsonData.length;
         if (jsLength) {
-            var getCur = Math.floor(Math.random() * (jsLength - 1));
-            $("#show").find('.name').text(jsonData[getCur].name + "说：");
-            $("#show").find('.content').text(jsonData[getCur].str);
-            $("#show").mySlideFadeIn();
+            var getCur = Math.floor(Math.random() * jsLength);
+            // $("#show").find('.name').text(jsonData[getCur].name + "说：");
+            // $("#show").find('.content').text(jsonData[getCur].str);
+            // $("#show").mySlideFadeIn();
+
+            $("#add-form").find('textarea').val(jsonData[getCur].str);
+            $("textarea").attr("disabled",true);
+            $("#submit").hide();
+            $("#add-form").mySlideFadeIn(function(){
+                $("#add-form").find('textarea').val(""); 
+            });
         };
     }
 
@@ -166,16 +173,27 @@ $(function(){
         sbSnow();
     });
 
+    $("#button_close").on('click', function(event) {
+        event.preventDefault();
+        $("#add-form").mySlideFadeOut(function(){
+                $("#add-form").find('textarea').val(""); 
+        });
+
+    });
+
 
     // event
     $("#btn-add-yu").click(function(){
+        $("textarea").attr("disabled",false);
+        $("#submit").show();
         $("#add-form").mySlideFadeIn(function(){
             $("#name").val("");
             $("#number").val("");
             $("#str").val("");
         });
-    })
-    $("#btn-weixin").click(function(){});
+    });
+
+    // $("#btn-weixin").click(function(){});
 
     // $("#yu-bg").on("click",".yuan",function(){
     //     $("#de-yuanwang").css({
@@ -204,27 +222,36 @@ $(function(){
         var name = $.trim($("#name").val());
         var number =$.trim($("#number").val());
         var str = $.trim($("#str").val());
-
-        if (name == "" || name == "您的姓名" || name.length > 5) {
-            alert("请输入正确的名称");
-            $("#name").focus();
-            return false;
-        }else if (number == "" || number == "您的联系电话") {
-            alert("请输入联系电话")
-            $("#number").focus();
-        }else if (number == "" || number == "您的联系电话") {
-            alert("请输入联系电话")
-            $("#number").focus();
-        }else if (!telreg.test(number)) {
-            alert("请输入正确的联系电话")
-            $("#number").focus();
-        }else if (str == "" || str == "您的许愿") {
+        if (str == "" || str == "您的许愿") {
             alert("请输入您的许愿")
             $("#str").focus();
             return false;
         }else {
             return true;
         }
+
+        //
+        //if (name == "" || name == "您的姓名" || name.length > 5) {
+        //    alert("请输入正确的名称");
+        //    $("#name").focus();
+        //    return false;
+        //}else if (number == "" || number == "您的联系电话") {
+        //    alert("请输入联系电话")
+        //    $("#number").focus();
+        //}else if (number == "" || number == "您的联系电话") {
+        //    alert("请输入联系电话")
+        //    $("#number").focus();
+        //}else if (!telreg.test(number)) {
+        //    alert("请输入正确的联系电话")
+        //    $("#number").focus();
+        //}else if (str == "" || str == "您的许愿") {
+        //    alert("请输入您的许愿")
+        //    $("#str").focus();
+        //    return false;
+        //}else {
+        //    return true;
+        //}
+
     }
 
     $("#submit").click(function(event){
@@ -240,8 +267,8 @@ $(function(){
                         // 添加
 
                         var curData = {
-                            name: $("#name").val(),
-                            number: $("#number").val(),
+                            // name: $("#name").val(),
+                            // number: $("#number").val(),
                             str:$("#str").val()
                         };
                         jsonData.push(curData);

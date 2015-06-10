@@ -104,7 +104,7 @@
             this.el.setAttribute("class", "sbSnow");
 			this.el.style.position = "absolute";
 			this.el.style.display = "block";
-			this.el.style.zIndex = "99999";
+			this.el.style.zIndex = "7";
 			this.parent.appendChild(this.el)
 		},
 		move: function() {

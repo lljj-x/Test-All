@@ -52,8 +52,11 @@ $dataArr = $mysql->select('',20,"id","DESC");
                 <p class="content"></p>
             </div>
             <div id="add-form" class="">
+                <span id="button_close" style="position: absolute; width: 50px; height: 50px; top: 120px; right: 44px; cursor: pointer;"></span>
                 <form action="add.php" method="post" id="xuyuan-form">
-                    <label for="name">
+                    <textarea rows="5" cols="20" name="str" id="str" placeholder="点击输入你的愿望"></textarea>
+
+<!--                     <label for="name">
                         姓名：
                     </label>
                     <input type="text" name="name" id="name" placeholder="请输入你的名称"/>
@@ -66,8 +69,10 @@ $dataArr = $mysql->select('',20,"id","DESC");
                     </label>
                     <textarea rows="5" cols="20" name="str" id="str" placeholder="请输入你的愿望"></textarea>
                     <input id="submit" name="submit" type="submit" value="许愿">
-                    <input id="reset" name="reset" type="reset" value="重新输入">
+                    <input id="reset" name="reset" type="reset" value="重新输入"> -->
+                    <img id="submit" src="images/submit.png" alt="" style="position: absolute; bottom: 2%; left: 37%; width: 27%; cursor: pointer;">
                 </form>
+
             </div>
 
             <div id="de-yuanwang">
@@ -79,17 +84,15 @@ $dataArr = $mysql->select('',20,"id","DESC");
                 </div>
             </div>
 
-            <div class="btn">
-                <button id="btn-add-yu">我要许愿</button>
-                <button id="btn-weixin">关注我们</button>
-            </div>
+            <img src="images/xuyuan.png" id="btn-add-yu" class="daxiao-animation" />
+            <!-- <button id="btn-weixin">关注我们</button> -->
         </div>
-        <div class="guize">
+<!--         <div class="guize">
             这里显示活动的规则
         </div>
         <div class="lipin">
             这里显示礼品
-        </div>
+        </div> -->
     </div>
 </body>
 <script>

@@ -8,15 +8,15 @@
  */
 include_once("mysql.php");
 
-if(! empty($_POST["name"])){
+if(! empty($_POST["str"])){
     function checkData(){
-        if($_POST["name"] == ""){
-            return "请输入你的名字";
-        }
+        // if($_POST["name"] == ""){
+        //     return "请输入你的名字";
+        // }
 
-        if($_POST["number"]== ""){
-            return "请输入电话号码";
-        }
+        // if($_POST["number"]== ""){
+        //     return "请输入电话号码";
+        // }
 
         if($_POST["str"]== ""){
             return "请输入你的愿望";
@@ -28,8 +28,8 @@ if(! empty($_POST["name"])){
     function addData(){
         $mysql = new Mysql('localhost','test','root','','xuyuan');
         $re = $mysql->insert(array(
-            "name" => trim($_POST["name"]),
-            "number" => $_POST["number"],
+            // "name" => trim($_POST["name"]),
+            // "number" => $_POST["number"],
             "str" => $_POST["str"]
         ));
         return $re;
