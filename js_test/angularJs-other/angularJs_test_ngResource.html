@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>AnjularJs Test 5</title>
+    <title>angularJs ngResource</title>
+    <meta charset="utf-8"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/angular-1.0.1.min.js"></script>
+    <script src="../js/angular-resource.js"></script>
     <style>
         body {
             font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
-
         .warp {
             width: 1000px;
             height: auto;
@@ -85,55 +87,58 @@
         }
     </style>
 </head>
-<body>
-<div class="warp" ng-app="myApp">
-    <H1>Anjular JS</H1>
-
-    <div class="div" ng-controller="myController">
-        <span ng-bind="sayHellow"></span>
-        <br/>
-
+<body ng-app="myApp">
+    <div class="warp" ng-controller="myController">
+        <div class="div">
+            <h3>ngResource</h3>
+            <p>
+                test
+            </p>
+        </div>
     </div>
 
-
-</div>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/angular-1.0.1.min.js"></script>
-<script>
-    // 方法一 通过 provider 的 $get 方法， 定义服务
-    var testService = function(){
-        this.$get = function(){
-            return {haha: '123, ① 定义一个叫 test1 的服务'};
-        }
-    }
-
-    // 方法二 factory 方法,有 $provide 提供
-
-    var myApp = angular.module('myApp',[],function($provide){
-        // ① 定义一个叫 test1 的服务
-        $provide.provider('test1',testService);
-
-        // ② 直接把函数当成是一个对象的 $get() 方法
-        $provide.factory('test2',function(){
-            return {haha: '123, ② 直接把函数当成是一个对象的 $get() 方法'};
-        })
-    });
-
-    // 方法三 直接使用 service 方法，最常见
-    myApp.service('test3',function(){
-        this.haha = '123, 直接使用 service 方法，最常见';
-    });
+    <script>
+        var myApp = angular.module('myApp',['ngResource'],angular.noop);
+        myApp.controller('myController',function($scope,$resource){
+            var actions = {
+                create : {
+                    method: 'POST',
+                    params:{_method:'create'}
+                },
+                read: {
+                    method: 'POST',
+                    params:{_method:'red'}
+                },
+                update:{
+                    method : 'POST',
+                    params: {_method:'update'}
+                },
+                delete:{
+                    method : 'POST',
+                    params: {_method:'delete'}
+                },
+                multi:{
+                    method : 'POST',
+                    params:{_method:'multi'}
+                }
+            };
+            var Book = $resource('/book',{},actions);
 
 
-// controller
-    myApp.controller("myController",function($scope,test1,test2,test3){
-        $scope.sayHellow = 'Hello World  !';
-        // ①
-        console.log(test1);
-        console.log(test2);
-        console.log(test3);
-    });
+        });
 
-</script>
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
 </body>
 </html>
