@@ -1,0 +1,101 @@
+@import 'base/base.less';
+
+@color_0:#000;
+@color_3:#333;
+@color_6:#666;
+@color_9:#999;
+@color_on:#000;
+
+@post-search-button-bgColor: #0E7BC9;
+@post-border-color:#DDDDDD;
+@post-table-odd-bg:#FFF;
+@post-table-even-bg:#F5F8FA;
+@pos-b-line-color:#0e7bc9;
+
+@job-detail-title: #1071c1;
+@job-info-color:#999999;
+@job-apply-bg:#FF9600;
+@job-controlNav-bg:#CCCCCC;
+
+@job_crl_bg:#0C7BC9;
+@job_crl_border:#DEDEDE;
+@job_crl_bg1:#11A285;
+@job_crl_bg2:#EC4E4F;
+@job_crl_bg3:#FFB400;
+@job_crl_bg4:#76AF2E;
+@job_crl_bg5:#568EFF;
+@job_crl_bg6:#B157FF;
+@job_crl_bg7:#FF57B1;
+
+@job_iframe_aColor:#333333;
+@job_in_fontColor:#404040;
+@job_in_blueColor:#0d7bc8;
+@job_top_bgColor:#F6F6F6;
+
+@color_8:#888888;
+@color_b:#106abc;
+
+/* 不支持html5的标签重置 */
+address,article,aside,audio,canvas,details,figcaption,figure,header,footer,hgroup,menu,nav,section,summary,time,video{ display:block}
+
+//公用
+body{font-family: 'microsoft YaHei'}
+body{font-size: 12px; color: @color_0;background:#fff;min-width: 1200px;}
+
+//公用宽度
+.hf{width: 1200px; margin-left: auto; margin-right: auto;}
+.inline-block{display:inline-block;*display:inline;*zoom:1;}
+
+//导航
+#pageheader{
+  border-bottom: 1px solid @post-border-color;
+  padding-bottom: 10px;
+}
+#top_nav{ float: right; margin-top: 30px; height: 30px; overflow: hidden;
+  .item{display: inline-block; *display: inline; *zoom: 1; vertical-align: top; width: 100px; padding-left: 20px;text-align: right;
+    p{font-size: 16px; line-height: 23px; height: 23px; }
+    &.on{
+      p a{color: @color_on;font-weight: bold;}
+    }
+  }
+  a{.text-muted; text-decoration: none;
+    &:hover{color: @color_on; text-decoration: underline;}
+  }
+
+//  .navsub{ margin-top: 10px; line-height: 28px; font-size: 14px;
+//    a{
+//      color: @color_6;
+//      &:hover{color: @color_on;}
+//    }
+//    .on{
+//      a{color: @color_on;}
+//    }
+//  }
+
+}
+
+// 招聘公用
+#warp-middle{position: relative;width: 100%;
+  section{position: relative;padding: 0;margin: 0;border:0;overflow: hidden;
+    &>img{width: 100%;height: auto;}
+  }
+}
+
+.bgImg{position: absolute;display: block;}
+.percent_div,.imgDiv{display:block;position: absolute;
+  &>img{display: block;width: 100%;height: auto;}
+  &.center{left:50%;}
+  &.middle{top:50%;}
+}
+.l0{left: 0px;}
+.t0{top: 0px;}
+.psr{position: relative !important;filter: inherit;}
+
+
+//底部
+#pageFooter{.border(top,1px); height: 66px; line-height: 66px; font-family: Verdana,'microsoft YaHei'; background-color: #f2f2f2;}
+
+
+// 招聘页面样式文件
+@import 'base/r_index.less';
+@import "base/r_subpage.less";

@@ -1,0 +1,405 @@
+// 底线
+.has-line{
+  .b-line{position: absolute; width: 100%; height: 3px; bottom: 0; left: 0;
+    span{display:block;margin:0 auto;width:0;height:100%;background-color: @pos-b-line-color;-webkit-transition: width 0.3s;-moz-transition: width 0.3s;-ms-transition: width 0.3s;-o-transition: width 0.3s;transition: width 0.3s;}
+  }
+  &.on,&:hover{.b-line{span{width: 100%;}}}
+}
+
+.fc9{color: @job-info-color;}
+
+// 职位搜索form
+.r-search-form{position: relative;color: #fff;
+  input,button{font-size: 14px;line-height: 18px;}
+  input{outline: none; width: 960px; border: 1px solid @post-border-color; padding: 10px 15px;}
+  #search-submit{position: absolute; top: 1px; height: 38px;color: #fff; border: none; right: 0; background-color: #0e7bc9; width: 200px;vertical-align: middle;cursor: pointer;
+    span{position: relative;padding-left:22px;height: 100%;line-height: 38px;}
+    .post-icon{display:block;width:18px;top:50%;margin-top:-9px;height: 18px;position: absolute;left: 0;}
+  }
+}
+.post-icon{background: url("../images/styleimg/post_icons.png") no-repeat;}
+.post-list{
+  font-size: 14px;
+  a{color: #000000;text-decoration: none;
+    &:hover{color: #888;}
+  }
+  // 搜索form
+  padding: 30px 0;
+  // 顶部滚动职位
+  .r-top-post{position: relative;overflow: hidden;height: 80px;margin-top: 30px;color: #fff;background: url("../images/styleimg/post-top-bg.jpg") no-repeat;
+    &>ul{position: absolute; top: 0; left: 0;padding-left: 100px;}
+  }
+  .r-tl-icon{position: absolute; left: 10px; top: 50%; margin-top: -32px; width: 64px; height: 64px; background-position: -83px 0;}
+  .r-top-item{height: 80px;overflow: hidden;
+    &>div{padding: 16px 0; line-height: 24px;}
+  }
+  .r-top-title{a{font-size: 16px;font-weight: bold;color: #FFFFFF;
+    &:hover{text-decoration: underline;}
+  }}
+  .con-button{display: block;position: absolute;width: 55px;height: 38px;right: 0;cursor: pointer;background: url("../images/styleimg/post_icons.png") rgb(38,38,51) no-repeat;opacity: 0.8;-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+    &:hover{opacity: 1;-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);}
+  }
+  .up{top: 0;background-position:-2px -56px;}
+  .down{bottom: 0;background-position:-2px -22px;}
+
+  // 职位分类
+  .post-cate{font-size: 18px;margin-top: 10px;
+    &>li{position: relative; float: left; width:115px; margin-right: 20px;text-align: center;
+      a{display: block;padding: 20px 0;}
+      &.mr0,&:last-child{margin-right: 0;}
+    }
+  }
+
+  // 职位列表
+  .r-post-list{
+    table{ width: 100%; border: 1px solid @post-border-color;}
+    .even{background-color: @post-table-even-bg;}
+    .odd{background-color: @post-table-odd-bg;}
+    th{font-weight: bold;border-bottom: 1px solid @post-border-color;padding: 20px 30px;}
+    td{padding: 15px 30px;}
+    .load-more{ background-color: #FFFFFF;padding: 40px 30px 25px;
+      p{background-color: @post-table-even-bg;border:1px solid @post-border-color;line-height: 30px;}
+      .disabled{color: #888;cursor: default;}
+    }
+  }
+}
+
+// 职位详细页面 ,校园招聘公用
+.job-button,.apply-job {color: #FFFFFF; background-color: @job-apply-bg;display: inline-block;*display: inline;*zoom: 1; padding: 15px 65px; font-size: 24px; text-decoration: none; -webkit-border-radius: 7px; -moz-border-radius: 7px; border-radius: 7px;}
+.post-detail-bg{padding: 30px 0;
+  // 左侧
+  .post-detail{width:815px;}
+  .post-title{font-size: 24px;color: @job-detail-title;font-weight: bold;}
+  .post-info{padding: 15px 0 20px;border-bottom: 1px solid @post-border-color;}
+  .post-content{padding: 35px 0;line-height: 30px;color:#000000;}
+  // 右侧
+  .post-sidebar{margin-left: 75px;width: 310px;}
+  .post-right-img .viewport{border: 1px solid @post-border-color}
+  .control-nav{text-align: center;margin-top: 10px;
+    li{display: inline-block;*display: inline;*zoom: 1;vertical-align: top;}
+    a{cursor: pointer;display: block;margin-right: 8px; width: 4px; height: 4px;border: 2px solid @job-controlNav-bg;background-color: #FFFFFF;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;font-size: 0;overflow:hidden;line-height:0;
+      &.active{background-color: @job-controlNav-bg;}
+    }
+  }
+  .rb-img{position: relative;
+    &>p{position: absolute;width: 100%;bottom: 25px;left: 0;color: #FFFFFF;}
+  }
+}
+
+// 校园招聘城市页面 ——-
+.cup{cursor: pointer;}
+.crl-triangle{display: block;position: absolute;right: 0;width: 0;height: 0;border-width: 0;cursor: pointer;}
+.crl-br{border-right: 1px solid @job_crl_border;}
+.crl-bl{border-left: 1px solid @job_crl_border;}
+.crl-bt{border-top: 1px solid @job_crl_border;}
+.crl-bb{border-bottom: 1px solid @job_crl_border;}
+
+.crl-table{width: 100%;margin-top:50px;border-collapse: separate;border-spacing: 0px;
+  td{padding: 0;  height: 102px;text-align: center;}
+  .table-first {background-color: @job_crl_bg;color: #FFFFFF;font-size: 24px;position: relative;
+    .crl-triangle{top: 36px;border: 13px solid transparent;cursor:default;border-right-color: #FFFFFF;border-right-width: 15px;right: -1px;}
+  }
+}
+
+.crlMain{
+  a{color: #000000;text-decoration: none;
+    &:hover,&.on{color: @job_crl_bg;}
+  }
+  .crl-triangle{top: 8px;border: 10px solid transparent;border-top-color: #0c7bc9;border-top-width: 10px;
+    .crl-triangle{border: 8px solid transparent;border-top-width: 8px;border-top-color: #fff;top: -12px;right: -8px;}
+  }
+  .text-city{font-size: 18px;padding-right: 30px;position: relative;}
+  .crl-drop-menu{display:none;width: 178px;border: 1px solid @job_crl_border;position: absolute;top: 30px;right: 0;background-color: #FFF; z-index: 88;
+    li{float: left;width: 59px;padding: 10px 0;text-align: center;}
+  }
+  .view-jobs{margin-top: 110px; text-align: center;
+    a{color: #FFFFFF;}
+  }
+
+  .hideCss3 {opacity: 0;pointer-events: none;transform-origin: 50% 0;transform: scale(0.7) translate(-30px,10px);transition: all .3s; }
+  .showCss3 { transform: none !important; pointer-events: auto !important; opacity: 1 !important; }
+  .show{display: block;}
+}
+
+// 校园招聘职位页面 ——-
+.bg1{background-color: @job_crl_bg1;}
+.bg2{background-color: @job_crl_bg2;}
+.bg3{background-color: @job_crl_bg3;}
+.bg4{background-color: @job_crl_bg4;}
+.bg5{background-color: @job_crl_bg5;}
+.bg6{background-color: @job_crl_bg6;}
+.bg7{background-color: @job_crl_bg7;}
+.crldMain{
+  a{color: #000000;text-decoration: none;}
+  .job-item{float: left; width: 240px; height: 325px; margin-right: 26px; padding: 30px 20px;text-align: center;line-height: 22px;margin-bottom: 26px;
+    a{color: #FFFFFF;text-decoration: none;}
+  }
+  .mr0{margin-right: 0px;}
+  .job-t{font-size: 18px;font-weight: bold;margin: 15px 0 35px 0;}
+}
+
+// 校园招聘iframe页面 --- - - - start --- -- -
+  // 轮播插件
+.direction-nav{height: 0;overflow: hidden;line-height: 0;font-size: 0;
+  a {display: block;position: absolute;width: 15px;height: 18px;background: url("../images/styleimg/graduates-icons.png") no-repeat;top: 17px;font-size: 0;line-height:0;opacity: 0.5;-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    &:hover{opacity: 1;-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);}
+    &.prev{background-position: -3px -20px;left: 20px;}
+    &.next{background-position: -15px -20px;right: 20px;}
+    &.disabled{display: none;}
+  }
+}
+.over-hide{overflow: hidden;}
+.over-auto{overflow: auto;position:relative;}
+.w900{width: 900px;margin: 0 auto;min-width: 900px;}
+#jobs_all{position:relative;border-bottom: 1px solid @post-border-color;height:55px;overflow: hidden;
+  .jobs-slide{position: relative;float: left;
+    li{display: inline-block;*display: inline;*zoom: 1;margin: 0 10px;width:135px;text-align: center;}
+    a{font-size: 18px;color:@job_iframe_aColor;text-decoration: none;display: block;position: relative;padding: 15px 0;
+      &:hover{color: #000000;}
+    }
+    &>ul{padding: 0 55px;}
+  }
+}
+.iframeMain{padding: 10px 0;background-color:rgb(250,250,250);
+  .post-detail{width: auto; padding: 50px 30px;position: relative;
+  .post-info{border-bottom: none;}
+  .i-icon{
+    background: url("../images/styleimg/graduates-icons.png") no-repeat;
+    &.icon-graduates{position: absolute;width: 175px;height: 96px;top: 25px;right: 20px;background-position: -5px -40px;}
+  }
+}}
+// 校园招聘iframe页面 --- - - - end --- -- -
+
+
+// 校园招聘首页 Start  - -- -
+.hasCss3{opacity: 0;pointer-events: none;}
+//
+@keyframes fadeIn{
+  0%,100%{transition-timing-function:ease;}
+  0% {opacity:0;transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+  100% {opacity:1;transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+}
+.animation-fadeIn{
+  animation-name: bounceInFromRight;
+  animation-fill-mode: forwards;
+}
+
+//
+@keyframes fadeOut{
+  0%,100%{transition-timing-function:ease;}
+  0% {opacity:1;transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+  100% {opacity:0;transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+}
+
+.animation-fadeOut{
+  animation-name: fadeOut;
+  animation-fill-mode: forwards;
+}
+
+//
+@keyframes bottomfadeIn1{
+  0%,100%{transition-timing-function:ease;}
+  0% {opacity:0;transform:translate3d(0,10%,0) rotate(0deg) scaleX(1) scaleY(1);}
+  100% {opacity:1;transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+}
+
+@keyframes bottomfadeIn{
+  0%,100%{transition-timing-function:ease;}
+  0% {opacity:0;transform:translate3d(0,22%,0) rotate(0deg) scaleX(1) scaleY(1);}
+  100% {opacity:1;transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+}
+.animation-bottomfadeIn{
+  pointer-events: auto;
+  animation-name: bottomfadeIn;
+  animation-fill-mode: forwards;
+}
+
+//
+@keyframes moveUp{
+  0%,100%{transition-timing-function:ease;}
+  0% {transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+  100% {transform:translate3d(0,-13%,0) rotate(0deg) scaleX(1) scaleY(1);}
+}
+.animation-moveUp{
+  pointer-events: auto;
+  animation-name: moveUp;
+  animation-fill-mode: forwards;
+}
+
+//
+@keyframes zoomFadeIn{
+   0%,100%{transition-timing-function:ease;}
+   0% {opacity:0;transform:translate3d(0,0,0) rotate(0deg) scaleX(0) scaleY(0);}
+   100% {opacity:1;transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+ }
+@keyframes chinaMapZoomFadeIn1{
+  0%,100%{transition-timing-function:ease;}
+  0% {opacity:0;transform:translate3d(0,0,0) rotate(0deg) scaleX(0) scaleY(0);}
+  100% {opacity:0.4;transform:translate3d(0,0,0) rotate(0deg) scaleX(0.05) scaleY(0.05);}
+}
+@keyframes chinaMapZoomFadeIn2{
+  0%,100%{transition-timing-function:ease;}
+  0% {opacity:0.4;transform:translate3d(0,0,0) rotate(0deg) scaleX(0.1) scaleY(0.1);}
+  100% {opacity:1;transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+}
+
+.animation-zoomFadeIn{
+  pointer-events: auto;
+  animation-name: zoomFadeIn;
+  animation-fill-mode: forwards;
+}
+
+// 城市小点
+@keyframes originFlase{
+  0%,100%{transition-timing-function:ease;}
+  0% {opacity:1;transform:translate3d(0,0,0) rotate(0deg) scaleX(1) scaleY(1);}
+  100% {opacity:0;transform:translate3d(0,0,0) rotate(0deg) scaleX(5) scaleY(5);}
+}
+
+//
+@keyframes mapBg2{
+  0%,100%{transition-timing-function:ease;}
+  0% {opacity:1;transform:translate3d(0,-13%,0) rotate(0deg) scaleX(1) scaleY(1);}
+  100% {opacity:0;transform:translate3d(0,-13%,0) rotate(0deg) scaleX(10) scaleY(10);}
+}
+@keyframes mapBg3{
+  0%,100%{transition-timing-function:ease;}
+  0% {opacity:1;transform:translate3d(-28%,-13%,0) rotate(0deg) scaleX(1.5) scaleY(1.5);}
+  100% {opacity:0;transform:translate3d(-28%,-13%,0) rotate(0deg) scaleX(5) scaleY(5);}
+}
+
+.criMain{
+  .wline_bg{width: 100%;height: 100%;top:0;left: 0;
+    &>img{position: absolute;left: 0;top: 0;width: 100%;height: auto;}
+  }
+  .chinaMapBg{left: 2%;}
+  .chinaMapBg>img,.cityBg{position: absolute;left: 0;top: 0;width: 100%;height:100%;}
+  .page{position:absolute;left:0;top:0;width: 100%;height: 100%;}
+  .bText{bottom: 3%;}
+  .cri-bg{position:absolute;width:100%;height:100%;background-image: radial-gradient(circle,rgb(41,54,144),rgb(4,5,44));}
+  .cityBg{
+    &>a{position: absolute;font-size: 14px;font-weight: bold;text-align: center;letter-spacing: 1px;color: #FFFFFF;text-decoration: none;cursor: pointer;
+      &:hover{.animation-origin{animation-name: originFlase};}
+      &.current{.animation-origin{  animation-name: originFlase;animation-iteration-count: infinite;};}
+    }
+  }
+  .city-name{position: absolute;}
+  .city1{right: 16.9%; top: 34.7%;
+    .city-name{top: -28px; left: 0;}
+  }
+  .city2{right: 26%; top: 39.7%;
+    .city-name{top: 18px;left: -20px;}
+  }
+  .city3{right: 29%;top: 55.7%;
+    .city-name{top: 20px; left: -15px;}
+  }
+  .city4{right: 38%; top: 58.7%;
+    .city-name{top: 18px; left: -12px;}
+  }
+  .city5{right: 27.8%; top: 66.9%;
+    .city-name{top: 4px; left: -37px;}
+  }
+  .city6{right: 47.8%; top: 68.2%;
+    .city-name{top: 2px; left: -40px;}
+  }
+  .city7{right: 24%; top: 71.3%;
+    .city-name{top: 11px; left: 14px;}
+  }
+  .city8{right: 29%; top: 74.5%;
+    .city-name{top: 10px; left: -32px;}
+  }
+  .city9{right: 30%; top: 89.5%;
+    .city-name{top: -26px; left: -5px;}
+  }
+  .city10{right: 37.4%; top: 90.5%;
+    .city-name{top: -25px; left: -15px;}
+  }
+  .city11{right: 27%; top: 89.6%;
+    .city-name{top: 25px; left: 11px;}
+    .icon-origin,.animation-origin{background-color: yellow;}
+  }
+  .icon-origin,.animation-origin{display: block; position: absolute; background-color: #FFFFFF; width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 0 6px rgb(239, 239, 239),0 0 7px rgb(224, 224, 224);}
+  .animation-origin{top: 0;left: 0;opacity:0;transform: none;animation-fill-mode: forwards; animation-duration: 0.8s;}
+  .rightQr{right: 2%;}
+  .qrCode{text-align: center;font-size: 14px;color: #FFFFFF;letter-spacing: 0;margin-top: 20%;}
+  .qr-triangle {top: 7px;border: 8px solid transparent;border-top-color: #FFFFFF;position: relative;display: inline-block;*display: inline;*zoom: 1;vertical-align: top;
+    .crl-triangle2{border: 6px solid transparent;border-top-color: rgb(20,26,86);top: -9px;right: -6px;}
+  }
+  #loading{position: absolute; width: 100%; height: 100%; top: 0; left: 0; background:url(../images/styleimg/loading.gif) #FFFFFF 50% 50% no-repeat; z-index: 999; color: #000; font-size: 14px; letter-spacing: 0;}
+}
+
+// 校园招聘首页 End - -- -
+
+
+// 人在环球页面 Start - -- -
+.path_nav{ height: 59px; border-bottom:1px solid #e2e2e2; line-height: 59px;background-color: @job_top_bgColor;
+  .sub_nav_columns{float: right; height: 100%;
+    a{display: block; float: left; height: 100%; position: relative; margin-left: 30px; color: @color_0; text-decoration: none;
+      &>span{position: absolute; bottom: 0px; left: 0; width: 100%; height: 2px; }
+      .b-line{display:block;margin:0 auto;height:100%;width: 0px;transition:width .3s ease-in-out; background: #f60;}
+      &.on{.b-line{width: 100%;}}
+    }
+  }
+}
+
+.cinMain{
+  .cin-icon{display: inline-block;*display: inline;*zoom: 1;background-image: url(../images/styleimg/rin-icons.png);}
+  .cin-content{padding-left: 220px;}
+  #leftNav{position: absolute;top: 0;left: 20px;
+    #jsLeftNav{position: relative;}
+    a{position:relative;color: #FFFFFF;text-decoration: none;font-size: 18px;font-weight: bold;margin-bottom: 20px;display: block;text-align: center;width: 120px;height: 120px;background-image: url(../images/styleimg/rin-icons.png);background-position: 0 -120px;}
+//    .text{display: inline-block;*display: inline; *zoom: 1;margin-top: 65px;}
+    .current{
+      a{background-position: 0 0;}
+    }
+    .cin-icon{width: 40px;height: 40px;margin-top: 25px;
+      &.cin-icon-welfare{background-position: -16px -275px;}
+      &.cin-icon-traine{background-position: -16px -321px;}
+      &.cin-icon-promotion{background-position: -12px -363px;}
+      &.cin-icon-life{background-position: -16px -405px;}
+    }
+  }
+  section{padding: 50px 0;border-bottom: 1px dashed @job_crl_border;
+    &.pt0{padding-top: 0;}
+    .fs18{font-size: 18px;}
+    p{line-height: 30px;margin: 30px 0;
+      &.in-title{font-size:24px;font-weight: bold;
+        span{color: @job_in_blueColor}
+      }
+    }
+    .in-con-item{
+      p{ margin: 0;
+        &.in-title{font-size: 18px;}}
+        .cin-icon-tri{width: 18px;height: 30px;vertical-align: top;background-position: -20px -244px;}
+    }
+  }
+}
+#backToTop{position: fixed; width: 70px; height: 70px; bottom: 90px; right: 20px; background-image: url(../images/styleimg/rin-icons.png); background-position: -130px 0;cursor: pointer; display: none;}
+
+// 人在环球页面 End - -- -
+
+// faq
+.faqMain{
+  li{margin: 40px 0;
+    &.mt0{margin-top: 0px;}
+  }
+  p{color: @job_in_fontColor;font-size: 12px;line-height: 26px;
+    &.faq-title{font-size: 14px;font-weight: bold;}
+  }
+}
+// faq end - -- -- -
+
+// 环球之星 start  - -- -- -
+.rzxMain{
+  img{vertical-align: top;}
+  li{position: relative;}
+  .pa-text{position: absolute; width: 760px; line-height: 34px;height: 100px; top: 205px; left: 360px; font-size: 18px; color: @color_8;
+    a{font-size: 18px;color: @color_b;text-decoration: none;}
+    span{color: @color_3;}
+  }
+}
+
+// 环球之星 end - -- -- -
+
+
+

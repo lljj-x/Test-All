@@ -1,0 +1,71 @@
+@import 'base/base.less';
+@color_0:#000;
+@color_3:#333; 
+@color_6:#666;
+@color_9:#999;
+@color_on:#F60;
+@color_protrude:#1a9bda;
+
+@color_button_bg:#ffcc01;
+@color_news_info_color:#666666;
+@color_news_hover_bg:#e9e8e8;
+@color_news_disabled:#999999;
+@color_bs_control_nav_bg: #332F2D;
+@color_bs_chart_bg:#2F3652;
+@color_bs_chart_textColor:#2F3652;
+
+@contact_h1_color: #2f3652;
+@contact_top_line: #99989D;
+/* 不支持html5的标签重置 */
+address,article,aside,audio,canvas,details,figcaption,figure,header,footer,hgroup,menu,nav,section,summary,time,video{ display:block}
+//公用
+body{font-family: 'microsoft YaHei'}
+body{font-size: 12px; color: @color_0;; background:#fff;}
+//公用宽度
+.hf{width: 1200px; margin-left: auto; margin-right: auto;} 
+
+//文本颜色
+.text-strong{color: @color_0;}
+.text-muted{color: @color_3;}
+
+//顶部
+#pageheader{height: 83px; 
+	.fixedNav{ position: fixed; top: 0; left: 0; z-index: 9999; width: 100%; min-height: 83px;  background: #fff; .border(bottom,1px); }
+}
+
+//导航
+#top_nav{ float: right; margin-top: 30px; height: 30px; overflow: hidden;
+	.item{display: inline-block; *display: inline; *zoom: 1; vertical-align: top; width: 100px; padding-left: 20px;
+		p{font-size: 16px; line-height: 23px; height: 23px; }
+		&.on{
+			p a{color: @color_on;}
+		}
+
+		&:first-child{ margin-right: -30px;}
+	}
+	a{.text-muted; text-decoration: none;
+		&:hover{color: @color_on; text-decoration: underline;}
+	}
+
+	.navsub{ margin-top: 10px; line-height: 28px; font-size: 14px;
+		a{
+			color: @color_6;
+			&:hover{color: @color_on;}
+		}
+		.on{
+			a{color: @color_on;}
+		}
+	}
+	
+}
+
+//底部
+#pageFooter{.border(top,1px); height: 66px; line-height: 66px; font-family: Verdana,'microsoft YaHei'; background-color: #f2f2f2;}
+
+
+
+//首页样式文件
+@import 'base/index.less'; 
+
+//子页面
+@import 'base/subpage.less'; 
