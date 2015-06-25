@@ -4,4 +4,4 @@ function myFunction (name) {
 }
 function myFunction1 (name) {
 	// body...
-}z
+}
