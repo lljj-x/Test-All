@@ -107,12 +107,11 @@
         }
     }
 
-    // 方法二 factory 方法,有 $provide 提供
-
     var myApp = angular.module('myApp',[],function($provide){
         // ① 定义一个叫 test1 的服务
         $provide.provider('test1',testService);
 
+        // 方法二 factory 方法,有 $provide 提供
         // ② 直接把函数当成是一个对象的 $get() 方法
         $provide.factory('test2',function(){
             return {haha: '123, ② 直接把函数当成是一个对象的 $get() 方法'};
