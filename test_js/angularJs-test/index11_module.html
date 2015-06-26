@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJs Module</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <div class="warp">
+        <div class="app" ng-app="myApp">
+            <div class="" ng-controller="myControll">
+                <p>姓：<input type="text" ng-model="person.firstName"/></p>
+                <p>名：<input type="text" ng-model="person.lastName"/></p>
+                <p>你的姓名: {{person.firstName + person.lastName}}</p>
+            </div>
+        </div>
+    </div>
+    <script src="angular/js/angular-1.0.1.min.js"></script>
+    <script src="angular/js/myApp.js"></script>
+    <script src="angular/js/module/controller/myCrl.js"></script>
+</body>
+</html>

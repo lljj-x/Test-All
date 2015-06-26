@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJs Program</title>
+    <style>
+        .warp{
+            position: relative;
+            margin: 100px auto;
+            width: 1000px;
+            height: auto;
+            padding: 10px;
+        }
+        .myNode{
+            background-color: #CCCCCC;
+            width: 600px;
+            height: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="warp" ng-app="myTestApp">
+        <div class="controller" ng-controller="myTestController">
+            <div class="myNode">
+                <textarea cols="40" rows="10" ng-model="myData.message"></textarea>
+                <hr/>
+                <button ng-click="clear()">清空</button>
+                <button ng-click="save()">保存</button>
+                <div>
+                    你还可以输入 <span ng-bind="100 - myData.message.length"></span> 个字
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="angular/js/angular-1.0.1.min.js"></script>
+    <script src="index16_app.js"></script>
+    <script src="index16_tool.js"></script>
+</body>
+</html>

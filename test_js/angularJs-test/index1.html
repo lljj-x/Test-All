@@ -1,0 +1,14 @@
+<!doctype html>
+<html ng-app>
+<head>
+    <script src="angular/js/angular-1.0.1.min.js"></script>
+</head>
+<body>
+<div class="warp">
+    Your Name:
+    <input type="text" ng-model="yourname" placeholder="Your Name"/>
+    <hr />
+    Hello {{yourname || 'World'}}!
+</div>
+</body>
+</html>

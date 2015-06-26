@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJs Form Validation</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div class="warp">
+    <h1>AngularJs 表单验证</h1>
+    <div class="app" ng-app="formValidation">
+        <div class="controller" ng-controller="validationController">
+            <form action="" name="myForm">
+                <p>Username: <br/>
+                    <input type="text" name="user" ng-model="user" required/><br/>
+                    <span style="color: red;" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+                        <span ng-show="myForm.user.$error.required">Username is required</span>
+                    </span>
+                </p>
+
+                <p>
+                    Email: <br/>
+                    <input type="email" name="email" ng-model="email" required/>
+                    <span style="color: red;" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                        <span ng-show="myForm.email.$error.required">Email is required.</span>
+                        <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+                    </span>
+                </p>
+
+                <p>
+                    <input type="submit" ng-disabled="myForm.user.$dirty && myForm.user.$invalid || myForm.email.$dirty && myForm.email.$invalid"/>
+                </p>
+                <p>
+                    {{user + " " + email}}
+                </p>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+    <script src="angular/js/angular-1.0.1.min.js"></script>
+    <script src="angular/js/myApp.js"></script>
+    <script src="angular/js/module/controller/formValidation.js"></script>
+</body>
+</html>

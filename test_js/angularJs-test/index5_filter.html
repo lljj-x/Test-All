@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angular Js 外部引入js文件</title>
+    <meta charset="utf-8"/>
+    <script src="angular/js/angular-1.0.1.min.js"></script>
+</head>
+<body>
+<div class="warp" ng-app>
+    <h1>
+        Angular 过滤器
+    </h1>
+    <div class="myFilter" ng-controller="personController">
+        <p>
+            姓名: {{name.firstNaem + name.lastName | lowercase}}
+            <p>
+                讲数字 2564223130.23 转化为一个currency 货币类型 <br/>
+                {{256422313 | currency}}
+            </p>
+        </p>
+        <hr/>
+        <h3>orderBy 过滤器</h3>
+        <ul ng-controller="namesController">
+            <li><input ng-model="firstName" type="text" name="firstName" id="" placeholder="输入firstName"/></li>
+            <li ng-repeat="x in names | filter:firstName | orderBy:'firstName' ">
+                {{(x.firstName)+ x.lastName}}
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    var personController = function ($scope) {
+        $scope.name = {
+            firstNaem : "Liu",
+            lastName : "Jun"
+        }
+    }
+    var namesController = function($scope){
+        $scope.names = [
+            {
+                firstName : "Liu",
+                lastName : "Jun"
+            },
+            {
+                firstName : "Xiao",
+                lastName : "Ming"
+            },
+            {
+                firstName : "Xiao",
+                lastName : "Hong"
+            }
+        ]
+    }
+    
+</script>
+
+</body>
+</html>
