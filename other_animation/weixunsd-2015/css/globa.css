@@ -1,0 +1,407 @@
+/**
+ * by liu.jun
+ * 2015.04.05 21:27
+ * www.weixunsd.com
+**/
+
+::-webkit-scrollbar              { /* 1 */  width:9px; background-color:#333;}
+::-webkit-scrollbar-button       { /* 2 */ }
+::-webkit-scrollbar-track        { /* 3 */ }
+::-webkit-scrollbar-track-piece  { /* 4 */ }
+::-webkit-scrollbar-thumb        { /* 5 */ border:solid 2px #333; width:5px;  border-radius:4px; background-color:#fff;}
+::-webkit-scrollbar-corner       { /* 6 */ background-color:#333;}
+::-webkit-resizer                { /* 7 */ }
+::-webkit-scrollbar:horizontal   { height:9px;}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/open-sans/OpenSans-Light.eot');
+    src:url('../fonts/open-sans/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/open-sans/OpenSans-Light.woff') format('woff');
+}
+
+html {-ms-overflow-style:-ms-autohiding-scrollbar;}
+html,body {-webkit-overflow-scrolling : touch; background-color:#16171C;font-family: 'Open Sans', \5FAE\8F6F\96C5\9ED1,"Helvetica Neue",sans-serif,HelveticaNeue-Light, Helvetica;font-size: 12px;}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    outline:none;
+    -webkit-box-sizing:content-box;
+    -moz-box-sizing:content-box;
+    box-sizing:content-box;
+    letter-spacing: 1px;
+}
+body{position: relative;}
+a{ text-decoration:none;font-size: 12px;font-family: 'Open Sans', \5FAE\8F6F\96C5\9ED1,"Helvetica Neue",sans-serif,HelveticaNeue-Light, Helvetica;}
+.txa_l {text-align:left;}
+.txa_r {text-align:right;}
+.txa_c {text-align:center;}
+.left{float: left;}
+.right{float: right;}
+.txt-left{text-align: left;}
+.txt-right{text-align: right;}
+.txt-center{text-align: center;}
+.clear {clear: both;display: block;overflow: hidden;visibility: hidden;width: 0;height: 0;}
+.dis-block{display: block;}
+.hardware-acceleration {
+    -webkit-transform:translateZ(0);
+    transform:-webkit-translateZ(0);
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+}
+:focus { outline: 0; }
+a {text-decoration: none;color: #666;}
+a:hover{text-decoration: underline;}
+img {border: none;border: 0;}
+.container-bg{
+    width: 1170px;
+    margin: 0 auto;
+}
+.display-none{
+    display:none
+}
+.display-inline-block{
+    display: inline-block;
+}
+#weixun-anli-list .display-inline-block{
+    margin-right: 20px;
+}
+.pos-absolute{
+    display: black;
+    position: absolute;
+}
+.font-title{
+    font-size:50px;
+}
+.font-content{
+    font-size:16px;
+}
+.fs-30{
+    font-size: 30px;
+}
+.fs-20{
+    font-size:20px;
+}
+.fs-14{
+    font-size: 14px;
+}
+.fs-16{
+    font-size:16px;
+}
+.fs-12{
+    font-size: 12px;
+}
+
+.fc-fff{
+    color: #FFF;
+}
+.fc-green{
+    color: #7CE77D;
+}
+.fc-51{
+    color: rgb(51,44,43);
+}
+
+.thumbnail>img{
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+.absolute-img>img{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.mt15{
+    margin-top: 15px;
+}
+.clearfix:after{
+    clear: both;
+    content: " ";
+    display: table;
+}
+.clear-float{
+    height: 0px;
+    margin-top: -1px;
+    overflow: hidden;
+    clear: both;
+}
+.wrap{
+    position: relative;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/*@-webkit-keyframes fadeInDown {*/
+    /*0% {*/
+        /*opacity:0;*/
+        /*-webkit-transform:translate3d(0,-100%,0);*/
+        /*transform:translate3d(0,-100%,0)*/
+    /*}*/
+    /*100% {*/
+        /*opacity:1;*/
+        /*-webkit-transform:none;*/
+        /*transform:none*/
+    /*}*/
+/*}*/
+/*@keyframes fadeInDown {*/
+     /*0% {*/
+         /*opacity:0;*/
+         /*-webkit-transform:translate3d(0,-100%,0);*/
+         /*-ms-transform:translate3d(0,-100%,0);*/
+         /*transform:translate3d(0,-100%,0)*/
+     /*}*/
+     /*100% {*/
+         /*opacity:1;*/
+         /*-webkit-transform:none;*/
+         /*-ms-transform:none;*/
+         /*transform:none*/
+     /*}*/
+ /*}*/
+/*.fadeInDown {*/
+    /*-webkit-animation:fadeInDown 1s;*/
+    /*animation-name:fadeInDown 1s;*/
+/*}*/
+
+/*@-webkit-keyframes fadeOut {*/
+    /*0% {*/
+        /*opacity:1*/
+    /*}*/
+    /*100% {*/
+        /*opacity:0*/
+    /*}*/
+/*}*/
+/*@keyframes fadeOut {*/
+     /*0% {*/
+         /*opacity:1*/
+     /*}*/
+     /*100% {*/
+         /*opacity:0*/
+     /*}*/
+/*}*/
+/*.fadeOut {*/
+    /*-webkit-animation:fadeOut 1s;*/
+    /*animation-name:fadeOut 1s;*/
+/*}*/
+
+
+
+/*header*/
+#header{
+    /*position: relative;*/
+}
+#header>.weixun-top-bg{
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 100%;
+}
+.img-responsive>img{
+    width: 100%;
+    height: auto;
+}
+
+#header #weixun-logo{
+    padding: 18px 20px 13px 55px;
+}
+#header .weixun-logo-img{
+    width: 90px;
+    position: relative;
+}
+#header .weixun-logo-img,#header .weixun-logo-img>img,#header #menu .menu-weixun-logo{
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+#header .weixun-logo-img>.weixun-logo-w{
+
+}
+#header .weixun-logo-img>.weixun-logo-b{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+}
+#header .logo-txt{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#header .logo-txt-big{
+    margin-left: 15px;
+    margin-top: 30px;
+    color: #FFF;
+}
+#header .right-menu,#header .right-menu li{
+    list-style: none;
+}
+#header .right-menu>li{
+    float: left;
+    position: relative;
+}
+#header .right-menu li>a{
+    width: 100px;
+    height: 100px;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    display: table;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    text-align: center;
+}
+#header .right-menu li>a>div{
+    display: table-cell;
+    vertical-align: middle;
+}
+#header .right-menu li>a>div>span{
+    display: block;
+    font-size: 40px;
+}
+
+
+/*changecolor*/
+#header.odd #menu,#header.odd .right-menu li>a:hover,#header.odd .right-menu li>a.current{
+    background-color: #017163;
+}
+#header.even #menu,#header.even .right-menu li>a:hover,#header.even .right-menu li>a.current{
+    background-color: #00679d;
+}
+#header .right-menu li>a.current{color: #FFF !important;}
+#mainMenu.current .fa-reorder:before{
+    content: "\f00d";
+}
+#header #drop-menu{
+    position: absolute;
+    top: 100px;
+    left: 0;
+    background: rgba(0,0,0,0.1);
+    box-shadow: 0 3px 3px rgba(0,0,0,.3);
+}
+
+#header #drop-menu>ul>li{
+    border-top: solid 1px #737373;
+}
+#header #menu,.wrap,#header .weixun-top-bg{
+    -webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
+}
+#header #menu{
+    position: absolute;
+    width: 240px;
+    right: -240px;
+    top: 0;
+    height: 100%;
+    background-color: rgb(37, 124, 104);
+    z-index: 9;
+}
+#header #menu .menu-weixun-logo{
+    position: relative;
+    display: block;
+    width: 39%;
+    margin: 25px auto;
+}
+#header #menu .menu-weixun-logo:hover{
+    opacity: 0.7;
+    transform: scale(1.1);
+    -webkit-transform: -webkit-scale(1.1);
+    -ms-transform: -webkit-scale(1.1);
+    -moz-transform: -webkit-scale(1.1);
+}
+
+#menu .menu-list>ul{
+    list-style: none;
+}
+#menu .menu-list>ul>li{
+    list-style: none;
+    position: relative;
+    border-bottom: 1px solid #004940;
+    text-align: center;
+}
+#header.even #menu .menu-list>ul>li{
+    border-color: #004d74;
+}
+#menu .menu-list>ul>li>a{
+    padding: 10px 5px;
+    font-size: 14px;
+    color: #FFF;
+    display: block;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+#menu .menu-list>ul>li>a:hover{
+    background-color: #005784;
+}
+#header.odd #menu .menu-list>ul>li>a:hover{
+    background-color: #01584d;
+}
+
+#menu .menu-footer{
+    position: absolute;
+    padding: 20px;
+    bottom: 1%;
+    left: 0;
+    color: #FFF;
+    font-size: 14px;
+    text-align: center
+}
+
+/*section1 以外*/
+
+#header.section_1_out .logo-txt-big{display: none}
+#header.section_1_out .logo-txt-small{
+    display: block;
+    margin-left: 15px;
+    margin-top: 20px;
+}
+
+/*section1 以外 end*/
+/*header end*/
+
+/*loading start*/
+#preloader{
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+}
+#preloader .loading{
+    width: 360px;
+    height: 360px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -180px;
+    margin-left: -180px;
+    text-align: center;
+}
+#preloader .loading>span{
+
+}
+
+/*loading end*/

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>致母亲节</title>
+    <meta name="description" content="致母亲节"/>
+    <meta name="keywords" content="致母亲节,母亲节"/>
+    <meta name="title" content="致母亲节">
+    <!-- 让IE浏览器用最高级内核渲染页面 还有用 Chrome 框架的页面用webkit 内核 -->
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+
+    <!-- IOS6全屏 Chrome高版本全屏-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- webkit内核渲染页面-->
+    <meta name="renderer" content="webkit">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="format-detection" content="telephone=no">
+
+    <!--script-->
+    <script type="text/javascript" src="js/jquery.min.1.7.js"></script>
+    <script type="text/javascript" src="http://www.weixunsd.com/templets/weixunsd-2015/js/imagesloaded.js"></script>
+    <script type="text/javascript" src="js/modernizr.2.5.3.min.js"></script>
+    <style>
+        #cnzz_stat_icon_1254953017{display: none;}
+    </style>
+</head>
+<body>
+    <div id="preloader" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0; z-index: 99999; background-color: #353535; color: #FFF;">
+        <div style="display: table;width: 100%;height: 100%;">
+            <div style="display: table-cell;vertical-align:middle;text-align: center;">
+                豆豆拼命加载中...
+            </div>
+        </div>
+    </div>
+
+    <div class="flipbook-viewport">
+        <div class="full-bg">
+            <section class="bg_1 currentBg" style="background-image: url(pages/bg_home.jpg)"></section>
+            <section class="bg_2" style="background-image: url(pages/bg_1.jpg)"></section>
+            <section class="bg_3" style="background-image: url(pages/bg_2.jpg)"></section>
+            <section class="bg_4" style="background-image: url(pages/bg_3.jpg)"></section>
+            <section class="bg_5" style="background-image: url(pages/bg_4.jpg)"></section>
+            <section class="bg_6" style="background-image: url(pages/bg_5.jpg)"></section>
+            <section class="bg_7" style="background-image: url(pages/bg_6.jpg)"></section>
+            <section class="bg_8" style="background-image: url(pages/bg_7.jpg)"></section>
+        </div>
+        <div class="bottom_d">
+            <img src="pages/bottom_bg.png" alt="" />
+            <div class="container">
+                <div class="flipbook" style="z-index: 999;">
+                    <div class="filpbook_mother_day">
+                        <img src="pages/home.jpg" alt="" />
+                    </div>
+                    <div class="filpbook_mother_day">
+                        <img src="pages/1.png" alt="五岁时" />
+                    </div>
+
+                    <div class="filpbook_mother_day">
+                        <img src="pages/2.png" alt="十岁时" />
+                    </div>
+
+                    <div class="filpbook_mother_day">
+                        <img src="pages/3.png" alt="十五岁时" />
+                    </div>
+
+                    <div class="filpbook_mother_day">
+                        <img src="pages/4.png" alt="二十岁时" />
+                    </div>
+
+                    <div class="filpbook_mother_day">
+                        <img src="pages/5.png" alt="二十五岁时" />
+                    </div>
+
+                    <div class="filpbook_mother_day">
+                        <img src="pages/6.png" alt="三十岁时" />
+                    </div>
+                    <div class="filpbook_mother_day">
+                        <img src="pages/7.png" alt="结束语" />
+                        <div class="page-text">
+                            <div id="show-text" class="text-content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-bg-layer">
+                    <div class="left-button button">
+                        <img src="pages/arr_left.png" />
+                    </div>
+                    <div class="right-button button">
+                        <img src="pages/arr_right.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="audio-btn fa-spin"></div>
+        <div id="bg-audio" style="display: none;">
+            <audio autoplay="autoplay" loop="loop" preload="auto">
+                <source src="http://miantiao.jd-app.com/xiami/1770195084.mp3" type="audio/mpeg" />
+            </audio>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(window).on('scroll.elasticity', function (e) {
+            e.preventDefault();
+        }).on('touchmove.elasticity', function (e) {
+            e.preventDefault();
+        });
+
+        var textData = '人生匆匆，时光荏苒，而作为子女，我们花在母亲身上的时间却远不如他人。一年有三百六十五天，但母亲节只有一天。放下手头的事儿，和她聊聊心事，陪她逛逛街，给她一个大大的拥抱吧。';
+
+        var isClearTimer = false;
+        var thisTimer = null;
+
+        $.fn.cheeckImgAndBgImgLoad = function(call){
+            this.each(function(){
+                var myThis = $(this);
+                $(this).imagesLoaded(function(){
+                    var image;
+                    var hasBgSection = myThis.find(".has-bgimg");
+                    if(hasBgSection.length > 0){
+                        var tmpImages = $("<div />");
+                        hasBgSection.each(function(){
+                            image = $(this).css("background-image").match(/url\((['"])?(.*?)\1\)/);
+                            if(image){
+                                tmpImages.append($("<img />").attr({
+                                    "src" : $(this).css("background-image").match(/url\((['"])?(.*?)\1\)/).pop()
+                                }))
+                            }
+                        });
+                        tmpImages.imagesLoaded(call);
+                    }else{
+                        call.call();
+                    }
+                });
+            });
+        }
+
+        $.fn.showText = function(speed,textData,callback){
+            speed = speed || 300;
+            var i = 0;
+            isClearTimer = true;
+            return this.each(function(){
+                var $this = $(this);
+                $(this).text("");
+                thisTimer = setInterval(function(){
+                    console.log("ok");
+                    $this.text($this.text() + textData[i]);
+                    if(i >= textData.length - 1){
+                        clearInterval(thisTimer);
+                        callback.call();
+                    }
+                    i ++;
+                },speed);
+            })
+        }
+
+        $.fn.hideText = function(){
+            if(isClearTimer){
+                if($(this).children("div").length>0){
+                    $(this).children("div").remove();
+                }
+                $(this).html("");
+                clearInterval(thisTimer);
+                isClearTimer = false;
+            }
+        }
+
+        $(document).ready(function(){
+            // audio
+            var myAudio = $("#bg-audio>audio")[0];
+            myAudio.play();
+            $(".audio-btn").on("click",function(){
+                if($(this).hasClass("fa-spin")){
+                    myAudio.pause();
+                    $(this).removeClass("fa-spin");
+                }else{
+                    myAudio.play();
+                    $(this).addClass("fa-spin");
+                }
+            });
+
+            var w;
+            var h;
+            var dW = 380;
+            var dH = 536;
+
+            var bDW = 414;
+            var bDH = 83;
+
+            function getFlipbookSize(){
+                w=Math.round($(window).width() * 0.9);
+                h =Math.round(w * ( dH / dW ));
+                $(".container").css({
+                    marginLeft : (0 - (w / 2)) + "px",
+                    bottom : (w * (bDH / bDW) - 0) + "px"
+                })
+            }
+
+            function loadApp() {
+                $(".flipbook-viewport").cheeckImgAndBgImgLoad(function(){
+                    // 图片加载完成
+                    $("#preloader").fadeOut(300,function(){
+                        $(this).remove();
+                    })
+
+                    getFlipbookSize();
+                    $('.flipbook').turn({
+                        width:w,
+                        height:h,
+                        duration : 1000,
+                        elevation: 50,
+                        display: 'single',
+                        gradients: true,
+                        direction: "ltr",
+                        autoCenter: true,
+                        when: {
+                            turned: function(event, page, pageObject) {
+
+                            },
+                            turning : function(event, page, pageObject){
+                                $(".full-bg>section").eq(page - 1).addClass("currentBg").siblings().removeClass("currentBg");
+
+                                if(page === $('.flipbook').turn("pages")){
+                                    // $(".right-button").hide();
+                                    $("#show-text").showText(200,textData,function(){
+                                        // 重播按钮显示
+                                        /**
+                                        return;
+                                        var $thisDiv = $("<div />").css({textAlign:'center',cursor:'pointer'}).append($("<img />").attr("src","pages/reset.png")).appendTo("#show-text");
+                                        $thisDiv.one("click",function(){
+                                            $('.flipbook').turn('page',1);
+                                        });
+                                        **/
+                                    });
+                                }
+
+                                if((page != 1) && (page != $(".flipbook").turn("pages"))){
+                                    $("#show-text").hideText();
+                                }
+                            }
+                        }
+                    });
+                    $(".left-button").click(function(){
+                        $('.flipbook').turn("previous");
+                    });
+                    $(".right-button").click(function(){
+                        $('.flipbook').turn("next");
+                    });
+                    $(window).resize(function(){
+                        getFlipbookSize();
+                        $(".flipbook").turn("size", w, h);
+                    });
+                });
+            }
+
+            yepnope({
+                test : Modernizr.csstransforms,
+                yep: ['./lib/turn.js'],
+                nope: ['./lib/turn.html4.min.js'],
+                both: ['./css/basic.css'],
+                complete: loadApp
+            });
+        })
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254953017'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254953017' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    overflow:hidden;
+    background-color:#fcfcfc;
+    margin:0;
+    padding:0;
+}
+
+/*audio btn*/
+.audio-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.3);
+    background-size: 52px 26px;
+    background-image: url('../pages/audio-btn5.png');
+    background-position: 26px 0;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 999999;
+}
+
+
+.fa-spin {
+    -webkit-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+    background-position: 0 0;
+}
+
+@-moz-keyframes spin {
+    0% {
+        -moz-transform:rotate(0deg);
+    }
+    100% {
+        -moz-transform:rotate(359deg);
+    }
+}@-webkit-keyframes spin {
+     0% {
+         -webkit-transform:rotate(0deg);
+     }
+     100% {
+         -webkit-transform:rotate(359deg);
+     }
+ }@-o-keyframes spin {
+      0% {
+          -o-transform:rotate(0deg);
+      }
+      100% {
+          -o-transform:rotate(359deg);
+      }
+  }@-ms-keyframes spin {
+       0% {
+           -ms-transform:rotate(0deg);
+       }
+       100% {
+           -ms-transform:rotate(359deg);
+       }
+   }@keyframes spin {
+        0% {
+            transform:rotate(0deg);
+        }
+        100% {
+            transform:rotate(359deg);
+        }
+    }
+
+    /*audio button end */
+
+.flipbook-viewport,.flipbook-viewport.container{
+    width: 100%;
+    height: 100%;
+}
+
+.flipbook-viewport .page{
+    background-color:rgb(226,226,226);
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+}
+
+.flipbook-viewport>.full-bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+.full-bg>section{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    opacity: 0;
+}
+.full-bg>section.currentBg{
+    opacity: 1;
+}
+
+.container{
+    position: absolute;
+    left: 50%;
+}
+.filpbook_mother_day>img,.bottom_d>img,.button>img{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.filpbook_mother_day .page-text{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
+.filpbook_mother_day .text-content{
+    font-family: \5FAE\8F6F\96C5\9ED1,'Open Sans',"Helvetica Neue",sans-serif,HelveticaNeue-Light, Helvetica;font-size: 12px;
+    padding: 20% 50px 0;
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: 1.5px;
+}
+
+.flipbook .page{
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.2);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.2);
+    -ms-box-shadow:0 0 20px rgba(0,0,0,0.2);
+    -o-box-shadow:0 0 20px rgba(0,0,0,0.2);
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+.flipbook-viewport .page img{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin:0;
+}
+
+.flipbook-viewport .shadow{
+    -webkit-transition: -webkit-box-shadow 0.5s;
+    -moz-transition: -moz-box-shadow 0.5s;
+    -o-transition: -webkit-box-shadow 0.5s;
+    -ms-transition: -ms-box-shadow 0.5s;
+
+    -webkit-box-shadow:0 0 20px #ccc;
+    -moz-box-shadow:0 0 20px #ccc;
+    -o-box-shadow:0 0 20px #ccc;
+    -ms-box-shadow:0 0 20px #ccc;
+    box-shadow:0 0 20px #ccc;
+}
+.bottom_d{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+.bottom-bg-layer{
+    z-index: 9999;
+    position: absolute;
+    bottom: 5px;
+    width: 80px;
+    height: 50px;
+    left: 50%;
+    margin-left: -40px;
+}
+
+.bottom-bg-layer .button{
+    position: absolute;
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+}
+
+.bottom-bg-layer .button.left-button{
+    left: 0px;
+}
+
+.bottom-bg-layer .button.right-button{
+    right: 0px;
+}

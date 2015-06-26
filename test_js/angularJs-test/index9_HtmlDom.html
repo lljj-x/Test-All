@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJs Html Dome</title>
+    <meta charset="utf-8"/>
+    <script src="angular/js/angular-1.0.1.min.js"></script>
+</head>
+<body>
+    <div class="warp">
+        <h1>AngularJs Dom 操作</h1>
+        <div class="bg" ng-app>
+            <h3>Ng-Disabled 指令</h3>
+            <p><button ng-disabled = "mySwitch"> 点不到我</button></p>
+            <p><input type="checkbox" ng-model="mySwitch"/>选择我</p>
+            <p>{{mySwitch}}</p>
+
+            <input type="text" ng-model="xxx"/>
+            {{xxx}}
+
+            <h3>ng-show 指令</h3>
+            <p ng-show="true"> 我是可见的</p>
+            <p ng-show="mySwitch">我是可变的</p>
+
+        </div>
+    </div>
+
+</body>
+</html>

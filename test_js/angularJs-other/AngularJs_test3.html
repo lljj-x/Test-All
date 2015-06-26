@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AnjularJs Test 3</title>
+	    <style>
+        body {
+            font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .warp {
+            width: 1000px;
+            height: auto;
+            position: relative;
+            margin: 100px auto;
+            padding: 30px;
+            border: 1px solid #C7C4C4;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        h1, h2 ,h3{
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 16px;
+        }
+
+        hr {
+            color: #003300;
+            margin: 20px 0;
+        }
+
+        div.div {
+            background-color: #cccccc;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
+        .fcblack {
+            color: #000;
+        }
+        .fcred {
+            color: red;
+        }
+
+        .fcw {
+            color: white;
+        }
+
+        .fcb {
+            color: blue;
+        }
+
+        .fch {
+            color: #cccccc;
+        }
+
+        img, div {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        li>img{
+            max-width: 150px;
+            height: auto;
+        }
+        li{
+            position: relative;
+            margin: 10px 0;
+            list-style: none;
+        }
+        li:hover>.span_hover{
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+	<div class="warp" ng-app="myApp">
+    	<H1>Anjular JS</H1>
+    	<div class="div" ng-controller="myController">
+			<h2>锚点路由</h2>
+            <p>
+                定义路由 #/test 、 #/test1
+            </p>
+
+            <h2>参数定义</h2>
+            <p>
+                1、预定义路由，比如链接 /#/book/test ，定义路由 '/book/:title' 类似于 zf2
+            </p>
+            <p>
+                2、直接get参数，比如链接 /#/book?bookName=bookName
+            </p>
+            <h2>引入模板文件 不使用字符串</h2>
+            <p>
+                /mytpl/tpl.html
+            </p>
+            <h2>不使用模板文件的内容，直接通过控制器来修改所显示的页面</h2>
+            <p>
+                /ctl/tpl.html <br/>
+                template: '{{}}', //这里template 的内容不能为空，不然不发触发 controller
+            </p>
+    	</div>
+        <div class="div" style="margin-top: 20px;">
+            <p>ng-view 的内容</p>
+            <div id="my_view" class="ng-view">
+            </div>
+        </div>
+
+        <div class="div" ng-controller="ajaxController" style="margin-top: 20px;">
+            <h2>$http $q </h2>
+            <ul>
+                <li ng-repeat="name in names">
+                    姓名 {{name.firstName + name.lastName}}
+                </li>
+            </ul>
+            <h2>angular.bind</h2>
+            <p>angular.bind 是用来进行上下文绑定，参数动态绑定的工具函数。</p>
+        </div>
+    </div>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/angular-1.0.1.min.js"></script>
+    <script>
+        var myApp = angular.module('myApp', [], function ($routeProvider) {
+            $routeProvider.when('/test', {
+                template: 'test'
+            })
+                    .when('/test1', {
+                        template: 'test1'
+                    })
+                    .when('/book/:bookName', {
+                        template: '{{title}}',
+                        controller: function ($scope, $routeParams) {
+                            // controller 中进行赋值
+                            console.log($routeParams);
+                            $scope.title = $routeParams.bookName;
+                        }
+                    })
+                    .when('/book', {
+                        template: '{{title}}',
+                        controller: function ($scope, $routeParams) {
+                            console.log($routeParams);
+                            $scope.title = $routeParams.bookName;
+                        }
+                    })
+                    .when('/a', {
+                        template: '{{title}}',
+                        controller: function ($scope) {
+                            $scope.title = 'a'
+                        }
+                    })
+                    .when('/b', {
+                        template: '{{title}}',
+                        controller: function ($scope, $route) {
+                            console.log($route);
+                            $route.routes['/a'].controller($scope);
+                        }
+                    })
+                    .when('/mytpl/tpl.html', {
+                        templateUrl: 'tmp.html',
+                        controller: function ($scope, $routeParams, $route) {
+
+                        }
+                    })
+                    .when('/ctl/tpl.html', {
+                        template: '{{}}', //这里template 的内容不能为空，不然不发触发 controller
+                        controller: function ($scope) {
+                            $("#my_view").html("这里是我通过 controller 修改的内容");
+                        }
+                    });
+        });
+
+        myApp.controller('myController',function($scope,$templateCache){
+            // 直接向 templateCache中写入数据，不用ajax获取
+            var tpl = '<div class="tpl">这里是 tpl 模板文件的内容<br>我是直接写入到 templateCache 中的</div>';
+            $templateCache.put('tmp.html',tpl);
+        });
+
+        myApp.controller('ajaxController', function ($scope, $http, $q) {
+            var defer = $q.defer();
+            var promise = defer.promise;
+
+            promise.then(function (data) {
+                console.log("ok1 ");
+                return data;
+            }, function (data) {
+                console.log('Error1');
+                return $q.reject(data); //触发后链的 error 回调：
+            }).then(function (data) {
+                console.log('ok ' + data);
+            }, function (data) {
+                console.log('erroxr ' + data);
+            });
+
+            defer.reject('x');
+
+            /**
+             var a1 = $http.get('json.php',{params:{a: 1}});
+             var a2 = $http.get('json.php',{params:{a: 2}});
+             var all = $q.all([a1,a2]);
+             a1.success(function(res){
+                console.log(res);
+            });
+             all.then(function(res){
+                console.log(res[1].data);
+            });
+             **/
+
+                //
+            $http.get('json.php').success(function (response, status, headers, config) {
+                $scope.names = response;
+                // console.log($q);
+                /**
+                 console.log(response);
+                 console.log(status);
+                 console.log(headers);
+                 console.log(config);
+                 */
+            });
+
+            // bind 上下文绑定
+            var bindFn = angular.bind({a: 'bind a value = a'}, function () {
+                console.log(this.a);
+            });
+            bindFn();
+
+            // bind 参数动态绑定
+            var f = function (x) {
+                console.log(x);
+            }
+            angular.bind({}, f, 'bind xxxx')();
+
+
+            // 对象处理
+                // angular.copy()
+                var a = {'x' : '123'};
+                var b = angular.copy(a);
+                a.x = '456';
+
+            // 对象聚合 angular.extend()
+            // 不同于 jquery $.extend 继承
+            var obj1 = {
+                a : "xxa",
+                b : "xxx"
+            }
+            var obj2 = {
+                c : 'xxxxb'
+            }
+            angular.extend(obj2,obj1);
+
+            // 大小写转换
+            console.log(angular.lowercase('xxXdfsf'));
+            console.log(angular.uppercase('xxXdfsf'));
+
+            var json = [{
+                firstName: "Liu",
+                lastName : "Jun"
+            },{
+                firstName : "Zhang",
+                lastName : "San"
+            }];
+
+            var array = [['Liu','Jun'],['firstName','lastName']];
+
+            console.log(angular.fromJson(json));
+            console.log(angular.toJson(array));
+
+        });
+    </script>
+</body>
+</html>

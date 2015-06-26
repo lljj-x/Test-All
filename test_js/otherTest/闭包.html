@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+
+
+
+
+
+<script type="text/javascript">
+    // 获取函数内部变量的值
+    /**
+    function f1(){
+        var n = 999;
+        function f2(){
+            alert(n);
+        }
+        return f2();
+    }
+
+    var result = f1();
+    result();
+    **/
+
+    /**
+    // 闭包内使用了 全局变量，
+    function f1(){
+        var n = 999;
+
+        test = 10;
+
+        nAdd = function(){
+            n += 1;
+        }
+
+        var f2 = function(){
+            alert(n ++ );
+        }
+
+        return f2;
+    }
+
+    var result=f1();
+    result();
+    nAdd();
+    result();
+    **/
+
+    // 代码片段 1
+    /**
+    var name = "The Window";
+    var object = {
+        name : "My Object",
+        getNameFun: function(){
+            return function(){
+                return this.name;
+            }
+        }
+    }
+    alert(object.getNameFun()());
+    **/
+
+    // 代码片段 2
+    var name = "The Window";
+    var object = {
+        name : "My Object",
+        getNameFun : function(){
+            var that = this;
+            return function(){
+                return that.name;
+            }
+        }
+    }
+    alert(object.getNameFun()());
+
+
+
+
+
+</script>
+
+</body>
+</html>
