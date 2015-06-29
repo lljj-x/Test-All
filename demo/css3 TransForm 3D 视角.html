@@ -11,50 +11,41 @@
             margin: 0;
             padding: 0;
         }
+        .wutai{
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            left: 50%;
+            margin-left: -250px;
+            top: 50%;
+            margin-top: -250px;
+            perspective: 800px;
+        }
         .bg{
             position: absolute;
             width: 128px;
             height: 100px;
             left: 50%;
             margin-left: -64px;
-            top: 50%;
-            margin-top: -200px;
+            top: 200px;
             background-color: rgba(0,0,0,0.3);
             text-align: center;
-            perspective: 640px;
+
             transform-style: preserve-3d;
             transition: opacity 1s, transform 1s;
-
-        }
-
-        .ts-div-bg,.ts-div{
-            position: absolute;
-            width: 160px;
-            height: 160px;
-            left: 50%;
-            margin-left: -80px;
-            top: 50%;
-            margin-top: -80px;
-            background-color: #0782C1;
-            transition: transform 1s ease;
-        }
-        .ts-div-bg{
-            background-color: rgba(0,0,0,0.3);
         }
         .warp>img{
             width: 128px;
             display: block;
             position: absolute;
             backface-visibility: visible;
-            left: 50%;
-            margin-left: -69px;
+            left: 0;
             bottom: 0;
         }
-
-
     </style>
 </head>
 <body>
+<div class="wutai">
     <div class="warp bg">
         <img src="img/mm10.jpg" alt=""/>
         <img src="img/mm13.jpg" alt=""/>
@@ -66,12 +57,19 @@
         <img src="img/mm15.jpg" alt=""/>
         <img src="img/mm8.jpg" alt=""/>
     </div>
+</div>
 <script src="js/jquery.min.js"></script>
 <script>
     $(".warp>img").each(function (i,v) {
         $(this).css({
-            'transform' : 'rotateY(' + i * 40 + 'deg) translateZ(195.838554845096px)',
+           // 'transform' : 'rotateY(' + i * 40 + 'deg) translateZ(195.838554845096px)',
             '-webkit-transform' : 'rotateY(' + i * 40 + 'deg) translateZ(195.838554845096px)'
+        })
+    })
+    var deg = 0;
+    $(".warp").click(function () {
+        $(this).css({
+            'transform': 'rotateY(' + (40 * ++deg) + 'deg)'
         })
     })
 
