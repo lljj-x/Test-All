@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery deferred object</title>
+    <meta charset="utf-8"/>
+    <script src="../js/jquery.min.js"></script>
+    <style>
+        .warp{
+            padding: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="warp">
+    </div>
+
+
+    <script>
+        // 传统ajax 写法
+        /**
+            $.ajax({
+                url : 'get.php',
+                success : function () {
+                    alert("哈哈，成功了 ！！");
+                },
+                error: function () {
+                    alert("出错了  ！！")
+                }
+
+            });
+        **/
+
+        // deferred 方法写法
+        /**
+        $.ajax('get.php')
+            .done(function () {
+                    alert("哈哈，成功了 ！");
+                })
+            .fail(function(){
+                    alert("哈哈，出错了 ！")
+                })
+            .done(function () {
+                    alert("哈哈，我是成功的第二个回调 ！！")
+                });
+        **/
+
+        // deferred 对象的最大优点，就是它把这一套回调函数接口，从ajax操作扩展到了所有操作
+        // 当有一个很耗时的代码时候， $.when() 方法去回调 ,参数必须是一个 deferred对象
+        /**
+            var dtd = $.Deferred();
+            var wait = function () {
+                var tasks = function () {
+                    alert("执行完毕 !");
+                    dtd.resolve(); //改变deferred对象的状态 .
+                }
+
+                setTimeout(tasks,5000);
+                return dtd; // 返回一个 deferred 对象
+            }
+
+            $.when(wait())
+             .done(function () {
+                        alert("执行完毕，哈哈哈哈哈 !")
+                    })
+             .fail(function () {
+                        alert("执行失败， 哈哈哈哈 ！")
+                    })
+            dtd.resolve();  //这样会导致可以通过外部去改变 deferred 的状态
+        **/
+
+        // deferred.promise 方法 ,避免外部直接修改  deferred 的方法
+
+        // 方法 1
+        var dtd = $.Deferred();
+        var wait = function () {
+            var tasks = function () {
+                alert("执行完毕 ！");
+                dtd.resolve();
+            }
+            setTimeout(tasks,3000);
+            return dtd.promise();
+        }
+        $.when(wait)
+          .done(function () {
+                    alert("回调成功方法 ！")
+                })
+                .fail(function () {
+                    alert("回调失败方法 ！")
+                });
+        dtd.resolve();
+
+            
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
