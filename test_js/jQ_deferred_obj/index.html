@@ -72,8 +72,9 @@
         // deferred.promise 方法 ,避免外部直接修改  deferred 的方法
 
         // 方法 1
-        var dtd = $.Deferred();
-        var wait = function () {
+            // 直接返回 promise 对象
+        /**
+        var wait = function (dtd) {
             var tasks = function () {
                 alert("执行完毕 ！");
                 dtd.resolve();
@@ -81,24 +82,68 @@
             setTimeout(tasks,3000);
             return dtd.promise();
         }
-        $.when(wait)
+
+        var p = wait($.Deferred());
+
+        $.when(p)
           .done(function () {
                     alert("回调成功方法 ！")
                 })
                 .fail(function () {
                     alert("回调失败方法 ！")
                 });
-        dtd.resolve();
+        p.resolve();
+        **/
 
+        // 方法2
+        /**
+        var wait = function () {
+            var der = $.Deferred();
+            var tasks = function () {
+                alert("执行完毕 ！");
+                der.resolve();
+            }
+            setTimeout(tasks,3000);
+            return der.promise();
+        }
+
+        $.when(wait())
+         .done(function(){
+                    alert("回调成功方法 !!");
+                })
+        .fail(function () {
+            alert("回调失败方法 ！");
+        })
+        .resolve(); // 这里是失效的 达到预期效果 .
             
+        **/
 
+        // $.then 方法
+            // 接受一个参数 等同于 done 方法
+            // $.then(funSuccess,funFail)
 
+        /**
+        $.ajax('get.php')
+                .then(function () {
+                    alert("ajax 成功!");
+                }, function () {
+                    alert("ajax 失败！");
+                });
+        **/
 
-
-
-
-
-
+        // $.always 方法，不管是调用 dererred.resolve() 和 deferred.fail() 方法都会执行
+        /**
+        $.ajax('get.php')
+                .always(function(){
+                    alert("执行完毕 !");
+                })
+                .done(function () {
+                    alert("Ajax成功 ！");
+                })
+                .fail(function () {
+                    alert("Ajax 失败!");
+                })
+        **/
 
 
 
