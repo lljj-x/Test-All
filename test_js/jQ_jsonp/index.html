@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery deferred object</title>
+    <meta charset="utf-8"/>
+    <script src="../js/jquery.min.js"></script>
+    <style>
+        .warp{
+            padding: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="warp">
+        <h1>jQuery jsonp</h1>
+    </div>
+    <script>
+
+
+        $.ajax({
+            url : 'get.php',
+            dataType : 'jsonp',
+            type : 'GET'
+        }).done(function (result) {
+            console.log(result);
+            alert(result.foo);
+        }).fail(function () {
+
+        });
+
+
+    </script>
+</body>
+</html>
