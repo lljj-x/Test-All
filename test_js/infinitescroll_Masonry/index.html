@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Infinitescroll_Masonry</title>
+    <style>
+
+    </style>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/masonry.pkgd.min.js"></script>
+    <script src="../js/jquery.infinitescroll.min.js"></script>
+</head>
+<body>
+    <div id="container">            <!-- 容器 -->
+        <div class="scroll">         <!-- 每次要加载数据的数据块-->
+            第一页内容第一页内容<br>
+            第一页内容<br>第一页内容<br>第一页内容<br>
+            第一页内容<br>第一页内容<br>第一页内容<br>
+            第一页内容<br>第一页内容<br>第一页内容
+        </div>
+    </div>
+    <div id="navigation" align="center">         <!-- 页面导航-->
+        <a href="user/list?page=1"></a>        <!-- 此处可以是url，可以是action，要注意不是每种html都可以加，是跟当前网页有相同布局的才可以。另外一个重要的地方是page参数，这个一定要加在这里，它的作用是指出当前页面页码，没加载一次数据，page自动+1,我们可以从服务器用request拿到他然后进行后面的分页处理。-->
+    </div>
+
+<script>
+    $(document).ready(function (){
+        $("#container").infinitescroll({
+            navSelector: "#navigation",      //页面分页元素--本页的导航，意思就是一个可以触发ajax函数的模块
+            nextSelector: "#navigation a",  //下一页的导航
+            itemSelector: ".scroll " ,             //此处我用了类选择器，选择的是你要加载的那一个块（每次载入的数据放的地方）
+            animate: true,                          //加载时候时候需要动画，默认是false
+            maxPage: 3                           //最大的页数，也就是滚动多少次停。这个页码必须得要你从数据库里面拿
+        });
+    });
+</script>
+
+</body>
+</html>
