@@ -1,16 +1,29 @@
 @import "base/base.less";
+
 @import "base/class.less";
+
 
 // global
 body{margin: 0;padding: 0;font-family:@fontFace;font-size: 14px;color: @colorBorder;}
 input,textarea,select{font-family:@fontFace;font-size: 14px;color: @colorBase;}
-
-.warp{width: 1200px;height: auto;margin: 0 auto;padding: 50px 0;
-  .title{font-size: 34px;color: @colorBase;font-weight: bold;margin: 10px 0;}
-
-  .text-label{display: block;
-    textarea{display: block;.border;width: 1178px;height: 300px;padding: 10px;font-size: 14px;line-height: 20px;
-
+.btn{display: inline-block;text-decoration: none;padding: 6px 12px;  margin-bottom: 0;font-size: 14px;font-weight: 400;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent;border-radius: 4px;
+    &.btn-default{color: #333;background-color: #fff;border-color: #ccc;
+        &:hover{color: #333;background-color: #e6e6e6;border-color: #adadad;}
     }
-  }
+}
+
+.same-line-height(){line-height: 22px;}
+
+.warp{width: 1200px;height: auto;margin: 0 auto;padding: 20px 0;
+    .title{font-size: 34px;color: @colorBase;font-weight: bold;margin: 10px 0;}
+    .text-label{display: block;position: relative;
+        .line-nums-wrap{display: block; position: absolute; height: 100%; width: 30px; left: -30px; top: 0; text-align: right;
+            .line-nums {display: block;padding: 10px 5px 0 10px;.same-line-height();
+                &>span {display: block;}
+            }
+        }
+        textarea{display: block;.border;width: 1178px;height: 250px;padding: 10px;font-size: 14px;.same-line-height();white-space: nowrap;
+            &:focus{border: 1px solid #6ce26c !important;outline: none;}
+        }
+    }
 }

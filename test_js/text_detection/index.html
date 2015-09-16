@@ -11,11 +11,18 @@
 </head>
 <body>
     <div class="warp">
-        <h1 class="title">JS html 错误检测</h1>
+        <h1 class="title">JS html 规范检测</h1>
         <div class="box">
             <label class="text-label">
-                <textarea id="js_inputText" style="" placeholder="请把你需要加密的内容粘贴在这里！"></textarea>
+                <span class="line-nums-wrap">
+                    <span class="line-nums js_lineNums">
+                    </span>
+                </span>
+                <textarea id="js_inputText" style="" placeholder="请把你需要检测的内容粘贴在这里！"></textarea>
             </label>
+        </div>
+        <div class="opa mt20">
+            <a id="js_detection" href="javascript:;" class="btn btn-default">检测</a>
         </div>
     </div>
 </body>
