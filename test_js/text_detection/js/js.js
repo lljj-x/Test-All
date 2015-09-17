@@ -9,6 +9,10 @@
     TextDetection.prototype = {
         init : function () {
             // init
+            this.$lineNums = $("#js_lineNums");
+            this.$inputElm = $(this.options.inputElm);
+            this.$consoleWrap = $("#js_consoleWrap");
+
             this.bindEvent();
         },
 
@@ -20,13 +24,18 @@
             this.$instans.on("click", function (event) {
                 self.inputDataArr = self.getTextData(); // 先更新数据
                 self.setlineNums();
-                return;
+                self.notHasError = true; // 默认木有错误
                 // 遍历每一行
-                for(var lineText in self.inputDataArr) {
+                for(var lineNum in self.inputDataArr) {
+                    var lineText = self.inputDataArr[lineNum];
 
                     // 执行用户配置的检测类型
-                    for(var validate in self.getConfig()){
-
+                    for(var validateNum in self.config){
+                        if(self.validate.method[self.config[validateNum]]){
+                            self.notHasError = self.validate.method[self.config[validateNum]](lineText,lineNum - 0 + 1 ) && self.notHasError;
+                        }else{
+                            alert("config配置有误，self.config[validateNum] 方法不存在");
+                        }
                     }
                 }
             });
@@ -37,7 +46,7 @@
          * @returns {Array}
          */
         getTextData: function () {
-            return $(this.options.inputElm).val().split(/\r?\n|\r/);
+            return this.$inputElm.val().split(/\r?\n|\r/);
         },
 
         /**
@@ -51,21 +60,15 @@
                 html += '<span>' + (i + 1) + '</span>';
             }
 
-            $(".js_lineNums").html(html);
+            this.$lineNums.html(html);
+            this.setTextAreaHeight(this.$lineNums.outerHeight());
         },
 
         /**
-         *  设置用户需要检测的类型
+         *  设置 textarea 高度
          */
-        setConfig : function () {
-
-        },
-
-        /**
-         *  获取用户需要检测的类型
-         */
-        getConfig : function () {
-
+        setTextAreaHeight : function (height) {
+            this.$inputElm.height(height - 10 * 2 + 5); // padding : 10  +5 滚动条
         },
 
         /**
@@ -76,11 +79,44 @@
         },
 
         /**
+         * 输出检测信息
+         * @params msg 信息
+         * @params 信息类型，true正确  false错误
+         */
+        consoleLog : function (msg,type) {
+            type = type || false;
+            $("<p />").html(msg).attr({
+                class : type ? "success" : "fail"
+            }).appendTo(this.$consoleWrap);
+        },
+
+        /**
          * 检测
          */
         validate : {
+            defaultError : {
+                detectionLabelA : "第 {0} 行缺少 a 标签."
+
+            },
+            method : {
+                detectionLabelA : function (text,lineNum) {
+                    if(1==2){
+                        // 木有错误
+
+                        return true;
+
+                    }else{
+
+                        alert("xxx");
 
 
+                        return false;
+
+                    }
+
+                }
+
+            }
         }
     };
 
@@ -92,7 +128,7 @@
 
     // 直接暴露默认参数
     $.fn.textDetection.defaults = {
-        config : [],
+        config : ["detectionLabelA"],
         inputElm : "#js_inputText"  // selector
         // eventType : "input" // 开发中
     };
@@ -106,7 +142,5 @@ $(function () {
      * @author Liu.Jun
      */
 
-    $("#js_detection").textDetection({
-        config : []
-    });
+    $("#js_detection").textDetection();
 });
