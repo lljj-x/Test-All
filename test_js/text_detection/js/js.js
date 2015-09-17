@@ -96,7 +96,6 @@
         validate : {
             defaultError : {
                 detectionLabelA : "第 {0} 行缺少 a 标签."
-
             },
             method : {
                 detectionLabelA : function (text,lineNum) {
