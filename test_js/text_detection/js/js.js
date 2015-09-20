@@ -41,13 +41,12 @@
             method: {
                 detectionUrl: function (text, lineNum, funNam, options) {
                     var reg = /"(\s)*(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)(\s)*"/g,
-                        matchUrl = text.match(reg);
+                        matchUrlArr = text.match(reg);
 
                     // 首先匹配到 " "首尾包含 0- 个空白的url
-                    if (matchUrl) {
-
-                        var matchUrlArr = matchUrl.splice(','),
-                            reBool = true;
+                    if (matchUrlArr) {
+                        var reBool = true,
+                            matchUrl;
 
                         for (var i in matchUrlArr) {
                             // url 检测使用一个方法，错误信息 要区分开来，不直接默认使用方法名对应错误信息
@@ -100,10 +99,10 @@
                 detectionImgAttr: function (text, lineNum, funNam, options) {
                     // 不贪婪
                     var reg = /(<\s*img\s+).*?(\/?\s*>)/g,
-                        imgTag = text.match(reg);
+                        imgTagArr = text.match(reg);
 
-                    if (imgTag) {
-                        var imgTagArr = imgTag.splice(','),
+                    if (imgTagArr) {
+                        var imgTag,
                             reBool = true;
 
                         // 一行可能存在多个匹配
