@@ -5,15 +5,47 @@
         // 默认参数
         defaults: {
             config: ["detectionUrl","detectionLength","detectionImgAttr","detectionTagP","detectionTableMerger"],  // 按行匹配
+            configTitle:["检测代码出现链接不规范或图片命名不规范：", "检测代码超过了500字符：", "检测代码未添加alt/height/width信息：", "检测代码包含p标签：", "检测代码包含 rowspan / colspan 属性："],
+
             fullTextSearchConfig : ["detectionEmail"], // 全文搜索
+            fullTextSearchConfigTitle : ["检测是否包含退订代码："],
+
             inputElm: "#js_inputText",
             consoleWrap : $("#js_consoleWrap")
         },
 
+        htmlEncode: function (str) {
+            var s;
+            if (str.length == 0) return "";
+            s = str.replace(/&/g, ">");
+            s = s.replace(/</g, "<");
+            s = s.replace(/>/g, ">");
+            s = s.replace(/ /g, " ");
+            s = s.replace(/\'/g, "'");
+            s = s.replace(/\"/g, '"');
+            s = s.replace(/\n/g, "<br>");
+            return s;
+        },
+        htmlDecode : function (str) {
+            var s;
+            if (str.length == 0) return "";
+            s = str.replace(/>/g, "&");
+            s = s.replace(/</g, "<");
+            s = s.replace(/>/g, ">");
+            s = s.replace(/ /g, " ");
+            s = s.replace(/'/g, "\'");
+            s = s.replace(/"/g, "\"");
+            s = s.replace(/<br>/g, "\n");
+            return s;
+        },
+
         // 输出提示信息
         consoleLog: function (msg, $consoleWrap,className) {
-            var className = className || "fail";
-            $("<p />").text(msg).attr({
+            className = className || "fail";
+
+            // 过滤 html 标签只留 span
+            var html = $("<p />").text(msg).html().replace('&lt;span&gt;',"<span>").replace('&lt;/span&gt;',"</span>");
+            $("<p />").html(html).attr({
                 "class": className
             }).appendTo($consoleWrap);
         },
@@ -21,16 +53,16 @@
         validate: {
             // 默认错误
             defaultError: {
-                detectionUrlSpace: '第 {0} 行： 链接 "{1}" 中存在空格',
-                detectionUrlSlash: '第 {0} 行： 链接 "{1}" 以 / 结尾',
-                detectionUrlQmark: '第 {0} 行： 链接 "{1}" 中包含 ? ',
-                detectionUrlImageNum: '第 {0} 行： 图片 "{1}" 图片命名中包含有数字',
-                detectionLength : '第 {0} 行： 代码超过 500 字符',
-                detectionImgAttr : '第 {0} 行： 图片 "{1}" 未添加alt/height/width信息',
-                detectionTagP : '第 {0} 行： 代码 "{1}" 包含p标签',
+                detectionUrlSpace: '第 {0} 行： 链接 "{1}" 中存在 <span>空格</span>',
+                detectionUrlSlash: '第 {0} 行： 链接 "{1}" 以 <span>/</span> 结尾',
+                detectionUrlQmark: '第 {0} 行： 链接 "{1}" 中包含 <span>?</span>',
+                detectionUrlImageNum: "第 {0} 行： 图片 '{1}' 图片命名中包含有 <span>数字</span>",
+                detectionLength : '第 {0} 行： 代码超过 <span>500</span> 字符',
+                detectionImgAttr : "第 {0} 行： 图片 '{1}' 未添加 <span>alt/height/width</span> 信息",
+                detectionTagP : '第 {0} 行： 代码 "{1}" 包含 <span>p</span> 标签',
 
-                detectionEmail : '没有发现退订代码 "... {$email} ... " ',
-                detectionTableMerger : '第 {0} 行： 代码 "{1}" 包含 {2} 标签'
+                detectionEmail : "没有发现退订代码  ... <span>{$email}</span>  ...",
+                detectionTableMerger : '第 {0} 行： 包含 <span>{2}</span> 标签'
             },
             // 获取错误文字
             setError: function (funNam,options,arrParams) {
@@ -202,36 +234,45 @@
                 self.inputDataArr = self.inputElmVal.split(/\r?\n|\r/); // 先更新数据
 
                 //self.setlineNums();     // 显示行号
-                var notHasError = true; // 默认木有错误
+                var globalNotHasHasError = true,
+                    methodNotHasHasError,
+                    cIndex = 1;           // 当前检测方法 index
 
                 // 全文搜索
                 for(var i in self.fullTextSearchConfig){
+                    methodNotHasHasError = true;  // 默认每种检测方法没有错误
+                    $.textDetection.consoleLog(cIndex + ' 、' + self.options.fullTextSearchConfigTitle[i], self.options.consoleWrap,"validate-title");
                     if($.textDetection.validate.method[self.fullTextSearchConfig[i]] != undefined){
-                        notHasError = $.textDetection.validate.method[self.fullTextSearchConfig[i]](self.inputElmVal, self.fullTextSearchConfig[i], self.options) && notHasError;
+                        methodNotHasHasError = $.textDetection.validate.method[self.fullTextSearchConfig[i]](self.inputElmVal, self.fullTextSearchConfig[i], self.options) && methodNotHasHasError;
                     }else {
                         alert('fullTextSearchConfig 配置有误，' + self.fullTextSearchConfig[i] + ' 方法不存在');
                     }
+
+                    methodNotHasHasError && $.textDetection.consoleLog('木有错误 \\(^o^)/', self.options.consoleWrap,"success");
+                    globalNotHasHasError = globalNotHasHasError && methodNotHasHasError;
+                    cIndex ++ ;
                 }
 
-                // 按行匹配
-                for (var lineNum in self.inputDataArr) {
-                    // 剔除首尾空格
-                    var lineText = self.inputDataArr[lineNum].replace(/(^\s*)|(\s*$)/g,'');
-                    // 执行用户配置的检测类型
-
-                    if(lineText == "") continue;  // 空行不检测
-
-                    for (var validateNum in self.config) {
-                        if ($.textDetection.validate.method[self.config[validateNum]] != undefined) {
-                            notHasError = $.textDetection.validate.method[self.config[validateNum]](lineText, lineNum - 0 + 1, self.config[validateNum],self.options) && notHasError;
-                        } else {
-                            alert('config 配置有误，' + self.config[validateNum] + ' 方法不存在');
+                // 执行用户配置的检测类型
+                for (var validateNum in self.config) {
+                    methodNotHasHasError = true;  // 默认每种检测方法没有错误
+                    $.textDetection.consoleLog(cIndex + ' 、' + self.options.configTitle[validateNum], self.options.consoleWrap,"validate-title");
+                    var currentMethod = $.textDetection.validate.method[self.config[validateNum]];
+                    if(currentMethod != undefined){
+                        for(var lineNum in self.inputDataArr){
+                            // 剔除首尾空格
+                            var lineText = self.inputDataArr[lineNum].replace(/(^\s*)|(\s*$)/g,'');
+                            if(lineText == "") continue;  // 空行不检测
+                            methodNotHasHasError = currentMethod(lineText, lineNum - 0 + 1, self.config[validateNum],self.options) && methodNotHasHasError;
                         }
+                    }else{
+                        alert('config 配置有误，' + self.config[validateNum] + ' 方法不存在');
                     }
+                    methodNotHasHasError && $.textDetection.consoleLog('木有错误 \\(^o^)/', self.options.consoleWrap,"success");
+                    globalNotHasHasError = globalNotHasHasError && methodNotHasHasError;
+                    cIndex ++ ;
                 }
-
-                // 木有错误
-                notHasError && $.textDetection.consoleLog("猴赛雷 ✪ ω ✪，木有错误 ！", self.options.consoleWrap,"success");
+                globalNotHasHasError && $.textDetection.consoleLog('猴赛雷 ✪ ω ✪ ,一个错误都木有 ！！！' , self.options.consoleWrap,"global-success");
             });
         },
 

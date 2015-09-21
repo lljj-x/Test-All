@@ -25,14 +25,18 @@ input,textarea,select{font-family:@fontFace;font-size: 14px;color: @colorBase;}
                 &>span {display: block;}
             }
         }
-        textarea{display: block;.border;width: 1178px;height: 250px;padding: 10px;font-size: 14px;.same-line-height();
+        textarea{display: block;.border;width: 1178px;height: 200px;padding: 10px;font-size: 14px;.same-line-height();
             &:focus{border: 1px solid @colorSuccess !important;outline: none;}
         }
     }
     .console-wrap{margin-top: 20px;line-height: 20px;font-size: 14px;
         p{margin: 10px 0;line-height: 16px;
             &.success{color: @colorSuccess;}
-            &.fail{color: @colorFail;}
+            &.fail {color: @colorBase;font-size: 14px;
+                &>span{color: @colorFail;font-weight: bold;}
+            }
+            &.validate-title{font-size: 14px;color: #000000;font-weight: bold;margin-top: 15px;}
+            &.global-success{font-size: 18px;color: @colorSuccess;font-weight: bold;margin-top: 20px;}
         }
 
     }
