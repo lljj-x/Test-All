@@ -4,15 +4,17 @@
     $.textDetection = {
         // 默认参数
         defaults: {
-            config: ["detectionUrl","detectionLength","detectionImgAttr"],
+            config: ["detectionUrl","detectionLength","detectionImgAttr","detectionTagP","detectionTableMerger"],  // 按行匹配
+            fullTextSearchConfig : ["detectionEmail"], // 全文搜索
             inputElm: "#js_inputText",
             consoleWrap : $("#js_consoleWrap")
         },
 
         // 输出提示信息
         consoleLog: function (msg, $consoleWrap,className) {
+            var className = className || "fail";
             $("<p />").text(msg).attr({
-                class: className || "fail"
+                "class": className
             }).appendTo($consoleWrap);
         },
 
@@ -23,9 +25,12 @@
                 detectionUrlSlash: '第 {0} 行： 链接 "{1}" 以 / 结尾',
                 detectionUrlQmark: '第 {0} 行： 链接 "{1}" 中包含 ? ',
                 detectionUrlImageNum: '第 {0} 行： 图片 "{1}" 图片命名中包含有数字',
-
                 detectionLength : '第 {0} 行： 代码超过 500 字符',
-                detectionImgAttr : '第 {0} 行： 图片 "{1}" 未添加alt/height/width信息'
+                detectionImgAttr : '第 {0} 行： 图片 "{1}" 未添加alt/height/width信息',
+                detectionTagP : '第 {0} 行： 代码 "{1}" 包含p标签',
+
+                detectionEmail : '没有发现退订代码 "... {$email} ... " ',
+                detectionTableMerger : '第 {0} 行： 代码 "{1}" 包含 {2} 标签'
             },
             // 获取错误文字
             setError: function (funNam,options,arrParams) {
@@ -123,6 +128,47 @@
                     }else{
                         return true;
                     }
+                },
+                detectionTagP : function (text, lineNum, funNam, options) {
+                    var regClose = /(<\s*p.*?>).*?(<\s*\/\s*p\s*>)/g,
+                        pTagArr = text.match(regClose),
+                        reBool = true;
+                    if(pTagArr){
+                        // 完整闭合标签 p
+                        for (var i in pTagArr) {
+                            $.textDetection.validate.setError(funNam, options, [lineNum,pTagArr[i]]);
+                        }
+                        reBool = false;
+                    }else if(text.search(/<\s*p.*?>/) >-1 || text.search(/<\s*\/\s*p\s*>/) >-1 ){
+                        // 开头 || 结束 p
+                        $.textDetection.validate.setError(funNam, options, [lineNum,text]);
+                        reBool = false;
+                    }
+                    return reBool;
+                },
+                detectionTableMerger : function (text, lineNum, funNam, options) {
+                    var reBool = true;
+                    if(text.indexOf('colspan') > -1){
+                        $.textDetection.validate.setError(funNam, options, [lineNum,text,'colspan']);
+                        reBool = false;
+                    }
+
+                    if(text.indexOf('rowspan') > -1){
+                        $.textDetection.validate.setError(funNam, options, [lineNum,text,'rowspan']);
+                        reBool = false;
+                    }
+                    return reBool;
+                },
+
+                // 全文检测方法参数不要 lineNum
+                detectionEmail : function (text, funNam, options) {
+                    // 整个文档直接检测 所以不要 lineNum
+                    if(text.indexOf('{$email}') < 0){
+                        $.textDetection.validate.setError(funNam, options);
+                        return false;
+                    }else{
+                        return true;
+                    }
                 }
             }
         }
@@ -131,7 +177,8 @@
     var TextDetection = function (selector, options) {
         this.$instans = $(selector);
         this.options = options;
-        this.config = this.options.config;  // Array
+        this.config = this.options.config;  // 按行匹配params Array
+        this.fullTextSearchConfig = this.options.fullTextSearchConfig;  // 全文搜索 params Array
         this.init();
     };
 
@@ -149,11 +196,24 @@
         bindEvent: function () {
             var self = this;
             self.$instans.on("click", function (event) {
+
                 self.options.consoleWrap.empty();
-                self.inputDataArr = self.getTextData(); // 先更新数据
-                self.setlineNums();
+                self.inputElmVal = self.$inputElm.val();
+                self.inputDataArr = self.inputElmVal.split(/\r?\n|\r/); // 先更新数据
+
+                //self.setlineNums();     // 显示行号
                 var notHasError = true; // 默认木有错误
-                // 遍历每一行
+
+                // 全文搜索
+                for(var i in self.fullTextSearchConfig){
+                    if($.textDetection.validate.method[self.fullTextSearchConfig[i]] != undefined){
+                        notHasError = $.textDetection.validate.method[self.fullTextSearchConfig[i]](self.inputElmVal, self.fullTextSearchConfig[i], self.options) && notHasError;
+                    }else {
+                        alert('fullTextSearchConfig 配置有误，' + self.fullTextSearchConfig[i] + ' 方法不存在');
+                    }
+                }
+
+                // 按行匹配
                 for (var lineNum in self.inputDataArr) {
                     // 剔除首尾空格
                     var lineText = self.inputDataArr[lineNum].replace(/(^\s*)|(\s*$)/g,'');
@@ -165,7 +225,7 @@
                         if ($.textDetection.validate.method[self.config[validateNum]] != undefined) {
                             notHasError = $.textDetection.validate.method[self.config[validateNum]](lineText, lineNum - 0 + 1, self.config[validateNum],self.options) && notHasError;
                         } else {
-                            alert('config配置有误，' + self.config[validateNum] + ' 方法不存在');
+                            alert('config 配置有误，' + self.config[validateNum] + ' 方法不存在');
                         }
                     }
                 }
@@ -173,14 +233,6 @@
                 // 木有错误
                 notHasError && $.textDetection.consoleLog("猴赛雷 ✪ ω ✪，木有错误 ！", self.options.consoleWrap,"success");
             });
-        },
-
-        /**
-         * 获取input框内容 转为数组
-         * @returns {Array}
-         */
-        getTextData: function () {
-            return this.$inputElm.val().split(/\r?\n|\r/);
         },
 
         /**
