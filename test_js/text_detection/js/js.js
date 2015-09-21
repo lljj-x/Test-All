@@ -53,7 +53,7 @@
                         var reBool = true,
                             matchUrl;
 
-                        for (var i in matchUrlArr) {
+                        for (var i =0;i<matchUrlArr.length;i++) {
                             // url 检测使用一个方法，错误信息 要区分开来，不直接默认使用方法名对应错误信息
 
                             matchUrl = matchUrlArr[i].toString().replace(/(^"*)|("*$)/g, '');
@@ -111,7 +111,7 @@
                             reBool = true;
 
                         // 一行可能存在多个匹配
-                        for (var i in imgTagArr) {
+                        for (var i=0;i<=imgTagArr.length;imgTagArr++) {
                             imgTag = imgTagArr[i].toString();
                             // img 标签未添加 alt/height/width eg : alt alt="" alt = "" alt = " "
 
@@ -135,7 +135,7 @@
                         reBool = true;
                     if(pTagArr){
                         // 完整闭合标签 p
-                        for (var i in pTagArr) {
+                        for (var i=0;i<pTagArr.length;pTagArr++) {
                             $.textDetection.validate.setError(funNam, options, [lineNum,pTagArr[i]]);
                         }
                         reBool = false;
@@ -270,7 +270,6 @@
             new TextDetection(this, $.extend({}, $.textDetection.defaults, options));
         });
     };
-
 
 })(jQuery, window);
 
