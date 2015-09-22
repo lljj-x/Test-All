@@ -103,7 +103,7 @@
                             }
 
                             // ③ 检测链接地址是否 包含 ？
-                            if (matchUrl.indexOf('?') > -1) {
+                            if (matchUrl.indexOf('?') > -1 && matchUrl.indexOf('{track_code}') < 0) {
                                 reBool = false;
                                 $.textDetection.validate.setError(funNam + 'Qmark', options, [lineNum, matchUrl]);
                             }
