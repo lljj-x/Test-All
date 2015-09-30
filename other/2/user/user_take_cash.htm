@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+	<link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='public_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-commission-to-cash" class="hf">
+        <p class="top-nav">
+            <a href="/">五洲会海购</a> > <span>个人中心</span>
+        </p>
+        <div class="user-index-wrap clearfix">
+            <div class="user-conent-warp fr">
+                    <!-- 提现表单-->
+                <p class="bold16 border-bottom pb10">提取现金</p>
+                <form action="" id="to-cash-form" class="user-global-form" method="post">
+                    <label>
+                        <span class="form-label"><span class="required">*</span>开户姓名</span>
+                        <span class="username-wrap">
+                            <input name="username" class="username" maxlength="10" placeholder="请输入开户姓名">
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label"><span class="required">*</span>银行</span>
+                        <span class="bank-wrap">
+                            <select name="bank" class="selected-bank">
+                                <option value="">选择银行</option>
+                                <option value="工商银行">工商银行</option>
+                                <option value="平安银行">平安银行</option>
+                                <option value="中国银行">中国银行</option>
+                                <option value="招商银行">招商银行</option>
+                                <option value="农业银行">农业银行</option>
+                                <option value="建设银行">建设银行</option>
+                            </select>
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label"><span class="required">*</span>银行卡号</span>
+                        <span class="bank-num-wrap">
+                            <input name="bank-num" class="bank-num" placeholder="请输入银行卡号">
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label"><span class="required">*</span>开户行</span>
+                        <span class="bank-name-wrap">
+                            <input name="bank-name" maxlength="50" class="bank-name" placeholder="请输入开户行">
+                        </span>
+                        <div class="cart_icon1 icon-msg">
+                            <div class="msg-drop-box bank-name-drop none">
+                                根据海关规定，免税店、跨境直邮商品需要办理清关手续，需您提供收货人身份信息进行认证。以确保您购买的商品顺利通过海关检查。（五洲会承诺会对您的身份证信息加密保管，绝不对外泄露！）
+                                <span class="triangle-left"><span class="triangle-left"></span></span>
+                            </div>
+                        </div>
+                    </label>
+                    <label>
+                        <span class="form-label"><span class="required">*</span>转出金额</span>
+                        <span class="money-wrap">
+                            <input name="money" class="money" placeholder="请输入转出金额">
+                        </span>
+                    </label>
+                    <p class="label-right mt10">
+                        <a class="btn btn-default js_toCash" href="#" onclick="return false;">确认提现</a>
+                    </p>
+                </form>
+
+                <!-- 隐藏弹窗，提现提示-->
+                <div id="js_pop" class="to-cash-pop tc none">
+                    <p class="title mt50">申请成功！</p>
+                    <p>财务人员会在1~2个工作日内审核批准，请留意提款帐户变化</p>
+                    <p class="mt50"><a href="/m-users-a-cash_list.htm" class="js_getUrl btn btn-default">查看提现记录</a></p>
+                </div>
+                <!-- 隐藏弹窗，提现提示-->
+            </div>
+
+           {include file="user/user_left.htm"}
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js")
+        .wait(function () {
+            // 用户中心佣金提现表单
+            if($("#to-cash-form").length > 0){
+                USER.commissionForm.checkForm("to-cash-form");
+            }
+        });
+</script>
+{/literal}
+</body>
+</html>

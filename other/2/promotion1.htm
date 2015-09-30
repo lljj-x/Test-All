@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/index_min.css?2015080301">
+	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
+
+	{include file="foot_c_js.htm"}
+</head>
+<body>
+	<header id="header">
+		
+		{include file="public_top.htm"}
+	</header>
+
+	{if $active == 1}
+	{literal}
+	<style type="text/css">
+		.prm-wrap{padding-bottom: 60px;}
+		.prm-wrap .banner{background: url({/literal}{$imgcache_url}{literal}images/promotion/yiqingchun/banner.jpg) no-repeat center center; height: 667px;}
+		.prm-prolist{background: url({/literal}{$imgcache_url}{literal}images/promotion/yiqingchun/pagebg.jpg) repeat-y center top; }
+		.coupon-icon{padding: 50px 0;}
+		.coupon-icon a{margin: 0 5px;}
+		.custom-pro{background: url({/literal}{$imgcache_url}{literal}images/promotion/yiqingchun/bsymbg.gif) no-repeat center top;  width: 1102px; padding-top: 100px; margin: 0 auto; padding-bottom: 78px;}
+		.custom-pro .item{width: 1006px; margin: 90px auto 0; padding: 0 30px;}
+		.custom-pro .item .pro-img{float: right;}
+		.custom-pro .item .pro-text{ width: 580px; float: left; padding-top: 15px;}
+		.custom-pro .item .pro-text h4{text-decoration: none; font-size: 36px; }
+		.custom-pro .item .pro-text a{color: #333; text-decoration: none;}
+		.custom-pro .item .pro-text h5{font-size: 28px;  padding: 5px 0 15px;}
+		.custom-pro .item .pro-text .info{font-size: 25px; line-height: 30px; color: #666;}
+		.custom-pro .item .market-price{color: #999; padding: 15px 0; font-size: 22px;}
+		.custom-pro .item .market-price span{text-decoration: line-through;}
+		.custom-pro .item  .bottom strong{ float: left; font-size: 55px; padding: 0 10px; position: relative;}
+		.custom-pro .item  .bottom strong i{ display: block; position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: 45px; background-color: #ffff01;}
+		.custom-pro .item  .bottom a{margin-top:22px; float: right; color: #fff; font-size: 22px; height: 50px; line-height: 50px; padding: 0 15px 0 20px; background-color: #333; text-decoration: none;}
+		.custom-pro .item  .bottom a i{display: inline-block; *zoom: 1; width: 0; height: 0; line-height: 0; border-width: 8px; border-style: solid; border-color: transparent transparent transparent #fff; vertical-align: middle;}
+		.custom-pro .img-left .pro-img{float: left;}
+		.custom-pro .img-left .pro-text{float: right; text-align: right;}
+		.custom-pro .img-left .market-price{text-align: left;}
+	
+		.pro-block{background: url({/literal}{$imgcache_url}{literal}images/promotion/yiqingchun/prowrap-bg.gif) no-repeat center top; position: relative; width: 1102px; margin: 90px auto 0; height: 553px;}
+		.pro-block .title{background: url({/literal}{$imgcache_url}{literal}images/promotion/yiqingchun/title.png) no-repeat center top; width: 581px; height: 121px; position: absolute; left: 50%; top: -30px; margin-left: -290px;}
+		.icon-active-zhekou {background: url({/literal}{$imgcache_url}{literal}images/domeimg/special/icon_active_zhekou.png) no-repeat;}
+
+		.prm-wrap .pro-list{ padding: 150px 0 0 40px;}
+		.prm-wrap .pro-list li { position: relative; z-index: 1; float: left; width: 200px; height: 320px; margin-right: 30px; margin-bottom: 20px; padding: 0 15px; text-align: center; border: 1px solid #e4e4e4; background: #fff; }
+		
+		.prm-wrap .pro-list li .icon-active-zhekou { font-size: 14px; font-weight: bold; line-height: 44px; position: absolute; z-index: 2; top: -1px; left: -1px; display: inline-block; width: 72px; height: 44px; padding-bottom: 10px; text-align: center; color: #fff; *display: inline; *zoom: 1; }
+		
+		.prm-wrap .pro-list li .icon-active-zhekou strong { font-family: Arial; font-size: 30px; font-weight: bold; }
+		.prm-wrap .pro-list li:hover { -webkit-box-shadow: 0 0 10px #999; box-shadow: 0 0 10px #999; }
+		.prm-wrap .pro-list .p-name { font-size: 14px; line-height: 20px; overflow: hidden; height: 40px; margin-bottom: 10px; color: #000; }
+		.prm-wrap .pro-list .p-name a { text-decoration: none; color: #000; }
+		.prm-wrap .pro-list .p-name a:hover { text-decoration: underline; color: #e61773; }
+		.prm-wrap .pro-list .price-buy-wrap .p-price { overflow: hidden; width: 100px; height: 60px; }
+		.prm-wrap .pro-list .price-buy-wrap .p-price strong { font-size: 20px; font-weight: bold; line-height: 30px; display: block; color: #e61773; }
+		.prm-wrap .pro-list .price-buy-wrap .p-price span { font-size: 12px; line-height: 20px; height: 20px; text-decoration: line-through; color: #999; }
+		.prm-wrap .pro-list .price-buy-wrap .buy-now { font-size: 14px; line-height: 32px; display: block; width: 94px; height: 32px; margin-top: 15px; text-decoration: none; color: #fff; background: #e61773; }
+
+		.pro-block-1 .title{background-position: 0 0;}
+		.pro-block-2 .title{background-position: 0 -160px;}
+		.pro-block-3 .title{background-position: 0 -320px;}
+		.pro-block-4 .title{background-position: 0 -480px;}
+		
+	</style>
+	{/literal}
+	
+	
+	<div class="prm-wrap">
+		
+		<div class="banner"></div>
+		<div class="prm-prolist">
+			<div class="coupon-icon tc" id="js_gotCoupon-icon">
+				<a href="javascript:;" data-url="#"><img src="{$imgcache_url}images/promotion/yiqingchun/10.jpg" width="348" height="187"></a>
+				<a href="javascript:;" data-url="#"><img src="{$imgcache_url}images/promotion/yiqingchun/20.jpg" width="348" height="187"></a>
+				<a href="javascript:;" data-url="#"><img src="{$imgcache_url}images/promotion/yiqingchun/30.jpg" width="348" height="187"></a>
+			</div><!-- coupon-icon -->
+
+			<div class="custom-pro">
+				<div class="item img-left clearfix">
+					<a  target="_bland" href="http://www.wzhouhui.com/product392.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-1.jpg" alt=""></a>
+					<div class="pro-text">
+						<h4><a target="_bland" href="http://www.wzhouhui.com/product392.html">深层美白补水，打造紧致Q弹肌</a></h4>
+						<h5>韩国SNP海豹动物补水面膜（10片）</h5>
+						<p class="info">50%天然椰子汁+50%椰子水，集中补充肌肤流失水分，平衡油脂，每天一敷，见证“膜”力时刻！</p>
+						<p class="market-price">市场价：<span>￥199</span></p>
+						<p class="bottom clearfix"><strong ><i></i>￥115</strong> <a  target="_bland" href="http://www.wzhouhui.com/product392.html">立即抢购 <i></i></a></p>
+					</div>
+				</div>
+
+
+				<div class="item clearfix">
+					<a  target="_bland" href="http://www.wzhouhui.com/product267.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-2.jpg" alt=""></a>
+					<div class="pro-text">
+						<h4><a  target="_bland" href="http://www.wzhouhui.com/product267.html">贴心呵护成长，千万妈咪的共同选择</a></h4>
+						<h5>日本原装进口花王宝宝纸尿裤（L54片）</h5>
+						<p class="info">凹凸透气轻柔网层，不紧黏肌肤，更干爽舒适，腰贴式设计，宝宝爱怎么动就怎么动！</p>
+						<p class="market-price">市场价：<span>￥180</span></p>
+						<p class="bottom clearfix"><strong ><i></i>￥155</strong> <a  target="_bland" href="http://www.wzhouhui.com/product267.html">立即抢购 <i></i></a></p>
+					</div>
+				</div>
+
+
+				<div class="item img-left clearfix">
+					<a   target="_bland" href="http://www.wzhouhui.com/product588.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-3.jpg" alt=""></a>
+					<div class="pro-text">
+						<h4><a   target="_bland" href="http://www.wzhouhui.com/product588.html">温和无刺激，准妈咪的最佳选择</a></h4>
+						<h5>澳洲Goat soap羊奶皂随机组合套餐 （100g*3）</h5>
+						<p class="info">新鲜有机山羊奶，保湿滋养，对婴儿湿疹有很好的清洁治疗效果，给孩子最好的呵护。</p>
+						<p class="market-price">市场价：<span>￥96</span></p>
+						<p class="bottom clearfix"><strong ><i></i>￥65</strong> <a  target="_bland"  href="http://www.wzhouhui.com/product588.html">立即抢购 <i></i></a></p>
+					</div>
+				</div>
+
+				<div class="item clearfix">
+					<a  target="_bland" href="http://www.wzhouhui.com/product199.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-4.jpg" alt=""></a>
+					<div class="pro-text">
+						<h4><a  target="_bland" href="http://www.wzhouhui.com/product199.html">每天1杯，开启1天新动力</a></h4>
+						<h5>澳大利亚Devondale德运高钙速溶全脂奶粉（1kg）</h5>
+						<p class="info">来自优质生态牧场奶源，拒绝人工添加与药物激素，含钙量高，补充人体所需蛋白，增强免疫力。</p>
+						<p class="market-price">市场价：<span>￥130</span></p>
+						<p class="bottom clearfix"><strong ><i></i>￥91</strong> <a  target="_bland" href="http://www.wzhouhui.com/product199.html">立即抢购 <i></i></a></p>
+					</div>
+				</div>
+
+			</div><!-- custom-pro -->
+
+
+			<div class="pro-block pro-block-1">
+				<h4 class="title"></h4>
+				<div class="pro-list-wrap">
+					<ul class="pro-list clearfix">
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+					</ul>
+				</div>
+			</div><!-- pro-block-1 -->
+
+			<div class="pro-block pro-block-2">
+				<h4 class="title"></h4>
+				<div class="pro-list-wrap">
+					<ul class="pro-list clearfix">
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+					</ul>
+				</div>
+			</div><!-- pro-block-1 -->
+
+			<div class="pro-block pro-block-3">
+				<h4 class="title"></h4>
+				<div class="pro-list-wrap">
+					<ul class="pro-list clearfix">
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+					</ul>
+				</div>
+			</div><!-- pro-block-1 -->
+
+			<div class="pro-block pro-block-4">
+				<h4 class="title"></h4>
+				<div class="pro-list-wrap">
+					<ul class="pro-list clearfix">
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+						<li>
+							<p class="p-img tc">
+								<a target="_bland" href="http://www.wzhouhui.com/product317.html">
+									<img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="200" height="200" data-original="http://img.wzhouhui.com/wzhl/2015/201508/grid-img/1439157076692-P-2886307.jpg?a=6" ></a></p>
+								<p class="p-name tl"><a target="_bland" href="http://www.wzhouhui.com/product317.html">【保税】喜宝有机芒果香蕉苹果樱桃混合水果泥 190g</a></p>
+								<div class="price-buy-wrap clearfix">
+									<p class="p-price fl"><strong>￥34.00</strong> <span>市场价￥74.00</span></p>
+									<a target="_bland" href="http://www.wzhouhui.com/product317.html" class="buy-now fr">立即抢购</a>
+								</div>
+								<span class="icon-active-zhekou"><strong>4.6</strong>折</span>
+							
+						</li>
+					</ul>
+				</div>
+			</div><!-- pro-block-1 -->
+
+
+		</div>
+
+	</div>
+	
+	{literal}
+	<script type="text/javascript">
+		$(function(){
+			$('#js_gotCoupon-icon').on('click','a',function(){
+				var url = $(this).data("url");
+
+				layer.msg('加载中', {icon: 16});
+				
+				$.get(url,function(data){
+					layer.closeAll();
+
+					if(data.status == 1){
+						layer.alert("领取成功");
+					}else if(data.status == 2){
+						layer.alert("不能重复领取");
+					}else if(data.status == 3){
+						layer.alert("优惠券无效");
+					}else if(data.status == 4){
+						layer.alert(data.msg);
+					}else if(data.status==0){
+						window.location.href = '/m-users-a-sign.html?ref='+window.location.href;
+					}
+				})
+				
+			})
+		})
+	</script>
+	{/literal}
+	{/if}
+
+
+	<footer id="footer">
+		<div id="copyrightWrap">
+			{include file="left_bar.htm"}
+
+			<p class="copyright tc f14">copyright 深圳市君美瑞信息科技有限公司 版权所有 2015-2020粤ICP备15024802号-1</p>
+			<div class="copyright tc pt10"><img src="http://aliimg.wzhouhui.com/icon_foot_01.png" width="81" height="30" />&nbsp;<img src="http://aliimg.wzhouhui.com/icon_foot_02.png" width="80" height="30" />&nbsp;<img src="http://aliimg.wzhouhui.com/icon_foot_03.png" width="80" height="30" />&nbsp;<img src="http://aliimg.wzhouhui.com/icon_foot_04.png" width="80" height="30" />&nbsp;<img src="http://aliimg.wzhouhui.com/icon_foot_05.png" width="80" height="30" />&nbsp;<img src="http://aliimg.wzhouhui.com/icon_foot_06.png" width="80" height="30" /></div>
+		</div><!-- #copyrightWrap -->
+	</footer>
+
+</body>
+</html>

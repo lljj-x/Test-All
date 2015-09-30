@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/goods_min.css?2015092801">
+	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
+</head>
+<body>
+	<header id="header">
+		
+		{include file="public_top.htm"}
+	</header>
+
+
+	<div class="wrap pb40">
+		
+		<!-- 主体部分 start -->
+		<div class="js_mainBgWrap">
+
+			<div class="mainWrap w1200">
+				<div class="crumbs">
+					<a href="/">五洲会海购</a> > {$nav_str1} ><span>{$goods.goods_title}</span>
+				</div><!-- .crumbs -->
+				
+				<div class="proInfoWrap clearfix">
+					<div class="pro_img">
+						<div class="n_bigImg" id="js_n_bigImg" ectype="jqzoom_relative">
+							<div class="jqzoom" id="js_jqzoom">
+								<!-- 滑块-->  
+								<div class="magnifyingBegin"></div>
+							    <!-- 放大镜显示的图片 -->
+							    <div class="magnifyingShow"><img src="{$goods.original_img}"></div>
+
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" class="myImgs" width="440" height="440" bigimg="{$goods.goods_grid}" data-original="{$goods.original_img}" alt="">
+							</div>
+							{if $goods.source!=1}<span class="c_tagbg icon-goods-mark">{if $goods.source == 2} 极速免税{elseif $goods.source==3}海外直邮{/if}</span>{/if}
+						</div><!--end .n_bigImg-->
+
+						<div class="n_thumbImg clearfix" id="js_n_thumbImg">
+							<a href="javascript:void(0);" class="spec_forward fl" id="js_spec_forward"><i class="icon icon_forward"></i></a>
+
+							<div class="n_thumbImg_item fl">
+								<ul class="js_scrollableDiv clearfix">
+								<li class="thumbnail_list active">
+										<a href="javascript:void(0);"><img src="{$goods.goods_thumb}" data-normal-img="{$goods.goods_grid}" bigimg="{$goods.original_img}" width="74" height="74"/></a>
+								</li>
+								{foreach from=$pictures key=k item=v}
+									<li class="thumbnail_list">
+										<a href="javascript:void(0);"><img src="{$v.thumb_url}" data-normal-img="{$v.img_url}" bigimg="{$v.img_original}" width="74" height="74"/></a>
+									</li>
+                                {/foreach}
+									
+								</ul>
+							</div><!--end .n_thumbImg_item-->
+
+							<a href="javascript:void(0);" class="spec-backward fl" id="js_spec-backward"><i class="icon icon_backward"></i></a>
+						</div><!--end .n_thumbImg-->
+					</div><!-- .pro_img -->
+
+					<div class="pro_info">
+						<p class="orig-country">
+							<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="31" height="31" data-original="/temp/skin1/dist/images/domeimg/country/{$goods.country}.png" alt=""/>
+							<span>{$goods.goods_remarks}</span>
+						</p>
+						<h3 class="product-title"><strong>{$goods.goods_title}</strong> </h3>
+						<p class="subTitle">{$goods.maidian}</p>
+
+                        {if $goods.end_time >0}
+                        <div class="spike-warp">
+                            <div class="spike-bg js_spike" data-start-time='{$goods.start_time}' data-end-time='{$goods.end_time}'>
+                                <p class="countdown-content">
+                                    <span class="vm js_text">距开始:</span>
+                                    <span class="js_countdown">
+                                        <b>00</b><span>时</span>
+                                        <b>00</b><span>分</span>
+                                        <b>00</b><span>秒</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        
+                        {literal}
+                            <style>
+                                .spike-warp{position: relative; overflow: hidden;}
+                                .spike-bg{display:none;width: 100%;height: 40px;background: url("{/literal}{$imgcache_url}{literal}images/domeimg/spike_bg.jpg") no-repeat}
+                                .spike-bg.active{background-image: url("{/literal}{$imgcache_url}{literal}images/domeimg/spike_active_bg.jpg");}
+                                .countdown-content{color: #454545;font-size: 14px;line-height: 40px;position: relative;left: 150px;}
+                                .spike-bg.active .countdown-content{color: #ffffff;}
+                                .countdown-content .js_countdown b{vertical-align: middle;font-size: 18px;padding: 0 5px;font-weight: 400;}
+                                .countdown-content .js_countdown span{vertical-align: middle;}
+                            </style>
+
+                            <script>
+                                $(function () {
+                                    window.Spike = {
+                                        startText : '距开始：',
+                                        inProgresstext : '距结束：',
+                                        setPrice : function () {
+											// 切换数量状态
+											$(".js_spike_num").toggle();
+
+                                            // 同时设置 当前 css
+                                            this.$elm.toggleClass("active");
+
+                                            // 切换价格
+                                            var $e = $("#js_currentPrice");
+                                            var tem = $e.text();
+                                            $e.text($e.data("activity-price"));
+                                            $e.data("activity-price",tem);
+
+                                            // 切换折扣
+                                            $e = $(".js_zhekou");
+                                            tem = $e.text();
+                                            $e.text($e.data("activity-zhekou"));
+                                            $e.data("activity-zhekou",tem);
+                                        },
+                                        init : function(){
+                                            this.$elm = $(".js_spike");
+                                            var self = this;
+
+                                            var startTimeSy = this.$elm.data("start-time");
+                                            var endTimeSy = this.$elm.data("end-time");
+                                            var durationSy =  endTimeSy - startTimeSy;
+
+                                            var $jstime = this.$elm.find(".js_countdown");
+                                            var $jsText = this.$elm.find(".js_text");
+
+                                            if(GLOBAL.otherGlobal.getTime(startTimeSy)){
+                                                this.$elm.show();
+                                                // 开始倒计时 （暂未开始）
+                                                $jsText.text(Spike.startText);
+
+                                                self.setSyTime($jstime,startTimeSy, function () {
+                                                    $jsText.text(Spike.inProgresstext); // 转入结束倒计时
+                                                    self.setPrice();
+                                                    self.setSyTime($jstime,durationSy, function () {
+                                                        // 活动已结束
+                                                        self.end($jstime,$jsText);
+                                                    })
+                                                });
+                                            }else if(GLOBAL.otherGlobal.getTime(endTimeSy)){
+                                                this.$elm.show();
+                                                // 结束倒计时 （进行中）
+                                                $jsText.text(Spike.inProgresstext);
+                                                self.setPrice();
+
+                                                self.setSyTime($jstime,endTimeSy, function () {
+                                                    // 活动已结束
+                                                    self.end($jstime,$jsText);
+                                                });
+                                            }else{
+                                                // 活动结束
+                                                self.end($jstime,$jsText);
+                                            }
+                                        },
+                                        end: function ($jstime,$jsText) {
+                                            this.$elm.hide();
+                                            this.setPrice();
+                                            $jstime.html('<b>00</b><span>时</span><b>00</b><span>分</span><b>00</b><span>秒</span>');
+                                        },
+                                        setSyTime : function (jQelm,sytime,callBack) {
+                                            // 倒计时
+                                            var $this = jQelm;
+                                            var currentT = GLOBAL.otherGlobal.getTime(sytime);
+                                            if(currentT == false){
+                                                callBack();
+                                                return false;
+                                            }else{
+                                                $this.html('<b>' + currentT.hours +  '</b><span>时</span><b>' + currentT.minutes + '</b><span>分</span><b>' + currentT.seconds + '</b><span>秒</span>');
+                                            }
+                                            sytime --;
+                                            setTimeout(function () {
+                                                Spike.setSyTime(jQelm,sytime,callBack);
+                                            },1000);
+                                        }
+                                    };
+                                    Spike.init();
+                                });
+                            </script>
+                        {/literal}
+
+                        {/if}
+
+						<div class="pro_priceWrap clearfix">
+							<span class="pro_price fl" id="js_currentPrice" value="{$goods.shop_price}" data-activity-price="￥{$goods.promote_price}">￥{$goods.shop_price}</span>
+							<span class="p_market_price fl">市场价：￥{$goods.market_price}</span>
+							<span class="icon icon_zhekou fl"><strong class="js_zhekou" data-activity-zhekou="{$goods.pro_zhekou}">{$goods.zhekou}</strong>折</span>
+							<div class="m-priceIntro">
+								<strong>关税说明<i class="icon iron-down"></i></strong>
+								<div class="introDet">
+									<span class="mask"></span>
+									<p class="dotted">税费 = 不含税价格 * 件数 * 商品税率</p>
+									{if $goods.guanshui}
+									   <p>{$goods.guanshui}</p>
+									{else}
+									<p>根据海关规定，本商品适用税率为 <b id="js_skuTaxRate">10%</b>,<br>若订单总税额 ≤ 50元，海关予以免征。</p> 
+									{/if}
+									<i class="triup"></i>
+									<i class="tri_bgf"></i>
+								</div>
+							</div>
+						</div><!-- .pro_priceWrap -->
+						
+						<!-- 优惠 -->
+						{if $promotion.name neq ''}
+						<p class="preferential">
+							<span class="p-tit f14">优惠</span>
+							<span class="p-info f14">
+								<strong>优惠券</strong>
+								{$promotion.name}
+								<a href="/coupon.html">立即领取</a>
+							</span>
+						</p><!-- .preferential -->
+						{/if}
+						<!-- 运费 -->
+						<p class="postage">
+							<span class="p-tit f14">运费</span>	
+							<span class="p-info f14">{if $goods.shipping_fee!=0}{$goods.shipping_fee}{else}免运费{/if}</span>
+						</p><!-- .postage -->
+						
+						<div class="buyBoxWrap">
+							<form action="" method="post">
+								<div class="js_general_num js_spike_num buyNumWrap clearfix">
+									<div class="p-tit fl f14">数量</div>
+									<div class="p-info fl clearfix">
+										<div class="ctrnum-wrap fl">
+											<a href="javascript:void(0);" class="btn_reduce" onclick="GLOBAL.cart.reduce();"><i class="c_tagbg"></i></a>
+											<input class="text" id="js_qty" onkeyup="GLOBAL.cart.input_quantity(this);" value="1">
+											<a href="javascript:void(0);" class="btn_add" onclick="GLOBAL.cart.add();"><i class="c_tagbg"></i></a>
+										</div>
+										<div class="domeTips fl">
+											<span class="f14">{if $goods.is_on_sale && $goods.goods_number > 0}库存充足{elseif !$goods.goods_number}已售完{else}已下架{/if}</span>
+											<div id="js_overAmountTip_1" class="overAmountWrap">
+												订单超过500元，海关将征收关税，建议分次购买
+												<i class="triright"></i>
+												<i class="tri_bgf3"></i>
+											</div>
+
+											<div id="js_overAmountTip_2" class="overAmountWrap">
+												抱歉，您已超过海关限额<a href="javascript:void(0);" class="overAmount">￥1000</a>，请分次购买
+												<i class="triright"></i>
+												<i class="tri_bgf3"></i>
+												<div class="tips_overAmount">
+													<div class="tip-tri"></div>
+													<div class="tip-mask"></div>
+													<div class="tip-body">
+														<p>海关规定：</p>
+														<p>① 消费者购买进口商品，以“个人自用，合理数量”为原则，每单最大购买限额为1000元人民币。</p>
+														<p>② 如果订单只含单件不可分割商品，则可以超过1000元限值。</p>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div><!-- .buyNumWrap -->
+
+								<div class="js_spike_num buyNumWrap clearfix none">
+									<div class="p-tit fl f14">数量</div>
+									<div class="p-info fl clearfix">
+										<div class="ctrnum-wrap fl">
+											<input class="text" disabled value="1">
+										</div>
+										<div class="domeTips fl">
+											<span class="f14 in-stock">仅剩{$goods.promote_number}件</span>
+										</div>
+									</div>
+								</div><!-- .buyNumWrap -->
+
+								<p class="buyTips">
+									{if $goods.xuzhi}{$goods.xuzhi}{else}购买须知：以商品实际销售价格作为完税价格(征税基数)参照行邮税税率征收税款。应征税额在50元(含50元)以下的，海关予以免征。{/if}
+								</p>
+
+								<div class="buy_btnWrap mb20 clearfix">
+								{if $goods.is_on_sale && $goods.goods_number > 0}
+									<div class="buy_btn fl">
+										<a href="javascript:void(0);" class="addCart addToCart" id="js_addCart" gid="{$goods.goods_id}" num="1" data-proimg="{$goods.goods_grid}" onclick="GLOBAL.cart.addcart(this);">加入购物车</a>
+										<a href="javascript:void(0);" class="buyBtn buyNow" id="js_buyBtn" gid="{$goods.goods_id}" num="1" onclick="GLOBAL.cart.addcart(this);">立即购买</a>
+									</div><!-- .buy_btn -->
+                                {elseif !$goods.goods_number}
+									<div class="buy_btn fl">
+										<a href="javascript:void(0);" class="buyBtn sold-out disabled">已售完</a>
+									</div><!-- .buy_btn -->
+                                {else}
+									<div class="buy_btn fl">
+										<a href="javascript:void(0);" class="buyBtn sold-out disabled">已下架</a>
+									</div><!-- .buy_btn -->
+                                {/if}
+									<div class="prcodeWrap fr clearfix">
+										<span class="c_tagbg icon_prcode fl"></span>
+										<i class="iron_down fl"></i>
+										<span class="txt fl">扫一扫<br/><strong>手机购买更优惠</strong></span>
+										<div class="show_prcode">
+											<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="100" height="100" data-original="{$imgcache_url}images/domeimg/qr_code_weixin.jpg?2015082701" alt="">
+											<i class="triup"></i>
+											<i class="tri_bgf"></i>
+										</div>
+									</div><!-- end .prcodeWrap -->
+								</div><!-- .buy_btnWrap -->
+
+								<!--分享-->
+								<div class="share-wrap clearfix">
+									<span class="share-tit fl">分享给朋友：</span>
+
+									<div class="bshare-custom fl"><div class="bsPromo bsPromo2"></div><a title="分享到微信" class="bshare-weixin" href="javascript:void(0);"></a><a title="分享到新浪微博" class="bshare-sinaminiblog" href="javascript:void(0);"></a><a title="分享到QQ空间" class="bshare-qzone"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+								</div><!-- .share-wrap -->
+								<!--分享-->
+							</form>
+						</div><!-- .buyBoxWrap -->
+
+					</div><!-- .pro_info -->
+				</div><!-- .proInfoWrap -->
+				
+				<!-- 相关推荐产品 -->
+				{if $recommendGoods}
+				<div class="pro-recommendList">
+					<h1 class="tit"><strong>相关推荐 /</strong> 购买了该商品的人还买了这些</h1>
+
+					<ul class="pro_list clearfix">
+					
+						{foreach from=$recommendGoods key=k item=v}
+		                    <li>
+		                        <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="180" height="180" data-original="{$v.goods_grid}" alt=""></a></p>
+		                        <p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+		                        <div class="p_price_cart_wrap clearfix">
+		                            <p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
+		                          <span class="zhekou fr"><strong>{$v.promote_zhekou}</strong>折</span>
+		                          
+		                        </div>
+		                        
+		                        
+		                    </li>
+                        {/foreach}
+						
+					</ul><!-- .pro_list -->
+				</div><!-- .pro-recommendList -->
+                {/if}
+				<!-- 最近浏览，商品详情，用户评价 -->
+				<div id="js_mainBtmWrap" class="mainBtmWrap clearfix">
+					<div class="siderBox fl">
+						<!-- 最近浏览 -->
+						<h1 class="sider_title">最近浏览商品</h1>
+						<ul class="recentlyViewedProList">
+						{foreach from=$historyList key=k item=v}
+                            <li>
+                                <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="240" height="240" data-original="{$v.goods_grid}" alt=""></a></p>
+                                <p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+                                <div class="p_price_cart_wrap clearfix">
+                                    <p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
+                                    {if $v.review_count}<span class="evaluation fr"><strong>{$v.review_count}</strong>人已评价</span>{/if}
+                                </div>
+                                
+                            </li>
+                        {/foreach}
+							
+						</ul>
+					</div><!-- .siderBox -->
+
+					<div class="goodsDetailWrap fr" id="js_goodsDetailTop">
+						<div class="P_nav">
+							<a id="js_aBuyBtn" class="aBuyBtn buyNow {if !$goods.is_on_sale || $goods.goods_number==0}disabled{/if}" style="display: none;" href="javascript:void(0);" gid="{$goods.goods_id}" num="1" onclick="GLOBAL.cart.addcart(this);">立即购买</a>
+							<a id="js_aAddCart" class="aAddCart addToCart mr10" style="display: none;" href="javascript:void(0);" gid="{$goods.goods_id}" num="1" data-proimg="{$goods.goods_grid}" onclick="GLOBAL.cart.addcart(this);">加入购物车</a>
+						
+							<span class="active" >商品详情<i></i></span>
+							<span class="is_userRating">用户评价<em> <b id="commentCounts" class="commentCount">{$goods.review_count}</b> </em><i></i></span>
+						</div>
+						
+						<div id="goodsDetailMain">
+							<!-- 商品详情 -->
+							<div class="goodsDetailItem">
+								<div id="js_goodsDetail" class="goodsDetail" style="margin-top:20px;">
+									<!-- info_head section -->
+									{if $goods.source == 2 || $goods.source == 3}
+									<div class="info_head">
+										{if $goods.source == 2 }
+										<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="870" height="440" data-original="{$imgcache_url}images/domeimg/goodsDetail/goods_detail_head2.jpg" alt="保税">
+										{else}
+										<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="870" height="440" data-original="{$imgcache_url}images/domeimg/goodsDetail/goods_detail_head1.jpg" alt="海外直邮">
+										{/if}
+									</div>
+									<div class="packing_tips">
+										<h3>新老包装说明</h3>
+										<p>由于原产地国家包装会有变更，进货批次不同，可能存在不同包装和日期，五洲会进行随机发货。因此，您收到的商品可能与图片包装不同，但均为正品，请放心选购！商品收货时，请仔细验货，如非质量问题，不接受因为包装问题而退货退款，五洲会将一如既往地为您提供高品质的产品和服务！</p>
+									</div>
+									{/if}
+									<!-- .info_head -->
+									<!-- .packing_tips -->
+
+									<!-- 中国平安banner -->
+									<p class="mt10 mb10 tc">
+										<img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/domeimg/goodsDetail/authenticity_guarantee.jpg" width="870" height="80" alt="">
+									</p>
+									<!-- 产品详情 -->
+									<div style="text-align: center;"><img alt="" src="http://des.wzhouhui.com/uploads/2015/201507/heditor/201507281745496094.jpg"></div>
+									
+									{$goods.goods_desc}
+			
+									<!-- info_foot section -->
+									<div class="info_foot pt20">
+										<p class="userId_tips mb30 pr">
+											<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="870" height="430" data-original="{$imgcache_url}images/domeimg/goodsDetail/goods_detail_user.jpg" alt="实名认证是中华人民共和国规定海关的保证您合法权益的重要举措,请您配合完成以保证您的合法权益！请您配合上传身份证正反面照片，并使用真实姓名。五洲会将对您的身份证信息将严格保密绝对不对外泄露！">
+											<a href="http://www.wzhouhui.com/help/21/" class="viewMore pa" target="_blank"> >>查看更多 </a>
+										</p>
+
+										<p class="mb30"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="870" height="50" data-original="{$imgcache_url}images/domeimg/goodsDetail/goods_detail_tips.jpg" alt="五洲会囤货小贴士"></p>
+
+										<ul class="stockpile_tips clearfix">
+											<li>
+												<h3 class="tit">1.关于发货</h3>
+												<p class="cont">五洲会采用保税区发货和原产地只有两种方式：保税区发货：五洲会从海外直接购买产品、批量运输至国内保税仓，全程接受海关监督。原产地直邮：为了丰富您的购物体验，五洲会部分商品采取海外定制购买跨国邮寄，我们会代您清关。</p>
+											</li>
+											<li>
+												<h3 class="tit">2.关于时间</h3>
+												<p class="cont">五洲会海购与广州保税区、杭州保税区、东莞保税区等6大保税区均有合作，订单在<strong>24小时之内</strong>推送至海关发货，<strong>周六日海关休息，不清关保税区收货需5—8天</strong>，具体时间受海关海关放行速度影响。</p>
+											</li>
+											<li class="lastLi">
+												<h3 class="tit">3.关于关税</h3>
+												<p class="cont">五洲会将依法代您向中国海关申报以及纳税，每人每天总税费不大于50元免税，大于50元需顾客自行缴纳行邮税。</p>
+												<p class="p_view_more"><a href="http://www.wzhouhui.com/help/26/" target="_blank"> >>查看更多 </a></p>
+											</li>
+										</ul><!-- .stockpile_tips -->
+									</div><!-- .info_foot -->
+								</div><!-- .goodsDetail -->
+							</div>
+							
+							<!-- 用户评价 -->
+							<div class="goodsDetailItem none">
+							
+							
+								<div id="js_userRating" class="userRating">
+								
+								</div><!-- .userRating -->
+
+								<!-- 分页 -->
+								<div id="Pagination" class="tr flickr"></div> 
+							</div>
+							
+							
+						</div><!-- goodsDetailMain-->
+					</div><!-- .goodsDetailWrap -->
+
+				</div><!-- .mainBtmWrap -->
+
+			</div><!-- .mainWrap -->
+
+		</div><!-- .js_mainBgWrap -->
+		<!-- 主体部分 end -->
+
+	</div><!-- .wrap -->
+
+
+	<footer id="footer" class="footer-bgf3">
+		
+		{include file="foot.htm"}
+	</footer><!--end #footer -->
+	
+	<!-- 评价的总数量 -->
+	<input type="hidden" value="/fun/?act=reviewList&pageSize=10&goods_id={$goods.goods_id}" id="js_pageCountUrl"/>
+	<input type="hidden" value="{$goods.review_count}" id="js_pageCount"/>
+       <input type='hidden' id='hidden-goodsId' value='{$goods.goods_id}'/>
+<!-- 用户评价模板 -->
+{literal}
+<script id="userRating_load" type="text/html">
+	<ul class="rateInfo clearfix">
+		<li class="first clearfix">
+			<span class="start start_{{ d.list.allStar }} fl"><i class="icon"></i></span>
+			<span class="goodPercent fl"><i>{{ d.list.goodPercent }}</i>%好评</span>
+			<span class="comnum fl">共有<strong>{{ d.list.comnum }}</strong>个评论</span>
+		</li>
+	</ul>
+
+	<div class="commWrap">
+	{{# for(var i = 0, len = d.list.eachInfoList.length; i < len; i++){ }}
+		<div class="eachInfo last clearfix">
+			<ul class="commItem_left fl">
+				<li class="commItem_txt">{{ d.list.eachInfoList[i].commItem_txt }}</li>
+				<li class="commItem_date">{{ d.list.eachInfoList[i].commItem_date }}</li>
+				<li class="commItem_showImg">
+					<div class="pic_list clearfix js_smallPicList">
+					{{# for(var j = 0, len_pic = d.list.eachInfoList[i].pic_list.length; j < len_pic; j++){ }}
+						<a href="javascript:void(0);"><img src="{{ d.list.eachInfoList[i].pic_list[j].img }}" width="80" height="80" alt=""></a>
+					{{# } }}
+					</div>
+
+					<div class="showBigImgList none js_showBigImgList">
+						<a href="javascript:void(0);" class="showPic_forward direction-iron fl js_showPicForward"></a>
+
+						<div class="n_thumbImg_item fl">
+							<ul class="js_scrollableDiv clearfix">
+							{{# for(var k = 0, len_thunbimg = d.list.eachInfoList[i].n_thumbImg_item.length; k < len_thunbimg; k++){ }}
+								<li class="thumbnail_list">
+									<img src="{/literal}{$imgcache_url}{literal}images/domeimg/lazyload1.gif" data-src-img="{{ d.list.eachInfoList[i].n_thumbImg_item[k].src_img }}" height="300"/>
+								</li>
+							{{# } }}
+							</ul>
+						</div>
+
+						<a href="javascript:void(0);" class="showPic_backward direction-iron fl js_showPicBackward"></a>
+						<a href="javascript:void(0);" class="c_tagbg icon-close js_closeShowBigImg"></a>
+					</div>
+					
+				</li>
+			</ul>
+
+			<ul class="commItem_right fr">
+				<li class="account">{{ d.list.eachInfoList[i].account }}</li>
+				<li><span class="start_small start_small_{{ d.list.eachInfoList[i].person_star }}"><i class="icon"></i></span></li>
+			</ul>
+		</div>
+	{{# } }}
+	</div>
+</script>
+
+
+
+
+	<script>
+		$LAB.script("jquery.jcarousellite.min.js")
+			.wait()
+			.script("laytpl.min.js")
+			.script("jquery.pagination.min.js")
+			.wait()
+			.script("goods.min.js?2015090101")
+			.wait(function(){
+
+			})
+	</script>
+	
+	
+	
+	{/literal}
+</body>
+</html>

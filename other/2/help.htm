@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/other_min.css">
+</head>
+<body>
+	<header id="header">
+	
+			{include file="public_top.htm"}
+	</header>
+
+
+	<div class="js_mainBgWrap">
+		<div class="help-center-main">
+			<h1 class="help-center-tit"><a href="#">五洲会海购</a> > <span>帮助中心</span></h1>
+			
+			<div class="help-center-wrap clearfix">
+				<div class="left-nav fl">
+					<ul class="nav" id="js_leftNavWrap">
+					{foreach from=$articleList item=v}
+						<li class="top  expanded">
+							<h3 class="tit"><i class="c_tagbg icon-help-shopping"></i>{$v.cat_name}<i class="c_tagbg icon-help-arr"></i></h3>
+							<ul class="subnav">
+							{foreach from=$v.list item=vL}
+								<li class="leaf"><a href="{if $vL.url_title eq ''}/help/{$vL.article_id}/{else}{$vL.url_title}{/if}" {if $vL.article_id eq $smarty.get.id}class="active"{/if}>{$vL.title}</a></li>
+							{/foreach}
+								
+							</ul>
+						</li>
+						{/foreach}
+						<!-- <li class="top expanded">
+							<h3 class="tit"><i class="c_tagbg icon-help-pay"></i>支付配送<i class="c_tagbg icon-help-arr"></i></h3>
+							<ul class="subnav">
+								<li class="leaf"><a href="#">配送方式</a></li>
+								<li class="leaf"><a href="#">运费计算</a></li>
+								<li class="leaf"><a href="#">物流跟踪</a></li>
+							</ul>
+						</li>
+						<li class="top expanded">
+							<h3 class="tit"><i class="c_tagbg icon-help-service"></i>售后服务<i class="c_tagbg icon-help-arr"></i></h3>
+							<ul class="subnav">
+								<li class="leaf"><a href="#">退换货政策</a></li>
+								<li class="leaf"><a href="#">取消订单</a></li>
+								<li class="leaf"><a href="#">退款流程</a></li>
+								<li class="leaf"><a href="#">退款说明</a></li>
+							</ul>
+						</li>
+						<li class="top expanded">
+							<h3 class="tit"><i class="c_tagbg icon-help-aboutus"></i>关于五洲会<i class="c_tagbg icon-help-arr"></i></h3>
+							<ul class="subnav">
+								<li class="leaf"><a href="#">公司介绍</a></li>
+								<li class="leaf"><a href="#">联系我们</a></li>
+								<li class="leaf"><a href="#">关注我们</a></li>
+							</ul>
+						</li> -->
+					</ul>
+				</div>
+
+				<div class="right-content fr">
+					<h3 class="content-tit">{$articleInfo.title}</h3>
+
+					<div class="content">
+						{$articleInfo.content|html_entity_decode}
+					</div>
+				</div>
+			</div><!-- .help-center-wrap -->
+
+		</div><!-- .help-center-main -->
+	</div><!-- .js_mainBgWrap -->
+
+	
+
+	<footer id="footer" class="footer-bgf3">
+	{include file="foot.htm"}
+	</footer><!--end #footer -->
+{literal}
+	<script>
+		$LAB.script("")
+			.wait(function(){
+
+				$(function(){
+					$("#js_leftNavWrap").on("click",".tit",function(){
+						var $this = $(this),
+							$thisParent = $this.parent(".top");
+
+						if($thisParent.hasClass('expanded')){
+							$thisParent.removeClass('expanded').addClass('collapsed').find(".subnav").hide();
+						}else{
+							$thisParent.removeClass('collapsed').addClass('expanded').find(".subnav").show();
+						}
+					});
+				});
+			})	
+	</script>
+{/literal}
+</body>
+</html>

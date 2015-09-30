@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file="top.htm"}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/business.css">
+</head>
+<body>
+<header id="header">
+    {include file="public_top.htm"}
+</header>
+
+<div class="wrap">
+    {*
+    //
+    英文页面 请在后面class 加上 lang-en
+    *}
+    <div id="business-wrap" class="lang-en">
+        <section class="banner">
+            <div class="content w990">
+                <h2 class="title">BECOME OUR PARTNER</h2>
+                <p>
+                    <span class="outline">
+                        About Wuzhouhui Oversea Shopping
+                    </span>
+                </p>
+                <p class="language">
+                    语言（Language）：<a href="{$DOMAIN}/business/1/">简体中文</a>丨 <a href="{$DOMAIN}/business/2/">English</a>
+                </p>
+            </div>
+        </section>
+        <section class="section-list">
+            <div class="w990">
+                <h3 class="title">
+                    <strong class="font1">About Us</strong>
+                </h3>
+                <p class="content">
+                    Wuzhouhui Oversea Shopping is a project of Globalegrow Inc., a public listed company in China with eight years of export e-commerce experience. In a direction opposite to our export business, Wuzhouhui’s mission is to introduce the best oversea products into China, which is exactly what our name Wuzhouhui means literally in Chinese.
+                </p>
+            </div>
+        </section>
+        <section class="hasbg section-list">
+            <div class="w990">
+                <h3 class="title">
+                    <strong class="font2">Our Achievement</strong>
+                </h3>
+                <p class="content">
+                    Started from late 2013, when the Chinese government first initiated the policy of cross-border bonded area e-commerce, Wuzhouhui has made enormous progress. We currently have multiple third-party-platform web-stores, our own PC shopping mall and app; we have initiated six  bonded-area warehouses in Guangzhou and Hangzhou, and are preparing a 12000 square-meters self-operated bonded area warehouse in Ningbo. We have an O2O distributional system connecting more than 10000 individual agents, which is increasing every day. We have built partnership with global brands like Salus, Thompson, Sana Expert, Leaders, Frufe, The Goat Skincare, Brauer, Freedom Food, Pure Origins, Hyperbiotics, Thinkbaby, Jamison, Comotomo, etc. Our categories range from maternal& child, healthy & beauty, food & nutrition, beauty & perfume, home & electronics, apparel & handbags.
+                </p>
+            </div>
+        </section>
+        <section class="section-list">
+            <div class="w990">
+                <h3 class="title">
+                    <strong class="font3">Join Us</strong>
+                </h3>
+                <p class="content">
+                    We would like to invite all reputable and credible oversea brands and factories to become our partner in promoting valuable oversea brands and products into the China market. With your market-tested brands and products, our rich marketing experience, our ample distributional channels, we believe we can realize the most value of your brand and bring the best service and products to the Chinese customers at the same time.
+                </p>
+                <p class="partner">
+                    <a href="javascript:;" class="btn btn-default btn-business" id="js_toggleForm">Apply for our global partnership</a>
+                </p>
+            </div>
+        </section>
+        <section class="hasbg section-list none" id="js_sectionForm">
+            <div class="w990">
+                <form action="?lang=2&subit=1" class="user-global-form" method="post" id="js_businessForm">
+                    <label>
+                        <span class="form-label">Supplier Name :</span>
+                        <span>
+                            <input maxlength="50" type="text" name="supplier-name" class="supplier-name" value=""/>
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label">Products and Services :</span>
+                        <span>
+                            <input maxlength="100" type="text" name="supplier-service" class="service" value=""/>
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label">Location :</span>
+                        <span>
+                            <input maxlength="100" type="text" name="supplier-location" class="supplier-location" value=""/>
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label">Contact Person :</span>
+                        <span>
+                            <input maxlength="20" type="text" name="supplier-contact" class="supplier-contact" value=""/>
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label">Email :</span>
+                        <span>
+                            <input type="text" name="supplier-email" class="supplier-email" value=""/>
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label">Telephone Number :</span>
+                        <span>
+                            <input maxlength="13" type="tel" name="supplier-tel" class="supplier-tel" value=""/>
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label">Website :</span>
+                        <span>
+                            <input maxlength="100" type="text" name="supplier-site" class="supplier-site" value=""/>
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label">Introduction :</span>
+                        <span class="address_street_wrap">
+                            <textarea maxlength="255" name="supplier-introduction" class="supplier-introduction" ></textarea>
+                        </span>
+                    </label>
+                    <p class="label-right mt30">
+                        <input type="submit" class="submit btn btn-default" value="Submit"/>
+                    </p>
+                </form>
+                <p class="success-msg none" id="js_successMsg">
+                    Submit is successful,we will contact you as soon as possible!<br/>
+                    Or call the business phone:(0755) 86960413-8018
+                </p>
+            </div>
+        </section>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file="foot.htm"}
+</footer><!--end #footer -->
+
+{literal}
+<script>
+    $LAB.script("jquery.validate.min.js")
+            .wait(function () {
+                var phoneMsg;
+                var $form = $("#js_businessForm");
+                if($("#business-wrap").hasClass("lang-en")){
+                    $.extend($.validator.messages, {
+                        required: "can not be empty。",
+                        email: "Please enter a valid E-mail.",
+                        url: "Please enter a valid URL.",
+                        rangelength: $.validator.format("Please enter a value between {0} and {1} characters long.")
+                    });
+                    phoneMsg = "Please write down correct phone number.";
+                }else{
+                    $.extend($.validator.messages, {
+                        required: "必须输入",
+                        email: "请输入正确格式的电子邮件",
+                        url: "请输入合法的网址",
+                        rangelength: $.validator.format("输入长度介于 {0} 和 {1} 之间")
+                    });
+                    phoneMsg = "请输入正确的电话或者手机号码";
+                }
+
+                jQuery.validator.addMethod("businessTel",function(value, element) {
+                            var length = value.length;
+                            var mobile =  /^(((13[0-9]{1})|(15[0-9]{1})|(17[6-8]{1})|(14[5-7]{1})|(18[0-9]{1}))+\d{8})$/;
+                            var tel = /^0\d{2,3}-?\d{7,8}$/;
+                            return this.optional(element) || (length == 11 && mobile.test(value))|| (tel.test(value));
+                        },phoneMsg
+                );
+
+                $.validator.setDefaults({
+                    debug: false,
+                    success: "valid",
+                    ignore: ""
+                });
+
+                $form.validate({
+                    errorClass: "form-error",
+                    wrapper: "p",
+                    success: function (label) {
+                        label.remove();
+                    },
+                    errorPlacement: function (error, element) {
+                        element.parent().parent().find(".error").remove();
+                        error.addClass("error").appendTo(element.parent().parent());
+                    },
+                    rules: {
+                        "supplier-name": {
+                            required: true,
+                            rangelength: [1, 50]
+                        },
+                        "supplier-service": {
+                            required: true,
+                            rangelength: [1, 100]
+                        },
+                        "supplier-location": {
+                            required: true,
+                            rangelength: [1, 100]
+                        },
+                        "supplier-contact": {
+                            required: true,
+                            rangelength: [1, 100]
+                        },
+                        "supplier-email": {
+                            required: true,
+                            email: true
+                        },
+                        "supplier-tel" :{
+                            required: true,
+                            rangelength: [1, 13],
+                            businessTel : true
+                        },
+                        "supplier-site" :{
+                            required: true,
+                            rangelength: [1, 100],
+                            url:true
+                        },
+                        "supplier-introduction":{
+                            required: true,
+                            rangelength: [1, 255]
+                        }
+                    }
+                });
+
+                $form.submit(function (event) {
+                    event.preventDefault();
+                    if ($form.valid()) {
+                        $.ajax({
+                            url : $form.attr("action"),
+                            type : $form.attr("method"),
+                            dataType:"json",
+                            data : $form.serialize()
+                        }).done(function (result) {
+                            if(result.status == 1){
+                                $form.hide();
+                                $("#js_successMsg").show();
+                            }
+                        })
+                    }
+                });
+
+                $("#js_toggleForm").on("click", function () {
+                    $("#js_sectionForm").stop(true,false).slideToggle(350, function () {
+                        if($(this).is(":visible")){
+                            $("html,body").animate({
+                                scrollTop : $(this).offset().top
+                            },350);
+                        }
+                    });
+                });
+
+            });
+
+</script>
+{/literal}
+</body>
+</html>

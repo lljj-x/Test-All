@@ -1,0 +1,92 @@
+{
+	"status": 0,
+	"msg": "xxxxxxxxxxxx",
+	"list": {
+		"goodPercent": "99.0",
+		"comnum": 1631,
+		"allStar": "5",
+		"eachInfoList": [
+			{
+				"commItem_txt": "包装完好，没有破盒，赞一个！但是为什么有两盒的识别码是一样的？识别码不是每一盒的身份证吗？为什么会有重复的？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [{"img": "../dist/images/domeimg/goods/pro_small_img.jpg"},{"img": "../dist/images/domeimg/goods/pro_small_img.jpg"}],
+				"n_thumbImg_item": [{"src_img": "../dist/images/domeimg/goods/pro_big_img1.jpg"},{"src_img": "../dist/images/domeimg/goods/pro_big_img1.jpg"}]
+			},
+			{
+				"commItem_txt": "包装完好，没有破盒，赞一个！但是为什么有两盒的识别码是一样的？识别码不是每一盒的身份证吗？为什么会有重复的？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [{"img": "../dist/images/domeimg/goods/pro_small_img.jpg"},{"img": "../dist/images/domeimg/goods/pro_small_img.jpg"}],
+				"n_thumbImg_item": [{"src_img": "../dist/images/domeimg/goods/pro_big_img2.jpg"},{"src_img": "../dist/images/domeimg/goods/pro_big_img2.jpg"}]
+			},
+			{
+				"commItem_txt": "包装完好，没有破盒，赞一个！但是为什么有两盒的识别码是一样的？识别码不是每一盒的身份证吗？为什么会有重复的？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [{"img": "../dist/images/domeimg/goods/pro_small_img.jpg"},{"img": "../dist/images/domeimg/goods/pro_small_img.jpg"}],
+				"n_thumbImg_item": [{"src_img": "../dist/images/domeimg/goods/pro_big_img3.jpg"},{"src_img": "../dist/images/domeimg/goods/pro_big_img3.jpg"}]
+			},
+			{
+				"commItem_txt": "包装完好吗？为什么会有重复的？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [],
+				"n_thumbImg_item": []
+			},
+			{
+				"commItem_txt": "包装完好，没有破盒，赞一个！但是为什么有两盒的识别码是一样的？识别码不是每一盒的身份证吗？为什么会有重复的？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [],
+				"n_thumbImg_item": []
+			},
+			{
+				"commItem_txt": "包装完好，没有破盒，赞什么会有重复的？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [],
+				"n_thumbImg_item": []
+			},
+			{
+				"commItem_txt": "包装完好，没有破盒，赞一个！但是为什么有两盒的识别码是一样的？识别码不是每一盒的身份证吗？为什么会有重复的？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [],
+				"n_thumbImg_item": []
+			},
+			{
+				"commItem_txt": "包装完好，为什么会有重复的？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [],
+				"n_thumbImg_item": []
+			},
+			{
+				"commItem_txt": "包装完好？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [],
+				"n_thumbImg_item": []
+			},
+			{
+				"commItem_txt": "但是为什么有两盒的识别码是一样的？识别码不是每一盒的身份证吗？为什么会有重复的？",
+				"commItem_date": "2015-07-18 22:15",
+				"account": "点***极",
+				"person_star": "4_5",
+				"pic_list": [],
+				"n_thumbImg_item": []
+			}
+		]
+
+	}
+}

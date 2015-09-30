@@ -1,0 +1,22 @@
+{*
+    --在这里做判断 需要加载 前台页面的头部 或者是用户中心的头部
+
+    ① cart 页面，checkout 页面，done 页面，success 页面
+
+    ② review页面
+
+    ③ 售后详情，申请售后，申请售后--仅退款
+
+    ④ 订单详情
+
+*}
+{if $cmodel eq 'flow' || $cmodel eq 'review' || $caction eq 'order_detail' || $page_type eq 'apply_detail' || $page_type eq 'apply_return' || $page_type eq 'apply_refund'}
+{include file="public_user_top.htm"}
+
+{*
+    所有用户中心一级页面使用
+    个人中心，我的订单，我的财富，售后管理，账户信息，收货地址，佣金排名
+*}
+{else}
+	{include file="public_top.htm"}
+{/if}

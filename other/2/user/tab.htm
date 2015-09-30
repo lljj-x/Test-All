@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{include file='top.htm'}
+
+	<link rel="stylesheet" href="/temp/skin1/dist/mincss/tab_min.css?20150810001">
+</head>
+<body>
+	
+	<div class="tab-wrap">
+		<div class="tab-nav-wrap">
+			<ul class="tab-nav clearfix" id="js_tabNav">
+				<li class="on"><a href="javascript:void(0);">会员信息</a></li>
+				<li><a href="javascript:void(0);">订单信息</a></li>
+				<li><a href="javascript:void(0);">退换货</a></li>
+				<li><a href="javascript:void(0);">咨询商品</a></li>
+			</ul>
+		</div><!-- .tab-nav-wrap -->
+
+		
+		<div class="items-wrap" id="js_itemsWrap">
+			<!-- 会员信息 -->
+			<div class="item user-info-item">
+				<div class="user-info-wrap mb25 bord_e4">
+					<h3 class="title">会员信息：{$userinfo.nickname}，你好！</h3>
+					<ul class="user-info clearfix">
+						<li>姓名：{$userinfo.nickname}</li>
+						<!--<li>微信号：xxxxxxxx</li>-->
+						<li>电话：无</li>
+						<li>手机：{$userinfo.tel}</li>
+						<li>邮箱：{$userinfo.email}</li>
+						<!--<li>积分：156</li>-->
+						<!--<li>客服：{$userinfo.nickname}</li>-->
+						<li>对话时间：{$time}</li>
+					</ul>
+				</div><!-- .user-info-wrap -->
+				<div class="user-address-wrap mb25 bord_e4">
+					<h3 class="title">客户地址：</h3>
+					<div class="user-address">
+                    {foreach from = $consignee_list item = address}
+						<p>{$address.province}{$address.city}{$address.addressline}</p>
+					{/foreach}
+					</div>
+				</div><!-- .user-address-wrap -->
+			</div><!-- .item -->
+			
+			<!-- 订单信息 -->
+			<div class="item order-info-item none">
+				<table class="order-nav mb25" width="100%" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+							<td class="order-number td7_1">订单号</td>
+							<!--<td class="customer-service td7_2">客服</td>-->
+							<td class="order-receiver td7_3">收货人</td>
+							<td class="order-amount td7_4">订单金额</td>
+							<td class="order-time-wrap td7_5">
+								<div class="order-time user-drop">
+									<span class="pointer">下单时间<i class="triangle-bottom icon-triangle"><i class="triangle-bottom"></i></i></span>
+									<div class="drop-box order-status-dropbox user-drop-dropbox none">
+	                                    <span class="top-line"></span>
+	                                    <div class="box-content">
+	                                        <ul class="order-status-dropbox-list user-drop-dropbox-list">
+<!--	                                            <li><a href="#">最近一个月</a></li>
+	                                            <li><a href="#">最近三个月</a></li>
+	                                            <li><a href="#">三个月之前</a></li>-->
+	                                        </ul>
+	                                    </div>
+	                                </div>
+								</div>
+							</td>
+							<td class="order-all-state td7_6">
+								<div class="order-status user-drop">
+									<span class="pointer">全部状态<!--<i class="triangle-bottom icon-triangle"><i class="triangle-bottom"></i></i>--></span>
+									<div class="drop-box order-status-dropbox user-drop-dropbox none">
+	                                    <span class="top-line"></span>
+	                                    <div class="box-content">
+	                                        <ul class="order-status-dropbox-list user-drop-dropbox-list">
+	                                           <!-- <li><a href="#">待付款</a></li>
+	                                            <li><a href="#">待发货</a></li>
+	                                            <li><a href="#">待收货</a></li>
+	                                            <li><a href="#">已完成</a></li>
+	                                            <li><a href="#">已取消</a></li>-->
+	                                        </ul>
+	                                    </div>
+	                                </div>
+								</div>
+							</td>
+							<td class="order-operate td7_7">操作</td>
+						</tr>
+					</tbody>
+				</table>
+				{foreach from = $orders item = order}
+				<div class="js_orderWrap">
+					<table class="user-order-wrap mb25 table_bord_e4">
+                    
+						<thead>
+							<tr>
+								<th colspan="7">订单编号：{$order.order_sn}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="order-info">
+								<td class="pro-img td7_1">
+                                {foreach from=$order.goods item = goods}
+									<img src="{$goods.goods_thumb}" width="60" height="60" alt="">
+                                {/foreach}
+								</td>
+								<!--<td class="customer-service td7_2">陈玉玲</td>-->
+								<td class="order-receiver td7_3">{$order.order_detail.consignee}</td>
+								<td class="order-amount td7_4">￥{$order.total_fee}</td>
+								<td class="order-time td7_5">{$order.order_time}</td>
+								<td class="order-state td7_6">{$order.status}</td>
+								<td class="order-operate td7_7"><a href="javascript:void(0);" class="js_viewDetails">查看</a></td>
+							</tr>
+						</tbody>
+                  
+					</table><!-- .user-order-wrap -->
+
+					<div class="order-details bord_e4 none js_orderWrapDetails">
+						<h1 class="details-title clearfix">
+							<span class="left fl">订单编号：<strong>{$order.order_sn}</strong></span>
+							<span class="fl">当前状态：<i>{$order.status}</i></span>
+							<a href="javascript:void(0);" class="js_closeThisDetails">【关闭】</a>
+						</h1>
+						
+						<!-- 物流信息 -->
+						<table class="logistics-information mb25" width="100%" cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<th>物流信息</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="first"><span class="tit">发货方式：</span><span class="content">快递</span></td>
+								</tr>
+								<tr>
+									<td><span class="tit">物流公司：</span><span class="content">{if $order.order_status < 3}未发货{else}{$order.order_detail.shipping_method}{/if}</span></td>
+								</tr>
+								<tr>
+									<td><span class="tit">运单号码：</span><span class="content">{if $order.order_status < 3}未发货{else}{$order.order_detail.Tracking_NO}{/if}</span></td>
+								</tr>
+							</tbody>
+						</table><!-- .logistics-information -->
+
+						<!-- 订单信息 -->
+						<table class="order-information mb50" width="100%" cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<th colspan="2">订单信息</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="first address" colspan="2"><span class="tit">收货地址：</span><span class="content fb">{$order.order_detail.consignee}   {$order.order_detail.tel}   {$order.order_detail.province}{$order.order_detail.city}{$order.order_detail.address}</span></td>
+								</tr>
+								<tr>
+									<td class="td_left"><span class="tit">订单编号：</span><span class="content">{$order.order_detail.order_sn}</span></td>
+									<td class="td_right"><span class="tit">下单时间：</span><span class="content">{$order.order_detail.formated_add_time}</span></td>
+								</tr>
+								<tr>
+									<td class="td_left"><span class="tit">付款时间：</span><span class="content">{if $order.order_status == 0}未付款{else}{$order.order_detail.pay_time}{/if}</span></td>
+									<td class="td_right"><span class="tit">支付金额：</span><span class="content">¥{$order.order_detail.order_amount}（{if $order.order_detail.pay_name eq 'wxpay'}微信支付{else}支付宝{/if}）</span></td>
+								</tr>
+								<tr>
+									<td class="td_left"><span class="tit">发货时间：</span><span class="content">{if $order.order_status < 3}未发货{else}{$order.order_detail.shipping_time}{/if}</span></td>
+									<!--<td class="td_right"><span class="tit">快件签收时间：</span><span class="content">{if $order.order_status < 3}未发货{else}{$order.order_detail.shipping_time}{/if}</span></td>-->
+								</tr>
+								<tr>
+									<td class="td_left"><span class="tit">确认收货：</span><span class="content">已确认</span></td>
+									<!--<td class="td_right"><span class="tit">评价时间：</span><span class="content">2015-06-23 16:45:36</span></td>-->
+								</tr>                                                               
+							</tbody>
+						</table><!-- .order-information -->
+						
+						<!-- 商品清单 -->
+						<p class="product-Listing fb">商品清单</p>
+
+						<table class="product-List-wrap mb25 table">
+							<thead>
+								<tr>
+									<th class="td4_1">商品信息</th>
+									<th class="td4_2">单价（元）</th>
+									<th class="td4_3">数量</th>
+									<th class="td4_4">金额（元）</th>
+								</tr>
+							</thead>
+							<tbody>
+                            	{foreach from=$order.order_detail.goods_list item = goods}
+								<tr class="product-List">
+									<td class="td4_1">
+										<div class="pro-img-wrap clearfix">
+											<span class="img-wrap fl"><a href="{$goods.url_title}" target="_blank"><img src="{$goods.goods_grid}" width="80" height="80" alt=""></a></span>
+											<span class="product-title fl">{$goods.goods_title}</span>
+										</div>
+									</td>
+									<td class="td4_2">{$goods.goods_price}</td>
+									<td class="td4_3">{$goods.goods_number}</td>
+									<td class="td4_4 fb">{$goods.subtotal}</td>
+								</tr>
+                                {/foreach}
+							</tbody>
+						</table><!-- .product-List-wrap -->
+
+						<ul class="order-price-all">
+							<li>佣金：    <span>-￥{$order.order_detail.user_cash}</span></li>
+							<li>优惠券： <span>-￥{$order.order_detail.promotion_code_youhuilv}</span></li>
+							<li>订单运费：<span>-￥{$order.order_detail.formated_shipping_fee}</span></li>
+							<li>订单关税：<span>-￥{$order.order_detail.tariff}</span></li>
+							<li class="actually-paid-amount">实付金额：<strong>￥{$order.order_detail.order_amount}</strong></li>
+						</ul>
+
+					</div><!-- .order-details -->
+				</div><!-- .js_orderWrap -->
+				{/foreach}
+				
+			</div><!-- .item -->
+			<!-- 退换货 -->
+            
+			<div class="item returns-info-item none">
+				<table class="returns-nav mb25" width="100%" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+							<td class="order-number td7_1">订单号</td>
+							<td class="goods-price td7_2">商品价</td>
+							<td class="refund-amount td7_3">退款金额</td>
+							<td class="application-time td7_4">申请时间</td>
+							<td class="change-time td7_5">变更时间</td>
+							<td class="returns-all-state td7_6">
+								<div class="order-status user-drop">
+									<span class="pointer">全部状态<!--<i class="triangle-bottom icon-triangle"><i class="triangle-bottom"></i></i>--></span>
+									<div class="drop-box order-status-dropbox user-drop-dropbox none">
+	                                    <span class="top-line"></span>
+	                                    <div class="box-content">
+	                                        <ul class="order-status-dropbox-list user-drop-dropbox-list">
+	                                         <!--   <li><a href="#">等待审核中</a></li>
+	                                            <li><a href="#">退款完成</a></li>
+	                                            <li><a href="#">退款关闭</a></li>-->
+	                                        </ul>
+	                                    </div>
+	                                </div>
+								</div>
+							</td>
+							<td class="returns-operate td7_7">操作</td>
+						</tr>
+					</tbody>
+				</table>
+                
+                
+				{foreach from = $apply item =apply }
+				<div class="js_orderWrap">
+					<table class="user-returns-wrap mb25 table_bord_e4">
+						<thead>
+							<tr>
+								<th colspan="7">订单编号：{$apply.order_sn}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="returns-info">
+								<td class="pro-img td7_1">
+									<img src="{$apply.goods.goods_grid}" width="60" height="60" alt="">
+								</td>
+								<td class="goods-price td7_2">￥{$apply.goods.goods_price}</td>
+								<td class="refund-amount td7_3">￥{$apply.apply_money}</td>
+								<td class="application-time td7_4">{$apply.add_time}</td>
+								<td class="change-time td7_5">{$apply.up_time}</td>
+								<td class="returns-state td7_6 status-ing">{$apply.apply_status}</td>
+								<td class="returns-operate td7_7"><a href="javascript:void(0);" class="js_viewDetails">查看</a></td>
+							</tr>
+						</tbody>
+					</table><!-- .user-returns-wrap -->
+
+					<div class="returns-details bord_e4 none js_orderWrapDetails">
+						<h1 class="details-title clearfix">
+							<!--icon-returns-ing:进行中， icon-returns-success：成功 ，icon-returns-end：结束-->
+							<i class="icon-returns icon-returns-ing"></i>
+							<strong>{$apply.apply_status}</strong>
+							<span class="tips">
+								如果售后人员同意，退款申请将达成并退款至您的微信、支付宝或银行卡中如果商家拒绝，将需要你修改退款申请。
+							</span>
+							<a href="javascript:void(0);" class="js_closeThisDetails">【关闭】</a>
+						</h1>
+						
+						<div class="returns-details-content">
+							<h3 class="returns-content-tit fb mb20">售后跟踪</h3>
+
+							<p class="fb mb20">用户名（手机号）于2015-07-06 13：00：02修改售后申请</p>
+							
+							<p class="mb20">
+								退款类型：{if apply_type == 0}退款退货{else}仅退款{/if}<br/> 
+								退款金额：<span class="color-main">￥{$apply.apply_money}</span><br/>
+								退款原因：<span class="fb">{$apply.reason}</span>
+							</p>
+							
+							<p class="mb20">
+								退款说明<br/>
+								{$apply.apply_desc}
+							</p>
+							<p class="mb20">
+								退款凭证<br/>
+                                {foreach from =$apply.apply_detail.apply_img_arr item = imgurl }
+								<img src="{$imgurl.img_url}" width="80" height="80" alt="">
+                                {/foreach}
+							</p>
+						</div><!-- .returns-details-content -->
+					</div><!-- .returns-details -->
+				</div><!-- .js_orderWrap -->
+                {/foreach}
+			</div><!-- .item -->
+            
+			<!-- 咨询商品 -->
+            
+			<div class="item consultingGoods-info-item none">
+            	{if $type eq 1}
+				<div class="goods-info-wrap clearfix mb25">
+					<div class="goods-img fl"><img src="{$goods_detail.goods_grid}" width="250" height="250" alt=""></div>
+					<div class="goods-info fr">
+						<p class="goods-title fb">{$goods_detail.goods_title}</p>
+						<p class="goods-price-wrap"><span class="shop_price fb">￥{$goods_detail.shop_price}</span>  <span class="market_price">市场价：{$goods_detail.market_price}</span></p>
+						<p class="goods-instock"><span class="g-tit">库存：</span>{$goods_detail.goods_number}件</p>
+						<p class="goods-shipment"><span class="g-tit">运费：</span>{$goods_detail.shipping_fee}元</p>
+						<!--<p class="goods-coupon"><span class="g-tit">优惠券：</span><strong>满299减20 全场</strong></p>-->
+						<p class="goods-shipping-to mb20"><span class="g-tit">发货地：</span>{$goods_detail.goods_remarks}</p>
+						<a href="http://www.wzhouhui.com/product{$goods.goods_id}.html" target="_blank">查看商品详情</a>
+					</div>
+				</div><!-- .goods-info -->
+				{/if}
+                
+                {if $type eq 3}
+				<!-- 客户购物车列表 -->
+				<table class="product-List-wrap mb25 table">
+					<thead>
+						<tr>
+							<th class="td3_1">商品信息</th>
+							<th class="td3_2">单价（元）</th>
+							<th class="td3_3">数量</th>
+						</tr>
+					</thead>
+					<tbody>
+                    {foreach from = $cart_list item = cart}
+						<tr class="product-List">
+							<td class="td3_1">
+								<div class="pro-img-wrap clearfix">
+									<span class="img-wrap fl"><a href="{$cart.url}" target="_blank"><img src="{$cart.img}" width="80" height="80" alt=""></a></span>
+									<span class="product-title fl">{$cart.title}</span>
+								</div>
+							</td>
+							<td class="td3_2"><span class="shop_price">{$cart.goods_price}</span><br/><span class="market_price">{$cart.market_price}</span></td>
+							<td class="td3_3">1</td>
+						</tr>
+					{/foreach}
+					</tbody>
+				</table><!-- .product-List-wrap -->
+				{/if}
+				<!-- 客户所在页面位置 -->
+				<div class="user-location">
+					<h1 class="location-tit">客户浏览位置</h1>
+					<p class="location"><span>{$position}</span> </strong></p>
+				</div><!-- .user-location -->
+			</div><!-- .item -->
+
+		</div><!-- .items-wrap -->
+	</div><!-- .tab-wrap -->
+
+	{literal}
+	<script>
+		(function(){
+			var $js_tabNav = $("#js_tabNav");
+			var $js_itemsWrap = $("#js_itemsWrap");
+			// var ArrayTabNav = $("#js_tabNav").find("li");
+			var ArrayTargetItems = $("#js_itemsWrap").find(".item");
+
+			var $js_orderWrap = $(".js_orderWrap");
+
+			$js_tabNav.on("click","li",function(){
+				var that = $(this);
+				var index = $js_tabNav.find("li").index(that);
+
+				that.addClass('on').siblings('li').removeClass('on');
+				ArrayTargetItems.eq(index).show().siblings('.item').hide();
+			});
+
+			$js_orderWrap.on("click",".js_viewDetails",function(){
+				var that = $(this);
+				var thatShow = $js_orderWrap.find(".js_orderWrapDetails");
+				var thatSiblings = that.closest(".js_orderWrap").siblings('.js_orderWrap');
+
+				thatShow.show();
+				thatSiblings.hide();
+			});
+
+			$js_orderWrap.on("click",".js_closeThisDetails",function(){
+				var that = $(this);
+				var thatBox = $js_orderWrap.find(".js_orderWrapDetails");
+
+				thatBox.hide();
+				$js_orderWrap.show();
+			});
+		})();
+	</script>
+{/literal}
+</body>
+</html>

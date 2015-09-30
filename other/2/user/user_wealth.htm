@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+
+
+<div class="wrap pb40">
+    <div id="user-commission" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="user-index-wrap clearfix">
+            <div class="user-conent-warp fr">
+                <!--  顶部菜单-->
+                <div class="user-action-menu-warp">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list clearfix">
+                        <li>
+                            <a href="#" class="current">我的佣金</a>
+                        </li>
+                        <li class="split">|</li>
+                        <li>
+                            <a href="/m-users-a-coupon.htm">我的优惠券 <span class="color-increase"></span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!--  顶部菜单-->
+
+                <!--  顶部佣金信息-->
+                {if $msg ==''}
+                <div class="commission-list">
+                    <div class="commission title">
+                        <p>
+                            <span>我的佣金：<span class="color-increase">￥{$all_commission}</span></span>
+                          <!--  <span class="pr to-cash-warp">
+
+                                {if $is_store == 0}
+                                    <a href="javascript:void (0);" class="apply-to-cash btn btn-default disabled">{$is_store}申请提现</a>
+                                     <span class="commission-prompt prompt">
+                                        佣金达到50元，并已开店
+                                    </span>
+                                {else}
+                                    <a href="/m-users-a-take_cash.htm" class="apply-to-cash btn btn-default">申请提现</a>
+                               {/if}
+                            </span>
+                            <span class="ml10">
+                                <a href="/m-users-a-cash_list.htm" class="btn btn-outline">申请记录</a>
+                            </span>-->
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt30 commission-list">
+                    <table class="comm-table table">
+                        <thead>
+                        <tr>
+                            <th>佣金来源</th>
+                            <th>金额（元）</th>
+                            <th>账户余额（元）</th>
+                            <th>产生时间</th>
+                            <th>
+                                <div class="user-drop">
+                                    <span class="pointer">全部明细 <i class="triangle-bottom icon-triangle"><i class="triangle-bottom"></i></i></span>
+                                    <div class="drop-box user-drop-dropbox commission-drop-dropbox none">
+                                        <span class="top-line"></span>
+                                        <div class="box-content">
+                                            <ul class="user-drop-dropbox-list">
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="tc">
+                        
+                        {foreach from = $mywealth item = wealth}
+                            <tr>
+                                <td>{$wealth.grade}</td>
+                                <td class="color-increase bold18">+{$wealth.income_money}</td>
+                                <td>￥{$wealth.balance}</td>
+                                <td class="prompt">{$wealth.add_time}</td>
+                                <td class="bold">{$wealth.status}</td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="page tc mt30">
+                    <div class="p-wrap">
+						<span class="p-num">
+							{$pagestr}
+						</span>
+						<!--<span class="p-skip">
+							<em>共<b>5</b>页，&nbsp;&nbsp;到第</em>
+							<input type="text" value="1" class="input-txt">
+							<em>页</em>
+							<a href="#" class="btn-go">确定</a>
+						</span>-->
+                    </div>
+                </div>
+                {else}
+                <div class="empty-warp">
+                    {$msg}
+                </div>
+                {/if}
+            </div>
+
+            {include file="user/user_left.htm"}
+
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js")
+</script>
+{/literal}
+</body>
+</html>

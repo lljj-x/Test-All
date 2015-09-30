@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/special_min.css?2015090201">
+	{if $special.css_path}
+	<link rel="stylesheet" href="{$special.css_path}">
+	{/if}
+</head>
+<body>
+	<header id="header">
+		
+		{include file="public_top.htm"}
+	</header>
+
+	<div class="active-wrap">
+
+		<div class="banner">
+			<img src="{$special.banner}" width="1920" height="660" alt="">
+		</div>
+
+		<!-- 自定义顶部banner背景图 -->
+		<!-- <div class="active-banner-wrap">
+			
+		</div> --><!-- .active-banner-wrap -->
+		
+		<!-- 主体产品分类部分 -->
+		<div class="active-main-wrap w1100">
+		  
+		  {foreach from=$data item=d key=k}
+			<div class="js_sectionTargetWrap">
+				<table class="nav-wrap" width="100%" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+						{foreach from=$data item=dS key=kS}
+							<td  class="js_itemNav {if $k == $kS}on{/if}"><a href="javascript:void(0);"><i class="icon-active icon-rocket"></i>{$dS.name}</a></td>
+							{/foreach}
+						</tr>
+					</tbody>
+				</table><!-- .nav-wrap -->
+
+				<div class="pro-list-wrap">
+					<ul class="pro-list clearfix">
+						{foreach from=$d.data item=v}
+						<li>
+							<p class="p-img tc"><a target="_blank" href="{$v.link_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$v.goods_grid}" alt=""></a></p>
+							<p class="p-name tl"><a target="_blank" href="{$v.link_url}">{$v.goods_title}</a></p>
+							<div class="price-buy-wrap clearfix">
+								<p class="p-price fl"><strong>￥{$v.shop_price}</strong> <span>市场价￥{$v.market_price}</span></p>
+								<a target="_blank" href="{$v.link_url}" class="buy-now fr">立即抢购</a>
+							</div>
+							<span class="icon-active-zhekou"><strong>{$v.zekou}</strong>折</span>
+							
+						</li>
+						
+						{/foreach}
+					</ul><!-- .pro-list -->
+				</div><!-- .pro-list-wrap -->
+			</div><!-- .js_sectionTargetWrap -->
+            {/foreach}
+			
+
+	
+		</div><!-- .active-main-wrap -->
+		
+		<!-- 右边悬浮分类nav -->
+		<div class="active-right-fixed none" id="sortTopNav">
+			<h1 class="tit-qrcode icon-active"><img src="{$imgcache_url}images/domeimg/special/qrcode.jpg" width="103" height="103" alt=""></h1>
+			<ul class="right-sort-nav">
+			{foreach from=$data item=d}
+				<li class="icon-active on"><a href="javascript:void(0);">{$d.name}</a></li>
+				{/foreach}
+				
+			</ul><!-- .right-sort-nav -->
+			<a href="#" class="icon-active goto-top"></a>
+		</div><!-- .active-right-fixed -->
+	</div><!-- .active-wrap -->
+
+	<footer id="footer" class="footer-bgf3">
+		
+		{include file="foot.htm"}
+	</footer><!--end #footer -->
+{literal}
+	<script>
+		$LAB.script("")
+			.wait(function(){
+				/*
+				***obj: 参数内容区域块对应的class************
+				***targetObj: fixed在页面顶部的nav导航区域块 对应的id或class************
+				***author: yuanbo************
+				***2015-07-10************
+				*/
+
+				//滑动页面顶部tab切换
+				function SetScrollTop(obj,targetObj){ 
+					this.index = 0;
+					this.obj = $(obj);
+					this.targetObj = $(targetObj);
+					this.ini();
+				}
+				SetScrollTop.prototype.ini = function(){
+					var that = this;
+
+					$(window).scroll(function(event) {
+						var $this = $(this),
+							widnScroll = $this.scrollTop(),
+							firstTargetTop = that.obj.eq(0).offset().top;
+
+						if(widnScroll > firstTargetTop){//如果页面滑动到第一个目标对象区域块
+							that.targetObj.removeClass('none');
+						}else{
+							that.targetObj.addClass('none');
+						}
+
+						$.each(that.obj, function(index, val) {
+							 var $targetItem = $(val);
+							 var targetTop = $targetItem.offset().top;
+
+							 if(widnScroll >= targetTop){
+							 	that.targetObj.find("li").eq(index).addClass('on').siblings('li').removeClass('on');
+							 }
+						});
+					});
+
+					that.chooseItem();
+					that.chooseItemNav();
+				};
+				SetScrollTop.prototype.chooseItem = function(){
+					var that = this;
+
+					that.targetObj.on("click","li",function(){
+						var $this = $(this);
+						var targetIndex = that.targetObj.find("li").index($(this));
+						var huadongLength = that.obj.eq(targetIndex).offset().top; 
+
+						$this.addClass('on').siblings('li').removeClass('on');
+
+						$("html,body").animate({scrollTop:huadongLength}, 500);
+					});
+				};
+				SetScrollTop.prototype.chooseItemNav = function(){
+					var that = this,$js_itemNav = $(".js_itemNav");
+
+					$js_itemNav.click(function(){
+						var $this = $(this),
+							thisParent = $this.closest('.js_sectionTargetWrap'),
+							index = thisParent.find(".js_itemNav").index($this),
+							huadongLength = that.obj.eq(index).offset().top; 
+
+						$("html,body").animate({scrollTop:huadongLength}, 500);
+					});
+
+				};
+
+				// 页面滑动tab切换
+				new SetScrollTop(".js_sectionTargetWrap","#sortTopNav");
+			})	
+	</script>
+{/literal}
+</body>
+</html>

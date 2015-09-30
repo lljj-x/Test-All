@@ -1,0 +1,132 @@
+{include file="public_top_info.htm"}
+
+<div id="docHead" class="user-top">
+    <div id="docHeadWrap" class="clearfix">
+        <a href="/" class="logowzhouhui" title="五洲汇"></a>
+
+        {* ① 购物车头部    < 这里需要判断购物车为空的情况  不显示步骤流程>    *}
+			{if $cmodel eq 'flow'}
+            <div class="cart_step fr">
+                <ul>
+                    <li {if $act =='cart' || $act =='checkout' || $act =='payment'}class="current"{/if}>
+                        <span class="cart_icon icon_step_cart"></span>
+                        <p>购物车</p>
+                    </li>
+                    <li>
+                        <span class="cart_icon icon_step_line"></span>
+                    </li>
+                    <li {if $act =='checkout' || $act =='payment'}class="current"{/if}>
+                        <span class="cart_icon icon_step_order"></span>
+                        <p>订单确认</p>
+                    </li>
+                    <li>
+                        <span class="cart_icon icon_step_line"></span>
+                    </li>
+                    <li {if $act =='payment'}class="current"{/if}>
+                        <span class="cart_icon icon_step_checkout"></span>
+                        <p>结算</p>
+                    </li>
+                </ul>
+            </div>
+			{/if}
+        {*  购物车 头部 End*}
+
+
+        {* ② review 页面头部右侧为空*}
+            <!--直接为空-->
+        {*  review 页面头部 END*}
+
+
+        {* ③ 售后页面头部*}
+			{if $page_type eq 'apply_detail' }
+            <div class="top-step order-sale-step fr">
+                <span class="step-line"><span class="js_stepLine step-line active"></span></span>
+                <div class="step-warp clearfix">
+                    <span class="user-icons-l icon-step  {if $apply.apply_status == 0} js_topStepCurrent {/if}">
+                        <span class="num">1</span>
+                        <span class="bottom-text text">申请售后 <br/>填写表单</span>
+                    </span>
+                    <span class="user-icons-l icon-step {if   $apply.apply_status == 1 || $apply.apply_status == 2 ||  $apply.apply_status == 5 }js_topStepCurrent  {/if}  ">
+                        <span class="num">2</span>
+                        <span class="bottom-text text ">客服审核 <br/>退货/退款信息</span>
+                    </span>
+                    <span class="user-icons-l icon-step  {if $apply.apply_status == 3}js_topStepCurrent {/if}" >
+                        <span class="num">3</span>
+                        <span class="bottom-text text">退货/退款 <br/>成功</span>
+                    </span>
+                </div>
+            </div>
+			{/if}
+        {*  售后页面头部 END*}
+        
+         {* ③ 售后页面头部*}
+			{if $page_type eq 'apply_return' || $page_type eq 'apply_refund' }
+            <div class="top-step order-sale-step fr">
+                <span class="step-line"><span class="js_stepLine step-line active"></span></span>
+                <div class="step-warp clearfix">
+                    <span class="user-icons-l icon-step   js_topStepCurrent">
+                        <span class="num">1</span>
+                        <span class="bottom-text text">申请售后 <br/>填写表单</span>
+                    </span>
+                    <span class="user-icons-l icon-step ">
+                        <span class="num">2</span>
+                        <span class="bottom-text text">客服审核 <br/>退货/退款信息</span>
+                    </span>
+                    <span class="user-icons-l icon-step">
+                        <span class="num">3</span>
+                        <span class="bottom-text text">退货/退款 <br/>成功</span>
+                    </span>
+                </div>
+            </div>
+			{/if}
+        {*  售后页面头部 END*}
+
+		
+        {* ④ 订单详情*}
+		{if $caction eq 'order_detail'}
+        <div class="top-step order-detail-step fr">
+            <span class="step-line"><span class="js_stepLine step-line active"></span></span>
+            <div class="step-warp clearfix">
+                <span class="user-icons-l icon-step {if $order.order_status == 0}js_topStepCurrent{/if}">
+                    <span class="num">1</span>
+                    <span class="top-text text">提交订单</span>
+                    <span class="bottom-text text">{if $order.formated_add_time!=''}{$order.formated_add_time}{/if}</span>
+                </span>
+                <span class="user-icons-l icon-step {if $order.order_status == 1}js_topStepCurrent{/if}">
+                    <span class="num">2</span>
+                    <span class="top-text text">支付成功</span>
+			   <span class="bottom-text text">{if $order.pay_time!=''}{$order.pay_time}{/if}</span>
+                </span>
+                <span class="user-icons-l icon-step  {if $order.order_status == 3}js_topStepCurrent{/if}">
+                    <span class="num">3</span>
+                    <span class="top-text text">发货</span>
+                    <span class="bottom-text text">{if $order.shipping_time!=''}{$order.shipping_time}{/if}</span>
+                </span>
+                <span class="user-icons-l icon-step ">
+                    <span class="num">4</span>
+                    <span class="top-text text">订单签收</span>
+                    <span class="bottom-text text">{if $order.confirm_time!=''}{$order.confirm_time}{/if}</span>
+                </span>
+                <span class="user-icons-l icon-step {if $order.order_status == 4 || $order.order_status == 5}js_topStepCurrent{/if}">
+                    <span class="num">5</span>
+                    <span class="top-text text">确认收货</span>
+                    <span class="bottom-text text">{if $order.confirm_time!=''}{$order.confirm_time}{/if}</span>
+                </span>
+            </div>
+        </div>
+		{/if}
+        {* ④ 订单详情 End*}
+
+
+
+
+
+    </div>
+    <div class="logo-bline clearfix">
+        <span class="line_red"></span>
+        <span class="line_black"></span>
+    </div>
+</div>
+
+<!--Cart 头部-->
+

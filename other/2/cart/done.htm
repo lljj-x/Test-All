@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/cart_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="payment" class="hf pt20 pb50">
+        <h1 class="title">订单提交成功，就差最后一步啦！</h1>
+        <p class="prompt">
+            请您在提交订单后， <span class="js_syTime" data-syTime="{$order_detail.sy_time}" data-order-sn="{$order_detail.order_sn}"></span> 内完成支付，否则订单会自动取消！
+        </p>
+        <div class="mt50 bt">
+            <table class="cart_table payment_confirm_table">
+                <tbody>
+					{foreach from = $order_detail.goods_list item = goods key=key}
+                    <tr {if $key gt 1}class="more_goods none"{/if}>
+                        <td>
+                            <div class="cart_goods_img">
+                                <img class="goods_img" src="{$goods.goods_thumb}" alt="{$goods.goods_name}" width="60" height="60">
+                            </div>
+                            <div class="cart_goods_content tl ml15">
+                                <p class="cart_goods_title">
+                                    <b>{$goods.goods_name}</b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="prompt shipping_address">{$goods.goods_remarks}</span>
+                                </p>
+                                <p>数量:{$goods.goods_number} 价格:{$goods.goods_price}</p>
+                            </div>
+                        </td>
+                    </tr>
+					{/foreach}
+                    <!--  如果超过 多少个显示改按钮-->
+					{if $order_detail.goods_list|@count gt 2}
+                    <tr>
+                        <td class="more-td">
+                            <a href="#" class="js_show_all_goods show_all_goods"><span class="icon_plus">+</span> 查看全部商品</a>
+                        </td>
+                    </tr>
+					{/if}
+                    <!--  如果超过 多少个显示改按钮-->
+
+                    <tr class="bt">
+                        <td>
+                            <div class="cart_goods_content tl ">
+                                <p class="fs16">
+                                    {$order_detail.province} {$order_detail.city} {$order_detail.district} {$order_detail.address}({$order_detail.consignee} 收)&nbsp;&nbsp;&nbsp;{$order_detail.tel} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="payment_money mt30">
+            <h2 class="title"><span class="text">支付金额：</span><span class="color_increase">{$order_detail.order_amount}</span></h2>
+        </div>
+        <form action="/m-flow-a-trun_pay.html" id="select_payment_form" method="post" target="_blank">
+            <div class="payment_mode">
+                <h2 class="title bb">支付平台</h2>
+                <div class="pt30 pb10 js_radioWrap">
+					{foreach from=$payment_list item=payment}
+                    <label>
+                        <input type="radio" {if $order.pay_name eq $payment.pay_code || $order.pay_name eq ''}checked="checked"{/if} name="pay_id" value="{$payment.pay_code}"/>&nbsp;&nbsp;{$payment.pay_name}
+                        <span class="cart_icon icon_{$payment.pay_code}"></span>
+                    </label>
+					{/foreach}
+                </div>
+            </div>
+			<input type="hidden" name="order_id" value="{$order_detail.order_id}">
+            <p class="go_payment mt50">
+                <input type="submit" value="立即付款" class="js_submit btn btn-default btn-xl"/>
+            </p>
+        </form>
+        <!-- 隐藏弹窗，-->
+        <div id="js_pop" class="tc pop none">
+            <div class="pr-warp">
+                <span class="cart_icon icon-warning"></span>
+                <div class="title">
+                    请在第三方支付页面完成付款 <br/>
+                    付款完成前请不要关闭此窗口
+                </div>
+            </div>
+            <p class="mt30">
+                <a href="/m-users-a-order_detail.htm?order_id={$order_detail.order_id}" class="btn btn-default">我已付款成功</a>
+                <a href="javascript:void(0)" class="js_repayment btn btn-outline ml30">付款遇到问题，重新支付</a>
+            </p>
+            <p class="mt20">
+                <a  onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698',900,600);" href="javascript:void(0)" class="color_increase contact">< 联系人工服务</a>
+            </p>
+        </div>
+        <!-- 隐藏弹窗，-->
+    </div>
+</div>
+
+<footer id="footer" class="cart_footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+
+{literal}
+<script>
+    $LAB.script("user.min.js");
+    $(function () {
+        $(".js_show_all_goods").click(function (e) {
+            e.preventDefault();
+            $(".more_goods").toggle();
+            var $tmpIcon = $(this).find(".icon_plus");
+            $tmpIcon.text(($tmpIcon.text() == "+") ? "-" : "+");
+        });
+
+        $(".js_repayment").click(function () {
+            $("#select_payment_form")[0].submit();
+        });
+
+        $(".js_submit").on("click", function (event) {
+            event.preventDefault();
+            if($('.js_radioWrap').find('input:radio:checked').length > 0){
+                $("#select_payment_form")[0].submit();
+                layer.open({
+                    type: 1,
+                    shadeClose : true,
+                    title:"提示",
+                    area: ['500px', "300px"], //宽高
+                    content:$("#js_pop"),
+                    end: function(){
+                        //  window.location.href = $("#js_pop").find(".js_getUrl").attr("href");
+                    }
+                })
+            }else{
+                layer.alert("请先选择支付平台");
+            }
+        })
+    })
+
+
+</script>
+{/literal}
+</body>
+</html>

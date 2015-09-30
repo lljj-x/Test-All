@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{include file='top.htm'}
+
+	<link rel="stylesheet" href="{$imgcache_url}mincss/other_min.css">
+</head>
+<body>
+	<header id="header">
+		{include file='public_top.htm'}
+	</header>
+
+
+	<div class="js_mainBgWrap">
+		<div class="msg-main w1200">
+			<!-- success:表示成功，failure：表示失败，warning：表示警告 -->
+			<p class="title"><i class="msg-status {if $message.type eq 'info'}failure{elseif $message.type eq 'warning'}warning{elseif $message.type eq 'success'}success{/if}"></i></p>
+			<div class="msg-content">
+				<p class="con-tit">{$message.content}</p>
+			</div>
+			{if $message.url_info}
+				<p class="btn-wrap clearfix">
+					<a href="{$DOMAIN}">返回首页</a>
+                    {foreach from=$message.url_info key=info item=url}
+                       {if $info}
+                          <a href="{$url}" class="color-main">{$info}</a>
+                       {/if}
+                    {/foreach}
+					
+				</p>		 
+            {/if}
+		</div><!-- .msg-main -->
+	</div><!-- .js_mainBgWrap -->
+
+
+	<footer id="footer" class="footer-bgf3">
+		{include file='foot.htm'}
+	</footer><!--end #footer -->
+	{literal}
+	<script>
+		$LAB.script("")
+			.wait(function(){
+
+			})	
+	</script>
+	{/literal}
+</body>
+</html>

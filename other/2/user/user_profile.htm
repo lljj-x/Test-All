@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-profile" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="pb50 clearfix">
+            <div class="user-conent-warp fr">
+                <div class="user-action-menu-warp">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list clearfix">
+                        <li>
+                            <a href="" class="current">帐户信息</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="form-warp">
+                    <div class="avatar-warp">
+                        <img src="{if $userinfo.avatar !=''}{$userinfo.avatar}{else}/temp/skin1/dist/images/domeimg/other/avatar.jpg{/if}" alt="头像名称"/>
+                        <a href="/m-users-a-up_avatar.htm" class="fs12 mt10">编辑头像</a>
+                    </div>
+                      <form action="/m-users-a-edit_profile.htm" id="user-profile-form" class="user-global-form" method="post">
+                        <label>
+                            <span class="form-label">用户昵称：</span>
+                            <span>
+                                <input type="text" name="nickname" value="{$userinfo.nickname}" maxlength="25" placeholder="长度不超过25个字符"/>
+                            </span>
+                        </label>
+
+                        <label>
+                            <span class="form-label">登陆密码：</span>
+                            <span>
+                                <input type="text" name="password" disabled placeholder="***************" value="***************">
+                                <a href="/m-users-a-change_password.htm" class="color-increase ml10">修改密码 ></a>
+                            </span>
+                        </label>
+
+                        <label>
+                            <span class="form-label">绑定手机：</span>
+                            <span class="verified">
+                                {$userinfo.tel} <span class="prompt">已验证</span>
+                            </span>
+                        </label>
+                        <label>
+                            <span class="form-label">绑定邮箱：</span>
+
+
+                            <!-- 老板请在这里做判断  验证过-->
+                            {if $userinfo.is_email == 1 }
+                                 <span class="verified">
+                                     {$userinfo.email} <span class="prompt">已验证</span>
+                                 </span>
+                             {/if}
+
+                            {if $userinfo.is_email != 1 }
+                            <span>
+                                <input type="text" name="email" value="{$userinfo.email}" {if $userinfo.email != ''  }disabled {/if} placeholder="填写邮箱"/>
+                                {if $userinfo.email != ''  }
+                                <a href="/m-users-a-send_validation.htm?email={$userinfo.email}" class="js_verifyMailboxBtn verify-mailbox-btn btn btn-default ml10" data-email="{$userinfo.email}">验证邮箱</a>
+                               	{/if}
+                            </span>
+                             {/if}
+                        </label>
+                        <label>
+                            <span class="form-label">你的生日：</span>
+                            <span>
+                                <input type="text" id="js_birthday" name="birthday" value="{$userinfo.birthday}" placeholder="填写生日有惊喜哦~"/>
+                            </span>
+                        </label>
+                        <p>
+                            <span class="form-label">比较感兴趣：</span>
+                            <span class="interest-warp">
+                            {foreach from=$userinfo.tags key=k item=tag}
+                                <a href="#" class="btn btn-outline {if $tag.user_tag==1} selected {/if} js_selected">{$tag.tag_name}
+                                    <input type="checkbox" name="interest[]" value="{$tag.id}" {if $tag.user_tag==1} checked {/if} />
+                                </a>
+                            {/foreach} 
+                               
+                            </span>
+                        </p>
+                        <p class="label-right mt30">
+                            <a class="btn btn-default js_submit" href="#">保存</a>
+                        </p>
+                    </form>
+
+                </div>
+            </div>
+
+            {include file="user/user_left.htm"}
+
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js")
+        .wait(function () {
+            USER.profile.profileForm($("#user-profile-form"));
+        });
+</script>
+{/literal}
+</body>
+</html>

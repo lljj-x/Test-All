@@ -1,0 +1,173 @@
+//所有变量都在这个文件里
+@import url("mixins.less"); 
+
+//公用图片 
+.login_icon{ display: inline-block; vertical-align: middle; background-image: url('../images/styleimg/login.png?2015071401'); background-repeat: no-repeat;}
+.login_icon:after,.login_icon:before{content: "";}
+.color_main{color:@color_main}
+//主体部分
+.login-main-wrap{ width:100%; min-width: 1200px; border-top: 1px solid @colore4; border-bottom: 1px solid @colore4; background: @color_bgf3;}
+
+//公用部分
+.public-login-page{ position: relative; margin: 0 auto; z-index: 1;
+    .base-a{ color: @color6; text-decoration: none;
+      &:hover{ color: @color_main;text-decoration: underline;}
+    }
+	.left-pic{ padding-top: 85px;}
+	.public-login-bord{ position: absolute; z-index: 2; top: 85px; right: 0; padding: 0 49px; width: 400px; border: 1px solid @colore4; background: @color_bgf;
+		.public-tit{ padding-top: 30px; height: 40px; line-height: 40px; overflow: hidden;
+			.tit{ color: @color3; font-size: 24px; font-weight: bold;}
+			.is-have{ color: @color6; font-size: 14px;
+				a{ color: @color_main; text-decoration: none;
+					&:hover{ text-decoration: underline;}
+				}
+			}
+			.is-not-have{ color: @color_main; font-size: 14px;
+				a{ color: @color6; text-decoration: none;
+					&:hover{ text-decoration: underline; color: @color_main;}
+				}
+			}
+		}
+        .switch-login{cursor: pointer;font-size: 14px;}
+
+		.input-group{ position: relative; z-index: 2; padding: 9px 0 9px 38px; width: 360px; height: 20px; border:1px solid @colorc;
+			.position-left{ position: absolute; top: 12px; left: 12px; }
+			.position-right{ position: absolute; top: 12px; right: -12px;}
+			.color_main{ color: @color_main;}
+
+			.input-wrap{ position: relative; padding: 0 15px; border-left: 1px solid @colorc; z-index: 3;
+				input{ width: 100%; height: 20px; line-height: 20px; font-size: 14px; color: @color3; border:none; border: 0;}
+				label.error{ position: absolute; top: 30px; left: -39px; height: 20px; line-height: 20px; color: @color_main; font-size: 12px;}
+				.placeholderText{ position: absolute; top: 0; left: 15px; height: 20px;line-height: 20px;}
+			}
+
+			.icon_name{ width: 11px; height: 14px; background-position: 0 -20px;}
+			.icon_password{ width: 10px; height: 14px; background-position: -30px -20px;}
+			.icon_email{ left: 11px; top: 14px; width: 14px; height: 10px; background-position: -60px -20px;}
+			.icon_birthday{ width: 13px; height: 14px; background-position: -90px -20px;}
+
+			&.message-group{ padding: 0; width: 398px; height: 40px; border: none;
+				.message-wrap{ position: relative; z-index: 3;
+					.placeholderText{ position: absolute; top: 0; left: 15px; height: 40px;line-height: 40px;}
+					.message{ position: relative; padding: 9px 14px; height: 20px; border:1px solid @colorc;z-index: 3;
+						input{ width: 100%; height: 20px; line-height: 20px; font-size: 14px; color: @color3; border: none; border: 0;}
+						label.error{ position: absolute; top: 40px; left: 0; height: 20px; line-height: 20px; color: @color_main; font-size: 12px;}
+					}
+					.smscode{ width: 148px; height: 38px; line-height: 38px; font-size: 14px; color: @colorf; border: 1px solid @color_main; background: @color_bgmain; text-align: center; cursor: pointer;
+						&.no-click{ color: @color9; border:1px solid @colorc; background: @colore4; cursor: default;}
+					}
+					.img-wrap{ margin-left: 15px; width: 100px; height: 40px; line-height: 40px; vertical-align: middle; background: @color_bgf3;}
+					.word_fresh{ float: left; display: block; height: 40px; line-height: 40px; color: @color6; text-decoration: none;
+						&:hover{ text-decoration: underline;}
+					}
+				}
+			}
+
+			&.active{ border-color: @color_main;
+				.input-wrap{ border-left-color: @color_main;}
+				.icon_name{background-position: 0 0;}
+				.icon_password{ background-position: -30px 0;}
+				.icon_email{ background-position: -60px 0;}
+				.icon_birthday{ background-position: -90px 0;}
+				.message-wrap{
+					.message{ border-color: @color_main;}
+				}
+			}
+		}
+		.btn-wrapper{ position: relative; height: 24px; line-height: 24px; color: @color6; font-size: 14px;z-index: 3;
+			input{ display: inline-block; vertical-align: middle; *display: inline; *zoom:1;}
+			a{ color: @color6; text-decoration: none;
+				&:hover{ text-decoration: underline;}
+			}
+			label.error{ position: absolute; top: 24px; left: 0; height: 20px; line-height: 20px; color: @color_main; font-size: 12px;}
+			.forget-password{ display: block; height: 20px; line-height: 20px; font-size: 14px; color: @color6; text-decoration: none;
+				&:hover{ text-decoration: underline;}
+			}
+		}
+		.submit{ width: 100%; height: 40px; text-align: center;
+			input{ display: block; width: 100%; height: 40px; line-height: 40px; color: @colorf; font-size: 14px; background: @color_main; border: none; border: 0; cursor: pointer;}
+		}
+
+		.other-sign-method{ padding-top: 20px; border-top: 1px dotted #ddd;
+			a{ display: block; line-height: 24px; text-decoration: none; color: @color9;}
+
+            .is-not-have{ color: @color_main; font-size: 14px;
+              a{ color: @color6;display: inline;
+                &:hover{ text-decoration: underline; color: @color_main;}
+              }
+            }
+        }
+        .icon_weixin,.icon_phone{ width: 24px; height: 24px; background-position: 0 -50px;}
+        .icon_phone{background-position: -35px -50px; margin-right: 5px;}
+	}	
+}
+
+//注册页面
+.register-page{ height: 860px;
+	.register-bord{ height: 680px;
+		.message{ width: 200px;}
+	}
+}
+
+//登录页面
+.login-page{ height: 600px;
+	.login-bord{ height: 470px;
+		.message{ width: 120px;}
+	}
+}
+
+//动态密码登录页面
+.login-sms-page{ height: 600px !important;
+  .login-bord{ height: 400px !important;;
+    .message{ width: 200px;}
+  }
+}
+
+//忘记密码页面
+.forget-password-page{ height: 660px;
+	.forget-password-bord{ height: 530px;
+		.message{ width: 200px;}
+	}
+}
+
+//绑定手机号页面
+.bound-phone-page{ height: 510px;
+	.bound-phone-bord{ height: 340px;
+		.message{ width: 200px;}
+	}
+}
+
+//微信绑定账号
+.Wechat-bound-page{ height: 850px;
+	.Wechat-bound-bord{ right: 200px; padding: 0 59px; width: 730px; border: 1px solid @colore4; background: @color_bgf;
+		.submit{ margin-bottom: 60px; width: 400px;}
+		.btn-wrapper{ width: 400px;}
+	}
+	.Wechat-title{ padding: 30px 0 10px; height: 40px; line-height: 40px; color: @color3; font-size: 24px; font-weight: bold; border-bottom: 1px solid #ddd; overflow: hidden;}
+	.Wechat-bound-tips{ margin-bottom: 40px; line-height: 30px; color: @color3; font-size: 18px;
+		.name{ font-weight: bold;
+			span{ color: @color_main;}
+		}
+		.tips{ padding-left: 35px;}
+	}
+	.tab-Wechat-bound{ height: 50px; line-height: 50px; border-bottom: 2px solid #ddd;
+		li{ float: left; margin-top: 2px; width: 160px; height: 48px; border-bottom: 2px solid #ddd; text-align: center;
+			a{ display: block; padding: 10px 0; height: 28px; line-height: 28px; color: @color3; font-size: 16px; font-weight: bold; text-decoration: none;
+				span{ margin: 4px 0; display: block; height: 20px; line-height: 20px; border-right: 1px solid #ddd;}
+			}
+			&:hover{ border-bottom-color: @color_main;
+				a{ color: @color_main;}
+			}
+			&.active{ border-bottom-color: @color_main;
+				a{ color: @color_main;}
+			}
+		}
+	}
+	
+}
+
+//登录注册页面 公用底部
+.f_copyrit{ margin: 40px auto; color: @color6; font-family:@font_main; font-size: 14px; text-align: center;
+	p{ line-height: 30px;}
+	strong{ font-weight: bold;}
+}

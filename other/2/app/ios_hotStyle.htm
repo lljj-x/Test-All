@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{include file='app/app_top.htm'}
+	{literal}
+	<style>
+		body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote {
+			margin: 0;
+			padding: 0;
+		}
+		address, caption, cite, code, dfn, em, strong, th, var { font-style: normal; font-weight: normal; }
+		.mt10{margin-top: 10px;}
+		body{font-size: 12px;margin: 0; padding: 0;color: #333;font-family: "微软雅黑",Helvetica,Arial,Helvetica,sans-serif;}
+		ol, ul { list-style: none;margin: 0; padding: 0;}
+		a {text-decoration: none;}
+		.block-img { max-width: 640px; margin: 0 auto; }
+		.block-img>img { display: block; width: 100%; height: auto; }
+		h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal; }
+
+		.hot-banner{position: relative;}
+		.hot-banner .over-img{position: absolute;width:100%;top:60%;left:0;text-align: center;}
+		.hot-banner .over-img img{width: 80%;display: inline-block;vertical-align: top;}
+		.hot-goods{padding: 10% 5%;background-color: #F3CCFE;}
+		.hot-goods .list li{border: 1px solid #AAAAAA;background-color: #FFFFFF;margin-top: 4%;}
+		.hot-goods .list li:first-child{margin-top: 12px;}
+		.hot-goods .list a{display: block;}
+		.hot-goods .goods-info{padding: 0 2% 1% 2%}
+		.hot-goods .goods-title{font-size: 14px;color: #323232;padding: 6px 0;}
+		.hot-goods .goods-des{font-size: 12px;color: #605f5f;}
+		.hot-goods .goods-price{position:relative;margin-top: 3%;padding: 10px 0;}
+		.hot-goods .goods-price .price{color: #ff2626;font-size: 18px;font-weight: bold;}
+		.hot-goods .goods-price .markey-price{color: #969696;font-size: 12px;font-weight: normal;text-decoration: line-through;}
+		.hot-goods .goods-price .buy-btn{display: block;position: absolute;background-color: #DE086F;top: 6px;right: 0;font-size:14px;padding: 5px 25px 5px 8px; border-radius: 3px;color: #ffffff;}
+		.hot-goods .goods-price .buy-btn:before{content: ''; position: absolute; top: 10px; right: 6px; vertical-align: 0; display: inline-block; width: 0; height: 0; border: 5px solid transparent; border-left-color: #fff; border-left-width: 7px; zoom: 1;}
+	</style>
+	{/literal}
+</head>
+<body>
+<div class="wrap">
+	<div class="hot-banner block-img">
+		<img src="{$imgcache_url}images/app/hotStyle/hot_bg.jpg?01" alt="">
+		<div class="over-img block-img">
+			<img src="{$imgcache_url}images/app/hotStyle/over-img.png?02" alt="">
+		</div>
+	</div>
+	<div class="hot-goods">
+		<ul class="list">
+			<li>
+				<a href="wzhwebaction://product?id=40">
+					<p class="goods-img block-img">
+						<img src="{$imgcache_url}images/app/hotStyle/goods_1.jpg?01" alt="">
+					</p>
+					<div class="goods-info">
+						<p class="goods-title">
+							德国铁元 红色版500ml
+						</p>
+						<p class="goods-des">
+							这款来自德国的铁元，是贫血补贴的佳品哦。关爱家人健康，补铁刻不容缓，过节回家，记得给家人带一份健康呵护！
+						</p>
+						<p class="goods-price">
+							<span class="price">
+								￥129<span class="markey-price">￥199</span>
+							</span>
+							<span class="buy-btn">
+								立即抢购
+							</span>
+						</p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="wzhwebaction://product?id=588">
+					<p class="goods-img block-img">
+						<img src="{$imgcache_url}images/app/hotStyle/goods_2.jpg?01" alt="">
+					</p>
+					<div class="goods-info">
+						<p class="goods-title">
+							澳洲Goat soap羊奶皂随机组合套餐 （100g*3）
+						</p>
+						<p class="goods-des">
+							宝宝的健康，有它不会错，温和的山羊奶皂，有柠檬、蜂蜜、原味三种不同味儿，搓揉出的丰富的泡泡，让你的宝宝爱上洗澡。澡。
+						</p>
+						<p class="goods-price">
+							<span class="price">
+								￥65<span class="markey-price">￥96</span>
+							</span>
+							<span class="buy-btn">
+								立即抢购
+							</span>
+						</p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="wzhwebaction://product?id=239">
+					<p class="goods-img block-img">
+						<img src="{$imgcache_url}images/app/hotStyle/goods_3.jpg?01" alt="">
+					</p>
+					<div class="goods-info">
+						<p class="goods-title">
+							和光堂婴儿低敏润肤啫喱 保湿水300ml
+						</p>
+						<p class="goods-des">
+							一款专为敏感肌宝宝打造的润肤沐浴露，天然温和配方，不含任何刺激成分，宝宝的保湿润肤一步到位，宝妈们不错的选择哦。
+						</p>
+						<p class="goods-price">
+							<span class="price">
+								￥135<span class="markey-price">￥156</span>
+							</span>
+							<span class="buy-btn">
+								立即抢购
+							</span>
+						</p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="wzhwebaction://product?id=586">
+					<p class="goods-img block-img">
+						<img src="{$imgcache_url}images/app/hotStyle/goods_4.jpg?01" alt="">
+					</p>
+					<div class="goods-info">
+						<p class="goods-title">
+							澳洲lucas pawpaw木瓜万用膏 (25g*3)
+						</p>
+						<p class="goods-des">
+							家居必备小物哦！季节干燥滋润手足get，防蚊虫叮咬get，宝宝湿疹、过敏get，出行防晒get，赶快入手一支，带着它来一场说走就走的旅行吧。
+						</p>
+						<p class="goods-price">
+							<span class="price">
+								￥90<span class="markey-price">￥150</span>
+							</span>
+							<span class="buy-btn">
+								立即抢购
+							</span>
+						</p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="wzhwebaction://product?id=187">
+					<p class="goods-img block-img">
+						<img src="{$imgcache_url}images/app/hotStyle/goods_5.jpg?01" alt="">
+					</p>
+					<div class="goods-info">
+						<p class="goods-title">
+							美国Coppertone水宝宝 防晒喷雾170g SPF 50
+						</p>
+						<p class="goods-des">
+							喜爱户外运动又害怕晒黑的小伙伴们，这款水宝宝赶紧拿下。喷出来的是白色泡沫，均匀的涂抹轻轻拍打，很凉爽的感觉，记得出门前30分钟涂抹效果最佳哦!
+						</p>
+						<p class="goods-price">
+							<span class="price">
+								￥80<span class="markey-price">￥138</span>
+							</span>
+							<span class="buy-btn">
+								立即抢购
+							</span>
+						</p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="wzhwebaction://product?id=529">
+					<p class="goods-img block-img">
+						<img src="{$imgcache_url}images/app/hotStyle/goods_6.jpg?01" alt="">
+					</p>
+					<div class="goods-info">
+						<p class="goods-title">
+							韩国Leaders丽得姿 水库补水面膜 (蓝袋10片装)
+						</p>
+						<p class="goods-des">
+							这款韩国Leaders丽得姿水库补水面膜，简直是补水神器，duang duang让毛孔隐形，皮肤变得水嫩，面膜里的精华液多的感觉嗖嗖的往皮肤里钻呢！
+						</p>
+						<p class="goods-price">
+							<span class="price">
+								￥125<span class="markey-price">￥180</span>
+							</span>
+							<span class="buy-btn">
+								立即抢购
+							</span>
+						</p>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="wzhwebaction://product?id=529">
+					<p class="goods-img block-img">
+						<img src="{$imgcache_url}images/app/hotStyle/goods_7.jpg?01" alt="">
+					</p>
+					<div class="goods-info">
+						<p class="goods-title">
+							韩国Itsskin伊思 红参 BB霜
+						</p>
+						<p class="goods-des">
+							即使没有华丽的衣服，也不能没有精致的面庞。女人天生爱美，红参蜗牛粘液，保护修复受损肌肤，完美蜕变就差一步了，赶紧下手吧。
+						</p>
+						<p class="goods-price">
+							<span class="price">
+								￥122<span class="markey-price">￥172</span>
+							</span>
+							<span class="buy-btn">
+								立即抢购
+							</span>
+						</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>

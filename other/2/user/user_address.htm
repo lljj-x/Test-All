@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css?2015091401">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-shipping-address" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="user-index-wrap clearfix">
+            <div class="user-conent-warp fr">
+                <div class="user-action-menu-warp clearfix">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list clearfix fl">
+                        <li>
+                            <a href="" class="current">收货地址</a>
+                        </li>
+                    </ul>
+                    <div class="fr pt10">
+                        <a href="/m-users-a-user_address.htm" class="color-increase fs14">+新增收货地址</a>
+                    </div>
+                </div>
+                <table id="js_shippingAddressTable" class="table shipping-address-table tc mt30">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="20%">
+                        <col width="25%">
+                        <col width="12%">
+                        <col width="23%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>收货人</th>
+                            <th>实名认证</th>
+                            <th>收货地址</th>
+                            <th>电话号码</th>
+                            <th>操作</th>
+                            <th>默认地址</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    {foreach from = $consignee_list item = address_list}
+                        <tr>
+                            <td>{$address_list.username}</td>
+                           {if $address_list.card_id !='' && $address_list.card_img==1} <td> 已认证 {else} <td class="color-increase"> 未认证 {/if} {if $address_list.card_id !=''} <br/>{$address_list.card_id} {/if}</td>
+                            <td class="tl">
+                                {$address_list.province} {$address_list.city}市 {$address_list.district} {$address_list.addressline}
+                            </td>
+                            <td>{$address_list.tel}</td>
+                            <td><a href="/m-users-a-user_address.htm?edit_address_id={$address_list.address_id}" data-address-id="{$address_list.address_id}" class="js_eidt">修改</a><span class="split">|</span><a href="javascript:;" data-address-id="{$address_list.address_id}" class="js_delete">删除</a>
+                               {if $address_list.card_img neq 1} <span class="split">|</span><a href="#" data-address-id="{$address_list.address_id}" data-username="{$address_list.username}" data-cart-id="{$address_list.card_id}" class="js_verified">实名认证</a>{/if}</td>
+                            <td><span class="cart_icon1 icon-checkbox js_setDefault {if $address_id == $address_list.address_id}selected {/if}" data-address-id="{$address_list.address_id}"></span></td>
+                        </tr>
+
+                      {/foreach}
+                    </tbody>
+                </table>
+
+                 <!-- 隐藏弹窗，-->
+                <div id="js_pop" class="tc pl20 pr20 none">
+                    <form action="" id="verified-form" class="user-global-form pt20">
+                        <p class="prompt">根据海关规定，免税店、跨境直邮商品需要办理清关手续，需您提供收货人身份信息进行认证。以确保您购买的商品顺利通过海关检查。（五洲会承诺会对您的身份证信息加密保管，绝不对外泄露！）</p>
+                        <p class="bold16 mt10">收货人姓名：<span class="js_name"></span></p>
+                        <p class="bold16">身份证号码：<span class="js_cardId"></span></p>
+                        <!--上传身份证-->
+                        <div class="file-warp js_fileWarp">
+                            <div class="clearfix line-wrap">
+                                <ul class="js_files files clearfix"></ul>
+                                <div class="file-upload-warp">
+                                    <i class="icon-plus"></i>
+                                    <input type="file" id="js_fileupload" class="file-upload" name="files[]" multiple="">
+                                </div>
+                            </div>
+                            <p class="error none"></p>
+                            <div class="progress-warp">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--上传身份证 End-->
+                        <input type="hidden" name="address_id" class="js_addressId" value="">
+                         <input type="hidden" name="card_id" class="js_cardId2" value=""  >
+                        <p class="prompt fs12">每张图片大小不超过5M，正反面2张照片，支持JPG、PNG格式</p>
+                        <p class="mt10">
+                            <a href="javascript:void (0)" class="js_verifiedBtn btn btn-default">认证</a>
+                            <a href="javascript:void (0)" class="js_cancel btn btn-outline ml30">取消</a>
+                        </p>
+                    </form>
+                </div>
+                <!-- 隐藏弹窗，-->
+
+                <form id="delivery_address_form" class="user-global-form mt30 {if $user_address.address_id!=''}js_edit{/if}" method="post">
+                    <p class="bold16 border-bottom pb10">管理收货地址</p>
+                    <label>
+                        <span>
+                            <input type="hidden" name="address_id" value="{$user_address.address_id}"/>
+                        </span>
+                    </label>
+
+                    <p class="js_select_address  select_address">
+                        <span class="form-label"><span class="required">*</span>所在地址</span>
+                        <span class="nselect_wrap">
+                            <select name="province" class="selected_province item-select item-150">
+                                <option value="default">--省/直辖市--</option>
+                                {foreach from=$province item=v}
+                                {if ($user_address.province==$v.region_id)}
+                                  <option value="{$v.region_id}" selected="selected">{$v.region_name}</option>
+                                {/if}
+                                <option value="{$v.region_id}">{$v.region_name}</option>
+                                {/foreach}
+                            </select>
+                        </span>
+                        <span class="nselect_wrap {if $user_address.city==''}none{/if}">
+                            <select name="city" class="selected_city item-select item-150">
+                                <option value="default">--市--</option>
+                                {foreach from=$city item=city}
+                                  <option value="{$city.region_id}" {if $city.region_id eq $user_address.city}selected="selected"{/if}>{$city.region_name}</option>
+                                {/foreach}
+                            </select>
+                        </span>
+                        <span class="nselect_wrap {if $user_address.district=='' || (count($area_list) <= 0) }none{/if}">
+                            <select name="district" class="selected_district item-select item-150">
+                                <option value="default">--县--</option>
+                                {foreach from=$area_list item=area}
+                                  <option value="{$area.region_id}" {if $area.region_id eq $user_address.district}selected="selected"{/if}>{$area.region_name}</option>
+                                {/foreach}
+                            </select>
+                        </span>
+                    </p>
+                    <label>
+                        <span class="form-label"><span class="required">*</span>详细地址</span>
+                    <span class="address_street_wrap">
+                        <textarea maxlength="50" name="addressline" class="address_street" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息">{$user_address.addressline}</textarea>
+                    </span>
+                    </label>
+                    <label>
+                        <span class="form-label"><span class="required">*</span>收货人姓名</span>
+                        <span>
+                            <input maxlength="15" type="text" name="username" class="username" placeholder="长度不超过25个字符" value="{$user_address.username}"/>
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label"><span class="required">*</span>手机号码</span>
+                        <span>
+                            <input maxlength="11" type="text" name="tel" class="phone" placeholder="电话号码、手机号码必须填一项" value="{$user_address.tel}">
+                        </span>
+                    </label>
+                    <label>
+                        <span class="form-label">或固定电话</span>
+                        <span><input maxlength="4" type="text" name="areacode" class="areacode item-150" placeholder="区号" value="{$user_address.areacode}"/></span>
+                        <span><input maxlength="8" type="text" name="telephone" class="telephone item-150" placeholder="电话号码" value="{$user_address.telephone}"/></span>
+                        <span><input maxlength="4" type="text" name="ext" class="ext item-150" placeholder="分机号(可选)" value="{$user_address.ext}"/></span>
+                    </label>
+                    <label>
+                        <span class="form-label"><span class="required">*</span>身份证号码</span>
+                        <span><input maxlength="18" type="text" name="card_id" class="idnumber" placeholder="请填写收货人身份证信息" value="{$user_address.card_id}"/></span>
+
+                        <div class="cart_icon1 icon-msg">
+                            <div class="msg-drop-box idnumber-drop none">
+                                根据海关规定，免税店、跨境直邮商品需要办理清关手续，需您提供收货人身份信息进行认证。以确保您购买的商品顺利通过海关检查。（五洲会承诺会对您的身份证信息加密保管，绝不对外泄露！）
+                                <span class="triangle-left"><span class="triangle-left"></span></span>
+                            </div>
+                        </div>
+                    </label>
+
+                    <p class="label-right">
+                        <span class="cart_icon1 icon-checkbox js_checkbox {if $address_id ==$user_address.address_id}selected{/if}"></span>设置为默认收货地址
+                        <input type="checkbox" class="js_inputCheckbox none" {if $address_id ==$user_address.address_id}checked{/if} name="is_default_address" value="1">
+                    </p>
+
+                    <p class="label-right mt30">
+                        <a class="address_confirm_submit btn btn-default" href="#">保存</a>
+                    </p>
+                </form>
+            </div>
+
+            {include file="user/user_left.htm"}
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("addressForm.min.js")
+        .script("user.min.js?2015092101")
+        .wait(function () {
+            // 表单事件
+            var $addressForm = $("#delivery_address_form");
+            new ADDRESSFORM($addressForm,function(){
+                USER.userAjax.getAjaxPromise({
+                    url : '/m-users-a-user_address.htm',
+                    data : $addressForm.serialize()
+                },true)
+                .done(function (result) {
+                    if(result.status == 0){
+                        // 修改地址
+                        USER.otherGlobal.layerAlertReload("保存成功","/m-users-a-user_address.htm");
+                    }
+                }).fail(function () {
+                    USER.otherGlobal.layerAlertReload("请求失败");
+                })
+            });
+
+            // 增删改 已经设置默认 +　默认表单事件
+            USER.shippingAddrssManage.init($("#js_shippingAddressTable"));
+        }).script("fileUpload.min.js").wait(function () {
+            $("#js_fileupload").fileupload({
+                url : '/m-users-a-upload_card_img.htm',
+                maxFiles: 2,
+                acceptFileTypes: /(\.|\/)(jpe?g|png)$/i
+            });
+        });
+</script>
+
+{/literal}
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/category_min.css?2015080603">
+	<script src="/temp/skin1/dist/minjs/jquery-cart.min.js"></script>
+</head>
+<body>
+	<header id="header">
+		
+		{include file="public_top.htm"}
+	</header>
+
+
+	<div class="wrap pb40">
+	{if $banner_16}
+		<div class="topBannerWrap clearfix">
+			<div class="slider" id="js_banner">
+				<ul class="slideList clearfix">
+				{foreach from=$banner_6 item=v}
+					<li><a href="{$v.url}"><img src="{$v.pic_url}" alt="" height="440"></a></li>
+					{/foreach}
+				</ul>
+			</div>
+		</div><!-- .topBannerWrap -->
+	{/if}
+		<!-- 主体部分 start -->
+		<div class="js_mainBgWrap">
+
+			<!-- 搜索列表页 -->
+			<div class="searchResult w1200">
+				<strong>“{$keyword}”</strong> 商品共{$total_count}个
+			</div><!-- .searchResult -->
+
+			
+			
+			<!-- 排序===列表页 -->
+			<div class="brand-sort-wrap w1200">
+				<div class="b-s-wrap">
+					<div class="b-s-down clearfix">
+						<div class="left fl">排序:</div>
+						<ul class="right fl clearfix">
+						  {foreach from=$orderUrlArr item=v key=k}
+							<li class="search-normal"><a href="{$v.url}" {if $k == $ord} class="on" {/if}>{$v.name}<i class="icon {$v.orderBy}"></i></a></li>
+							{/foreach}
+							<li class="instock"><a href="{$stockUrl}"><i class="icon icon_checkbox {if $stock}selected{/if}"></i>只显示有货商品</a></li>
+							<li class="allProNum">共计<strong>{$total_count}</strong>个商品</li>
+						</ul>
+					</div>
+				</div>
+			</div><!-- .brand-sort-wrap -->
+
+
+
+
+			<!-- 品牌产品列表 -->
+			<div class="proListWrap w1200">
+				<ul class="p-proList clearfix">
+				
+				    {foreach from=$goods_list key=k item=v}
+                    <li>
+                        <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="/temp/skin1/dist//images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt=""></a></p>
+                        <p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+                        <div class="p_price_cart_wrap clearfix">
+                            <p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
+                            <span class="icon_child fr js_addToCart {if $v.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
+                        </div>
+                        <span class="icon_child o-icon"><strong>{$v.promote_zhekou}</strong>折</span>
+                        {if $v.goods_number ==0 }<a target="_blank" href="{$v.url_title}" class="soldOut_thisProduct"><i class="icon_soldOut"></i></a>{/if}
+                    </li>
+                    {/foreach}
+				    
+				</ul><!-- .p-proList -->
+			</div><!-- .proListWrap -->
+			
+			<!-- 分页 -->
+			<div class="pageWrap w1200">
+				<div class="page tc">
+				
+					<div class="p-wrap">
+					{$pagestr}
+						
+						<!-- <span class="p-num">
+							<a href="#" class="prev">上一页</a>
+							<a href="#" class="cur">1</a>
+							<a href="#">2</a>
+							<a href="#">3</a>
+							<a href="#">4</a>
+							<a href="#">5</a>
+							<a href="#" class="next">下一页</a>
+						</span>
+						<span class="p-skip">
+							<em>共<b>5</b>页，&nbsp;&nbsp;到第</em>
+							<input type="text" value="1" class="input-txt">
+							<em>页</em>
+							<a href="#" class="btn-go">确定</a>
+						</span> -->
+					</div>
+				</div>
+			</div><!-- .pageWrap -->
+
+			
+
+		</div><!-- .js_mainBgWrap -->
+		<!-- 主体部分 end -->
+
+	</div><!-- .wrap -->
+
+	<!-- 分类导航固定在页面顶部 -->
+	<div id="sortTopNav" class="none">
+		<ul class="s-t-nav s-t-nav-child w1200">
+			<li class="on"><a href="javascript:void(0);">大牌奶粉</a></li>
+			<li><a href="javascript:void(0);">纸尿裤</a></li>
+			<li><a href="javascript:void(0);">营养保健</a></li>
+			<li><a href="javascript:void(0);">日常洗护</a></li>
+		</ul>
+	</div><!-- #sortTopNav -->
+
+	<footer id="footer">
+		{include file="foot.htm"}
+	</footer><!--end #footer -->
+{literal}
+	<script>
+		$LAB.script("jquery.flexslider.min.js")
+			.wait(function(){
+
+				$('#js_banner').flexslider({
+				 	namespace:"",
+				    animation: "fade",
+				    selector: ".slideList > li",
+				    pauseOnAction:false,
+				    directionNav: true, 
+				    slideshowSpeed: 10000
+				});
+				
+				(function(){
+					var slideListLen = $('#js_banner').find(".slideList li").length;
+					if(slideListLen >= 2){
+						$('#js_banner').hover(function() {
+							$(this).find('.direction-nav a').show();
+						}, function() {
+							$(this).find('.direction-nav a').hide();
+						});
+					}else{
+						$(".direction-nav").hide();
+					}
+				})();
+			});
+	</script>
+	{/literal}
+</body>
+</html>

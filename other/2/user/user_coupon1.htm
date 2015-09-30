@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-coupon" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="user-index-wrap clearfix">
+            <div class="user-conent-warp fr">
+                <div class="user-action-menu-warp">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list clearfix">
+                        <li>
+                            <a href="/m-users-a-mywealth.htm">我的佣金</a>
+                        </li>
+                        <li class="split">|</li>
+                        <li>
+                            <a href="" class="current">我的优惠券 <span class="color-increase">{$user_count_coupon}</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="coupon-form">
+                    <span class="input-warp ">
+                        <span class="bold">输入兑换码</span>
+                        <input type="text" class="coupon-input" name="coupon"/>
+                    </span>
+                    <span class="submit-warp">
+                        <input type="submit" class="btn btn-default" value="兑换"/>
+                    </span>
+                    <span class="ml30">
+                        <a href="#" class="color-increase">优惠券使用规则</a>
+                    </span>
+                </div>
+
+                <ul class="coupon-list-wrap js_couponList clearfix">
+                	{foreach from=$coupon item=coupon}
+                    {if $coupon.is_exp==0 && $coupon.is_use==0}
+                    
+                     <li>
+                        <p class="coupon-num">￥<strong>{$coupon.code_name}</strong></p>
+                        <p class="coupon-condition">{$coupon.code_desc}</p>
+                        <p class="coupon-end-time">有效期：{$coupon.create_time}—{$coupon.exp_time}</p>
+                        <p class="get-coupon clearfix"><span class="fl">全场通用</span><a href="/m-users-a-get_code.htm?pcode={$coupon.code}" class="fr js_getCode" onclick="return false;">立即领取</a></p>
+                    </li>
+                    
+                   <!-- <li class="used geted">
+                        <p class="coupon-num">￥<strong>{$coupon.code_name}</strong></p>
+                        <p class="coupon-condition">{$coupon.code_desc}</p>
+                        <p class="coupon-end-time">有效期：{$coupon.create_time}—{$coupon.exp_time}</p>
+                        <p class="get-coupon clearfix"><span class="fl">全场通用</span><a href="/m-users-a-get_code.htm?pcode={$coupon.code}" class="fr js_getCode" onclick="return false;">立即领取</a></p>
+                         <div class="bg-layer">
+                            <div class="bg"></div>
+                            <i class="icon-status icon-coupon-list"></i>
+                        </div>
+                    </li>-->
+                    
+                   {/if}
+                   {if $coupon.is_use == 1}
+                    <li class="used">
+                        <p class="coupon-num">￥<strong>{$coupon.code_name}</strong></p>
+                        <p class="coupon-condition">{$coupon.code_desc}</p>
+                        <p class="coupon-end-time">有效期：{$coupon.create_time}—{$coupon.exp_time}</p>
+                        <p class="get-coupon clearfix"><span class="fl">全场通用</span><a href="#" class="fr">已使用</a></p>
+                        <div class="bg-layer">
+                            <div class="bg"></div>
+                            <i class="icon-status icon-coupon-list"></i>
+                        </div>
+                    </li>
+                    {/if}
+                    {if $coupon.is_exp == 1}
+                    <li class="disabled">
+   						<p class="coupon-num">￥<strong>{$coupon.code_name}</strong></p>
+                        <p class="coupon-condition">{$coupon.code_desc}</p>
+                        <p class="coupon-end-time">有效期：{$coupon.create_time}—{$coupon.exp_time}</p>
+                        <p class="get-coupon clearfix"><span class="fl">仅限美容彩妆</span><span class="all-out fr">已领完</span></p>
+                        <div class="bg-layer">
+                            <div class="bg"></div>
+                            <i class="icon-status icon-coupon-list"></i>
+                        </div>
+                    </li>
+                    {/if}
+                  {/foreach}
+                </ul>
+
+                <!-- 隐藏弹窗，领取优惠券提示-->
+                <div id="js_pop" class="to-cash-pop tc none">
+                    <p class="title mt50">领取成功！</p>
+                    <p>优惠券领取成功</p>
+                    <p class="mt50"><a href="/m-users-a-coupon.htm" class="js_getUrl btn btn-default">返回我的优惠券</a></p>
+                    <p class="mt50"><a href="javascript:void(0);" class="btn btn-default" onclick="USER.otherGlobal.windowReload()">返回我的优惠券</a></p>
+                </div>
+                <!-- 隐藏弹窗，领取优惠券提示-->
+
+                <div class="page tc mt30">
+                    <div class="p-wrap">
+						<span class="p-num">
+							{$pagestr}
+						</span>
+						<!--<span class="p-skip">
+							<em>共<b>5</b>页，&nbsp;&nbsp;到第</em>
+							<input type="text" value="1" class="input-txt">
+							<em>页</em>
+							<a href="#" class="btn-go">确定</a>
+						</span>-->
+                    </div>
+                </div>
+            </div>
+            {include file="user/user_left.htm"}
+
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js")
+            .wait(function () {
+               // 领取优惠券
+                $(".js_couponList").on("click",".js_getCode", function (event) {
+                    USER.coupon.getCoupon.call(this,event);
+                })
+            });
+</script>
+{/literal}
+</body>
+</html>

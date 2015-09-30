@@ -1,0 +1,87 @@
+{include file="public_top_info.htm"}
+
+<div id="docHead">
+	<div id="docHeadWrap" class="clearfix">
+		<a href="/" class="logowzhouhui" title="五洲汇"></a>
+
+		<div class="topSearchWrap fl">
+			<i class="search_loading pa" id="js_seachLoading"></i>
+			<div class="searchWrap">
+				<form action="/s/" method='get'>
+					<i class="icon-search icon"></i>
+					<input type="hidden" value="0" name="category">
+					<input type="text" class="search" value="{if $smarty.get.keyword}{$smarty.get.keyword}{else}{$searchKeywordList.0.word}{/if}" name='keyword' autofocus="true" placeholder="{if $smarty.get.keyword}{$smarty.get.keyword}{else}{$searchKeywordList.0.word}{/if}" id="js_topSearch" autocomplete="off"/>
+					<input class="search-btn tc" type="submit" value="搜索" id="js_topSearchBtn" hidefocus="true"/>
+				</form>
+			</div>
+			
+			<!-- 默认类型 -->
+			<div class="search_complete_box pa f14 none" id="js_seachComplete">
+				<ul>
+					<li><a href="javascript:void(0);"><span>铁元素</span></a></li>
+					<li><a href="javascript:void(0);"><span>爱他美</span></a></li>
+					<li><a href="javascript:void(0);"><span>宝宝辅食</span></a></li>
+					<li><a href="javascript:void(0);"><span>保湿</span></a></li>
+				</ul>
+			</div><!-- .search_complete_box -->
+			
+			<div class="hot-sort clearfix">
+			{foreach from=$searchKeywordList item=v}
+			 {if $v.is_default==0}
+				<a href="{$v.url}">{$v.word}</a>
+				{/if}
+			{/foreach}
+				
+			</div>
+		</div><!-- .topSearchWrap -->
+
+		<div class="main-logo-slogan fr cleafix">
+			<a href="/guarante.html#authenticity-guarantee" class="true tl"><i class="icon_true icon"></i><span>100%自营正品</span></a>
+			<a href="/guarante.html#overseas" class="overseas_stock tc"><i class="icon_stock icon"></i><span>海外直采</span></a>
+			<a href="/guarante.html#returns" class="free_returns tr"><i class="icon_returns icon"></i><span>7天无忧退货</span></a>
+		</div>
+	</div><!-- #docHeadWrap -->
+</div><!-- #docHead -->
+
+{literal}
+	<script>
+		(function(){
+			var $js_topSearch = $("#js_topSearch");
+
+			$js_topSearch.on("focus",function(){
+				var thatObj = document.getElementById("js_topSearch"),
+					thatPlaceholder = thatObj.getAttribute("placeholder"),
+					thatDefaultVal = thatObj.getAttribute("data-val"),
+					thatVal = thatObj.value;
+
+				if($.trim(thatVal) === thatPlaceholder){
+					thatObj.value = "";
+				}
+			});
+
+			$js_topSearch.on("blur",function(){
+				var thatObj = document.getElementById("js_topSearch"),
+					thatPlaceholder = thatObj.getAttribute("placeholder"),
+					thatDefaultVal = thatObj.getAttribute("data-val"),
+					thatVal = thatObj.value;
+
+				if(!$.trim(thatVal)){
+					thatObj.value = thatPlaceholder;
+				}
+			});
+
+		})();
+	</script>
+{/literal}
+
+<div id="topTabBox">
+	<div id="topTab" class="clearfix">
+		<ul id="funcTab" class="clearfix">
+			{$nav_str}
+		</ul><!-- #funcTab -->
+
+		{*<div class="mobileExclusive">
+			<a href="#"><img src="{$imgcache_url}images/domeimg/wifi.gif" alt=""></a>
+		</div>*}<!-- .mobileExclusive -->
+	</div><!-- #topTab -->
+</div><!-- #topTabBox -->

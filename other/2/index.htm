@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/index_min.css?2015080301">
+	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
+</head>
+<body>
+	<header id="header">
+		
+		{include file="public_top.htm"}
+	</header>
+
+
+	<div class="wrap pb40">
+	   {if $banner_list}
+		<div class="topBannerWrap clearfix">
+			<div class="slider" id="js_banner">
+				<ul class="slideList clearfix">
+					{foreach from=$banner_list item=v}
+					
+						<li><a target="_blank" href="{$v.url}"><img src="{$v.pic_url}" alt="" height="440"></a></li>
+					{/foreach}
+					
+				</ul>
+			</div>
+		</div><!-- .topBannerWrap -->
+		{/if}
+		<div class="js_mainBgWrap">
+			<!-- 今日推荐 -->
+			<div class="todayRecommended w1200">
+				<h1 class="index-title">爆款推荐 / <span>五洲会海购为你精挑细选</span></h1>
+
+				<div class="proWrap clearfix">
+					<div class="w460 fl"><a target="_blank" href="{$today_recommend_list[0].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="458" height="401" data-original="{$today_recommend_list[0].pic_url}" alt=""></a></div>
+					<div class="w370 fl">
+						<div class="h200"><a target="_blank" href="{$today_recommend_list[1].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$today_recommend_list[1].pic_url}" alt=""></a></div>
+						<div class="h200"><a target="_blank" href="{$today_recommend_list[2].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$today_recommend_list[2].pic_url}" alt=""></a></div>
+					</div>
+					<div class="w370 fl">
+						<div class="h200"><a target="_blank" href="{$today_recommend_list[3].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$today_recommend_list[3].pic_url}" alt=""></a></div>
+						<div class="h200"><a target="_blank" href="{$today_recommend_list[4].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$today_recommend_list[4].pic_url}" alt=""></a></div>
+					</div>
+				</div>
+			</div><!-- .todayRecommended -->
+            {if $todayDownAd}
+			<div class="smallBannerWrap w1200 clearfix">
+			{foreach from=$todayDownAd key=k item=v}
+				<p {if $k eq 0} class="fl" {else} class="fr" {/if}><a target="_blank" href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="590" height="180" data-original="{$v.pic_url}" alt="" ></a></p>
+			{/foreach}
+			
+			</div><!-- .smallBannerWrap -->
+            {/if}
+			<!-- 全球精选 -->
+			<div class="globalSelectWrap w1200">
+				<h1 class="index-title">全球精选 / <span>国际大牌 正品保证</span></h1>
+				
+				<div class="selectWrap clearfix">
+					<div class="leftProListWrap fl">
+						{foreach from=$global_recommend_list item=v}
+						<a target="_blank" href="{$v.url}" class="a-pro-wrap mb30">
+							<div class="pro-wrap pl20 clearfix">
+								<div class="propertyWrap pt20 w300 fl">
+									<p class="p_brand mb30"><img src="{$v.brand_logo}" alt="" height="60"></p>
+									<p class="p_name mb30">{$v.name}</p>
+									<p class="p_zhekou"><strong>{$v.lowprice}</strong></p>
+									<div class="p_from_iconCart clearfix">
+										<p class="country fl clearfix"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="31" height="31" data-original="/temp/skin1/dist/images/domeimg/country/{$v.country_css}.png" class="fl mr10" alt=""/>{$v.country_note}</p>
+										<span class="icon_index icon_cart fr"></span>
+									</div>
+								</div>
+
+								<div class="imgWrap fr">
+									<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="540" height="300" data-original="{$v.pic_url}" alt="" >
+								</div>
+							</div><!-- .pro-wrap -->
+						</a><!-- .a-pro-wrap -->
+						{/foreach}
+						
+						
+					</div><!-- .leftProListWrap -->
+
+					<div class="rightWrap fr">
+						<!-- 品牌特卖 -->
+						<div class="brands-saleWrap mb30">
+							<h1 class="title tc">品牌特卖</h1>
+							
+							<div id="js_brandsList" class="brandConListWrap clearfix">
+								<div class="brandConList">
+									
+									
+									<div class="brandCon clearfix js_brandCon_hover">
+									{foreach from=$brand_list key=k item=v}
+										{if $k <=23}
+										<div class="bc pr">
+											<div class="rcn">
+												<a href="/brand-{$v.id}.html">
+													<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="80" height="48" data-s-src="{$v.brand_logo}" alt="">
+												</a>
+											</div>
+
+											<div class="yd none pa">
+												<a href="/brand-{$v.id}.html">
+													<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="310" height="135" data-src="{$v.banner_logo}" alt="">
+													<p class="p1">{$v.brand_name}</p>
+													<div class="zk">{$v.lowprice}</div>
+												</a>
+											</div>
+										</div>
+										{/if}
+									{/foreach}
+										
+									</div><!-- .brandCon -->
+                            {if $brand_list|@count >24}
+									<div class="brandCon clearfix js_brandCon_hover">
+										{foreach from=$brand_list key=k item=v}
+										{if $k <=47 and $k>23}
+										<div class="bc pr">
+											<div class="rcn">
+												<a href="/brand-{$v.id}.html">
+													<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="80" height="48" data-s-src="{$v.brand_logo}" alt="">
+												</a>
+											</div>
+
+											<div class="yd none pa">
+												<a href="/brand-{$v.id}.html">
+													<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="310" height="135" data-src="{$v.banner_logo}" alt="">
+													<p class="p1">{$v.brand_name}</p>
+													<div class="zk">{$v.lowprice}</div>
+												</a>
+											</div>
+										</div>
+										{/if}
+									{/foreach}
+                           
+										
+									</div><!-- .brandCon -->
+                                {/if}
+									
+								</div><!-- .brandConList -->
+
+								<ul class="direction-nav"><li><a class="prev" href="#">Previous</a></li><li><a class="next" href="#">Next</a></li></ul>
+
+							</div><!-- #js_brandsList -->
+						</div>
+
+						<!-- 精选专题 -->
+						<div class="selectTopics">
+							<h1 class="title tc">精选专题</h1>
+							{foreach from=$special_list item=v}
+							<div class="st_wrap tc mb20">
+								<p class="img"><a target="_blank" href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="280" height="125" data-original="{$v.pic_url}" alt=""></a></p>
+								<p class="name"><a target="_blank" href="{$v.url}">{$v.name}</a></p>
+							</div>
+							{/foreach}
+							
+
+						</div><!-- .selectTopics -->
+
+					</div><!-- .rightWrap -->
+				</div><!-- .selectWrap -->
+			</div><!-- .globalSelectWrap -->
+{if $hot_list}
+			<!-- 正在热销 -->
+			<div class="nowHotSale w1200">
+				<h1 class="index-title">正在热销 / <span>100%海外直采 吃的放心</span></h1>
+				<ul class="proHotSaleList clearfix">
+				{assign var='cnt' value=1}
+				{foreach from=$hot_list key=k item=v}
+					<li>
+						<p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$v.goods_grid}" alt=""></a></p>
+						<p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong></strong>{$v.goods_title}</a></p>
+						<div class="p_price_cart_wrap clearfix">
+							<p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{if $v.promote_price}{$v.promote_price}{else}{$v.market_price}{/if}</span></p>
+							<span class="icon_index icon_cart fr js_addToCart" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
+						</div>
+						<em class="icon_index o-icon">TOP{$cnt}</em>
+					</li>
+					{assign var="cnt" value="`$cnt+1`"}   
+					{/foreach}
+					
+				</ul><!-- .proHotSaleList -->
+			</div><!-- .nowHotSale -->
+			{/if}
+		</div><!-- .js_mainBgWrap -->
+	</div><!-- .wrap -->
+
+
+	<footer id="footer">
+		{include file="foot.htm"}
+	</footer>
+{literal}
+
+	<script>
+		$LAB.script("jquery.flexslider.min.js")
+			.wait(function(){})	
+			.script("index.min.js?2015091403")
+	</script>
+{/literal}
+</body>
+</html>

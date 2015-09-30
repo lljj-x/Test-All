@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-sale-manage" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="user-index-wrap clearfix">
+            <div class="user-conent-warp fr">
+                <div class="user-action-menu-warp">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list clearfix">
+                        <li>
+                            <a href="#" class="current">售后管理</a>
+                        </li>
+                    </ul>
+                </div>
+
+               
+				{if $apply}
+                <ul class="sale-list mt30">
+                    <!-- 循环这里-->
+                    {foreach from = $apply item = apply}
+                    <li class="mt30">
+                        <table class="table sale-table">
+                            <colgroup>
+                                <col width="40%">
+                                <col width="12%">
+                                <col width="12%">
+                                <col width="12%">
+                                <col width="12%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>订单号:{$apply.order_sn} / 商品信息</th>
+                                    <th>交易金额</th>
+                                    <th>退款金额</th>
+                                    <th>申请时间</th>
+                                    <th>变更时间</th>
+                                    <th>退款状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="inline-block goods-img">
+                                            <a href="{$apply.goods.url_title}" target="_blank">
+                                                <img src="{$apply.goods.goods_grid}" alt="{$apply.goods.goods_title}" width="100" height="100">
+                                            </a>
+                                        </div>
+                                        <div class="inline-block goods-des">
+                                            <p class="goods-title">
+                                                <a href="{$apply.goods.url_title}" target="_blank">
+                                                    {$apply.goods.goods_title}
+                                                </a>
+                                            </p>
+                                            <p class="goods-other">
+                                                <span class="goods-num">数量:{$apply.number}</span>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>￥{$apply.order_amount}</p>
+                                    </td>
+                                    <td>
+                                        <p class="color-increase bold">￥{$apply.apply_money}</p>
+                                    </td>
+                                    <td>
+                                        <p>{$apply.add_time}</p>
+                                    </td>
+                                    <td>
+                                        <p>{$apply.up_time}</p>
+                                    </td>
+                                    
+                                    <td>
+                                        <p class="color-increase">{$apply.apply_status}</p>
+                                        <p><a href="/m-users-a-apply_detail.htm?apply_id={$apply.id}&order_id={$apply.order_id}&goods_id={$apply.goods_id}">查看详情</a></p>
+                                    </td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    {/foreach}
+                </ul>
+                {else}
+                <!--为空-->
+                <div class="empty-warp">
+                    您的满意是我们服务的唯一标准，<br />
+                    预祝您在五洲会海购中收获满满的<a href="/" class="color-increase">惊喜</a>！
+                </div>
+                <!--为空-->
+				{/if}
+                <div class="page tc mt30">
+                    <div class="p-wrap">
+						<span class="p-num">
+							{$pagestr}
+						</span>
+						<!--<span class="p-skip">
+							<em>共<b>5</b>页，&nbsp;&nbsp;到第</em>
+							<input type="text" value="1" class="input-txt">
+							<em>页</em>
+							<a href="#" class="btn-go">确定</a>
+						</span>-->
+                    </div>
+                </div>
+            </div>
+            {include file="user/user_left.htm"}
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js")
+</script>
+{/literal}
+</body>
+</html>

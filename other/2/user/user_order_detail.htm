@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css?2015091101">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-order-detail" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="user-index-wrap clearfix">
+                <section class="order-status pr">
+                	{if $banner_list}
+			        <div style="clear:both; margin:10 auto;">
+			                <ul class="slideList clearfix">
+			                {foreach from=$banner_list item=v}
+			                        <li><a href="{$v.url}"><img src="{$v.pic_url}" alt="" height="100"></a></li>
+			                    {/foreach}
+			                </ul>
+			        </div>
+			        {/if}
+                    <h1 class="title">当前状态： <span>{if $order.order_status ==0}未付款{elseif $order.order_status == 1}已付款{elseif $order.order_status == 2}备货中{elseif $order.order_status == 3}卖家已发货{elseif $order.order_status == 7}售后申请中{elseif $order.order_status == 4}去评价{elseif $order.order_status == 5}已完成{else}交易关闭{/if}</span></h1>
+
+                    {if $order.order_status == 3}
+                        <a href="javascript:;" class="btn btn-default js_confirmReceipt" data-order-id="{$order.order_id}">确认收货</a>
+                    {elseif $order.order_status == 0}
+                    	<a href="/m-flow-a-payment-order_sn-{$order.order_sn}.html"  class = "btn btn-default">立即付款</a>
+                    {elseif $order.order_status == 4}
+                    	<a href="/review/write-{$order.order_sn}.html" class="js_buyAgains btn btn-default" data-order-sn="{$order.order_sn}">去评价</a>
+                    {elseif $order.order_status >= 4 && $order.order_status !=7}
+                    	<a href="javascript:;" class="js_buyAgain btn btn-default" data-order-sn="{$order.order_sn}">再次购买</a>
+                    {/if}
+                    
+                    <div class="qr-code-warp clearfix order-detail-qr">
+                        <span class="qr-code-img fl"></span>
+                            <span class="qr-code-text fl">  扫一扫 <br>
+                                <span class="color-increase">手机购买更便宜</span>
+                            </span>
+                        <div class="qr-code-drop drop-box none">
+                            <img src="../dist/images/domeimg/qr_code_app.jpg?2015082701" alt=""> App首单减5元
+                            <i class="triangle-right"><i class="triangle-right"></i></i>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="shipping-status pt20">
+                    <h3 class="bold16 pb10 border-bottom">物流信息</h3>
+                    <ul class="order-shipping">
+
+                        {* 这里加判断 如果不是一个快递显示 下面三个 li，否则显示第四个 li *}
+                        <li>
+                            <span class="prompt">发货方式：</span>快递
+                        </li>
+                        <li>
+                            <span class="prompt">物流公司：</span>{if $order.shipping_method eq ''}未发货{else}{$order.shipping_method}{/if}
+                        </li>
+                        <li>
+                            <span class="prompt">运单号码：</span>{if $order.Tracking_NO eq ''}未发货{else}{$order.Tracking_NO}
+                            <a href="javascript:void(0);" target="" class="view-shipping js-view-shipping" data-order-sn="{$order.order_sn}">查看物流</a>
+                            {/if}
+                        </li>
+						{if $shippingnum>1}
+                        <li>
+                            <p class="msg-box"><span class="color-increase">温馨提示：</span><span>尊敬的客户，由于您的商品在不同库房，所以您的订单将被拆分为多个包裹分开配送，给您带来的不便尽请谅解。</span></p>
+                        </li>
+                        {/if}
+                    </ul>
+                </section>
+
+                <!--<section>
+                    <h3 class="bold">物流跟踪：</h3>
+                    <ul class="order-shipping">
+                        <li>2015-07-11 18:23:32 您的订单开始处理 </li>
+                        <li>2015-07-11 18:29:00 您的订单待配货 </li>
+                        <li>2015-07-11 18:37:57 您的包裹已出库 </li>
+                        <li>2015-07-11 20:43:47 【广东深圳罗湖民治分部】的收件员【吴祥城】已收件 </li>
+                        <li>2015-07-12 02:59:10 快件已到达【广东深圳公司】 扫描员是【9105】上一站是【】 </li>
+                        <li>2015-07-12 03:01:47 由【广东深圳公司】发往【深圳罗湖南油分点】 </li>
+                        <li>2015-07-12 08:05:02 快件已到达【深圳罗湖南油分点】 扫描员是【林美足】上一站是【】 </li>
+                        <li>2015-07-12 16:27:36 【深圳罗湖南油分点】已进行【疑难件】扫描 ，疑难件原因：【节假日延迟派送】 </li>
+                        <li>2015-07-13 08:42:04 【深圳罗湖南油分点】已收入 </li>
+                        <li>2015-07-13 08:42:04 【深圳罗湖南油分点】的派件员【王海平】正在派件 </li>
+                        <li>2015-07-13 11:51:11 已签收,签收人是草签 </li>
+                    </ul>
+                </section>-->
+
+                <section>
+                    <h3 class="bold16 pb10 border-bottom">订单信息</h3>
+                    <ul class="order-info">
+                        <li>
+                            <span class="prompt">收货地址：</span>
+                            <span class="bold">{$order.consignee} &nbsp;&nbsp;&nbsp;{$order.tel}&nbsp;&nbsp;&nbsp;{$order.country} &nbsp;{$order.province} &nbsp;{$order.city}市 &nbsp;{$order.district} &nbsp;{$order.address}</span>
+                        </li>
+                        <li class="clearfix">
+                            <span class="fl left"><span class="prompt">订单编号：</span> {$order.order_sn}</span>
+                            <span class="fl"><span class="prompt">下单时间：</span> {$order.formated_add_time}</span>
+                        </li>
+                        <li class="clearfix">
+                            <span class="fl left"><span class="prompt">付款时间：</span> {if $order.pay_time==''}未付款{else}{$order.pay_time}{/if} </span>
+                            <span class="fl"><span class="prompt">发货时间：</span>{if $order.shipping_time==''}未发货&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;{else} {$order.shipping_time}{/if}</span>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3 class="bold16 pb10">商品清单</h3>
+                    <table class="table order-detail-table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="table left-table">
+                                        <thead>
+                                            <tr>
+                                                <th>商品信息</th>
+                                                <th>重量（千克）</th>
+                                                <th>单价（元）</th>
+                                                <th>数量</th>
+                                                <th>金额（元）</th>
+                                                <th>物流信息</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {if $shippingnum<2}
+                                        {foreach from = $goods_list item = goods key=k}
+                                        	<tr>
+                                                <td>
+                                                    <div class="inline-block goods-img">
+                                                        <a href="{$goods.url_title}" target="_blank">
+                                                            <img src="{$goods.goods_grid}" alt="{$goods.goods_name}" width="100" height="100">
+                                                        </a>
+                                                    </div>
+                                                    <div class="inline-block goods-des">
+                                                        <p class="goods-title">
+                                                            <a href="{$goods.url_title}" target="_blank">{$goods.goods_title}</a>
+                                                        </p>
+                                                        <p class="user-shipping-address cart_icon1">
+                                                            {$goods.remarks}
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td>{$goods.goods_weight}</td>
+                                                <td>
+                                                    <p class="price">{$goods.goods_price}</p>
+                                                    <p class="original-price">{$goods.market_price}</p>
+                                                </td>
+                                                <td>{$goods.goods_number}</td>
+                                                <td class="bold">{$goods.subtotal}</td>
+                                                {* 物流信息，rowspan 的值等于你当前订单中 该快递的 商品数量*}
+                                                {if $k==0}
+	                                                {if $shippingnum==0}
+	                                                <td rowspan="{$goods_list|@count}" class="bl"><a href="javascript:void(0);" target="" class="color-increase js-view-shipping" data-order-sn="{$order.order_sn}">查看物流</a></td>
+	                                                {elseif $shippingnum==1}
+	                                                <td rowspan="{$goods_list|@count}" class="bl"><a href="javascript:void(0);" target="" class="color-increase js-view-shipping" data-shipping-name="{$order.shipping_way.shipping_name}" data-shipping-no="{$order.shipping_way.shipping_no}">查看物流</a></td>
+	                                                {/if}
+                                                {/if}
+                                            </tr>
+                                        {/foreach}
+                                        {else}
+                                        {foreach from=$shipping item=ship}
+                                        {foreach from = $ship.track_goods item = goods}
+                                            <tr>
+                                                <td>
+                                                    <div class="inline-block goods-img">
+                                                        <a href="{$goods.url_title}" target="_blank">
+                                                            <img src="{$goods.goods_grid}" alt="{$goods.goods_name}" width="100" height="100">
+                                                        </a>
+                                                    </div>
+                                                    <div class="inline-block goods-des">
+                                                        <p class="goods-title">
+                                                            <a href="{$goods.url_title}" target="_blank">{$goods.goods_title}</a>
+                                                        </p>
+                                                        <p class="user-shipping-address cart_icon1">
+                                                            {$goods.remarks}
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                                <td>{$goods.goods_weight}</td>
+                                                <td>
+                                                    <p class="price">{$goods.goods_price}</p>
+                                                    <p class="original-price">{$goods.market_price}</p>
+                                                </td>
+                                                <td>{$goods.goods_number}</td>
+                                                <td class="bold">{$goods.subtotal}</td>
+
+                                                {* 物流信息，rowspan 的值等于你当前订单中 该快递的 商品数量*}
+                                                {$goods.view_logis}
+                                            </tr>
+                                        {/foreach}
+                                        {/foreach}
+                                        {/if}
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="js_rightTable table right-table">
+                                        <thead>
+                                            <tr>
+                                                <th>优惠（元）</th>
+                                                <!--<th>关税（元）</th>-->
+                                                <th>运费（元）</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="prompt">
+                                                    优惠券省{$order.promotion_code_youhuilv}<br/>
+                                                    佣金省{$order.user_cash}
+                                                </td>
+                                                <!--<td class="prompt">-->
+                                                    <!--{$order.tariff}<br/>-->
+                                                    <!--( 关税 )-->
+                                                <!--</td>-->
+                                                <td class="prompt">
+                                                    {$order.formated_shipping_fee}<br/>
+                                                    ( 快递 )
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="payment-amount">
+                                    <span>实付款：</span><span class="color-increase">￥{$order.order_amount}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </section>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="footer-bg">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $(function(){
+        var $rightTable = $(".js_rightTable");
+        $rightTable.find("td").height($rightTable.parent().height() - 40);
+    });
+    $LAB.script("user.min.js?2015091502");
+</script>
+{/literal}
+</body>
+</html>

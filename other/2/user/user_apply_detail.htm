@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-sale-detail" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <p class="title">售后详情</p>
+        <div class="user-index-wrap clearfix">
+            <div class="user-sale-conent-warp fr">
+                <div class="user-action-menu-warp">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list clearfix">
+                        <li>
+                            <a href="#" class="current">售后详情</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="pb30 pt30 border-bottom">
+                    <div class="sale-status">
+                       
+                        <div class="status-des">
+                        {if $apply.apply_status==1}
+                            <i class="user-msg user-icon-msg"></i>
+                            <p class="title">待审核</p>
+                            <p class="title">等待售后人员处理退款情况</p>
+                            <p class="prompt">如果售后人员同意，退款申请将达成并退款至您的微信、支付宝或银行卡中如果商家拒绝，将需要你修改退款申请。</p>
+                        {elseif $apply.apply_status==2}
+                             <i class="user-msg icon-big-success"></i>
+                            <p class="title">审核通过</p>
+                            <p class="prompt">您的售后申请已审核通过!请留意观察您的支付帐户，一般会在1-2日内退款至您的支付帐户中。</p>
+                        {elseif $apply.apply_status==5}
+                            <i class="user-msg icon-big-wait"></i>
+                            <p class="title">审核失败</p>
+                            <p class="prompt">您的售后申请被驳回。请修改售后申请，或联系售后人员，客服热线：  400-013-8666 </p>
+                        {elseif $apply.apply_status==3}
+                            <i class="user-msg icon-big-success"></i>
+                            <p class="title">退款成功</p>
+                            <p class="prompt">退款已转至您的支付帐户，请查收！</p>
+                        {elseif $apply.apply_status==4}
+                        <i class="user-msg icon-big-wait"></i>
+                        <p class="title">已撤销</p>
+                        <p class="prompt">您已撤销申请！</p>
+                        {/if}
+                        
+                        </div>
+                    </div>
+                    {if $apply.apply_status == 1 || $apply.apply_status == 5 || $apply.apply_status ==0}
+                    <p>
+                        <a href="{if $apply.apply_type eq  0}/m-users-a-apply_refund.htm?order_id={$apply.order_id}&apply_id={$apply.id}&goods_id={$apply.goods_id}&editApply=1{else}/m-users-a-apply_return.htm?order_id={$apply.order_id}&apply_id={$apply.id}&goods_id={$apply.goods_id}&editApply=1{/if}" class="btn btn-default mr20">修改售后申请</a><a href="#" class="js_undo btn btn-outline">撤销售后申请</a>
+                    </p>
+                    {/if}
+                </div>
+
+                <ul class="sale-detail js_saleDetail mt50">
+                    <li>
+                        <i class="user-icon icon-quan"></i>
+                        {if $apply.up_time!=''}
+                        <h3 class="bold">用户名（手机号）{$nickname}于{$apply.up_time}修改售后申请</h3>
+                        {/if}
+                        <p class="type">
+                            退款类型：{if $apply.apply_type == 0}退款退货{else}仅退款{/if} <br/>
+                            退款金额：<span class="color-increase">￥{$apply.apply_money}</span><br/>
+                            退款原因：<span class="bold">{$apply.apply_reason}</span>
+                        </p>
+                        <p class="msg">
+                            退款说明 <br/>
+                            {$apply.apply_desc}
+                        </p>
+                        {if $apply.apply_img!=''}
+                        <p class="voucher">
+                            <span>退款凭证</span>
+                            <br/>
+                            {foreach from = $apply.apply_img_arr item=imgurl}
+                            <a href="{$imgurl.img_url}" class="img"><img src="{$imgurl.img_url}"/></a>
+                            {/foreach}
+                        </p>
+                       {/if}
+                       {if $apply.remark neq ''}
+                       <p class="msg">
+                            审核结果说明： <br/>
+                            {$apply.remark}
+                        </p>
+                        {/if}
+                        {if $apply.audit_time neq ''}
+                        <p class="msg">
+                            审核时间： <br/>
+                            {$apply.audit_time}
+                        </p>
+                        {/if}
+                    </li>
+                </ul>
+
+                <div id="js_pop" class="none">
+                    <form id="undo-form" class="user-global-form" action="/m-users-a-cencel_apply.htm" method="get">
+                      <p class="prompt">友情提示：撤消售后申请后，此商品不可再次申请售后申请，如需修改申请内容，请点击修改售后申请。</p>
+                        <label class="mt30">
+                            <span class="form-label"><span class="required">*</span>撤消原因</span>
+                            <input type="hidden" name="apply_id" value="{$apply.id}"/>
+                            <span class="reason-wrap">
+                                <select name="cencel">
+                                    <option value="">请选择撤消原因</option>
+                                    <option value="1">我不想退了</option>
+                                    <option value="2">商品勉强可以接受</option>
+                                    <option value="3">退货/退款太麻烦了</option>
+                                    <option value="4">与客服协商一致</option>
+                                    <option value="5">其他</option>
+                                </select>
+                            </span>
+                        </label>
+                        <p class="label-right mt40">
+                            <a class="btn btn-default js_submit" href="#" onclick="return false;">确定</a>
+                            <a class="btn btn-outline js_cancel ml30" href="#" onclick="return false;">取消</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <aside class="user-sale-sidebar fl">
+                <ul>
+                    <li>
+                        <h2 class="bold16 clearfix"><span class="fl">售后申请</span>
+                            <span class="warning">
+                                {if $apply.apply_status eq 1 || $apply.apply_status eq 0}
+                                    <i class="user-icon icon-status-wait"></i>待审核
+                                {elseif $apply.apply_status eq 2}
+                                    <i class="user-icon icon-status-success"></i>已审核
+                                {elseif $apply.apply_status eq 3}
+                                    <i class="user-icon icon-status-success"></i>已完成
+                                {elseif $apply.apply_status eq 4}
+                                    <i class="user-icon icon-status-fail"></i>已撤销
+                                {else}
+                                    <i class="user-icon icon-status-fail"></i>审核失败
+                                {/if}
+                            </span>
+                        </h2>
+                        <div class="content">
+                            <p>退款类型：{if $apply.apply_type == 0 }退款退货{else}仅退款{/if}</p>
+                            <p>退款金额：<span class="color-increase">￥{$apply.apply_money}</span></p>
+                            <p>退款原因：{$apply.apply_reason}</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h2 class="bold16">退货/退款商品信息</h2>
+                        <div class="content">
+                            <p>
+                                <a href="{$order.goods.url_title}">
+                                    <img class="img border" src="{$order.goods.goods_grid}" alt="商品名称" width="80" height="80"/>
+                                    <span class="text">{$order.goods.goods_title}</span>
+                                </a>
+                            </p>
+                            <p class="mt30">单 价：￥{$order.goods.goods_price}</p>
+                            <p>数 量：{$order.goods.goods_number}</p>
+                            <p>小  计：￥{$order.goods.subtotal}</p>
+                            <p><a href="/m-users-a-order_detail.htm?order_id={$order.order_id}" class="color-increase">查看订单信息></a></p>
+                        </div>
+                    </li>
+                 <li>
+                        <h2 class="bold16">订单详情</h2>
+                        <div class="content">
+                            <p><span class="left">订单编号：</span> {$order.order_sn}</p>
+                            <p><span class="left">商品总额：</span>{$order.total_fee}元</p>
+                            <p><span class="left">运费：</span> {$order.formated_shipping_fee}元</p>
+                            <p><span class="left">优惠券：</span>-{$order.promotion_code_youhuilv}元</p>
+                            <p><span class="left">佣金：</span>-{$order.user_cash}元</p>
+                            <p><span class="left">实付金额：</span>{$order.total_fee}元</p>
+                            <p><span class="left">成交时间：</span>{$order.pay_time}</p>
+                        </div>
+                    </li>
+                </ul>
+
+            </aside>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="footer-bg">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js").wait(function () {
+        USER.applyDetail.detailInit("undo-form");
+    });
+</script>
+{/literal}
+</body>
+</html>

@@ -1,0 +1,40 @@
+{if $banner_top.pic_url}
+<div class="topBanner">
+    <a href="{$banner_top.url}"><img src="{$banner_top.pic_url}" width="1920" height="80" alt=""></a>
+</div><!-- .topBanner -->
+{/if}
+
+<div id="topNav">
+    <div id="topNavWrap" class="clearfix">
+        <div id="topNavLeft">
+            <a href="javascript:;" class="followUs pr mr30 pl20 no_unl">
+                <i class="icon_followUs pa icon"></i>关注我们
+                <span class="qr_code pa"><img src="{$imgcache_url}images/domeimg/qr_code_app.jpg?2015082701" alt=""></span>
+            </a>
+            <a href="javascript:;" class="app pr mr30 pl20 no_unl">
+                <i class="icon_app pa icon"></i>下载五洲会海购APP
+                <span class="qr_code pa"><img src="{$imgcache_url}images/domeimg/qr_code_app.jpg?2015082701" alt=""></span>
+            </a>
+			<span class="tel pr pl20">
+				<i class="icon_tel pa icon"></i>400-013-8666
+			</span>
+            <!-- <span class="pl10">
+                环球易购旗下五洲会
+            </span> -->
+        </div><!-- #topNavLeft -->
+
+        <ul id="topNavRight" class="clearfix">
+            <li class="isLogin none" id="js_isLoginName"><span></span>，欢迎你！</li>
+            <li class="isLogin none"><a href="/m-users-a-order_list.htm">我的订单</a></li>
+            <li class="isLogin none"><a href="/m-users-a-index.htm">个人中心</a></li>
+            <li class="isNoLogin">欢迎来到五洲会海购！</li>
+            <li>
+                <p class="isNoLogin"><a href="/m-users-a-sign.html">登录</a><a href="/m-users-a-join.htm" class="fast-register">快速注册</a></p>
+            </li>
+            <li><a href="/m-flow-a-cart.html">购物车(<span id="js_topCartNum">0</span>)</a></li>
+            <li><a href="/help.html">帮助中心</a></li>
+            <li><a href="/business/1/" class="color-increase">招商合作</a></li>
+            <li class="isLogin js_isLoginUserCenter none"><a href="/m-users-a-logout.html">退出</a></li>
+        </ul><!-- #topNavRight -->
+    </div><!-- #topNavWrap -->
+</div><!-- #topNav -->

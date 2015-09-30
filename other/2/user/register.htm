@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{include file="top.htm"}
+
+	<link rel="stylesheet" href="/temp/skin1/dist/mincss/login_min.css">
+</head>
+<body>
+	<header id="header">
+		{include file="user/public_sign_top.htm"}
+	</header>
+	
+	<!-- 注册主体start -->
+	<div class="login-main-wrap">
+		<div class="public-login-page register-page w1200">
+			<div class="left-pic"><img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="535" height="436" data-original="/temp/skin1/dist/images/domeimg/login/login_left_2.png" alt=""></div>
+
+			<div class="public-login-bord register-bord" id="js_loginBord">
+				<form id="js_registerForm" action="/m-users-a-a_join.htm" method="post" autofocus autocomplete="off">
+					<div class="public-tit mb25 clearfix">
+						<span class="fl tit">注册帐号</span>
+						<span class="fr is-have">已有五洲会帐号， <a href="/m-users-a-sign.htm">登录</a></span>
+					</div>
+
+					<div class="input-group mb25">
+						<i class="login_icon icon_name position-left"></i>
+						<div class="input-wrap">
+							<input type="text" name="phone" maxlength="11" id="js_regPhone" data-type="1" class="phone" placeholder="请输入手机号">
+						</div>
+						<span class="position-right"><strong class="color_main f14">*</strong></span>
+					</div>
+
+					<div class="input-group message-group mb25" id="js_enterVerifycode">
+						<div class="message-wrap clearfix">
+							<div class="message fl">
+								<input type="text" name="verifycode" id="js_accessCode" class="verifycode" placeholder="输入验证码">
+							</div>
+							<div class="img-wrap fl"><img id="js_refreshVerifycode" data-src="/fun/?act=verify" src="/fun/?act=verify" width="100" height="40"></div>
+						</div>
+						<span class="position-right"><strong class="color_main f14">*</strong></span>
+					</div>
+
+					<div class="input-group message-group mb25">
+						<div class="message-wrap clearfix">
+							<div class="message fl">
+								<input type="text" name="phoneCode" id="js_regPhoneCode" class="phoneCode" placeholder="短信验证码">
+							</div>
+							<button id="js_smsCode" type="button" class="smscode no-click fr" disabled="disabled">获取短信验证码</button>
+						</div>
+						<span class="position-right"><strong class="color_main f14">*</strong></span>
+					</div>
+
+					<div class="input-group mb25">
+						<i class="login_icon icon_password position-left"></i>
+						<div class="input-wrap">
+							<input type="password" name="password" id="js_regPassword" class="password" placeholder="请输入密码">
+						</div>
+						<span class="position-right"><strong class="color_main f14">*</strong></span>
+					</div>
+
+					<div class="input-group mb25">
+						<i class="login_icon icon_password position-left"></i>
+						<div class="input-wrap">
+							<input type="password" name="password_confirm" id="js_regPasswordConfirm" class="password_confirm" placeholder="确认登录密码">
+						</div>
+						<span class="position-right"><strong class="color_main f14">*</strong></span>
+					</div>
+
+					<div class="input-group mb25">
+						<i class="login_icon icon_email position-left"></i>
+						<div class="input-wrap">
+							<input type="text" name="email" id="js_regEmail" class="email" placeholder="E-mail地址">
+						</div>
+					</div>
+
+					<div class="input-group mb25">
+						<i class="login_icon icon_birthday position-left"></i>
+						<div class="input-wrap">
+							<input type="text" name="birthday" readonly id="js_regBirthday" class="birthday" placeholder="填写生日有惊喜哦~">
+						</div>
+					</div>
+					
+					<p class="btn-wrapper mb25"><label for="js_isagree"><input type="checkbox" name="isagree" checked="checked" class="isagree" id="js_isagree">&nbsp;&nbsp;我已阅读并同意<a href="http://www.wzhouhui.com/help/25/">五洲会海购服务条款</a></label></p>
+                    
+<!--					<p><input id="access_code" class="validate-code" type="text" value="" name="verifycode">
+                    <img src="/fun/?act=verify" data-src="/fun/?act=verify" id="img-verifycode"></p>-->
+					<p class="submit"><input type="submit" value="快速注册" id="js_submitRegisterForm"/></p>
+				</form>
+			</div><!-- .register-bord -->
+
+		</div><!-- .register-page -->
+		
+	</div><!-- .login-main-wrap -->
+
+	<footer id="footer">
+		{include file='foot_c_js.htm'}
+		{include file='user/public_sign_foot.htm'}
+	</footer><!--end #footer -->
+{literal}
+<script>
+		$LAB.script("jquery.validate.min.js")
+			.wait()
+			.script("laydate/laydate.dev.js")
+			.script("login.min.js?2015081301")
+			.wait(function(){
+				//填写注册信息
+				(function(){
+					var $js_registerForm = $("#js_registerForm");
+					if($js_registerForm.length > 0){
+						// 电话
+						$.validator.addMethod("mobile", function(value, element) {
+				                var length = value.length;
+				                var mobile =  /^(((13[0-9]{1})|(15[0-9]{1})|(17[6-8]{1})|(14[5-7]{1})|(18[0-9]{1}))+\d{8})$/;
+				                return this.optional(element) || (length == 11 && mobile.test(value));
+				        }, "手机号码格式错误");
+
+						$js_registerForm.validate({
+							rules: {
+								phone: {
+									required: true,
+									maxlength: 11,
+									mobile:true
+								},
+								verifycode: {
+									required: true,
+									minlength: 4,
+									maxlength: 4
+								},
+								phoneCode: {
+									required: true
+								},
+							    password: {
+							        required: true,
+							        maxlength: 60,
+							        minlength: 6
+							    },
+							    password_confirm: {
+							        required: true,
+							        minlength: 6,
+							        maxlength: 60,
+							        equalTo: $("#js_regPassword")
+							    },
+							    email:{
+							    	email:true
+							    },
+							    isagree: {
+							    	required: true
+							    }
+							},
+							messages: {
+								phone: {
+									required: '请输入大陆地区手机号码',
+									maxlength: '手机号码长度不能超过11位',
+									mobile: '请输入正确的手机格式'
+								},
+								verifycode: {
+									required: '请输入验证码',
+									minlength: '验证码长度不对',
+									maxlength: '验证码长度不对'
+								},
+								phoneCode: {
+									required: '请输入正确的手机验证码'
+								},
+							    password: {
+							        required:  '请设置密码',
+							        minlength: '密码长度必须大于6个字符'
+							    },
+							    password_confirm: {
+							        required:  '请再次确认密码',
+							        minlength: '密码长度必须大于6个字符',
+							        equalTo:   '两次密码输入不一致'
+							    },
+							    email:{
+							    	email:'请输入正确格式的电子邮件'
+							    },
+							    isagree: {
+							    	required: '您未阅读并接受五洲会海购服务条款'
+							    }
+							},
+						   
+							errorPlacement:function(error,element){
+							    element.parent().find("label.checked").remove();
+							    error.appendTo(element.parent());
+						    },
+							success: function(label) {
+							    label.remove();
+							}
+					    });
+					}
+				})();
+
+				
+			})	
+	</script>
+{/literal}
+
+
+	<!-- 第三方统计代码 -->
+	<div style="display:none;">
+	<!--官网统计代码-->
+	{literal}
+	<script type="text/javascript">
+		$(function () {
+			setTimeout(function(){
+				$LAB.script("//hm.baidu.com/hm.js?0fee07bdf074af72912949b59552450d");
+			 /*
+			 var _hmt = _hmt || [];
+			 (function() {
+			   var hm = document.createElement("script");
+			   hm.src = "//hm.baidu.com/hm.js?0fee07bdf074af72912949b59552450d";
+			   var s = document.getElementsByTagName("script")[0]; 
+			   s.parentNode.insertBefore(hm, s);
+			 })();
+			*/
+			},300);
+		});
+	</script>
+	{/literal}
+	</div>
+
+</body>
+</html>

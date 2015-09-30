@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-sale-apply" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <p class="title">申请售后</p>
+
+        <form id="sale-apply-form" action="/m-users-a-do_apply.htm" method="post">
+            <div class="user-index-wrap clearfix">
+            <div class="user-sale-conent-warp fr">
+                <div class="user-action-menu-warp">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list clearfix">
+                        <li>
+                            <a href="{if $order.order_status == 1 || $apply.apply_type==1}javascript:;{else}/m-users-a-apply_refund.htm{/if}">退货退款</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="current">仅退款</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="form-warp user-global-form">
+                    <label>
+                        <span class="form-label"><span class="required">*</span>货物状态</span>
+                        <span class="reason-wrap">
+                            <select disabled name="status">
+                                <option value="">请选择货物状态</option>
+                                {if $order.order_status <= 2}
+                                <option value="1" selected>未发货</option>
+                                {elseif $order.order_status == 3}
+                                <option value="2" selected>运输中</option>
+                                {elseif $order.order_status == 4}
+                                <option value="3" selected>已收货</option>
+                                {/if}
+                            </select>
+                        </span>
+                    </label>
+
+                    <label>
+                        <span class="form-label"><span class="required">*</span>退款原因</span>
+                        <span class="reason-wrap">
+                        	{if $order.order_status < 2}
+                            <select name="reason">
+                            {if $apply.apply_reason != ''}<option value="{$apply.apply_reason}" selected>{$apply.apply_reason}</option>{/if}
+                                <option value="">请选择退货原因</option>
+                                <option value="我不想买了">我不想买了</option>
+                                <option value="信息填写错误，重新拍">信息填写错误，重新拍</option>
+                                <option value="重复下单">重复下单</option>
+                                <option value="忘记使用优惠券">忘记使用优惠券</option>
+                                <option value="其他原因">其他原因</option>
+                            </select>
+                            {else}
+                             <select name="reason">
+                            	{if $apply.apply_reason != ''}<option value="{$apply.apply_reason}" selected>{$apply.apply_reason}</option>{/if}
+                                <option value="">请选择退货原因</option>
+                                <option value="假冒品牌">假冒品牌</option>
+                                <option value="不喜欢/不想要">不喜欢/不想要</option>
+                                <option value="收到商品描述不符">收到商品描述不符</option>
+                                <option value="商品质量问题">商品质量问题</option>
+                                <option value="其他">其他</option>
+                            </select>
+                            {/if}
+                        </span>
+                    </label>
+
+                    <label>
+                        <span class="form-label"><span class="required">*</span>退款金额</span>
+                        <span class="money-wrap">
+                            <input type="hidden" name="apply_type" value="1" />
+                            <input type="hidden" name="goods_id" value="{$order.goods.goods_id}" />
+                            <input type="hidden" name="order_id" value="{$order.order_id}" />
+                            <input type="hidden" name="order_sn" value="{$order.order_sn}" />
+                            <input type="hidden" name="apply_money" value="{$order.goods.refund_money}" />
+                            <input type="hidden" name="apply_id" value="{$apply_id}" />
+                            <input type="hidden" name="number" value="{$order.goods.goods_number}" />
+                            <input name="money" placeholder="请输入退款金额" disabled value="{$order.goods.refund_money}"> <span class="prompt">（最多 499 元，含发货邮费0.00元）</span>
+                        </span>
+                    </label>
+
+                    <label>
+                        <span class="form-label"><span class="required">*</span>退款说明</span>
+                        <span class="message-wrap">
+                            <textarea name="message" placeholder="最多200字">{$apply.apply_desc}</textarea>
+                        </span>
+                    </label>
+
+                    <div class="mt10 mb10">
+                        <span class="form-label">上传图片</span>
+                        <!-- 上传图片-->
+                        <div class="file-warp js_fileWarp">
+                            <div class="clearfix">
+                                <ul class="js_files files clearfix fl">
+                                {if $apply.apply_img_arr}
+                                {foreach from = $apply.apply_img_arr item = imgarr}
+                                <li><i class="user-icon icon-remove js_remove remove" data-delete-url="/fun/index.php?act=delete&amp;type=apply&amp;file={$imgarr.img_name}"></i><img src="{$imgarr.img_url}" alt="1437806445972767303.jpeg" height="80" width="80"><input type="hidden" name="file[]" value="{$imgarr.img_url}">
+                                </li>
+                                {/foreach}
+                                {/if}
+                                </ul>
+                                <div class="file-upload-warp fl">
+                                    <i class="icon-plus"></i>
+                                    <p>上传凭证 <br/>（最多三张）</p>
+                                    <input type="file" id="fileupload" class="file-upload" name="files[]" multiple>
+                                </div>
+                            </div>
+                            <p class="error none"></p>
+                            <div class="progress-warp">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 上传图片-->
+                    </div>
+
+                    <p class="label-right prompt">每张图片大小不超过5M，最多3张，支持GIF、JPG、PNG、BMP格式</p>
+
+                    <p class="label-right mt30">
+                        <a class="btn btn-default js_submit" href="#" onclick="return false;">提交申请</a>
+                    </p>
+                </div>
+            </div>
+
+
+            <aside class="user-sale-sidebar fl">
+                <ul>
+                    <li>
+                        <h2 class="bold16">退货/退款商品信息</h2>
+                        <div class="content">
+                            <p>
+                                <a href="{$order.goods.url_title}">
+                                    <img class="img border" src="{$order.goods.goods_grid}" alt="{$order.goods.goods_title}" width="80" height="80"/>
+                                    <span class="text">{$order.goods.goods_title}</span>
+                                </a>
+                            </p>
+                            <p class="mt30">单 价：￥{$order.goods.goods_price}</p>
+                            <p>数 量：{$order.goods.goods_number}</p>
+
+                            {*
+                            <p><span class="vem">数 量：</span>
+                                <span class="modified-box-warp clearfix">
+                                    <a class="minus-box modified-box js_modifiedBox js_minusBox" href="javascript:void (0)">-</a>
+                                    <input type="text" name="num" class="num-box modified-box js_numBox" value="{$order.goods.goods_number}" placeholder="输入数量" data-max = "{$order.goods.goods_number}">
+                                    <a class="plus-box modified-box disabled js_modifiedBox js_plusBox" href="javascript:void (0)">+</a>
+                                </span>
+                            </p>
+                            *}
+
+                            <p>小 计：￥{$order.goods.subtotal}</p>
+                            <p><a href="/m-users-a-order_detail.htm?order_id={$order.order_id}" class="color-increase">查看订单信息></a></p>
+                        </div>
+                    </li>
+                   <li>
+                        <h2 class="bold16">订单详情</h2>
+                        <div class="content">
+                            <p><span class="left">订单编号：</span> {$order.order_sn}</p>
+                            <p><span class="left">商品总额：</span>{$order.total_fee}元</p>
+                            <p><span class="left">运费：</span> {$order.formated_shipping_fee}元</p>
+                            <p><span class="left">优惠券：</span>-{$order.promotion_code_youhuilv}元</p>
+                            <p><span class="left">佣金：</span>-{$order.user_cash}元</p>
+                            <p><span class="left">实付金额：</span>{$order.total_fee}元</p>
+                            <p><span class="left">成交时间：</span>{$order.pay_time}</p>
+                        </div>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        </form>
+    </div>
+</div>
+
+<footer id="footer" class="footer-bg">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js")
+        .wait(function () {
+            // 申请售后form
+            if($("#sale-apply-form").length > 0){
+                USER.saleApplyForm.checkForm("sale-apply-form");
+            }
+        })
+        .script("fileUpload.min.js").wait(function () {
+            $("#fileupload").fileupload({
+                url : '/m-users-a-apply_img.htm',
+                maxFiles: 3
+            });
+        });
+</script>
+{/literal}
+</body>
+</html>

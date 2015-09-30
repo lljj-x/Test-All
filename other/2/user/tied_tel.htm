@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{include file='top.htm'}
+
+	<link rel="stylesheet" href="/temp/skin1/dist/mincss/login_min.css">
+</head>
+<body>
+	<header id="header">
+		{include file='user/public_sign_top.htm'}
+	</header>
+	
+	<!-- 绑定手机号 主体start -->
+	<div class="login-main-wrap">
+		<div class="public-login-page bound-phone-page w1200">
+			<div class="left-pic"><img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="529" height="328" data-original="/temp/skin1/dist/images/domeimg/login/login_left.png" alt=""></div>
+
+			<div class="public-login-bord bound-phone-bord" id="js_loginBord">
+				<form id="js_boundPhoneForm" action="/m-users-a-do_tied.htm" method="post" autofocus autocomplete="off">
+					<div class="public-tit mb25 clearfix">
+						<span class="fl tit">绑定手机号</span>
+						<span class="fr is-have">给你提供更多便捷服务</span>
+					</div>
+
+					<div class="input-group mb25">
+						<i class="login_icon icon_name position-left"></i>
+						<div class="input-wrap">
+							<input type="text" name="tel" id="js_regPhone" data-type="3" class="phone" placeholder="请输入手机号">
+						</div>
+						<span class="position-right"><strong class="color_main f14">*</strong></span>
+					</div>
+
+					<div class="input-group message-group mb25">
+						<div class="message-wrap clearfix">
+							<div class="message fl">
+								<input type="text" name="verifycode" id="js_accessCode" class="verifycode" placeholder="输入验证码">
+							</div>
+							<div class="img-wrap fl"><img id="img-verifycode" data-src="/fun/?act=verify" src="/fun/?act=verify"></div>
+							<div class="ml5 fl"><a href="javascript:void(0);" id="js_refreshVerifycode" class="word_fresh">看不清</a></div>
+						</div>
+						<span class="position-right"><strong class="color_main f14">*</strong></span>
+					</div>
+
+					<div class="input-group message-group mb25">
+						<div class="message-wrap clearfix">
+							<div class="message fl">
+								<input type="text" name="phoneCode" id="js_regPhoneCode" class="phoneCode" placeholder="短信验证码">
+							</div>
+							<button id="js_smsCode" type="button" class="smscode no-click fr" disabled="disabled">获取短信验证码</button>
+						</div>
+						<span class="position-right"><strong class="color_main f14">*</strong></span>
+					</div>
+
+					<p class="submit"><input type="submit" value="绑定手机" id="js_submitBoundPhoneForm"/></p>
+				</form>
+			</div><!-- .bound-phone-bord -->
+
+		</div><!-- .bound-phone-page -->
+		
+	</div><!-- .login-main-wrap -->
+
+	<footer id="footer">
+		{include file='foot_c_js.htm'}
+		{include file='user/public_sign_foot.htm'}
+	</footer><!--end #footer -->
+{literal}
+	<script>
+		$LAB.script("jquery.validate.min.js")
+			.wait()
+			.script("login.min.js")
+			.wait(function(){
+
+				
+			})	
+	</script>
+{/literal}
+</body>
+</html>

@@ -1,0 +1,29 @@
+// 通用form 样式
+.color-increase {color: @color_increase}
+
+
+.form-error{border-color: @color_increase !important;color:@color_increase !important;}
+
+.user-global-form{padding: 20px 0;
+    select,input,textarea{font-size:14px;box-sizing: border-box;padding: 5px;width: 300px;border: 1px solid @color_assist;color: @color_base;font-family: '微软雅黑';
+        &:disabled{background: @color_assist;}
+        &.required{color: @color_base;}
+    }
+    label{display: block;padding: 10px 0;}
+    .form-label{.inline-block;text-align: right;width: 84px;vertical-align: top;padding: 5px 5px 10px 0;font-size: 12px;
+        &.left-label{width: auto;padding-left: 0;}
+    }
+    label.form-error,.label-right{padding-left: 93px;}
+    .required{.color-increase};
+    p{margin: 5px 0;
+        &.error{padding-top: 5px;margin-top:0;}
+        &.mt30{margin-top: 30px;}
+        &.mt20{margin-top: 20px;}
+        &.mt50{margin-top: 50px;}
+        &.mt10{margin-top: 10px;}
+    }
+    .item-150{width: 150px;}
+    .address_street {width: 456px;height: 100px;}
+
+    &.cancel-order-form{padding: 20px;}
+}

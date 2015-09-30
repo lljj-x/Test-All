@@ -1,0 +1,32 @@
+.jqzoom {
+cursor:pointer;
+float:left;
+padding:0px;
+position:relative;
+}
+.jqzoom img {
+float:left;
+}
+.zoomdiv {
+background:#fff url(/temp/skin1/images/loading.gif) center center no-repeat;
+border:1px solid #CCCCCC;
+display:none;
+left:0;
+overflow:hidden;
+position:absolute;
+top:0;
+z-index:3000;
+}
+.jqZoomPup {
+background:none repeat scroll 0 0 #FFFFFF;
+border:1px solid #AAAAAA;
+height:50px;
+left:0;
+opacity:0.5;
+position:absolute;
+top:0;
+visibility:hidden;
+width:50px;
+z-index:1000;
+filter: alpha(opacity = 60);
+}

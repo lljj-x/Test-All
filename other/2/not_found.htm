@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+{include file='top.htm'}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/other_min.css">
+</head>
+<body>
+	<header id="header">
+	
+		{include file='public_top.htm'}
+	</header>
+
+
+
+	<div class="js_mainBgWrap">
+
+		<div class="page-not-found-main">
+			<div class="page-not-found">
+				<h1 class="tips-tit"><span>抱歉~~~，</span>没有找到{if $msg}与“<strong>{$msg}</strong>”{/if}相关的商品~</h1>
+				<p class="tips-txt">
+					建议您：<br/>
+					1、看看输入的文字是否有误<br/>
+					2、拆分要搜索的关键词，分成几个词语再次搜索
+				</p>
+				<i class="icon-position-left"></i>
+			</div>
+		</div><!-- .page-not-found-main -->
+		
+	</div><!-- .js_mainBgWrap -->
+
+	
+
+	<footer id="footer" class="footer-bgf3">
+		{include file='foot.htm'}
+	</footer><!--end #footer -->
+	{literal}
+	<script>
+		$LAB.script("")
+			.wait(function(){})	
+	</script>
+	{/literal}
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    <link rel="stylesheet" href="/temp/skin1/dist/specialActivity/20767/style_min.css?09">
+</head>
+<body>
+<header id="header">
+    {include file='public_top.htm'}
+</header>
+<div class="active-wrap">
+    <section id="banner">
+        <div class="hf">
+            
+            <a href="/sales.html?a=yuehui" class="raiders-btn block-img" target="_blank">
+                <img src="/temp/skin1/dist/specialActivity/20767/images/raiders_btn.png" alt="优惠攻略"/>
+            </a>
+        </div>
+    </section>
+    <div class="cate-warp" id="cate-warp">
+        <section id="bg0">
+        <div class="hf">
+            <div class="spike-warp">
+                <div class="spike-tab-wrap">
+                    <ul id="spike-tabs" class="clearfix">
+                    	{foreach from = $limit_data key=k item = pro}
+                        <li>
+                            <a href="#tab-spike-{$k}">
+                                <span class="active-bg a-icon"></span>
+                                <span class="pr">{$pro.name}</span>
+                                <span class="point a-icon icon-point"></span>
+                            </a>
+                        </li>
+                        {/foreach}  
+                    </ul>
+                    <div class="b-line"></div>
+                </div>
+
+                <ul id="spike-tab-contents">
+                    <!--第一次场-->
+                    <li class="js_spike" id="tab-spike-0" data-start-time='{$start_time0}' data-end-time='{$end_time0}'>
+                        <div class="goods-countdown">
+                            <div class="countdown-warp clearfix">
+                                <p class="text js_text">
+                                    距离本场开始还有：
+                                </p>
+                                <p class="a-icon countdown clearfix js_time">
+                                    <span class="h">00</span>
+                                    <span class="m">00</span>
+                                    <span class="s">00</span>
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="goods-list-wrap clearfix">
+                        	{foreach from = $limit_data.0.data key = k  item=goods}
+                            <li>
+                                <p class="goods-img">
+                                    <a href="{$goods.link_url}" target="_blank" title="{$goods.goods_title}">
+                                        <img src="{$goods.goods_img}" data-original="{$goods.goods_img}" height="180" width="180"/>
+                                    </a>
+                                </p>
+                                <p class="goods-title">
+                                    <a href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a>
+                                </p>
+                                 {if $goods.promote_price > 0}
+                                <p class="goods-price">
+                                    秒杀价 <span class="price-text">￥{$goods.promote_price}</span>
+                                </p>
+                                {else}
+                                 <p class="goods-price">
+                                    售价 <span class="price-text">￥{$goods.shop_price}</span>
+                                </p>
+                                {/if}
+                                <p class="goods-o-price">
+                                    市场价：￥{$goods.market_price}
+                                </p>
+			
+                                {if $goods.promote_number <=0 || $end_time0 eq 0 }
+                                <!--已抢完-->
+                                <a class="spike-out spike-warp" target="_blank" href="{$goods.link_url}" target="_blank">已抢完<span class="spike-layer"></span></a>
+                                {else}
+                                <p class="spike-btn a-icon"></p>
+                               	{/if}   
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </li>
+                    
+                    <!--第二场-->
+                    <li class="js_spike" id="tab-spike-1" data-start-time='{$start_time1}' data-end-time='{$end_time1}'>
+                        <div class="goods-countdown">
+                            <div class="countdown-warp clearfix">
+                                <p class="text js_text">
+                                    距离本场开始还有：
+                                </p>
+                                <p class="a-icon countdown clearfix js_time">
+                                    <span class="h">00</span>
+                                    <span class="m">00</span>
+                                    <span class="s">00</span>
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="goods-list-wrap clearfix">
+                           {foreach from = $limit_data.1.data key = k item=goods}
+                            <li>
+                                <p class="goods-img">
+                                    <a href="{$goods.link_url}" target="_blank" title="{$goods.goods_title}">
+                                        <img src="{$goods.goods_img}" data-original="{$goods.goods_img}" height="180" width="180"/>
+                                    </a>
+                                </p>
+                                <p class="goods-title">
+                                    <a href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a>
+                                </p>
+                                {if $goods.promote_price > 0}
+                                <p class="goods-price">
+                                    秒杀价 <span class="price-text">￥{$goods.promote_price}</span>
+                                </p>
+                                {else}
+                                 <p class="goods-price">
+                                    售价 <span class="price-text">￥{$goods.shop_price}</span>
+                                </p>
+                                {/if}
+                                <p class="goods-o-price">
+                                    市场价：￥{$goods.market_price}
+                                </p>
+			
+                                {if $goods.promote_number <=0 || $end_time1 eq 0}
+                                <!--已抢完-->
+                                <a class="spike-out spike-warp" href="{$goods.link_url}" target="_blank">已抢完<span class="spike-layer"></span></a>
+                                {else}
+                                <p class="spike-btn a-icon"></p>
+                               	{/if}   
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </li>
+                    
+                    <!--第三场-->
+                    <li class="js_spike" id="tab-spike-2" data-start-time='{$start_time2}' data-end-time='{$end_time2}'>
+                        <div class="goods-countdown">
+                            <div class="countdown-warp clearfix">
+                                <p class="text js_text">
+                                    距离本场开始还有：
+                                </p>
+                                <p class="a-icon countdown clearfix js_time">
+                                    <span class="h">00</span>
+                                    <span class="m">00</span>
+                                    <span class="s">00</span>
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="goods-list-wrap clearfix">
+                            {foreach from = $limit_data.2.data key = k item=goods}
+                            <li>
+                                <p class="goods-img">
+                                    <a href="{$goods.link_url}" title="{$goods.goods_title}" target="_blank">
+                                        <img src="{$goods.goods_img}" data-original="{$goods.goods_img}" height="180" width="180"/>
+                                    </a>
+                                </p>
+                                <p class="goods-title">
+                                    <a href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a>
+                                </p>
+                                 {if $goods.promote_price > 0}
+                                <p class="goods-price">
+                                    秒杀价 <span class="price-text">￥{$goods.promote_price}</span>
+                                </p>
+                                {else}
+                                 <p class="goods-price">
+                                    售价 <span class="price-text">￥{$goods.shop_price}</span>
+                                </p>
+                                {/if}
+                                <p class="goods-o-price">
+                                    市场价：￥{$goods.market_price}
+                                </p>
+			
+                                {if $goods.promote_number <=0 || $end_time2 eq 0}
+                                <!--已抢完-->
+                                <a class="spike-out spike-warp" href="{$goods.link_url}" target="_blank">已抢完<span class="spike-layer"></span></a>
+                                {else}
+                                <p class="spike-btn a-icon"></p>
+                               	{/if}   
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </li>
+                    
+                    <!--第四场-->
+                    <li class="js_spike" id="tab-spike-3" data-start-time='{$start_time3}' data-end-time='{$end_time3}'>
+                        <div class="goods-countdown">
+                            <div class="countdown-warp clearfix">
+                                <p class="text js_text">
+                                    距离本场开始还有：
+                                </p>
+                                <p class="a-icon countdown clearfix js_time">
+                                    <span class="h">00</span>
+                                    <span class="m">00</span>
+                                    <span class="s">00</span>
+                                </p>
+                            </div>
+                        </div>
+                        <ul class="goods-list-wrap clearfix">
+                            {foreach from = $limit_data.3.data key = k  item=goods}
+                            <li>
+                                <p class="goods-img">
+                                    <a href="{$goods.link_url}" target="_blank" title="{$goods.goods_title}">
+                                        <img src="{$goods.goods_img}" data-original="{$goods.goods_img}" height="180" width="180"/>
+                                    </a>
+                                </p>
+                                <p class="goods-title">
+                                    <a href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a>
+                                </p>
+                                {if $goods.promote_price > 0}
+                                <p class="goods-price">
+                                    秒杀价 <span class="price-text">￥{$goods.promote_price}</span>
+                                </p>
+                                {else}
+                                 <p class="goods-price">
+                                    售价 <span class="price-text">￥{$goods.shop_price}</span>
+                                </p>
+                                {/if}
+                                <p class="goods-o-price">
+                                    市场价：￥{$goods.market_price}
+                                </p>
+								
+                                {if $goods.promote_number <=0 || $end_time3 eq 0}
+                                <!--已抢完-->
+                                <a class="spike-out spike-warp" href="{$goods.link_url}" target="_blank">已抢完<span class="spike-layer"></span></a>
+                                {else}
+                                <p class="spike-btn a-icon"></p>
+                               	{/if}   
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+		{foreach from=$other key=k item = pro}
+        
+        <!--其他版块-->
+        <section id="bg{$k+1}">
+            <div class="hf">
+                <div class="goods-bg">
+                    <ul class="goods-list-wrap clearfix">
+                    	{if $k == 0}
+                    	<!--第一个-->
+                        <li class="li-cate">
+                            <p class="goods-img">
+                                <a href="http://www.wzhouhui.com/s/?keyword=%E5%BE%B7%E5%9B%BD%E5%A5%B6%E7%B2%89" title="【保税】澳大利亚Devondale德运 全脂奶粉 1kg">
+                                    <img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" data-original="/temp/skin1/dist/specialActivity/20767/images/cate1.jpg" width="246" height="326"/>
+                                </a>
+                            </p>
+                        </li>
+                        {elseif $k ==1}
+                       <!-- 第二个-->
+                        <li class="li-cate">
+                            <p class="goods-img">
+                                <a href="http://www.wzhouhui.com/s/?keyword=%E5%BE%B7%E5%9B%BD%E5%A5%B6%E7%B2%89" title="【保税】澳大利亚Devondale德运 全脂奶粉 1kg">
+                                    <img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" data-original="/temp/skin1/dist/specialActivity/20767/images/cate2.jpg" width="246" height="326"/>
+                                </a>
+                            </p>
+                        </li>
+                        {elseif $k ==2}
+                        <!--第三个-->
+                         <li class="li-cate">
+                            <p class="goods-img">
+                                <a href="http://www.wzhouhui.com/category-c-19.html" title="【保税】澳大利亚Devondale德运 全脂奶粉 1kg">
+                                    <img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" data-original="/temp/skin1/dist/specialActivity/20767/images/cate3.jpg" width="246" height="326"/>
+                                </a>
+                            </p>
+                        </li>
+                         {elseif $k ==3}
+                        <!--第四个-->
+                        <li class="li-cate">
+                            <p class="goods-img">
+                                <a href="http://www.wzhouhui.com/category-c-21.html" title="【保税】澳大利亚Devondale德运 全脂奶粉 1kg">
+                                    <img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" data-original="/temp/skin1/dist/specialActivity/20767/images/cate4.jpg" width="246" height="326"/>
+                                </a>
+                            </p>
+                        </li>
+                         {elseif $k ==4}
+                        <!--第五个-->
+                          <li class="li-cate">
+                            <p class="goods-img">
+                                <a href="http://www.wzhouhui.com/category-c-25.html" title="【保税】澳大利亚Devondale德运 全脂奶粉 1kg">
+                                    <img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" data-original="/temp/skin1/dist/specialActivity/20767/images/cate5.jpg" width="246" height="326"/>
+                                </a>
+                            </p>
+                        </li>
+                         {elseif $k ==5}
+                        <!--第六个-->
+                         <li class="li-cate">
+                            <p class="goods-img">
+                                <a href="http://www.wzhouhui.com/category-c-27.html" title="【保税】澳大利亚Devondale德运 全脂奶粉 1kg">
+                                    <img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" data-original="/temp/skin1/dist/specialActivity/20767/images/cate6.jpg" width="246" height="326"/>
+                                </a>
+                            </p>
+                        </li>
+                         {elseif $k ==6}
+                        <!--第七个-->
+                         <li class="li-cate">
+                            <p class="goods-img">
+                                <a href="http://www.wzhouhui.com/category-c-35.html" title="【保税】澳大利亚Devondale德运 全脂奶粉 1kg">
+                                    <img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" data-original="/temp/skin1/dist/specialActivity/20767/images/cate7.jpg" width="246" height="326"/>
+                                </a>
+                            </p>
+                        </li>
+                         {else}
+                        <!--第八个-->
+                        <li class="li-cate">
+                            <p class="goods-img">
+                                <a href="http://www.wzhouhui.com/category-b-38.html" title="【保税】澳大利亚Devondale德运 全脂奶粉 1kg">
+                                    <img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" data-original="/temp/skin1/dist/specialActivity/20767/images/cate8.jpg" width="246" height="326"/>
+                                </a>
+                            </p>
+                        </li>
+                        {/if}
+                        
+                        <!-- end-->
+						{foreach from = $pro.data key=k item=goods}
+                        	{if $k < 7 }
+                            <li>
+                                <p class="goods-img">
+                                    <a href="{$goods.link_url}" title="{$goods.goods_title}">
+                                        <img src="{$goods.goods_img}" data-original="{$goods.goods_img}" height="150" width="150"/>
+                                    </a>
+                                </p>
+                                <p class="goods-title">
+                                    <a href="{$goods.link_url}">{$goods.goods_title}</a>
+                                </p>
+                                <p class="goods-o-price">
+                                    市场价：￥{$goods.market_price}
+                                </p>
+                                {if $goods.promote_price > 0}
+                                <p class="goods-price">
+                                    约惠价 <span class="price-text">￥{$goods.promote_price}</span>
+                                </p>
+                                {else}
+                                 <p class="goods-price">
+                                    售价 <span class="price-text">￥{$goods.shop_price}</span>
+                                </p>
+                                {/if}
+                                
+                                <p class="goods-buy-btn">
+                                    <a href="{$goods.link_url}">立即抢购</a>
+                                </p>
+                            </li>
+                            {/if}
+                        {/foreach}
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+		{/foreach}
+      
+		
+        <aside class="sidebar" id="js_sidebar">
+            <ul class="cate-list">
+               <li>
+                    <a href="#bg0">天天特卖</a>
+               </li>
+            {foreach from=$other key=k item = pro}
+                <li class="cate-li-{$k+1}">
+                    <a href="#bg{$k+1}">{$pro.name}</a>
+                </li>
+            {/foreach}
+                <!--<li>
+                    <a href="#bg1" class="active">德国奶粉</a>
+                </li>
+                <li>
+                    <a href="#bg2">美国雅培</a>
+                </li>
+                <li>
+                    <a href="#bg3">女性健康</a>
+                </li>
+                <li>
+                    <a href="#bg4">营养保健</a>
+                </li>
+                <li>
+                    <a href="#bg5">关爱宝宝</a>
+                </li>
+                <li>
+                    <a href="#bg6">辅食精选</a>
+                </li>
+                <li>
+                    <a href="#bg7">美容彩妆</a>
+                </li>
+               -->
+                <li>
+                    <a href="/sales.html?a=yuehui">约惠攻略</a>
+                </li>
+            </ul>
+            <div class="">
+                <a href="javascript:;" class="psa c-service" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698&info=',900,600);" rel="nofollow">联系客服</a>
+            </div>
+            <div>
+                <a href="javascript:;" class="psa js_toTop to-top">Top</a>
+            </div>
+        </aside>
+    </div>
+</div><!-- .active-wrap -->
+
+<footer id="footer" class="footer-bgf3">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+
+{literal}
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["qzone","tsina","sqq","weixin","renren","tieba","tqq","kaixin001","tqf","ty","isohu","mail","meilishuo","mogujie"],"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"left","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+    $LAB.script("jquery.nav.js")
+        .script('/temp/skin1/dist/specialActivity/20767/js.min.js?11')
+        .wait(function () {
+
+        });
+</script>
+{/literal}
+</body>
+</html>

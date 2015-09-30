@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{include file="top.htm"}
+
+	<link rel="stylesheet" href="{$imgcache_url}mincss/category_min.css?2015080603">
+	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
+</head>
+<body>
+	<header id="header">
+		
+		{include file="public_top.htm"}
+	</header>
+
+
+	<div class="wrap pb40">
+	
+	   {if $banner_list}
+        <div class="topBannerWrap clearfix mb30">
+            <div class="slider" id="js_banner">
+                <ul class="slideList clearfix">
+                    {foreach from=$banner_list item=v}
+                    
+                        <li><a href="{$v.url}"><img src="{$v.pic_url}" alt="" height="440"></a></li>
+                    {/foreach}
+                    
+                </ul>
+            </div>
+        </div><!-- .topBannerWrap -->
+        {/if}
+		
+		
+		<!-- 主体部分==海外直邮 start -->
+		<div class="js_mainBgWrap overseas-direct-mail-wrap">
+			
+			<!-- 爆款 -->
+			<div class="hotGoods w1200">
+				<h1 class="child-title">爆款/<span>国际大牌 安全放心</span></h1>
+				<ul class="p-proList clearfix">
+				{foreach from=$baoKuan key=k item=v}
+                    <li>
+                        <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt=""></a></p>
+                        <p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+                        <div class="p_price_cart_wrap clearfix">
+                            <p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
+                            <span class="icon_child fr js_addToCart {if $v.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
+                        </div>
+                        <span class="icon_child o-icon"><strong>{$v.promote_zhekou}</strong>折</span>
+                        {if $v.goods_number ==0 }<a target="_blank" href="{$v.url_title}" class="soldOut_thisProduct"><i class="icon_soldOut"></i></a>{/if}
+                        
+                    </li>
+                {/foreach}
+				</ul><!-- .p-proList -->
+			</div><!-- .hotGoods -->
+
+            {foreach from=$catList item=v}
+            {if $v.goods_list}
+			<!-- 母婴用品 -->
+			<div class="overseas-section-proList w1200 js_sectionTargetWrap {$v.cat_color}">
+				<h1 class="icon_child icon_title tc">{$v.cat_name}</h1>
+				
+				<ul class="p-proList clearfix">
+				{foreach from=$v.goods_list item=cG}
+					<li>
+						<p class="p_img tc"><a target="_blank" href="{$cG.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$cG.goods_grid}" alt=""></a></p>
+						<p class="p_name tl"><a target="_blank" href="{$cG.url_title}"><strong>{$cG.goods_remarks}</strong>{$cG.goods_title}</a></p>
+						<div class="p_price_cart_wrap clearfix">
+							<p class="p_price fl"><strong>￥{$cG.shop_price}</strong> <span>￥{$cG.market_price}</span></p>
+							<span class="icon_child fr js_addToCart {if $cG.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$cG.goods_id}" data-proimg="{$cG.goods_grid}"></span>
+						</div>
+						<span class="icon_child o-icon"><strong>{$cG.promote_zhekou}</strong>折</span>
+						{if $cG.goods_number ==0 }<a target="_blank" href="{$cG.url_title}" class="soldOut_thisProduct"><i class="icon_soldOut"></i></a>{/if}
+					</li>
+				{/foreach}
+					
+				</ul><!-- .p-proList -->
+			</div><!-- .overseas-section-proList -->
+			{/if}
+            {/foreach}
+			
+		</div><!-- .js_mainBgWrap -->
+		<!-- 主体部分 end -->
+
+	</div><!-- .wrap -->
+
+	<!-- 分类导航固定在页面顶部 -->
+	<div id="sortTopNav" class="none">
+		<ul class="s-t-nav s-t-nav-overseas w1200">
+		    {foreach from=$catList key=k item=v}
+		    {if $v.goods_list}
+            <li {if $k eq 0} class="on" {/if}><a href="javascript:void(0);">{$v.cat_name}</a></li>
+            {/if}
+            {/foreach}
+		
+		</ul>
+	</div><!-- #sortTopNav -->
+
+	
+
+	<footer id="footer">
+		
+		{include file="foot.htm"}
+	</footer><!--end #footer -->
+{literal}
+	<script>
+		$LAB.script("jquery.flexslider.min.js")
+			.wait(function(){
+
+				$('#js_banner').flexslider({
+				 	namespace:"",
+				    animation: "fade",
+				    selector: ".slideList > li",
+				    pauseOnAction:false,
+				    directionNav: true, 
+				    slideshowSpeed: 10000
+				});
+
+				(function(){
+					var slideListLen = $('#js_banner').find(".slideList li").length;
+					if(slideListLen >= 2){
+						$('#js_banner').hover(function() {
+							$(this).find('.direction-nav a').show();
+						}, function() {
+							$(this).find('.direction-nav a').hide();
+						});
+					}else{
+						$(".direction-nav").hide();
+					}
+				})();
+			})
+
+			.script("tab_change.min.js?2015080401")
+			.wait(function(){
+				new SetScrollTop(".js_sectionTargetWrap","#sortTopNav");
+			})
+	</script>
+
+{/literal}
+
+</body>
+</html>

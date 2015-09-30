@@ -1,0 +1,37 @@
+// 优惠券列表
+.icon-coupon-list{background: url('../images/styleimg/coupon_bg.png?1') no-repeat;}
+.icon-coupon{.icon-coupon-list;position: absolute; top: 40px; left: 45px; width: 163px; height: 139px;}
+.icon-status{.icon-coupon;}
+
+.coupon-list-wrap{ margin-bottom: 15px; padding-top: 30px; width: 1256px;
+  li{.icon-coupon-list;float: left; margin: 0 56px 45px 0; width: 258px; height: 294px;background-position: 0 0; text-align: center;
+    .coupon-num{ padding-top: 50px; height: 90px; line-height: 90px; color: @colorf; font-size: 36px;
+      strong{ font-weight: bold; font-size: 80px; font-family: @font_other;}
+    }
+    .coupon-condition{ height: 40px; line-height: 40px; color: @colorf; font-size: 18px; font-weight: bold;}
+    .coupon-end-time{ height: 20px; line-height: 20px; color: @colorf; font-size: 12px;}
+    .get-coupon{ margin-top: 50px; padding: 0 10px; font-size: 14px; color: @color3;
+      a{ font-weight: bold; color: @color_main; text-decoration: none;
+        &:hover{ text-decoration: underline;}
+      }
+    }
+
+    &.end{ position: relative; background-position: -300px 0; z-index: 2;
+      .get-coupon{ color: @color9;
+        .all-out{ font-weight: bold;}
+      }
+      .icon-end{.icon-coupon;background-position: 0 -340px;}
+    }
+
+    // user
+    .bg-layer{position: absolute;width: 100%;height: 100%;left: 0;top: 0;
+      .bg{position: absolute;width: 100%;height: 293px;top:0;left:0;background-color: #000000;opacity: 0.2;-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);}
+    }
+    &.disabled{background-position: -300px 0;position: relative;
+      .icon-status{background-position:  -182px -340px;}
+    }
+    &.used{position: relative;
+      .icon-status{background-position:  -365px -340px;}
+    }
+  }
+}

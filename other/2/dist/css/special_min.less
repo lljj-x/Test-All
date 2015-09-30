@@ -1,0 +1,68 @@
+//所有变量都在这个文件里
+@import url("mixins.less"); 
+
+.icon-active{ display: inline-block; background: url(../images/domeimg/special/icon_active.png) no-repeat; *display: inline; *zoom:1;}
+.icon-active-zhekou{ background: url(../images/domeimg/special/icon_active_zhekou.png) no-repeat;}
+.w1100{ margin: 0 auto; width: 1000px; overflow: hidden;}
+.active-wrap{ position: relative; padding-bottom: 50px; width: 100%; min-width: 1000px; background: #75d1ff; z-index: 1;}
+.active-wrap .banner{ position: relative; width: 100%; min-width: 1000px; height: 660px; z-index: 2; overflow: hidden;}
+.active-wrap .banner img{ position: absolute; top: 0; left: 50%; margin-left: -960px; width: 1920px; height: 660px;}
+
+.active-main-wrap{
+	.nav-wrap{ margin-bottom: 40px; width: 100%; background: #0077fd; text-align: center;
+		td{ height: 60px; line-height: 60px;
+			a{ display: block; color: @colorf; font-size: 22px; text-decoration: none;}
+			.icon-rocket{ display: none; margin-right: 10px; width: 24px; height: 34px; background-position: -400px -100px; vertical-align: middle;}
+			&.on{
+				a{ background: #ff61a7;}
+				.icon-rocket{ display: inline-block; *display: inline; *zoom:1;}
+			}
+			&:hover{
+				a{ background: #0257b6;}
+			}
+		}
+	}
+	.pro-list-wrap{ margin-bottom: 60px;
+		.pro-list{ width: 1024px;
+			li{ position: relative; z-index: 1; float: left; margin-right: 24px; margin-bottom: 20px; padding: 0 15px; width: 200px; height: 320px; background: @color_bgf; .border(all,1px,@colore4); text-align: center;
+		     	.icon-active-zhekou{ position: absolute; top: -1px; left: -1px; padding-bottom: 10px; display: inline-block; width: 72px; height: 44px; line-height: 44px; 
+		     		color: @colorf; font-size: 14px; font-weight: bold; text-align: center; z-index: 2;*display: inline; *zoom:1;
+					strong{ font-family: Arial; font-size: 30px; font-weight: bold;}
+		     	}
+		     	&:hover{ .shadow(0;0;10px;@color9;)}
+			}
+			.p-name{ margin-bottom: 10px; height: 40px; line-height: 20px; font-size: 14px; color: @color0; overflow: hidden;
+				a{ color: @color0; text-decoration: none;
+					&:hover{ color: @color_main; text-decoration: underline;}
+				}
+			}
+			.price-buy-wrap{
+				.p-price{ width: 100px; height: 60px; overflow: hidden;
+					strong{ display: block; line-height: 30px; color: @color_main; font-size: 20px; font-weight: bold;}
+					span{ height: 20px; line-height: 20px; color: @color9; font-size: 12px; text-decoration: line-through;}
+				}
+				.buy-now{ margin-top: 15px; display: block; width: 94px; height: 32px; line-height: 32px; color: @colorf; font-size: 14px; text-decoration: none; background: @color_bgmain;}
+			}
+		}
+	}
+}
+
+.active-right-fixed{ position: fixed; top: 50px; left: 50%; margin-left: 520px; width: 147px;
+	.tit-qrcode{ padding: 24px 22px 0; width: 103px; height: 120px; background-position: 0 0;}
+	.right-sort-nav{
+		li{ display: block; width: 100%; height: 54px; background-position: -200px 0; overflow: hidden;
+			a{ padding: 20px 0 12px; display: block; width: 100%; height: 22px; line-height: 22px; color: @colorf; font-size: 14px; text-align: center; overflow: hidden; text-decoration: none;}
+			&:hover{a{ text-decoration: underline;}}
+			&.on{ background-position: -400px 0;}
+		}
+	}
+	.goto-top{ margin: 18px auto 0; display: block; width: 53px; height: 53px; background-position: -200px -100px;
+		&:hover{ background-position: -280px -100px;}
+	}
+}
+
+
+
+
+
+

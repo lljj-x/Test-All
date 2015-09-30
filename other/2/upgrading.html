@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    {literal}
+    <style>
+        .footBgWrap{background-color: #F3F3F3;}
+        .pt70{padding-top: 70px;}
+        .pb70{padding-bottom: 70px;}
+        .msg{font-size: 24px;font-weight: bold;margin-top: 70px;}
+    </style>
+    {/literal}
+</head>
+<body>
+<header id="header">
+    {include file="public_user_top.htm"}
+</header>
+
+<div class="wrap pb40">
+    <div id="upgrading" class="hf pt15">
+        <div class="tc pt70 pb70">
+            <p>
+                <img src="{$imgcache_url}images/domeimg/upgrading.png" alt="升级中"/>
+            </p>
+            <p class="msg">
+                系统正在进行升级维护，马上回来，请稍后刷新重试！
+            </p>
+            <p class="mt50">
+                <a href="javascript:;" class="btn btn-default btn-xl" onclick="window.location.reload(true);">刷新页面</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+</body>
+</html>

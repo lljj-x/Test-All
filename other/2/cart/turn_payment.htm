@@ -1,0 +1,54 @@
+{dynamic}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+    <title>跳转至{$pay_name}</title>
+    {include file='top.htm'}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/cart_min.css">
+</head>
+<body>
+    <div id="mainWrap" class="clearfix mt100">
+        <div class="tc">
+            <p class="pt50">
+                <img src="{$imgcache_url}images/styleimg/loading.gif"/>
+            </p>
+            <p style="color:#999;font-size: 14px;margin-top: 30px;">
+                正在跳转至{$pay_name}，请稍等...
+            </p>
+            <div class="mt50">
+                {$pay_online_desc}
+            </div>
+        </div>
+		{/dynamic}
+
+	</div><!--end #mainWarp-->
+	
+	<script type="text/javascript">
+		{literal}
+		//document.formsub.submit();
+
+		jump(2);
+
+		function jump(count) {   
+			window.setTimeout(function(){   
+				count--;   
+				if(count > 0) {                           
+				$('#num').attr('innerHTML', count);   
+					jump(count);   
+				} else {   
+					document.formsub.submit();
+				}   
+			}, 1000);   
+		};
+
+		function dis()
+		{
+			$('.formsubbotton').show();
+		}	
+		setTimeout( dis, 8000);			
+
+		</script>
+		{/literal}
+</body>
+</html>

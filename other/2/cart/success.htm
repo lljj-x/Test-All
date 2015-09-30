@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     {include file='top.htm'}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/cart_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="checkout_complete_page" class="hf pt50 pb50">
+        <div class="checkout_complete_msg_wap tc pt50 ">
+            <p class="cart_icon icon_success"></p>
+            <p class="title">你已付款成功</p>
+            <p class="prompt">你已付款成功，我们会尽快发货，请耐心等待！</p>
+            <p class="title pt30">
+                <span class="text">支付金额：</span><span class="color_increase">{$order.order_amount}</span>
+            </p>
+            <p class="pt10">
+                <a href="/m-users-a-order_list.html" class="btn btn-outline mr10">返回订单列表</a>
+                <a href="/m-users-a-order_detail.html?order_id={$order.order_id}" class="btn btn-default">查看订单详情</a>
+            </p>
+        </div>
+		{if $TopSale}
+        <div class="promote_goods">
+            <h2 class="title">购买过此商品的人还购买了</h2>
+            <ul class="goods_list clearfix">
+				{foreach from=$TopSale item=goods}
+                <li>
+                    <p class="good_img">
+                        <a href="{$goods.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$goods.good_img}" alt="{$goods.goods_title}" class="js_lazy" width="205" height="205"/></a>
+                    </p>
+                    <p class="goods_name">
+                        <a href="{$goods.url_title}">
+                            <span class="goods_title">{$goods.goods_title}</span>
+                        </a>
+                    </p>
+                    <p class="goods_price">
+                        <span class="price color_increase">￥{$goods.shop_price}</span>
+                        <span class="original_price">￥{$goods.market_price}</span>
+                    </p>
+                </li>
+				{/foreach}
+            </ul>
+        </div>
+		{/if}
+    </div>
+</div>
+
+<footer id="footer" class="cart_footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+
+</script>
+{/literal}
+</body>
+</html>

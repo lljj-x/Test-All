@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-order" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="user-index-wrap clearfix">
+            <div class="user-conent-warp fr">
+                <div class="user-action-menu-warp clearfix">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list fl clearfix">
+                        <li>
+                            <a href="/m-users-a-order_list.htm?type=-1" {if $type == -1}class="current"{/if}>所有订单</a>
+                        </li>
+                        <li class="split">|</li>
+                        <li>
+                            <a href="/m-users-a-order_list.htm?type=0" {if $type == 0}class="current"{/if}>待付款 <span class="color-increase">{$userinfo.order_status0}</span></a>
+                        </li>
+                        <li class="split">|</li>
+                        <li>
+                            <a href="/m-users-a-order_list.htm?type=1" {if $type == 1}class="current"{/if}>待发货 <span class="color-increase">{$userinfo.order_status1}</span></a>
+                        </li>
+                        <li class="split">|</li>
+                        <li>
+                            <a href="/m-users-a-order_list.htm?type=3" {if $type == 3}class="current"{/if}>待收货 <span class="color-increase">{$userinfo.order_status3}</span></a>
+                        </li>
+                        <li class="split">|</li>
+                        <li>
+                            <a href="/m-users-a-order_list.htm?type=4" {if $type == 4}class="current"{/if} >待评价 <span class="color-increase">{$userinfo.order_status4}</span></a>
+                        </li>
+                    </ul>
+                    <form class="order-form fr" action="/m-users-a-order_list.htm" method="post">
+                        <div class="order-search">
+                            <input type="submit" value="搜索" class="user-icon icon-search"/>
+                            <input type="text" name="search" value="{$search}" placeholder="订单号"/>
+                        </div>
+                    </form>
+                </div>
+
+               
+				{if $orders}
+                <section class="order-item-warp">
+                    <table class="title-table table">
+                        <tbody>
+                            <td class="goods-info">商品信息</td>
+                            <td class="operate">商品操作</td>
+                            <td class="pirce">价格</td>
+                            <td class="status">
+                                <div class="order-status-drop user-drop">
+                                    <span class="pointer">订单状态 <i class="triangle-bottom icon-triangle"><i class="triangle-bottom"></i></i></span>
+                                    <div class="drop-box order-status-dropbox user-drop-dropbox none">
+                                        <span class="top-line"></span>
+                                        <div class="box-content">
+                                            <ul class="order-status-dropbox-list user-drop-dropbox-list">
+                                                <li><a href="/m-users-a-order_list.htm?type=0">待付款</a></li>
+                                                <li><a href="/m-users-a-order_list.htm?type=1">待发货</a></li>
+                                                <li><a href="/m-users-a-order_list.htm?type=3">已发货</a></li>
+                                                <li><a href="/m-users-a-order_list.htm?type=5">交易完成</a></li>
+                                                <li><a href="/m-users-a-order_list.htm?type=11">交易关闭</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="deal">交易操作</td>
+                        </tbody>
+                    </table>
+                </section>
+				{foreach from=$orders item=order}
+                <!--未付款 -->
+                 {if $order.order_status==0}
+                <section class="order-item-warp">
+                    <table class="user-table table user-table-danger">
+                        <thead>
+                        <tr>
+                            <th colspan="4">
+                                <span class="fl">
+                                    <span>订单号：{$order.order_sn}</span>
+                                    <span class="pl30">下单时间：{$order.order_time}</span>
+                                    <a href="javascript:void(0)" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698',900,600);" class="pl30">
+                                        <i class="user-icon icon-chat"></i> 联系客服
+                                    </a>
+                                </span>
+                                <span class="fr">请在<span class="js_syTime" data-syTime="{$order.sy_time}" data-order-sn="{$order.order_sn}"></span>内付款</span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="first">
+                            <td class="first">
+                           	{foreach from=$order.goods item=goods}
+                                <div class="goods-td">
+                                    <div class="inline-block goods-img">
+                                        <a href="{$goods.url_title}" target="_blank">
+                                            <img src="{$goods.goods_thumb}" alt="{$goods.goods_title}" width="100" height="100">
+                                        </a>
+                                    </div>
+                                    <div class="inline-block goods-des">
+                                        <p class="goods-title">
+                                            <a href="{$goods.url_title}" target="_blank">
+                                                {$goods.goods_title}
+                                            </a>
+                                        </p>
+                                        <p class="goods-other">
+                                            <span class="goods-original-price">￥{$goods.goods_price}</span>
+                                            <span class="goods-num">数量:{$goods.goods_number}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            {/foreach}
+                            </td>
+                            <td class="price-td">
+                                <p>
+                                    <span class="bold goods-price">￥{$order.total_fee}</span>
+                                </p>
+                                <p class="prompt fs12">(含运/税费：{if $order.shipping_fee==''}0{else}{$order.shipping_fee}{/if} )</p>
+                            </td>
+                            <td class="status-td">
+                                <p class="color-increase">等待支付</p>
+                                <p><a href="/m-users-a-order_detail.htm?order_id={$order.order_id}" target="_blank">订单详情</a></p>
+                            </td>
+                            <td>
+                                <p><a href="/m-flow-a-payment-order_sn-{$order.order_sn}.html" class="btn btn-default">立即付款</a></p>
+                                <p><a href="javascript:void(0);" target="_blank" class="js_deleteOrder" data-order-sn="{$order.order_sn}">取消订单</a></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+                {/if}
+				<!-- 已付款，待收货 -->
+                {if  $order.order_status==3}
+                <section class="order-item-warp">
+                    <table class="user-table table">
+                        <thead>
+                        <tr>
+                            <th colspan="4">
+                                <span class="fl">
+                                    <span>订单号：{$order.order_sn}</span>
+                                    <span class="pl30">下单时间：{$order.order_time}</span>
+                                    <a href="javascript:void(0)" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698',900,600);" class="pl30">
+                                        <i class="user-icon icon-chat"></i> 联系客服
+                                    </a>
+                                </span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="first">
+                            <td class="first">
+                            {foreach from=$order.goods item=goods}
+                                <div class="goods-td">
+                                    <div class="inline-block goods-img">
+                                        <a href="{$goods.url_title}" target="_blank">
+                                            <img src="{$goods.goods_thumb}" alt="{$goods.goods_title}" width="100" height="100">
+                                        </a>
+                                    </div>
+                                    <div class="inline-block goods-des">
+                                        <p class="goods-title">
+                                            <a href="{$goods.url_title}" target="_blank">
+                                                {$goods.goods_title}
+                                            </a>
+                                        </p>
+                                        <p class="goods-other">
+                                            <span class="goods-original-price">￥{$goods.goods_price}</span>
+                                            <span class="goods-num">数量:{$goods.goods_number}</span>
+                                        </p>
+                                    </div>
+                                    <div class="inline-block goods-operate">
+                                        <p class="">
+                                            <a href="/m-users-a-apply_refund.htm?order_id={$order.order_id}&goods_id={$goods.goods_id}">申请售后</a>
+                                        </p>
+                                    </div>
+                                </div>
+                         {/foreach}
+                            </td>
+                            <td class="price-td">
+                                <p>
+                                    <span class="bold goods-price">￥{$order.total_fee}</span>
+                                </p>
+                                <p class="prompt fs12">(含运/税费：{if $order.shipping_fee==''}0{else}{$order.shipping_fee}{/if}  )</p>
+                            </td>
+                            <td class="status-td">
+                                <p class="color-increase">卖家已发货</p>
+                                <p><a href="/m-users-a-order_detail.htm?order_id={$order.order_id}" target="_blank">订单详情</a></p>
+                                <div class="view-shipping-warp">
+									{if $order.shipping_num==0}
+									<a href="javascript:void(0);" target="" class="view-shipping js-view-shipping" data-order-sn="{$order.order_sn}">查看物流</a>
+									{elseif $order.shipping_num==1}
+									<a href="javascript:void(0);" target="" class="view-shipping js-view-shipping" data-shipping-name="{$order.shipping_name}" data-shipping-no="{$order.shipping_no}">查看物流</a>
+									{/if}
+
+                                </div>
+                            </td>
+                            <td>
+                                <p><a href="javascript:;" class="btn btn-default js_confirmReceipt" data-order-id="{$order.order_id}">确认收货</a></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+                {/if}
+				<!--待发货 -->
+                {if  $order.order_status==1 || $order.order_status==2}
+                <section class="order-item-warp">
+                    <table class="user-table table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                    <span class="fl">
+                                        <span>订单号：{$order.order_sn}</span>
+                                        <span class="pl30">下单时间：{$order.order_time}</span>
+                                        <a href="javascript:void(0)" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698',900,600);" class="pl30">
+                                            <i class="user-icon icon-chat"></i> 联系客服
+                                        </a>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="first">
+                            <td class="first">
+                            {foreach from=$order.goods item=goods}
+                                <div class="goods-td">
+                                    <div class="inline-block goods-img">
+                                        <a href="{$goods.url_title}" target="_blank">
+                                            <img src="{$goods.goods_thumb}" alt="{$goods.goods_title}" width="100" height="100">
+                                        </a>
+                                    </div>
+                                    <div class="inline-block goods-des">
+                                        <p class="goods-title">
+                                            <a href="{$goods.url_title}" target="_blank">
+                                                {$goods.goods_title}
+                                            </a>
+                                        </p>
+                                        <p class="goods-other">
+                                            <span class="goods-original-price">￥{$goods.goods_price}</span>
+                                            <span class="goods-num">数量:{$goods.goods_number}</span>
+                                        </p>
+                                    </div>
+                                    <div class="inline-block goods-operate">
+                                        <p class="">
+                                            <a href="/m-users-a-apply_return.htm?order_id={$order.order_id}&goods_id={$goods.goods_id}">申请售后</a>
+                                        </p>
+                                    </div>
+                                </div>
+                           {/foreach}
+                            </td>
+                            <td class="price-td">
+                                <p>
+                                    <span class="bold goods-price">￥{$order.total_fee}</span>
+                                </p>
+                                <p class="prompt fs12">(含运/税费：{if $order.shipping_fee==''}0{else}{$order.shipping_fee}{/if}  )</p>
+                            </td>
+                            <td class="status-td">
+                                <p class="color-increase">待发货</p>
+                                <p><a href="/m-users-a-order_detail.htm?order_id={$order.order_id}" target="_blank">订单详情</a></p>
+                            </td>
+                            <td>
+                                <p>
+                                     <a href="javascript:;" class="js_buyAgain" data-order-sn="{$order.order_sn}">再次购买</a>
+                                </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+                {/if}
+                <!--订单取消，交易关闭 -->
+                {if  $order.order_status==11 }
+                <section class="order-item-warp">
+                    <table class="user-table table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                    <span class="fl">
+                                        <span>订单号：{$order.order_sn}</span>
+                                        <span class="pl30">下单时间：{$order.order_time}</span>
+                                        <a href="javascript:void(0)" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698',900,600);" class="pl30">
+                                            <i class="user-icon icon-chat"></i> 联系客服
+                                        </a>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="first">
+                            <td class="first">
+                            {foreach from=$order.goods item=goods}
+                                <div class="goods-td">
+                                    <div class="inline-block goods-img">
+                                        <a href="{$goods.url_title}" target="_blank">
+                                            <img src="{$goods.goods_thumb}" alt="{$goods.goods_title}" width="100" height="100">
+                                        </a>
+                                    </div>
+                                    <div class="inline-block goods-des">
+                                        <p class="goods-title">
+                                            <a href="{$goods.url_title}" target="_blank">
+                                                {$goods.goods_title}
+                                            </a>
+                                        </p>
+                                        <p class="goods-other">
+                                            <span class="goods-original-price">￥{$goods.goods_price}</span>
+                                            <span class="goods-num">数量:{$goods.goods_number}</span>
+                                        </p>
+                                    </div>
+                                    
+                                </div>
+                           {/foreach}
+                            </td>
+                            <td class="price-td">
+                                <p>
+                                    <span class="bold goods-price">￥{$order.total_fee}</span>
+                                </p>
+                                <p class="prompt fs12">(含运/税费：{if $order.shipping_fee==''}0{else}{$order.shipping_fee}{/if}  )</p>
+                            </td>
+                            <td class="status-td">
+                                <p class="prompt">交易关闭</p>
+                                <p><a href="/m-users-a-order_detail.htm?order_id={$order.order_id}" target="_blank">订单详情</a></p>
+                            </td>
+                            <td>
+                                <p>
+                                     <a href="javascript:;" class="js_buyAgain" data-order-sn="{$order.order_sn}">再次购买</a>
+                                </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+                {/if}
+                
+                 <!--售后中 -->
+                {if  $order.order_status==7 }
+                <section class="order-item-warp">
+                    <table class="user-table table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                    <span class="fl">
+                                        <span>订单号：{$order.order_sn}</span>
+                                        <span class="pl30">下单时间：{$order.order_time}</span>
+                                        <a href="javascript:void(0)" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698',900,600);" class="pl30">
+                                            <i class="user-icon icon-chat"></i> 联系客服
+                                        </a>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="first">
+                            <td class="first">
+                            {foreach from=$order.goods item=goods}
+                                <div class="goods-td">
+                                    <div class="inline-block goods-img">
+                                        <a href="{$goods.url_title}" target="_blank">
+                                            <img src="{$goods.goods_thumb}" alt="{$goods.goods_title}" width="100" height="100">
+                                        </a>
+                                    </div>
+                                    <div class="inline-block goods-des">
+                                        <p class="goods-title">
+                                            <a href="{$goods.url_title}" target="_blank">
+                                                {$goods.goods_title}
+                                            </a>
+                                        </p>
+                                        <p class="goods-other">
+                                            <span class="goods-original-price">￥{$goods.goods_price}</span>
+                                            <span class="goods-num">数量:{$goods.goods_number}</span>
+                                        </p>
+                                    </div>
+                                    <div class="inline-block goods-operate">
+                                        <p class="">
+                                            <a href="javascript:;">售后申请中</a>
+                                        </p>
+                                    </div>
+                                </div>
+                           {/foreach}
+                            </td>
+                            <td class="price-td">
+                                <p>
+                                    <span class="bold goods-price">￥{$order.total_fee}</span>
+                                </p>
+                                <p class="prompt fs12">(含运/税费：{if $order.shipping_fee==''}0{else}{$order.shipping_fee}{/if}  )</p>
+                            </td>
+                            <td class="status-td">
+                                <p class="prompt">售后中</p>
+                                <p><a href="/m-users-a-order_detail.htm?order_id={$order.order_id}" target="_blank">订单详情</a></p>
+                            </td>
+                            <td>
+                                <p>
+                                     <a href="javascript:;" class="js_buyAgain" data-order-sn="{$order.order_sn}">再次购买</a>
+                                </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+                {/if}
+				<!-- 待评论 -->
+                {if  $order.order_status==4}
+                <section class="order-item-warp">
+                    <table class="user-table table">
+                        <thead>
+                        <tr>
+                            <th colspan="4">
+                                <span class="fl">
+                                    <span>订单号：{$order.order_sn}</span>
+                                    <span class="pl30">下单时间：{$order.order_time}</span>
+                                    <a href="javascript:void(0)" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698',900,600);" class="pl30">
+                                        <i class="user-icon icon-chat"></i> 联系客服
+                                    </a>
+                                </span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="first">
+                            <td class="first">
+                            {foreach from=$order.goods item=goods}
+                                <div class="goods-td">
+                                    <div class="inline-block goods-img">
+                                        <a href="{$goods.url_title}" target="_blank">
+                                            <img src="{$goods.goods_thumb}" alt="{$goods.goods_title}" width="100" height="100">
+                                        </a>
+                                    </div>
+                                    <div class="inline-block goods-des">
+                                        <p class="goods-title">
+                                            <a href="{$goods.url_title}" target="_blank">
+                                                {$goods.goods_title}
+                                            </a>
+                                        </p>
+                                        <p class="goods-other">
+                                            <span class="goods-original-price">￥{$goods.goods_price}</span>
+                                            <span class="goods-num">数量:{$goods.goods_number}</span>
+                                        </p>
+                                       
+                                    </div>
+                                     <div class="inline-block goods-operate">
+                                        <p class="">
+                                            <a href="/m-users-a-apply_refund.htm?order_id={$order.order_id}&goods_id={$goods.goods_id}">申请售后</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            {/foreach}
+                            </td>
+                            <td class="price-td">
+                                <p>
+                                    <span class="bold goods-price">￥{$order.total_fee}</span>
+                                </p>
+                                <p class="prompt fs12">(含运/税费：0.00 )</p>
+                            </td>
+                            <td class="status-td">
+                                <p class="">交易成功</p>
+                                <p><a href="/m-users-a-order_detail.htm?order_id={$order.order_id}" target="_blank">订单详情</a></p>
+                                <div class="view-shipping-warp">
+									{if $order.shipping_num==0}
+									<a href="javascript:void(0);" target="" class="view-shipping js-view-shipping" data-order-sn="{$order.order_sn}">查看物流</a>
+									{elseif $order.shipping_num==1}
+									<a href="javascript:void(0);" target="" class="view-shipping js-view-shipping" data-shipping-name="{$order.shipping_name}" data-shipping-no="{$order.shipping_no}">查看物流</a>
+									{/if}
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a href="/review/write-{$order.order_sn}.html" class="btn btn-default">我要评论</a>
+                                </p>
+                                 <p>
+                                     <a href="javascript:;" class="js_buyAgain" data-order-sn="{$order.order_sn}">再次购买</a>
+                                </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+				{/if}
+                <!-- 已完成 -->
+                {if  $order.order_status==5}
+                <section class="order-item-warp">
+                    <table class="user-table table">
+                        <thead>
+                        <tr>
+                            <th colspan="4">
+                                <span class="fl">
+                                    <span>订单号：{$order.order_sn}</span>
+                                    <span class="pl30">下单时间：{$order.order_time}</span>
+                                    <a href="javascript:void(0)" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698',900,600);" class="pl30">
+                                        <i class="user-icon icon-chat"></i> 联系客服
+                                    </a>
+                                </span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="first">
+                            <td class="first">
+                            {foreach from=$order.goods item=goods}
+                                <div class="goods-td">
+                                    <div class="inline-block goods-img">
+                                        <a href="{$goods.url_title}" target="_blank">
+                                            <img src="{$goods.goods_thumb}" alt="{$goods.goods_title}" width="100" height="100">
+                                        </a>
+                                    </div>
+                                    <div class="inline-block goods-des">
+                                        <p class="goods-title">
+                                            <a href="{$goods.url_title}" target="_blank">
+                                                {$goods.goods_title}
+                                            </a>
+                                        </p>
+                                        <p class="goods-other">
+                                            <span class="goods-original-price">￥{$goods.goods_price}</span>
+                                            <span class="goods-num">数量:{$goods.goods_number}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            {/foreach}
+                            </td>
+                            <td class="price-td">
+                                <p>
+                                    <span class="bold goods-price">￥{$order.total_fee}</span>
+                                </p>
+                                <p class="prompt fs12">(含运/税费：0.00 )</p>
+                            </td>
+                            <td class="status-td">
+                                <p class="">交易成功</p>
+                                <p><a href="/m-users-a-order_detail.htm?order_id={$order.order_id}" target="_blank">订单详情</a></p>
+                                <div class="view-shipping-warp">
+                                	{if $order.shipping_num==0}
+									<a href="javascript:void(0);" target="" class="view-shipping js-view-shipping" data-order-sn="{$order.order_sn}">查看物流</a>
+									{elseif $order.shipping_num==1}
+									<a href="javascript:void(0);" target="" class="view-shipping js-view-shipping" data-shipping-name="{$order.shipping_name}" data-shipping-no="{$order.shipping_no}">查看物流</a>
+									{/if}
+                                </div>
+                            </td>
+                             <td>
+                                <p>
+                                     <a href="javascript:;" class="js_buyAgain" data-order-sn="{$order.order_sn}">再次购买</a>
+                                </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+				{/if}
+				{/foreach}
+ 			{elseif $search neq ''}
+             <!--搜索-->
+              	<div class="empty-warp">
+                  没有此订单，去<a href="/" class="color-increase">逛逛</a>吧
+             	</div>
+           <!--搜索-->
+           {else}
+           <!--为空-->
+              	<div class="empty-warp">
+                  您还没有订单，去<a href="/" class="color-increase">逛逛</a>吧
+             	</div>
+           <!--为空-->
+            {/if}
+                <div class="page tc mt30">
+                    <div class="p-wrap">
+						<span class="p-num">
+                        {$pagestr}
+<!--							<a href="#" class="prev">上一页</a>
+							<a href="#" class="cur">1</a>
+							<a href="#">2</a>
+							<a href="#">3</a>
+							<a href="#">4</a>
+							<a href="#">5</a>
+							<a href="#" class="next">下一页</a>-->
+						</span>
+<!--						<span class="p-skip">
+							<em>共<b>5</b>页，&nbsp;&nbsp;到第</em>
+							<input type="text" value="1" class="input-txt">
+							<em>页</em>
+							<a href="#" class="btn-go">确定</a>
+						</span>-->
+                    </div>
+                </div>
+            </div>
+
+            {include file="user/user_left.htm"}
+
+        </div>
+    </div>
+</div>
+
+<footer id="footer"> {include file='foot.htm'} </footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js?2015091502")
+</script>
+{/literal}
+</body>
+</html>

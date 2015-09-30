@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+   <link rel="stylesheet" href="{$imgcache_url}mincss/user_min.css">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-coupon" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="user-index-wrap clearfix">
+            <div class="user-conent-warp fr">
+                <div class="user-action-menu-warp">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list clearfix">
+                        {*
+                        <li>
+                            <a href="/m-users-a-mywealth.htm">我的佣金</a>
+                        </li>
+                        <li class="split">|</li>
+                        *}
+
+                        <li>
+                            <a href="" class="current">我的优惠券 <span class="color-increase">{$user_count_coupon}</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="coupon-form">
+                    <form id="exchange-coupon-form" action="/m-users-a-get_code.htm" method="post">
+                        <span class="input-warp">
+                            <span class="bold">输入兑换码</span>
+                            <input type="text" class="coupon-input" name="pcode"/>
+                        </span>
+                        <span class="submit-warp">
+                            <input type="submit" class="js_exchangeCoupon btn btn-default" value="兑换"/>
+                        </span>
+                        <span class="ml30">
+                            <a href="http://www.wzhouhui.com/help/22/" class="color-increase">优惠券使用规则</a>
+                        </span>
+                    </form>
+                </div>
+
+               
+				{if $coupon}
+                <ul class="coupon-list-wrap js_couponList clearfix">
+                
+                	{foreach from=$coupon item=coupon}
+                    <li {if $coupon.is_use eq 1}class="used"{elseif $coupon.is_exp eq 1}class="disabled"{/if}>
+                        <p class="coupon-num">￥<strong>{$coupon.code_name}</strong></p>
+                        <p class="coupon-condition">{$coupon.code_desc}</p>
+                        <p class="coupon-end-time">有效期：{$coupon.start_time}—{$coupon.exp_time}</p>
+                        <p class="get-coupon clearfix"><span class="fl">{if $coupon.cat_name}{$coupon.cat_name}{elseif $coupon.goods}{$coupon.goods}{else}全场通用{/if}</span><a href="{$coupon.code_url}" class="fr">{if $coupon.is_use eq 1}已经使用{elseif $coupon.is_exp eq 1}已经失效{else}立即使用{/if}</a></p>
+						{if $coupon.is_use eq 1 || $coupon.is_exp eq 1}
+						<div class="bg-layer">
+                            <div class="bg"></div>
+                            <i class="icon-status icon-coupon-list"></i>
+                        </div>
+						{/if}
+                    </li>
+                  {/foreach}
+                </ul>
+                {else}
+                 <!--为空-->
+                <div class="empty-coupon">
+                    您还没有优惠券，去<a href="/coupon.html" class="color-increase" target="_blank">领券中心</a>看看
+                </div>
+                <!--为空-->
+				{/if}
+                <!-- 隐藏弹窗，领取优惠券提示-->
+                <div id="js_pop" class="to-cash-pop tc none">
+                    <p class="title mt50">领取成功！</p>
+                    <p>优惠券领取成功</p>
+                    <p class="mt50"><a href="javascript:void(0);" class="btn btn-default" onclick="USER.otherGlobal.windowReload()">返回我的优惠券</a></p>
+                </div>
+                <!-- 隐藏弹窗，领取优惠券提示-->
+				{if $pagestr}
+                <div class="page tc mt30">
+                    <div class="p-wrap">
+						<span class="p-num">
+						{$pagestr}
+						</span>
+                    </div>
+                </div>
+				{/if}
+            </div>
+            {include file="user/user_left.htm"}
+
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js")
+            .wait(function () {
+               // 领取优惠券
+                $(".js_couponList").on("click",".js_getCode", function (event) {
+                    USER.coupon.getCoupon.call(this,event);
+                });
+                $(".js_exchangeCoupon").click(function (event) {
+                    USER.coupon.exchangeCoupon.call(this,event);
+                });
+            });
+</script>
+{/literal}
+</body>
+</html>

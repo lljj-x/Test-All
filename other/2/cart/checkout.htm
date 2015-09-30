@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/cart_min.css?2015092201">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <input type="hidden" id="js_directMail" value="{$direct_mail}"/>
+    <!-- 隐藏弹窗，-->
+    <div id="js_pop" class="tc pl20 pr20 none">
+        <p class="fs16 mb80 mt80">所选商品中包含直邮商品，需要上传身份证信息</p>
+        <p>
+            <a href="{$back_url}" class="btn btn-outline">返回修改</a>
+            <a href="#" class="js_addressVer btn btn-default ml30">实名认证</a>
+        </p>
+    </div>
+    <!-- 隐藏弹窗，-->
+
+    <div id="order_confirm" class="hf pt20 pb50">
+        <h1 class="title">填写并核对订单信息</h1>
+        <p class="title2 clearfix">收货地址信息
+
+            <span class="add_address fr">
+                <a href="javascript:;" class="js_add_aaddress {if $consignee eq ''}none{/if}">+新增地址</a>
+            </span>
+        </p>
+
+        <div class="delivery_address_warp">
+
+            <form id="delivery_address_form" class="cart_global_form {if $consignee neq ''}none{/if}">
+                <label>
+                    <span>
+                        <input type="hidden" name="address_id"/>
+                    </span>
+                </label>
+
+                <p class="js_select_address  select_address">
+                    <span class="form-label"><span class="required">*</span>所在地址</span>
+                    <span class="nselect_wrap">
+                        <select name="province" class="selected_province item-select item-150">
+                            <option value="default">--省/直辖市--</option>
+							{foreach from=$province item=province}
+                            <option value="{$province.id}">{$province.value}</option>
+							{/foreach}
+                        </select>
+                    </span>
+                    <span class="nselect_wrap none">
+                        <select name="city" class="selected_city item-select item-150">
+                            <option value="default">--市--</option>
+                        </select>
+                    </span>
+                    <span class="nselect_wrap none">
+                        <select name="district" class="selected_district item-select item-150">
+                            <option value="default">--县--</option>
+                        </select>
+                    </span>
+                </p>
+                <label>
+                    <span class="form-label"><span class="required">*</span>详细地址</span>
+                    <span class="address_street_wrap">
+                        <textarea maxlength="50" name="addressline" class="address_street" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息"></textarea>
+                    </span>
+                </label>
+                <label>
+                    <span class="form-label"><span class="required">*</span>收货人姓名</span>
+            <span>
+                <input maxlength="15" type="text" name="username" class="username" placeholder="长度不超过25个字符"/>
+            </span>
+                </label>
+                <label>
+                    <span class="form-label"><span class="required">*</span>手机号码</span>
+            <span>
+                <input maxlength="11" type="text" name="tel" class="phone" placeholder="电话号码、手机号码必须填一项"/>
+            </span>
+                </label>
+                <label>
+                    <span class="form-label">或固定电话</span>
+                    <span><input maxlength="4" type="text" name="areacode" class="areacode item-150" placeholder="区号"/></span>
+                    <span><input maxlength="8" type="text" name="telephone" class="telephone item-150" placeholder="电话号码"/></span>
+                    <span><input maxlength="4" type="text" name="ext" class="ext item-150" placeholder="分机号(可选)"/></span>
+                </label>
+                <label>
+                    <span class="form-label"><span class="required">*</span>身份证号码</span>
+                    <span><input maxlength="18" type="text" name="card_id" class="idnumber" placeholder="请填写收货人身份证信息"/></span>
+
+                    <div class="cart_icon1 icon_msg">
+                        <div class="drop_box idnumber_drop none">
+                            根据海关规定，免税店、跨境直邮商品需要办理清关手续，需您提供收货人身份信息进行认证。以确保您购买的商品顺利通过海关检查。（五洲会承诺会对您的身份证信息加密保管，绝不对外泄露！）
+                            <span class="triangle-left"><span class="triangle-left"></span></span>
+                        </div>
+                    </div>
+                </label>
+
+                <p class="label-right">
+                    <span class="cart_icon1 icon_checkbox selected" onclick="CHECKOUT.setCheckBox(this);"></span>设置为默认收货地址
+                    <input type="checkbox" name="is_default_address" checked="checked" value="1" class="hidden-input none"/>
+                </p>
+
+                <p class="label-right mt30">
+                    <a class="address_confirm_submit btn btn-default" href="javascript:;">保存</a>
+                    <a class="js_address_confirm_cancel btn btn-outline none ml30" href="javascript:;">取消</a>
+                </p>
+            </form>
+
+            <div id="js_address_warp">加载中....</div>
+        </div>
+
+        <div class="order_confirm_warp pt50">
+            <p class="title2">确认订单信息</p>
+            <form action="#" id="js_order_confirm_form" class="cart_global_form">加载中....</form>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="cart_footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script type="text/html" id="address_tmp">
+    {{# var listLength = d.address_list.length;
+
+    if(listLength > 0){ }}
+    <div class="delivery_address_list pt20">
+        <table class="address_table js_addressTable" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            {{#
+                var defaultColumnNum = 3;
+                var rowNum = Math.ceil(listLength / defaultColumnNum);
+                var lastColumnNum = listLength % defaultColumnNum;
+                for(var cr=1;cr<=rowNum;cr++){
+            }}
+            <tr class="{{# if (cr > 1){ }}show_all none{{#}}}">
+                {{#
+                    for(var cc=1; cc<=defaultColumnNum;cc++){
+                        var currentNum = (cr - 1) * defaultColumnNum + cc;
+                        if(currentNum > listLength) break;
+                        var currentItemData = d.address_list[currentNum-1];
+                }}
+                <td class="{{# if(cc === 1){}}first{{#}}}{{#if(cc === defaultColumnNum){}}last{{#}}}">
+                    <div class="address_wrap">
+                        <div class="js_address_label {{#if(currentItemData.is_default_address == 1){}}js_defaultWarp{{# }}}  address_label address_icon  {{# if(currentItemData.is_default_address == 1){}}checked{{#}}}" data-address-id="{{currentItemData.address_id}}">
+                            <p class="address_title bb clearfix">
+                                <strong>{{currentItemData.username}}&nbsp;&nbsp;收</strong>
+                                {{# var isDefaultAddress = currentItemData.is_default_address;}}
+                                <span class="default js_default {{# if(isDefaultAddress != 1){}}hidden{{# }}}">默认地址</span>
+                                <span class="default js_setDefault set_default none {{# if(isDefaultAddress == 1){}}hidden{{# }}}"><a href="javascript:;" onclick="ORDERADDRESS.setDefaultEvent(this,event,'{{currentItemData.address_id}}');return false;">设为默认</a></span>
+                            </p>
+                            <p class="address_content">
+                                {{#
+                                    var curProvince = (currentItemData.province) ? currentItemData.province : '';
+                                    var curCity = (currentItemData.city) ? currentItemData.city : '';
+                                    var curDistrict = (currentItemData.district) ? currentItemData.district : '';
+                                    var curTel = (currentItemData.tel) ? currentItemData.tel : currentItemData.number;
+                                    var curAddressline = (currentItemData.addressline) ? currentItemData.addressline : '';
+                                    var shortAddressLine = curAddressline;
+                                    if(curAddressline.length > 24){
+                                        shortAddressLine = curAddressline.substr(0,22) + '...'
+                                    }
+                                }}
+
+                                <span class="addressText">{{curProvince}}&nbsp;&nbsp;{{curCity}}&nbsp;&nbsp;{{curDistrict}}
+                                    <br>
+                                        <span title="{{curAddressline}}">{{shortAddressLine}}</span>
+                                    <br>
+                                    <b>{{curTel}}</b>
+                                </span>
+                            </p>
+                            <p class="address_operate none">
+                                <a href="javascript:void(0)" class="mod" onclick="ORDERADDRESS.editEvent(event,'{{currentItemData.address_id}}');return false;">修改</a>
+                                <a href="javascript:void(0)" class="del" onclick="ORDERADDRESS.deleteEvent(event,'{{currentItemData.address_id}}');return false;">删除</a>
+                            </p>
+                        </div>
+                    </div>
+                </td>
+                {{# } }}
+                {{# if (listLength<3) { }}
+                    <td class="last">
+                    </td>
+                {{# } }}
+            </tr>
+            {{# } }}
+            {{# if(listLength > 3){ }}
+            <tr>
+                <td>
+                    <p class="show_all_address js_showAllAddress ">
+                        <a href="javascript:;" onclick="ORDERADDRESS.showAllEvent(event);return false;">+ 使用其它地址</a>
+                    </p>
+                </td>
+            </tr>
+            {{# }}}
+            </tbody>
+        </table>
+    </div>
+    {{# } }}
+</script>
+{/literal}
+{literal}
+<script type="text/html" id="checkout_tmp">
+    {{# var listLength = d.cart_list.length;
+        if(listLength > 0){ }}
+
+    <table class="cart_table order_confirm_table">
+        <thead>
+        <tr>
+            <th class="first">商品信息</th>
+            <th>重量（千克）</th>
+            <th>单价（元）</th>
+            <th>数量</th>
+            <th class="last_item">金额</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#
+                for(var cr=0; cr < listLength;cr++){
+                    var currentItemData = d.cart_list[cr];
+            }}
+			{{# if(currentItemData.is_checkout == 1){ }}
+            <tr>
+                <td class="first">
+                    <div class="cart_goods_img">
+                        <a href="{{currentItemData.url}}">
+                            <img src="{{currentItemData.img}}" alt="{{currentItemData.title}}" width="100" height="100"/>
+                        </a>
+                    </div>
+                    <div class="cart_goods_content tl ml15">
+                        <p><a href="{{currentItemData.url}}" class="cart_goods_title">{{currentItemData.title}}</a></p>
+                        <p class="cart_shipping_address cart_icon1">
+                            <span class="cart_icon icon_shipping_address"></span>{{currentItemData.shipping_address}}
+                        </p>
+                    </div>
+                </td>
+                <td>{{currentItemData.weight}}</td>
+                <td>
+                    <p class="price">{{currentItemData.goods_price}}</p>
+                    <p class="original_price">{{currentItemData.market_price}}</p>
+                </td>
+                <td>{{currentItemData.goods_num}}</td>
+                <td class="last_item total bold16">
+                    {{currentItemData.sub_total}}
+                </td>
+            </tr>
+			{{# }}}
+            {{#} }}
+        </tbody>
+    </table>
+
+
+
+    {{# if((1==1) || d.coupon_list.length > 0 || d.commission_over != 0){}}
+    <div class="clearfix bb">
+        <ul class="order_reduce_info">
+            {{#
+                var couponList = d.coupon_list;
+                var isUseCoupon = d.isUseCoupon;
+                if (couponList.length > 0){
+            }}
+            <!-- 有优惠券显示-->
+            <li class="user_coupon_warp">
+                <span class="ie7_span">
+                    <span class="cart_icon1 icon_checkbox js_use_coupon selected" data-cart-id="0" onclick="CHECKOUT.setCheckBox(this)"></span>使用优惠券
+                    <input checked name="is_use_coupon" type="checkbox" value="1" class="hidden-input none"/>
+                </span>
+                <div class="cart_icon1 icon_msg">
+                    <div class="drop_box coupon_drop none">
+                        每笔订单仅限使用一张优惠券，优惠券不可合并。若使用优惠券的订单发生退货行为，则优惠券不予返还。
+                        <span class="triangle-bottom"><span class="triangle-bottom"></span></span>
+                    </div>
+                </div>
+                <span class="nselect_wrap selected_coupon js_none_show">
+                    <select name="coupon" class="item-select coupon" onchange="CHECKOUT.selectCouponEvent(this);">
+                        <option value="default">选择你要使用的优惠券</option>
+                        {{#
+                            for(var cuc=0;cuc < couponList.length; cuc++){
+                        }}
+                            <option {{# if(couponList[cuc].is_use =="1"){ }} selected{{# }}} value="{{couponList[cuc].code}}">{{ couponList[cuc].msg }}</option>
+                        {{#
+                            }
+                        }}
+                    </select>
+                </span>
+                <span class="coupon_money reduce_money"> -￥{{d.coupon_money}} </span>
+            </li>
+            {{#}}}
+            <li class="user-exchange-coupon-warp">
+                <p>
+                    <span class="ie7_span"><a class="js_userCoponCode color_increase" href="javascript:;"> + 已有优惠码</a></span>
+                    <span class="reduce_money"></span>
+                </p>
+                <p class="pt10 js_couponCodeWarp none">
+                    <span class="coupon_code_warp inline-block vm ">
+                       <input class="coupon-code js_couponCode" name="coupon_code" maxlength="16" type="text" value="" placeholder="请输入优惠码"/>
+                        <a href="javascript:;" class="btn btn-default btn-sm" onclick="CHECKOUT.exchangeCoupon(this)">兑换</a>
+                    </span>
+                    <span class="reduce_money"></span>
+                </p>
+            </li>
+            <!--有佣金才显示使用佣金-->
+            {{#
+                var hasCommission = d.commission_over;
+                var isUseCoupon = false;
+                var useCommission = (d.commission_money == "0") ? false : d.commission_money;
+                if(hasCommission != "0"){
+            }}
+
+            <li class="user_commission_warp">
+                <div class="user_commission_form">
+                    <span class="ie7_span use_commission_bg">
+                        <span class="cart_icon1 icon_checkbox js_use_commission {{# if (useCommission){}}selected{{# }}}" data-cart-id="0" onclick="CHECKOUT.setCheckBox(this)"></span>使用佣金
+                        <input {{# if (useCommission){}}checked{{# }}} name="is_use_commission" type="checkbox" value="1" class="hidden-input none"/>
+                    </span>
+                    <!--弹出框和弹出按钮-->
+                    <div class="cart_icon1 icon_msg">
+                        <div class="drop_box commission_drop none">
+                            关注公众号，微信分享至朋友圈或好友，可能获得更多佣金
+                            <span class="triangle-top"><span class="triangle-top"></span></span>
+                        </div>
+                    </div>
+                    <!--弹出框和弹出按钮-->
+                    <input name="use_commission_money" disabled class="js_use_commission_money" type="text" value="{{# if (!useCommission){}}{{hasCommission}}{{# }else{}}{{useCommission}}{{#}}}" placeholder="使用金额" onkeyup="CHECKOUT.commissionChangeEvent(this)" data-has-commission ="{{hasCommission}}"/>
+                    <span class="commission_code_warp js_none_show none">
+                        <input name="commission_code" maxlength="6" type="text" value="" onkeyup="CHECKOUT.inputCheckSecurityCodeEvent(this)" placeholder="输入验证码"/>
+                        <a href="javascript:;" class="js_get_commission_code btn btn-default btn-sm">获取验证码</a>
+                    </span>
+                    <span class="commission_money reduce_money"> -￥{{d.commission_money}} </span>
+                </div>
+                <div class="user_commission_msg">
+                    <span class="commission_money_over">（可用金额：{{hasCommission}}）</span>
+                    <span class="send_code_num js_send_code_msg none">验证码已发送至{{d.tel}}</span>
+                </div>
+            </li>
+            {{# }}}
+            <!--有佣金才显示使用佣金-->
+        </ul>
+    </div>
+    {{# }}}
+    <div class="clearfix">
+        <table class="cart_total_table order_confirm_pay_table">
+            <tbody class="tr">
+            <tr>
+                <td>订单运费：</td>
+                <td>￥<span>{{d.total.shipping}}</span></td>
+            </tr>
+            <tr>
+                <td>订单关税：</td>
+                <td>￥<span>{{d.total.tariff}}</span></td>
+            </tr>
+            <tr>
+                <td>应付金额：</td>
+                <td class="cart_total_price color_increase">￥<span>{{d.total.order_amount}}</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="cart_checkout pt20 cart_bottom_warp clearfix">
+        <div class="back_home fl">
+            <a href="/m-flow-a-cart.html">< 返回购物车修改</a>
+        </div>
+        <div class="right_checkout fr clearfix">
+            <div class="qr_code_warp fl clearfix">
+                <span class="qr_code_img cart_icon fl"></span>
+                                        <span class="qr_code_text fl">
+                                            扫一扫 <br/>
+                                            <span class="color_increase">手机购买更便宜</span>
+                                        </span>
+                <div class="qr_code_drop drop_box none">
+                    <img src="{/literal}{$imgcache_url}{literal}images/domeimg/qr_code_app.jpg?2015082701" alt=""/>
+                    App首单减5元
+                    <span class="triangle-right"><span class="triangle-right"></span></span>
+                </div>
+            </div>
+            <a href="/m-flow-a-done.html" class="submit btn btn-default btn-xl fl">去结算</a>
+        </div>
+    </div>
+    {{# }}}
+</script>
+
+<script>
+    $LAB.script("laytpl.min.js")
+        .wait()
+        .script("addressForm.min.js")
+        .script("checkout.min.js?2015092301");
+</script>
+{/literal}
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+{include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/category_min.css?2015080603">
+	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
+</head>
+<body>
+	<header id="header">
+		
+		{include file="public_top.htm"}
+	</header>
+
+
+	<div class="wrap pb40">
+		<!-- 主体部分 start -->
+		<div class="js_mainBgWrap">
+			
+			<!-- 品牌专区top 品牌介绍 -->
+			<div class="brand_introduction w1200">
+				<div class="b-i-wrap clearfix">
+					<div class="b-side-left fl">
+						<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="700" height="300" data-original="{$brandInfo.banner_logo}" alt="">
+					</div><!-- .b-side-left -->
+
+					<div class="b-side-right">
+						<div class="m-info-logo">
+						 	<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="150" height="90" data-original="{$brandInfo.brand_logo}" alt="">
+						</div>
+
+						<div class="m-detail">
+						 	<h3 class="clearfix">
+						 		<span class="mart-name fl">{$brandInfo.brand_name}</span>
+						 		<em class="mart-price"><span>{$brandInfo.lowprice}</span></em>
+						 	</h3>
+						 	<div class="description js_description">
+						 		{$brandInfo.description}
+						 		<span class="iconWrap clearfix">
+						 			<i class="icon iconfont"></i>
+						 		</span>
+						 	</div><!-- .description -->
+						</div><!-- .m-detail -->
+					</div><!-- .b-side-right -->
+				</div><!-- .b-i-wrap -->
+			</div><!-- .brand_introduction -->
+		
+			<!-- 品牌专区分类 -->
+			<div class="brand-sort-wrap w1200">
+				<div class="b-s-wrap">
+					<div class="b-s-top clearfix">
+						<div class="left fl">分类:</div>
+						<ul class="right fl clearfix">
+						  {foreach from=$catCntArr item=v}
+							<li><a href="{$v.url}" {if $v['cat_id'] == $cat_id} class="on" {/if}>{$v.cat_name}<span>({$v.count})</span></a></li>
+							{/foreach}
+							
+						</ul>
+					</div>
+
+					<!-- 排序 -->
+					<div class="b-s-down clearfix">
+						<div class="left fl">排序:</div>
+						<ul class="right fl clearfix">
+							{foreach from=$orderUrlArr item=v key=k}
+							<li class="search-normal"><a href="{$v.url}" {if $k == $ord} class="on" {/if}>{$v.name}<i class="icon {$v.orderBy}"></i></a></li>
+							{/foreach}
+							<li class="instock"><a href="{$stockUrl}"><i class="icon icon_checkbox {if $stock}selected{/if}"></i>只显示有货商品</a></li>
+							<li class="allProNum">共计<strong>{$totalCount}</strong>个商品</li>
+						</ul>
+					</div>
+				</div>
+			</div><!-- .brand-sort-wrap -->
+
+			<!-- 品牌产品列表 -->
+			<div class="proListWrap w1200">
+				<ul class="p-proList clearfix">
+					{foreach from=$goods_list key=k item=v}
+                    <li>
+                        <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt=""></a></p>
+                        <p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+                        <div class="p_price_cart_wrap clearfix">
+                            <p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
+                            <span class="icon_child fr js_addToCart {if $v.goods_number==0}disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
+                        </div>
+                        <span class="icon_child o-icon"><strong>{$v.promote_zhekou}</strong>折</span>
+                        {if $v.goods_number ==0}<a target="_blank" href="{$v.url_title}" class="soldOut_thisProduct"><i class="icon_soldOut"></i></a>{/if}
+                    </li>
+                    {/foreach}
+					
+				</ul><!-- .p-proList -->
+			</div><!-- .proListWrap -->
+			
+			<!-- 分页 -->
+			<div class="pageWrap w1200">
+				<div class="page tc">
+					<div class="p-wrap">
+						{$pagestr}
+					</div>
+				</div>
+			</div><!-- .pageWrap -->
+			
+			<!-- 相关品牌 -->
+			<div class="m-recommend-wrap w1200">
+				<div class="line"></div>
+				<h3 class="title">关注此品牌的用户还关注</h3>
+
+				<ul class="recommend-items clearfix">
+				    {foreach from=$brand_list item=v}
+					<li>
+						<a href="/brand-{$v.id}.html">
+							<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="588" height="252" data-original="{$v.banner_logo}" alt="">
+							<div class="from">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="31" height="31" data-original="/temp/skin1/dist/images/domeimg/country/{$v.country_css}.png" alt="" class="logo">
+								<span class="from-c">{$v.country_note}</span>
+							</div>
+							<div class="info">
+								<span class="discount"><strong>{$v.lowprice}</strong></span>
+								<span class="name">{$v.brand_name}</span>
+							</div>
+						</a>
+					</li>
+					{/foreach}
+					
+				</ul>
+				
+			</div><!-- .m-recommend-wrap -->
+
+		</div><!-- .js_mainBgWrap -->
+		<!-- 主体部分 end -->
+
+	</div><!-- .wrap -->
+
+
+
+	<footer id="footer">
+		
+		{include file="foot.htm"}
+	</footer><!--end #footer -->
+{literal}
+	<script>
+		$LAB.script("jquery.flexslider.min.js")
+			.wait(function(){
+				$(function(){
+					$(".js_description").hover(function() {
+						$(this).addClass('z-desc-shown');
+					}, function() {
+						$(this).removeClass('z-desc-shown');
+					});
+				});
+			})
+	</script>
+{/literal}
+
+
+</body>
+</html>

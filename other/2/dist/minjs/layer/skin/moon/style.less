@@ -1,0 +1,66 @@
+//所有变量都在这个文件里
+@import url("../../../../css/mixins.less");
+
+html #layui_layer_skinmoonstylecss {
+    display: none;
+    position: absolute;
+    width: 1989px;
+}
+.layer-ext-moon{min-width: 420px;padding: 0;background-clip: padding-box;
+  .layui-layer-title {padding-left:20px;background: @colorf;color: @color_base;font-size: 18px;font-weight: normal;height: 46px;line-height: 46px;border-bottom: 1px solid @color_assist;}
+
+  .layui-layer-content{
+    .layui-layer-ico {height: 32px;width: 32px;top:18.5px;}
+    .layui-layer-ico0 {background: url(default.png) no-repeat -96px 0;}
+    .layui-layer-ico1 {background: url(default.png) no-repeat -224px 0;}
+    .layui-layer-ico2 {background: url(default.png) no-repeat -192px 0;}
+    .layui-layer-ico3 {background: url(default.png) no-repeat -160px 0;}
+    .layui-layer-ico4 {background: url(default.png) no-repeat -320px 0;}
+    .layui-layer-ico5 {background: url(default.png) no-repeat -288px 0;}
+    .layui-layer-ico6 {background: url(default.png) -256px 0;}
+    .layui-layer-ico7 {background: url(default.png) no-repeat -128px 0;}
+  }
+
+  .layui-layer-setwin {top: 15px;right: 15px;
+    a {width: 16px;height: 16px;}
+    .layui-layer-min cite:hover {background-color: #56abe4;}
+    .layui-layer-max {background: url(default.png) no-repeat -80px 0;}
+    .layui-layer-max:hover {background: url(default.png) no-repeat -64px 0;}
+    .layui-layer-maxmin {background: url(default.png) no-repeat -32px 0;}
+    .layui-layer-maxmin:hover{background: url(default.png) no-repeat -16px 0;}
+    .layui-layer-close1,.layui-layer-close2 {
+      background: url(default.png) 0 0;
+      &:hover{background: url(default.png) -48px 1px;}
+    }
+    .layui-layer-close{background-color: #ffffff !important;border: 2px solid #ffffff; border-radius: 50%;}
+  }
+
+  .layui-layer-padding{padding-top: 24px;}
+  .layui-layer-btn {padding: 0 0 40px 0;
+    a {.inline-block;height: auto;line-height:normal !important; margin: 0 15px;text-align: center;padding: 8px 50px;margin-bottom: 0;font-size: 14px;font-weight: 400;font-family: @font_main;white-space: nowrap;vertical-align: middle;touch-action: manipulation;cursor: pointer;user-select: none;background-image: none;text-decoration: none;border: 0 none;*overflow:visible;background-repeat: no-repeat;outline: none;box-sizing: content-box; }
+    .layui-layer-btn0 {color: @color_bgf;background-color: @color_increase;
+      &.active,&:hover{background-color: @color_increase_active;}
+      &.disabled{background-color: @colorc;cursor: @cursor-disabled;}
+    }
+    .layui-layer-btn1 {border-style: solid;border-color: @color_assist;border-width: 1px;color: @color_base;background-color: @color_bgf;
+      &.active,&:hover{color: @color_increase_active;border-color: @color_increase_active; }
+      &.disabled{border-color: @colorc;color: @colorc;cursor: @cursor-disabled;}
+    }
+    .layui-layer-btn2 {background: #f60;color: #fff;border: 1px solid #f60;border-radius: 3px;}
+    .layui-layer-btn3 {background: #f00;color: #fff;border: 1px solid #f00;border-radius: 3px;}
+    .layui-layer-title span.layui-layer-tabnow{height:47px;}
+  }
+
+  &.layui-layer-dialog .layui-layer-content{text-align: center;font-size: 16px;padding: 60px 10px;}
+
+  &.layer-ext-moon-msg{width: 250px; height: 100px;min-width: 0;padding: 0; overflow: hidden;font-size: 0;line-height: 0;color: transparent;
+    .layui-layer-content{padding: 0;width: 250px;height: 100px;overflow: hidden;
+      .layui-layer-ico{width: 250px;height: 100px;top:0; left: 0;}
+    }
+  }
+
+
+}
+
+
+

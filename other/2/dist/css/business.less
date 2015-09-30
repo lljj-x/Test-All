@@ -1,0 +1,55 @@
+//所有变量都在这个文件里
+@import url("mixins.less"); 
+@import "include/user_global_form.less";
+@businessBaseColor :#535353;
+.hasbg{background-color: #F6F6F6;}
+
+#business-wrap{
+    .w990{width: 990px;}
+    .w990,section {margin: 0 auto;}
+    .banner{height:450px;background: url("../images/pageimg/business/banner.jpg") no-repeat 50% 50%;
+        .content{position:relative;top:100px;color: #ffffff;text-align: center;
+            p{margin: 15px 0;}
+            .title{font-size: 78px;font-weight: normal;color: #ffffff;}
+            .outline{.inline-block;vertical-align:top;font-size: 30px;padding: 15px 130px;border: 1px solid #ffffff;}
+            .language{font-size: 14px;
+                a{font-size: 14px;color: #ffffff;text-decoration: none;
+                    &:hover{text-decoration: underline;}
+                }
+            }
+        }
+    }
+
+    .section-list{padding: 50px 0;
+        .title{text-align: center;color: @businessBaseColor;
+            strong{.inline-block;padding-left:80px;font-size: 45px;background-repeat: no-repeat;
+                &.font1{background-image: url("../images/pageimg/business/1.png");}
+                &.font2{background-image: url("../images/pageimg/business/2.png");}
+                &.font3{background-image: url("../images/pageimg/business/3.png");}
+            }
+        }
+        .content{margin-top: 50px;font-size: 16px;color: @businessBaseColor;line-height: 32px;}
+        .partner{margin-top: 60px;text-align: center;
+            a{font-size: 28px;background-color: #CA1B43;border-radius: 8px;padding: 12px 40px;}
+        }
+    }
+    .user-global-form{padding: 0 185px;
+        label{font-size: 0;}
+        .form-label{font-size: 16px;color: #222222;width: 130px;text-align: left;padding: 10px 5px;line-height: 18px;}
+        input,textarea{font-size: 16px;color: #222222;padding: 7.5px;width: 458px;box-sizing: content-box;}
+        textarea{height: 130px;}
+        .label-right{padding-left: 140px;}
+        .error{
+            .form-error{font-size: 16px; padding-left: 140px;}
+        }
+        .submit{width:auto;height:45px;line-height:45px;background-color: #CA1B43;padding: 0 40px;color: #ffffff;font-size: 20px;}
+    }
+    .success-msg{font-size: 28px;text-align: center;color: #535353; line-height: 40px;}
+
+    &.lang-en{
+        .user-global-form {padding: 0 155px;
+            .form-label{width: 190px;}
+            .error .form-error,.label-right{padding-left: 200px;}
+        }
+    }
+}
