@@ -1,0 +1,120 @@
+<div id="s-ptailor" class="none" >
+          <div class="s-ptailorMain clearfix">
+          
+          	<div class="s-ptailorMain-left" >
+            	<div id="s-pri_cussize" >
+                	<p>Do not customize?<a class="s-size_link"href="javascript:void(0)">{$lang.Select_the_standard_size}</a></p>
+                    <input type="hidden" value="14.99" id="s-pri_cussizeMoney"/><!--这里用来存要多少钱的-->
+                    <form id="s-pri_cussizeForm" action="?" method="post">
+						<dl class="custom_input">
+						  <dd class="costumer_units"> {$lang.please_select_1}:
+							<select id="s-custom_size" class="select_model" style="width: 50px;" name="units">
+							  <option value="0" {if $suit_custom_info.units==0}selected="selected"{/if}>{$lang.in}</option>
+							  <option value="1" {if $suit_custom_info.units==1}selected="selected"{/if}>{$lang.cm}</option>
+							</select>
+						  </dd>
+						  <dd><span>A.Height:</span>
+							<input type="text" value="{$suit_custom_info.height}" class="numpass"  name="height">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display: none;">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>B. Chest:</span>
+							<input type="text" value="{$suit_custom_info.chest}" class="numpass"  name="chest">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>C. Sleeve:</span>
+							<input type="text" value="{$suit_custom_info.sleeves}" class="numpass"  name="sleeves">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>D. Shoulder:</span>
+							<input type="text" value="{$suit_custom_info.shoulder}" class="numpass"  name="shoulder">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>E. Jacket length:</span>
+							<input type="text" value="{$suit_custom_info.jacketLength}" class="numpass"  name="jacketLength">
+							<label class="custom_unit">in</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>F. Stomach:</span>
+							<input type="text" value="{$suit_custom_info.stomach}" class="numpass"  name="stomach">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>G. Pants Length:</span>
+							<input type="text" value="{$suit_custom_info.pantsLength}" class="numpass"  name="pantsLength">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>H. Crotch:</span>
+							<input type="text" value="{$suit_custom_info.backRise}" class="numpass"  name="backRise">
+							<label class="custom_unit">in</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>I. Seat:</span>
+							<input type="text" value="{$suit_custom_info.seat}" class="numpass"  name="seat">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>J. Thighs:</span>
+							<input type="text" value="{$suit_custom_info.thights}" class="numpass"  name="thights">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>K. Knee:</span>
+							<input type="text" value="{$suit_custom_info.knee}" class="numpass"  name="knee">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						  <dd><span>L. Leg Opening:</span>
+							<input type="text" value="{$suit_custom_info.legOpning}" class="numpass"  name="legOpning">
+							<label class="custom_unit">{$lang.in}</label>
+							<div class="tips1" style="display:none">{$lang.Please_enter_a_number}</div>
+						  </dd>
+						</dl>
+						<input type="hidden" name="save_suit_custom" value="1"/>
+						<input type="hidden" name="goods_id" value="{$goods.goods_id}"/>
+					</form>
+                </div><!--end #s-pri_cussize-->
+                
+                <div id="s-size" style="display:none;">
+                	<p>{$lang.Your_selected_standard_size}:</p>
+                    <div>
+                       {if $have_same_goods eq 1}
+                        {foreach from=$same_goods_list item=goods_type key=key1}
+                            {if $key1==0}
+                                <select id="select-goods-size" name="select_same_goods_{$key}">
+                                  <option  value="">{$lang.please_select}</option>
+                                  {foreach from=$goods_type.list item=value key=key}
+                                  <option value="{$key}" {if $goods.goods_id eq $key}selected{/if}>
+                                  {$value.attr_value}{if $value.attr_price != 0}{if $value.attr_price gt 0}+{elseif $value.attr_price lt 0}-{/if}<B> USD {$value.spe_format_price}</B>{/if}
+                                  </option>
+                                  {/foreach}
+                                </select>
+                            {/if}
+                        {/foreach}
+                        {/if}
+                     </div>
+                     <p><a href="javascript:void(0)" class="s-size-choose">{$lang.Custom_measurements}</a></p>
+                </div><!--end #s-size-->
+                
+            </div>
+            
+            <div class="s-ptailorMain-right">
+            	<div><img src="{$imgcache_url}images/domeimg/customwest.jpg" width="370"/></div>
+                <p>{$lang.suit_note}</p>
+            </div><!--end .s-ptailorMain-right-->
+            
+          </div><!--end .s-ptailorMain-->
+          
+          <div class="s-ptailorBottom">
+          		<p>{$lang.price}:<strong class="bizhong" style="color:#e3631e">USD</strong><strong class="my_shop_price" orgp="{$goods.shop_price}" style="color:#e3631e">{$goods.shop_price}</strong></p>
+                
+        		<div class="s-popBtn">
+                  <button id="s-cancel_ptailor" type="button" class="blackBtn"><span>{$lang.Cancel}</span></button>
+                  <button id="s-apply_ptailor" type="button" class="grayBtn" data-highgrade="{$goods.is_suit_type}"><span>{$lang.Apply}</span></button>
+                </div>
+          </div>
+      </div><!--#s-ptailor-->

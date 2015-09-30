@@ -1,0 +1,41 @@
+
+<div class="f_copyrit tc mb10">Copyright © 2011-2015 <span id="welcome-msg-name-foot">SammyDress.com</span>. All Rights Reserved.</div>
+
+{include file="foot_common_js.htm"}
+
+{literal}
+
+<script type="text/javascript">
+    var query_url = window.location.href;
+    //aff source
+    var aff_source = _GET('utm_source', query_url);//"{$smarty.get.utm_source}";
+
+    if(aff_source)
+    {
+        $.cookie('aff_source',aff_source, {expires: 60, path: '/',domain:COOKIESDIAMON});
+    }
+    var admitad_uid	= _GET('admitad_uid', location.hash.indexOf('admitad_uid=') > 0 ? '?' + location.hash.substr(1) : null);
+
+    if(admitad_uid)
+  	{
+        $.cookie('aff_source','admitad',{expires: 60, path: '/',domain:COOKIESDIAMON});
+  		$.cookie("admitad_uid",admitad_uid,{expires: 60, path: '/',domain:COOKIESDIAMON});
+  	}
+
+    var tduid =  _GET('tduid', location.hash.indexOf('tduid=') > 0 ? '?' + location.hash.substr(1) : null);
+    if( tduid )
+    {
+		$.cookie("admitad_uid",tduid,{expires: 60, path: '/',domain:COOKIESDIAMON});
+    }
+
+    var utm_campaign = _GET('utm_campaign', location.hash.indexOf('utm_campaign=') > 0 ? '?' + location.hash.substr(1) : null);
+    if( utm_campaign )
+    {
+        $.cookie("utm_campaign",utm_campaign,{expires: 60, path: '/',domain:COOKIESDIAMON});
+    }
+    //aff source end
+
+</script>
+
+{/literal}
+

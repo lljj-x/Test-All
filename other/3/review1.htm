@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file=top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css">
+	<!--弹出层插件-->
+	<link rel="stylesheet" href="{$imgcache_url}mincss/skin/bluebar/ymPrompt.css" />
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+	
+
+	<div class="path rev_path main_inner">
+		<a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}">{$lang.home}</a>
+		<i>&gt;</i>
+		<span>{$lang.sammydress_reviews}</span>
+	</div><!--end .path-->
+	
+	<div id="mainBox">
+		<div id="ms_warp" class="clearfix">
+            {$review_con}
+		</div><!--end #ms_warp-->
+	</div><!--end #mainBox-->
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	
+	<script>
+		$LAB.script("{$imgcache_url}minjs/jquery.infinitescroll-masonry.min.js")
+        {literal}
+			.wait(function(){
+				$("#ms_warp").masonry({ 
+		          itemSelector: ".ms_brick",
+		         
+		          animate: true,
+		          isFitWidth:true,
+		          singleMode: true
+		        });
+			})
+        {/literal}
+	</script>
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

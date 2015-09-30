@@ -1,0 +1,34 @@
+<div class="u_myquestions">
+	<h2 class="u_model"><span></span>{$lang.my_questions}</h2>
+	
+	<table>
+		{foreach from=$questions_list item=q}
+		<tr class="list">
+			<td  class="product">
+				<p><a href="{$q.url_title}"><img class="js_lazy" src="{$imgcache_url}/images/domeimg/lazyload.gif" data-original="{$q.goods_grid}"></a></p>
+				<dl>
+					<dt><a href="{$q.url_title}" title="product info">{$q.goods_title}</a></dt>
+					<dd>{$q.adddate}</dd>
+				</dl>
+			</td>
+			<td class="info">
+				<ul>
+					<li><strong>{$lang.question}: </strong>{$q.i_content}</li>
+					<li><strong>{$lang.answer}: </strong>{$q.reply}</li>
+				</ul>
+			</td>
+		</tr>
+		{/foreach}
+	</table>
+	
+	<div class="pages tc mb50">
+		{if count($questions_list) > 0}
+		{$pager}
+		{/if}
+	</div>
+	{if empty($questions_list)}
+	<div class="empty cb">
+		{$lang.no_questions_yet}
+	</div>
+	{/if}
+</div>

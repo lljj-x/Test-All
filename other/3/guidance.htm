@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/guidance_min.css?2015032001">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div class="path">
+	   <a href="/" title="Sammydress.com Home">Home</a> » White List Adding Guidance
+	</div>
+	
+	<!-- 白名单添加指南设计 -->
+	<div class="clearfix customer_Guidance">		
+		<div class="customer_GuidanceWrap clearfix">
+			<div class="customer_Guidance_menu">
+				<ul id="js_customer_Guidance_menu_ul">
+					<li class="email_Gmail"><span class="email_span1">Gmail<i class="triangle_up"></i></span></li>
+					<li class="email_Hotmail"><span class="email_span2">Hotmail<i class="triangle_up"></i></span></li>
+					<li class="email_Yahoo"><span class="email_span3">Yahoo<i class="triangle_up"></i></span></li>
+					<li class="email_Aol on"><span class="email_span4">Aol<i class="triangle_up"></i></span></li>
+				</ul>
+			</div>
+
+			<div id="js_customer_Guidance_stepWrap" class="GuidanceWrap">
+				<h4 class="title">How to add our e-mail address (<div class="copyWrap"><a href="#" class="CopyUrl">no_reply_system@newsletter.sammydress.com</a></div>) into your "white list":</h4>
+
+				<div class="Gmail_step none">
+					<div class="step_pic"><img src="{$imgcache_url}images/domeimg/email_gmail.gif?2015090901" border="0" /></div>
+				</div>
+
+				<div class="Hotmail_step none">
+					<div class="step_pic"><img src="{$imgcache_url}images/domeimg/email_outlook.gif?2015090901" border="0" /></div>
+				</div>
+
+				<div class="Yahoo_step none">
+					<div class="step_pic"><img src="{$imgcache_url}images/domeimg/email_yahoo.gif?2015090901" border="0" /></div>
+				</div>
+
+				<div class="Aol_step">
+					<div class="step_pic"><img src="{$imgcache_url}images/domeimg/email_aol.gif?2015090901" border="0" /></div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+
+	{literal}
+	<script>
+	(function(){
+		var $div_Guidance_menu_li = $('#js_customer_Guidance_menu_ul').find("li");
+		
+		$div_Guidance_menu_li.click(function(){
+			$(this).addClass('on').siblings().removeClass('on');
+			
+			var index = $div_Guidance_menu_li.index(this);
+			var $a_copyUrl_color = $('#js_customer_Guidance_stepWrap').find(".CopyUrl");
+
+			$('#js_customer_Guidance_stepWrap > div').eq(index).show().siblings().hide();
+			$('#js_customer_Guidance_stepWrap').find("h4.title").show();//让h4.title始终显示出来。
+			if(index == 0){
+				$a_copyUrl_color.css("color","#df373e");
+			}else if(index == 1){
+				$a_copyUrl_color.css("color","#0072c6");
+			}else if(index == 2){
+				$a_copyUrl_color.css("color","#4e01cb");
+			}else if(index == 3){
+				$a_copyUrl_color.css("color","#86b923");
+			}
+		});
+	})();
+	</script>
+	{/literal}
+
+
+	<script type="text/javascript" src="{$imgcache_url}minjs/ZeroClipboard_other.js?201409090101"></script>
+	<script>
+	{literal}
+	$(document).ready(function(){
+
+		$('.CopyUrl').zclip({
+	{/literal}
+			path:'{$imgcache_url}minjs/ZeroClipboard.swf', 
+	{literal}
+			copy:function(){
+				return $(this).text();
+			},
+			afterCopy:function(){ 
+				alert("Copy success!");
+			} 
+		});
+	    	
+	})
+	{/literal}
+</script>
+</body>
+
+</html>

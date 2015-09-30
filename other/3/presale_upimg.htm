@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/presale_min.css?201509012">
+	{literal}
+	<style type="text/css">
+	.backToTop{display: none;}
+	</style>
+	{/literal}
+</head>
+<body style="background-color: #fff;">
+	<div class="upimg-main">
+		<div class="pic-wrap" >
+			<div class="upimg" id="js_upBtnWrap">
+				<img src="{$imgcache_url}images/domeimg/presale/upimgbtn.png" width="116" height="116">
+				<p class="pt10">Upload Your Pictrues </p>
+				<input type="file" id="outfit_outfit_image" name="pic" accept=".jpg,.jpeg,.gif,.png">
+			</div>
+			<div class="pic-loading none" id="js_loading"></div>
+			<div class="upimg-show none" id="js_imgShow"></div>
+
+			<p class="upimg-ag fb"><a href="javascript:void(0);" id="js_detIcon">Upload again?</a></p>
+			<p class="errormsg pt5" id="js_upmsg"></p>
+		</div>
+		<div class="info-wrap" >
+			<p class="title pb5"><strong>*</strong>Tell us about this item:</p>
+			<form id="js_upform">
+				<input type="hidden" value="" name="pic_url" id="upImgUrl">
+				<textarea name="tips" id="textval" placeholder="Describe like &quot;cotton printed v neck long&quot;..."></textarea>
+				<p class="errormsg" id="js_textAreaTip"></p>
+				<div class="mt50 tips">Tips:Please upload only JPEG, GIF, or PNG (2MB max). Images should be at least 500px wide and over 500px high. Photos must be clear,  if any photos with nudity or obscene content are uploaded, your entire review will be rejected.</div>
+
+				<div class="btn">
+					<a class="redBtn" id="js_sumbitForm">
+						<span>Submit</span>
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	{include file="foot_common_js.htm"}
+	
+	{literal}
+	<script type="text/javascript">
+		$LAB
+			.script(JS_IMG_URL+"minjs/jquery.upload.min.js")
+			.wait()
+			.script(JS_IMG_URL+"minjs/presale.min.js?201509012")
+			.wait(function(){
+                $('#js_sumbitForm').click(function(event) {
+				    var $tips = $("#js_upmsg"),
+				    	$textAreaTip = $("#js_textAreaTip");
+
+			        var flag = 1;
+			        if (!$.trim($('#upImgUrl').val()).length) {
+			          	$tips.html(jsLg.presal_upimg.notSelect);
+			          	flag = 0;
+			        }else{
+			        	$tips.html('');
+			        };
+
+			        if (!$.trim($('#textval').val()).length) {
+			          	$textAreaTip.html(jsLg.presal_upimg.required);
+			          	flag = 0;
+			        }else{
+			        	$textAreaTip.html('');
+			        };
+
+			        if (flag === 0) {
+			          return false;
+			        }
+
+				    $.ajax({
+			          	url: '/fun/?act=presale_upload',
+			          	type: 'POST',
+			          	dataType: 'json',
+			          	data:$("#js_upform").serialize()
+				    })
+				    .done(function(data) {
+				   		if(data.code == 0){
+				   			//上传成功的预览图
+				   			alert(jsLg.presal_upimg.successfully);
+				   			// 关闭弹窗
+				   			var index = parent.layer.getFrameIndex(window.name);
+				   			parent.layer.close(index);
+				   		}else{
+				   			alert(data.msg);
+				   			$tips.html('');
+				   			$textAreaTip.html('');
+				   		}
+				         
+				        
+				    });
+				});
+			});
+
+	</script>
+	{/literal}
+</body>
+
+</html>

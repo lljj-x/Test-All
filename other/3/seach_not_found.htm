@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css?2014063001">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="mainBox" class="mt15">
+		<!--如果没有搜索到商品-->
+		<div class="noGoods">
+			<div class="pageN_img">
+				<img src="{$imgcache_url}images/domeimg/pagenotfindimg.jpg" width="200" height="212" alt="">
+				{$lang.noGoods}<!--end .noGoods_tips-->
+			</div><!--end .pageN_img-->
+		</div><!--end .noGoods-->
+        
+        {if $search_congzu_goods_list}
+		<section class="mb15">
+			<h4 class="sectionBox_h">{$lang.Recommendation}</h4>
+			<div class="scrollBox">
+				<textarea  class="js_slide none">
+					<ul class="slides">
+                        {foreach from =$search_congzu_goods_list item=search_congzu_goods_info}
+						<li>
+							<a href="{$search_congzu_goods_info.url_title}" class="i_proImg"><img src="{$search_congzu_goods_info.goods_img}" height="216"/></a>
+							<p class="proName"><a href="{$search_congzu_goods_info.url_title}">{$search_congzu_goods_info.goods_title}</a></p>
+							<p class="proPrice"><span class="bizhong"></span><span class="my_shop_price fb f14" orgp="{$search_congzu_goods_info.shop_price}"></span></p>
+						</li>
+                        {/foreach}
+					</ul> 
+				</textarea>
+			</div><!--end .scrollBox-->
+		</section>
+        {/if}
+	</div><!--end .mainBox-->
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	<script type="text/javascript">
+		$LAB.script("{$imgcache_url}minjs/jquery.flexslider.min.js")
+			{literal}
+			.wait(function(){
+				function scrollCallBack(htmls,$warp){
+					$warp.flexslider({
+					 	namespace:"",
+					    animation: "slide",
+					    selector: ".slides > li",
+					    pauseOnAction:false,
+					    controlNav:false,
+					    itemWidth: 236,
+					    animationLoop:false,
+					    minItems: 3,
+					    maxItems: 10
+					});
+				}
+				//元素懒加载
+				GLOBAL.lazyLoad.creatEle("textarea.js_slide",scrollCallBack);
+			})
+			{/literal}
+	</script>
+	{include file="tongji.htm"}
+</body>
+
+</html>

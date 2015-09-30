@@ -1,0 +1,119 @@
+{dynamic}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{$lang.Loading_to} {$pay_name}</title>
+{literal}
+<style>.formsubbotton{display:none;}</style>
+{/literal}
+<script src="{$imgcache_url}minjs/jquery-1.8.0.min.js"></script>
+</head>
+
+<body>	
+    <div id="mainWrap" class="clearfix">
+    	
+        {*电子商务代码统计,跳转页及快速付款done页共用by mashanling on 2013-10-07 16:28:11*}
+        {include file=include_pay_ok_stat_js.htm}
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td height="150" align="center" valign="top">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td align="center" valign="top">
+            <table width="304" height="74" border="0" cellpadding="0" cellspacing="0" background="{$imgcache_url}images/domeimg/load_bg.jpg">
+			  <tr>
+				<td align="center" valign="top"><table width="96%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+					<td height="39" align="center" valign="middle"><img src="{$imgcache_url}images/styleimg/indicator.gif" width="16" height="16" /></td>
+				  </tr>
+				  <tr>
+					<td align="center" valign="middle" style="font-size:12px; font-family:Arial, Helvetica, sans-serif; color:#666666">{$lang.Loading_to} {$pay_name}, {$lang.Please_wait}</td>
+				  </tr>
+				</table></td>
+			  </tr>
+			</table>
+            </td>
+		  </tr>
+		  
+          <tr>
+            <td align="center" width="100%">{$pay_online_desc}</td>
+          </tr>
+		  
+		</table>
+		{/dynamic}  
+		
+		
+	</div><!--end #mainWarp-->
+	
+	<script type="text/javascript">
+		{literal}
+		//document.formsub.submit();
+
+		jump(2);
+
+		function jump(count) {   
+			window.setTimeout(function(){   
+				count--;   
+				if(count > 0) {                           
+				$('#num').attr('innerHTML', count);   
+					jump(count);   
+				} else {   
+					document.formsub.submit();
+				}   
+			}, 1000);   
+		};
+
+		function dis()
+		{
+			$('.formsubbotton').show();
+		}	
+		setTimeout( dis, 8000);			
+
+		</script>
+		{/literal}
+
+		{if $google_tj}
+		{literal}
+		
+		<script type="text/javascript">
+		 // var _gaq = _gaq || [];
+		 // _gaq.push(['_setAccount', 'UA-23493272-1']);
+		//  _gaq.push(['_setDomainName', 'sammydress.com']); 
+		 // _gaq.push(['_trackPageview']);
+		//  (function() {
+		//	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		//	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		//	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		//  })();
+		</script>
+		
+
+
+
+		{/literal}
+	
+		{/if}
+
+        <!-- bing跟踪代码 -->
+		{literal}
+		<script type="text/javascript"> if (!window.mstag) mstag = {loadTag : function(){},time : (new Date()).getTime()};</script> <script id="mstag_tops" type="text/javascript" src="//flex.msn.com/mstag/site/f7c69d88-a886-4e38-b617-e9bd48c949b4/mstag.js"></script> <script type="text/javascript"> mstag.loadTag("analytics", {dedup:"1",domainId:"1639979",type:"1",actionid:"55796"})</script> <noscript> <iframe src="//flex.msn.com/mstag/tag/f7c69d88-a886-4e38-b617-e9bd48c949b4/analytics.html?dedup=1&domainId=1639979&type=1&actionid=55796" frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden;display:none"> </iframe> </noscript>
+		{/literal}
+		<!-- bing跟踪代码 -->
+
+		{literal}
+		<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+		<script type="text/javascript">
+		window.criteo_q = window.criteo_q || [];
+		window.criteo_q.push(
+				{ event: "setAccount", account: [{/literal}{$criteo.setAccount}{literal}] },
+				{ event: "setHashedEmail", email: "{/literal}{$criteo.setHashedEmail}{literal}" },
+				{ event: "setSiteType", type: "{/literal}{$criteo.setSiteType}{literal}" },
+				{ event: "trackTransaction" , id: "{/literal}{$criteo.trackTransactionSN}{literal}", currency: "{/literal}{$criteo.currency}{literal}", item:{/literal}{$criteo.trackTransactionProduct}{literal}
+		});
+		</script>
+		{/literal}
+
+</body>
+</html>

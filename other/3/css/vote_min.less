@@ -1,0 +1,280 @@
+@color3:#333;
+@color6:#666;
+@colorf:#fff;
+@colord:#ddd;
+@colorRed:#da3439;
+@colortr:transparent;
+
+@font_fV:Verdana;
+@font_fA:Arial;
+@bord_d:1px solid #ddd;
+
+.color_red{ color: @colorRed;}
+/* S网vote页面 */
+.s_voteWrap{ margin: 20px auto;}
+
+	/* S网votes_list页面 banner区域 */
+	.s_votebg{ width: 100%; height: 550px; min-width: 990px; background:url(../images/domeimg/vote2014/banner_bg.jpg) no-repeat; background-position: center; overflow: hidden;}
+	.s_voteMainContent{ margin: 0 auto; width: 990px; padding-top: 24px; height: 525px;}
+
+	/* tabs 四个链接 */
+	#vote_tabs{
+		.tabsWrap{ float: right; width: 630px; height: 37px; text-align: center;
+			a{ display: inline-block; margin-right: 10px; padding: 0 27px; height: 33px; font: 18px/33px Helvetica; border: 2px solid @colorf; -moz-border-radius: 20px; -webkit-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; color: @colorf; text-decoration: none; background: #000;}
+			a.active{ border-color: @colorRed; background: @colorRed;}
+		}
+	}
+
+	/* tabs四个链接的相关内容 */
+	.vote_tabs_conWrap{ margin-top: 10px; width: 990px;
+		.howToEnter_con{ padding: 15px 25px; height:337px; text-align: left; background:#fff;
+			h4{ font:22px/28px Arial; font-weight: bold;}
+			.li_title{ width: 940px; height: 50px; font:16px/25px Arial;
+				ul{ height: 50px; line-height: 50px;
+					li{ float: left; margin-right: 7px; width: 227px; line-height: 25px;}
+				}
+			}
+			.p_pic{ margin-bottom: 30px; width: 940px; height: 225px;
+				img{ width: 940px; height: 225px;}
+			}
+			.p_text{
+				span{ font:16px/25px Arial;}
+				.span_strong{ font-weight: bold;}
+				// .seeprizes_alink{ margin-left: 25px; display: inline-block; width: 140px; height: 26px; line-height: 26px; color: @colorf; text-align: center; border: 1px solid @colorRed; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; background: @colorRed;
+				// 	a{ color: @colorf; text-decoration: none;}
+				// }
+			}
+		}
+
+		.prizes_con{ float: right; padding: 20px 60px 0; width: 685px; height: 345px; background: @colorf;
+			.prizes_text{ height: 60px; line-height: 30px; font-size: 18px;
+				.voteNow_alink{ margin-left: 15px; display: inline-block; width: 140px; height: 26px; line-height: 26px; color: @colorf; text-align: center; border: 1px solid @colorRed; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius: 5px; background: @colorRed;
+					a{ color: @colorf; text-decoration: none;}
+				}
+			}
+			.prizes_pic{ margin-bottom: 20px; width: 685px; height: 200px; overflow: hidden;}
+			.prizes_tips{ font-size: 16px;}
+		}
+
+		.vote_con{ position: relative;
+			.voteNow_alink{ position: absolute; top: 290px; left: 740px; width: 195px; height: 34px;
+				a{ display: block; width: 195px; height: 34px;}
+			}
+		}
+		.uploadStyle_con{ padding: 20px 0 0 40px; width: 950px; height: 345px; background: @colorf;
+			.upload_left{ width: 505px; font-family: Arial; text-align: center; color:#000;
+				.upload_text{ height: 100px; line-height: 50px; font-size: 30px; 
+					span.small_size{ margin-bottom: 10px; height: 40px; line-height: 40px; font-size: 20px;}
+				}
+				.upload_tips{ font-size: 18px; text-align: center;}
+			}
+			.upload_right{ width: 430px; height: 330px; overflow: hidden;}
+		}
+
+	}
+
+	/* 投票入口 */
+	.votingEntrance{ margin: 0 auto 20px; position: relative; width: 990px; height: 105px;
+		// 链接锚点
+		.go_voteAnchor{ position: absolute; top: -110px;}
+
+		ul{ position: absolute; width: 990px; top: -105px; left: 0; height: 207px;
+			li{ float: left; margin-right: 22px; width: 180px; height: 207px;
+				&.enter_5{ float: right; margin: 0;}
+				a{ display: block;}
+			}
+		}
+	}
+
+	/* S网投票首页 第三部分内容（News/LuckyDrawResults）*/
+	.voteList_thirdWrap{ margin: 0 auto; width: 990px; height: 588px; background:url(../images/domeimg/vote2014/voteList_third_bg.gif) no-repeat;
+		.NewsWrap{ float: left; padding: 25px 15px; width: 330px; height: 538px; 
+			h3{ height: 44px; border-bottom: 2px solid @colorRed; font:24px/44px Arial; text-align: center;}
+			p.winner_title{ margin: 0px; padding: 10px 12px 0 13px; height: 20px; font:12px/20px Arial; font-weight: bold; background: @colorf;
+				.winner_name{ display: inline-block; float: left;}
+				.winner_gift{ display: inline-block; float: right; width: 60px;}
+			}
+			// 左边向上滚动
+			.scroll_demo{ height:456px; overflow:hidden;}
+			ul{ padding: 6px 13px 0 12px; /* height: 456px; overflow: hidden; */ background: @colorf; border: 1px solid @colorf; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;
+				li{ position: relative; margin-top: 13px; display: block; height: 62px; *margin-bottom: 11px;
+					p{ padding: 0; margin:0;}
+					p.fbr_user { border: 1px solid #e8e8e8; width: 60px; height: 60px; padding: 0; float: left;}
+					p.fbr_text { color: #000; width: 140px; line-height: 18px; float: left; margin-left: 10px; overflow: hidden; word-wrap: break-word; font-size: 0.75em;}
+					p.fbr_img { border: 1px solid #e8e8e8; width: 60px; height: 60px; padding: 0; float: right;}
+					p.gift_icon { position: absolute; left: 50px; width: 24px; height: 28px; background:url(../ximages/vote2014/gift_icon.png) no-repeat;}
+				}
+			}
+		}
+
+		.luckyResultsWrap{ float: right; padding: 25px; width: 547px; height: 538px;
+			h3{ height: 44px; border-bottom: 2px solid @colorRed; font:24px/44px Arial; text-align: center;
+				span{ color: @colorRed; font-size: 16px; font-weight: normal;}
+			}
+			.lucky_firstMonPic{ margin-top: 27px; text-align: center; overflow: hidden;
+				img{ width: 546px; height: 280px;}
+			}
+			.lucky_firstMonTxt{ margin-top: 20px; text-align: center;
+				.span1{ display: block; font:28px/45px Arial; font-weight: bold;}
+				.span2{ margin-bottom: 20px; display: block; font:20px/30px Arial;}
+				.span3{ display: block; font:18px/25px Arial;}
+			}
+			
+			// 第二周开始
+			.luckyListWrap{ margin-bottom: 12px; color: #000;
+				p.title{ height: 40px; font:20px/40px Arial; text-align: center;}
+				p.li_title{ height: 40px; line-height: 40px; font-size: 18px; text-align: left;
+					span{ display: inline-block;}
+					.span_division{ width: 150px;}
+					.span_prize{ width: 90px;}
+					.span_winningNum{ width: 100px;}
+					.span_name{ width: 65px;}
+				} 
+				// 右边向上滚动
+				.scroll_demo3{ height:400px; overflow:hidden;}
+				ul{ width: 100%; height: 400px; font-size: 14px; overflow: hidden;
+					li{ margin-bottom: 14px; width: 100%; height: 66px; line-height: 66px; *margin-bottom: 12px; overflow: hidden;
+						p{ float: left; text-align: left;
+							&.division{ width: 160px;}
+							&.prize{ width: 100px;}
+							&.winning_num{ width: 100px;}
+							&.img{ width: 65px;
+								a{ display: block; width: 60px; height: 60px; border: 1px solid #e8e8e8;}
+							}
+							&.fbr_text{ float: left; color: #000; width: 80px; line-height: 18px; font-size: 12px; margin-left: 10px; overflow: hidden; word-wrap: break-word;}
+						}
+					}
+				}
+
+			}
+
+		}
+	}
+
+
+
+/* S网vote具体页面 */
+.s_vote_voteWrap{ margin: 20px auto; width: 990px;}
+	.vote_matchupWrap{  margin: 0 auto; width: 738px;
+		.vote_sub{ margin-bottom: 20px; height: 40px; line-height: 40px; border-top: 1px dashed @colord; border-bottom: 1px solid #000; font-family: Arial; text-align: center;
+			span{ margin-top: 7px; display: inline-block; padding: 0 30px; height: 25px; line-height: 25px; font-size: 20px; color: @colorf; background: #000;}
+		}
+	}
+
+	/*投票商品展示区域*/
+	#matchup{ margin-bottom: 30px;}
+	#matchup_content{ position: relative; width: 738px; background: @color3;}
+	.contestant_wrapper{ float: left; width: 345px; background: #fff; cursor: pointer;}
+	#contestant_1{ margin: 10px 27px 30px 10px;}
+	#contestant_2{ margin: 10px 10px 30px 0;}
+	.contestant{ position: relative;}
+	.contestant_image{ position: relative; margin: 0 auto; width: 345px; height: 500px; text-align: center; background-position: center center; overflow: hidden; background: url(../images/styleimg/default/xubox_loading2.gif) no-repeat center center; display: table-cell; vertical-align: middle;  
+		/* 针对IE的Hack */
+ 		*display: block;
+		*font-size: 436px;/*约为高度的0.873，200*0.873 约为175*/
+ 		*font-family:Arial;/*防止非utf-8引起的hack失效问题，如gbk编码*/}
+	.contestant_image img{ max-width: 345px; max-height: 500px; vertical-align: middle;}
+	.contestant_name{ position: absolute; top: 450px; left: 20px; padding: 5px 30px; width: 245px; height: 40px; font: 14px/20px Arial; color: @colorf; text-align: center; overflow: hidden; background: #000;}
+	.contestant_name a{ display: block; height: 40px; line-height: 20px; overflow: hidden; color: @colorf;}
+	#contestant_separator{ position: absolute; top: 200px; left: 310px; width: 117px; height: 117px; background: #f00; background: url(../images/domeimg/vote2014/or_icon.png) no-repeat;}
+	#round_indicator{ position: absolute; top: 20px; left: 50px; font-size: 24px; color: @colorf;}
+
+
+
+/* 投票结果页*/
+.voteResultWrap{ margin: 20px auto; width: 1200px; background: #ffe8e8;}
+	/* 把投票结果分享到fb等 */
+	.vote_share{ width: 1200px; height: 40px; line-height: 40px; background: @colorf;
+		.voteShare_list{ float: right; width: 450px; height: 40px; line-height: 40px;
+			span{ float: left; display: block; font:18px/40px Arial;}
+			.shareList{ float: left; margin:7px 0 0 5px;
+				a{ display: inline-block; margin-right: 5px; width: 24px; height: 26px; background: url(../images/domeimg/vote2014/icon_shareTo.png) no-repeat;
+					&.fb_link{ width: 20px; background-position: 0 0;}
+					&.tw_link{ background-position: -22px 0;}
+					&.g_link{ background-position: -51px 0;}
+					&.t_link{ background-position: -84px 0;}
+					&.email_link{ background-position: -113px 0;}
+				}
+			}
+			a.moreChance_pop{float: right; display: block; font-size: 14px; color: #000;}
+		}
+	}
+
+	/* 投票结果页主体样式 */
+	.voteResultMainWrap{ width: 1176px; background: #ffe8e8; height: 550px; padding: 12px;
+		// left_1
+		.overAll_youPicks{ margin-right: 10px; width: 208px; height: 530px; padding: 10px; background: @colorf;	text-align: center;	
+			h3{ height: 29px; line-height: 29px; font:18px/29px Times New Roman; font-style: italic; border-bottom: 1px dashed @colord;}
+		}
+		.pro_overAll{ margin-top: 12px; height: 486px;
+			ul{ width: 208px;
+				li{ position: relative; height: 162px;
+					.pro_pic{ height: 142px;
+						img{ width: 140px; height: 140px; border: 1px solid @colord;}
+					}
+					.vote_num{ height: 20px; line-height: 20px; font:13px/20px Arial;}
+					.rank_num{ position: absolute; top: -10px; left: 10px; width: 30px; height: 30px; color: @colorf; font:24px/30px Times New Roman; font-style: italic; font-weight: bold; border: 1px solid #000; -moz-border-radius: 16px; -webkit-border-radius: 16px; border-radius: 16px; background: #000;}
+				}
+			}
+		}
+		
+		// left_2
+		.youHaveVoted{ padding: 10px; width: 330px; height: 530px; background: @colorf; text-align: center;
+			h3{ height: 39px; line-height: 39px; font:30px/39px Times New Roman; font-style: italic; border-bottom: 1px dashed @colord;}
+			.youVoted_pro{ position: relative; height: 490px;
+				.pro_name{ margin-bottom: 10px; width: 330px; height: 40px; line-height: 20px; overflow: hidden; font:15px/20px Georgia;
+					a{ color: #000;}
+				}
+				.pro_pic{ width: 330px; height: 440px; overflow: hidden;
+					a{ display: block; width: 330px; height: 440px; text-align: center;
+						img{ max-width: 330px; max-height: 440px;}
+					}
+				}
+
+				.surpriseSale{ position: absolute; top: 150px; left: 35px; width: 254px; height: 254px; background:url(../images/domeimg/vote2014/surpriseSale_bg.png) no-repeat;
+					span{ display: block; color: @colorf;}
+					.span1{ padding-top: 90px; font:40px/50px Arial; text-align: center;}
+					.span2{ font:18px/25px Arial;}
+					.span3{ margin: 0 auto; width: 150px; height: 30px; line-height: 30px; font:14px/30px Arial; background: #f35059;}
+					.span4{ font:14px/20px Arial;}
+				}
+			}
+			
+		}
+		
+		// right_1
+		.voteResult_rightWrap{ padding: 10px 25px; width: 520px; height: 530px; background: @colorf; text-align: center;
+			.voteNum{ padding: 40px 0 30px; height: 30px; line-height: 30px; font:20px/30px Arial; background:url(../images/domeimg/vote2014/voteNum_bg.jpg) no-repeat;}
+			.alink_again{ padding: 20px 0; width:520px; height: 30px; text-align: center;
+				a{ padding: 0 15px; display: inline-block; height: 28px; line-height: 28px; font:16px/28px Arial; color: @colorf; border: 1px solid #f35059; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; background: #f35059; text-decoration: none;}
+				.playAgain_alink{ margin-right: 30px;}
+			}
+			.text{ width: 520px; height: 100px;
+				span{ display: block;}
+				.span1{ height: 40px; font: 38px/40px Times New Roman; font-style: italic;}
+				.span2{ height: 30px; font: 23px/30px Times New Roman; font-style: italic;}
+				.span3{ height: 30px; font: 16px/30px Arial;}
+			}
+			.voteResult_giftPic{ width: 520px; height: 260px; overflow: hidden;}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

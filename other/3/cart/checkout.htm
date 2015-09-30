@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/cart_min.css?2015092801">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="main1000px" style="width:980px;">
+		<div id="cartWrap">
+			{include file="cart/cart_header.htm"}
+			
+			{*<section class="cart_s_Box ch_proWarp">
+				<h4><a href="">Edit Shopping Cart</a>Product list</h4>
+				<div class="cart_s_inner">
+					<ul class="th clearfix">
+						<li class="th_proName">Product Name</li>
+						<li class="th_price">Price</li>
+						<li class="th_quantity">Quantity</li>
+						<li class="th_subtotal">Subtotal</li>
+					</ul>
+					<div class="proList">
+						<ul class="clearfix">
+							<li class="td_proName">
+								<div class="proName">
+									<a href="" class="pr_img"><img src="http://samimg01.sammydress.com/S/201305/thumb-img/1369959032955-thumb-P-832858.jpg" height="50" title="Elegant One-Shoulder Rhinestone and Handmade Flower Embellished Zipper Up Evening Dress For Women"/></a>
+									<a href="">Elegant One-Shoulder Rhinestone and Handmade Flower Embellished Zipper Up Evening Dress For Women</a>
+									<p><span>Size:ONE SIZE</span><span>Color:RED</span></p>
+								</div>
+							</li>
+							<li class="td_price">
+								<span class="bizhong"></span>
+								<span class="my_shop_price fb" orgp="67.57"></span>
+							</li>
+							<li class="td_quantity">
+								1
+							</li>
+							<li class="td_subtotal">
+								<span class="bizhong"></span>
+								<span class="my_shop_price fb" orgp="67.57"></span>
+							</li>
+						</ul>
+						<ul class="clearfix">
+							<li class="td_proName">
+								<div class="proName">
+									<a href="" class="pr_img"><img src="http://samimg01.sammydress.com/S/201305/thumb-img/1369959032955-thumb-P-832858.jpg" height="50" title="Elegant One-Shoulder Rhinestone and Handmade Flower Embellished Zipper Up Evening Dress For Women"/></a>
+									<a href="">Elegant One-Shoulder Rhinestone and Handmade Flower Embellished Zipper Up Evening Dress For Women</a>
+									<p><span>Size:ONE SIZE</span><span>Color:RED</span></p>
+								</div>
+							</li>
+							<li class="td_price">
+								<span class="bizhong"></span>
+								<span class="my_shop_price fb" orgp="67.57"></span>
+							</li>
+							<li class="td_quantity">
+								1
+							</li>
+							<li class="td_subtotal">
+								<span class="bizhong"></span>
+								<span class="my_shop_price fb" orgp="67.57"></span>
+							</li>
+						</ul>
+					</div><!--end .proList-->
+
+					<div class="proListTips">
+						Your subtotal  <span class="bizhong"></span> <span class="my_shop_price fb" orgp="102.06"></span> , save <span class="bizhong"></span> <span class="my_shop_price fb" orgp="7.37"></span>
+					</div><!--end .proListTips-->
+
+				</div><!--end .cart_s_inner-->
+
+			</section><!--end.cart_s_Box-->*}
+
+			<section class="cart_s_Box">
+				<h4><a href="{$DOMAIN_CART}/{$cur_lang_url}m-flow-a-consignee.htm">{$lang.edit}<span class="cartBg"></span></a>{$lang.Shipping_Information}</h4>
+				<div class="cart_s_inner">
+					<ul class="consigneeList">												
+						<li><strong>{$lang.name}</strong>: {$consignee.firstname|escape} {$consignee.lastname|escape}</li>
+						<li><strong>{$lang.addressline1}</strong>: {$consignee.addressline1|escape}</li>
+                        {if $consignee.addressline2!=''}
+						<li><strong>{$lang.addressline2}</strong>: {$consignee.addressline2|escape}</li>
+                        {/if}
+						<li><strong>{$lang.address}</strong>: {$consignee.city|escape}  {$consignee.province|escape}  {if $step=='exp_checkout'}{$consignee.country_str|escape}{else}{$consignee.country|escape}{/if}</li>
+						<li><strong>{$lang.postalcode}</strong>: {$consignee.zipcode|escape}</li>
+                        {if $consignee.tel!=''}
+						<li><strong>{$lang.phone}</strong>: {$consignee.tel}</li>
+                        {/if}
+						<li><strong>{$lang.Email_address}</strong>: {$consignee.email|escape}</li>
+					</ul>
+				</div>
+			</section><!--end.cart_s_Box-->
+			
+			<form action="m-flow-a-done.htm?PaymentOption={$PaymentOption}" method="post" name="theForm" id="theForm">
+				<div class="cart_s_Box  methodShip">
+					<h4 class="clearfix mb10">
+						<span class="fl">{$lang.Shipping_Methods}</span>
+						{if $show_tariff==0}
+						<dl class="helpTage">
+							<dt>?</dt>
+							<dd class="none">
+								<div class="text">
+									{$lang.countries_tax}
+								</div>
+								<span class="trg_bg"></span>
+								<span class="trg_color"></span>
+							</dd>
+						</dl>
+						{/if}
+					</h4>
+					<!-- 
+		            <ul class="clearfix mb10 methodship_title">
+		                <li class="w_col1 fb">{$lang.Shipping_Methods}</li>
+					</ul> 
+					
+					{if $show_tariff==0}
+					<div class="codTips">
+						{$lang.countries_tax}
+					</div>
+					{/if}-->
+
+		            <!--配送方式-->
+		            {if $shipping_list}
+                    {foreach from=$shipping_list item=shipping name=shippinglist}
+					<ul class="clearfix">
+		                <li class="w_col1">
+							<input name="shipping" type="radio" class="shipping_method" value="{$shipping.id}" 
+                            {if $order.shipping_id == $shipping.id && ($shipping.id != 4 || $shipping.id == 4 && !$disabled_dhl) && ($shipping.id == 1 && !$disabled_pingyou)}
+                            checked="true"
+                            {/if} 
+                            {if ($shipping.id == 4 && $disabled_dhl) || ($shipping.id == 1 && $disabled_pingyou)}
+                                disabled="disabled"
+                            {/if} 
+                            id="shipping{$shipping.id}"> 
+							<label for="shipping{$shipping.id}">{$shipping.ship_name}</label>					
+		                </li>
+		                <li class="w_col2">
+		                    <span>{$shipping.ship_desc}</span>
+		                </li>
+						<li class="w_col3">
+                            {if $shipping_weight > 0}
+							<span class="bizhong"></span> 
+							<span class="my_shop_price fb" orgp="{$shipping.ship_price}" id="sm{$shipping.id}">{$shipping.ship_price}</span>
+							({$shipping.ship_save}% {$lang.OFF})
+                            {/if}
+						</li>
+                        {if $shipping.id eq '1'}
+		                <li class="needTraking" id="Need_Traking_number_button1">
+		                    <div class="fl">
+								<input name="Need_Traking_number"  type="checkbox" isman = "{if $IsMan10}yes{/if}"  value="1.99" id="Need_Traking_number{$shipping.id}"  shipid="{$shipping.id}" ship_fee="0" class="Need_Traking_number" {if $shipping.id == 1 && $disabled_pingyou}disabled="disabled"{else}checked="checked"{/if} {if $is_need_traking}data-disabled="disabled"{/if}>
+                                <!-- {if $IsMan10}
+                                    <input name="Need_Traking_number" type="hidden" value="{if $total.goods_price_formated ge 40}0.00{else}{$guahaofei}{/if}">
+                                {/if} --> 
+							    <label for="Need_Traking_number{$shipping.id}" class="fb">{$lang.Tracking_number}</label>
+								 
+		                        <span class="fb">+</span>
+		                        <span class="bizhong fb"></span> 
+                                <span class="my_shop_price red fb" orgp="1.99" id="Need_Traking_number_fee{$shipping.id}" >
+                                    1.99
+                                </span>
+								{if $shipping.id == 1 && $disabled_pingyou}
+								<p style="color: red;">{$lang.disabled_pingyou}</p>
+								{/if}
+
+								{if $is_need_traking}
+								<p style="color: red;">{$lang.is_need_traking}</p>
+								{/if}
+
+		                    </div>
+		                    <!-- <div class="useCoupon_help fl">
+		                        <a href="javascript:void(0);" class="cartBg">{$lang.help}</a>
+		                        <div class="useCoupon_helpWrap" style="display: none;">
+		                            <p>{$lang.checkout_onte1}</p>
+		                            <span class="cartBg"></span>
+		                        </div>
+		                    </div> -->
+		                </li>
+                        {elseif $shipping.id == 4 && $disabled_dhl}{*地址包含apo,po box,box，干掉dhl by mashanling on 2012-10-04 15:26:05*}
+                        <li>
+                        <p class="red">{$lang.checkout_onte2}</p>
+                        </li>
+                        {/if}
+					</ul>
+                    {/foreach}
+                    {/if}
+                    {if !$shipping_list && $is_cat_name_wedding && $is_cat_name_beauty}
+                    <p class="shipped_via_s">
+						{$lang.shipped_via_Standard}
+		            </p>
+                    {/if}
+                    {if !$shipping_list && !($is_cat_name_wedding && $is_cat_name_beauty) && !$is_ok_kuaidi}
+                    <p class="shipped_via_s">
+						{$lang.shipped_destination_country}
+		            </p>
+                    {/if}
+                    {if !$shipping_list && !($is_cat_name_wedding && $is_cat_name_beauty) && $is_ok_kuaidi}
+                    <p class="shipped_via_s">
+						{$lang.via_Expedited_Shipping}
+		            </p>
+                    {/if}
+
+		            <!--保费-->
+		            <div class="premiumWrap">
+		            	<div class="fl w_col12 clearfix">
+							<div class="fl">
+								<input name="insurance" type="checkbox" class="baofei" id="insurance_checked" value="1.48" checked="checked">
+		                    	<label for="insurance_checked">{$lang.checkout_onte3}</label>
+		                    </div>
+							<dl class="helpTage">
+								<dt>?</dt>
+								<dd class="none">
+									<div class="text">
+										Shipping insurance offers premium protection and safety for your valuable items during international shipping. We’ll reship your parcel at no extra charge if it’s confirmed lost or damaged.
+									</div>
+									<span class="trg_bg"></span>
+									<span class="trg_color"></span>
+								</dd>
+							</dl>
+		                   
+		                </div>
+		                <p class="w_col3 fl" id="insurancehtm">
+		                	<span class="bizhong"></span> 
+							<span orgp="{$total.insure_fee}" id="baofei" class="my_shop_price fb">{$total.insure_fee}</span>
+		                </p>
+		            </div>
+		            
+		            <div class="methodShipTips">
+	                	<span class="cartBg"></span>
+	                	{$lang.checkout_onte4}
+	                </div>
+		        </div><!--end .methodShip-->
+				
+					
+				<!-- <section class="cart_s_Box cart_wallet">
+					<h4><label><input name="iswallet" type="checkbox" id="Js_userWallet" checked>Wallet</label></h4>
+					<div class="cart_s_inner">
+						<div class="clearfix">
+							
+							<div class="tips fl">
+								Wallet :
+							</div>
+						</div>
+
+						<div class="walletUser mt10 clearfix">
+							<label for="wallet_ipt" class="fl">I want to use</label>
+							<input id="wallet_ipt" type="text" name="wallet" size="6" value="0" class="fl tc ml5 mr5" >
+							<span class="bizhong fl" style="display:block">USD</span>
+
+							<div class="allWallet">
+								<b class="stribg"></b>
+								<b class="stri"></b>
+								
+								Available Balance:<span class="bizhong"></span><span class="my_shop_price" id="js_balaceWallet" orgp="84.05">84.05</span>
+							</div>
+						</div>
+
+						<a href="#" class="gotoSetPass">Please Set up Transaction password first</a>
+						
+						<div class="walletPass">
+							<label for="">Please enter trasaction password</label>
+							<input id="wallet_pass" type="password" name="walletpass" size="12" class=" ml5 mr5">
+							<a href="#">Forgot Password &gt;&gt;</a>
+
+						</div>
+						
+						
+					</div>
+				</section> --><!-- .cart_wallet -->
+
+				
+
+                {if $is_exchange_goods neq 1 || $total.real_goods_count neq 0}
+		        {if $payment_list} 
+				<section class="cart_s_Box payMethod pr" id="js_payMethod">
+					<!-- 6 -->
+
+					<h4 class="clearfix">
+						<div class="fl pr10">{$lang.Payment_Method}</div>
+						<div class="walletTips">
+							<b class="stribg"></b>
+							<b class="stri"></b>
+							
+							{$lang.Grand_Total}:<span class="bizhong"></span><span id="walletPriceTotal"  class="my_shop_price" orgp="{$total.amount_formated}">{$total.amount_formated}</span>
+						</div>
+					</h4>
+
+					<div class="cart_s_inner mt10">
+						{if $my_wallet_info.wallet_effective_amount gt 0}
+                        {*电子钱包*}
+						
+							<dl class="cart_wallet on clearfix" id="Js_userWalletWrap">
+								<dt>
+									
+									<input name="is_wallet"  type="checkbox" id="Js_userWallet" value="1" checked  class="iswallet">
+									<span class="payLine"></span>
+										<div class="fb f16">
+											<i class="cartBg"></i>
+											{$lang.Sammy_Wallet}: <span class="bizhong"></span><span id="js_myWallet" class="my_shop_price" orgp="{$my_wallet_info.wallet_effective_amount}">{$my_wallet_info.wallet_effective_amount}</span>
+										</div>
+										
+										<input id="wallet_ipt" type="hidden" name="wallet" size="6" value="0" class="fl tc ml5 mr5" >
+										{if $my_wallet_info.pay_password eq ''}
+										<a href="{$DOMAIN_USER}/m-users-a-wallet_password.htm" class="gotoSetPass">{$lang.setup_transaction_psw}</a>
+										{else}
+										<div class="walletPass">
+											<label for="">{$lang.enter_trasaction_psw}</label>
+											<input id="wallet_pass" type="password" name="walletpass" size="12" class=" ml5 mr5" maxlength="10">
+											<a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-wallet_password.htm">{$lang.Forgot_Password} &gt;&gt;</a>
+
+										</div>
+                                    {/if}
+																	
+								</dt>
+
+								<dd>
+									<div class="payFloatBox">
+										{$lang.pay} <span class="bizhong"></span><span class="my_shop_price" orgp="0" id="wallet_text">0</span>
+									</div>
+								</dd>
+
+							</dl>
+					
+						{*电子钱包end*}
+                        {/if}
+
+                        {foreach from=$payment_list item=payment}
+                        {if $payment.pay_code!='S_99Bill'}
+                        	
+	                            <dl class="clearfix {if $order.pay_id eq $payment.pay_code and $my_wallet_info.wallet_effective_amount eq 0}on{/if}">
+	                                <dt>
+	                                    
+	                                    <input type="radio" name="payment" value="{$payment.pay_code}" {if $order.pay_id eq $payment.pay_code and $my_wallet_info.wallet_effective_amount eq 0}checked{/if} autocomplete="off"  id="paymentlist{$payment.pay_code}" class="paymentselect">
+
+	                                    
+	                                    	{if $payment.logo == ''}{$payment.pay_name}{else} <img src="{$payment.logo}"/>{/if}   
+	                                    	{$payment.pay_shuoming}
+	                                  
+										
+	                                    
+	                                </dt>
+	                        
+	                                {if $payment.pay_desc !=''}
+	                                <dd id="subpaymentlist{$payment.pay_code}" class="help">
+	                                	<a href="javascript:void(0);" class="helpTag">?</a>
+	                                	<div class="helpTips none">
+	                                    	{$payment.pay_desc}
+	                                    </div>
+	                                    <i class="triangle trg_bg"></i>
+	                                    <i class="triangle trg_color"></i>
+	                                </dd>
+	                                {/if}
+
+	                                <dd>
+	                                	<div class="payFloatBox">
+											{$lang.pay} <span class="bizhong"></span><span class="my_shop_price js_alsoNeedPayNum" orgp="1" >1</span>
+										</div>
+	                                </dd> 
+
+	                            </dl>
+                  
+                        {/if}
+                        {/foreach}
+
+                        <!--礼品卡-->
+                        {if $gift_card_arr}
+                        
+	                        <dl class="clearfix" id="paymentlist_gift_cardWrap">
+	                            <dt>
+	                                <input type="radio" name="payment" value="GiftCard" id="paymentlist_gift_card" class="paymentselect"/>
+	                               
+		                                <strong class="fb">{$lang.Sammy_Gift_Card} : </strong>
+		                                <select id="gift_card_select" name="gift_card_select">
+		                                    <option value="0" selected="selected">--{$lang.please_select_your_gift_card}--</option>
+		                                    {foreach from=$gift_card_arr item=gift_card}
+		                                    <option value="{$gift_card.card_no}">{$gift_card.card_no} ({$lang.Balance} ${$gift_card.balance})</option>
+		                                    {/foreach}
+		                                </select>
+		                                <span id="gift_card_msg" class="red"></span>
+	                               
+	                            </dt>
+	                        </dl>
+                        
+                        {/if}
+
+					</div>
+				</section><!--end.cart_s_Box-->
+                {else}
+                    <input name = "payment" type="radio" value = "PayPal" checked="checked"  style="display:none"/>
+                {/if}
+                {else}
+                    <input name = "payment" type="radio" value = "1" checked="checked"  style="display:none"/>
+                {/if}
+				
+        		<section class="cart_s_Box mb10">
+               		<header>
+               			<a href="javascript:void(0);" class="c_tagbg fr orderReviewDown" id="js_blockSH"></a>
+               			<h4 class="">{$lang.Order_Review}</h4>
+               		</header>
+                    <div class="orderReview p10" id="js_orderReview">
+                    	<p>{$lang.Order_Review_Desc}</p>
+                        <textarea name="postscript" id="postscript">{$order.postscript|escape}</textarea>
+                    </div>
+               </section>
+                
+				<section class="total">
+                    {if $point.avail_point >= $point.min_use_point && $point}
+					<div class="point">
+						<ul>
+							<li class="li1">
+								{$point.point_desc}
+							</li>
+							<li class="li2"><input value="0" id="point_ipt" type="text" name="point" size="6" class="fl tc"><span>{$lang.Point}</span></li>
+							<li class="li3" id="point_tips"></li>
+						</ul>
+					</div>
+                    {/if}
+
+					<div class="calc">
+						<ul>
+							<li>
+								<strong>{$lang.Subtotal}</strong>
+								<em><span class="bizhong"></span> <span class="my_shop_price" orgp="{$total.formated_goods_price}" id="items_sub_total">{$total.formated_goods_price}</span></em>
+							</li>
+                            {if $point.avail_point >= $point.min_use_point and $point.avail_point neq 0}
+							<li>
+								<strong>{$lang.SPoints_saving}</strong>
+								<em>-<span class="bizhong"></span> <span class="my_shop_price" orgp="0" id="point_money"></span></em>
+							</li>
+                            {/if}
+							<li>
+								<strong>{$lang.Shipping_Cost}</strong>
+								<em><span class="bizhong"></span> <span class="my_shop_price" orgp="0" id="shipping_sub_total"></span></em>
+							</li>
+							<li>
+								<strong>{$lang.Tracking_number}</strong>
+								<em><span class="bizhong"></span> <span class="my_shop_price" orgp="{if $total.goods_price_formated ge 40}0.00{else}{$guahaofei}{/if}" id="Tracking_number">{if $total.goods_price_formated ge 40}0.00{else}{$guahaofei}{/if}</span></em>
+							</li>
+							<li>
+								<strong>{$lang.Shipping_Insurance}</strong>
+								<em><span class="bizhong"></span> <span class="my_shop_price" orgp="{$total.insure_fee}" id="insurance">{$total.insure_fee}</span></em>
+							</li>
+							
+						</ul>
+					</div>
+					<div class="grandTotal">
+						<strong>{$lang.Grand_Total}</strong>
+						<em><span class="bizhong"></span> <span class="my_shop_price" orgp="{$total.amount_formated}" id="price_total">{$total.amount_formated}</span></em>
+					</div>
+				</section>
+				
+				<div class="step_2_btn">
+					<p><button type="submit" id="js_upFormBtn"><span class="allBtn"><i></i>{$lang.PLACE_YOUR_ORDER} &gt;</span></button></p>
+					<p class="btnTips">{$lang.PLACE_YOUR_ORDER_DESC}</p>
+                    <div class="norton"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name=www.sammydress.com&amp;size=S&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=en"></script></div>
+				</div>
+			</from>
+		
+			
+		</div><!--cartWrap end-->
+
+	</div><!--main1000px end-->
+	<footer>
+		{include file="cart/cart_footer.htm"}
+		{include file="footer.htm"}
+		
+	</footer>
+	
+	<script type="text/javascript">
+	
+	$LAB.script("{$imgcache_url}minjs/checkout.min.js?2015021101");
+	</script>
+
+	
+    
+
+	{include file="tongji.htm"}
+    <!-- Facebook Conversion Code for Checkout  -->
+    
+    
+    
+    <script>
+    {literal}
+    fbq('track', '6018755973709', {'value':{/literal}'{$shopping_money}'{literal},'currency':'USD'});
+    {/literal}
+    {literal}
+    fbq('track', '6008921409530', {'value':{/literal}'{$shopping_money}'{literal},'currency':'USD'});
+    {/literal}
+    </script>
+
+	{literal}
+	<script>
+	$(function() {
+	  $('#js_upFormBtn').click(function(event) { //upFormBtn 提交按钮的ID
+	    event.preventDefault();
+        fbq(
+		  'track', 
+		  'Purchase', 
+		  {
+		    currency: 'USD',
+			value: {/literal}'{$shopping_money}'{literal},
+	        content_type: 'product',
+	        content_ids: {/literal}{$goodssn_cart_facebook}{literal}
+	      }
+		);
+//		return false;
+		$('#theForm').submit();  // theForm : form的ID
+	  });
+	});
+	</script>
+	{/literal}
+    
+    
+</body>
+
+</html>

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/cart_min.css?2015020502">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="mainBox" class="mt15">
+		<input type="hidden" value='{$country_json}' id="country_json">
+
+		<!--开始收货人信息填写界面-->
+		<section class="cart_s_Box mt20">
+			<h4 class="pl20">{$lang.Shipping_Address}</h4>
+			<div class="cart_s_inner">
+				<ul class="addressList pt5 clearfix">
+					<!--地址循环显示-->
+                    {foreach from=$consignee_list item=consignee key=sn}
+                    {if $consignee.firstname !=''}
+                        <li>{$lang.Consignee} : <a href="#consignee{$sn}">{$consignee.firstname|escape} {$consignee.lastname|escape}</a></li>
+                    {/if}
+                    {/foreach}
+                    <!--地址循环显示结束-->
+				</ul>
+				<!--地址编辑循环体开始-->
+                {foreach from=$consignee_list item=consignee key=sn}
+			    <form action="/{$cur_lang_url}m-flow-a-consignee.htm?token={$token}&PayerID={$PayerID}" method="post"  name="theForm" class="theAddressForm" novalidate="novalidate">
+					<div id="consignee{$sn}" class="addressShow">
+						<ul class="i_table">
+							<li>
+								<p class="fl i_table_l"><strong class="orange fb">*</strong>{$lang.firstname}:</p>
+								<div class="fl i_table_r">
+	                                <input name="firstname" type="text" class="inputText i_table_w150" id="firstname_{$sn}" value="{$consignee.firstname|escape}" />
+								</div>
+							</li>
+							<li>
+								<p class="fl i_table_l"><strong class="orange fb">*</strong>{$lang.lastname}:</p>
+								<div class="fl i_table_r">
+	                                <input name="lastname" type="text" class="inputText i_table_w150" id="lastname_{$sn}" value="{$consignee.lastname|escape}" size="15" />
+								</div>
+							</li>
+							<li>
+								<p class="fl i_table_l"><strong class="orange fb">*</strong>{$lang.Email_address}:</p>
+								<div class="fl i_table_r">
+	                                <input name="email" type="text" class="inputText i_table_w250" id="email_{$sn}" value="{$consignee.email|escape}" />
+								</div>
+							</li>
+							<li>
+								<p class="fl i_table_l"><strong class="orange fb">*</strong>{$lang.addressline1}:</p>
+								<div class="fl i_table_r">
+	                                <input name="addressline1" type="text" class="inputText i_table_w250"  id="addressline1_{$sn}" value="{$consignee.addressline1|escape}"  />
+	                                
+								</div>
+							</li>
+							<li>
+								<p class="fl i_table_l">{$lang.addressline2}:</p>
+								<div class="fl i_table_r">
+	                                <input name="addressline2" type="text" class="inputText i_table_w250"  id="addressline2_{$sn}2" value="{$consignee.addressline2|escape}"/>
+								</div>
+							</li>
+							<li>
+								<p class="fl i_table_l"><strong class="orange fb">*</strong>{$lang.Country_Region}:</p>
+								<div class="fl i_table_r">
+	                            <select name="country" class="choiceCountry js_choiceCountry" data-key="{$sn}">
+									<option value="">{$lang.Please_select_country} </option>
+                                    {foreach from=$country_list item=country}
+                                    <option value="{$country.region_id}" {if $consignee.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+                                    {/foreach}
+								</select>
+								</div>
+							</li>
+							<li>
+								<p class="fl i_table_l"><strong class="orange fb">*</strong>{$lang.state_county}:	</p>
+	                            <div class="fl i_table_r state_{$sn}_{$sn}">
+									{if $consignee.states neq '' && $smarty.get.token eq ''}
+									  <select name="province" class="choiceCountry">
+                                          <option value="">{$lang.Please_select} </option>
+										  {foreach from=$consignee.states item=state}
+										  <option value="{$state}" {if $state eq $consignee.province}selected{/if}>{$state}</option>
+										  {/foreach}
+									   </select>
+									  {if $consignee.province_not_in eq 1 }<span style="color: red">{$consignee.province} {$lang.Not_in_list_please_select}</span>{/if}
+								  {else}
+									 <input name="province" type="text" class="inputText i_table_w150" id="consignee_{$sn}3" value="{$consignee.province|escape}" />
+								  {/if}
+								</div>
+							</li>
+							<li>
+								<p class="fl i_table_l"><strong class="orange fb">*</strong>{$lang.city}:</p>
+								<div class="fl i_table_r">
+	                                <input name="city" type="text" class="inputText i_table_w150" id="consignee_{$sn}2" value="{$consignee.city|escape}">
+								</div>
+							</li>
+							<li>
+								<p class="fl i_table_l"><strong class="orange fb">*</strong>{$lang.Phone_Number}:</p>
+								<div class="fl i_table_r">
+                                    <span class="code_{$sn}"  name="countryCode">+{$consignee.code}<input type="hidden" name="code" value="{$consignee.code}"></span>
+                                    <input name="tel" type="text" class="inputText i_table_w250" id="tel_{$sn}" value="{$consignee.tel|escape}" />
+								</div>
+							</li>
+							<li>
+								<p class="fl i_table_l"><strong class="orange fb">*</strong>{$lang.postalcode}:</p>
+								<div class="fl i_table_r">
+                                    <input name="zipcode" type="text" class="inputText i_table_w150"  id="zipcode_{$sn}" value="{$consignee.zipcode|escape}" />
+								</div>
+							</li>
+						</ul>
+						<p class="i_btnsWarp clearfix pb20 pb20">
+							<button type="submit" class="i_orangeBtn fl" title="submit"><span class="allBtn">{$lang.Place_your_Order}</span></button>
+                            <!--如果登录了，就显示删除按钮-->
+                            {if $smarty.session.user_id gt 0 and $consignee.address_id gt 0}
+                             <a href="javascript(0);" class="i_heightBtn fl" onclick="if (confirm('{$lang.delete_info}')) {literal} { {/literal}location.href='/{$cur_lang_url}m-flow-a-drop_consignee-id-{$consignee.address_id}.htm'; return false; {literal} } {/literal}">{$lang.Drop}</a>
+                            {/if}
+                            <input type="hidden" name="act" value="checkout" />
+                            <input name="address_id" type="hidden" value="{$consignee.address_id}" />
+						</p>
+					</div><!--end .addressShow-->
+				</form>
+                {/foreach}
+				<!--地址编辑循环体结束-->
+			</div><!--end .cart_s_inner-->
+		</section><!--end.cart_s_Box-->
+
+	</div><!--end .mainBox-->
+	
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+
+	{literal}
+	<script>
+		//滚动到相应的位置
+		$(".addressList").find("a").click(function(){
+			var target = $(this).attr("href");
+			$("html,body").animate({scrollTop:$(target).offset().top-100},500);
+
+			return false;
+		});
+		//选择国家
+		$(".choiceCountry").each(function(i,v){
+			$(this).change(function(){
+				$(this).parent().find("label.error ").remove();
+				GLOBAL.CountryChange({country_id:this.value,address_id:$(this).data("key")})
+			});
+		});
+
+		//收获地址验证
+		$(".theAddressForm").each(function(){
+			 $(this).validate({
+				rules: {
+					firstname: {
+						required: true,
+						maxlength: 35,
+						checkUserName:true,
+						minlength:2
+					},
+					lastname: {
+						required: true,
+						maxlength: 35,
+						checkUserName:true,
+						minlength:2
+					},
+					tel:{
+						required: true,
+						digits:true,
+						minlength:7,
+						maxlength: 15
+					},
+					email: {
+						required: true,
+						maxlength: 60,
+						email: true
+					},
+					//addressline1: {required: true,maxlength: 120},
+					addressline1: {
+						required: true,
+						maxlength: 35,
+						checkAddress: true
+					},
+					addressline2: {
+						maxlength: 35,
+						checkAddress: true
+					},
+					city: {
+						required: true,
+						maxlength: 35
+					},
+					province: {
+						required: true,
+						maxlength: 35
+					},
+					country: {
+						required: true
+					},
+					zipcode: {
+						required: true,
+						maxlength: 10,
+						minlength:2
+					}
+				},
+				messages: {
+					firstname: {
+						required:  jsLg.formMsg.firstname_msg,
+						maxlength: jsLg.formMsg.firstname_maxlength_msg,
+						minlength: jsLg.formMsg.Enter_at_least
+
+					},
+					lastname: {
+						required: jsLg.formMsg.lastname_msg,
+						maxlength: jsLg.formMsg.lastname_maxlength_msg,
+						minlength: jsLg.formMsg.Enter_at_least
+					},
+					tel: {
+                        required: jsLg.formMsg.tel_msg,
+                        digits:jsLg.formMsg.digits,
+                        minlength:jsLg.formMsg.tel_minlength_msg,
+                        maxlength: jsLg.formMsg.tel_maxlength_msg
+					},
+					email: {
+                        required: jsLg.formMsg.email_require_msg,
+                        email: jsLg.formMsg.email_require_msg,
+                        maxlength: jsLg.formMsg.email_maxlength_msg
+					},
+					//addressline1: {required: addressline1_msg,maxlength: addressline1_maxlength_msg},
+					addressline1: {
+                        required: jsLg.formMsg.addressline1_msg,
+                        maxlength: jsLg.formMsg.addressline1_maxlength_msg
+                        //maxlength:"You can write a maximum of 35 characters.Please add your address in Address line2. "
+					},
+					addressline2: {
+                        maxlength: jsLg.formMsg.addressline2_maxlength_msg
+					},
+					city: {
+                        required: jsLg.formMsg.city_msg,
+                        maxlength: jsLg.formMsg.city_maxlength_msg
+                    },
+                   province: {
+                       required: jsLg.formMsg.province_msg,
+                       maxlength: jsLg.formMsg.province_maxlength_msg
+                   },
+                    country: {
+                        required:jsLg.formMsg.country_msg
+                    },
+                    zipcode: {
+                        required: jsLg.formMsg.zipcode_msg,
+                        maxlength: jsLg.formMsg.zipcode_maxlength_msg,
+                        minlength: jsLg.formMsg.zipcode_minlength_msg
+                    }
+				},
+				  errorPlacement:function(error,element){
+					element.parent().find("label.checked").remove();
+					element.parent().find('label.error1').remove();
+					error.appendTo(element.parent());
+				},
+				success: function(label) {
+					label.not('label.error1').remove();
+				}
+			});
+		}); //收获地址验证结束
+		
+		function SetAddress(obj,maxSize,errorMsg){
+			this.obj = $(obj);
+			this.maxSize = maxSize;
+			this.msg = errorMsg;
+			this.ini();
+		}
+		
+		SetAddress.prototype.ini = function(){
+			var that = this;
+
+			$.each(this.obj, function(index, val) {
+				/* iterate through array or object */
+
+				$(val).keyup(function(event) {
+
+					var $this = $(this),
+						thisParent = $this.parent();
+					var val = $this.val();
+
+					
+
+					//限制最大字符数
+					$this.prop("maxlength",that.maxSize+1);
+					
+					//如果输入超出最大字符数
+					if($.trim(val).length>=that.maxSize){
+
+						//移除验证插件的提示
+						thisParent.find('label.error').remove();
+
+						//保证只插入一次提示语
+						if(thisParent.find('label.error1').length<1){
+							$('<label class="error1" style="color:#da3439;font-weight:bold;">'+that.msg+'</label>').appendTo(thisParent);
+
+							//2500毫秒后隐藏
+							setTimeout(function(){
+								thisParent.find('label.error1').fadeOut(function(){
+									$(this).remove();
+								})
+							}, 2500);
+
+						}
+					}else{
+
+						thisParent.find('label.error1').remove();
+					}
+
+					
+				})
+			});
+		};
+
+		new SetAddress($("input[name=addressline1]"),36,jsLg.formMsg.adres1_to_adres2);
+		
+		
+	</script>
+    {/literal}
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

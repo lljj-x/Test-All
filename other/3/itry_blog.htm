@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css">
+</head>
+<body>
+
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+	
+    <div id="mainBox" class="mt15 pb20 clearfix">
+    	
+		<div class="path">
+			<a href="/">Home</a>
+			<i>&gt;</i>
+			<span>iTry Blogger program</span>
+		</div><!--end .path-->
+		
+        {if $step==''}
+		<!--第一步-->
+		<div class="blogger">
+			<div class="bannerImg">
+				<img src="{$imgcache_url}images/domeimg/article/blogger/blogBanner.jpg" width="100%"/>
+			</div><!--end .adImg-->
+			
+			<div class="blog_header">
+				<div class="pplicy step">Read Policy <i class="triangle tri_bord"></i><i class="triangle tri_f"></i></div>
+				<div class="icon">Get Promotion Icon </div>
+				<div class="form">Complete our Form</div>
+				<div class="first_acion"></div>
+				<div class="second_acion"></div>
+			</div><!--end .blog_header-->
+
+			<h4>Please provide the URL of your blog which should feature our promotion icons.</h4>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <caption>
+			    Fashion Blogger Policy
+			  </caption>
+			{*
+			 <tr>
+				
+			    <td width="25%">
+			    	<img src="{$imgcache_url}images/domeimg/article/blogger/1.gif"/>
+			    </td>
+			    <td>
+			    	<h5>Your blog has over 1,000 Followers.</h5>
+			    	<p>- If you have more than 10k followers at Pinterest.com contact Abby directly: pinterest.sammydress@gmail.com</p>
+			    </td>
+			  </tr>
+			*}
+			  <tr>
+			    <td  width="25%"><img src="{$imgcache_url}images/domeimg/article/blogger/1.gif"/></td>
+			    <td>
+			    	<h5>$15 to $100 Free Products for You Every Month.</h5>
+			    	<p>- Get Free Products ($15-$100) Site wide without shipping fee.</p>
+			    	<p>- If quality and response of your reviews/posts are good, you will get higher value free products next month.</p>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td><img src="{$imgcache_url}images/domeimg/article/blogger/2.gif"/></td>
+			    <td>
+			    	<h5>Add SammyDress Promotion Icon on your Blog.</h5>
+			    	<p>- Please add our promotion icon on the home page of your blog with the link to www.sammydress.com.</p>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td><img src="{$imgcache_url}images/domeimg/article/blogger/3.gif"/></td>
+			    <td>
+			    	<h5>Provide the URL of your Blog.</h5>
+			    	<p>- Please provide the URL of your blog which should feature our promotion  icons.</p>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td><img src="{$imgcache_url}images/domeimg/article/blogger/4.gif"/></td>
+			    <td>
+			    	<h5>We have the rights to use your review.</h5>
+			    	<p>- We will have the rights to use your photos/reviews of the free products you have received from SammyDress.Attention: If you are not willing to, please inform us in advance.</p>
+			    </td>
+			  </tr>
+			</table>
+			
+			<div class="btns">
+				<a href="?step=agree" class="redBtn"><span>I AGREE</span></a>
+				<a href="/m-promotion-active-57.html" class="grayBtn"><span>NO,THANKS</span></a>
+			</div>
+		</div><!--end .blogger-->
+        {/if}
+		
+        {if $step=='agree'}
+		<!--第二步-->
+		<div class="blogger">
+			<div class="bannerImg">
+				<img src="{$imgcache_url}images/domeimg/article/blogger/blogBanner.jpg" width="100%"/>
+			</div><!--end .adImg-->
+			
+			<div class="blog_header">
+				<div class="pplicy ">Read Policy</div>
+				<div class="icon step">Get Promotion Icon  <i class="triangle tri_bord"></i><i class="triangle tri_f"></i></div>
+				<div class="form">Complete our Form</div>
+				<div class="first_acion"></div>
+				<div class="second_acion"></div>
+			</div><!--end .blog_header-->
+
+			<h4>Please add our promotion icon to the home page of your blog.</h4>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <caption>Fashion Blogger Policy</caption>
+			  <tr>
+			    <td >
+			    	<img src="{$imgcache_url}images/domeimg/article/blogger/blog_ad.jpg" width="100%" class="step_2_img" />
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>
+			    	<p class="itry_link"><a href="/m-advertisement.html">Get More Fabulous Promition Icon &gt;</a></p>
+			    </td>
+			  </tr>
+			</table>
+			
+			<div class="btns">
+				<a href="?step=next" class="redBtn"><span>NEXT</span></a>
+			</div>
+		</div><!--end .blogger-->
+        {/if}
+
+
+	</div><!--end #mainWarp-->
+	
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+</body>
+</htm>

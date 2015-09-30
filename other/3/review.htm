@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/user_inc_min.css?2014082901">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+	
+
+	<div id="mainBox" class="mt15">
+	
+	
+	
+	<div id="myReviews">
+	
+	<!--================用户评论写入页开始================-->
+	{if $act == 'write_review'}
+    <script type="text/javascript">document.domain = '{$main_domain}';</script>
+	<section class="reviews">
+		<h2><span></span>Reviews</h2>
+		<aside>
+			{$lang.review_note}
+		</aside>
+		
+		<div class="main">
+			<h3>{$lang.write_a_review}</h3>
+			<!--可以有多个评论  .first要展开的商品-->
+            {foreach from=$goods_list item=goods}
+            {if $goods.goods_thumb}
+			<div class="list {if $curr_goods_id == $goods.goods_id}first{/if}">
+				<ul>
+					<li class="left">
+						<a href="{$goods.url_title}">
+						<img src="{$goods.goods_thumb}"/>
+						</a>
+						<a href="{$goods.url_title}" class="title">{$goods.goods_title}</a>
+					</li>
+					<li class="right">
+                    {if not $goods.is_reviewed}
+                    <a href="javascript:void(0);" class="a_review js_review"><span class="userBg review"></span>{$lang.write_a_review}</a> 
+                    <!--<a href="/m-review-a-write_review-goods_id-560279.htm" class="js_ptoTagBox none"><span class="userBg show"></span>Buyer's show</a>-->
+                    {else}
+                    <b>{$lang.review_submitted}</b>
+                    {/if}
+                    </li>
+				</ul>
+                {if not $goods.is_reviewed}
+				<form method="post" action="/{$cur_lang_url}m-review-a-save_review-goods_id-{$goods.goods_id}.htm?goods_ids={$goods_ids}" enctype="multipart/form-data" class="reviewForm">
+				<input type="hidden" name="pic_src" value="" id="pic_src-{$goods.goods_id}"/>
+                <input type="hidden" name="pics" value="" id="pics-{$goods.goods_id}"/>   
+
+                
+				<div class="wReview js_wReview">
+					<em class="triangle userBg"></em>
+                    {*产品评论页添加尺寸*}
+
+                    {foreach from=$review_size key=k1 item=rz}
+                    {if $goods.goods_id==$k1 && $rz.flag==1 }
+					<ul class="type clearfix">
+						<li>
+							<div class="pb20"><label>{$lang.review_size_title.Weight}:</label>
+								<input type="text" name="Weight" value="{if $rz.info.is_save==1}{$rz.info.weight}{/if}">
+
+								<dl class="selectBox weight_unit js_selectBox ml5">
+							        <dt><span class="js_valBox">{$lang.review_size_title.Lbs}</span> <i class="c_tagbg"></i></dt>
+							        <dd>
+							            <ul>
+			                                <li data-val="{$lang.review_size_title.Lbs}" class="selected"><a href="javascript:void(0);">{$lang.review_size_title.Lbs}</a></li>
+			                                <li data-val="Kg"><a href="javascript:void(0);">{$lang.review_size_title.Kg}</a></li>
+			                                
+			                            </ul>
+							        </dd>
+							        <input type="hidden" name="weight_unit" value="" class="weight_unitInput">
+							    </dl>
+
+								<!-- <select name="weight_unit" class="weight_unit"> 
+									<option value="{$lang.review_size_title.Lbs}">{$lang.review_size_title.Lbs}</option>
+									<option value="Kg">{$lang.review_size_title.Kg}</option>
+								</select> -->
+							</div>
+						</li>
+
+						<li>
+							<div class="pb20"><label>{$lang.review_size_title.Height}:</label>
+								<dl class="selectBox l_selectBoxt js_selectBox Height">
+							        <dt><span class="js_valBox">{$lang.Please_select}</span> <i class="c_tagbg"></i></dt>
+							        <dd>
+							            <ul>
+			                                <li data-val="-1"><a href="javascript:void(0);">{$lang.Please_select}</a></li>
+			                                {foreach from=$lang.review_size.height item=height key=k}
+			                                <li data-val="{$k}" {if $rz.info.is_save==1 && $rz.info.height==$k}class="selected"{/if}><a href="javascript:void(0);">{$height}</a></li>
+			                                {/foreach}
+			                            </ul>
+							        </dd>
+							        <input type="hidden" name="Height" class="" value="-1">
+							    </dl>
+
+								<!-- <select name="Height" class="Height">
+                                    <option value="-1">{$lang.Please_select}</option>
+                                    {foreach from=$lang.review_size.height item=height key=k}
+                                    <option value="{$k}" {if $rz.info.is_save==1 && $rz.info.typical_size==$k}selected{/if}>{$height}</option>
+                                    {/foreach}
+                                </select> -->
+							</div>
+						</li>
+
+						<li>
+							<div class="pb20"><label>{$lang.review_size_title.Bust}:</label>
+								<dl class="selectBox l_selectBoxt js_selectBox">
+							        <dt><span class="js_valBox">{$lang.Please_select}</span> <i class="c_tagbg"></i></dt>
+							        <dd>
+							            <ul>
+			                                <li data-val="-1"><a href="javascript:void(0);">{$lang.Please_select}</a></li>
+			                                {foreach from=$lang.review_size.Bust item=Bust key=k}
+			                                <li data-val="{$k}" {if $rz.info.is_save==1 && $rz.info.bust==$k}class="selected"{/if}><a href="javascript:void(0);">{$Bust}</a></li>
+			                                {/foreach}
+			                            </ul>
+							        </dd>
+							        <input type="hidden" name="Bust" class="" value="-1">
+							    </dl>
+
+								<!-- <select name="Bust">
+                                    <option value="-1">{$lang.Please_select}</option>
+                                    {foreach from=$lang.review_size.Bust item=Bust key=k}
+                                    <option value="{$k}" {if $rz.info.is_save==1 && $rz.info.bust==$k}selected{/if}>{$Bust}</option>
+                                    {/foreach}
+                                </select> -->
+							</div>
+						</li>
+
+						<li>						
+							<div class="pb20"><label>{$lang.review_size_title.Body_Shape}:</label>
+								<dl class="selectBox l_selectBoxt js_selectBox">
+							        <dt><span class="js_valBox">{$lang.Please_select}</span> <i class="c_tagbg"></i></dt>
+							        <dd>
+							            <ul>
+			                                <li data-val="-1"><a href="javascript:void(0);">{$lang.Please_select}</a></li>
+			                                {foreach from=$lang.review_size.body_shape item=body_shape key=k}
+			                                <li data-val="{$k}" {if $rz.info.is_save==1 && $rz.info.body_shape==$k}class="selected"{/if}><a href="javascript:void(0);">{$body_shape}</a></li>
+			                                {/foreach}
+			                            </ul>
+							        </dd>
+							        <input type="hidden" name="Body_Shape" class="" value="-1">
+							    </dl>
+
+								<!-- <select name="Body_Shape">
+                                    <option value="-1">{$lang.Please_select}</option>
+                                    {foreach from=$lang.review_size.body_shape item=body_shape key=k}
+                                    <option value="{$k}" {if $rz.info.is_save==1 && $rz.info.body_shape==$k}selected{/if}>{$body_shape}</option>
+                                    {/foreach}
+                                </select> -->
+							</div>
+						</li>
+						<li>							
+							<div class="pb20"><label>{$lang.review_size_title.Overall_Fit}:</label>
+								<dl class="selectBox l_selectBoxt js_selectBox">
+							        <dt><span class="js_valBox">{$lang.Please_select}</span> <i class="c_tagbg"></i></dt>
+							        <dd>
+							            <ul>
+			                                <li data-val="-1"><a href="javascript:void(0);">{$lang.Please_select}</a></li>
+			                                {foreach from=$lang.review_size.overall_fit item=of key=k}
+			                                <li data-val="{$k}"><a href="javascript:void(0);">{$of}</a></li>
+			                                {/foreach}
+			                            </ul>
+							        </dd>
+							        <input type="hidden" name="Overall_Fit" class="" value="-1">
+							    </dl>
+
+								<!-- <select name="Overall_Fit">
+                                    <option value="-1">{$lang.Please_select}</option>
+                                    {foreach from=$lang.review_size.overall_fit item=of key=k}
+                                    <option value="{$k}">{$of}</option>
+                                    {/foreach}
+                                </select> -->
+							</div>
+						</li>
+						{if $rz.dis_Typical}
+						<li>
+							<div id="typical_size" class="pb20"><label>{$lang.review_size_title.Typical}:</label>
+
+								<dl class="selectBox l_selectBoxt js_selectBox">
+							        <dt><span class="js_valBox">{$lang.Please_select}</span> <i class="c_tagbg"></i></dt>
+							        <dd>
+							            <ul>
+			                                <li data-val="-1"><a href="javascript:void(0);">{$lang.Please_select}</a></li>
+			                                {foreach from=$lang.review_size.typical item=typical key=k}
+			                                <li data-val="{$k}" {if $rz.info.is_save==1 && $rz.info.typical_size==$k}class="selected"{/if}><a href="javascript:void(0);">{$typical}</a></li>
+			                                {/foreach}
+			                            </ul>
+							        </dd>
+							        <input type="hidden" name="typical_size" class="" value="-1">
+							    </dl>
+
+								<!-- <select name="typical_size" id="">
+                                    <option value="-1">{$lang.Please_select}</option>
+                                    {foreach from=$lang.review_size.typical item=typical key=k}
+                                    <option value="{$k}" {if $rz.info.is_save==1 && $rz.info.typical_size==$k}selected{/if}>{$typical}</option>
+                                    {/foreach}
+								</select> -->
+								<div class="ask">
+									<strong> ?</strong>
+									<table class="datasource table table-striped table-bordered table-hover" style="width: 630px;">
+										<tr>
+											<th width="">CHINA</th>
+											<th width="15%">US</th>
+											<th width="15%" class="">UK</th>
+											<th width="15%" class="">EU</th>
+											<th width="15%" class="">AUS</th>
+										</tr>
+										<tr>
+											<td class="prod_size"  data-orig="XS - 150/76A">XS - 150/76A</td>
+											<td class="prod_size"  data-orig="0">0</td>
+											<td class="prod_size"  data-orig="4">4</td>
+											<td class="prod_size"  data-orig="32">32</td>
+											<td class="prod_size"  data-orig="4">4</td>
+										</tr>
+										<tr>
+											<td class="prod_size"  data-orig="S - 155/80A">S - 155/80A</td>
+											<td class="prod_size"  data-orig="2">2</td>
+											<td class="prod_size"  data-orig="6">6</td>
+											<td class="prod_size"  data-orig="34">34</td>
+											<td class="prod_size"  data-orig="6">6</td>
+										</tr>
+										<tr>
+											<td class="prod_size"  data-orig="M - 160/84A">M - 160/84A</td>
+											<td class="prod_size"  data-orig="4">4</td>
+											<td class="prod_size"  data-orig="8">8</td>
+											<td class="prod_size"  data-orig="36">36</td>
+											<td class="prod_size"  data-orig="8">8</td>
+										</tr>
+										<tr>
+											<td class="prod_size"  data-orig="L - 165/88A">L - 165/88A</td>
+											<td class="prod_size"  data-orig="6">6</td>
+											<td class="prod_size"  data-orig="10">10</td>
+											<td class="prod_size"  data-orig="38">38</td>
+											<td class="prod_size"  data-orig="10">10</td>
+										</tr>
+										<tr>
+											<td class="prod_size"  data-orig="XL - 170/92A">XL - 170/92A</td>
+											<td class="prod_size"  data-orig="8">8</td>
+											<td class="prod_size"  data-orig="12">12</td>
+											<td class="prod_size"  data-orig="40">40</td>
+											<td class="prod_size"  data-orig="12">12</td>
+										</tr>
+										<tr>
+											<td class="prod_size"  data-orig="XXL - 175/96A">XXL - 175/96A</td>
+											<td class="prod_size"  data-orig="10">10</td>
+											<td class="prod_size"  data-orig="14">14</td>
+											<td class="prod_size"  data-orig="42">42</td>
+											<td class="prod_size"  data-orig="14">14</td>
+										</tr>
+										<tr>
+											<td class="prod_size"  data-orig="XXXL - 180/100A">XXXL - 180/100A</td>
+											<td class="prod_size"  data-orig="12">12</td>
+											<td class="prod_size"  data-orig="16">16</td>
+											<td class="prod_size"  data-orig="44">44</td>
+											<td class="prod_size"  data-orig="16">16</td>
+										</tr>
+										<tr>
+											<td class="prod_size"  data-orig="XXXL - 180/100A">XXXXL-185/104A</td>
+											<td class="prod_size"  data-orig="12">14</td>
+											<td class="prod_size"  data-orig="16">18</td>
+											<td class="prod_size"  data-orig="44">46</td>
+											<td class="prod_size"  data-orig="16">18</td>
+										</tr>
+										<tr>
+											<td class="prod_size"  data-orig="XXXL - 180/100A">XXXXXL-190/108A</td>
+											<td class="prod_size"  data-orig="12">16</td>
+											<td class="prod_size"  data-orig="16">20</td>
+											<td class="prod_size"  data-orig="44">48</td>
+											<td class="prod_size"  data-orig="16">20</td>
+										</tr>
+									</table>
+								</div>								
+                            </div>
+						</li>
+						{/if}
+
+						<li>
+
+							<div class="pb20"><label>&nbsp;</label><span class="checkBox"><input type="checkbox" name="is_save" value="1"/> {$lang.review_size_title.Save_to_Profile}</span>
+                            	<input type="hidden" name="is_review_size" value="1"/>
+                        	</div>
+
+						</li>
+						
+						
+						{if $save_style == 0}
+						<li>	
+							<div class="pb20"><span class="upToPoints">Get 10 S Points</span></div>
+							
+						</li>
+						{/if}
+						
+					</ul>
+                    {/if}
+                    {/foreach}
+                    
+
+					<dl class="reviewRang">
+						<dd>
+							<p><span class="red">*</span>{$lang.Rating}:</p>
+							<div class="user_rate">
+								<div class="rates rate5"> 
+									<b rate="2"></b> 
+									<b rate="4"></b> 
+									<b rate="6"></b> 
+									<b rate="8"></b>
+									<b rate="10"></b>
+									<div class="rates big_rate_up"></div>
+								</div>
+								<input type="text" class="required startRate" name="rate_overall" value=" ">
+							</div>
+						</dd>
+						<dd>
+							<p><span class="red">*</span>{$lang.name}:</p>
+							<div><input type="text" value="{$nickname}" name="nickname"></div>
+						</dd>
+						<dd>
+							<p><span class="red">*</span>{$lang.Title}:</p>
+							<div><input type="text" value="" class="required" name="subject"></div>
+						</dd>
+						<dd>
+							<p><span class="red">*</span>{$lang.Content}:</p>
+							<div><textarea name="pros" class="js_content"></textarea></div>
+						</dd>
+						<dd class="charNum">
+							<div class="textR">{$lang.Remaining_characters}</div>
+						</dd>
+						<dd class="selImage">
+							<p><span class="red"></span>{$lang.Buyers_Show}:</p>
+							<div><a href="{$domain_img}/{$cur_lang}/upload4more.action" uploadmsg_goods_id="{$goods.goods_id}" class="hBtn js_ptoTagBox">{$lang.SELECT_IMAGE}</a>
+								<span class="upToPoints">{$lang.up_to_points}</span>
+								<span class="uploadmsg" id="uploadmsg-{$goods.goods_id}"></span>
+							</div>
+                            <div class="textR mt5">{$lang.SELECT_IMAGE_CAPTION}</div>
+						</dd>
+
+                        {if $goods.is_use_gift_card}
+                        <dd>
+							<p>{$lang.use_gift_card}</p>
+                            <div><textarea  class="js_content" name="shared_link" id="shared_link"></textarea></div>
+						</dd>
+                        {/if}
+
+						<dd>
+                            <input type="hidden" name="lang" value="{$cur_lang}"/>
+							{if $y > 1}
+							<div class="textR"><input class="allBtn submitBtn" type="submit" value="{$lang.Submit_and_Continue}"></div>
+							{else}
+							<div class="textR"><input class="allBtn submitBtn" type="submit" value="{$lang.Submit}"></div>
+							{/if}
+						</dd>
+					</dl>
+				</div>
+				</form>
+                {/if}
+			</div><!--end .list-->
+			{/if}
+			{/foreach}	
+
+			
+		</div>
+	</section>
+	{/if}
+	<!--================用户评论写入页结束================-->
+	
+
+
+
+
+
+
+	<!--================用户咨询写入页开始================-->
+	{if $act == 'write_inquiry'}
+	<section class="questions">
+		<h2><span></span>{$lang.Questions}</h2>
+		
+		<aside>
+			{$lang.questions_note}
+		</aside>
+		
+		<div class="main">
+			<h3>{$lang.Ask_a_new_question_for} {$goods.goods_sn}</h3>
+			<!--提问只有一个-->
+			<div class="list first">
+				<ul>
+					<li class="left">
+						<a href="{$goods.url_title}"><img src="{$goods.goods_thumb}"></a>
+						<a href="{$goods.url_title}" class="title">{$goods.goods_title}</a>
+					</li>
+					
+				</ul>
+				<form method="post" action="/{$cur_lang_url}m-review-a-save_inquiry-goods_id-{$goods.goods_id}.htm" id="questionsForm">  
+				<div class="wReview">
+					<em class="triangle userBg"></em>
+					
+					<dl class="reviewRang">
+						
+						<dd>
+							<p><span class="red">*</span>{$lang.name}:</p>
+							<div><input type="text" value="{$nickname}" name="i_nickname"></div>
+						</dd>
+						<dd>
+							<p><span class="red">*</span>{$lang.Pre_sale_topic}:</p>
+							<div> 
+                                <select name="pre_sale" id="pre_sale" >
+									<option value="">{$lang.Please_select}</option>
+									{foreach from=$Pre_sale_array key=key item=pre_sale}
+                                        <option value="{$key}">{$pre_sale}</option>
+                                    {/foreach}
+							    </select>
+							</div>
+						</dd>
+						<dd>
+							<p><span class="red">*</span>{$lang.Ask_a_question}:</p>
+							<div><textarea name="i_content" class="js_content"></textarea></div>
+						</dd>
+						<dd class="charNum">
+							<div class="textR">{$lang.Remaining_characters}</div>
+						</dd>
+						<dd>
+							<div class="textR">
+                            <input type="hidden" name="lang" value="{$cur_lang}"/>
+                            <input class="allBtn submitBtn" type="submit" value="{$lang.Submit}">
+                            </div>
+						</dd>
+					</dl>
+				</div>
+				</form>
+			</div><!--end .list-->
+			
+			
+			
+			
+			
+			
+			
+			
+		</div>
+	</section>
+	{/if}
+	<!--================用户咨询写入页结束================-->	
+	
+</div>
+	
+
+	</div><!--end .mainBox-->
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	{literal}
+
+	<script>
+	function uploadmsg_getCookie(c_name)
+    {
+        if (document.cookie.length>0)
+        { 
+            c_start=document.cookie.indexOf(c_name + "=");
+            if (c_start!=-1)
+            { 
+                c_start=c_start + c_name.length+1;
+                c_end=document.cookie.indexOf(";",c_start);
+            if (c_end==-1) c_end=document.cookie.length;
+                return unescape(document.cookie.substring(c_start,c_end));
+            } 
+        }
+        return "";
+    }
+
+    function uploadmsg_setCookie(c_name,value,expireMins)
+    {
+        var exdate=new Date();
+        exdate.setMinutes(exdate.getMinutes()+expireMins);
+        document.cookie=c_name+ "=" +escape(value)+((expireMins==null) ? "" : "; expires="+exdate.toGMTString());
+    }
+
+    function set_review_pics(data,pic_src){
+        if(!data){
+            alert(jsLg.anError);
+            return;
+        }
+        var uploadmsg_goods_id = uploadmsg_getCookie('uploadmsg_goods_id');
+        $("#uploadmsg-"+uploadmsg_goods_id).text(jsLg.successed); 
+        $("#pics-"+uploadmsg_goods_id).val(data); 
+        $("#pic_src-"+uploadmsg_goods_id).val(pic_src);//{*图片来源  1:本地, 2:facebook, 3:相册*}
+    }
+
+
+	$LAB.script(JS_IMG_URL+"minjs/jquery.flexslider.min.js")
+		.script(JS_IMG_URL+"minjs/jquery.validate.min.js")
+        .wait(function(){})
+		.script(JS_IMG_URL+"minjs/user.min.js?2015050601")
+		.wait(function(){})
+		.script(JS_IMG_URL+"minjs/write_review.min.js?2014082901");
+
+       
+        
+
+	</script>
+	{/literal}
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

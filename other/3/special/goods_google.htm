@@ -1,0 +1,127 @@
+<div class="topNavWrap none" id="js_topNavWrap">
+	<div class="navWrap clearfix">
+		<p class="top_logo fl"><a href="/"><img src="http://www.sammydress.com/temp/skin4/images/domeimg/logo.gif" alt=""></a></p>
+		<ul class="topNav fl clearfix" id="js_topNav">
+			{foreach from=$data item=list key=key}
+			<!-- <li><a href="{$list.url}" class="on">{$list.name}</a></li> -->
+			<li><a href="javascript:void(0);">{$list.name}</a></li>
+			{/foreach}
+		</ul>
+	</div>
+</div><!-- .topNavWrap -->
+<div class="emptyDiv none" id="js_emptyDiv"></div>
+
+<div class="w_auto google" id="js_wAuto_scrollTop">
+	<div class="w_box clearfix">
+		<div class="w_banner"><img src="{$special.banner}"></div>
+		<div class="w_main">
+			<div class="prod_main">
+				{foreach from=$data item=list key=key}
+				<ul class="clearfix">
+					<h3><a href="{$list.url}" id="js_anchor_{$key}" target="_blank">{$list.name}</a></h3>
+                    {foreach from=$list.data item =item }
+					<li class="switch-249">
+						<p class="img"><a href="{$item.link_url}" target="_blank"><img alt="{$item.goods_title}" src="{$item.goods_img}" height="220"></a></p>
+						<p class="name"><a href="{$item.link_url}" target="_blank">{$item.goods_title}</a></p>
+						<p class="was"> <span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$item.shop_price}"><span class="icon">$</span>{$item.shop_price}</span>  <span class="market_price"><span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$item.market_price}"><span class="icon">$</span>{$item.market_price}</span></span></p>
+						<div class="endTimeWrap clearfix">
+							<i class="icon_clock fl"></i>
+							<p class="timeEnd fl">
+								{$lang.Prom_ends_in} <span time_limit_end="{$item.promote_end_date}" class="task_pre">00:00:00</span>
+							</p>
+						</div>
+						<p class="buynow"><a href="{$item.link_url}" rel="nofollow" target="_blank">{$lang.BUY_NOW}</a></p>
+						{if $item.zekou}
+						<div class="off_s"><span>{$item.zekou}</span>%</div>
+						{/if}  
+					</li>
+					{/foreach}
+				</ul>
+				{/foreach}
+				<div class="clear"></div>
+			</div>
+		</div>
+
+		<div class="yourtext"></div>
+
+	</div>
+</div>
+
+{literal}
+<script>
+  function lxfEndtime(){
+    $(".task_pre").each(function(i){
+      var now_limit = 0;
+      var now_time = Math.round(new Date().getTime()/1000);
+      
+      var time_limit_end = $(".task_pre").eq(i).attr("time_limit_end")-now_time;
+    
+      now_limit = time_limit_end;
+
+      if(time_limit_end>=0){
+        var seconds = now_limit;
+        var minutes = Math.floor(seconds/60);
+        var hours = Math.floor(minutes/60);
+        var days = Math.floor(hours/24);
+        var CDay= days ;
+        var CHour= hours % 24;
+        var CMinute= minutes % 60;
+        var CSecond= Math.floor(seconds%60);
+        
+        if(CDay<10){
+          CDay='0'+CDay;
+        }
+        if(CHour<10){
+          CHour='0'+CHour;
+        }
+        if(CMinute<10){
+          CMinute='0'+CMinute;
+        }
+        if(CSecond<10){
+          CSecond='0'+CSecond;
+        }
+        
+        if(time_limit_end>=0){
+          $(".task_pre").eq(i).html("<span class='s_day'>"+CDay+"</span>"+jsLg.day+"<span class='s_hour'>"+CHour+"</span>:<span>"+CMinute+"</span>:<span>"+CSecond+"</span>");
+        }
+      }
+      
+    });
+    setTimeout("lxfEndtime()",1000);
+  }
+
+  lxfEndtime();
+</script>
+{/literal}
+
+{literal}
+<script>
+	$(function(){
+		
+		$(window).on("scroll",function(){
+			var windowScroll = $(this).scrollTop(),
+				wAuto_scrollTop = $("#js_wAuto_scrollTop").position().top,
+				$js_topNavWrap = $("#js_topNavWrap"),
+				$js_emptyDiv = $("#js_emptyDiv");
+
+			if(windowScroll >= wAuto_scrollTop ){
+				$js_topNavWrap.removeClass('none').addClass('fixed');
+				$js_emptyDiv.removeClass('none');
+			}else{
+				$js_topNavWrap.addClass('none').removeClass('fixed');
+				$js_emptyDiv.addClass('none');
+			}
+		});
+		
+		$("#js_topNav").on('click','a',function(){
+			var thisIndex = $("#js_topNav").find("a").index($(this)),
+				offsetTop = parseInt($("#js_anchor_" + thisIndex).offset().top) - 52;
+				
+			$("html,body").animate({scrollTop:offsetTop}, 500);
+		});
+	});
+</script>
+{/literal}
+
+</body>
+</html>

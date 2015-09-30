@@ -1,0 +1,441 @@
+<aside class="cate_attr" id="js_cate_attr">
+    <div id="js_closeCateAttr" class="closeAttr c_tagbg"><a href="javascript:void(0)">close</a></div>
+     
+     {if $select_attr}
+      {*属性查找开始 *}
+     <section class="cateB mt20" >
+        <header class="cateB-header">
+            <h4>Refine By</h4>
+        </header>
+        <div class="cateB-wrap sort_listShow">
+            <ul>
+                {if $select_attr}
+                <li><a  href="{$cat_url}"><i class="closeBtn c_tagbg"></i><span>{$lang.CLEAR_ALL}</span></a></li>
+                 {/if}
+            {foreach from=$select_attr item=select_value}
+                <li><a  href="{$select_value.url}"><i class="closeBtn c_tagbg"></i><span>{$select_value.keyword}</span></a></li>
+            {/foreach}
+            </ul> 
+        </div>
+    </section>
+    {*属性查找结束 *}
+     {/if}
+   
+
+    {* 新品 日期导航*}
+    {if $calendar_info}
+    <section class="cateB mt20">
+        <header class="cateB-header">
+            <h4>{$lang.DEPARTMENT}</h4>
+        </header>
+        
+        <div class="cateB-wrap depart-now-navlist">
+                <ul>
+                    
+                    {foreach from=$cat_new_goods_info item=cat}
+                    {if $cat.new_goods_num>0}
+                    <li>
+                        <p class="title"><a href="{$cat.cat_url}" {if $smarty.get.id == $cat.cat_id}class="on"{/if}>{$cat.cat_name}</a></p>
+                        {if $leval_arr.0 == $cat.cat_id }
+                        <ul>
+                        {foreach from=$cat.child item=cat_child}
+                        
+                        {if $cat_child.new_goods_num>0}
+                        <li>
+                            <p class="title"><a href="{$cat_child.cat_url}" {if $smarty.get.id eq $cat_child.cat_id}class="on"{/if}> {$cat_child.cat_name}</a></p>
+                            {if $leval_arr.1 == $cat_child.cat_id }
+                            <ul>
+                                {foreach from=$cat_child.childiii item=cat_childiii}
+                                    {if $cat_childiii.new_goods_num>0}
+                                <li>
+                                    <p class="title"><a href="{$cat_childiii.cat_url}" {if $cat_id == $cat_childiii.cat_id}class="on"{/if} >{$cat_childiii.cat_name}</a></p>
+                                </li>
+                                    {/if}
+                                {/foreach}
+                            </ul>
+                            {/if}
+                            
+                        </li>
+                        {/if}
+                        
+                        {/foreach}
+                        </ul>
+                        {/if}
+                       
+                    </li>
+                    {/if}
+                    {/foreach}
+                </ul>
+                </div>
+        
+    </section>
+
+    {*
+    <section class="cateB mt20" id="js_newCateList">
+        <header class="cateB-header">
+            <h4>{$lang.DEPARTMENT}</h4>
+        </header>
+        <div class="cateB-wrap depart-navlist">
+            {foreach from=$cat_new_goods_info item=cat} 
+            {if $cat.new_goods_num>0}
+            <div class="item {if $top_id1 == $cat.cat_id || $top_id2 == $cat.cat_id || $cat_id == $cat.cat_id}cur{/if}">
+                <p><a href="{$cat.cat_url}" {if $top_id eq $cat.cat_id}class="on"{/if}>{$cat.cat_name}</a></p>
+                {foreach from=$cat.child item=cat_child}
+                {if $cat_child.new_goods_num>0}
+                <dl {if $top_id2 eq $cat_child.cat_id}class="openCur"{/if}>
+                    <dt>{if $cat_child.childiii}<i class="triangle"></i>{/if}<a href="{$cat_child.cat_url}" {if $smarty.get.id eq $cat_child.cat_id}class="on"{/if}>{$cat_child.cat_name}</a></dt>
+                    <dd>
+                        <ul>
+                            {foreach from=$cat_child.childiii item=cat_childiii}
+                            {if $cat_childiii.new_goods_num>0}
+                            <li><a href="{$cat_childiii.cat_url}" {if $smarty.get.id eq $cat_childiii.cat_id}class="on"{/if}><i class="c_tagbg"></i>{$cat_childiii.cat_name}</a></li>
+                            {/if}
+                            {/foreach}
+                        </ul>
+                    </dd>
+                </dl>
+                {/if}
+                {/foreach}
+            </div>
+            {/if}
+            {/foreach}
+
+        </div>
+    </section>
+    *}
+
+    <section class="cateB mt20">
+        <header class="cateB-header">
+            <h4>{$lang.browse_by_release_dates}</h4>
+        </header>    
+        <div class="cateB-wrap">
+            <ul class="cateB-list">
+                
+                {foreach from=$calendar_info item=item key=key}
+                  <li {if $search_date == $item.date_fromat}class="on"{/if}>
+                    <span class="fr">{$item.goods_num}</span>
+                    <a href="/{$cur_lang_url}new-products-date-{$item.date_fromat}{$cat_id_url}.html">{$item.date}</a>
+                  </li>
+                {/foreach} 
+            </ul>
+        </div>
+        
+    </section>
+        
+    {/if}
+    {* end 新品 日期导航 *}
+
+    {* 分类页 *}
+    {if $goods_list_flag eq 'yes' || $smarty.get.pro == 'free_shipping' || $smarty.get.pro == 'more_point' || $search_keywords!=''}
+
+        {*导航*}
+        {if $goods_list_flag eq 'yes'}
+            
+            
+            <section class="cateB mt20">
+                <header class="cateB-header">
+                    <h4>{$lang.REFINE_FURTHER}</h4>
+                </header>
+                <div class="cateB-wrap depart-now-navlist">
+                <ul>
+                    {foreach from=$cat_new_arr.1 item=cat}
+                    <li>
+                        <p class="title"><a href="{$cat.cat_url}" tag="{$cat.cat_id}" {if $cat_id==$cat.cat_id }class="on" {/if} >{$cat.cat_name}</a></p>
+                        {if $cat.child }
+                        <ul>
+                        {foreach from=$cat_new_arr.2 item=sec_cat}
+                        <li>
+                            <p class="title"><a href="{$sec_cat.cat_url}" {if $cat_id == $sec_cat.cat_id}class="on" {/if} > {$sec_cat.cat_name}</a></p>
+                            {if $sec_cat.child}
+                            <ul>
+                                {foreach from=$cat_new_arr.3 item=thd_cat}
+                                <li>
+                                    <p class="title"><a href="{$thd_cat.cat_url}" {if $cat_id == $thd_cat.cat_id}class="on"{/if} >{$thd_cat.cat_name}</a></p>
+                                </li>
+                                {/foreach}
+                            </ul>
+                            {/if}
+                        </li>
+                        
+                        {/foreach}
+                        </ul>
+                        {/if}
+                    </li>
+                    {/foreach}
+                </ul>
+                </div>
+                
+                <div class="cateB-wrap">
+                    <ul  class="cateB-list">
+                        {foreach from=$child_arr key=k item=child name=list}
+                        <li><a href="{$child.cat_url}">{$child.cat_name}</a></li>
+                        {/foreach}
+                    </ul>
+                </div>
+                
+            </section>
+           
+
+       
+
+            {*属性搜索*}
+            {include file="left_attr.htm"}
+
+        {/if}
+
+       {*free_shipping*}
+        {if $smarty.get.pro == 'free_shipping'}
+            <section class="cateB mt20" id="js_free_shippList">
+                <header class="cateB-header">
+                    <h4>{$lang.free_shipping_categories}</h4>
+                </header>
+                
+                <div class="cateB-wrap depart-now-navlist">
+                <ul>
+                    
+                    {foreach from=$all_top_cat_arr item=top_cat}
+                    
+                    {if $top_cat.cnum>0}
+                    <li>
+                        <p class="title"><a href="{$top_cat.url}" {if $cat_id==$top_cat.cat_id }class="on" {/if} > {$top_cat.cat_name}</a></p>
+                        {if $selected_fir_catid==$top_cat.cat_id }
+                        <ul>
+                        {foreach from=$second_cat_arr item=sec_cat}
+                        {if $sec_cat.top_id==$top_cat.cat_id && $sec_cat.cnum>0}
+                        <li>
+                            <p class="title"><a href="{$sec_cat.url}" {if $cat_id == $sec_cat.cat_id}class="on"{/if} > {$sec_cat.cat_name}</a></p>
+                            {if !$sec_cat.bottom_flag}
+                            {if $selected_sec_catid == $sec_cat.cat_id}
+                            <ul>
+                                {foreach from=$third_cat_arr item=thd_cat}
+                                    {if $thd_cat.top_id==$sec_cat.cat_id && $thd_cat.cnum>0}
+                                <li>
+                                    <p class="title"><a href="{$thd_cat.url}" {if $selected_thr_catid == $thd_cat.cat_id}class="on"{/if} >{$thd_cat.cat_name}</a></p>
+                                </li>
+                                    {/if}
+                                {/foreach}
+                            </ul>
+                            {/if}
+                            {/if}
+                        </li>
+                        {/if}
+                        
+                        {/foreach}
+                        </ul>
+                        {/if}
+                    </li>
+                    {/if}
+                    {/foreach}
+                </ul>
+                </div>
+            </section>
+            
+        {/if}
+
+        {*popular Searches*}
+        {if $cur_lang == $default_lang}
+            {if $goods_list_flag eq 'yes'}{*category page*}
+               {if $abc_relesd_word}
+               <section class="cateB mt20">
+                   <header class="cateB-header">
+                       <h4>{$lang.popular_searches}</h4>
+                   </header>
+                   <div class="cateB-wrap">
+               
+                      <div class="popular">
+                            {foreach from=$abc_relesd_word item=abc_relesd_word_item name=abc_relesd_word_name key=abc_relesd_word_key}
+                                <a href="{$abc_relesd_word_item.url}">{$abc_relesd_word_item.keyword}</a>{if $smarty.foreach.abc_relesd_word_name.last!=($abc_relesd_word_key+1)}, {/if}
+                            {/foreach}
+                      </div>
+                  </div>
+                </section>
+               {/if}
+            {/if}
+        {/if}
+
+
+
+
+    {/if}
+    {* end 分类页 *}
+    
+        {*搜索页*}
+
+        {if $matches_cat_arr_sort_temp}{*abc search show*}
+                <section class="cateB mt20" id="js_C_allWrap">
+                    <header class="cateB-header">
+                        <h4>{$lang.See_Matches_In}</h4>
+                    </header>
+            <div class="cateB-wrap depart-now-navlist">
+                {if $search_cat_id==0}
+                <ul>
+                    {foreach from=$matches_cat_arr_sort_temp item=item key=key}
+                    <li>
+                        <p class="title"><a href="{$item.url}" {if $key==0 }class="on" {/if} > {$item.name}({$item.goods_num})</a></p>
+                        {if $key<3}
+                        <ul>
+                        {foreach from=$item.level2 item=item2}
+                        <li>
+                            <p class="title"><a href="{$item2.url}">{$item2.name}({$item2.goods_num})</a></p>
+                        </li>
+                        {/foreach}
+                        </ul>
+                        {/if}
+                    </li>
+                    {/foreach}
+                </ul>
+                        
+            {else}
+                <ul>
+                    {if $search_cat_arr_level1}
+                    
+                        <li>
+                            <p class="title"><a href="{$any_category}" > Any category</a></p>
+                        </li>
+                        <li>
+                            <p class="title"><a {if $search_cat_arr_level1.cat_id==$search_cat_id}class="on"{/if} href="{$item.url}" >{$search_cat_arr_level1.name}({$search_cat_arr_level1.goods_num})</a></p>
+                            
+                            <ul>
+                              {*当前一级下的二级分类循环*}
+                                {foreach from=$search_cat_arr_level1.level2 item=item}
+                                <li><p class="title"><a href="{$item.url}" >{$item.name}({$item.goods_num})</a></p></li>
+                                {/foreach}  
+                                
+                            </ul>
+                        </li>
+                    
+                    
+                    {elseif $search_cat_arr_level2}
+                    
+                        <li>
+                            <p class="title"><a href="{$any_category}" >Any category</a></p>
+                        </li>
+                        <li>
+                            <p class="title"><a href="{$search_cat_arr_level2.url}" {if $search_cat_arr_level2.cat_id==$search_cat_id}class="on"{/if}>{$search_cat_arr_level2.name}({$search_cat_arr_level2.goods_num})</a></p>
+                            <ul>
+                                    <li>
+                                        <p class="title"><a href="{$search_cat_arr_level2.level2.$search_cat_id_temp.url}" {if $search_cat_arr_level2.level2.$search_cat_id_temp.cat_id==$search_cat_id}class='on'{/if} >{$search_cat_arr_level2.level2.$search_cat_id_temp.name}({$search_cat_arr_level2.level2.$search_cat_id_temp.goods_num})</a></p>
+                                        <ul>
+                                            {foreach from=$search_cat_arr_level2.level2.$search_cat_id_temp.level3 item=item}
+                                            <li>
+                                                <p href="{$item.url}"  class="title"><a {if $item.cat_id==$search_cat_id}class="on"{/if} href="{$item.url}" >{$item.name}({$item.goods_num})</a></p>
+                                            </li>
+                                            {/foreach}
+                                        </ul>
+                                    </li>
+                                </ul>
+                        </li>
+                    
+                    {/if}
+                    
+                    
+                </ul>
+            {/if}
+            </div>
+                    
+            </section>
+            {*属性搜索*}
+            {if $is_search_page==1}{include file="left_attr.htm"}{/if}
+
+        {/if}
+        {* end 搜索*}
+
+
+        {* 有货专区*}
+        {if $is_collections=='yes'}
+        <section class="cateB mt20" >
+            <header class="cateB-header">
+                <h4>{$lang.Recommendations}</h4>
+            </header>
+            <div class="cateB-wrap">
+ 
+                <ul class="cateB-list">
+                    {foreach from=$catgory_second item=catgory_second_item key=catgory_second_key}
+                        <li>
+                            <a href="{$catgory_second_item.url}">
+                                {if $catgory_second_item.is_bold==1}
+                                    <strong class="fb">{$catgory_second_item.cat_name_lang}</strong>
+                                {else}
+                                    {$catgory_second_item.cat_name_lang}
+                                {/if}
+                            </a>
+                         </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </section>
+        {/if}
+        {* 有货专区 *}
+
+
+        {if $smarty.get.m=='clearance'}
+           <!--*Clearance Category List Start*-->
+           
+           {if $all_top_cat_clearance_arr}
+            <section class="cateB mt20"  id="js_newCateList">
+                <header class="cateB-header">
+                    <h4>{$lang.CLEARANCE}</h4>
+                </header>
+                
+                <div class="cateB-wrap depart-now-navlist">
+                <ul>
+                    
+                    {foreach from=$all_top_cat_clearance_arr item=top_cat}
+                    
+                    {if $top_cat.cnum>0}
+                    <li>
+                        <p class="title"><a href="{$top_cat.url}" {if $cat_id==$top_cat.cat_id }class="on" {/if} > {$top_cat.cat_name}</a></p>
+                        {if $selected_fir_catid==$top_cat.cat_id }
+                        <ul>
+                        {foreach from=$second_cat_clearance_arr item=sec_cat}
+                        {if $sec_cat.top_id==$top_cat.cat_id && $sec_cat.cnum>0}
+                        <li>
+                            <p class="title"><a href="{$sec_cat.url}" {if $cat_id == $sec_cat.cat_id}class="on" {php}$this->_tpl_vars["sec_cat_opened"] = 1;{/php}{/if} > {$sec_cat.cat_name}</a></p>
+                            {if !$sec_cat.bottom_flag}
+                            {if $selected_sec_catid == $sec_cat.cat_id}
+                            <ul>
+                                {foreach from=$third_cat_clearance_arr item=thd_cat}
+                                    {if $thd_cat.top_id==$sec_cat.cat_id && $thd_cat.cnum>0}
+                                <li>
+                                    <p class="title"><a href="{$thd_cat.url}" {if $selected_thr_catid == $thd_cat.cat_id}class="on"{/if} >{$thd_cat.cat_name}</a></p>
+                                </li>
+                                    {/if}
+                                {/foreach}
+                            </ul>
+                            {/if}
+                            {/if}
+                        </li>
+                        {/if}
+                        
+                        {/foreach}
+                        </ul>
+                        {/if}
+                    </li>
+                    {/if}
+                    {/foreach}
+                </ul>
+                </div>
+                
+            </section>
+           {/if}
+            <!--*Clearance Price List Start*-->
+            {if $price_arr}
+                <section class="cateB mt20">
+                    <header class="cateB-header">
+                        <h4>{$lang.PRICE}</h4>
+                    </header>
+                    <div class="cateB-wrap">
+               
+                        <ul class="cateB-list">
+                            {foreach from=$price_arr item=list key=key}
+                                <li>
+                                <a href="{$list.url}" {if $price == $key}class="cur"{/if}><i></i>{$list.des}</a>
+                                </li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                </section>
+            {/if}
+            <!--*Clearance Price List End*-->
+        {/if}
+</aside><!--end left-->

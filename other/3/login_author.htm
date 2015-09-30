@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Longin</title>
+  <style>
+  {literal}
+  body{margin:0;}
+  .login-auto{width: 380px; height: 380px; font-family: Arial,Verdana,Helvetica,sans-serif; background: #fff;}
+  .login-auto form h5{margin:0 auto; width: 100%; height: 60px; line-height: 60px; font-size: 24px; text-align: center; color:#fff; background: #0385c3;}
+  .items-wrap{margin:0 auto; width: 350px;}
+  .items{position: relative; width:100%;}
+  .items span{display: block; position: absolute; width: 25px; height: 25px; left: 8px; top:7px;}
+  .items label{  position: absolute; top: 40px; left: 40px; color: red;}
+  .envelop{background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAAE8jCKiAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpEOEFFRjcyQjMwMjIxMUU1ODIxM0Y3QzU0RDM2RTI4RSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpEOEFFRjcyQzMwMjIxMUU1ODIxM0Y3QzU0RDM2RTI4RSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkQ4QUVGNzI5MzAyMjExRTU4MjEzRjdDNTREMzZFMjhFIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkQ4QUVGNzJBMzAyMjExRTU4MjEzRjdDNTREMzZFMjhFIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+KTmQlwAAApxJREFUeNpi/P//PwMMMAExc9sRIIJygICdGcRgRFYGEEAIDgtEg7eKEGPqlls///5fcuUVQhYggFA0oVsCIXtPPoWwQWrjN91iRFK4wE8NIICwmMCEaSIjU+thoEaIyu0R2utvvgWpAvKZGRm3hmt7rrjKCNH4LN/87///3iuv/q2yAWmcdOrp2edf4AZN81TBYiNAAGH3BiZggXsMF2hxkK+0kkX4AOgKoAvh3C3h2isCNYCMxx9/Qs2DgNydd08nGeiLc2+98+7b73+eyoLI9kDVFZtLA0Nz2tnncImI9QycLExiXKxAPST4AyCAiFLHRIxJTNQJNmAwgUyyleW7mm6MVRph3eHHn7bfeXcu2RBNBdwGqJtK9t5fdPnlyUQDTBUoDu91Ubr48svBWD2giiOPPzXYyaGHO1BCZuKp519/hWmK2C++BBS5nGrEysRUfeAB1CRgDKhNOwNUAWSvuv4Gok139rlXYBGoSR7KgsBgt5LhQ/Pdu+9/muzlqRotAAFGbEIYILNWX3+z4ebb/wz/kfMGfvDvPwMwXzsrCKQaSqCYBYxUPjZmWzn+/Q8/QHIBQQDMXaeefX77/U+Utuhif3WUQP3y+y8whj6XWp1PMWRhwuc6YLEDTBjxeuJfwbbysjGjRxDQzcAkAnTg7vsfflZYX0gxxDRld5QO0JT3P/4AlUWsv/Hjzz/0nIMGyvbeP/Hk0+pgTaC2y6++Gsw5D3ELMHUBGUW77008/QxnLkQGuSZSE9yUXn39zdt9DBhwvS6KkGwGLFshGeVSqlGfq1L7scc1Bx5ij0egOhtZPmDW+fzrr/LU08AQxZdwGRkupxlrCHN6r7i64977dEMJYGGM4i5g7sNfTCCHrPbMs3AuHzvL4E73AL2hRiPE7JknAAAAAElFTkSuQmCC) no-repeat;}
+  .lock{background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAIAAAE8jCKiAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGOUE2OUExNjMwMjIxMUU1OEI2M0EyNUQ0Mzc5MjVEQiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGOUE2OUExNzMwMjIxMUU1OEI2M0EyNUQ0Mzc5MjVEQiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkY5QTY5QTE0MzAyMjExRTU4QjYzQTI1RDQzNzkyNURCIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkY5QTY5QTE1MzAyMjExRTU4QjYzQTI1RDQzNzkyNURCIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+OxMbPgAAAnNJREFUeNpi/P//PwMMMAFx+rY7zG1HoJw5F15AZBiRlQEEEILDhNAK0eS67ApCFiCAGP6DAVPrYTgJBCB5iGIIMJXkOZFogDAJAv78A5EAAYRiLYqVx598cl56GWFP5b77/5EAuiV/q2ygGmV52dHNevz5Jxa/wQFAAKEIXX39TW/2OSBDW5TrUqoRikK47WV77kWtvwHnwr2OcBtQddne+9vuvPv197+pFC+Qy8zEsPTK6yht0V4XJTFuVoS9cG/0OCsWmkvDuU4KArujdFAiAQKAxjBgA1Dzmo88evb5FyN6cP9vd1IU5mQBsgECCEsQYAIWZI7TkssHH30EMraEa3sqC2IJEbVpp5WnnAYybrz5BgyON99+w6UYsIZT46GHKEGI1REiXKw///5Dd1PcppsQEiJ16933119/Z26/M91TBeo7h8WXDj/+hNVIYEKBBqkQJyuy6LYIbewpEQ4+/fzbeOgRAUV87Mz2cvxYAhMYJHA+cspFUXQoTg+UPxkZMExlwZl8MQFAgBGliEjAglX0+ptvOrPOQdh2cvzszIy773+AcDeEavmqCmE37D8G2HzrLTBVCPYce/b5J5qU5vQzQKnWI4/+YwNYEswhcBKN1BaV5GFDkyowlwaSp599xuosLGZBEgc7MxYpXjZm5BjBGfaV+x50nXhCUmAHqAmvDdHE4q4bb79hqmZmZAQWGcBUL8rFiin76ddf7PHIyMiIqXpVkEaAujCQYSnNazDnPH5nMuGXDl57HZhVgAyflVdJSF//sCVaYInVcOghMxMjJNQx0xN2s4BZcPPtd2iq337/M/H0M1wOURbkpFUeAgD0wZ9ZKMuyGgAAAABJRU5ErkJggg==) no-repeat;}
+  .email, .password{display: block; margin:42px auto 0 auto; padding:10px 10px 10px 40px; width: 298px; height: 18px; line-height: 18px; border:1px solid #ddd;}
+  .email:focus, .password:focus{border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6); box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);}
+  .login-auto button{display: block; margin:42px auto 0 auto; width: 350px; height: 46px; font-size: 18px; text-align: center; color:#fff; font-weight: bold; background: #0385c3;border:none; border-radius: 3px; cursor: pointer; filter:-webkit-opacity: 0.8; -moz-opacity: 0.8; opacity:.8; filter:alpha(opacity=80);}
+  .login-auto button:hover{filter:-webkit-opacity: 1; -moz-opacity: 1; opacity:1; filter:alpha(opacity=100);}
+  .sign-content{position: relative;}
+  .sign-content .success-msg{position: absolute; top:25px; left: 0; width: 100%; text-align: center; color:green;}
+  .sign-content .error-msg{position: absolute; top:25px; left: 0; width: 100%; text-align: center; color:red;}
+  {/literal}
+  </style>
+</head>
+<body>
+  <div class="login-auto">
+    <form>
+    {if !$is_login}
+      <h5>SIGN IN</h5>
+      <div class="items-wrap">
+        <div class="items">
+          <span class="envelop"></span>
+          <input type="text" class="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="items">
+          <span class="lock"></span>
+          <input type="password" class="password" name="password" placeholder="Password">
+        </div>
+      </div> 
+     {/if}
+     <div class="sign-content"> 
+         <input name="state" id="state" type="hidden" value="{$smarty.get.state}">
+         <input name="client_id" id="client_id" type="hidden" value="{$smarty.get.client_id}">
+         <input name="response_type" id="response_type" type="hidden" value="{$smarty.get.response_type}">
+         <input name="redirect_uri" id="redirect_uri" type="hidden" value="{$smarty.get.redirect_uri}">        
+         <div class="success-msg"></div>
+         <div class="error-msg"></div>
+     </div>
+     {if !$is_login}
+     <button type="submit" id="js-authorization">Login And Authorization</button>
+     {else}
+     <button type="submit" id="js-authorization" style="display:none;">Authorization</button>
+     {/if}
+    </form>
+  </div>
+  <script type="text/javascript">	
+        var COOKIESDIAMON = '{$COOKIESDIAMON}';
+        var DOMAIN = '{$DOMAIN}';
+        var DOMAIN_USER = '{$DOMAIN_USER}';
+        var DOMAIN_CART = '{$DOMAIN_CART}';
+        var DOMAIN_IMG  = '{$domain_img}';
+        var JS_IMG_URL  = '{$imgcache_url}';
+        var JS_LANG = '{$imgcache_url}';	//JS语言目录名
+        //https定义
+        var HTTPS_LOGIN_DOMAIN      = '{$HTTPS_LOGIN_DOMAIN}',
+        HTTPS_ORDER_DOMAIN      = '{$HTTPS_ORDER_DOMAIN}',
+        HTTPS_CSS_DOMAIN        = '{$HTTPS_CSS_DOMAIN}',
+        HTTPS_GALLERY_DOMAIN    = '{$HTTPS_GALLERY_DOMAIN}';
+  </script>
+  <script src="{$imgcache_url}/minjs/jquery-1.9.1.min.js"></script>  
+  <script src="{$imgcache_url}/minjs/jquery.validate.min.js"></script>  
+  <script src="{$imgcache_url}/minjs/jquery.layer.min.js"></script> 
+  {literal}
+  <script type="text/javascript">
+    ;(function(){
+      var $longinAuto = $('.login-auto'),
+          $form = $longinAuto.find('form'),
+          $successMsg = $longinAuto.find('.success-msg'),
+          $errorMsg = $longinAuto.find('.error-msg');
+
+      $form.validate({
+        rules:{
+          email:{
+            required:true,
+            email:true
+          },
+          password:{
+            required:true,
+            minlength:6,
+            maxlength:60
+          }
+        },
+        messages:{
+          email:{
+            required:'This field is required.',
+            email:'Please enter a valid email address.'
+          },
+          password:{
+            required:'This field is required.',
+            minlength:'Please enter at least 6 characters.',
+            maxlength:'Please enter no more than 60 characters.'
+          }
+        },
+        submitHandler:function(){
+          $.ajax({
+            // url: $form.attr('action'),
+            url:'/m-users-a-act_sign_author.htm',
+            type: 'POST',
+            dataType: 'json',
+            data: $form.serialize()
+          })
+          .done(function(data) {
+            if (data.status == 1) {
+              $successMsg.html(data.msg);
+              $errorMsg.html('');
+              window.location.href = DOMAIN_USER + '/m-users-a-act_sign_author_allow.htm?' + $form.serialize();
+            } else{
+              if (indexLoad !=undefined) {
+                layer.close(indexLoad);
+              };
+              $successMsg.html('');
+              $errorMsg.html(data.msg);
+            };
+          })
+          .fail(function() {
+            console.log("error");
+          })
+          .always(function() {
+            console.log("complete");
+          });
+          return false;
+        }
+      });
+      
+      // 直接授权
+      if ($longinAuto.find('.items-wrap').length <= 0) {
+        $('#js-authorization').trigger('click');
+        var indexLoad = layer.load('loading...', 3);
+      };
+
+    })();
+  </script>
+  {/literal}
+</body>
+</html>

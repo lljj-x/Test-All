@@ -1,0 +1,111 @@
+<div id="userInfoWrap">
+	<div class="userInfo">
+		<div class="info">
+
+			<div  id="imgUpload" class="userImg">
+				<img src="{if $avatar neq ''}{$avatar}{else}{$imgcache_url}images/domeimg/defaultpic.jpg?2013101001{/if}" id="my_avatar">
+				<p id="hintUpload" title="upload">
+				<script type="text/javascript">document.domain = '{$main_domain}';</script>
+				<a id="pop_upImg" title="Upload" href="{$avatar_upload_url}">{$lang.upload}</a>
+				</p>
+			</div>
+			
+			{if $user_rank=='VIP Member'}<div class="vipItem userIcon"></div>{/if}
+
+			<div class="profile">
+				<ul>
+					<li class="li1 clearfix">
+						<span class="fl">{$lang.welcome_back}</span>
+
+						<div class="resendEmail">
+							{if $is_validated==0}
+							<a class="icon" href="javascript:void(0);" title=""></a>
+							<div class="text">
+								{$pls_check_your_email} <a class="resendEmailBtn" href="javascript:void(0);">{$lang.resend_email}</a>
+								<em></em>
+							</div>
+							{else}
+							<a class="icon ok" href="javascript:void(0);" title="{$lang.confirmed}"></a>
+							{/if}
+						</div>
+					</li>
+					<li class="li2" data-text="{$nickname}" id="js_userNameText">{$nickname}</li>
+					<li class="li3"><span class="userBg"></span><a href="/{$cur_lang_url}m-users-a-profile.htm">{$lang.edit_profile}</a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="resendEmmailPop none">
+			<p>Confirmation email was sent to your email address.</p><p>
+			</p><p><a href="javascript:void(0)">OK</a></p>
+		</div>
+		<div class="data">
+			<ul>
+				<li class="li0">
+					<a href="/{$cur_lang_url}m-users-a-wallet.htm" class="block {if $all_my_wallet <= 0}gray{/if}">
+						<span>{$lang.my_wallet}</span>
+						<strong><i class="bizhong"></i><span class="my_shop_price" orgp="{$all_my_wallet}">{$all_my_wallet}</span></strong>
+					</a>
+				</li>
+				<li class="li1">
+					<a href="/{$cur_lang_url}m-users-a-points_record.htm" class="block {if $my_rewards <= 0}gray{/if}">
+						<span>{$lang.s_point}</span>
+						<strong>{$my_rewards}</strong>
+					</a>
+				</li>
+				<li class="li2">
+					<a href="/{$cur_lang_url}m-users-a-collection_list.htm" class="block {if $fav_count <= 0}gray{/if}">
+						<span>{$lang.favorites}</span>
+						<strong>{$fav_count}</strong>
+					</a>
+				</li>
+				<li class="li3">
+					<a href="/{$cur_lang_url}m-users-a-order_list.htm" class="block {if $my_order_total <= 0}gray{/if}">
+						<span>{$lang.my_orders}</span>
+						<strong>{$my_order_total}</strong>
+					</a>
+				</li>
+				{*
+				<li class="li4">
+					<a href="/{$cur_lang_url}m-users-a-my_shows.htm" class="block {if $my_show_count <= 0}gray{/if}">
+						<span>{$lang.buyers_show}</span>
+						<strong>{$my_show_count}</strong>
+					</a>
+				</li>
+				*}
+				<li class="li5">
+					<p class="p1"><span class="userBg"></span><a href="http://support.sammydress.com/index/index/ticketlist/?lang={$cur_lang}">{$lang.my_tickets}</a></p>
+					<p class="p2"><span class="userBg"></span><a href="/{$cur_lang_url}m-users-a-questions_list.htm">{$lang.my_question}</a></p>
+					<p class="p3"><span class="userBg"></span><a href="/{$cur_lang_url}m-users-a-my_message.htm">{$lang.my_message}</a></p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div><!--end userInfoWrap-->
+
+<div id="userNav">
+	<div class="userNavBox">
+		<ul class=" clearfix">
+			<li {if $action eq 'order_list' || $action eq 'order_detail'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-order_list.htm">{$lang.my_orders}</a></li>
+			<li {if $action eq 'points_record'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-points_record.htm">{$lang.s_point}</a></li>
+			<li {if $action eq 'wallet' || $action eq 'wallet_list' || $action eq 'wallet_password' || $action eq 'retrieve_wallet_password'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-wallet.htm">{$lang.my_wallet}</a></li>
+			<li {if $action eq 'collection_list'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-collection_list.htm">{$lang.favorites}</a></li>
+			
+			
+			{if $my_reviews_count}<li {if $action eq 'my_reviews'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-my_reviews.htm">{$lang.my_reviews}</a></li>{/if}
+
+			<li {if $action eq 'my_coupon'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-coupon.htm">{$lang.my_coupon}</a></li>
+			{*
+			<li {if $action eq 'submit_itry_blog'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-submit_itry_blog.htm">{$lang.itry_blogger_program}</a></li>
+			*}
+			{if !empty($gift_card_count)}
+			<li {if $action eq 'gift_card' || $action eq 'giftcard_history'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-gift_card.htm">{$lang.gift_card}</a></li>
+			{/if}
+		 
+			<li {if $action eq 'my_complaint'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-my_complaint.htm">{$lang.my_complaint_title}</a></li>
+			 
+			<li {if $action eq 'notify_in_stock_list'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-notify_in_stock_list.htm">{$lang.notify_in_stock}</a></li>
+			<li {if $action eq 'my_shows'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-my_shows.htm">{$lang.my_shows}</a></li>
+		</ul>
+	</div>
+</div><!--end userNav-->

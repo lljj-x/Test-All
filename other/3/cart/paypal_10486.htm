@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/cart_min.css">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="mainBox" class="mt15">
+		<div id="cartWrap">
+            <section class="checkOutBoxStyle bd1 pb10 mb10">
+				<header class="co_header">
+					<h4 class="fb">{$lang.Order_Review}</h4>
+				</header>
+				<ul  class="orderTable">
+					<li><strong>{$lang.Order_No} : </strong>{$order_info.order_sn}</li>
+					<li><strong>{$lang.Order_Status} : </strong>Waiting for payment</li>
+					<li><strong>{$lang.Order_Amount} : </strong>USD {$order_info.order_amount}</li>
+					<li><strong>{$lang.Payment_Method} : </strong>{$order_info.pay_name}</li>
+					<li><strong>{$lang.Shipping_Method} : </strong>{$order_info.shipping_name}</li>
+					<li><strong>{$lang.Shipping_Information} : </strong>
+					 {$lang.name} : {$order_info.consignee}<br />
+                     {$lang.addressline1} : {$order_info.address}<br />
+                     {$lang.address} : {$order_info.city} {$order_info.province} {$order_info.country}<br />
+                     {$lang.postalcode} : {$order_info.zipcode}<br />
+                     {$lang.phone} : {$order_info.tel}<br />
+                     {$lang.Email_address} : {$order_info.email}<br />
+					</li>
+				</ul>
+				
+				<table width="98%"  border=0 align="center" cellpadding="4" cellspacing="1" class="orderBill" >
+					
+                    <tr class="title">
+						
+                        <th>{$lang.SELECTED_ITEM}</th>
+						<th>{$lang.UNIT_PRICE}</th>
+						<th>{$lang.QUANTITY}</th>
+						<th>{$lang.Subtotal}</th>
+					
+                    </tr>
+                    {foreach from=$order_goods item=goods}   
+					<tr>
+						<td class="p_name"  width="40%" ><a href="{$goods.url_title}"><img src="{$imgcache_url}images/domeimg/thunmb1.jpg" ></a>
+							<a href="{$goods.url_title}" target="_blank">{$goods.goods_name}</a>
+						</td>
+						<td><span class="bizhong">USD</span>   <span class="my_shop_price" orgp="{$goods.goods_price}">{$goods.goods_price}</span></td>
+						<td>{$goods.goods_number}</td>
+						<td class="money"><span class="bizhong fb red">USD</span>  <span class="my_shop_price fb red" orgp="{$goods.subtotal}">{$goods.subtotal}</span></td>
+					</tr>
+                    {/foreach}				
+                    </table>
+				<p class="tc m30">
+                	<a id="ordersubmit" class="checkout_button" href="m-flow-a-paypal_redirect_pay.htm?token={$token}&order_sn={$order_sn}">{$lang.PLACE_YOUR_ORDER}</a>
+                </p>
+            </section><!--end .checkOutBoxStyle-->	
+
+		</div><!--end .cartWrap-->
+
+	</div><!--end .mainBox-->
+	<footer>
+		{include file="cart/cart_footer.htm"}
+		{include file="footer.htm"}
+	</footer>
+	
+	<script type="text/javascript">
+	
+	$LAB.script("{$imgcache_url}minjs/cart.min.js")
+		.script("{$imgcache_url}minjs/jquery.flexslider.min.js")
+        {literal}
+		.wait(function(){ 
+			function scrollCallBack(){
+				$(".scrollBox").flexslider({
+				 	namespace:"",
+				    animation: "slide",
+				    selector: ".slides > li",
+				    pauseOnAction:false,
+				    controlNav:false,
+				    itemWidth: 216,
+				    animationLoop:false,
+				    minItems: 4,
+				    maxItems: 5
+				});
+			}
+			//元素懒加载
+			GLOBAL.lazyLoad.creatEle("textarea.js_slide",scrollCallBack);
+			
+		})
+        {/literal}
+	</script>
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

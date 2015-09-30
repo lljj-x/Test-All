@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}/mincss/goods_min.css">
+    {literal}
+    <style>
+        #sammyDress .backToTop{ display:none !important;}
+    </style>
+    {/literal}
+</head>
+<body>
+	<div class="gPop_warp">
+		<div class="gPop_img">
+			<table>
+				<tr>
+					<td>
+						<a href="{$goods.url_title}" target="_blank"><img src="{$big_img}" alt="{$goods.goods_title}"></a>
+					</td>
+				</tr>
+			</table>
+		</div><!--end .gPop_img-->
+		
+		<div class="gPop_info">
+			<p class="name">{$review.nickname} {$lang.moment}</p>
+			<p class="title">{$review.subject}</p>
+			<div class="review">
+				<div class="gPop_userInfo">
+					{if $weight}
+					<span><strong>{$lang.weight}:</strong>{$weight}Lbs</span>
+					{/if}
+					{if $height}
+					<span><strong>{$lang.height}:</strong>{$height}</span>
+					{/if}
+					{if $bust}
+					<span><strong>{$lang.bust_size}:</strong>{$bust}</span>
+					{/if}
+					{if $body_shape}
+					<span><strong>{$lang.body_shape}:</strong>{$body_shape}</span>
+					{/if}
+					{if $overall_fit}
+					<span><strong>{$lang.Overall_Fit}:</strong>{$overall_fit}</span>
+					{/if}
+				</div><!--end .userInfo-->
+                
+                <div class="gPop_userInfo gPop_userInfoB pt10">
+					{if $size}
+					<span><strong>{$lang.size}:</strong>{$size}</span>
+					{/if}
+					{if $color}
+					<span><strong>{$lang.color}:</strong>{$color}</span>
+					{/if}
+				</div><!--end .userInfo-->
+                
+				<div  class="reting clearfix">
+					<strong>{$lang.Rating}:</strong>
+					<span class="c_tagbg start start_{$review.rate_overall} fl"><i class="c_tagbg">{$review.rate_overall}</i></span>
+				</div>
+                
+				<div class="text">
+					{$review.pros}
+				</div>
+			</div><!--end .review-->
+		</div><!--end .gPop_info-->
+
+		<div class="cb gPop_gds clearfix">
+			<div class="good" id="js_gPop_good">
+				<p class="img"><a href="{$goods.url_title}" target="_blank"><img src="{$goods.goods_grid}" height="150" /></a></p>
+				<p class="name"><a href="{$goods.url_title}" target="_blank">{$goods.goods_title}</a></p>
+				<p class="proPrice fb">		
+					<span class="bizhong">USD</span>
+					<span class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span>
+				</p>
+			</div>
+			
+			<section class="other-moments">
+				<h4>{$lang.how_others_wore_it}</h4>
+				<div class="momentsList" id="js_momentsList">
+					<ul class="slides">
+						{foreach from=$reviews.buyers_show_total item=show}
+						<li {if $mid eq $show.id}class="on"{/if}><a href="{$show.url}"><img src="{$show.paths_w80}" width="80" height="120"></a></li>
+						{/foreach}
+					</ul>
+				</div>
+			</section>
+			{if $left_url}
+			<a class="c_tagbg prev_goods" href="{$left_url}"></a>
+			{/if}
+			{if $right_url}
+			<a class="c_tagbg next_goods" href="{$right_url}"></a>
+			{/if}
+		</div><!--end .gPop_gds-->
+	</div><!--end .gPop_warp-->
+	
+	{include file="foot_common_js.htm"}
+	{literal}
+	<script>
+	$LAB.script(JS_IMG_URL+"minjs/jquery.flexslider.min.js")
+		.wait(function(){ 
+			$("#js_momentsList").flexslider({
+			 	namespace:"c_",
+			    animation: "slide",
+			    selector: ".slides > li",
+			    pauseOnAction:false,
+			    controlNav:false,
+			    itemWidth: 87,
+			    animationLoop:false,
+			    slideshow: false
+			   
+			});
+
+			$("#js_gPop_good").click(function(event) {
+				/* Act on the event */
+				var i = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(i);
+			});
+		})
+	</script>
+	{/literal}
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+{if $goods.custom_size.legOpning>0}
+<!--西服-->
+<section class="custom_size">
+    <h5> {$lang.custom_size.0}</h5>
+    <ul class="clearfix order_suitSize">
+        <li>{$lang.custom_size.1}: {$goods.custom_size.height} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.2}: {$goods.custom_size.chest} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.3}: {$goods.custom_size.sleeves} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.4}: {$goods.custom_size.shoulder} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.5}: {$goods.custom_size.jacketLength} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.6}: {$goods.custom_size.stomach} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.7}: {$goods.custom_size.pantsLength} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.8}: {$goods.custom_size.backRise} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.9}: {$goods.custom_size.seat} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.10}: {$goods.custom_size.thights} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.11}: {$goods.custom_size.knee} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+        <li>{$lang.custom_size.12}: {$goods.custom_size.legOpning} {if $goods.custom_size.units==0}{$lang.in}{else}{$lang.cm}{/if}</li>
+    </ul>
+</section>
+{else}
+<section class="custom_size">
+<h5> {$lang.custom_size.0}</h5>
+<ul class="clearfix order_dressSize">
+    <li>{$lang.custom_size.13}:{$goods.custom_size.Hollow_to_Hem} {$goods.custom_size.danwei}</li>
+    <li>{$lang.custom_size.14}:{$goods.custom_size.Bust_Size} {$goods.custom_size.danwei}</li>
+    <li>{$lang.custom_size.15}:{$goods.custom_size.Waist_Size} {$goods.custom_size.danwei}</li>
+    <li>{$lang.custom_size.16}:{$goods.custom_size.Hip_Size} {$goods.custom_size.danwei}</li>
+</ul>
+</section>
+{/if}

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>coupon</title>
+	<style>
+		html, body, p {margin:0; padding:0;}
+		html {overflow: hidden;}
+		.wrap {padding: 60px 45px 0 45px; width: 580px;}
+		.wrap-inner {font: 14px/1.5 normal normal Arial,Helvetica,sans-serif; color: #000;}
+		.wrap-inner p {text-align: center;}
+		.wrap-inner .title {font-family: "Times New Roman",serif; font-weight: bold; font-style: italic; font-size: 22px; line-height: 1;}
+		.wrap-inner .sub-title {font-family: "Century Gothic",Arial,sans-serif; font-size: 20px; line-height: 1; margin: 20px 0 30px 0;}
+		.wrap-inner strong {font-weight: bold; color: #de190a;}
+		.wrap-inner .coupon-wrap {margin: 30px auto 15px auto;  width: 424px; height: 74px; overflow: hidden; padding: 10px 12px; background: url(http://css.sammydress.com/imagecache/S/images/styleimg/couponbg.png) no-repeat;}
+		.wrap-inner .coupon {height: 73px; width: 425px; line-height: 76px; font-weight: bold; font-size: 20px; color: #fff;}
+		.wrap-inner .tip-wrap {display: none; height: 65px; overflow: hidden;}
+		.wrap-inner .tip-wrap .tip {margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid #d9d9d9; font-family: "Century Gothic",Arial,sans-serif; color: #666;}
+		.wrap-inner .action {margin-bottom: 20px; font-family: "Century Gothic",Arial,sans-serif; font-size: 18px;}
+		.fb-wrap {margin: 0 auto; width: 68px; height: 61px; overflow: hidden;}
+	</style>
+	<script src="http://css.sammydress.com/imagecache/S/minjs/jquery-1.8.0.min.js"></script>
+</head>
+<body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.3&appId=1406009852948446";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<div class="wrap">
+		<div class="wrap-inner">
+			<p class="title">REJOIGNEZ NOTRE COMMUNAUTÉ SUR FACEBOOK!</p>
+			<p class="sub-title">ÉCONOMISEZ 8% SUR VOTRE COMMANDE</p>
+		  <p>
+Cliquez sur le bouton <strong>J’aime </strong>ci-dessous</p>
+			<p>Obtenez -8% Code Promo et économisez dans le style</p>
+			<div class="coupon-wrap">
+			  <div class="coupon" id="coupon">
+					<p>DÉCOUVREZ VOTRE CODE PROMO</p>
+					<p>SAMMYDRESSLIKE</p>
+				</div>
+			</div>			
+			<div class="tip-wrap" id="tipWrap"><p class="tip" id="tip">Entrez ce code de promo à la page de paiement.</p></div>
+			<p class="action">Suivez-Nous pour Révéler Votre Code Promo</p>
+		</div>
+		<div class="fb-wrap"><div class="fb-like" data-href="https://www.facebook.com/Sammydress.fr" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div></div>
+	</div>
+	<script type="text/javascript">
+		var COUPON_STATUS = {yes: 'yes', no: 'no'};
+		var COOKIE_NAME = 'showFbLikeCoupon';
+		var EXPIREDAYS = 7;
+		var DURATION = 500; // 动画事件
+
+		window.fbAsyncInit = function() {
+	        // like事件，之前已经like不会触发
+	        FB.Event.subscribe('edge.create', function() {
+	        	showCoupon();	        	
+	        });
+	        // “取消like”事件
+			FB.Event.subscribe('edge.remove', function() {
+				hideCoupon();				
+			});	
+		};
+		
+		function showCoupon(check) {
+			var couponEl, tipEl;
+
+			if (true === check && !checkCoupon()) {
+				return;
+			}
+
+			$('#coupon').children().first().fadeOut(DURATION);
+			$('#tipWrap').slideDown(DURATION);
+
+			setCookie(COOKIE_NAME, COUPON_STATUS.yes, 7);
+
+			window.parent.GLOBAL.promoCodePop.setHeight(590, DURATION);
+		}
+
+		function hideCoupon() {
+			$('#coupon').children().first().fadeIn(DURATION);
+			$('#tipWrap').slideUp(DURATION);
+
+			setCookie(COOKIE_NAME, COUPON_STATUS.no, 7);
+
+			window.parent.GLOBAL.promoCodePop.setHeight(514, DURATION);
+		}
+
+		// 检查缓存
+		function checkCoupon() {
+			return COUPON_STATUS.yes === getCookie(COOKIE_NAME);
+		}
+
+		function getCookie(c_name) {
+			if (document.cookie.length > 0) {
+			    var c_start = document.cookie.indexOf(c_name + "=");
+
+			    if (c_start != -1) {
+			        c_start = c_start + c_name.length + 1;
+			        var c_end = document.cookie.indexOf(";", c_start);
+
+			        if (c_end == -1) c_end = document.cookie.length;
+
+			        return unescape(document.cookie.substring(c_start, c_end))
+			    }
+			}
+			return "";
+		}
+
+		function setCookie(c_name, value, expiredays) {
+			var exdate = new Date();
+		    exdate.setDate(exdate.getDate() + expiredays);
+		    document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
+		}
+
+		// 页面加载完检查是否显示coupon
+		$(function() {
+			showCoupon(true);
+		});
+	</script>
+</body>
+</html>

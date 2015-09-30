@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>model</title>
+	<link rel="stylesheet" href="{$imgcache_url}mincss/base_min.css"/>
+	<link rel="stylesheet"  href="{$imgcache_url}mincss/common_min.css" >
+	<script type="text/javascript" src="{$imgcache_url}minjs/LAB.min.js"></script>
+
+	<script type="text/javascript">
+		$LAB.script("{$imgcache_url}minjs/jquery-1.8.0.min.js")
+			.script("{$imgcache_url}minjs/languege/{$cur_lang}/var_languages.js")
+			.script("{$DOMAIN}/data-cache/currency_huilv.js")
+			.wait()
+			.script("{$imgcache_url}minjs/en_validator.min.js")
+            {literal}
+			.wait(function(){
+				$(function(){
+                    var bizhong = $(window.parent.document).find(".bizhong").html();
+                    var yuanshi = $(".custom_size_price").attr('orgp');
+                    $(".custom_size_price").html((parseFloat(my_array[bizhong]) * parseFloat(yuanshi)).toFixed(2));
+                    $(".bizhong").html(bizhong);
+
+					$("#weddingCancel").click(function(){
+						window.top.document.getElementById('custom_button').checked = false;
+
+						$.get("?",{'clear_suit_session':1, 't':Math.random()},function(){
+
+							if(window.top.document.getElementById('select_custom_size')){
+								window.top.document.getElementById('select_custom_size').disabled=false;
+							}
+
+                            //定制婚纱切换语言刷新缓存
+
+                            $(window.parent.document).find("ul.top_nav_left").find("li.on").find('a').each(function(j){
+                                cur_lang_url = $(this).attr('href');
+                                cur_lang_url_arr = cur_lang_url.split('?');
+                                $(this).attr('href',cur_lang_url_arr[0]);
+                            });
+
+                            $(window.parent.document).find("#custom_price_content").hide();
+
+                            var i = parent.layer.getFrameIndex();
+						    parent.layer.close(i);
+                        });
+
+					});
+					$('#danwei').change(function(){
+						$('.dwspan').html($(this).val())
+					});
+					$("#form1").submit(function(){
+						return Validator.Validate(this,2);
+					});
+
+				})
+			})
+	</script>
+
+	<style>
+	#weddingWarp{ background:#fff; width:840px; font-size: 12px;}
+	#weddingWarp h4{background-color:#c03; padding:0 10px; height:30px; line-height:30px; color:#fff;}
+	a.weddingCloseBtn{ font-size:16px;color:#fff;}
+	a.weddingCloseBtn:hover{ text-decoration:none;}
+
+	.weddingInner{ padding:10px 14px 10px 274px; min-height:444px; height:auto; _height:444px;}
+	.weddingInner h5,.weddingInner p{ line-height:20px;}
+	.weddingInner h5{ color:#f60;}
+	.weddingInner .red{ color:#BE3231;}
+
+	.weddingImg{ float:left; margin-left:-260px;}
+
+	.weddingForm{background:rgb(255, 244, 244); border:1px solid rgb(255, 191, 255); margin-top:10px; padding:10px 0; width:548px;height:130px;}
+	.weddingForm li{ height:32px; width:467px; padding-left:30px; line-height:32px;}
+	.weddingForm .whalf{ width:240px;}
+	.weddingForm label{ display:inline; float:left; width:157px; padding-right:5px; text-align:right;}
+	.weddingForm input{ height:22px; width:40px; text-align:center;  border:1px solid #ccc; line-height:22px;}
+	#weddingSubmit,#weddingCancel{ background-color:#C00; color:#fff;  padding:0 5px; margin-right:20px; height:26px; width:auto;font-weight:bold; cursor:pointer;}
+	#weddingCancel{background-color:#060;}
+	</style>
+    {/literal}
+</head>
+<body>
+	<div id="weddingWarp">
+		<!-- <h4><a href="javascript:void(0)" class="weddingCloseBtn fr">x</a>Custom Options</h4> -->
+		<div class="weddingInner">
+            {if $custom_cat_id==224 || $custom_cat_id==225 || $custom_cat_id==226 || $custom_cat_id==227 || $custom_cat_id==11195 || $custom_cat_id==230 || $custom_cat_id==232 || $custom_cat_id==228}
+    	    <img src="{$imgcache_url}images/domeimg/ren1.jpg" class="weddingImg" width="250" height="444" />
+            {else}
+            <img src="{$imgcache_url}images/domeimg/ren.jpg" class="weddingImg" width="250" height="444" />
+            {/if}
+
+			{$lang.custom_str} <span class="bizhong red">USD</span> <span class="custom_size_price my_shop_price red" orgp="{$custom_size_price}">{$custom_size_price}</span> {if $cur_lang=='ja'}の特製追加サービス料を請求させていただきます。</p>{else}.</p>{/if}
+
+			<form id="form1" name="form1" method="post" action="?"  onSubmit="">
+				<ul class="weddingForm">
+					<li>
+						<label for="danwei">{$lang.please_select_1}:</label>
+						<select name="danwei" id="danwei">
+							<option {if $custom_size_info.danwei == 'cm'}selected="selected"{/if}>{$lang.cm}</option>
+							<option {if $custom_size_info.danwei == 'in'}selected="selected"{/if}>{$lang.in}</option>
+						</select>
+					</li>
+					<li class="fl whalf">
+						<label for="Hollow_to_Hem">{$lang.Hollow_to_Hem}:</label>
+						<input name="Hollow_to_Hem" type="text" value="{$custom_size_info.Hollow_to_Hem}" class="ic1" size="6" maxlength="5" id="Hollow_to_Hem" datatype="Double" msg="{$lang.Please_enter_your_height}" />
+						<span class="dwspan">{$lang.cm}</span>
+					</li>
+					<li class="fl whalf">
+						<label for="Bust_Size">{$lang.Bust_Size}:</label>
+						<input name="Bust_Size" type="text" value="{$custom_size_info.Bust_Size}" class="ic1" size="6" maxlength="5" id="Bust_Size" datatype="Double" msg="{$lang.Please_enter_your_Bust_Size}" />
+						<span class="dwspan">{$lang.cm}</span>
+					</li>
+					<li class="fl whalf">
+						<label for="Waist_Size">{$lang.Waist_Size}:</label>
+						<input name="Waist_Size" type="text" value="{$custom_size_info.Waist_Size}" class="ic1" size="6" maxlength="5" id="Waist_Size" datatype="Double" msg="{$lang.Please_enter_your_Waist_Size}"/>
+						<span class="dwspan">{$lang.cm}</span>
+					</li>
+					<li  class="fl whalf">
+						<label for="Waist_Size">{$lang.Hip_Size}:</label>
+						<input name="Hip_Size" type="text" value="{$custom_size_info.Hip_Size}" class="ic1" size="6" maxlength="5" id="Hip_Size" datatype="Double" msg="{$lang.Please_enter_your_Hip_Size}"/>
+						<span class="dwspan">{$lang.cm}</span>
+					</li>
+					<li class="fl tc">
+						<input type="submit" name="button" id="weddingSubmit" value="{$lang.submit}" />
+						<input type="reset" name="button2" id="weddingCancel" value="{$lang.Cancel}" />
+						<input name="abc" type="hidden" id="abc" value="yes" />
+						<input name="goods_id" type="hidden" id="goods_id" value="{$smarty.get.id}" />
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

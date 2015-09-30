@@ -1,0 +1,135 @@
+<div id="myPoints"> 
+	<section class="pointsInfo">
+		<ul>
+			<li class="li1">
+				<dl>
+					<dd class="text">{$lang.balance}</dd>
+					<dd class="number"><strong>{$user.avaid_point}</strong></dd>
+				</dl>
+			</li>
+			<li class="li2">
+				<dl>
+					<dd class="text">{$lang.total_saved}</dd>
+					<dd class="number"><strong><span class="bizhong"></span> <span class="my_shop_price" orgp="{math equation="x * 0.02" x=$user.avaid_point }">$ {math equation="x * 0.02" x=$user.avaid_point }</span></strong></dd>
+				</dl>
+			</li>
+			<li class="li3">
+				<dl>
+					<dd class="text"><span class="howTo">{$lang.how_to_get}:</span><div class="divUse">
+						<div class="ico"><a href="/{$cur_lang_url}m-article-id-86.html" class="userBg cart js_useDown"></a>
+							<div class="useDown">
+								<span class="userBg"></span>
+								<!--<a href="javascript:void(0);" class="close" id="js_useClose">×</a>-->
+								<strong>{$lang.icon_shop_in_sammydress}</strong>
+								<p>{$lang.icon_shop_in_sammydress_desc}</p>
+							</div>
+						</div>
+						<div class="ico"><a href="/{$cur_lang_url}m-article-id-86.html" class="userBg write js_useDown"></a>
+							<div class="useDown">
+								<span class="userBg"></span>
+								<!--<a href="javascript:void(0);" class="close" id="js_useClose">×</a>-->
+								<strong>{$lang.icon_write_review}</strong>
+								<p>{$lang.icon_write_review_desc}</p>
+							</div>
+						</div>
+						<div class="ico"><a href="/{$cur_lang_url}m-article-id-86.html" class="userBg com js_useDown"></a>
+							<div class="useDown">
+								<span class="userBg"></span>
+								<!--<a href="javascript:void(0);" class="close" id="js_useClose">×</a>-->
+								<strong>{$lang.icon_buyers_show}</strong>
+								<p>{$lang.icon_buyers_show_desc}</p>
+							</div>
+						</div>
+					</div>
+					<dd class="text"><span class="howTo">{$lang.how_to_use}:</span><div class="divUse">
+						<div class="ico"><a href="/{$cur_lang_url}m-article-id-86.html" class="userBg use js_useDown"></a>
+							<div class="useDown">
+								<span class="userBg"></span>
+								<!--<a href="javascript:void(0);" class="close" id="js_useClose">×</a>-->
+								<strong>{$lang.icon_use_spoints_to_save}</strong>
+								<p>{$lang.icon_use_spoints_to_save_desc}</p>
+							</div>
+						</div>
+					</div>
+						
+					</dd>
+				</dd>
+			</li>
+		</ul>
+	</section>
+	
+	
+	<section class="allInfo">
+		<ul class="title">
+			<li {if $smarty.get.type==1 || $smarty.get.type==0}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-points_record.htm?type=1">{$lang.balance_summary}</a></li>
+			<li {if $smarty.get.type==2}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-points_record.htm?type=2">{$lang.all_earned}</a></li>
+			<li {if $smarty.get.type==3}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-points_record.htm?type=3">{$lang.all_spent}</a></li>
+		</ul>
+		<div class="content">
+			<div class="cnt cnt1 cnt_on">
+				<table>
+					<tr class="title">
+						<th>{$lang.date}</th>
+						<th>{$lang.earned} / {$lang.spent}</th>
+						<th>{$lang.saved} / {$lang.earned}</th>
+						<th>{$lang.note}</th>
+					</tr>
+					{foreach from=$all_records item=r}
+					<tr class="info">
+						<td class="td1"><p>{$r.adddate}</p></td>
+						<td class="td2">{if $r.income}<strong class="add">+{$r.income}{/if}{if $r.outgo}<strong class="subtract">-{$r.outgo}{/if}</strong></td>
+						<td class="td3">{if $r.note_id != 19}<span>{if $r.outgo}<strong class="add">$ {math equation="x * 0.02" x=$r.outgo}</strong>{/if}</span>{/if}</td>
+						<td class="td4">{$r.note}</td>
+					</tr>
+					{/foreach}
+				</table>
+				
+			</div>
+			
+			{*<div class="cnt cnt2">
+				<table>
+					<tr class="title">
+						<th>Date</th>
+						<th>Incoming / Outgoing</th>
+						<th>Saved / Earned</th>
+						<th>Note</th>
+					</tr>
+					<tr class="info">
+						<td class="td1"><p>2014-02-03</p><p>17:03:52</p></td>
+						<td class="td2"><strong class="add">+67</strong></td>
+						<td class="td3"><strong class="add">+<span class="bizhong"></span><span class="my_shop_price" orgp="13.34">$13.34</span></strong></td>
+						<td class="td4">Order: # MS2316541324563 return 67 points</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div class="cnt cnt3">
+				<table>
+					<tr class="title">
+						<th>Date</th>
+						<th>Incoming / Outgoing</th>
+						<th>Saved / Earned</th>
+						<th>Note</th>
+					</tr>
+					<tr class="info">
+						<td class="td1"><p>2014-02-03</p><p>17:03:52</p></td>
+						<td class="td2"><strong class="subtract">-210</strong></td>
+						<td class="td3"><strong class="subtract">-<span class="bizhong"></span><span class="my_shop_price" orgp="13.34">$13.34</span></strong></td>
+						<td class="td4">Order: # MS2316541324563 return 67 points</td>
+					</tr>
+				</table>
+			</div>*}
+			
+			<!--10条信息出现滚动条-->
+			<div class="pages tc">
+				{if $all_records}
+				{$pagestr}
+				{/if}
+			</div>
+			<!--end .pages-->
+			
+		</div>
+		
+		
+	</section>
+</div>

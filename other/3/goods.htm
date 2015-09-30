@@ -1,0 +1,1129 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+
+	{include file="top.htm"}
+	
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/goods_min.css?2015080401">
+	<!--弹出层插件-->
+	<link rel="stylesheet" href="{$imgcache_url}mincss/skin/bluebar/ymPrompt.css" />
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="mainBox">
+		<div class="path">
+			<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}" itemprop="url"><strong itemprop="title">Home</strong></a></span>
+			{$nav_title}
+			
+		</div><!--end .path-->
+		<div class="pro_content pb20 pt10 clearfix">
+			<div class="pro_m">
+				<div class="pro_m_inner" itemscope itemtype="http://schema.org/Product">
+					<h1 itemprop="name">{$goods.goods_title}</h1>
+
+					<div class="pro_grade clearfix" {if $review.review_count}itemprop="aggregateRating"  itemscope itemtype="http://schema.org/AggregateRating"{/if}>
+						<span class="c_tagbg start start_{$review.avg_rate_img}"><i class="c_tagbg" {if $review.review_count}itemprop="ratingValue"{/if}><span>{$review.avg_rate}</span></i></span><!--评分-->
+						<a href="#js_Reviews" rel="nofollow">(<strong {if $review.review_count}itemprop="reviewCount"{/if}>{$review.review_count}</strong>)</a><!--评论-->
+						{if $goods.is_free_shipping}<span class="c_tagbg fs js_tips" alt="free_shipping " data-tips="{$lang.freeShip}"></span>{/if}<!--免邮图标-->
+						{if $goods.is_24h_ship}<span class="c_tagbg sihrs js_tips" data-tips="{$lang.ship_in_24_hrs}"></span>{/if}<!--24小时图标-->
+						<em>{$goods.goods_sn}</em><!--商品编码-->
+						{if $smarty.session.usertype eq '2'}
+						{literal} <script type="text/javascript" >
+							function add_wj_link(id){
+								if(id !=""){
+									$.ajax({
+										url: "/m-webad-a-add_link_auto-pid-"+id+".htm",
+										beforeSend:function(){$("#aff"+id).html("Processing,please wait.")},
+										success: function(data){
+											$("#aff"+id).html(data)
+										}
+									});
+								}
+								return false;
+							}
+						</script>{/literal}
+						<span id="aff{$goods.goods_id}" class="pro_cutout" ><img src="{$imgcache_url}images/recomm.gif" border="0" onClick="add_wj_link({$goods.goods_id})" /></span>
+						{/if}
+						{if $goods.is_dispatch}
+						<p class="pt10 cb">
+						{if $is_presale}
+							{$lang.Dispatch2|replace:'5-10':'14'}
+						{else}
+							{if $goods.goods_sn|truncate:7:"":true == '1090367' || $goods.goods_sn|truncate:7:"":true == 'YM71755'}
+								{$lang.Dispatch2|replace:'5-10':'7-15'}
+							{elseif $goods.goods_sn|truncate:7:"":true == '1168976'}
+								{$lang.Dispatch2|replace:'5-10':'15-22'}
+							{else}
+								{if $goods.delivery_level eq '1'}
+									{$lang.Dispatch1}
+								{elseif $goods.delivery_level eq '2'}
+									{$lang.Dispatch2}
+								{elseif $goods.delivery_level eq '3'}
+									{$lang.Dispatch2|replace:'5-10':'7-15'}
+								{/if}
+							{/if}
+						{/if}
+						</p>
+						{/if}
+					</div><!--end .pro_grade-->
+					
+					
+
+					<div class="pro_price clearfix pr" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+						<!--商品价格-->
+						<p class="curPrice fl">
+							<span class="bizhong"></span><span id="unit_price" class="my_shop_price " orgp="{if $goods.is_direct_sale == 1}{$goods.bulk_price}{else}{$goods.shop_price}{/if}">{if $goods.is_direct_sale == 1}{$goods.bulk_price}{else}{$goods.shop_price}{/if}</span>
+
+							<!--如果是定制婚纱-->
+							<span id="custom_price_content" style="display:none;">+
+								<span class="bizhong"></span>
+								<span id="custom_price" class="my_shop_price" orgp="{$goods.custom_size_price}">{$goods.custom_size_price}</span>
+							</span>
+
+							<meta itemprop="priceCurrency" content="{$currency}" />
+							<span itemprop="price" content="{$currency_price}" /></span>
+							<span itemprop="availability" content="{if $goods.goods_number}{$lang.in_stock}{else}{$lang.out_of_stock}{/if}" class="none"></span>
+						</p>
+
+						<div class="pro_price_other fl ">
+							{if ($nowtime gt $promote_start_time and $nowtime lt $promote_end_time) || ($promote_end_time_format && $is_presale)}
+							<p class="pro_time">
+								<!--倒计时-->
+								<i class="c_tagbg"></i><strong class="fb" id="time_coutDown" data-time="{$promote_end_time_format}">{$promote_end_time_format}</strong>
+							</p>
+							{/if}
+							<p>
+								<!--市场价-->
+								<span class="costPrice"><span class="bizhong"></span><span id="unit_price" class="my_shop_price " orgp="{$goods.market_price}">{$goods.market_price}</span></span>
+								{if $promote_zhekou gt 0}
+								<!--折扣-->
+								<span class="pro_cutout">({$promote_zhekou}% off)</span>
+								{/if}
+							</p>
+							{if $goods.shelf_down_type==100 && !$promote_zhekou}
+							<p class="clearanceTips fb">{$lang.CLEARANCE}</p>
+							{/if}
+						</div><!--end.pro_price_other-->
+                        
+                        {if $goods.mobile_exclusive>0}
+						{*<div class="phonePrice fl">
+							<i>Mobile Exclusive</i>
+							<p>
+								<span class="bizhong"></span>
+								<span class="my_shop_price" orgp="{$goods.mobile_exclusive}">{$goods.mobile_exclusive}</span>
+							</p>
+						</div>*}
+                        {/if}
+						
+						
+
+					</div><!--end .pro_price-->
+
+					<div class="pro_property">
+						<ul class="click-attr clearfix">
+							{if $specification || $have_same_goods eq 1}
+							{assign var=multicolor_num value=$same_goods_list.1.multicolor_num}
+							{foreach from=$same_goods_list item=goods_type key=key1}
+							  <li id="select_same_goods_id_{$key1}" class="js_property_secelt_Box">
+								
+									
+									<div class="choose_wrap {if $goods_type.name==$lang.Color}choose_color_wrap{/if}">
+							   			<strong class="fb fl pr5 tit">{$goods_type.name}:</strong>
+										<ul
+										{if $goods_type.name==$lang.Color}
+										 id="js_property_color" class="choose_list choose_color clearfix"
+										{elseif $goods_type.name==$lang.Size}
+										 id="js_property_size" class="choose_list choose_size clearfix {if $custom_size_flag=='1'} disabled{/if}"
+										{/if}
+										>
+											{foreach from=$goods_type.list item=value key=key}
+											
+											<li class="item {if $goods.goods_id eq $key}selected{/if}  " >
+								   				<a href="javascript:void(0)" title="{$value.attr_value}" >{if $goods_type.name == $lang.Size}{$value.attr_value}{else}{if $value.attr_value_en=='RANDOM COLOR' || $value.attr_value_en=='COLOR ASSORTED' || $value.attr_value_en=='RANDOM COLOR PATTERN'}<span class="pl5 pr5">{$value.attr_value}</span>{else}<img src="{$value.goods_thumb}" height="40">{/if}{/if}</a>
+								   				<b></b>
+								   			</li>
+											
+										{/foreach}
+										</ul>
+									</div>
+
+
+								{*
+							      {if $cur_lang == 'en' || $multicolor_num>1}
+							      <select name="select_same_goods_{$key}" onChange="GLOBAL.cart.change_same_goods(this);" class="js_property_secelt" id="select_custom_size" {if $goods_type.name==$lang.Size}{if $custom_size_flag=='1'}disabled{/if}{/if}>
+							          <option  value="">{$lang.please_select_1}&nbsp;{$goods_type.name}</option>
+							          {foreach from=$goods_type.list item=value key=key}
+							          <option value="{$key}" {if $goods.goods_id eq $key}selected{/if}>
+							          {$value.attr_value}{if $value.attr_price != 0}{if $value.attr_price gt 0}+{elseif $value.attr_price lt 0}-{/if}<B> USD {$value.spe_format_price}</B>{/if}
+							          </option>
+							          {/foreach}
+							      </select>
+								  {else}
+								  <!-- 下拉选择属性 改成卡片式选择属性 --> 
+								  
+									<div class="choose_wrap">
+							   			<strong class="fb fl pr5 tit">{$goods_type.name}:</strong>
+										<ul
+										{if $goods_type.name==$lang.Color}
+										 id="js_property_color" class="choose_list choose_color clearfix"
+										{elseif $goods_type.name==$lang.Size}
+										 id="js_property_size" class="choose_list choose_size clearfix {if $custom_size_flag=='1'} disabled{/if}"
+										{/if}
+										>
+											{foreach from=$goods_type.list item=value key=key}
+											
+											<li class="item {if $value.color_code=='Multicolor'}c_colorbg multicolor {/if} {if $value.color_code=='Leopard'}c_colorbg leopard {/if} {if $value.color_code=='Camouflage'}c_colorbg camouflage {/if} {if $goods.goods_id eq $key}selected{/if}  "   style="background-color:{$value.color_code}">
+								   				<a href="javascript:void(0)" title="{$value.attr_value}" >{if $goods_type.name == $lang.Size}{$value.attr_value}{else}&nbsp;&nbsp;{/if}</a>
+								   				<b></b>
+								   			</li>
+											
+										{/foreach}
+										</ul>
+									</div>
+									{/if}
+								*}
+							   </li>
+							{/foreach}
+							   							 
+							    <script type="text/javascript">
+									 var ColorSize = [{$same_goods_list[0].ColorSizeJson}]
+								</script>
+								 
+								
+							<!--有货专区-->
+							<li class="none" id="select_available_stock_id">
+								<select name="select_available_stock" class="js_available_secelt" onChange="GLOBAL.cart.change_available_stock(this)">
+                                  <option  value="" selected>Please Select{$imgcache_url}/.</option>
+                                  <!-- {foreach from=$goods_available_stock_arr item=value key=key} -->
+                                  <option id="spec_available_stock_{$value.goods_id}" value="{$value.goods_id}" {if $goods.goods_id eq $value.goods_id}selected{/if} attr="{$value.url_title}">
+                                    {$value.attr_value}
+                                  </option>
+                                  <!-- {/foreach} -->
+                                </select>
+							</li>
+
+							<li class="none">
+								{foreach from=$specification item=spec key=spec_key}
+			              			<span {if $spec.is_public eq 1}style="display:none" {/if}>
+			                		<strong>{$spec.name}:</strong>
+			                		{* 判断属性是复选还是单选 *}
+
+			                			{if $spec.attr_type eq 1}
+
+			                				{if $cfg.goodsattr_style eq 1}
+
+			                					{foreach from=$spec.values item=value key=key}
+				                					<label for="spec_value_{$value.id}">
+				                  					<input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if  $smarty.get.atrid eq $value.id }checked{/if}  class="spec_{$spec_key}"  lab_name="{$spec.name}"/>
+				                  					{$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label>
+			                					{/foreach}
+			                					<input type="hidden" name="spec_list" value="{$key}" />
+
+			                				{else}
+				               					<!-- <select name="spec_{$spec_key}"  class="spec_{$spec_key}" onChange="show_custom({$spec_key},{$goods.goods_id});" lab_name="{$spec.name}" style="height:19px; font-size:11px; width:90px;" isnes="{$spec.isnes}"> -->
+				                				<select name="spec_{$spec_key}"  class="spec_{$spec_key}" lab_name="{$spec.name}" style="height:19px; font-size:11px; width:90px;" isnes="{$spec.isnes}">
+				                  					<option  value="">{$lang.Please_select}</option>
+													{foreach from=$spec.values item=value key=key}
+														<option value="{$value.id}" subprice="{$value.price}" {if $smarty.get.atrid eq $value.id or $spec.values|@count eq 1}selected{/if}>
+														{$value.label}{if $value.price gt 0}+{elseif $value.price lt 0}-{/if}{if $value.price neq 0}<B> USD {$value.format_price}</B>{/if}
+														</option>
+													{/foreach}
+				                				</select>
+				                				<input type="hidden" name="spec_list" value="{$key}" />
+			                				{/if}
+
+			                			{else}
+			                				{foreach from=$spec.values item=value key=key}
+			                					<label for="{if $value.id eq 'custom made'}customxx{$spec_key}{else}spec_value_{$value.id}{/if}">
+			                  					<input type="checkbox" name="spec_{$spec_key}" value="{$value.id}"  class="spec_{$spec_key}"  {if $smarty.get.atrid eq $value.id }checked{/if} {if $value.id eq 'custom made'} id="customxx{$spec_key}"  onClick="show_check_custom({$spec_key})" {else} id="spec_value_{$value.id}" {/if}  lab_name="{$spec.name}"/>
+			                  					{$value.label} {if $value.price gt 0}+{elseif $value.price lt 0}-{/if}<B> USD {$value.format_price}</B> </label>
+			                				{/foreach}
+			                				<input type="hidden" name="spec_list" value="{$key}" />
+			                			{/if}
+			                		</span>
+			                	{/foreach}
+							</li>
+							{/if}
+						</ul>
+					</div><!--end .pro_property-->
+
+					<div class="order_quantity" style="position: relative;">
+						<span>{$lang.qty}:</span>
+						<div class="order_q_box">
+							<input class="text fl" id="js_input_quantity" onKeyUp="GLOBAL.cart.input_quantity(this)" value="1" />
+							<a href="javascript:void(0);" class="c_tagbg btn_add" {if $goods.shop_price !='0.01'}onclick="GLOBAL.cart.add()"{/if}>add 1</a>
+							<a href="javascript:void(0);" class="c_tagbg btn_reduce" {if $goods.shop_price !='0.01'}onclick="GLOBAL.cart.reduce()"{/if}>reduce 1</a>
+						</div>
+
+						{if $goods.custom_size}
+						<!--婚纱定制-->
+						<p class="setSize">
+							<input type="checkbox" class="js_custom_button" id="custom_button" value="1" {if $custom_size_flag}checked{/if} data-page="/{$cur_lang_url}m-goods-temp-show.htm?id={$goods.goods_id}"><!--婚纱弹出框iframe的地址-->
+							<label for="custom_button">{$lang.custom_size}</label>
+						</p>
+						{/if}
+						{if $goods.is_suit}
+						<!--西服定制-->
+						<p class="setSize">
+							<input type="checkbox" class="js_custom_button" id="custom_Mode" flag="0">
+							<label for="custom_Mode">{$lang.custom_made}</label>
+						</p>
+						{/if}
+						{* 假发的一个指引入口 *}
+						{if $goods.cat_id==11199}
+						<div class="wig-style-guide"><a href="{$DOMAIN}/m-promotion-active-130.htm" target="_blank">STYLE GUIDE</a></div>
+                        {elseif $goods.cat_id==11201}
+                        <div class="wig-style-guide"><a href="{$DOMAIN}/m-promotion-active-133.htm" target="_blank">STYLE GUIDE</a></div>
+						  {elseif $goods.cat_id==11267}
+                        <div class="wig-style-guide"><a href="{$DOMAIN}/m-promotion-active-134.htm" target="_blank">STYLE GUIDE</a></div>
+						{/if}
+					</div><!--end .order_quantity-->
+					
+					{*这句话不需要了
+					<p class="setSizeTips">
+					{if !$is_presale}
+						{if $goods.cat_id==216||$goods.cat_id==220||$goods.cat_id==221||$goods.cat_id==222||$goods.cat_id==11185||$goods.cat_id==224||$goods.cat_id==225||$goods.cat_id==226||$goods.cat_id==227 ||$goods.cat_id==228||$goods.cat_id==229||$goods.cat_id==230||$goods.cat_id==232||$goods.cat_id==11209||$goods.cat_id==11210}
+							{$lang.goods_note1} {$lang.goods_note1_1}
+							{if $goods.custom_size_price > 0}
+							{$goods.goods_note1_2}
+							{/if}
+							{$lang.goods_note1_3}
+						{/if}
+
+						{if $top_cat_id==1}
+						{$lang.goods_note2}
+						{/if}
+						
+						{if $goods.cat_id==233}
+							{$lang.goods_note4}
+						{/if}
+					{/if}
+					</p><!--end .setSizeTips-->
+					*}
+
+					
+					<div class="order_btn clearfix cart_handle">
+						{if $goods.goods_number==0 && $goods.is_dinghuo_goods==1}
+						<!--订货-->
+						<p class="fl" id="add_cart_msg{$goods.goods_id}">
+							<a href="javascript:void(0)" id="new_addcart" class="redBtn" gid="{$goods.goods_id}" num = "50" attrchage="{$attrkey}"  onClick="GLOBAL.cart.addcart(this,{if $goods.custom_size || $goods.is_suit}1{else}0{/if});" ref="1" dinghuo="1" rel="nofollow" title="Please enter more than 50 quantities for the out of stock items. We can be made according to your requirements. After receive your payment, we will arrange the shipment for you as soon as possible.">
+								<span>{$lang.bulk_order_discount}</span>
+							</a>
+						</p>
+						{elseif $goods.goods_number == 0}
+						<!--缺货 显示到货通知-->
+							{if $goods.is_on_sale == 0}
+
+							{else}
+						<a href="/{$cur_lang_url}m-notify_in_stock-id-{$goods.goods_id}.htm" style="display:inline" class="blackBtn fl">
+							<span>{$lang.out_of_stock}</span>
+						</a>
+							{/if}
+						{else}
+						<!--有货-->
+						<p class="fl mt15" id="add_cart_msg{$goods.goods_id}">
+							<a href="javascript:void(0)" id="new_addcart" class="redBtn" gid="{$goods.goods_id}" num = "{if $goods.is_direct_sale == 1}5{else}1{/if}" attrchage="{$attrkey}"  onClick="GLOBAL.cart.addcart(this,{if $goods.custom_size || $goods.is_suit}1{else}0{/if});" ref="1" rel="nofollow" srcpage="2">
+								<span>{$lang.add_to_cart}</span>
+							</a>
+						</p>
+						{/if}						
+						<!--加入收藏夹-->
+						<a class="addToFavBtn fl pt15" href="javascript:void(0)" rel="nofollow" data-src="/fun/index.php?act=drop_to_collect&id={$goods.goods_id}"><i class="c_tagbg"></i>{$lang.add_to_fav}</a>
+                        <p class="fr mr15"><script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.sammydress.com&amp;size=xs&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=en"></script></p>
+					</div><!--end .order_btn-->
+
+					<ul class="proMain_shareList clearfix">
+						{*
+						<li class="proMain_pinit">
+							<!-- PIN分享代码AddThis PIN Button BEGIN -->
+							<a data-pin-config="beside" href="//pinterest.com/pin/create/button/?url={$goods.url_title}&media={$goods.original_img}&description=${$goods.shop_price} {$goods.goods_title}" data-pin-do="buttonPin" rel="nofollow"><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a>
+							<!-- AddThis PIN Button END -->
+						</li>
+						*}
+
+						<li class="proMain_faceBook">
+							<!-- BOF facebook like button -->
+							<div id="fb-root"></div>
+							<div class="fb-like" data-href="{$goods.url_title}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+							<!-- EOF facebook like button -->
+						</li>
+
+						<li>
+							<!-- Add twitter Button BEGIN -->
+							<a rel="nofollow" target="_blank" href="https://twitter.com/share" class="twitter-share-button" data-url="{$goods.url_title}?utm_medium=twitter" data-text="{$goods.goods_title}" data-width="80">Tweet</a>
+							<!-- Add twitter Button END -->
+						</li>
+
+						<li class="proMain_google">
+							<!-- Place this tag where you want the +1 button to render. -->
+							<div class="g-plusone" data-size="medium" data-href="{$goods.url_title}?utm_medium=googleplus"></div>
+							<!-- EOF Place this tag where you want the +1 button to render. -->
+						</li>
+
+						<li>
+							<!-- EOF Put this div tag to the place, where the Like block will be BEGIN -->
+							<div id="vk_like"></div>
+							<!-- EOF Put this div tag to the place, where the Like block will be END -->
+						</li>
+
+						<li class="pl30">
+							<!-- tumblr button -->
+                           <a href="http://www.tumblr.com/share?v=3&u={$tumblr_url}&t={$tumblr_title}+|+Sammydress.com&s=" title="Share on Tumblr" style="display:inline-block; text-indent:-9999px; overflow:hidden; width:81px; height:20px; background:url('http://platform.tumblr.com/v1/share_1.png') top left no-repeat transparent;" target="_blank">Share on Tumblr</a>
+                            <!-- tumblr button END -->
+						</li>
+					</ul><!--end .proMain_shareList-->
+					<input type="hidden" id="save_goodsId" value="{$goods.goods_id}"/>
+					
+					{if $same_cat_goods|@count}
+					<section class="proList">
+						<h4>{$lang.similar_recommended}:</h4>
+						<ul class="clearfix">
+							{foreach from=$same_cat_goods item=g}
+							{php}
+					            $this->_tpl_vars['tmp_url'] = get_position_product_link($this->_tpl_vars['g']['url_title'], POSITION_SALE_RECOMMENDED_FOR_YOU, $this->_tpl_vars['g']['cat_id']);
+					        {/php}
+							<li>
+								<a href="{$tmp_url}">
+									<img src="{$g.goods_thumb}" alt="{$g.goods_title}" data-original="{$g.goods_thumb}" height="95"/>
+								</a>
+							</li>
+							{/foreach}
+						</ul>
+					</section><!--end .proList-->
+					{/if}
+					
+				</div><!--end .pro_m_inner-->
+			</div><!--end .pro_text-->
+
+			<div class="pro_img">
+			    <input type="hidden" name="pic_from" id="pic_from" value="{$goods.pic_from}">
+				<div class="n_thumbImg" id="js_n_thumbImg">
+					<a href="javascript:void(0);" class="c_tagbg spec_forward" id="js_spec_forward"></a>
+					<div class="n_thumbImg_item">
+						<ul class="js_scrollableDiv">
+							<li>
+								<img src="{$goods.goods_thumb}" data-normal-img="{$goods.original_img}" data-big-img="{$goods.original_img}" height="80"/>
+							</li>
+							{if $pictures}
+							{foreach from=$pictures item=picture}
+							<li>
+								<img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" data-normal-img="{$picture.img_original}" data-big-img="{$picture.img_original}" height="80"/>
+							</li>
+							{/foreach}
+							{/if}
+						</ul>
+					</div><!--end .n_thumbImg_item-->
+					{if $goods.buyers_show}
+					<div class="n_thumB_custom upImg" id="js_revThumb_img">
+						<a data-uid="/{$cur_lang_url}m-goods-a-cusphotos-id-{$goods.goods_id}-rid-{$goods.buyers_show.rid}-mid-{$goods.buyers_show.id}.htm" href="javascript:void(0);" >
+						<img src="{$domain_img}/{$goods.buyers_show.thumb_paths}" height="80"/>
+						</a>
+						<p>{$lang.customer_photos} ({$goods.buyers_show_total})</p>
+					</div>
+					{/if}
+					<a href="javascript:void(0);" class="c_tagbg spec-backward" id="js_spec-backward"></a>
+				</div><!--end .n_thumbImg-->
+				<div class="n_bigImg" id="js_n_bigImg" ectype="jqzoom_relative">
+					<span class="jqzoom" id="js_jqzoom">
+						<img src="{$goods.original_img}" jqimg="{$goods.original_img}"  height="430" alt="{$goods.goods_title}">
+                        {if $is_presale}
+						<span class="presale_tag c_tagbg">PRE SALE</span>
+						{/if}
+					</span>
+					
+					{if $goods.goods_number==0 && $goods.is_dinghuo_goods!=1}
+					<div class="outInStockTag">
+						{if $goods.is_on_sale == 0}<!--是否在卖-->
+
+						{else}
+						<span>{$lang.OUT_OF_STOCK}</span>
+						{/if}
+					</div>
+					{/if}
+
+					{*多倍积分*}
+					
+					{if $goods.point_rate > 1 }
+					<div class="goodsPointF">
+						<span>{math equation="x" x=$goods.point_rate format="%.1f"}</span>
+					</div>
+					{/if}
+      
+				</div><!--end .n_bigImg-->
+
+				<div class="cb"></div>
+
+				{*预售商品的进度*}
+				{if $is_presale}
+				<div class="goods_preSale">
+					<p class="title"><span class="fr">{$lang.presale.20} <a href="javascript:void(0);" id="js_openPop">?</a></span><strong>{$presale_info.0.ordgoodscount}</strong> {$lang.presale.21}</p>
+					
+					<div class="table">
+						<ul class="priceList">
+							{foreach from=$presale_info.0.sun_interval item=sumi key=keys name=mysumi}
+							<li class="{if $presale_info.0.ordgoodscount<20 && $smarty.foreach.mysumi.first}on
+								{elseif $presale_info.0.ordgoodscount>=20 && $presale_info.0.ordgoodscount<=49 && $smarty.foreach.mysumi.index==1}on
+								{elseif $presale_info.0.ordgoodscount>=50 && $smarty.foreach.mysumi.last}on
+								{/if}">
+								<span class="bizhong"></span><span class="my_shop_price" orgp="{$presale_info.0.real_price.$keys}"></span>
+								<i></i>
+							</li>
+							{/foreach}
+						</ul>
+						<p class="point">
+							<em class="fb">0</em>
+							{foreach from=$presale_info.0.sun_interval item=sumi key=keys name=mysumi}
+				            {if $smarty.foreach.mysumi.last}
+							<i>{$sumi}</i>
+							{else}
+							<span>{$sumi}</span>
+							{/if}
+							{/foreach}
+						</p>
+
+					</div><!-- table -->
+					
+					<div id="js_popHelp" class="popHelp p10 none">
+						{$lang.presale.22}
+					</div>
+				</div>
+				{/if}
+				<!-- goods_preSale -->
+				
+
+
+
+
+			</div><!--end .pro_img-->
+		</div><!--end .pro_content-->
+
+		<div class="pro_main" id="js_proMain">
+			<div class="pro_info_nav">
+				<ul id="js_pro_nav">
+					<li class="first on">{$lang.DESCRIPTION}</li>
+					<li>{$lang.REVIEWS}</li>
+					<li>{$lang.QUESTIONS}</li>
+					{*<li>{$lang.PAYMENT_AND_SHIPPING}</li> *}
+					<li>{$lang.WHOLESALE}</li>
+				</ul>
+			</div>
+
+			<div class="pro_infoBox">
+				<div class="pro_inf_l">
+
+					<div class="clearfix goodsInfoWarp mb20 js_p_infoBlack ">
+
+	                    {if $goods.is_display_size_converter == 1}
+						<ul class="conversionWrap">
+							<li>{$lang.converter}: <input type="text" size="3"class="js_size inputText" />{$lang.cm} <input type="text" disabled="disabled" class="inputText dis_inputText  js_size_show" />{$lang.inch}<input type="submit" class="inputSbmit js_size_btn" value="{$lang.calculation}" data-unit="cm" /></li>
+							<li>{$lang.converter}: <input type="text" size="3"class="js_size inputText" />{$lang.inch} <input type="text" disabled="disabled" class="inputText dis_inputText  js_size_show" />{$lang.cm}<input type="submit" class="inputSbmit js_size_btn" value="{$lang.calculation}" data-unit="inch"/></li>
+						</ul>
+	                    {/if}
+						<!--这里放商品的详细说明内容-->
+						{$desc_cont}
+                        <br />
+                        {if $goods.seller_note}{$goods.seller_note}{/if}
+                        <br />
+						{$goods.goods_desc}
+                        
+						{if $goods.size_chart_str || $goods.relate_size_chart_str}
+						<div class="chart-table-wrap pt10">
+
+							<div class="chart-btn pb10 clearfix js_table-switcher">
+								{if $goods.size_chart_str}<a href="javascript:void(0);" class="active">{$lang.Size_Chart}</a>{/if}
+								{if $goods.relate_size_chart_str}<a href="javascript:void(0);">{$lang.Size_Conversion_Chart}</a>{/if}
+							</div>
+
+							{if $goods.size_chart_str}
+							<div class="chartContainer">
+								<div class="chart-btn clearfix js_unit-switcher">
+								{if $goods.size_unit}
+								    <a href="javascript:void(0);" class="inchBtn" data-unit="inch">{$lang.Inches}</a>
+								    {if $goods.size_unit == 'cm'}
+									<a href="javascript:void(0);" class="cmBtn" data-unit="cm">{$lang.Centimeters}</a>
+									{elseif $goods.size_unit == 'mm'}
+									<a href="javascript:void(0);" class="mmBtn" data-unit="mm">{$lang.Millimeters}</a>
+									{/if}
+								{/if}
+								</div><!-- .chart-btn -->
+								<div class="chart-table">
+									{$goods.size_chart_str}
+								</div><!-- .chart-table -->
+							</div>
+							{/if}
+                            
+							{if $goods.relate_size_chart_str}
+							<div class="chartContainer {if $goods.size_chart_str && $goods.relate_size_chart_str}none{/if}">
+								<div class="chart-btn clearfix js_unit-switcher">
+								{if $goods.relate_size_unit}
+								    <a href="javascript:void(0);" class="inchBtn" data-unit="inch">{$lang.Inches}</a>
+								    {if $goods.relate_size_unit == 'cm'}
+									<a href="javascript:void(0);" class="cmBtn" data-unit="cm">{$lang.Centimeters}</a>
+									{elseif $goods.relate_size_unit == 'mm'}
+									<a href="javascript:void(0);" class="mmBtn" data-unit="mm">{$lang.Millimeters}</a>
+									{/if}
+								{/if}
+								</div><!-- .chart-btn -->
+								<div class="chart-table">
+									{$goods.relate_size_chart_str}
+								</div><!-- .chart-table -->
+							</div>
+							{/if}
+
+						</div><!-- .chart-table-wrap -->
+						{/if}
+
+
+					</div><!--end .p_infoBlack-->
+
+					<!--用户评论-->
+					<section class="goodsBlock reviewsBox mb20 js_p_infoBlack">
+						<header id="js_Reviews"><h4>{$lang.REVIEWS}</h4></header>
+						{if $review.review_list && $review.display_fitting && !($review.big==0 && $review.small==0 && $review.ok==0)}
+						<div class="rate-subject clearfix">
+							<h5>Did the item fit well? </h5>
+							<div class="rate-theme" id="js_reviewTheme">
+								<ul>
+									<li class="clearfix" data-num="{math equation='round(x/y*100)' x=$review.small y=$review.all_size format='%d'}" data-type="2">
+										<span>{$lang.review_size.overall_fit.2}</span>
+										<b>{math equation="round(x/y*100)" x=$review.small y=$review.all_size format="%d"}%</b>
+										<div class="rate-themeBg js_rateItem" >
+											<i style="width:{math equation='round(x/y*100)' x=$review.small y=$review.all_size format='%d'}%" ></i>
+										</div>
+									</li>
+									<li class="clearfix" data-num="{math equation='round(x/y*100)' x=$review.ok y=$review.all_size format='%d'}" data-type="0">
+										<span>{$lang.review_size.overall_fit.0}</span>
+										<b>{math equation="round(x/y*100)" x=$review.ok y=$review.all_size format="%d"}%</b>
+										<div class="rate-themeBg js_rateItem" >
+											<i style="width:{math equation='round(x/y*100)' x=$review.ok y=$review.all_size format='%d'}%"></i>
+										</div>
+									</li>
+									<li class="clearfix" data-num="{math equation='round(x/y*100)' x=$review.big y=$review.all_size format='%d'}" data-type="1">
+										<span>{$lang.review_size.overall_fit.1}</span>
+										<b>{math equation="round(x/y*100)" x=$review.big y=$review.all_size format="%d"}%</b>
+										<div class="rate-themeBg js_rateItem" >
+											<i style="width:{math equation='round(x/y*100)' x=$review.big y=$review.all_size format='%d'}%"></i>
+										</div>
+									</li>
+								</ul>
+							</div><!--end. tate-theme-->
+						</div><!--end .rate-subject-->
+						{/if}
+						<div class="goodsBlock_t" id="js_goodRevieList">
+							<ul>
+								{foreach key=key from=$review.review_list item=r name=r}
+								<li>
+									<img src="{$r.avatar}" class="js_lazy portrait" width="60" height="60"/>
+									<p class="review_t">
+										{$lang.by} <strong class="name">{$r.nickname}</strong> <i class="time">{$r.adddate}</i>
+									</p>
+									<p>
+										<span class="c_tagbg start start_{$r.rate_overall}"><i class="c_tagbg">{$r.rate_overall}</i></span>
+										<strong class="fb">{$r.subject}</strong>
+									</p>
+									<div class="gPop_userInfo">
+										{if $r.review_size.weight}
+										<span><strong>{$lang.weight}:</strong>{$r.review_size.weight}Lbs</span>
+										{/if}
+										{if $r.review_size.height}
+										<span><strong>{$lang.height}:</strong>{$r.review_size.height}</span>
+										{/if}
+										{if $r.review_size.bust}
+										<span><strong>{$lang.bust_size}:</strong>{$r.review_size.bust}</span>
+										{/if}
+										{if $r.review_size.body_shape}
+										<span><strong>{$lang.body_shape}:</strong>{$r.review_size.body_shape}</span>
+										{/if}
+										{if $r.review_size.overall_fit}
+										<span><strong>{$lang.Overall_Fit}:</strong>{$r.review_size.overall_fit}</span>
+										{/if}
+										{if !empty($r.review_size.typical_size)}
+										<span><strong>{$lang.typical_size}:</strong>{$r.review_size.typical_size}</span>
+										{/if}
+									</div>
+									<div>{$r.pros}</div>
+									{if $r.pic != ''}
+									<!--用户上传图片-->
+									<div class="upImg js_reviews_img">
+										{foreach from=$r.pic item=pic}
+										<a target="_blank" href="/{$cur_lang_url}m-review_media-a-view_image-goods_id-{$pic.goods_id}-mid-{$pic.id}.htm" data-uid="/m-review_img-rid-{$r.rid}.htm">
+										<img src="{$pic.thumb_paths}" width="80" height="120">
+										</a>
+										{/foreach}
+									</div><!--end .upImg-->
+									{/if}
+									{if $r.video != ''}
+									<!--用户上传视频-->
+									<div class="upVideo js_reviews_video clearfix">
+										{foreach from=$r.video item=video}
+										<a target="_blank" href="/m-review_media-a-view_video-goods_id-{$goods.goods_id}-mid-{$video.id}.htm"  data-video="{$video.paths}">
+											<img src="/{$cur_lang_url}m-review-a-show_video_pic-code-{$video.paths}.htm" width="80" height="80">
+										</a>
+										{/foreach}
+								</div><!--end .upVideo-->
+									{/if}
+
+									<div class="gPop_userInfo gPop_userInfoB pt10">
+										{if $r.size}
+										<span><strong>{$lang.size}:</strong>{$r.size}</span>
+										{/if}
+										{if $r.color}
+										<span><strong>{$lang.color}:</strong>{$r.color}</span>
+										{/if}
+									</div>
+
+								</li>
+								{/foreach}
+							</ul>
+
+							{if $review.review_count > 0}
+							<div class="revieBtn clearfix">
+								<a href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm" class="redBtn fl" rel="nofollow">
+									<span>{$lang.write_a_review}</span>
+								</a>
+								{if $review.review_count > 5 || ($review.myReview_pass==1 && $reviews.review_count == 5)}
+								<a href="/{$cur_lang_url}m-review-a-view_review-goods_id-{$goods.goods_id}.htm" class="fr" rel="nofollow">{$lang.see_more_review} &gt;</a>
+								{/if}
+							</div><!--end .revieBtn-->
+							{else}
+							<div class="no_reviews clearfix">
+								<p class="fl">{$lang.no_reviews}</p>
+								<a href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm" class="redBtn fl mt5" rel="nofollow">
+									<span>{$lang.write_a_review}</span>
+								</a>
+							</div>
+							{/if}
+							
+						</div><!--end .goodsBlock_t-->
+					</section><!--end .reviewsBox-->
+
+					<!--用户咨询-->
+					<section class="goodsBlock asksBox mb20 js_p_infoBlack">
+						<header>
+							<h4>{$lang.QUESTIONS}</h4>
+						</header>
+						<div class="goodsBlock_t">
+							{if $inquiry.inquiry_count > 0}
+							<ul>
+								{foreach key=key from=$inquiry.inquiry_list item=item name=item}
+								<li class="clearfix">
+									<div class="ask_dialog ask_q ">
+										<p>{$lang.by} {$item.nickname} {$item.adddate}</p>
+										<div class="askText">
+											<strong>Q:</strong>
+											{$item.i_content}</div>
+
+										<i class="triangle tri_b"></i><i class="triangle tri_t"></i>
+									</div><!--end .ask_dialog-->
+									<div class="ask_dialog ask_a">
+										<div class="askText">
+											<strong>A:</strong>
+											{$item.reply}
+										</div>
+										<i class="triangle tri_b"></i><i class="triangle tri_t"></i>
+									</div>
+								</li>
+								{/foreach}
+							</ul>
+							<div class="askBtn clearfix">
+								<a href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm" class="redBtn fl" rel="nofollow">
+									<span>{$lang.ask_a_question}</span>
+								</a>
+								{if $inquiry.inquiry_count > 4}
+								<a href="/m-review-a-view_inquiry-goods_id-{$goods.goods_id}.htm" class="fr" rel="nofollow">{$lang.see_more_questions} &gt;</a>
+								{/if}
+							</div>
+							{else}
+							<!--如果没有咨询-->
+							<div class="no_asks clearfix">
+                                <p class="fl">{$lang.no_questions_yet}</p>
+								<a href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm" class="redBtn fl mt5" rel="nofollow">
+									<span>{$lang.ask_a_question}</span>
+								</a>
+							</div>
+							{/if}
+						</div><!--end .goodsBlock_t-->
+					</section><!--end .reviewsBox-->
+
+					<!--payment & ghipping-->
+					{*
+					<section class="goodsBlock payment mb20">
+						<header>
+							<h4>{$lang.PAYMENT}</h4>
+						</header>
+						<div class="goodsBlock_t">
+							{$lang.pro_intr_shipping}
+						</div>
+					</section><!--end .goodsBlock-->
+
+					<section class="goodsBlock payment mb20 js_p_infoBlack">
+						<header>
+							<h4>{$lang.SHIPPING}</h4>
+						</header>
+						<div class="goodsBlock_t">
+							{$lang.pro_intr_Payment}
+							<p><img src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="http://css.sammydress.com/imagecache/S/images/domeimg/{$cur_lang}/shippic2.gif" width="693" height="316" class="js_lazy"/></p>
+						</div>
+					</section><!--end .goodsBlock-->
+					*}
+					<section class="goodsBlock wholesaleBox mb20 js_p_infoBlack">
+						<header>
+							<h4>{$lang.WHOLESALE}</h4>
+						</header>
+						<div class="goodsBlock_t">
+							{if $goods.shop_price eq '0.01'}
+							{elseif $volume_price_list and $goods.promote_price lte 0 and $goods.is_groupbuy lte 0 and $goods.shelf_down_type!=100}
+							<div class="price_ladder_table none">
+								<!--阶梯价格-->
+								<p class="fb">{$lang.bulk_order_discount}:</p>
+								<input type="hidden" class="js_orangNum" data-atrp="0" data-val="1">
+								<input type="hidden" class="js_orangNum" data-atrp="1" data-val="2 ---- 9">
+								<input type="hidden" class="js_orangNum" data-atrp="2" data-val="10 ---- 49">
+								<input type="hidden" class="js_orangNum" data-atrp="3" data-val="50 ----- max">
+
+								<table width="100%" border="0" cellpadding="0" cellspacing="1" class=""><tbody>
+								{if !$is_presale}
+									{if $goods.is_direct_sale == 1}
+									<tr>
+										<td height="25"><strong>{$lang.quantity}</strong></td>
+										<td>5+ {$lang.units}</td>
+										<td>{$lang.dropship_price}</td>
+										<td>{$lang.dropship_price}</td>
+										<td>{$lang.more}</td>
+									</tr>
+									<tr>
+										<td height="25">
+											<strong class="fb">{$lang.price_unit}</strong>
+										</td>
+										{foreach from=$volume_price_list item=price_list key=price_key name=vp}
+										{if $smarty.foreach.vp.index eq '0'}
+										<span class="my_shop_price none" id="pk{$price_key}"  orgp="{$price_list.format_price}">{$price_list.format_price}</span>
+										{else}
+										<td>
+											<span class="bizhong red"></span>
+											<span class="my_shop_price red" id="pk{$price_key}" orgp="{$price_list.format_price}">{$price_list.format_price}</span>
+										</td>
+										{/if}
+										{/foreach}
+										<td>{$lang.submit_inquiry}</td>
+									</tr>
+									{else}
+									<tr>
+										<td height="25"><strong>{$lang.quantity}</strong></td>
+										<td>2+ {$lang.units}</td>
+										<td>10+ {$lang.units}</td>
+										<td>{$lang.dropship_price}</td>
+										<td>{$lang.more}</td>
+									</tr>
+									<tr>
+										<td height="25">
+											<strong class="fb">{$lang.price_unit}</strong>
+										</td>
+										{foreach from=$volume_price_list item=price_list key=price_key name=vp}
+										{if $smarty.foreach.vp.index eq '0'}
+										<span class="my_shop_price none" id="pk{$price_key}"  orgp="{$price_list.format_price}"></span>
+										{else}
+										<td>
+											<span class="bizhong red"></span>
+											<span class="my_shop_price red" id="pk{$price_key}" orgp="{$price_list.format_price}">{$price_list.format_price}</span>
+										{/if}
+										</td>
+										{/foreach}
+										<td>{$lang.submit_inquiry}</td>
+									</tr>
+									{/if}
+								{/if}
+								</tbody></table>
+							</div><!--end .price_ladder_table
+							{/if}
+							<!--wholesale inquiry表单-->
+							<form method="post" name="pinglunform" action="/m-inquiry.htm" id="InquiryBox" class="g_inquiryBox mt30" novalidate>
+	                            <input id="act" value="save" type="hidden" name="act">
+	                            <input type="hidden" value="{$goods.goods_id}" name="goods_id">
+	                            <input id="act" type="hidden" name="lang" value="{$cur_lang}">
+
+	                            <table border="0" cellspacing="0" cellpadding="3" width="100%" align="center">
+									<tbody>
+										<tr>
+											<td height="30" width="207" align="right"><strong>*</strong>{$lang.name}:</td>
+											<td width="571"><input name="txtTrueName" id="txtTrueName" type="text" value="" size="50"/></td>
+										</tr>
+										<tr>
+											<td height="30" align="right"><p><strong>*</strong>{$lang.mobile_phone}:</p><p class="tr">({$lang.pls_inc_country_code})</p></td>
+											<td><input name="txtPhone" id="txtPhone" type="text"  value=""></td>
+										</tr>
+										<tr>
+											<td height="30" align="right"><strong>*</strong>{$lang.email}:</td>
+											<td><input name="txtEMail" id="txtEMail" type="text"  value="" size="60"></td>
+										</tr>
+										<tr>
+											<td height="30" align="right"><strong>*</strong>{$lang.your_target_price}:</td>
+											<td><input name="txtPrice" id="txtPrice" type="text"  value=""></td>
+										</tr>
+										<tr>
+											<td height="30" align="right"><strong>*</strong>{$lang.order_quantity}:</td>
+											<td><input name="txtQuantity" id="txtQuantity" type="text"  value=""></td>
+										</tr>
+										<tr>
+											<td height="30" align="right"><strong>*</strong>{$lang.country_state}:</td>
+											<td><input name="txtDelDay" id="txtDelDay" type="text"  value="" size="60"></td>
+										</tr>
+										<tr>
+											<td height="30" align="right">{$lang.company_name}:</td>
+											<td><input name="txtCorpName" id="txtCorpName" type="text" value=""></td>
+										</tr>
+										<tr>
+											<td height="100" align="right"><strong>*</strong>{$lang.write_an_inquiry}:</td>
+											<td>
+
+												<textarea class="required textareaBox" rows="6" name="txtMessage" id="txtMessage"></textarea>
+												<p> *{$lang.inquiry_msg} </p>
+											</td>
+										</tr>
+										<tr>
+											<td height="30" align="right"><strong>*</strong>{$lang.access_code}:</td>
+											<td>
+												<input name="verifycode" type="text" id="access_code" class="validate-code" value="">
+												<img id="img-verifycode" data-src="/fun/?act=verify" src="/fun/?act=verify"/>
+												<a href="javascript: void(0)" id="refresh-verifycode" class="word_fresh">{$lang.refresh}</a>
+												<button class="n_inquiryBtn redBtn ml10" type="submit"><em><span>{$lang.submit}</span></em></button>
+											</td>
+										</tr>
+									</tbody>
+	                            </table>
+	                        </form>
+						</div><!--end.goodsBlock_t-->
+
+					</section><!--end .goodsBlock-->
+
+
+
+				</div><!--end .pro_inf_l-->
+
+				<div class="new_goods" id="js_newGoods">
+					<dl class="clearfix">
+						<dt>
+							<table>
+								<tr>
+									<td>{$cat_name}&nbsp;<br>{$lang.new_arrivals}</td>
+								</tr>
+							</table>
+						</dt>
+						{foreach from=$search_congzu_goods_list item=list}
+						{php}
+				            $this->_tpl_vars['tmp_url'] = get_position_product_link($this->_tpl_vars['list']['url_title'], POSITION_SALE_RECOMMENDED_PRODUCTS_FOR_YOU, $this->_tpl_vars['list']['cat_id']);
+				        {/php}
+						<dd>
+							<a href="{$tmp_url}"><img src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$list.goods_grid}" class="js_lazy" height="120" alt="{$list.goods_title}"/></a>
+							<p><span class="bizhong"></span><span class="my_shop_price " orgp="{$list.shop_price}">{$list.shop_price}</span></p>
+						</dd>
+						{/foreach}
+					</dl>
+
+					{if $cur_lang == $default_lang}
+					   {if $relate_abc_keywords}
+					    <section class="popularSearch">
+					      <h4>{$lang.popular_searches}</h4>
+					        <div class="popular">
+								{foreach from=$relate_abc_keywords item=relate_abc_keywords_item name=relate_abc_keywords_name key=abc_relesd_word_key}
+							    	<a class="kw_results" href="{$relate_abc_keywords_item.url}">{$relate_abc_keywords_item.keyword}</a><span>{if $smarty.foreach.relate_abc_keywords_name.last!=($abc_relesd_word_key+1)}, {/if}</span>
+							    {/foreach}
+					        </div>
+					    </section>
+					   {/if}
+					{/if}
+
+				</div><!--end .new_goods-->
+
+			</div><!--end .pro_infoBox-->
+		</div><!--end .pro_main-->
+
+		<section class="bestSell mb20">
+			<header>
+				<h4>{$lang.best_selling}</h4>
+			</header>
+			<div class="goodsBlock_t" id="good_foot_proList">
+				<ul>
+					{foreach from=$hot_products item=hg}
+					<li>
+					{php}
+			            $this->_tpl_vars['tmp_url'] = get_position_product_link($this->_tpl_vars['hg']['url_title'], POSITION_SALE_CUSTOMERS_ALSO_BOUGHT, $this->_tpl_vars['hg']['cat_id']);
+			        {/php}
+						<div class="proImgBox">
+							<a href="{$tmp_url}"><img src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$hg.goods_img}" class="js_lazy" height="230"></a>
+						</div>
+						<p class="proName">
+							<a href="{$hg.url_title}">{$hg.goods_title}</a>
+						</p>
+						<p class="proPrice">
+							<span class="bizhong">USD</span>
+							<span class="my_shop_price" orgp="{$hg.shop_price}">{$hg.shop_price}</span>
+						</p>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+		</section><!--end .goodsBlock-->
+		
+		
+		<!--西服定制弹出框-->
+		{include file="suit_custom_size_pop.htm"}
+		
+		
+		{*隐藏域用来存储历史记录的*}
+		{if $goods.goods_number != 0}
+		<input type="hidden" id="hidden-goodsId" value="{$goods.goods_id}" />
+		<input type="hidden" id="hidden-history" value="{$goods.url_title}?i=00009_{$goods.cat_id}||{$goods.goods_img}||{$goods.shop_price}" />
+		{/if}
+	</div><!--end .mainBox-->
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>         
+    
+        <script>
+        var itemId = {$goods.goods_id};
+        </script>
+	{literal}
+	<script>
+       $.getJSON('http://click.appinthestore.com/hits.php?act=goods_stat&jsoncallback=?&source_id=1&website=sammydress&itemId=' + itemId,function(data){});  
+	$LAB
+		.script(JS_IMG_URL+"/minjs/jquery.jcarousellite.min.js")
+		//.script(JS_IMG_URL+"/minjs/jquery.jqzoom.min.js")
+		.script(JS_IMG_URL+"/minjs/jquery.zoom.min.js")
+		.wait()
+		.script(JS_IMG_URL+"/minjs/goods.min.js?2015052601")
+		.script(JS_IMG_URL+"/minjs/goods_gift.min.js?2015080401")
+	
+		.wait()
+		//婚纱定制
+		.script(JS_IMG_URL+"/minjs/customWedding.min.js")
+		.wait()
+		//西服定制弹出框中相关操作
+		.script(JS_IMG_URL+"/minjs/customWestern.min.js")
+		.wait(function(){
+			//弹出西服定制框
+			$("#custom_Mode").click(function(){
+				var $this = $(this);
+
+				if($this.attr("flag")==1){
+					$this.attr("checked",true);
+				}
+
+				$.layer({
+					type : 1,
+					title : "PRIVATE TAILOR",
+					border : [1, 1, '#ddd', true],
+					shade : [0.8 , '#000' , true],
+					move : ['.xubox_title' , false],
+					area: ['840px','500px'],
+					offset: [($(window).height()-500)/2 +"px" ,'50%'],
+					page : {dom : '#s-ptailor'},
+					close : function(index){
+						if($this.attr("flag") !=1){$this.attr("checked",false);}
+						layer.close(index);
+					},
+					success : function(layer){
+						$("#s-ptailor").height("440px").css("overflow-y","auto");
+						$("#s-custom_size").val()==0?$(".custom_unit").text("in"):$(".custom_unit").text("cm");
+					}
+				});
+
+			})
+		})
+		.wait(function(){
+			//元素懒加载
+			GLOBAL.lazyLoad.creatEle("textarea.js_slide");
+			//tips提示
+			$(".js_tips").hover(function() {
+				var $this = $(this);
+
+				GLOBAL.PopObj.tipsShow({
+					Obj : $this,
+					msg : $this.data("tips")
+				})
+			}, function() {
+				/* Stuff to do when the mouse leaves the element */
+				GLOBAL.PopObj.closeTipsShow();
+			});
+
+			setTimeout(function(){
+				GLOBAL.LoadJS("https://connect.facebook.net/en_US/all.js#xfbml=1&appId=470157883020077","facebook-jssdk");
+				//GLOBAL.LoadJS("//assets.pinterest.com/js/pinit.js","g_pint");//分享到pinit
+				GLOBAL.LoadJS("//platform.twitter.com/widgets.js","g_Tweet");//分享到Tweet
+				GLOBAL.LoadJS("https://apis.google.com/js/plusone.js","g_google");//分享到Google+
+				GLOBAL.LoadJS("http://platform.tumblr.com/v1/share.js","g_tumblr");//分享到tumblr
+			},2000)
+		})
+		.script("http://userapi.com/js/api/openapi.js?50")
+		.wait(function(){
+			VK.init({apiId: 3049484, onlyWidgets: true});
+			VK.Widgets.Like("vk_like", {type: "button",height: 20});
+		})
+        .wait(function(){
+            fbq(
+                'track',
+                'ViewContent',
+                {
+                  content_type: 'product',
+                  content_ids: ['{/literal}{$goods.goods_sn}{literal}']
+                }
+              );
+              $(function(){
+                  function onClick(event) {
+                      fbq(
+                        'track',
+                        'AddToCart',
+                        {
+                          content_type: 'product',
+                          content_ids: ['{/literal}{$goods.goods_sn}{literal}']
+                        }
+                      );
+                  }
+                  $('#new_addcart').click(onClick); //快速加入购物车的ID
+          //		$('#new_addcart').click(onClick);    //加入购物ID	
+              });
+        });
+	</script>
+    
+    <script>
+	
+	</script>
+
+	{/literal}
+    <script type="text/javascript">
+        // required object
+        {literal}
+        window.ad_product = {
+        {/literal}
+            "id": "{$goods.goods_sn}",
+            "vendor": "",
+            "price": "{if $goods.is_direct_sale == 1}{$goods.bulk_price}{else}{$goods.shop_price}{/if}",
+            "url": "{$goods.url_title}",
+            "picture": "{$goods.original_img}",
+            "name": "{$goods.goods_title}",
+            "category": "{$top_cat_id}"
+        {literal}
+        };
+
+        window._retag = window._retag || [];
+        window._retag.push({code: "9ce8886b16", level: 2});
+        (function () {
+            var id = "admitad-retag";
+            if (document.getElementById(id)) {return;}
+            var s = document.createElement("script");
+            s.async = true; s.id = id;
+            var r = (new Date).getDate();
+            s.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//cdn.trmit.com/static/js/retag.min.js?r="+r;
+            var a = document.getElementsByTagName("script")[0]
+            a.parentNode.insertBefore(s, a);
+        })()
+        {/literal}
+    </script>
+	{include file="tongji.htm"}
+</body>
+
+</html>

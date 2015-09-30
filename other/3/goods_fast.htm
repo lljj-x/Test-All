@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	<meta charset="UTF-8">
+	<title>{$goods.goods_title}</title>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}/mincss/category_min.css?2015050701">
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}/mincss/jquery.mCustomScrollbar_min.css">
+	{literal}
+	<style>
+		.backToTop{ display: none !important;}
+	</style>
+	{/literal}
+</head>
+<body style="background-color:#fff;">
+	<div id="gf_main">
+		<!--good img-->
+		<div class="gf_img" id="js_gf_img">
+			<img src="{$goods.original_img}" height="430"/>
+		</div>
+		
+		<h1>{$goods.goods_title}</h1>
+
+		<!--good price-->
+		<div class="gf_price clearfix">
+			<p class="curPrice fl"><span class="bizhong"></span><span id="unit_price" class="my_shop_price " orgp="{if $goods.is_direct_sale == 1}{$goods.bulk_price}{else}{$goods.shop_price}{/if}">{if $goods.is_direct_sale == 1}{$goods.bulk_price}{else}{$goods.shop_price}{/if}</span></p>
+			<p class="costPrice fl"><span class="bizhong"></span><span id="unit_price" class="my_shop_price " orgp="{$goods.market_price}">{$goods.market_price}</span></p>
+		</div><!--end .gf_price-->
+		
+		<!--属性选择-->
+		{if $specification || $have_same_goods eq 1}
+		{assign var=multicolor_num value=$same_goods_list.1.multicolor_num}
+		<div class="gf_property">
+			<ul class="click-attr clearfix">
+				{foreach from=$same_goods_list item=goods_type key=key1}
+				  <li>
+					 
+						<div class="choose_wrap {if $goods_type.name==$lang.Color}choose_color_wrap{/if}">
+				   			<strong class="fb fl pr5 tit">{$goods_type.name}:</strong>
+							<ul
+							{if $goods_type.name==$lang.Color}
+							 id="js_property_color" class="choose_list choose_color clearfix"
+							{elseif $goods_type.name==$lang.Size}
+							 id="js_property_size" class="choose_list choose_size clearfix {if $custom_size_flag=='1'} disabled{/if}"
+							{/if}
+							>
+								{foreach from=$goods_type.list item=value key=key}
+								
+								<li class="item {if $goods.goods_id eq $key}selected{/if}  " >
+					   				<a href="javascript:void(0)" title="{$value.attr_value}" >{if $goods_type.name == $lang.Size}{$value.attr_value}{else}{if $value.attr_value_en=='RANDOM COLOR' || $value.attr_value_en=='COLOR ASSORTED' || $value.attr_value_en=='RANDOM COLOR PATTERN'}<span class="pl5 pr5">{$value.attr_value}</span>{else}<img src="{$value.goods_thumb}" height="40">{/if}{/if}</a>
+					   				<b></b>
+					   			</li>
+								
+							{/foreach}
+							</ul>
+						</div>
+
+  					 {*
+					 {if $cur_lang == 'en' || $multicolor_num>1}
+				     <select name="select_same_goods_{$key}" class="js_property_secelt">
+				          <option  value="">{$lang.Please_select}&nbsp;{$goods_type.name}</option>
+				          {foreach from=$goods_type.list item=value key=key}
+				          <option value="{$key}" {if $goods.goods_id eq $key}selected{/if}>
+				          {$value.attr_value}{if $value.attr_price != 0}{if $value.attr_price gt 0}+{elseif $value.attr_price lt 0}-{/if}<B> USD {$value.spe_format_price}</B>{/if}
+				          </option>
+				          {/foreach}
+				      </select>
+					  {else}
+					
+					  <!-- 下拉选择属性 改成卡片式选择属性 --> 
+				  	 	<strong class="fb fl pr5 tit">{$goods_type.name}:</strong>
+						<ul name="select_same_goods_{$key}" class="js_property_secelt clearfix" id="select_custom_size" {if $goods_type.name==$lang.Size}{if $custom_size_flag=='1'}disabled{/if}{/if}>
+							{foreach from=$goods_type.list item=value key=key}
+							    {if $value.color_size_disable==1}
+								<li value="" class="product_out" style="background-color:{$value.color_code}" title="{$value.attr_value}"><a href="javascript:void(0)">{if $goods_type.name == $lang.Size}{$value.attr_value}{/if}</a></li>
+								{else}
+								<li style="background-color:{$value.color_code}" value="{$key}" class="card_attr {if $goods.goods_id eq $key}selected{/if} 
+								{if $value.color_code=='Multicolor'}multicolor c_colorbg{/if}
+								{if $value.color_code=='Leopard'}leopard c_colorbg{/if} 
+								{if $value.color_code=='Camouflage'}camouflage c_colorbg{/if}" title="{$value.attr_value}">
+									<a href="javascript:void(0)">{if $goods_type.name == $lang.Size}{$value.attr_value}{else}&nbsp;&nbsp;{/if}</a>
+								</li>
+								{/if}
+							{/foreach}
+						</ul>
+						
+						<div class="choose_wrap">
+				   			<strong class="fb fl pr5 tit">{$goods_type.name}:</strong>
+							
+							{if $goods_type.name==$lang.Color}
+							<ul id="js_property_color" class="choose_list choose_color clearfix">
+							{else if $goods_type.name==$lang.Size}
+							<ul id="js_property_size" class="choose_list choose_size clearfix {if $custom_size_flag=='1'} disabled{/if}">
+							{/if}
+							{foreach from=$goods_type.list item=value key=key}
+								
+								<li class="item {if $value.color_code=='Multicolor'}c_colorbg multicolor {/if} {if $value.color_code=='Leopard'}c_colorbg leopard {/if} {if $value.color_code=='Camouflage'}c_colorbg camouflage {/if} {if $goods.goods_id eq $key}selected{/if}  "   style="background-color:{$value.color_code}">
+					   				<a href="javascript:void(0)" title="{$value.attr_value}" >{if $goods_type.name == $lang.Size}{$value.attr_value}{else}&nbsp;&nbsp;{/if}</a>
+					   				<b></b>
+					   			</li>
+								
+							{/foreach}
+							<ul>
+						</div>
+						
+						{/if}
+						*}
+				   </li>
+				{/foreach}
+
+				<li class="none">
+					{foreach from=$specification item=spec key=spec_key} 
+              			<span {if $spec.is_public eq 1}style="display:none" {/if}>
+                		<strong>{$spec.name}:</strong>
+                		{* 判断属性是复选还是单选 *}
+
+                			{if $spec.attr_type eq 1} 
+
+                				{if $cfg.goodsattr_style eq 1} 
+
+                					{foreach from=$spec.values item=value key=key} 
+	                					<label for="spec_value_{$value.id}">
+	                  					<input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if  $smarty.get.atrid eq $value.id }checked{/if}  class="spec_{$spec_key}"  lab_name="{$spec.name}"/>
+	                  					{$value.label} [{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}] </label>
+                					{/foreach}
+                					<input type="hidden" name="spec_list" value="{$key}" />
+
+                				{else}
+	               					<!-- <select name="spec_{$spec_key}"  class="spec_{$spec_key}" onChange="show_custom({$spec_key},{$goods.goods_id});" lab_name="{$spec.name}" style="height:19px; font-size:11px; width:90px;" isnes="{$spec.isnes}"> -->
+	                				<select name="spec_{$spec_key}"  class="spec_{$spec_key}" lab_name="{$spec.name}" style="height:19px; font-size:11px; width:90px;" isnes="{$spec.isnes}">
+	                  					<option  value="">{$lang.Please_select}</option>
+										{foreach from=$spec.values item=value key=key}
+											<option value="{$value.id}" subprice="{$value.price}" {if $smarty.get.atrid eq $value.id or $spec.values|@count eq 1}selected{/if}>
+											{$value.label}{if $value.price gt 0}+{elseif $value.price lt 0}-{/if}{if $value.price neq 0}<B> USD {$value.format_price}</B>{/if}
+											</option>
+										{/foreach}
+	                				</select>
+	                				<input type="hidden" name="spec_list" value="{$key}" />
+                				{/if}
+
+                			{else}
+                				{foreach from=$spec.values item=value key=key}
+                					<label for="{if $value.id eq 'custom made'}customxx{$spec_key}{else}spec_value_{$value.id}{/if}">
+                  					<input type="checkbox" name="spec_{$spec_key}" value="{$value.id}"  class="spec_{$spec_key}"  {if $smarty.get.atrid eq $value.id }checked{/if} {if $value.id eq 'custom made'} id="customxx{$spec_key}"  onClick="show_check_custom({$spec_key})" {else} id="spec_value_{$value.id}" {/if}  lab_name="{$spec.name}"/>
+                  					{$value.label} {if $value.price gt 0}+{elseif $value.price lt 0}-{/if}<B> USD {$value.format_price}</B> </label>
+                				{/foreach}
+                				<input type="hidden" name="spec_list" value="{$key}" />
+                			{/if}
+                		</span>
+                	{/foreach}
+				</li>
+			</ul>
+
+			<script type="text/javascript">
+				 var ColorSize = [{$same_goods_list[0].ColorSizeJson}]
+			</script>
+		</div><!--end .gf_property-->
+		{/if}
+		<div class="order_quantity">
+			<span>{$lang.qty}:</span>
+			<div class="order_q_box">
+				<input class="text fl" id="js_input_quantity"  value="1" />
+				<a href="javascript:void(0);" class="c_tagbg btn_add">add 1</a>
+				<a href="javascript:void(0);" class="c_tagbg btn_reduce">reduce 1</a>
+			</div>
+			{* 假发的一个指引入口 *}
+			{if $goods.cat_id==11199}
+			<div class="wig-style-guide"><a href="{$DOMAIN}/m-promotion-active-130.htm" target="_blank">STYLE GUIDE</a></div>
+			{/if}
+		</div>
+
+		<div class="order_btn clearfix cart_handle">
+			{if $goods.goods_number == 0}
+			{if $goods.is_on_sale == 0}
+			{else}
+			<!--缺货 显示到货通知-->
+			<a href="/m-notify_in_stock-id-{$goods.goods_id}.htm"  class="blackBtn fl" id="js_gf_outStock">
+				<span>{$lang.back_in_stock_notice}</span>
+			</a>
+			{/if}
+			{else}
+			<!--有货-->
+			<p class="fl add_cart_msg{$goods.goods_id}">
+				<a href="javascript:void(0)" id="new_addcart" class="redBtn" gid="{$goods.goods_id}" num = "{if $goods.is_direct_sale == 1}5{else}1{/if}" attrchage="{$attrkey}"  ref="1" rel="nofollow" srcpage="1">
+					<span>{$lang.add_to_bag}</span>
+				</a>
+			</p>
+			{/if}
+			<!--加入收藏夹-->
+			<a href="javascript:void(0)" class="addToFavBtn fl" data-src="/fun/index.php?act=drop_to_collect&id={$goods.goods_id}"><i class="c_tagbg"></i>{$lang.add_to_fav}</a>
+		</div><!--end .order_btn-->
+		
+		<div class="albumListWarp">
+			<div class="albumList">
+				<ul>
+					<li>
+						<img src="{$goods.goods_thumb}" data-bigsrc="{$goods.original_img}" height="95" />
+					</li>
+					{foreach from=$pictures item=val}
+					<li>
+						<img src="{if $val.thumb_url}{$val.thumb_url}{else}{$val.img_url}{/if}" data-bigsrc="{$val.img_original}" height="95" />
+					</li>
+					{/foreach}
+				</ul>
+			</div><!--end .albumList-->
+			{if count($buyers_show)>0}
+			<div class="albumList">
+				<ul>
+					{foreach from=$buyers_show item=val}
+						{if $val.type eq 'pic'}
+						<li>
+							<img src="{$val.thumb_paths}" data-bigsrc="{$val.paths}" height="95" />
+						</li>
+						{elseif $val.type eq 'video'}
+						<!--如果是视频-->
+						<li class="video">
+							<i class="c_tagbg"></i>
+							<img src="{$val.thumb_paths}" data-bigsrc="{$val.paths}" height="95" />
+						</li>
+						{/if}
+					{/foreach}
+				</ul>
+			</div><!--end .albumList-->
+			{/if}
+		</div><!--end.albumListWarp-->
+
+		{if $lurl}
+		<a class="prev_goods" href="{$lurl}"><i class="c_tagbg"></i></a><!--上一个商品-->
+		{/if}
+		{if $rurl}
+		<a class="next_goods" href="{$rurl}"><i class="c_tagbg"></i></a><!--下一个商品-->
+		{/if}
+
+		{if $volume_price_list and $goods.promote_price lte 0 and $goods.is_groupbuy lte 0}
+		<!--阶梯价格-->
+		<div class="price_ladder_table none">
+			<p class="fb">{$lang.bulk_order_discount}:</p>
+			
+			<input type="hidden" class="js_orangNum" data-atrp="0" data-val="1">
+			<input type="hidden" class="js_orangNum" data-atrp="1" data-val="2 ---- 9">
+			<input type="hidden" class="js_orangNum" data-atrp="2" data-val="10 ---- 49">
+			<input type="hidden" class="js_orangNum" data-atrp="3" data-val="50 ----- max">
+			
+			<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd">
+				<tbody>
+				{if $goods.is_direct_sale == 1}
+				<tr>
+					<td height="25"><strong>{$lang.quantity}</strong></td>
+					<td>5+ {$lang.units}</td>
+					<td>{$dropship_price}</td>
+					<td>{$dropship_price}</td>
+					<td>{$lang.more}</td>
+				</tr>
+				<tr>
+					<td height="25">
+						<strong class="fb">{$lang.price/unit}</strong>
+						<span class="my_shop_price none" id="pk0" orgp="10.65"></span>
+					</td>
+					{foreach from=$volume_price_list item=price_list key=price_key name=vp}
+					<td>
+						{if $smarty.foreach.vp.index eq '0'}
+						<span class="my_shop_price none"  id="pk{$price_key}"  orgp="{$price_list.format_price}">
+						{else}
+						<span class="bizhong red">USD</span> 
+						<span class="my_shop_price red" id="pk{$price_key}" orgp="{$price_list.format_price}">{$price_list.format_price}</span>
+						{/if}
+					</td>
+					{/foreach}
+					<td>
+						<a href="/{$cur_lang_url}m-inquiry.htm?{$goods.goods_id}" class="unl blue" rel="nofollow">{$lang.wholesale_inquiry}</a>
+					</td>
+				</tr>
+				
+				<tr>
+					<td height="25"><strong>{$lang.quantity}</strong></td>
+					<td>2+ {$lang.units}</td>
+					<td>10+ {$lang.units}</td>
+					<td>{$dropship_price}</td>
+					<td>{$lang.more}</td>
+				</tr>
+				<tr>
+					<td height="25">
+						<strong class="fb">Price/Unit</strong>
+						<span class="my_shop_price none" id="pk0" orgp="10.65"></span> 
+					</td>
+					{foreach from=$volume_price_list item=price_list key=price_key name=vp}
+					<td>
+						{if $smarty.foreach.vp.index eq '0'}
+						<span class="my_shop_price none"  id="pk{$price_key}"  orgp="{$price_list.format_price}">{$price_list.format_price}</span>
+						{else}
+						<span class="bizhong red">USD</span> 
+						<span class="my_shop_price red" id="pk{$price_key}" orgp="{$price_list.format_price}">{$price_list.format_price}</span>
+						{/if}
+					</td>
+					{/foreach}
+					<td>
+						<a href="/{$cur_lang_url}m-inquiry.htm?{$goods.goods_id}" class="unl blue" rel="nofollow">{$lang.wholesale_inquiry}</a>
+					</td>
+				</tr>
+				{else}
+				<tr>
+					<td height="25"><strong>{$lang.quantity}</strong></td>
+					<td>2+ {$lang.units}</td>
+					<td>10+ {$lang.units}</td>
+					<td>{$lang.dropship_price}</td>
+					<td>{$lang.more}</td>
+				</tr>
+				<tr>
+					<td height="25">
+						<strong class="fb">{$lang.price_unit}</strong>
+					</td>
+					{foreach from=$volume_price_list item=price_list key=price_key name=vp}
+					{if $smarty.foreach.vp.index eq '0'}
+					<span class="my_shop_price none" id="pk{$price_key}"  orgp="{$price_list.format_price}"></span> 
+					{else}
+					<td>
+						<span class="bizhong red"></span> 
+						<span class="my_shop_price red" id="pk{$price_key}" orgp="{$price_list.format_price}">{$price_list.format_price}</span>
+					{/if}
+					</td>
+					{/foreach}
+					<td>{$lang.submit_inquiry}</td>
+				</tr>
+				{/if}
+			</tbody></table>
+		</div>
+		{/if}
+		<p class="tr">
+			<a href="javascript:void(0);" class="gotoFullDetail" data-url="/{$cur_lang_url}product{$goods.goods_id}.html"> &gt;&gt;{$lang.VIEW_FULL_DETAILS}</a>
+		</p>
+		{*产品页链接*}
+	</div><!--end .gf_main-->
+
+	
+	<script src="/data-cache/currency_huilv.js"></script>
+	<script src="/data-cache/lang_currency.js"></script>
+
+	<script src="{$imgcache_url}/minjs/jquery.common_plug.min.js"></script>
+	<script src="{$imgcache_url}/minjs/jquery.layer.min.js"></script>
+	<script src="{$imgcache_url}/minjs/languege/{$cur_lang}/var_languages.js?20140606901"></script>
+
+	<script src="{$imgcache_url}/minjs/common.min.js?2015032601"></script>
+	{literal}
+	<script type="text/javascript">
+		$LAB.script(JS_IMG_URL+"/minjs/jquery.mousewheel.min.js")
+			.script(JS_IMG_URL+"/minjs/jquery.mCustomScrollbar.min.js")
+			.wait(function(){})
+			.script(JS_IMG_URL+"/minjs/goodsFast.min.js")
+	</script>
+	{/literal}
+    
+    {include file="tongji.htm"}
+	{literal}
+	<script>
+	$(function(){
+		function onClick(event) {
+			fbq(
+			  'track',
+			  'AddToCart',
+			  {
+				content_type: 'product',
+				content_ids: ['{/literal}{$goods.goods_sn}{literal}']
+			  }
+			);
+		}
+		$('#new_addcart').click(onClick); //new_addcart 加入购物车按钮ID
+	});
+	</script>
+	{/literal}
+</body>
+</html>

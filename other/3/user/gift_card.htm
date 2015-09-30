@@ -1,0 +1,110 @@
+<div id="myGift"> 
+		
+	<section class="allInfo">
+		<ul class="title">
+			<li class="on"><a href="javascript:void(0);">{$lang.gift_card}</a></li>
+			<li><a href="javascript:void(0);">{$lang.history}</a></li>
+		</ul>
+		<div class="content">
+			<div class="cnt cnt1 cnt_on">
+				<table>
+					<tr class="title">
+						<th>{$lang.card_no}</th>
+						<th>{$lang.card_value}</th>
+						<th>{$lang.balance}</th>
+						<th>{$lang.date}</th>
+						<th>{$lang.opration}</th>
+					</tr>
+					{foreach from=$gift_list item=gift}
+					<tr class="info">
+						<td class="td1">{$gift.card_no}</td>
+						<td class="td2"><span class="bizhong"></span><span class="my_shop_price" orgp="{$gift.card_value}">{$gift.card_value}</span></td>
+						<td class="td3"><span class="bizhong"></span><span class="my_shop_price" orgp="{$gift.balance}">{$gift.balance}</span></td>
+						<td class="td4">{$gift.add_time}</td>
+						<td class="td5 viewhistory"><a href="javascript:void(0);" data-url="m-users-a-gift_card-card_id-{$gift.id}.htm">{$lang.view_history}</a></td>
+					</tr>
+					{/foreach}
+				</table>
+			</div>
+			
+			<div class="cnt cnt2">
+				<table id="history">
+					<tr class="title">
+						<th>{$lang.card_no}</th>
+						<th>{$lang.card_value}</th>
+						<th>{$lang.outgoing}</th>
+						<th>{$lang.balance}</th>
+						<th>{$lang.date}</th>
+					</tr>
+					{foreach from=$gift_history_list item=gift}
+					<tr class="info">
+						<td class="td1">{$gift.card_no}</td>
+						<td class="td2"><span class="bizhong"></span><span class="my_shop_price" orgp="{$gift.card_value}">{$gift.card_value}</span></td>
+						<td class="td3"><span class="bizhong"></span><span class="my_shop_price" orgp="{$gift.outgo}">{$gift.outgo}</span></td>
+						<td class="td3"><span class="bizhong"></span><span class="my_shop_price" orgp="{$gift.balance}">{$gift.balance}</span></td>
+						<td class="td4">{$gift.add_time}</td>
+					</tr>
+					{/foreach}
+				</table>
+			</div>
+			
+			<div class="pages tc">
+				
+			</div>
+		</div>
+	</section>
+</div>
+{literal}
+<script type="text/javascript">
+$('.allInfo .title li').click(function(){
+	$('.allInfo .title li').removeClass('on');
+	$(this).addClass('on');
+	var index = $(this).index();
+	$('.allInfo .cnt').hide();
+	$('.allInfo .cnt').eq(index).fadeIn();
+});
+
+$(".viewhistory a").click(function(){
+	var url = $(this).data("url");
+	$.get(url, function(data){
+	  updateHistory(data, true);
+	},'json');
+});
+
+$(".allInfo ul[class=title] li:eq(1)").click(function(){
+	var sign = $(this).attr('sign');
+    if(sign){
+	  $.get('/m-users-a-gift_card-ajax-1.htm', function(data){
+	  	updateHistory(data, false);
+	  	$(".allInfo ul[class=title] li:eq(1)").attr('sign', false);
+	  },'json');
+	}
+});
+
+function updateHistory(data,changeTab){
+	  if(changeTab){
+		  // $(".allInfo ul[class=title] li:eq(1)").trigger('click');
+		  $('.allInfo .title li').removeClass('on');
+		  $(".allInfo ul[class=title] li:eq(1)").addClass('on');
+		  $('.allInfo .cnt1').hide();
+		  $('.allInfo .cnt2').fadeIn();
+	  	  $("#history tr:gt(0)").remove();
+	  	  $(".allInfo ul[class=title] li:eq(1)").attr('sign', 1);
+	  }
+	  var html = '';
+	  if(data){
+	  	for(var i in data){
+	  		html += '<tr class="info">'
+						+'<td class="td1">'+data[i].card_no+'</td>'
+						+'<td class="td2"><span class="bizhong"></span><span class="my_shop_price" orgp="'+data[i].card_value+'">'+data[i].card_value+'</span></td>'
+						+'<td class="td3"><span class="bizhong"></span><span class="my_shop_price" orgp="'+data[i].outgo+'">'+data[i].outgo+'</span></td>'
+						+'<td class="td3"><span class="bizhong"></span><span class="my_shop_price" orgp="'+data[i].balance+'">'+data[i].balance+'</span></td>'
+						+'<td class="td4">'+data[i].add_time+'</td>'
+					+'</tr>';
+	  	}
+	  }
+	  $("#history tr:gt(0)").remove();
+	  $("#history").append(html);
+}
+</script>
+{/literal}

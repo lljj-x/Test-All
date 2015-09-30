@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+  {include file="top.htm"}
+  <link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/narrow_min.css">
+  {include file="foot_common_js.htm"}
+</head>
+<body>
+
+<header id="header">
+    {include file="public_top.htm"}
+</header>
+
+
+{if $active == 58}
+<div style="width:1000px; margin:10px auto; clear:both;">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="border:#000000 5px solid;">
+  <tr>
+    <td><img src="{$imgcache_url}images/shore/aaa.jpg" alt="Show off your SammyStyle, win 500 S POINTS" width="100%" height="172" border="0" style="vertical-align:top;"></td>
+  </tr>
+  <tr>
+    <td><img src="{$imgcache_url}images/shore/bb.jpg" alt="Show off your SammyStyle, win 500 S POINTS" width="100%" height="171" border="0" style="vertical-align:top;"></td>
+  </tr>
+  <tr>
+    <td><img src="{$imgcache_url}images/shore/c.jpg" alt="Show off your SammyStyle, win 500 S POINTS" width="100%" height="172" border="0" style="vertical-align:top;"></td>
+  </tr>
+  <tr>
+    <td><table width="930" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="20"></td>
+      </tr>
+      <tr>
+        <td style="padding-bottom:30px; font-family:Verdana, Geneva, sans-serif; font-size:24px; color:#000000;">Activity Process</td>
+      </tr>
+      <tr>
+        <td><table width="820" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="122"><img src="{$imgcache_url}images/shore/d.jpg" alt="Show off your SammyStyle, win 500 S POINTS" width="117" height="92" border="0" style="vertical-align:top;"></td>
+            <td width="250" align="center" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size:18px; color:#000000;">SHOPPING</td>
+            <td width="448" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size:18px; color:#000000;">Shop the Latest Styles in Sammydress</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="center" valign="middle"></td>
+            <td align="center" valign="middle"><img src="{$imgcache_url}images/shore/g.jpg" alt="Show off your SammyStyle, win 500 S POINTS" width="27" height="52" border="0" style="vertical-align:top;"></td>
+          </tr>
+          <tr>
+            <td><img src="{$imgcache_url}images/shore/e.jpg" alt="Show off your SammyStyle, win 500 S POINTS" width="117" height="92" border="0" style="vertical-align:top;"></td>
+            <td align="center" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size:18px; color:#000000;">PHOTOS</td>
+            <td align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size:18px; color:#000000;">Take photos and upload them to comments pages</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="center" valign="middle"></td>
+            <td align="center" valign="middle"><img src="{$imgcache_url}images/shore/g.jpg" alt="Show off your SammyStyle, win 500 S POINTS" width="27" height="52" border="0" style="vertical-align:top;"></td>
+          </tr>
+          <tr>
+            <td><img src="{$imgcache_url}images/shore/f.jpg" alt="Show off your SammyStyle, win 500 S POINTS" width="122" height="122" border="0" style="vertical-align:top;"></td>
+            <td align="center" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size:18px; color:#000000;">CATWALK</td>
+            <td align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size:18px; color:#000000;">Staff review photos and add them to the Buyer's Show, <br>
+              awarding 500 Points directly</td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td height="20"></td>
+      </tr>
+      <tr>
+       <td style="padding-bottom:20px; font-family:Verdana, Geneva, sans-serif; font-size:24px; color:#000000;">Activity Rules</td>
+      </tr>
+      <tr>
+        <td align="left" valign="middle" style="padding:0 0 10px 10px; font-family: Arial, Helvetica, sans-serif; font-size:16px; color:#000000; line-height:24px;">1. All photos must be shot in color; they should be well-lit and clear.<br>
+2. Photos must feature the model as well as Sammydress clothing and accessories.<br>
+3. Only photos of Sammydress products will be accepted.<br><br>
+</td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</div>
+{/if}
+
+
+<footer>
+    {include file="footerhelp.htm"}
+    <div class="f_copyrit tc mb10">Copyright © 2011-2015 <span id="welcome-msg-name-foot">SammyDress.com</span>. All Rights Reserved.</div>
+
+    {literal}
+    <script type="text/javascript">
+        var query_url = window.location.href;
+
+        //aff source
+        var aff_source = _GET('utm_source', query_url);//"{$smarty.get.utm_source}";
+
+        if(aff_source)
+        {
+            $.cookie('aff_source',aff_source, {expires: 60, path: '/',domain:COOKIESDIAMON});
+        }
+        //aff source end
+    </script>
+    {/literal}
+  </footer>
+</body>
+
+</html>

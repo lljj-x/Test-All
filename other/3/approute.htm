@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<iframe style="display:none"  height="0" width="0" id="loader"></iframe>
+	
+	<script type="text/javascript">
+		var AndroidDown = {
+		    sUserAgent  :  navigator.userAgent.toLocaleLowerCase(),
+		    
+		    isAndroid:function(){
+		       
+		        return this.sUserAgent.match(/android/i) == "android";
+		    },
+		    iphone:function(){
+		        return this.sUserAgent.match(/iphone os/i) == "iphone os";
+		    },
+		    ipad:function(){
+		    	return this.sUserAgent.match(/ipad/i) == "ipad";
+		    },
+		    ini:function(){
+		        var that = this;
+		        
+		        if(this.isAndroid() ){
+		        	window.location.href = "market://details?id=com.globalegrow.app.sammydress"
+		        }else if(this.iphone()){
+		        	document.getElementById("loader").src = "sammydress://start";
+		        	
+		        	//$("#loader").attr("src",'sammydress://start');
+		        	 window.setTimeout(function (){  window.location.href = "https://itunes.apple.com/us/app/sammydress/id966062498?ls=1&mt=8" ; }, 1000);
+		        }else if(this.ipad()){
+		        	document.getElementById("loader").src = "sd959878332CheckInstallation://start";
+		        	//$("#loader").attr("src",'sammydress://start');
+		        	window.setTimeout(function (){  window.location.href = "https://itunes.apple.com/us/app/sammydress/id970849297?ls=1&mt=8" ; }, 1000);
+		        }		        
+		    }
+		}
+		AndroidDown.ini();
+	</script>
+</body>
+</html>

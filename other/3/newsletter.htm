@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="mainBox">
+	
+		<div class="path">
+			<a href="{$DOMAIN}{$cur_lang_url}">{$lang.home}</a>
+			<i>&gt;</i>
+			<span>{$lang.Newsletter}</span>
+		</div>
+		<section class="newsletterList">
+			<h4>{$lang.Newsletter}</h4>
+			<ul>
+				{foreach from=$data item=item}
+				<li>
+					<span class="fr">{$item.date}</span>
+					<div class="newsletter_info">
+						<a href="{$item.url}" class="fl"><img src="{$item.img}" alt="" width="50" height="50" /></a>
+						<p><a href="{$item.url}" class="fb blue" >{$item.title}</a></p>
+						<p> {$item.description}</p>
+					</div>
+				</li>
+				{/foreach}
+			</ul>
+		</section>
+		
+		
+	</div><!--end .mainBox-->
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css?2014082901">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+	
+	<div id="luckerBox">
+		<div class="banner">
+			<div class="float icon"><a href="m-lucker.html?type=2" target='_blank'>Activity Rules</a></div>
+		</div>
+
+		<div class="mainText">
+			<div class="voice clearfix">
+				<div class="voiceRight"><i class="icon"></i>The Most Recent Winners (updated in real-time):</div>
+				<div class="voiceLis" id="js_voiceLis" style="widht:720px">
+					<ul  class="slides">
+						{$prize_list}
+					</ul>
+				</div>
+			</div>
+
+			{if $type==2}
+			<section>
+				<header class="title">
+					<h4>Activity Rules</h4>
+					<h5 class="tipsH">The competition starts on August 29!</h5>
+				</header>
+				<div class="tipsR">
+					<p class="tips_title">Rules:</p>
+					<ul>
+						<li>1. Customers must log in to participate. </li>
+						<li>2. A total of eight mobile-exclusive products are involved. </li>
+						<li>3. For each product, we have concealed one of the digits in its price, e.g. $X.99.</li>
+						<li>4. Guess the price by choosing one of the five digits shown, e.g. 1, 2, 3, 4 and 5, to replace the hidden digit. </li>
+						<li>5. You can only make one guess for each product.</li>
+						<li>6. Each customer can make a maximum of three guesses, i.e. guess once for any 3 products of their choice (so choose the items carefully).</li>
+						<li>7. Every time you guess correctly, a pop up will appear and you’ll randomly win one of the prizes below. It’s possible to win three prizes if you guess correctly every time!</li>
+					</ul>
+				</div>
+
+				<div class="tipsR">
+					<p class="tips_title">Prizes (allocated randomly to winners):</p>
+					<ul>
+						<li>1. Grand Prize: $50 cash coupon</li>
+						<li>2. Second Prize: 500 S points (500 S points = $10)</li>
+						<li>3. Third Prize: $5 cash coupon </li>
+						<li>4. Runner up Prize: 10% off coupon </li>
+						
+					</ul>
+				</div>
+
+				<div class="tipsR">
+					<p class="tips_title">Using the prizes:</p>
+					<ul>
+						<li>1. S points will be sent to your account immediately.</li>
+						<li>2. Cash coupon codes will appear in a pop-up. Please note down this code, they will not be shown anywhere else! </li>
+						<li>3. The coupons are valid until Sept 30.</li>
+					</ul>
+				</div>
+
+			</section>
+			{/if}
+
+
+            {if $type==1}
+			<section>
+				<header class="title">
+					<h4><a href="http://www.sammydress.com/m-lucker.html?type=2" target="_blank" style="text-decoration:none; color:#ff0057;">Guess the right price, win a top prize!</a></h4>
+                    <h5 style="font-size:18px; ">Prize：$50 cash coupon; 500 S points (500 S points = $10); $5 cash coupon; 10% off 
+Coupon
+</h5>
+					<h5>Rules:  1. One guess for each product allowed    2. Get a maximum of three guesses</h5>
+				</header>
+				<div class="luckerList">
+					<i class="icon up"></i>
+					<ul class="clearfix">
+						<li>
+							<p class="img">
+								<img src="http://samimg01.sammydress.com/S/2014/201405/goods-img/1401301387461-P-1740492.jpg"  height="250" />
+							</p>
+							<div class="pricew">
+								<i class="icon"></i>
+								<div class="price">
+									<span>$</span><span class="luckNum" id="js_luckNum1209440">{if $goods_arr.1209440.1==1}{$goods_arr.1209440.0}{else}?{/if}</span><em>.90</em>
+								</div>								
+							</div>
+							<div class="opreal">
+								<div class="icon guessBox" data-goodsid="1209440">
+									<span>5</span>
+									<span>6</span>
+									<span>7</span>
+									<span>8</span>
+									<span>9</span>
+								</div>
+
+								<div class="already none">You already guessed</div>
+								<div class="win none">You already guessed</div>
+							</div>
+						</li>
+
+						<li>
+							<p class="img">
+								<img src="http://samimg01.sammydress.com/S/2014/201401/goods-img/1388705839004-P-1425943.jpg"  height="250" />
+							</p>
+							<div class="pricew">
+								<i class="icon"></i>
+								<div class="price">
+									<span>$</span><span class="luckNum"  id="js_luckNum1006278">{if $goods_arr.1006278.1==1}{$goods_arr.1006278.0}{else}?{/if}</span><em>.70</em>
+								</div>
+							</div>
+							<div class="opreal">
+								<div class="icon guessBox" data-goodsid="1006278">
+									<span>5</span>
+									<span>6</span>
+									<span>7</span>
+									<span>8</span>
+									<span>9</span>
+								</div>
+							</div>
+						</li>
+						
+						<li>
+							<p class="img">
+								<img src="http://samimg01.sammydress.com/S/2014/201406/goods-img/1403218425302-P-1788599.jpg"  height="250" />
+							</p>
+							<div class="pricew">
+								<i class="icon"></i>
+								<div class="price">
+									<span>$</span><span class="luckNum" id="js_luckNum1238347">{if $goods_arr.1238347.1==1}{$goods_arr.1238347.0}{else}?{/if}</span><em>.60</em>
+								</div>
+							</div>
+							<div class="opreal">
+								<div class="icon guessBox" data-goodsid="1238347">
+									<span>5</span>
+									<span>6</span>
+									<span>7</span>
+									<span>8</span>
+									<span>9</span>
+								</div>
+							</div>
+						</li>
+
+						<li>
+							<p class="img">
+								<img src="http://samimg01.sammydress.com/S/201310/goods-img/1383154239261-P-1238351.jpg"  height="250" />
+							</p>
+							<div class="pricew">
+								<i class="icon"></i>
+								<div class="price">
+									<span>$</span><span class="luckNum" id="js_luckNum898853">{if $goods_arr.898853.1==1}{$goods_arr.898853.0}{else}?{/if}</span><em>.50</em>
+								</div>								
+							</div>
+							<div class="opreal">
+								<div class="icon guessBox" data-goodsid="898853">
+									<span>2</span>
+									<span>3</span>
+									<span>4</span>
+									<span>5</span>
+									<span>6</span>
+								</div>
+							</div>
+						</li>
+						<li>
+							<p class="img">
+								<img src="http://samimg01.sammydress.com/S/201306/goods-img/1372012656885-P-889940.jpg"  height="250" />
+							</p>
+							<div class="pricew">
+								<i class="icon"></i>
+								<div class="price">
+									<span>$</span><span class="luckNum" id="js_luckNum678419">{if $goods_arr.678419.1==1}{$goods_arr.678419.0}{else}?{/if}</span><em>.50</em>
+								</div>
+							</div>
+							<div class="opreal">
+								<div class="icon guessBox" data-goodsid="678419">
+									<span>4</span>
+									<span>5</span>
+									<span>6</span>
+									<span>7</span>
+									<span>8</span>
+									
+								</div>
+							</div>
+						</li>
+						<li>
+							<p class="img">
+								<img src="http://samimg01.sammydress.com/S/201311/goods-img/1383529927623-P-1255221.jpg"  height="250" />
+							</p>
+							<div class="pricew">
+								<i class="icon"></i>
+								<div class="price">
+									<span>$</span><span class="luckNum" id="js_luckNum904191">{if $goods_arr.904191.1==1}{$goods_arr.904191.0}{else}?{/if}</span><em>.90</em>
+								</div>
+							</div>
+							<div class="opreal">
+								<div class="icon guessBox" data-goodsid="904191">
+									<span>5</span>
+									<span>6</span>
+									<span>7</span>
+									<span>8</span>
+									<span>9</span>
+								</div>
+							</div>
+						</li>
+						
+						<li>
+							<p class="img">
+								<img src="http://samimg01.sammydress.com/S/2014/201407/goods-img/1405979337653-P-1861797.jpg"  height="250" />
+							</p>
+							<div class="pricew">
+								<i class="icon"></i>
+								<div class="price">
+									<span>$</span><span class="luckNum" id="js_luckNum1281441">{if $goods_arr.1281441.1==1}{$goods_arr.1281441.0}{else}?{/if}</span><em>.80</em>
+								</div>
+							</div>
+							<div class="opreal">
+								<div class="icon guessBox" data-goodsid="1281441">
+									<span>5</span>
+									<span>6</span>
+									<span>7</span>
+									<span>8</span>
+									<span>9</span>
+								</div>
+							</div>
+						</li>
+						
+						<li>
+							<p class="img">
+								<img src="http://samimg01.sammydress.com/S/2014/201408/goods-img/1407528307311-P-1925704.jpg"  height="250" />
+							</p>
+							<div class="pricew">
+								<i class="icon"></i>
+								<div class="price">
+									<span>$</span><span class="luckNum" id="js_luckNum1310483">{if $goods_arr.1310483.1==1}{$goods_arr.1310483.0}{else}?{/if}</span><em>.50</em>
+								</div>
+							</div>
+							<div class="opreal">
+								<div class="icon guessBox" data-goodsid="1310483">
+									<span>5</span>
+									<span>6</span>
+									<span>7</span>
+									<span>8</span>
+									<span>9</span>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+					<i class="icon down"></i>
+				</div>
+			</section>
+			
+			
+
+			<section>
+				<header class="title">
+					<h4><a href="http://www.sammydress.com/sammydress-app.html" target="_blank" style="text-decoration:none; color:#ff0057;">Download the app and enjoy our</a></h4>
+					<h5 class="telphoneH5">mobile exclusive sale</h5>
+				</header>
+
+				<div class="telphoneList">
+					<ul class="clearfix">
+					    {foreach from=$goods_arr2 item=goods}
+						<li>
+							<p class="img">
+								<a href="{$goods.url_title}"><img src="{$goods.goods_img}"  height="250" /></a>
+							</p>
+							<p class="proTitle">
+								<a href="{$goods.url_title}">{$goods.goods_title}</a>
+							</p>
+							<div class="pricew">
+								<i class="icon"></i>
+								<span class="bizhong"></span>
+								<span class="my_shop_price" orgp="{$goods.shop_price}"></span>
+							</div>
+						</li>
+						{/foreach} 
+					</ul>
+				</div>
+			</section>
+			{/if}
+
+		</div><!-- .mainText -->
+
+
+		
+	</div><!-- #luckerBox -->
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+
+
+	<script type="text/javascript">
+		$LAB.script("{$imgcache_url}minjs/jquery.flexslider.min.js")
+			.wait()
+			.script("{$imgcache_url}minjs/lucker.min.js")
+		
+	</script>
+	
+</body>
+
+</html>

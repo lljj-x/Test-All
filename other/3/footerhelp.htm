@@ -1,0 +1,70 @@
+<div class="footHelp">
+	<div class="footHelp_inner clearfix">
+        {foreach from=$ArticleCatArr item=list name=lotion}
+		   <dl>
+		      <dt>{$list.cat_name}</dt>
+		      <dd>
+		      {foreach from=$list._childlist item=slist  name=wu}
+				  {if $slist.article_id!=105}
+		          <a href="{if $slist.link ne 'http://'}{$slist.link}{else}/{$cur_lang_url}m-article-id-{$slist.article_id}.htm{/if}" rel="nofollow">{$slist.title}</a> 
+				  {/if}
+		      {/foreach}  
+		      </dd>
+		    </dl>
+		{/foreach}
+	</div><!--end .footHelp_inner-->
+	<div class="social">
+		<dl class="share">
+			<dt>{$lang.FIND_US_ON}:</dt>
+			<dd>
+				<a href="http://www.facebook.com/sammydress{if $cur_lang eq 'fr'}.fr{/if}" class="fbk" target="_blank">facebook</a>
+				<!-- <a href="http://pinterest.com/sammydress" class="pi" target="_blank">pinit</a> -->
+				<a href="http://twitter.com/SammyDress" class="tw" target="_blank">twitter</a>
+				<a href="http://www.youtube.com/sammydress" class="yt" target="_blank">youTbe</a>
+				<a href="https://plus.google.com/112559723937650962244" class="google" target="_blank">g+</a>
+				<a href="http://vk.com/sammydresscom" class="vb" target="_blank">vb</a>
+				<a href="http://sammydressblog.blogspot.com" class="bl" target="_blank">blog</a>
+				<a href="https://instagram.com/sammydressfashion" class="instagram" target="_blank">instagram</a>
+			</dd>
+		</dl><!--end .share-->
+		
+		<div class="footerEmail">
+			<h4>{$lang.NEWSLETTER}</h4>
+			<form method="post" name="pinglunform" action="/m-cemails.html" id="js_emailForm_subscribe" class="clearfix">
+				<input id="js_eact" value="add" type="hidden" name="act">
+				<input type="hidden" value="2" name="action" id="js_action">
+				<input type="text" name="txtEMail" placeholder="{$lang.Your_Email_Address}" maxlength="90" id="js_email_subscribe"/>
+				<button type="submit">{$lang.JOIN}</button>
+			</form>
+		</div>
+
+		<div class="downApp">
+			<span  class="c_tagbg ios ">
+				<a href="https://itunes.apple.com/us/app/sammydress/id970849297?ls=1&mt=8" class="mr5" target="_blank">ipad</a> 
+				| 
+				<a href="https://itunes.apple.com/us/app/sammydress/id966062498?ls=1&mt=8" class="ml5" target="_blank">{$lang.iPhone}</a>
+			</span>
+			
+			
+			<a href="https://play.google.com/store/apps/details?id=com.globalegrow.app.sammydress" class="c_tagbg android" target="_blank">{$lang.Android}</a>
+		</div>
+	</div> <!--end .social-->       
+	<!--quick Index-->
+	{if $cur_lang == $default_lang}
+		{include file="abc_link.htm"}
+	{/if} 
+</div><!--end .footHelp-->
+
+
+<div class="webTagWrap">
+	<img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/domeimg/logolist2.jpg" alt="" width="807" height="32" class="logoList js_lazy"/>
+	<a target="_blank" rel="nofollow" href="https://www.paypal.com/us/verified/pal=payment@sammydress.com"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/domeimg/fpaypal2.jpg" class="js_lazy" width="55" height="54"/></a>
+
+	<script type="text/javascript" src="https://seal.websecurity.norton.com/getseal?host_name=www.sammydress.com&amp;size=xs&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=en"></script>
+
+	<!-- <script type="text/javascript" src="https://sealserver.trustwave.com/seal.js?style=invert&code=91a7bdb49c9f4bfeba46fc0519c98995&size=105x54&language=en"></script> -->
+	
+	<a href="https://sealserver.trustwave.com/cert.php?customerId=91a7bdb49c9f4bfeba46fc0519c98995&size=105x54&style=normal" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/domeimg/trustwave2.jpg" class="js_lazy" height="32"/></a>
+
+  	<script src="//images.dmca.com/Badges/DMCABadgeHelper.min.js"></script><a href="http://www.dmca.com/Protection/Status.aspx?ID=a87ec4d6-3053-4c45-b0f3-19e8b5f32ca3" title="DMCA.com Protection Program" class="dmca-badge" style="margin:0"><img src ="//images.dmca.com/Badges/dmca_protected_sml_120ag.png?ID=a87ec4d6-3053-4c45-b0f3-19e8b5f32ca3"  alt="DMCA.com Protection Status" height="39" /></a>
+</div>

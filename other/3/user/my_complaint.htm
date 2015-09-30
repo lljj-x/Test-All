@@ -1,0 +1,276 @@
+{if $complaint_action eq 'my_complaint_view'}
+	{*投诉详情*}
+	<div class="complainDetail mt20 mb20">
+		<div class="bloack mb30">
+			<header>
+				<a href="/{$cur_lang_url}m-users-a-my_complaint_history.htm" class="btn btn-black fr">{$lang.my_complaint.0}</a>
+				<h4>{$lang.my_complaint.1}</h4>
+			</header>
+			
+			<div class="infoHead mt10">
+				<ul>
+					<li>{$lang.my_complaint.2}: <strong>{$res.order_sn}</strong></li>
+					<li>{$lang.my_complaint.3}: <strong>{$res.complaint_type}</strong></li>
+					<li>{$lang.status}: <strong>{if $res.status==1 || $res.status==2 || $res.status==4}{$lang.my_complaint.4}{elseif $res.status==3 || $res.status == 5 }{$lang.my_complaint.5}{/if}</strong></li>
+                    {if $res.status!=3 && $res.status!=5}
+					<li class="fr">
+						<a href="javascript:void(0);" class="btn btn-red" id="js_continue">{$lang.user_continue}</a>
+						<a href="javascript:void(0);" class="btn btn-black" data-orderid="{$res.id}" id="js_closeTicket">{$lang.my_complaint.6}</a>
+					</li>
+					{/if}
+				</ul>
+				<div class="tips">
+					{if $res.status==1}
+						{$lang.my_complaint.8}
+					{elseif $res.status==2 || $res.status==4}
+						{$lang.my_complaint.27}
+					{elseif $res.status==3 || $res.status==5}
+						{$lang.my_complaint.7}
+					{/if}
+				</div>
+			</div><!-- .infoHead -->
+		</div><!-- .bloack -->
+
+		<div class="bloack mb30">
+			<h4>{$lang.my_complaint.9}</h4>
+			
+			<table class="userTable mt10 tc mb20">
+				<colgroup>
+					<col width="285"></col>
+					<col width=" "></col>
+					<col width="150"></col>
+				
+				</colgroup>
+
+				<tbody>
+					<tr>
+						<td><span class="fb">{$lang.my_complaint.10}</span></td>
+						<td>
+							<span class="info">{$res.complaint_txt}</span>
+						</td>
+						<td>{$res.add_time}</td>
+					</tr>
+					{foreach from=$reply item=item}
+					<tr {if $item.is_admin==2}class="colorBlue"{/if}>
+						<td><span class="fb">{if $item.is_admin==1}{$lang.my_complaint.11}{else}{$lang.my_complaint.12}{/if}</span></td>
+						<td>
+							<span class="info">{$item.reply_txt}</span>
+						</td>
+						<td>{$item.reply_time}</td>
+					</tr>
+					{/foreach}
+				</tbody>
+			</table>
+		</div><!-- .bloack -->
+
+		<div class="bloack mb30 none"  id="js_viewComplaint">
+			<h4>{$lang.my_message}</h4>
+
+			<form action="/{$cur_lang_url}m-users-a-my_complaint_reply.htm" method="post" >
+			    <input type="hidden" name="complaint_id" value="{$res.id}">
+				<div class="form-group mt10">
+					<textarea class="complaintText" name="reply_txt"></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-red js_upData">{$lang.Submit}</button>
+				</div>
+			</form>
+			
+
+		</div>
+
+	</div><!-- .complainDetail -->
+	{*投诉详情结束*}
+{else}
+
+	<div class="complainMain mb20">
+
+		<ul class="tabletitle complaintTable mt20 ">
+			<li {if $search==0 && $complaint_action=='my_complaint'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-my_complaint.htm">{$lang.my_complaint.13}</a></li>
+			<li {if $search==0 && $complaint_action=='my_complaint_history'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-my_complaint_history.htm">{$lang.my_complaint.14}</a></li>
+			{if $search==1}<li class="on"><a href="#">{$lang.my_complaint.15}</a></li>{/if}
+
+			{if $complaint_action=='my_complaint'}
+			<li class="seachComplaint">
+				<form action="" method="get">
+					<div class="form-group">
+						<input type="hidden" name="search" value="1">
+						<input type="text" name="searchKey" placeholder=" {$lang.order_number}">
+						<button class="seachBtn c_tagbg"></button>
+					</div>
+				</form>
+			</li>
+			{/if}
+
+            {if $complaint_action=='my_complaint_history'}
+			<li class="seachComplaint">
+				<select name="" id="selectType" class="selt" onchange="listOpinion(this);">
+					<option value="0" {if $complaint_type==0}selected{/if}>{$lang.please_select}</option>
+					<option value="1" {if $complaint_type==1}selected{/if}>{$lang.my_complaint.4}</option>
+					<option value="3" {if $complaint_type==3}selected{/if}>{$lang.my_complaint.5}</option>
+				</select>
+			</li>
+			{/if}
+		</ul><!-- .tabletitle -->
+		
+		{if $complaint_action eq 'my_complaint'}
+		{*select Order*}
+		<div class="mt15">
+			<table class="userTable tc mb20">
+				<colgroup>
+					<col width="200"></col>
+					<col width=""></col>
+					<col width="150"></col>
+					<col width="150"></col>
+				</colgroup>
+				<thead>
+					<tr>
+						<th>{$lang.order_no}</th>
+						<th>{$lang.my_complaint.16}</th>
+						<th>{$lang.order_time}</th>
+						<th>{$lang.operation}</th>
+					</tr>
+				</thead>
+				<tbody>
+				{foreach from=$orders item=item}
+					<tr>
+						<td>{if $item.is_reply==1}<SUP><img src="{$imgcache_url}images/domeimg/new.gif"/></SUP>{/if}<a href="{$cur_lang_url}/m-users-a-order_detail-order_id-{$item.order_id}.htm">{$item.order_sn}</a></td>
+						<td>
+							<div class="img-list clearfix">
+								{if $item.goods}
+								{foreach from=$item.goods item=goods}
+								{if $goods.goods_thumb == 'temp/skin1/images/no_pic.jpg' }
+								<a href="javascript:void(0);"><img src="{$imgcache_url}images/domeimg/portrait.gif"></a>
+								{else}
+								<a href="{$cur_lang_url}/product{$goods.goods_id}.html" target="_blank"><img src="{$goods.goods_thumb}"></a>
+								{/if}
+								{/foreach}
+								{else}
+									<a href="javascript:void(0);"><img src="{$imgcache_url}images/domeimg/portrait.gif"/></a>
+								{/if}
+							</div>
+						</td>
+						<td> {$item.order_time}</td>
+						<td>
+							{if $item.complaint_status==0}
+							<a href="javascript:void(0);" class="btn btn-red js_toAddView" data-orderid="{$item.order_sn}">{$lang.my_complaint.17}</a>
+							{elseif $item.complaint_status==1 || $item.complaint_status==2 || $item.complaint_status==4}
+							<a href="/{$cur_lang_url}m-users-a-my_complaint_view.htm?id={$item.complaint_id}" class="btn btn-pink">{$lang.my_complaint.4}</a>
+							{elseif $item.complaint_status==3 || $item.complaint_status == 5}
+							<a href="javascript:void(0);" class="btn btn-pink">{$lang.my_complaint.5}</a>
+							{/if}
+						</td>
+					</tr>
+				{/foreach}	 
+				</tbody>
+			</table>
+			
+			{if $orders}
+			<div class="pages tc">{$pagestr}</div>
+			{else}
+			<div class="empty tc">{$lang.no_order_yet}</div>
+			{/if}
+		</div>
+		{*select Order end*}
+
+
+	{elseif $complaint_action eq 'my_complaint_history'}
+
+		{*history*}
+		<div class="mt15">
+			<table class="userTable tc mb20">
+				<colgroup>
+					<col width=""></col>
+					<col width="200"></col>
+					<col width="200"></col>
+					<col width="180"></col>
+					<col width="100"></col>
+					<col width="150"></col>
+				</colgroup>
+				<thead>
+					<tr>
+						<th>{$lang.my_complaint.10}</th>
+						<th>{$lang.my_complaint.3}</th>
+						<th>{$lang.my_complaint.2}</th>
+						<th>{$lang.my_complaint.18}</th>
+						<th>{$lang.status}</th>
+						<th>{$lang.operation}</th>
+					</tr>
+				</thead>
+				<tbody>
+					{foreach from=$orders item=item}
+					<tr>
+						<td>{$item.complaint_txt}  {if $item.is_reply==1}<SUP><img src="{$imgcache_url}images/domeimg/new.gif"/></SUP>{/if}</td>
+						<td>{$item.complaint_type}</td>
+						<td>{$item.order_sn}</td>
+						<td>{$item.add_time}</td>
+						<td>{if $item.status==1 || $item.status==2 || $item.status==4}{$lang.my_complaint.4}{elseif $item.status==3 || $item.status==5}{$lang.my_complaint.5}{/if}</td>
+						<td><a href="/{$cur_lang_url}m-users-a-my_complaint_view.htm?id={$item.id}" class="btn btn-red">{$lang.view}</a></td>
+					</tr>
+					{/foreach}
+				</tbody>
+			</table>
+
+			{if $orders}
+			<div class="pages tc">{$pagestr}</div>
+			{else}
+			<div class="empty tc">{$lang.my_complaint.28}</div>
+			{/if}	
+		</div>
+		{*history end*}
+
+	{/if}	
+
+	</div><!-- .complainMain -->
+
+{/if}
+
+
+
+{*弹出框*}
+<div class="ComplaintPopBox myComplaintPop none" id="js_myComplaintPop">
+	<h4>{$lang.my_complaint_title}</h4>
+	<form action="/{$cur_lang_url}m-users-a-my_complaint.htm?save_complaint=1" method="post">
+		<ul class="orderInfo">
+			<li>
+				{$lang.my_complaint.2}: <span id="js_popOrderId"></span>
+				<input type="hidden" name="order_sn" id="js_hidePopOrderId"/>
+			</li>
+			<li>
+				<strong class="red">*</strong> {$lang.my_complaint.19}
+				<select name="type" id="selectType" class="selt" >
+					<option value="0" >{$lang.please_select}</option>
+					<option value="1" >{$lang.my_complaint.20}</option>
+					<option value="2" >{$lang.my_complaint.21}</option>
+					<option value="3" >{$lang.my_complaint.22}</option>
+					<option value="4" >{$lang.my_complaint.23}</option>
+					<option value="5" >{$lang.my_complaint.24}</option>
+					<option value="6" >{$lang.my_complaint.25}</option>
+				</select>
+			</li>
+		</ul>
+
+		<div class="text">
+			<strong class="red">*</strong>{$lang.my_complaint.26}:
+			<textarea class="complaintText" name="complaintText"></textarea>
+		</div>
+
+		<div class="tc">
+			<button class="btn btn-red" type="submit">{$lang.submit}</button>
+		</div>
+	</form>
+</div><!-- .popBox -->
+
+<div class="ComplaintPopBox complaintConfirm none" id="js_complaintConfirm">
+	<h4>{$lang.my_complaint.29}</h4>
+	
+	<div class="popMsg">
+		<span class="msgIcon"></span>
+		<p>{$lang.my_complaint.30}</p>
+	</div>
+
+	<div class="tc">
+		<button class="btn btn-red" id="js_closeTickesBtn">{$lang.my_complaint.31}</button>
+		<button class="btn btn-black" onclick="layer.closeAll();">{$lang.my_complaint.32}</button>
+	</div>
+</div><!-- .popBox -->

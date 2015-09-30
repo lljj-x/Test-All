@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/presale_min.css?201509012">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+	
+	<div class="presaleBox" >
+		{if $type!=1}
+		<header class="tabBox clearfix" id="js_tabBox" style="background:url({$imgcache_url}images/pageimg/homebanner/en/presal_bannerbg.jpg) no-repeat center top;">
+			<div class="tabInner">
+				<ul class="clearfix">
+					<li class="{if $type==1}on{/if}">
+						<img src="{$imgcache_url}images/domeimg/presale/n_step1.jpg">
+						<span class="stepIcon">STEP <br> 1 </span>
+						<p class="tc tabBoxCate">BE A FASHION BUYER </p>
+						<p class="tc tips">Spot a hot trend and submit it for votes. <br> You will be <b>REWARDED</b> if it got produced!</p>
+						<p class="tc"><a href="?type=1" class="btn ">BE A Fashion Buyer</a></p>
+					</li>
+					<li {if $presale}class="{if $type==2}on{/if}"{else}{/if}>
+						<img src="{$imgcache_url}images/domeimg/presale/n_step2.jpg">
+						<span class="stepIcon">STEP <br> 2 </span>
+						<p class="tc tabBoxCate">{$lang.presale.18}</p>
+						<p class="tc  tips">Get the most voted item 50% OFF with limited quantity. </p>
+						<p class="tc">
+							{if $presale}
+							<a href="?type=2" class="btn ">{$lang.presale.3}</a>
+							{else}
+							<a href="javascript:void(0);" class="btn">{$lang.presale.4}</a>
+							{/if}
+						</p>
+					</li>
+					<li {if $collection} class="{if $type==3}on{/if}"{else}{/if}>
+						<img src="{$imgcache_url}images/domeimg/presale/n_step3.jpg">
+						<span class="stepIcon">STEP <br> 3 </span>
+						<p class="tc tabBoxCate">{$lang.presale.19}</p>
+						<p class="tc tips">See what you suggested comes into life! <br>Shop the hottest collections now!</p>
+						<p class="tc">
+							{if $collection}
+							<a href="?type=3" class="btn ">Produce</a>
+							{else}
+							<a href="javascript:void(0);" class="btn">{$lang.presale.4}</a>
+							{/if}
+						</p>
+					</li>
+				</ul>
+			</div>
+		</header><!-- .tabBox -->
+
+		{else if}
+		<header class="ste1Header" style="background:url({$imgcache_url}images/pageimg/homebanner/en/presal_step1_bannerbg.jpg) no-repeat center top;">
+			<!--<p class="topText">At SammyDress, we believe you have better taste than us, so vote for your favorite styles suggested by other users like you. You can also submit your own fashion finds by uploading pictures, after our staff reviewing, we will post them into the vote. If the item uploaded by you gets enough votes, a <strong>15% coupon</strong> will charge into your account within 24 hours.</p>
+			<div class="btns">
+				<a href="javascript:void(0);" data-href="{$DOMAIN}/presale.html?act=upload_pic" class="upBtn" id="js_upPicNow"><i class="p_icon"></i>Upload Pictrues Now &gt;</a>
+				<a href="?type=2" class="preBtn"><i class="p_icon"></i>Presale  &gt;</a>
+				<a href="?type=3" class="colleBtn"><i class="p_icon"></i>Collection &gt;</a>
+			</div>-->
+            {$lang.tip_presale.0}
+            {if $winners}
+			<div class="winnerTips">
+                <dl>
+					<dt><i class="p_icon"></i>The most Recent <strong class="fb">Winner</strong> :  </dt>
+					<dd id="js_winnerList">
+						<ul class="slides">
+							{foreach from=$winners key=k item=v}
+                            {$v.msg}
+                            {/foreach}
+						</ul>
+					</dd>
+				</dl>
+                
+			</div>
+            {/if}
+		</header>
+		{/if}
+		<div class="presaleMain">
+			<div class="content">
+			{if $type==1}
+				<!-- step1 -->
+				<div class="block js_block">
+					<ul class="clearfix pb10 itemWrap">
+						
+					    {foreach from=$list item=v key=key}
+						<li class="item">
+							<p class="img">
+								<img src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$v.pic_url}" class="js_lazy_0" height="250">
+							</p>
+							<p class="name pt15">
+								{$v.title}
+							</p>
+							<div class="voteBox pt15">
+								<a href="javascript:void(0)" class="mr5  {if $v.endday <=0}voteEnd{/if}  js_likeBtn" data-gid="{$v.id}"><i class="p_icon linkeIcon mr5"></i>{$lang.presale.7}</a>
+								<span class="p_icon likeNum text-muted"><strong>{$v.like_cnt}</strong> / {$v.like_mubiao} </span>
+							</div>
+							<p class="text-muted pt10">
+								
+                                {if $v.endday >0}{$v.endday} {$lang.presale.8} {else}{$lang.presale.23}{/if}
+							</p>
+						</li>
+						{/foreach}
+					</ul>
+				</div><!-- .block -->
+				{elseif $type==2}
+				<!-- step2 -->
+				<div class="block js_block" id="js_presaleStep2">
+					<ul class="clearfix pb10 itemWrap">
+						{foreach from=$presale item=goods key=key}
+						<li class="item">
+							<div class="img pr">
+								<a href="{$goods.url_title}">
+									<img src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$goods.goods_img}"  class="js_lazy_0" height="250">
+								</a>
+
+								<div class="preTime">
+									<div class="pre_timeBg"></div>
+									<div class="tak_pre">{$lang.presale.9} :<strong data-time="{$goods.time_left}" class="js_time"></strong></div>
+								</div>
+							</div>
+							
+							<p class="name step2_name pt15">
+								{$goods.goods_title}
+							</p>
+							
+							<div class="orderStep pt15 clearfix">
+								{foreach from=$goods.sun_interval item=sumi key=keys name=mysumi}
+								<div class="osBlock 
+								{if $goods.ordgoodscount<=20 && $smarty.foreach.mysumi.first}on
+								{elseif $goods.ordgoodscount>20 && $goods.ordgoodscount<=50 && $smarty.foreach.mysumi.index==1}on
+								{elseif $goods.ordgoodscount>50 && $smarty.foreach.mysumi.last}on
+								{/if}
+								">
+									<span class="line"></span>
+									<p>{$sumi} <br> {$lang.presale.10}</p>
+									<p class="pt10">
+										<span class="bizhong"></span>
+										<span class="my_shop_price" orgp="{$goods.real_price.$keys}"></span>
+									</p>
+								</div>
+								{/foreach}
+							</div><!-- .orderStep -->
+
+
+							<p class="pt15 orderPlace">
+								{$lang.presale.11}: <strong class="fb">{$goods.ordgoodscount}</strong> &nbsp;
+								 <a href="javascript:void(0);" class="strong_help fb js_help">?</a>
+							</p>
+
+							<p class="pt20 priceWrap" style="white-space: nowrap;">
+								<strong class="fb strong"><span class="bizhong fb f14"></span><span class="my_shop_price fb f14" orgp="{$goods.select_price}"></span> </strong> Presale price / 
+								{if $goods.market_price gt $goods.select_price }
+								<span class="costPrice"><span class="bizhong"></span><span class="my_shop_price " orgp="{$goods.market_price}"></span></span>
+								{/if}
+							</p>
+							
+							<a href="{$goods.url_title}" class="buyNow mt20">Shop Now</a>
+						</li>
+						{/foreach}
+					</ul>
+				</div><!-- .block -->
+				{elseif $type==3}
+				<!-- step3 -->
+				<div class="block js_block">
+					<ul class="clearfix pb10 itemWrap">
+					    {foreach from=$collection item=goods key=key}
+						<li class="item">
+							<p class="img">
+								<a href="{$goods.url_title}">
+									<img src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$goods.goods_img}"  class="js_lazy_0" height="250">
+								</a>
+							</p>
+							<p class="name pt15">
+								<a href="{$goods.url_title}">{$goods.goods_title}</a>
+							</p>
+							
+							<p class="strong pt10 fb f14">
+								<span class="bizhong"></span>
+								<span class="my_shop_price" orgp="{$goods.presale_shop_price}">{$goods.presale_shop_price}</span>
+							</p>
+							<a href="{$goods.url_title}" class="buyNow mt10">Shop Now</a>
+						</li>
+						{/foreach}
+					</ul>
+
+					<a href="/{$cur_lang_url}Wholesale-Women-b-1.html" class="seeMoreBtn fb">{$lang.presale.15}</a>
+				</div><!-- .block -->
+				{/if}
+
+			</div>
+
+		</div><!-- .presaleMain -->
+
+	</div><!-- .presaleBox -->
+	
+	<div id="js_popHelp" class="popHelp p10 none">
+		{$lang.presale.16}
+	</div>
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	{literal}
+	<script>
+		$LAB
+		.script(JS_IMG_URL+"minjs/jquery.flexslider.min.js")
+		.script(JS_IMG_URL+"/minjs/presale.min.js?201509012")
+		
+
+		.wait(function(){ 
+			
+			//banner 滚动
+			$('#js_winnerList').flexslider({
+			 	namespace:"",
+			    animation: "slide",
+			    selector: ".slides > li",
+			    direction: "vertical",    
+			    pauseOnAction:false,
+			    controlNav:false,
+			    slideshowSpeed: 5000
+			    
+			});	
+		})
+	</script>
+    {/literal}
+	
+	{include file="tongji.htm"}
+</body>
+
+</html>

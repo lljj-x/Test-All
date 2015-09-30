@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/cart_min.css?2015092401">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="mainBox" class="mt15">
+		<div id="cartWrap">
+            {if !$goods_list}
+			<div id="cart_list">
+				<div class="empty">
+					<div class="cartImg cartBg"></div>
+					<div class="info">
+						<h3>{$lang.cart_empty.1}</h3>
+						<ul>
+							<li><span class="cartBg"></span><strong>{$lang.cart_empty.2}</strong></li>
+							<li><span class="cartBg"></span><strong>{$lang.cart_empty.3}</strong></li>
+						</ul>
+						<p class="btn"><a href="{$DOMAIN}/{$cur_lang_url}" class="allBtn">{$lang.OCONTINUE_SHOPPINGR}</a></p>
+					</div>
+				</div><!--end .empty-->
+        	</div>
+			{else}
+			<div id="cart_list">
+			{include file="cart/cart_header.htm"}
+				<div class="cartList">
+					<ul class="title">
+						<li class="li1">{$lang.SELECTED_ITEM}</li>
+						<li class="li2">{$lang.QUANTITY}</li>
+						<li class="li3">{$lang.UNIT_PRICE}</li>
+						<li class="li4">{$lang.EDIT}</li>
+						<li class="li5">{$lang.SUBTOTAL}</li>
+					</ul><!--end .title-->
+
+                    {foreach from=$goods_list item=goods}
+					<ul class="products clearfix {if $goods.delected}sold-out{/if}" id="js_cartListTr_{$goods.rec_id}">
+						<li class="li1">
+							<div class="item item1">
+								{if $goods.delected}
+								<img src="{$imgcache_url}images/not-allowed.png" alt="">
+								{else}
+								<input type="checkbox" class="js_selectGoods" data-goods_id="{$goods.rec_id}">								
+								{/if}
+							</div>
+							<div class="item item2"><a href="{$goods.url_title}" target="_blank"><img src="{$goods.goods_thumb}" height="100"/></a></div>
+							<div class="item item3">
+								<p><a href="{$goods.url_title}" target="_blank">{$goods.goods_name}</a></p>
+								<p>{$goods.goods_attr}
+								{if $goods.is_free_shipping}
+									<i class="c_tagbg freeShipTag js_tips" data-tips="{$lang.freeShip}"></i><!--免邮图标-->
+								{/if}
+								</p>
+								{if $goods.delected}
+									<p class="red fb">({$lang.currently_sold_out})</p>
+								{/if}
+
+								
+							</div>
+
+						</li>
+						<li class="li2">
+							<span {if $goods.delected==0}class="js_cart_reduce"{/if} data-gid="{$goods.rec_id}">—</span>
+							<input type="text" value="{$goods.goods_number}" class="js_goods_number" {if $goods.delected}disabled="disabled"{/if} id="goods_number_{$goods.rec_id}" data-gid="{$goods.rec_id}" data-payer_id="" maxlength="4">
+							<span {if $goods.delected==0}class="js_cart_add"{/if} data-gid="{$goods.rec_id}">＋</span>
+							<p id="num{$goods.rec_id}" class="cartList_l_loading"></p>
+
+						</li>
+						<li class="li3">
+                            {if $goods.market_price > $goods.goods_price}
+							<p class="costPrice">
+								<span class="bizhong"></span><span class="my_shop_price" orgp="{$goods.market_price}"></span>
+							</p>
+                            {/if}
+							<p>
+								<span class="bizhong"></span> <span class="my_shop_price" orgp="{$goods.goods_price}"></span>
+							</p>
+							{if $goods.shelf_down_type==100}<p class="clearance-mark">{$lang.CLEARANCE}</p>{/if}
+							{if $goods.is_presale}<p class="fb preSaleTips">presale</p>{/if}
+						</li>
+						<li class="li4">
+							<p class="removeWarp">
+								<a href="javascript:void(0);" class="remove cartBg js_del_action" data-delmsg="{$lang.Delect_msg}" data-delatr="/m-flow-a-drop_goods-id-{$goods.rec_id}.htm?token=&amp;PayerID=" data-gid="{$goods.rec_id}" title="{$lang.delete}">{$lang.remove}</a>
+							</p>
+							{if $goods.delected==0}
+							<p>
+								<a href="javascript:void(0);" data-src="/fun/index.php?act=drop_to_collect&id={$goods.goods_id}" class="favorite cartBg favorite_on" title="{$lang.Move_to_Favorite}">{$lang.favorite}</a>
+								
+							</p>
+							{/if}
+						</li>
+						<li class="li5"><span class="bizhong"></span> <span class="my_shop_price" orgp="{$goods.subtotal}"></span></li>
+                        {if $goods.custom_size}
+                            <li class="cart_customSize cb">
+                                {include file='custom_size.htm'}
+                            </li>
+                        {/if}
+					</ul><!--end .products-->
+
+	                {/foreach}
+
+
+					<ul class="operation">
+						<li class="selectAll fl">
+							<input type="checkbox" id="selected_allGoods"><label for="selected_allGoods" class="mr15">{$lang.Select_All}</label>
+						</li>
+						<li class="btn fl">
+							<p class="fl"><a href="javascript:void(0);" class="clearAll" id="del_all_action" delatr="/m-flow-a-clear.htm" delmsg="{$lang.Are_you_sure}"><span>{$lang.CLEAR_ALL}</span></a></p>
+							<p class="fl"><a id="add_to_save" href="javascript:void(0)" data-src="/m-flow-a-save_cart.htm" class="save"><span>{$lang.SAVE_FOR_LATER}</span></a></p>
+						</li>
+						<li class="fr">
+							{if $goods_list}
+								<div class="continueShopping fr"><a href="{$DOMAIN}/{$cur_lang_url}"><span>&lt;</span> {$lang.OCONTINUE_SHOPPINGR}</a></div><!--end .Continue Shopping-->
+							{/if}
+						</li>
+					</ul>
+
+				</div><!--end .cartList-->
+
+				<div class="toCheckOut">
+
+					<div class="shipping">
+						<h3>{$lang.Estimate_Shipping}</h3>
+
+						<ul>
+							<li class="li1">{$lang.Enter_your_destination_to_get_a_shipping_estimate} <strong>({$lang.Shipping_Weight}:{$shipping_weight})</strong></li>
+							<li class="li2">
+								<span class="country">{$lang.Country}:</span>
+								<select name="country" id="selcountries" class="lie_sls">
+                                    <option value="">{$lang.Please_select_country} </option>
+                                    {foreach from=$country_list item=country}
+                                    <option value="{$country.region_id}" {if $country_post_id eq $country.region_id}selected{/if}>{$country.region_name}</option>
+                                    {/foreach}
+                                </select>
+                                <p id="load_ajax_msg" class="loading none"></p>
+								<dl id="shipajax">
+                                    {foreach from=$shipping_list item=shipping}
+									<dd>
+										<strong>{$shipping.ship_name}</strong>
+										<em><span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$shipping.ship_price}">{$shipping.ship_price}</span></em>
+									</dd>
+                                    {/foreach}
+								</dl>
+							</li>
+
+							<!-- <li class="li3">{$lang.We_Accept}: <p class="cartBg"></p></li> -->
+						</ul>
+					</div><!--end .shipping-->
+
+					<div class="code">
+						<div class="row1 clearfix ">
+							<div class="fr pr" id="js_couponWrap">
+								{if $smarty.session.pcode_code != ''}
+								<a class="cancel_coupon" href="/{$cur_lang_url}m-flow-a-clearCoupon.htm">{$lang.cancel_coupon}</a>
+								{else}<a href="javascript:void(0);" class="applyBtn">{$lang.Apply}</a>{/if}
+								<input name="promotion_code" type="text" id="promotion_code"  value="{$pcode}"  maxlength="40" huance="0" huancode="" isapply="0" autocomplete="off" data-coupon-event= "{if $user_coupon}1{else}0{/if}" />
+
+								<ul id="coupon">
+								{$user_coupon}
+								</ul>
+							</div>
+							<strong>{$lang.Promotion_Code}:</strong>
+							<dl class="helpTage">
+								<dt>?</dt>
+								<dd class="none">
+									<div class="text">
+										{$lang.cart_note}
+									</div>
+									<span class="trg_bg"></span>
+									<span class="trg_color"></span>
+								</dd>
+							</dl>
+
+							
+						</div>
+
+						<p class="apply_msg">{$pcode_msg}</p>
+
+	                    <div class="row2">
+							<ul>
+								<li>
+									<strong>{$lang.Subtotal}</strong>
+									<em><span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$shopping_money}">{$shopping_money}</span></em>
+								</li>
+                                {if $show_marketprice == 1 or $total.saving gt 0}
+								<li>
+									<strong>{$lang.Save}</strong>
+									<em><span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$total.saving}">{$total.saving}</span></em>
+
+								</li>
+                                {/if}
+								<!-- <li>
+									<strong>Promotion Code</strong>
+									<em><span class="bizhong">USD</span> <span class="my_shop_price" orgp="12.99">$12.99</span></em>
+								</li> -->
+							</ul>
+						</div><!--end .row2-->
+
+						<div class="row3"><em>{$lang.Cart_Total}</em><strong><span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$shopping_money}">{$shopping_money}</span></strong></div>
+					</div><!--end .code-->
+
+					<div class="clear"></div>
+					{if $goods_list}
+                    <div class="row4 clearfix">
+                        {if $access_token!=1}
+                            <a class="checkOutBtn redBtn mt15" href="{$HTTPS_ORDER_DOMAIN}/{$cur_lang_url}m-flow-a-checkout.htm?flow=checkout"><span>{$lang.PROCEED_TO_CHECKOUT}</span></a>
+							<span class="or pt10">-{$lang.OR}-</span>
+                        {/if}
+						{if $shopping_money lt 3000}
+							<a class="cartBg paypal mt15" href="/expresscheckout.php?cur_lang_exp={$cur_lang}" alt="PayPal"></a>
+						{/if}
+                        
+					</div><!--end .row4-->
+                    {/if}
+				</div><!--end .toCheckOut-->
+			</div><!--end #cart_list-->
+            {/if}
+			<div class="nortonWarp">
+				<div class="nortonImg"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name=www.sammydress.com&amp;size=S&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=en"></script></div>
+			</div>
+			
+            <section class="mb10 recentTbale" id="js_recentBox">
+            	<ul class="tables clearfix">
+					{if $smarty.cookies.browserHistories3}
+            		<li><a href="javascript:;">{$lang.cart.YOUR_RECENT_HISTORY}</a></li>
+					{/if}
+					{if $collection_goods}
+            		<li><a href="javascript:;">{$lang.cart.FAVORITE}</a></li>
+					{/if}
+					{if !$smarty.cookies.browserHistories3 && !$collection_goods && $cart_recommendation_goods}
+            		<li><a href="javascript:;">{$lang.cart.RECOMMEDATION}</a></li>
+					{/if}
+            	</ul>
+               
+                <div class="tableMain">
+				    {if $smarty.cookies.browserHistories3}
+                	<div class="scrollBox youRecentHistory">
+
+                	</div><!--end .scrollBox-->
+					{/if}
+
+                    {if $collection_goods}
+                	<div class="scrollBox  myFavoriteScroll">
+						<ul class="slides" >
+						{foreach from=$collection_goods item=fav}
+							{php}
+								$this->_tpl_vars['tmp_url'] = get_position_product_link($this->_tpl_vars['fav']['url_title'], POSITION_SALE_FREQUENTLY_BOUGHT_TOGETHER_WITH, $this->_tpl_vars['fav']['cat_id']);
+							{/php}
+							<li class="tc">
+								<a href="{$tmp_url}" class="i_proImg">
+									<img height="216" src="{$fav.goods_img}" draggable="false">
+								</a>
+								<p class="proPrice">
+									<span class="bizhong"></span><span class="my_shop_price fb f14" orgp="{$fav.shop_price}"></span>
+								</p>
+							</li>
+						{/foreach}
+						</ul>
+                	</div><!--end .scrollBox-->
+					{/if}
+                    
+					{if !$smarty.cookies.browserHistories3 && !$collection_goods && $cart_recommendation_goods}
+                	<div class="scrollBox recommendation">
+						<ul class="slides" >
+						{foreach from=$cart_recommendation_goods item=cart_reco}
+							<li class="tc">
+								<a href="{$cart_reco.url_title}" class="i_proImg">
+									<img height="216" src="{$cart_reco.goods_img}" draggable="false">
+								</a>
+								<p class="proPrice">
+									<span class="bizhong"></span><span class="my_shop_price fb f14" orgp="{$cart_reco.shop_price}"></span>
+								</p>
+							</li>
+						{/foreach}
+						</ul>
+                	</div><!--end .scrollBox-->
+					{/if}
+					
+                </div>
+            </section>
+     
+
+		</div><!--end .cartWrap-->
+
+	</div><!--end .mainBox-->
+	<footer>
+		{include file="cart/cart_footer.htm"}
+
+		{include file="footer.htm"}
+
+	</footer>
+
+	<script type="text/javascript">
+
+	$LAB.script("{$imgcache_url}minjs/cart.min.js?2015012101")
+		.script("{$imgcache_url}minjs/jquery.flexslider.min.js")
+    {literal}
+		.wait(function(){
+
+			function getBrowerHistoryCall(element){
+				//元素懒加载
+				element.flexslider({
+				 	namespace:"",
+				    animation: "slide",
+				    selector: ".slides > li",
+				    pauseOnAction:false,
+				    controlNav:false,
+				    itemWidth: 216,
+				    animationLoop:false,
+				    minItems: 4,
+				    maxItems: 5
+				});
+
+				GLOBAL.currency.change_html("",$(".scrollBox"))
+			}
+
+			//getBrowerHistoryCall($(".myFavoriteScroll,.recommendation"));
+			GLOBAL.browserHistories.cart_redBrowerHistories(getBrowerHistoryCall);
+			
+			$("#js_recentBox").on("click",".tables li",function(){
+				$(this).addClass('on').siblings('li').removeClass('on');
+				var index = $(this).index();
+				var curScrollBox = $("#js_recentBox").find('.scrollBox').eq(index);
+
+				curScrollBox.css("visibility","visible").show().siblings('.scrollBox').hide();
+				if(!curScrollBox.find('.viewport').length){
+					getBrowerHistoryCall(curScrollBox);
+				}
+
+			});
+			$("#js_recentBox").find(".tables li").eq(0).trigger('click');
+
+
+			$("#cart_list").on("mouseenter","dl.helpTage",function(){
+				$(this).find("dd").fadeIn();
+			});
+			$("#cart_list").on("mouseleave","dl.helpTage",function(){
+				$(this).find("dd").hide();
+			});
+
+		})
+    {/literal}
+	</script>
+    
+    
+    
+
+    
+	<!-- twitter -->
+	<!-- <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	twttr.conversion.trackPid('l4tg7');
+	</script>
+	<noscript>
+	<img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l4tg7&p_id=Twitter" />
+	<img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l4tg7&p_id=Twitter" />
+	</noscript> -->
+	<!-- twitter -->
+
+    {if $goods_list}
+    <script type="text/javascript">
+        window.ad_products = [
+            {foreach from=$goods_list item=item name=goods_list}
+            {literal}{ {/literal}
+            "id": "{$item.goods_sn}",
+            "number": "{$item.goods_number}",
+             {literal} }{/literal}{if !$smarty.foreach.goods_list.last},{/if}
+            {/foreach}
+        ];
+        {literal}
+        window._retag = window._retag || [];
+        window._retag.push({code: "9ce8886b17", level: 3});
+        (function () {
+            var id = "admitad-retag";
+            if (document.getElementById(id)) {return;}
+            var s = document.createElement("script");
+            s.async = true; s.id = id;
+            var r = (new Date).getDate();
+            s.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//cdn.trmit.com/static/js/retag.min.js?r="+r;
+            var a = document.getElementsByTagName("script")[0]
+            a.parentNode.insertBefore(s, a);
+        })()
+    </script>
+    {/literal}
+    {/if}
+	{include file="tongji.htm"}
+    
+    <!-- Facebook Conversion Code for Shopping Cart -->
+	<script>
+	{literal}
+	fbq('track', '6018756010709', { 'value': {/literal}'{$shopping_money}'{literal}, 'currency':'USD' });
+    {/literal}
+    {literal}
+    fbq('track', '6008921407930', { 'value': {/literal}'{$shopping_money}'{literal}, 'currency':'USD' });
+    {/literal}    
+	</script>
+</body>
+
+</html>

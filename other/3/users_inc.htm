@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+    {include file="top.htm"}
+	
+	<!--弹出层插件-->
+	<link rel="stylesheet" href="{$imgcache_url}mincss/skin/bluebar/ymPrompt.css" />
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/jquery.mCustomScrollbar_min.css">
+    <link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/user_inc_min.css?2015052901">
+	
+</head>
+<body>
+    <header id="header">
+        {include file="public_top.htm"}
+    </header>
+    {include file="user_header.htm"}
+    <div id="mainBox" class="mt15">
+    {if $action eq 'points_record'}
+         {include file="user/my_s_points.htm"}
+    {elseif $action eq 'address_list'}
+        {include file="user/address_book.htm"}
+    {elseif $action eq 'profile'}
+        {include file="user/account_setting.htm"}
+    {elseif $action eq 'order_list' || $action eq 'order_detail'}
+        {include file="user/my_order.htm"}
+    {elseif $action eq 'collection_list'}
+        {include file="user/my_favorites.htm"}
+    {elseif $action eq 'notify_in_stock_list'}
+        {include file="user/notify_in_stock.htm"}
+    {elseif $action eq 'gift_card' || $action eq 'giftcard_history'}
+        {include file="user/gift_card.htm"}
+    {elseif $action eq 'questions_list'}
+        {include file="user/myquestions.htm"}
+    {elseif $act == 'introduce' || $act == 'apply' || $act == 'apply_form' || $act == 'is_checking'}
+        {include file="user/webad.htm"}
+    {elseif $action eq 'submit_itry_blog'}
+        {include file="user/submit_itry_blog.htm"}
+    {elseif $action eq 'index'} 
+        {include file="user/users_index.htm"}
+    {elseif $action eq 'users_index_new'} 
+        {include file="user/users_index_new.htm"}
+    {elseif $action eq 'my_shows' || $action eq 'my_message'} 
+        {include file="user/my_shows.htm"}
+    {elseif $action eq 'visit_count'} 
+        {include file="user/verify_page.htm"}
+	{elseif $action eq 'my_reviews'} 
+        {include file="user/my_reviews.htm"}
+	{elseif $action eq 'my_coupon'}
+			{include file="user/my_coupon.htm"}
+	{elseif $action eq 'my_complaint'}
+			{include file="user/my_complaint.htm"}
+	{elseif  $action eq 'wallet' || $action eq 'wallet_list' || $action eq 'wallet_password' || $action eq 'retrieve_wallet_password'}
+            {include file='user/my_wallet.htm'} 
+    {/if}
+    </div><!--end .mainBox-->
+    <footer>
+        {include file="footerhelp.htm"}
+        {include file="footer.htm"}
+    </footer>
+    {literal}
+    <script>
+    function update_avatar(avatar){
+        if(!avatar){
+            return;
+        }
+        $("#my_avatar").attr('src',DOMAIN_IMG+"/"+avatar);
+        $.ajax({
+           type: "POST",
+           url: "/m-users-a-update_avatar.htm",
+           data: "avatar="+avatar,
+           dataType: 'json',
+           success: function(msg){
+             if(!msg.status){
+                alert(jsLg.user.anError);
+             }
+           }
+        });
+    }
+    </script>
+    {/literal}
+    <script>
+    $LAB.script(JS_IMG_URL+"/minjs/jquery.flexslider.min.js")
+
+        .script(JS_IMG_URL+"/minjs/jquery.mousewheel.min.js")
+        .script(JS_IMG_URL+"/minjs/jquery.mCustomScrollbar.min.js")
+        {literal}
+		.wait(function(){
+            $("#userNav .userNavBox").mCustomScrollbar({
+                theme:"dark",
+                horizontalScroll:true
+            });
+        })
+        {/literal}
+        .script(JS_IMG_URL+"/minjs/user.min.js?2015062302")
+
+        {if $action eq 'my_complaint'}
+        .script(JS_IMG_URL+"/minjs/user/complaint.min.js?2015031202")
+        {/if}
+
+        {if  $action eq 'wallet' || $action eq 'wallet_list' || $action eq 'wallet_password' || $action eq 'retrieve_wallet_password'}
+        .script(JS_IMG_URL+"minjs/user/wallet.min.js")
+        {/if}
+    </script>
+    
+    {include file="tongji.htm"}
+</body>
+
+</html>

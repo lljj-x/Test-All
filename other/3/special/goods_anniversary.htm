@@ -1,0 +1,273 @@
+<div class="g-anniversary">
+	<div class="banner" >
+		<img src="{$BANNER_MGR.promotion_anniversary_top_001.pic_url}" width="1920">
+	</div>
+
+	
+
+	<div class="main-box">
+                
+		<div class="progress">
+                        {if $BANNER_MGR.promotion_anniversary_top_002.pic_url}
+			<img src="{$BANNER_MGR.promotion_anniversary_top_002.pic_url}" width="1920">
+                        {/if}
+		</div>
+                
+		<div class="notice">
+			<h4>{$lang.win_notes}:</h4>
+			<div class="noticel-ist" id="js_noticel-ist">
+				<ul class="list slide">
+					{foreach from=$winer_logs item=list}
+                                        <li>{$list.msg}</li>
+                                        {/foreach}
+				</ul>
+			</div>
+		</div><!-- notice -->
+		
+		<div class="ad-list">
+			<div class="row-1">
+				<ul>
+					<li><a href="{$BANNER_MGR.promotion_anniversary_center01_001.url}"  target="_blank"><img src="{$BANNER_MGR.promotion_anniversary_center01_001.pic_url}" width="390" height="415"></a></li>
+					<li><a href="{$BANNER_MGR.promotion_anniversary_center01_002.url}"  target="_blank"><img src="{$BANNER_MGR.promotion_anniversary_center01_002.pic_url}" width="390" height="415"></a></li>
+					<li><a href="{$BANNER_MGR.promotion_anniversary_center01_003.url}"  target="_blank"><img src="{$BANNER_MGR.promotion_anniversary_center01_003.pic_url}" width="390" height="415"></a></li>
+				</ul>
+			</div>
+			<div class="row-2">
+				<ul>
+					{if $BANNER_MGR.promotion_anniversary_center02_001.pic_url}}<li><a href="{$BANNER_MGR.promotion_anniversary_center02_001.url}"  target="_blank"><img src="{$BANNER_MGR.promotion_anniversary_center02_001.pic_url}" width="363" height="135"></a></li>{/if}
+					{if $BANNER_MGR.promotion_anniversary_center02_002.pic_url}}<li><a href="{$BANNER_MGR.promotion_anniversary_center02_002.url}"  target="_blank"><img src="{$BANNER_MGR.promotion_anniversary_center02_002.pic_url}" width="363" height="135"></a></li>{/if}
+					{if $BANNER_MGR.promotion_anniversary_center02_003.pic_url}}<li><a href="{$BANNER_MGR.promotion_anniversary_center02_003.url}"  target="_blank"><img src="{$BANNER_MGR.promotion_anniversary_center02_003.pic_url}" width="363" height="135"></a></li>{/if}
+					{if $BANNER_MGR.promotion_anniversary_center02_004.pic_url}}<li><a href="{$BANNER_MGR.promotion_anniversary_center02_004.url}"  target="_blank"><img src="{$BANNER_MGR.promotion_anniversary_center02_004.pic_url}" width="363" height="135"></a></li>{/if}
+					{if $BANNER_MGR.promotion_anniversary_center02_005.pic_url}}<li><a href="{$BANNER_MGR.promotion_anniversary_center02_005.url}"  target="_blank"><img src="{$BANNER_MGR.promotion_anniversary_center02_005.pic_url}" width="363" height="135"></a></li>{/if}
+					{if $BANNER_MGR.promotion_anniversary_center02_006.pic_url}}<li><a href="{$BANNER_MGR.promotion_anniversary_center02_006.url}"  target="_blank"><img src="{$BANNER_MGR.promotion_anniversary_center02_006.pic_url}" width="363" height="135"></a></li>{/if}
+				</ul>
+			</div>
+		</div><!-- ad-list -->
+
+		<div class="g-nav clearfix" id="js_prmotionNav">
+			
+
+			<div class="g-nav-inner cleafix">
+				<img src="{$imgcache_url}images/domeimg/logo.gif" alt="">
+				<div class="g-nav-list">
+					{foreach from=$data item=list key=key}
+                    <a href="javascript:;">{$list.name|strtoupper}</a>
+                    {/foreach}
+				</div>
+				
+			</div>
+		</div><!-- g-nav -->
+                
+                {foreach from=$data item=list key=key}
+		<div class="g-annpro-Wrap">
+                    <h4><a href="{$list.url}" target="_blank">{$list.name}</a></h4>
+			<div class="g-ann-pro-list">
+				<ul class="clearfix">
+                                            
+                                        {foreach from=$list.data item = item }
+					<li>
+						<p class="img">
+							<a href="{$item.link_url}" target="_blank">
+								<img  src="http://css.sammydress.com/imagecache/S/images/domeimg/lazyload.gif" data-original="{$item.goods_img}"  class="js_lazy" height="250">
+							</a>
+							<div class="off_s"><span>{$item.zekou}</span>% <p>OFF</p></div>
+						</p>
+						<p class="name">
+							<a href="{$item.link_url}" target="_blank">{$item.goods_title}</a>
+						</p>
+						<p class="was pt5"> 
+							<span class="market_price">
+								<span class="bizhong"></span>
+								<span class="my_shop_price" orgp="{$item.market_price}">{$item.market_price}</span>
+							</span>
+						</p>
+						<p class="was wasPrice"> 
+							
+							<span class="bizhong"></span>
+							<span class="my_shop_price" orgp="{$item.shop_price}">{$item.shop_price}</span>
+							
+						</p>
+
+						<div class="endTimeWrap">
+							<i class="icon_clock"><img src="{$imgcache_url}images/pageimg/special/4thsale/time.gif"></i>
+							<span data-time="{$item.leave_time}" class="js_good_time"></span>
+						</div>
+
+						<p class="buynow">
+							<a href="{$item.link_url}" target="_blank">{$lang.BUY_NOW} &gt;</a>
+						</p>
+																	  
+					</li>
+                                        {/foreach}
+				</ul>
+			</div>
+		</div><!-- g-annpro-Wrap -->
+                {/foreach}
+
+	</div><!-- mainBox -->
+</div><!-- g-anniversary -->
+
+{literal}
+<script>
+	(function(){
+	    function ScrollNav(){
+	       this.$target = $("#js_prmotionNav");
+	       this.$scrollTarget = $('.g-annpro-Wrap');
+	       this.scrollHeight = [];
+	       this.targetHeight = this.$target.next().offset().top;
+	       this.ini();
+	    }
+	    ScrollNav.prototype.ini = function(){
+	        var that = this;
+
+	        this.getVal();
+
+	        $(window).scroll(function(){
+	            
+	            that.scroll($(this).scrollTop());
+	        });
+
+	         this.$target.on("click","a",function(){
+	       		
+	            $('html,body').animate({
+	                scrollTop: that.scrollHeight[$(this).index()] - that.$target.children().height() +10
+	                },
+	                500, function() {
+	                /* stuff to do after animation is complete */
+	            });
+	         })
+	       
+	    }
+	    ScrollNav.prototype.getVal = function(){
+	        /* body... */
+	        var that = this;
+	        $.each(that.$scrollTarget, function(index, val) {
+	            that.scrollHeight.push($(val).offset().top);
+
+	        });
+	    };
+	    ScrollNav.prototype.scroll = function(top){
+	        var that = this;
+
+	        if(top > that.targetHeight){
+	            that.$target.children().addClass('fixed');
+	        }else if(top < that.targetHeight){
+	            that.$target.children().removeClass('fixed');
+	        }
+
+	        $.each(that.scrollHeight,function(index,val){
+
+	            if(top > val  - that.$target.children().height()){
+	                that.$target.find('a').eq(index).addClass('on').siblings('a').removeClass('on');
+	            }
+	        })
+	    }
+
+	    new ScrollNav();
+	})();
+	(function(){
+	        
+	        window.new_GLOBAL ={};
+	        new_GLOBAL.Untime = function($cutBox,cutTime,msec){
+	            this.timeBox = $cutBox;
+	            this.cutTime = cutTime;
+	            this._bland = "";
+	            this.msec = msec;
+	        }
+	        new_GLOBAL.Untime.prototype.ini = function(){
+	            var that = this;
+	            var a1,a2;
+	            var cutTime = this.cutTime;
+	            if($.isNumeric(cutTime)){
+	                // a1 = cutTime[0].split("/");
+	                // a2 = cutTime[1].split(":");          
+	                that.setCutTime(cutTime);
+	            }   
+	        }
+	        new_GLOBAL.Untime.prototype.n8 = function(n){
+	            if(n < 10){return "0" + n.toString()};
+	            return n.toString();
+	        }
+	        new_GLOBAL.Untime.prototype.n3 = function(n){
+	            if(n < 10){return "00" + n.toString()};
+	            if(n < 100){return "0" + n.toString()};
+	            return n.toString();
+	        }
+
+	        new_GLOBAL.Untime.prototype.setCutTime = function(d){
+	            var that = this;
+	            var time_h,tmme_m,time_s,time_ms,time_day;
+	            var d1 = new Date();
+	            //var zone =  d1.getHours()-d1.getUTCHours();
+	            var n;
+	            var daytext = jsLg.day; 
+	            n = d*1000;
+
+	            if(n > 0){
+	                time_ms = that.n3(n % 1000);
+	                n = (n - n % 1000) / 1000;
+	                time_s = that.n8(n % 60);
+	                n = (n - n % 60) / 60;
+	                tmme_m = that.n8(n % 60);
+	                n = (n - n % 60) / 60;
+	                time_h = that.n8(n % 24);
+	                n = (n - n % 24) / 24;
+
+	               // daytext = n > 1 ? "days " : "day ";
+
+	                if(this.msec == 1 ){
+	                    if(n > 0){
+	                        
+	                        that.timeBox.html(n+" <b>"+ daytext +time_h+":"+tmme_m+":"+time_s +" </b> ")
+	                    }else{
+	                        that.timeBox.html(time_h+":"+tmme_m+":"+time_s)
+	                    }
+	                    
+	                }else{
+	                    if(n>0){
+	                        that.timeBox.html(n+" <b>"+ daytext +time_h+":"+tmme_m+":"+time_s+":"+time_ms +" </b> ")
+	                    }else{
+	                        that.timeBox.html(time_h+":"+tmme_m+":"+time_s+":"+time_ms)
+	                    }
+	                }
+	                that._bland = setTimeout(function(){
+	                    that.setCutTime(d-1)
+	                }, 1000);
+	            }else{
+	                that.timeBox.html("00 : 00 : 00");
+	                //that.timeBox.closest('.item').addClass('showEnd');
+
+	                if(that._bland){
+	                    clearTimeout(that._bland);
+	                }
+	            }
+	        }//倒计时对象结束
+
+	        var js_good_timeArr = $('.js_good_time');
+
+	        for (var i = 0; i < js_good_timeArr.length; i++) {
+	            var Timecut = new new_GLOBAL.Untime($(js_good_timeArr[i]),$(js_good_timeArr[i]).attr("data-time"),1);
+	            Timecut.ini();
+	        };
+	    })();
+
+</script>
+{/literal}
+<script src="{$imgcache_url}minjs/jquery.flexslider.min.js"></script>
+{literal}
+<script>
+	(function(){
+		//banner 滚动
+		$('#js_noticel-ist').flexslider({
+		 	namespace:"",
+		 	direction: "vertical",     
+		    animation: "slide",
+		    selector: ".slide > li",
+		    pauseOnAction:false,
+		    controlNav:false,
+		    slideshowSpeed: 5000
+		    
+		});
+	})()
+</script>
+{/literal}

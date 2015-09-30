@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/turkeyRun_min.css?2014112501">
+
+
+
+	<meta property="og:title" content="Play the #Turkey Run now ! " />
+	<meta property="og:type" content="product" />
+	<meta property="og:url" content="http://www.sammydress.com/m-turkey.html" />
+	<meta property="og:image" content="http://css.sammydress.com/imagecache/S/images/domeimg/turkey/title.png" />
+	<meta property="og:site_name" content="sammydress" />
+	<meta property="og:description" content="Turkey Run ! Help Turkey or Help Miss Tweedy ? Choose your side and SHARE to help! WIN up to 100% OFF! Each time you share a product, whom you support will run a certain distance. Who will win? It’s all up to YOU!"/>
+
+	<meta property="fb:admins" content="100003136903167" />
+	<meta property="fb:page_id" content="220612487992157"/>
+
+</head>
+<body>
+	<header id="header">
+		
+		{include file="public_top.htm"}
+
+	</header>
+	<div id="pageMain">
+		<div class="w1200">
+			
+			<div class="banner">
+				<div class="topShare"  >
+					<div id="fb-root"></div>
+					<div class="fb-like"  data-send="false" data-layout="button_count"  data-show-faces="false"></div>
+					<a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-url = "http://www.sammydress.com/m-turkey.html" data-text="Turkey Run! The night before Thanksgiving, Turkey planned to escape. And Tweedy must catch turkey to make Thanksgiving dinner for her children. Share and help turkey or tweedy run further. In the end who can ultimately achieve? It depends on you!"></a>
+				</div>
+				<div class="turkeyimg">
+					<img src="{$imgcache_url}images/domeimg/turkey/turkey.png" width="265" height="250"/>
+				</div><!-- .turkeyimg -->
+				<div class="tweedimg">
+					<img src="{$imgcache_url}images/domeimg/turkey/tweed.png" width="250" height="255"/>
+				</div><!-- .turkeyimg -->
+				<div class="starimg">
+					<img src="{$imgcache_url}images/domeimg/turkey/star.png" width="112" height="107"/>
+				</div>
+				<div class="title">
+					<img src="{$imgcache_url}images/domeimg/turkey/title.png" width="551" height="178"/>
+				</div>
+
+				<div class="voice clearfix">
+					<div class="voiceRight"><i class="icon"></i>The Latest News:</div>
+					<div class="voiceLis" id="js_voiceLis" style="widht:720px">
+                    	{if $is_end_time eq 0}
+						<ul  class="slides">
+
+	                    	{foreach from=$cop_info item=r1}
+							<li><span>{$r1.uinfo}</span> got <span>{$r1.youhuilv}% off</span> coupon </li>
+                            {/foreach}
+
+	                        
+						</ul>
+                        {else}
+						<p>The more likes our game gets, the sooner a new round begins!</p>
+                        {/if}
+					</div>
+				</div><!-- .voice -->
+
+			</div><!-- .banner -->
+			
+			<div class="activityBox">
+				<section class="turkeyT">
+					<h4 class="icon">turkey team</h4>
+					<div class="row clearfix">
+						<div class="shareList" id="js_turkeyList">
+							<ul class="slide clearfix">
+							
+							{foreach from=$record1 item=r1}
+								<li><a href="{$r1.url_title}"><img  src="{$r1.goods_grid}" height="120"/></a></li>
+							{/foreach}	 
+							</ul>
+						</div>
+
+						<div class="numBoxWrap">
+							<div class="img"><img class="js_lazy" src="{$imgcache_url}images/domeimg/lazyload.gif"  data-original="{$imgcache_url}images/domeimg/turkey/turkeyimg.jpg" width="161" height="119"/> </div>
+
+							<div class="btn" ><a href="javascript:void(0);" class="js_choiceTeam" data-team="1" data-targetBox = "#js_turkeyPro">Help Turkey <i>Go&gt;</i></a></div>
+
+							<div class="numBox">
+								<strong id="js_turkeyTeamNumBox"></strong>
+								<p>Meters</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row2 clearfix" id="js_turkeyPro">
+						<div class="upRow2 js_upRow2"></div>
+						<div class="proList js_proList">
+							<ul class="slide">
+							{foreach from=$goods_list1 item=goods1}
+								<li>
+									<a href="{$goods1.url_title}"><img  src="{$goods1.goods_grid}" height="148"/></a>
+									<p data-goodsid="{$goods1.goods_id}" data-link = "{$goods1.url_title}" data-desc="{$goods1.goods_name}">
+
+										<span class="bg"></span>
+
+										<a href="javascript:void(0);"  class="icon shareFb"></a>
+										<a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-url = "{$goods1.url_title}" data-text="{$goods1.goods_name}"></a>
+									</p>
+								</li>
+							{/foreach} 
+							</ul><!-- .slide -->
+						</div><!-- .proList -->
+
+						<div class="tips">*You can share anything on our site! <a href="/Wholesale-Women-b-1.html" style="color:red;">MORE &gt;</a>
+							<p class="pt10 fn">On each product page, please click <b class="shareAndTwitter"></b> to share.</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="tweedyT">
+					<h4 class="icon">tweedy team</h4>
+					<div class="row clearfix">
+						<div class="shareList" id="js_tweedyList">
+							<ul class="slide clearfix">
+
+							{foreach from=$record2 item=r2}
+								<li><a href="{$r2.url_title}"><img  src="{$r2.goods_grid}" height="120"/></a></li>
+							{/foreach}
+								 
+							</ul>
+						</div>
+
+						<div class="numBoxWrap">
+							<div class="img"><img class="js_lazy" src="{$imgcache_url}images/domeimg/lazyload.gif"  data-original="{$imgcache_url}images/domeimg/turkey/tweedimg.jpg" width="203" height="164"/> </div>
+
+							<div class="btn"><a href="javascript:void(0)" class="js_choiceTeam" data-team="2" data-targetBox = "#js_tweedyPro">Help Miss Tweedy <i>Go&gt;</i></a></div>
+
+							<div class="numBox">
+								<strong id="js_tweedyTeamNumBox"></strong>
+								<p>Meters</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row2 clearfix" id="js_tweedyPro">
+						<div class="upRow2 js_upRow2"></div>
+						<div class="proList js_proList">
+							<ul class="slide">
+								{foreach from=$goods_list2 item=goods2}
+								<li>
+									<a href="{$goods2.url_title}"><img  src="{$goods2.goods_grid}" height="148"/></a>
+									<p data-goodsid="{$goods2.goods_id}" data-link = "{$goods2.url_title}" data-desc="{$goods2.goods_name}">
+
+										<span class="bg"></span>
+
+										<a href="javascript:void(0);"  class="icon shareFb"></a>
+										<a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-url = "{$goods1.url_title}" data-text="{$goods1.goods_name}"></a>
+									</p>
+								</li>
+							{/foreach} 
+							
+							</ul><!-- .slide -->
+						</div><!-- .proList -->
+
+						<div class="tips">*You can share anything on our site! <a href="/Wholesale-Women-b-1.html" style="color:red;">MORE &gt;</a>
+							<p class="pt10 fn">On each product page, please click <b class="shareAndTwitter"></b> to share.</p>
+						</div>
+					</div>
+				</section>
+			</div>
+
+		</div>
+	</div><!-- #pageMain -->
+	
+	<!--弹出框-->
+	<div class="turkeyPop hasChoiceTeam none" id="js_hasChoiceTeam">
+		<p>Only one side can be selected in each round.<br/>
+You can't change to help the other side until one round ends.</p>
+	</div>
+
+	<!--分享超过5次-->
+	<div class="turkeyPop maxShare turkey_pop none" id="js_maxShare_turkey">
+		<div class="tipsbox">Thank you so much! <br/>
+		But I can only receive up to <strong class="fb f16">5</strong> shares from each person in one round.<br/>
+Hope you come back to help my buddy in the next round!
+
+			<div class="btn">
+				<a href="javascript:void(0);" class="js_shareResult">share my result</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="turkeyPop maxShare tweedy_pop none" id="js_maxShare_turkey">
+		<div class="tipsbox">Thank you for all your help! <br/>
+		But I can only receive up to <strong class="fb f16">5</strong> shares from each person in one round.<br/>
+Please come back to help me in the next round!
+			<div class="btn">
+				<a href="javascript:void(0);" class="js_shareResult">share my result</a>
+			</div>
+		</div>
+	</div>
+	
+	<!--分享成功 -->
+	<div class="turkeyPop shareOk turkey_pop none" id="js_shareOk_turkey_pop">
+		<div class="tipsbox">
+			Thanks a lot, you helped me run to the <strong class="js_helpnum"></strong>m line.<br/>
+			Can you keep helping me? 
+			<br/>
+			<strong>If I win, you'll get a 2X Discount!</strong>
+
+			<div class="js_codeCouponWarp pt15 fb">Use code: <strong class="js_codeCoupon fb"></strong> to get <strong class="js_codeCouponoff"></strong> for this item!</div>
+		</div>
+	</div>
+	
+	<!--分享成功 tweedy -->
+	 <div class="turkeyPop shareOk tweedy_pop none" id="js_shareOk_tweedy_pop">
+		<div class="tipsbox">
+			Thank you for your help. I ran to the <strong class="js_helpnum">3</strong>m line.<br/>
+			Can you keep helping me? <br/>
+			<strong>If I win, you'll get a 2X Discount!</strong>
+
+			<div class="js_codeCouponWarp pt15 fb">Use code: <strong class="js_codeCoupon fb"></strong> to get <strong class="js_codeCouponoff"></strong> for this item!</div>
+		</div>
+	</div> 
+
+	<!--游戏结束-->
+	<div class="turkeyPop gameover none" id="js_gameover_turkey_pop">
+		<div class="tipsbox">
+			<h4 class="pt15">DOUBLE DISCOUNT</h4>
+			<p class="fb f14 pb10">Game over ! Turkey won ! </p>
+			<p>Congrats to everyone who helped Turkey!<br/>
+			Please check your accounts to get double discount.
+			</p>
+			
+		</div>
+	</div>
+
+	<div class="turkeyPop gameover none" id="js_gameover_tweedy_pop">
+		<div class="tipsbox">
+			<h4 class="pt15">DOUBLE DISCOUNT</h4>
+			<p class="fb f14 pb10">Game over ! Miss Tweedy won ! </p>
+			<p>Congrats to everyone who helped Miss Tweedy!<br/>
+			Please check your accounts to get a special treat – a discount x2!
+			</p>
+		</div>
+	</div>
+	
+	<!-- 下一局游戏等待中 -->
+	<div class="turkeyPop waintNextGame none" id="js_waintNextGame">
+		<div class="tipsbox">
+			<div class="waintNextGameT">BEGINS IN... </div>
+			<div class="fb pt10">
+				
+				<div class="cutTime tc js_waintcutTime">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--侧边框-->
+	<div class="mui-mbar" id="js_mui-mbar">
+		<div class="mui-mbar-tabs">
+			<span class="mui-barTag" id="js_mui-barTag"><img src="{$imgcache_url}images/domeimg/turkey/helpbar.png" width="138" height="146" /></span>
+		</div>
+		<div class="mui-mbar-plugins tc">
+			<div class="mui-mbar-pluginsInner">
+				<h4 class="fb f18">About the Game</h4>
+				<p><img src="{$imgcache_url}images/domeimg/turkey/barbanner.jpg?2014112501" width="279" height="100" /></p>
+				<p><img src="{$imgcache_url}images/domeimg/turkey/barbtnimg.jpg?2014112501" width="279" height="31" /></p>
+				<p class=" pb15">Each time you share a product, whom you support will run a certain distance.</p>
+
+				<div class="howtoplay pt15 pb15">
+					<h4 class="fb f18 ">How to Play</h4>
+					<dl>
+						<dt>1. Choose a side</dt>
+						<dd>ONLY one side for one round </dd>
+						<dt>2. Share anything you want</dt>
+						<dd><img src="{$imgcache_url}images/domeimg/turkey/barsharebtns.jpg" width="229" height="41" /></dd>
+						<dt>3. Chances to Get Coupons</dt>
+						<dd>Up to 50% OFF
+							<p class="f12 fn">*More info about your coupons: My Account- My Coupon</p>
+						</dd>
+					</dl>
+				</div>
+				
+				<div class="prize pt15">
+					<h4 class="fb f18 ">Prizes</h4>
+					<p class="f14"><strong class="fb">The winning side:</strong> Get a <img src="{$imgcache_url}images/domeimg/turkey/bar2x.png" width="43" height="23" /> Discount</p>
+					<p class="f14 fb">For example <strong class="fb colorRedx"> 5% --> 10%</strong></p>
+
+					<p>
+						Notes: <br/>
+						1.  The discount of coupons got from this round will be DOUBLED!<br/>
+						2. The Double Discount applies if the coupon has NOT been used before the round ends. 
+					</p>
+				</div>
+			</div><!-- .mui-mbar-pluginsInner -->
+		</div>
+	</div>
+
+
+	<footer>
+		{include file="tongji.htm"}
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+
+	<script type="text/javascript">
+		$LAB.script("{$imgcache_url}minjs/jquery.flexslider.min.js")
+			{literal}
+			.wait(function(){
+				$.layer({
+				    type: 1,
+				    shade : [0.8 , '#000' , true],
+				    closeBtn: [0],
+				    area: ['auto', 'auto'],
+				    title: false,
+				    border: [0],
+				    page: {html : '<div class="layer_notice" style="width:500px; padding:20px;"><h4 style="font-size:18px; line-height:24px; text-align:center; padding-bottom:10px;">The contest you are trying to enter has ended. </h4><p style="font-size:16px; line-height:24px;">Thank you for your interest. Please take this opportunity to enter our latest <a href="/v-buyer-show.html" style="color:#da3439;">contest</a>! And don’t miss your chance to enjoy our <a href="http://www.sammydress.com/" style="color:#da3439;">special offers</a> !!<p></div>'}
+				})
+							
+			})
+			{/literal}
+			.script("{$imgcache_url}minjs/turkeyRun_min.js?2014112507")
+			
+		
+	</script>
+</body>
+
+</html>

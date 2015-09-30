@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}/mincss/show_min.css?2014120301">
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}/mincss/fullscreen_min.css?2015092401">
+
+	<script type="text/javascript" src="{$imgcache_url}/minjs/jquery.infinitescroll-masonry.min.js"></script>
+	<script type="text/javascript" src="{$imgcache_url}/minjs/review_fallscroll.min.js"></script>
+	{literal}
+	<script type="text/javascript">
+		$(document).ready(function($) {
+			$("#myShowList").show();
+			FallScrollObj.ini($("#myShowList"),".myshow_b");	
+		});
+	</script>
+	{/literal}
+</head> 
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+	
+	<div class="showBanner">
+		<a href="/v-buyer-show.html"></a>
+	</div>
+
+	<div id="myShowImg" >
+		<header>
+			<div class="fr changeData">
+				<a href="/buyers-show?ord=hot" class="fl {if $smarty.get.ord eq 'hot'}on{/if}">{$lang.most_popular}</a>
+				<a href="/buyers-show" class="fl {if !$smarty.get.ord or $smarty.get.ord eq 'new'}on{/if}">{$lang.most_recent}</a>
+			</div>
+			<p class="fb">{$lang.buyers_show}</p>
+		</header>
+		
+		
+		<div id="myShowList" class="clearfix">
+            {if $curpage<2}
+			<div class="myshow_b">
+				<div class="myshow_img">
+					<a href="/m-promotion-active-58.html"><img src="{$imgcache_url}images/shore/showa.jpg" width="235" height="500"/></a>
+				</div>
+			</div>
+            {/if}
+
+			{foreach from=$img_arr item=img}
+			<div class="myshow_b">
+				<div class="myshow_img">
+					<a href="{$img.detail_url}"><img src="{$img.thumb_paths}" width="{$img.width}" height="{$img.height}"/></a>
+				</div>
+
+				<div class="myshow_heart">
+					<a href="javascript:void(0);" data-href="/m-show-a-like.htm?rid={$img.rid}&type={if $img.is_video}video{else}image{/if}" data-flag="{if $img.liked}1{else}0{/if}" class="addToCollect {if $img.liked}addToCollectCur{/if}"><i class="c_tagbg"></i><span>{$img.like_count}</span></a>
+					<img src="{if $img.avatar}{$img.avatar}{else}{$imgcache_url}/images/domeimg/portrait.gif{/if}" width="40" height="40"/>
+				</div>
+			</div>
+			{/foreach}
+		</div>
+		<div id="page-nav" allpage="{$page_count}"><a href="?{if $smarty.get.ord}ord={$smarty.get.ord}&{/if}curpage={$curpage}"></a></div>
+
+		<div class="pages tc pr20 none" id="myshowPage">
+			{if $record_count}{$pagestr}{/if}
+		</div>
+
+	</div>
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	{literal}
+	<script>
+		(function(){
+			// like无需登陆
+			$("#myShowList").on("click", "a.addToCollect", function(){changeCollect($(this));});
+			//改变收藏状态
+			function changeCollect($this) {
+				var url = $this.attr("data-href"),
+					num = parseInt($this.find("span").text(),10),
+					flag = $this.attr("data-flag");
+
+				//如果已经收藏取消收藏
+				if ($this.hasClass('addToCollectCur')) {
+					$this.removeClass('addToCollectCur');
+					num = num - 1;
+					flag = 0;
+				} else {
+					$this.addClass('addToCollectCur');
+					num = num -0 + 1;
+					flag = 1;
+				}
+				$this.find('span').html(num);
+
+				$.get(url + '&flag=' +flag , function(data) {
+
+				});
+			};
+
+		})()
+	</script>
+	{/literal}
+	{include file="tongji.htm"}
+</body>
+
+</html>

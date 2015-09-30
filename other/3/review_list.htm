@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css?2014092201">
+	<!--弹出层插件-->
+	<link rel="stylesheet" href="{$imgcache_url}mincss/skin/bluebar/ymPrompt.css" />
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+	
+
+	<div class="path rev_path main_inner">
+		<a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}">{$lang.home}</a>
+		<i>&gt;</i>
+		<a href="{$goods.url_title}" title="{$goods.goods_title}" rel="nofollow">{$lang.Back_to_product_page}</a>
+	</div><!--end .path-->
+	
+    {if $act == 'view_inquiry'}
+	{*用户咨询列表开始*}
+	<div class="good_part">
+		<div class="main_inner clearfix">
+			<div class="gp_gInfo">
+				<div class="gp_gInfoInner">
+					<h4><strong>{$lang.Customer_Questions} {$lang.for} : </strong><a href="{$goods.url_title}"> {$goods.goods_title}.</a></h4>
+					<p>
+						<!-- <strong class="fl">{$review_rate.avg_rate}</strong> --><!--评分-->
+						<span class="bizhong"></span>
+						<span class="my_shop_price fb fl" orgp="{$goods.shop_price}"></span>
+					</p>
+                    {if $goods.goods_number}
+					<div id="add_cart_msg{$goods.goods_id}">
+						<a href="javascript:void(0);"  gid="{$goods.goods_id}" num = "1" ref="1" attrchage="{$attrkey}" class="redBtn"   onclick="GLOBAL.cart.addcart(this,0);"><span>{$lang.add_to_bag}</span></a>
+					</div>
+                    {/if}
+				</div><!--end .gp_gInfoInner-->
+			</div><!--end .gp_doodsInfo-->
+
+			<div class="gp_gimg clearfix">
+				<div class="gp_gimgImg">
+					<a href="{$goods.url_title}"><img src="{$goods.goods_grid}" height="150"/></a>
+				</div><!--end .gp_gimgBtn-->
+
+			</div><!--end .gp_gimg-->
+			
+			<div class="gp_right">
+				<div class="gp_gimgBtn">
+					<p class="titel">{$inquiry.inquiry_count} {$lang.QUESTIONS}</p>
+					<span class="gp_gimgBtn_span c_tagbg fl start start_{$review_rate.avg_rate_img}"><i class="c_tagbg">{$review_rate.avg_rate}</i></span><!--评分-->
+					<a href="/{$cur_lang_url}m-review-a-write_inquiry-goods_id-{$goods.goods_id}.htm" class="pinkBtn"><span class="pinkBtn_span">{$lang.Ask_a_Question}</span></a>
+				</div><!--end .gp_gimgBtn-->
+
+			</div>
+			
+
+		</div><!--end .mian_inner-->
+	</div><!--end .good_part-->
+	
+	<div id="mainBox">
+		<div class="askList">			
+			<ul>
+				{foreach key=key from=$inquiry.inquiry_list item=item name=item} 
+				<li class="clearfix">
+					<p class="pb10">{$lang.by} <em>{$item.nickname}</em> {$item.adddate}</p>
+					<div class="ask_dialog ask_q ">
+						<div class="askText">
+							<strong>Q:</strong> 
+							{$item.i_content}</div>
+						<i class="triangle tri_b"></i><i class="triangle tri_t"></i>
+					</div><!--end .ask_dialog-->
+
+					<div class="ask_dialog ask_a">
+						
+						<div class="askText">
+							<strong>A:</strong> 
+							{$item.reply}  
+						</div>
+						<p>{$lang.by} Sammydress {$item.passdate}</p>
+						<i class="triangle tri_b"></i><i class="triangle tri_t"></i>
+					</div>
+				</li>
+                {/foreach}
+			</ul>
+		</div><!--end .goodsBlock_t-->
+
+	    {if $inquiry.inquiry_list}
+		<div class="pages tc revPage">
+             {$pagestr}
+		</div>
+        {/if}
+
+		<section class="bestSell mb20">
+			<header>
+				<h4>{$lang.Others_also_Like}</h4>
+			</header>
+			<div class="goodsBlock_t" id="good_foot_proList">
+				<ul>
+                    {foreach from=$same_cat_goods item=list name=shop}
+					<li>
+						<div class="proImgBox">
+							<a href="{$list.url_title}"><img src="{$list.goods_img}" data-original="{$list.goods_img}" class="js_lazy" height="230"></a>
+						</div>
+						<p class="proName">
+							<a href="{$list.url_title}">{$list.short_name}</a>
+						</p>
+						<p class="proPrice">
+							<span class="bizhong"></span>
+							<span class="my_shop_price" orgp="{$list.shop_price}"></span>
+						</p>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+		</section><!--end .goodsBlock-->
+	</div><!--end .mainBox-->
+	{*用户咨询列表结束*}
+    {/if}
+
+    {if $act == 'view_review'}  
+	{*用户评论列表开始*}
+	<div class="good_part">
+		<div class="main_inner clearfix">
+			<div class="gp_gInfo">
+				<div class="gp_gInfoInner">
+					<h4><strong>{$lang.Customer_Reviews} {$lang.for} : </strong><a href="{$goods.url_title}"> {$goods.goods_title}.</a></h4>
+					<p>
+						<!-- <strong class="fl">{$review.avg_rate}</strong> --><!--评分-->
+						<span class="bizhong"></span>
+						<span class="my_shop_price fb fl" orgp="{$goods.shop_price}"></span>
+					</p>
+                    {if $goods.goods_number}
+					<div id="add_cart_msg{$goods.goods_id}">
+						<a href="javascript:void(0);"  gid="{$goods.goods_id}" num = "1" ref="1" attrchage="{$attrkey}" class="redBtn"   onclick="GLOBAL.cart.addcart(this,0);"><span>{$lang.add_to_bag}</span></a>
+					</div>
+                    {/if}
+				</div><!--end .gp_gInfoInner-->
+			</div><!--end .gp_doodsInfo-->
+
+			<div class="gp_gimg clearfix">
+				<div class="gp_gimgImg">
+					<a href="{$goods.url_title}"><img src="{$goods.goods_grid}" height="150"/></a>
+				</div><!--end .gp_gimgBtn-->
+			</div><!--end .gp_gimg-->
+
+			<div class="gp_right">
+				<div class="gp_gimgBtn">
+					<p class="titel">{$review.review_count} {$lang.REVIEWS}</p>
+					<div class="bo_gp_right">
+						<span class="c_tagbg fl start start_{$review.avg_rate_img}"><i class="c_tagbg">{$review.avg_rate}</i></span><!--评分-->
+						<p class="gp_wr_rev"><i class="c_tagbg"></i><a href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm" >{$lang.Write_a_Review}</a></p>
+					</div>
+					{*
+					{if $num_review_list >= 5 }
+					<p class="gp_wr_tips">{$lang.Write_a_Review_note}</p>
+					{/if}
+					*}
+				</div><!--end .gp_gimgBtn-->
+				{if $review.display_fitting && !($review.big==0 && $review.small==0 && $review.ok==0)}
+				<div class="rate-theme" id="js_rate-theme">
+					<ul>
+						<li class="clearfix" data-num="{math equation='round(x/y*100)' x=$review.small y=$review.all_size format='%d'}" data-type="2">
+							<a href="?itemPropertyIndex=2">
+								<span>{$lang.review_size.overall_fit.2}</span>
+								<b>{math equation="round(x/y*100)" x=$review.small y=$review.all_size format="%d"}%</b>
+								<div class="rate-themeBg {if $itemPropertyIndex==2}on{/if} js_rateItem" >
+									<i style="width:{math equation='round(x/y*100)' x=$review.small y=$review.all_size format='%d'}%" ></i>
+								</div>
+							</a>
+						</li>
+						<li class="clearfix" data-num="{math equation='round(x/y*100)' x=$review.ok y=$review.all_size format='%d'}" data-type="0">
+							<a href="?itemPropertyIndex=0">
+								<span>{$lang.review_size.overall_fit.0}</span>
+								<b>{math equation="round(x/y*100)" x=$review.ok y=$review.all_size format="%d"}%</b>
+								<div class="rate-themeBg {if $itemPropertyIndex==0}on{/if} js_rateItem" >
+									<i style="width:{math equation='round(x/y*100)' x=$review.ok y=$review.all_size format='%d'}%"></i>
+								</div>
+							</a>
+						</li>
+						<li class="clearfix" data-num="{math equation='round(x/y*100)' x=$review.big y=$review.all_size format='%d'}" data-type="1">
+							<a href="?itemPropertyIndex=1">
+								<span>{$lang.review_size.overall_fit.1}</span>
+								<b>{math equation="round(x/y*100)" x=$review.big y=$review.all_size format="%d"}%</b>
+								<div class="rate-themeBg {if $itemPropertyIndex==1}on{/if} js_rateItem" >
+									<i style="width:{math equation='round(x/y*100)' x=$review.big y=$review.all_size format='%d'}%"></i>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div><!--end. tate-theme-->
+				{/if}
+
+			</div><!--end .gp_right-->
+
+		</div><!--end .mian_inner-->
+	</div><!--end .good_part-->
+	
+	<div id="mainBox">
+		<div class="revList">			
+			<ul>
+                {foreach key=key from=$review.review_list item=r key=key}
+				<li class="revListBox cleafix">
+					<textarea class="js_revList none">			
+						<div class="rev_main">
+							<div class="rev_inner">
+								<p class="rev_time">
+									<span class="c_tagbg start start_{$r.rate_overall|default:'0'} fl"><i class="c_tagbg">{$r.rate_overall|default:'0'}</i></span>
+									<!-- <span class="startNum fl">{$r.rate_overall}</span> -->
+									<i class="time fl">{$r.adddate}</i>
+								</p>
+								<p class="name">{$r.subject}</p>
+								<p class="rev_goodInfo">
+                                {if $r.color}<span>{$lang.Color}: {$r.color}</span>{/if}
+                                {if $r.size}<span>{$lang.Size}: {$r.size}</span>{/if}
+                                </p>
+								<div class="rev_text">{$r.pros}</div>
+							</div>
+						</div><!--end .rev_main-->
+
+						<div class="rev_user">
+							<p>{$lang.by} <strong>{$r.nickname}</strong></p>
+							<p class="ser_tag"><i class="c_tagbg"></i>{$lang.Verified_Buyer}</p>
+                            {if $r.review_size.weight}<p>{$lang.Weight} : <strong>{$r.review_size.weight} Lbs</strong></p>{/if}
+							{if $r.review_size.height}<p>{$lang.Height} : <strong>{$r.review_size.height}</strong></p>{/if}
+							{if $r.review_size.overall_fit}<p>{$lang.Overall_Fit} : <strong>{$r.review_size.overall_fit}</strong></p>{/if}
+							{if $r.review_size.bust}<p>{$lang.Bust_size} : <strong>{$r.review_size.bust}</strong></p>{/if}
+							{if $r.review_size.body_shape}<p>{$lang.Body_Shape} : <strong>{$r.review_size.body_shape}</strong></p>{/if}
+							{if isset($r.review_size.typical_size)}<p>{$lang.typical_size} : <strong>{$r.review_size.typical_size}</strong></p>{/if}
+						</div><!--end .rev_user-->
+
+                        {if $r.pic != ''}
+						<div class="rev_img">
+							<ul class="slides">
+                                {foreach from=$r.pic item=pic}
+								<li>
+									<a href="javascript:void(0)" class="js_reviews_img" data-uid="/m-review_img-rid-{$r.rid}.htm"><img src="{$DOMAIN_IMG}/{$pic.thumb_paths}" width="80" height="120"/></a>
+								</li>
+		                        {/foreach}
+							</ul>
+						</div><!--end .rev_img-->
+                        {/if}
+
+					</textarea>
+				</li>
+                {/foreach}
+
+			</ul>
+		</div><!--end .revList-->
+		
+        {if $review.review_list}
+		<div class="pages tc revPage">
+            {$pagestr}
+		</div>
+        {/if}
+
+		<section class="bestSell mb20">
+			<header>
+				<h4>{$lang.Others_also_Like}</h4>
+			</header>
+			<div class="goodsBlock_t" id="good_foot_proList">
+				<ul>
+                    {foreach from=$same_cat_goods item=list name=shop}
+					<li>
+						<div class="proImgBox">
+							<a href="{$list.url_title}"><img src="{$list.goods_img}" data-original="{$list.goods_img}" class="js_lazy" height="230"></a>
+						</div>
+						<p class="proName">
+							<a href="{$list.url_title}">{$list.short_name}</a>
+						</p>
+						<p class="proPrice">
+							<span class="bizhong"></span>
+							<span class="my_shop_price" orgp="{$list.shop_price}"></span>
+						</p>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+		</section><!--end .goodsBlock-->
+	</div><!--end .mainBox-->
+	{*用户评论列表结束*}
+    {/if}
+
+
+
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	
+	<script>
+	
+	$LAB.script("{$imgcache_url}minjs/jquery.flexslider.min.js")
+    {literal}
+		.wait(function(){ 
+			(function(){
+				var $revList = $("textarea.js_revList");
+				
+				if($revList.length){
+
+					function userImgCakkBack(htmls,$warp){
+						if($warp.find('ul.slides').find('li').length>2){
+							$warp.find('.rev_img').flexslider({
+							 	namespace:"",
+							    animation: "slide",
+							    selector: ".slides > li",
+							    pauseOnAction:false,
+							    itemWidth: 130,
+							    controlNav:false,
+							    animationLoop:false
+							});
+						}
+					}
+                    GLOBAL.lazyLoad.creatEle("textarea.js_revList",userImgCakkBack);
+				};
+				 $('.revListBox').find('h3.none').eq(0).removeClass('none');
+
+				//查看用户上传的图片
+				$("li.revListBox").on("click","a.js_reviews_img",function(){
+					var options = {
+						area: ['810px','490px'],
+						offset : [($(window).height()-490)/2 +"px", '50%'],
+						//index是用来标记点击图片是同类图片中的第几张
+						iframe : {src : $(this).data("uid")+"?index="+$(this).index()}
+					}
+					//options是弹出iframe框的配置信息
+					GLOBAL.PopObj.iframe(options);
+					return false;
+
+				});
+				
+				$("#js_rate-theme").on("click","a",function(){
+					var $this = $(this),
+					$thisParentLi = $this.parent("li");
+					var attrHref = $(this).attr('href');
+
+					//当数字为0的时候，class为rate-theme下面的a链接不能点击
+					if($thisParentLi.data("num") == 0){
+						return false;
+					}
+
+					// 点击跳回去
+					if(location.search.indexOf('itemPropertyIndex') > 0){
+						location.href = 'http://' + location.hostname + location.pathname;
+						return false;
+					}
+
+				})
+			})()
+		})
+        {/literal}
+	</script>
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

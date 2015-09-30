@@ -1,0 +1,195 @@
+
+<div class="ordersBag">
+	<section class="orders">
+		<div class="model">
+			<h2 class="u_model"><span></span>{$lang.my_orders}</h2>
+			<ul>
+				<li><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=cancel">{$lang.cancel}:</a> <strong class="color_green">{$order_totals.cancel}</strong></li>
+				<li><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=shipped">{$lang.shipped}:</a> <strong class="color_green">{$order_totals.shipped}</strong></li>
+				<li class="paid"><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=paid">{$lang.paid}:</a> <strong class="color_blue">{$order_totals.paid}</strong></li>
+				<li><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=unpaid">{$lang.unpaid}:</a> <strong class="color_red">{$order_totals.unpaid}</strong></li>
+				<li><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=refund">{$lang.my_wallet_refund}:</a> <strong class="color_red">{$order_totals.refund}</strong></li>
+			</ul>
+		</div>
+		<table>
+			<tr class="title">
+				<th>{$lang.order_no}</th>
+				<th>{$lang.order_date}</th>
+				<th>{$lang.order_total}</th>
+				<th>{$lang.order_status}</th>
+				<th>{$lang.operation}</th>
+			</tr>
+			{foreach from=$orders item=ord}
+			<tr class="row">
+				<td><a href="/{$cur_lang_url}m-users-a-order_detail-order_id-{$ord.order_id}.htm">{$ord.order_sn}</a></td>
+				<td>{$ord.order_time}</td>
+				<td>{$ord.order_currency} {$ord.total_fee}</td>
+				<td> {$ord.order_status_str} </td>
+				<td>
+					{if $ord.order_status ==0}
+					<a href="javascript:void(0);" class="js_cancelOrder" data-orderid="{$ord.order_id}" title="{$lang.cancel}">
+                    {/if}
+                    {if $ord.order_status ==0 || $ord.order_status ==8}
+					<span class="userBg cancel"></span></a>
+						{if $ord.pay_id=='PayPal' || $ord.pay_id=='CreditCard'}
+		                <a href="/{$cur_lang_url}m-users-a-payment_order-order_sn-{$ord.order_sn}.htm" title="{$lang.pay}"><span class="userBg pay"></span></a>
+						{else}
+						<a href="/{$cur_lang_url}m-users-a-order_detail-order_id-{$ord.order_id}.htm"><span class="userBg pay"></span></a>
+	                	{/if}
+					{elseif $ord.order_status == 11}
+						{*<a class="js_deleteOrder" data-orderid="{$ord.order_id}" href="javascript:void(0);"  title="delete">
+							<span class="userBg delete"></span>
+						</a>*}
+                     {elseif $ord.order_status == 8}
+                     	<a href="/m-users-a-order_detail-order_id-{$ord.order_id}.htm"><span class="userBg pay"></span></a>
+					{else}
+	                <a href="m-users-a-order_detail-order_id-{$ord.order_id}.htm" title="{$lang.view}"><span class="userBg view"></span></a>
+	                {/if}
+				</td>
+			</tr>
+			{/foreach}
+		</table>
+		{if empty($orders)}
+		<div class="notOrders">
+			{if $coupon_words}
+			<p>{$coupon_words}</p>
+			{else}
+			<p>{$lang.no_order_yet}</p>
+			{/if}
+		</div>
+		{/if}
+	</section>
+	<section class="bag">
+		<div class="model">
+			<h2 class="u_model"><span></span>{$lang.my_bag}</h2>
+		</div>
+		{section loop=$cart_goods name=goods max=2}
+		<div class="list">
+			<p><a href="{$cart_goods[goods].url_title}"><img class="js_lazy" src="{$imgcache_url}/images/domeimg/lazyload.gif" data-original="{$cart_goods[goods].goods_thumb}"></a></p>
+			<ul>
+				<li class="li1"><a href="{$cart_goods[goods].url_title}">{$cart_goods[goods].goods_name}</a></li>
+				<li class="li2"><span class="bizhong"></span>
+				<span class="my_shop_price" orgp="{$cart_goods[goods].goods_price}">{$cart_goods[goods].goods_price}</span></li>
+				<li class="li3"><strong>{math equation="round((y-x)/y*100)" x=$cart_goods[goods].goods_price y=$cart_goods[goods].market_price format="%d"}% {$lang.OFF}</strong></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		{sectionelse}
+		<ul class="notBag">
+			<li class="userBg"></li>
+			<li>
+				<p class="red">{$lang.your_bag_is_empty}</p>
+				<p><a href="/">{$lang.continue_shopping}</a></p>
+			</li>
+		</ul>
+		{/section}
+		{if count($cart_goods) > 0}
+		<div class="more"><a href="{$DOMAIN_CART}/{$cur_lang_url}m-flow-a-cart.htm">{$lang.view_more} &gt;</a></div>
+		{/if}
+	</section>
+	<div class="clear"></div>
+</div>
+
+<div class="favShows">
+	<section class="fav">
+		<div class="model">
+			<h2 class="u_model"><span></span>{$lang.my_favorite}</h2>
+		</div>
+		<div class="scrollWrap">
+		<div class="scrollBox scrollFav">
+				<textarea  class="js_slideFav none">
+				<ul class="slides">
+					{foreach from=$fav_list item=fav}
+					{php}
+			            $this->_tpl_vars['tmp_url'] = get_position_product_link($this->_tpl_vars['fav']['url_title'], POSITION_SALE_FREQUENTLY_BOUGHT_TOGETHER_WITH, $this->_tpl_vars['fav']['cat_id']);
+			        {/php}
+					<li>
+						<a href="{$tmp_url}" class="i_proImg"><img src="{$fav.goods_grid}"/></a>
+						<p class="proName"><a href="{$fav.url_title}">{$fav.goods_title}</a></p>
+						<p class="proPrice"><span class="bizhong"></span><span class="bizhong"></span><span class="my_shop_price fb f14" orgp="{$fav.shop_price}">{$fav.shop_price}</span></p>
+					</li>
+					{/foreach}
+				</ul> 
+		</textarea>
+		</div><!--end .scrollBox-->
+		</div>
+	</section>
+	<section class="shows">
+		<div class="model">
+			<h2 class="u_model"><span></span>{$lang.my_shows}</h2>
+			<div class="scrollWrap">
+				<div class="scrollBox scrollShows">
+					<textarea  class="js_slideShows none">
+					<ul class="slides">
+						{foreach from=$myshows item=show}
+						<li><a href="{$show.detail_url}"><img src="{$domain_img}/{$show.thumb_paths}"></a></li>
+						{/foreach}
+						<li class="add"><a href="/{$cur_lang_url}m-users-a-my_shows.htm"><span class="userBg"></span></a></li>
+					</ul>
+					</textarea>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+	<div class="clear"></div>
+</div><!--end .ordersBag-->
+{if $reviews}
+<div class="history" style="border-bottom:1px solid #ddd">
+	<section>
+		<div class="model">
+			<h2 class="u_model"><span></span>{$lang.my_pending_reviews}</h2>
+		</div>
+		<div>
+			<strong class="f14">
+			{$lang.There_are}
+			<font class="red fb">{$reviews_count}</font>
+			{$lang.products_you_have_purchased}
+			<font class="red fb">{$reviews_count*500}</font>
+			{$lang.S_points}
+			</strong>
+		</div>
+		<div class="scrollWrap">
+		<div class="scrollBox scrollHistory">
+			<textarea  class="js_slideHistory none">
+				<ul class="slides">
+					{foreach from=$reviews item=revs}
+					<li>
+						<a href="{$revs.url_review}" class="i_proImg"><img src="{$revs.goods_grid}"/></a>
+						<p class="proName"><a href="{$his.url_review}">{$revs.goods_title}</a></p>
+					</li>
+					{/foreach}
+				</ul> 
+			</textarea>
+		</div>
+		</div>
+	</section>
+	<div class="clear"></div>
+</div><!--end .ordersBag-->
+{/if}
+{if $histories}
+<div class="history">
+	<section>
+		<div class="model">
+			<h2 class="u_model"><span></span>{$lang.my_history}</h2>
+		</div>
+		<div class="scrollWrap">
+		<div class="scrollBox scrollHistory">
+			<textarea  class="js_slideHistory none">
+				<ul class="slides">
+					{foreach from=$histories item=his}
+					<li>
+						<a href="{$his.goods_url}" class="i_proImg"><img src="{$his.goods_img}"/></a>
+						<p class="proName"><a href="{$his.goods_url}">{$his.goods_title}</a></p>
+						<p class="proPrice"><span class="bizhong"></span><span class="bizhong"></span><span class="my_shop_price fb f14" orgp="{$his.shop_price}">{$his.shop_price}</span></p>
+					</li>
+					{/foreach}
+				</ul> 
+			</textarea>
+		</div>
+		</div>
+	</section>
+	<div class="clear"></div>
+</div><!--end .ordersBag-->
+{/if}
+

@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+<head>
+{include file="top.htm"}
+<link rel="stylesheet" href="{$jscache_url}sysjs/calendar/calendar.css"/>
+<script type="text/javascript" src="/sysjs/calendar.php?lang=en"></script>
+{literal}
+<style>
+
+.userTable{background-color:#ccc; font-size:12px;}.userTable th{background-color:#EFEFEF;text-align:center;font-weight:bold;height:30px; padding:5px;}.userTable td{background-color:#FFF;text-align:center; padding:5px;}.userTableStyle_2{background-color:#FFF;border-collapse:collapse;}.userTableStyle_2 tr:nth-child(2n+1){background-color:#fafafa;}.userTableStyle_2 td{background-color:transparent;border-bottom:1px solid #ddd;padding:8px 0;}.userRedBtn{background-color:#c03;color:#fff;border:1px solid #c03;text-align:center;-webkit-transition:all 0.5s ease-in-out;-moz-transition:all 0.5s ease-in-out;-ms-transition:all 0.5s ease-in-out;-o-transition:all 0.5s ease-in-out;transition:all 0.5s ease-in-out;border:none}.userGrayBtn{background-color:#f1f1f1;color:#666;border:1px solid #ccc;text-align:center;}.userRedBtn:hover{background-color:#F01186;-webkit-transition:all 0.5s ease-in-out;-moz-transition:all 0.5s ease-in-out;-ms-transition:all 0.5s ease-in-out;-o-transition:all 0.5s ease-in-out;transition:all 0.5s ease-in-out;}
+/* Affiliate Program */
+#mainWrap { width:98%; margin-left:auto; margin-right:auto; font-size:12px;}
+.affiatePrgmBox h4{ margin:0 10px; font-size:18px; font-weight:bold; line-height:50px; text-align:center; border-bottom:3px solid #c00;}
+.affiatePrg_warp{ line-height:24px; padding:10px 40px;}
+.affiatePrg_warp h5{ padding-bottom:10px; font-weight:bold; font-size:14px;}
+.affiatePrg_warp p{ padding-bottom:10px; text-indent:2em;}
+.next_affiatePrg_warp{ height:600px; overflow-y:scroll;}
+
+.af_nextBtn{ padding-bottom:10px; text-align:center;}
+.af_nextBtn a{ display:inline-block; width:100px; height:30px; line-height:30px; zoom:1; font-weight:bold;}
+.af_nextBtn a:hover{ text-decoration:none;}
+
+.afValShow{ line-height:30px;}
+.af_breakWord{word-break:break-all; word-wrap: break-word;  }
+.af_breakWord p{ padding-bottom:5px; line-height:18px;text-align:left; }
+.af_script p{ text-align:left; }
+.af_script  textarea{ width:180px; height:40px; font-size:12px; line-height:16px; padding:5px; border:1px solid #ccc;}
+
+.af_detail_btn input{ width:175px; height:30px; margin-left:10px; cursor:pointer;}
+
+/* 添加一个 affiliate*/
+.add_afLink input{ height:18px; padding:3px; border:1px solid #ccc;}
+.add_afLink textarea{ padding:3px;border:1px solid #ccc;}
+.add_afLink input.error,.add_afLink textarea.error{ border:1px solid red; color:red; font-weight:bold;}
+.add_afLink label.error{ padding-left:5px; color:red; font-weight:bold;}
+.add_afLink td{ text-align:left;}
+.af_add_btnsWarp td{ text-align:center;}
+.af_add_btnsWarp input{ width:100px; padding:0; height:30px; margin-right:10px; font-weight:bold; line-height:30px; cursor:pointer;}
+.copyBtn{display: inline-block; zoom: 1; line-height: 26px; padding: 0 10px; cursor: pointer; background-color:#da3439; color: #fff; border-radius: 3px; position: relative;}
+</style>
+{/literal}
+
+
+
+
+</head>
+
+<body>
+	<header id="header">
+	{include file="public_top.htm"}
+	</header>
+	
+    
+	<!--添加一个新的Affiliates-->
+		<div id="mainWrap" class="clearfix mb10">
+			<div class="path"><a href="/" title="Sammydress.com Home">{$lang.home}</a>&nbsp;»&nbsp;<strong class="fb red">{$lang.Affiliates_Program}</strong> </div>
+            
+            {if $act == 'add_link'}
+			<form method="post" action="" id="link_form">
+				<input type="hidden" name="act" value="">
+				<input type="hidden" name="linkid" value="">
+				<input type="hidden" name="pid" value="">
+				<table width="100%" align="center" border="0" cellspacing="1" cellpadding="5" class="userTable mb10 add_afLink">
+					<tr>
+						<td width="120">{$lang.Link_Name} <strong class="red">*</strong></td>
+						<td><input size="50" maxlength="200" type="text" value="{$link.link_name}" name="link_name"/></td>
+					</tr>
+					<tr>
+						<td>{$lang.Link_image}</td>
+						<td>{if $link.img}<img width="100" height="100" src="{$link.img}"><br/>{/if}<input type="text" size="80" name="img" value="{$link.img}"/></td>
+					</tr>
+					<tr>
+						<td>{$lang.Link_Text}</td>
+						<td>
+							<textarea maxlength="150" cols="60" rows="5" type="text" name="link_text">{$link.link_text}</textarea>
+							<p>{$lang.link_note1}</p>
+						</td>
+					</tr>
+					<tr>
+						<td>{$lang.Link_Url} <strong class="red">*</strong></td>
+						<td><input size="80" maxlength="200" type="text" name="link_url" value="{$link.link_url}"/></td>
+					</tr>
+					<tr class="af_add_btnsWarp">
+						<td colspan="2"><input type="submit" value="Save" class="userRedBtn"/><input type="button" onclick="location.href='/{$cur_lang_url}m-webad-a-links_list.htm'" value="{$lang.Cancel}" class="cancelOrderBtn" /></td>
+					</tr>
+				</table>				
+			</form>
+		{/if}
+         
+
+        {if $act == '' or $act == 'links_list'}
+		<!--Affiliates列表-->
+        <div style="margin:0 0 10px 0">
+            <form action="?" name="searchform" method="get">
+            LinkID: <input type="text" name="LinkID" style="width:80px;" value="{$LinkID}" id="LinkID1"/>
+            <!--<input type="submit" value="Search" class="sub_but" />
+            </form>-->
+
+			<!--<form action="?" name="searchform" method="get">-->
+			Link name: <input type="text" name="LinkName" style="width:80px;" value="{$LinkName}" id="LinkName1"/>
+			<!--<input type="submit" value="Search" class="sub_but" />
+			</form>-->
+			
+            <!--<form action="?" name="searchform" method="get">
+			<input type="hidden" name="LinkID" style="width:80px;" value="{$LinkID}" id="LinkID_hid"/>
+			<input type="hidden" name="LinkName" style="width:80px;" value="{$LinkName}" id="LinkName_hid"/>-->
+            Page size:
+            <select name="page_size" onchange="this.parentNode.submit();">
+                <option value="10" {if $page_size=='10'}selected{/if}>10</option>
+                <option value="20" {if $page_size=='20'}selected{/if}>20</option>
+                <option value="50" {if $page_size=='50'}selected{/if}>50</option>
+                <option value="100" {if $page_size=='100'}selected{/if}>100</option>
+            </select>&nbsp;&nbsp;&nbsp;
+            Paid Date: <input name="search_start_date" value="{$search_start_date}" style="width:160px;" onclick="return showCalendar(this, '%Y-%m-%d 00:00', false, false, this);" /> --  <input name="search_end_date" value="{$search_end_date}" style="width:160px;" onclick="return showCalendar(this, '%Y-%m-%d 23:59', false, false, this);" />
+            <input type="submit" value="Search" class="sub_but" />
+            </form>
+        </div>
+
+		<form action="/m-webad-a-del_link.htm" method="post">
+			<table width="100%" align="center" border="0" cellspacing="1" cellpadding="5" class="userTable mb10 af_detail">
+			  <tr>
+                <th rowspan="2" scope="col" width="38">{$lang.Link_ID}</th>
+				<th rowspan="2" scope="col" width="250">{$lang.Link_Name}</th>
+				<th rowspan="2" scope="col" width="70">{$lang.image}</th>
+				<th rowspan="2" scope="col" width="180">{$lang.Script}</th>
+				<th rowspan="2" scope="col" width="71">{$lang.Dedicated_IP}</th>
+				<th rowspan="2" scope="col" width="69">{$lang.Registration_Count}</th>
+				<th colspan="2" scope="col">{$lang.Orders_Count}</th>
+				<th colspan="2" scope="col" >{$lang.Orders_sum}</th>
+				<th rowspan="2" scope="col" width="50">&nbsp;</th>
+			  </tr>
+			  <tr>
+				<td width="15">{$lang.All}</td>
+				<td width="30">{$lang.finish}</td>
+				<td width="35">Paid</td>
+				<!-- <td width="20">Last Month</td>
+				<td width="20">Current Month</td> -->
+				<td width="46">{$lang.Pending}</td>
+			  </tr>
+			  <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{if $search_start_date}{$Arr_links.IP_total_count}{/if}</td>
+                <td>{if $search_start_date}{$Arr_links.reg_total_count}{/if}</td>
+                <td></td>
+                <td>{$paid_count_all}</td>
+				<td>{$paid_sum_all}</td>
+                <td>{$pending_sum_all}</td>
+			  </tr> 
+
+              {foreach from=$Arr_links.list item=link}
+			  <tr>
+                <td>{$link.id}</td>
+				<td class="af_breakWord">
+					<p>{$link.link_name}</p>
+					<p>{$link.adddate}</p>
+					<p><a href="http://{$smarty.server.SERVER_NAME}/{$cur_lang_url}m-webad-a-add_link-linkid-{$link.id}.htm" class="blue">{$lang.edit}</a></p>
+				</td>
+				<td>{if $link.img neq ''}<img width="70"  height="70" src="{$link.img}">{/if}</td>
+				<td class="af_script" width="180">
+                    <div style="height:76px; width:100%; overflow-x:hidden;overflow-y:auto;">
+					<p class="pt5 pb5">{$lang.Affiliate_URL}:<span data-copyText="{$link.link_url_jump}" class="copyBtn">copy</span></p>
+					{*
+					<textarea  name="textarea" onclick="this.select()" cols="25" rows="1">{$link.link_url_jump}</textarea>
+					*}
+					<p class="pt5 pb5">{$lang.Text_link}:<span data-copyText='<a  target="_blank" href="{$link.link_url_jump}">{$link.link_text}</a>'class="copyBtn">copy</span></p>
+					{*
+					<textarea name="textarea" onclick="this.select()" cols="25" rows="1"><a  target="_blank" href="{$link.link_url_jump}">{$link.link_text}</a></textarea>
+					*}
+                    {if $link.img != ''}
+					<p class="pt5 pb5">{$lang.Image_link}:<span data-copyText='<a target="_blank" href="{$link.link_url_jump}"><img alt="{$link.link_name}" src="{$link.img}" border="0"/>{$link.link_text}</a>'class="copyBtn">copy</span></p>
+					{*
+					<textarea rows="1" cols="25" onclick="this.select()"><a target="_blank" href="{$link.link_url_jump}"><img alt="{$link.link_name}" src="{$link.img}" border="0"/>{$link.link_text}</a></textarea>
+					*}
+                    {/if}
+                    </div>
+				</td>
+				<td>{$link.ip_count}</td>
+                <td>{$link.reg_count}</td>
+				<td>{$link.order_count}</td>
+				<td>{$link.order_finish}</td>
+				<td>${$link.paid}</td>
+				<!-- <td>${$link.last_month_paid}</td>
+				<td>${$link.month_paid}</td> -->
+				<td>${$link.this_pending_issue}</td>
+				<td><input type="checkbox" name="linkid[]" value="{$link.id}"/></td>
+			  </tr>
+              {/foreach}
+                  
+			</table>
+			
+			<div class="tr af_detail_btn pb10"><input type="button" onclick="window.open('/{$cur_lang_url}m-webad-a-add_link.htm')" value="{$lang.Add_new_link}" class="userRedBtn" /><input type="button" onclick="if(confirm('{$lang.links_alert}'))this.form.submit()" value="{$lang.Delete_selected_link}" class="cancelOrderBtn"/></div>
+		
+		</form>
+		
+		<p>{$lang.Last_month_complete_commission} : <span>{$all_last_complete_commission}</span></p>
+		<p>{$lang.Current_month_complete_commission} : <span>{$all_current_complete_commission}</span></p>
+		<p>{$lang.Pending_commission} : <span>{$all_Pending_commission}</span></p>
+		
+		<div class="pageWarp clearfix">
+			<div class="pages fr tr">
+				{$pagestr}
+				{*cdn缓存,处理参数,如排序,每页显示数等 by mashanling on 2013-09-18 14:53:22*}
+				{php}
+				$this->_tpl_vars['_cdn_querystring'] = isset($this->_tpl_vars['cdn_querystring']) ? preg_replace('/&page_size=\d+/', '', $this->_tpl_vars['cdn_querystring']) : '';
+				{/php}
+			</div>
+
+		</div><!--end .pageWarp-->
+		{/if}
+		
+	</div><!--end #mainWarp-->
+	
+	<footer id="footer">	{include file="footerhelp.htm"}{include file="footer.htm"}</footer><!--end #footer-->
+	<script>
+		$LAB.script("{$imgcache_url}minjs/jquery.validate.min.js")
+        {literal}
+				.wait(function(){
+					if($("#link_form").length>0){
+
+						$("#link_form").validate({
+								rules: {
+									link_name:{required: true,maxlength: 60},
+									img: {maxlength: 200},
+									/*link_text:{
+										required: true,
+										maxlength: 200
+									},*/
+									link_url: {
+										required: true,
+										url:true,
+										maxlength: 200
+									}
+								},
+								messages : {
+									link_name : {
+										required: jsLg.affiliates.requir,
+										maxlength: jsLg.affiliates.no_more_60
+									},
+									img : {
+										maxlength: jsLg.affiliates.no_more_200
+									},
+									/*link_text:{
+										required: jsLg.affiliates.requir,
+										maxlength: jsLg.affiliates.no_more_200
+									},*/
+									link_url: {
+										required: jsLg.affiliates.requir,
+										url:jsLg.affiliates.url,
+										maxlength: jsLg.affiliates.no_more_200
+									}
+								},
+								errorPlacement:function(error,element){
+									element.parent().find("label.checked").remove();
+									error.appendTo(element.parent());
+									
+								},
+								success: function(label) {
+									label.html("&nbsp;").attr("class","checked");
+								}
+							});
+						
+					}
+				});
+				
+				$('#LinkID1').blur(function(){
+					var val= $(this).val();
+					$('#LinkID_hid').val(val);
+				});
+				
+				$('#LinkName1').blur(function(){
+					var val= $(this).val();
+					$('#LinkName_hid').val(val);
+				});
+				
+				
+				
+        {/literal}
+	</script>
+	
+	{literal}
+	<script>
+		$(function(){
+
+			$('.copyBtn').click(function(){
+				$.layer({
+					type: 1,
+					shadeClose: true,
+					area: ['auto', 'auto'],
+					title: false,
+					border: [0],
+					page: {html :'<div style="width:320px; height:160px; padding:20px; border:1px solid #ddd; background-color:#fff;"><h2 style="font-weight:bold; font-size:12px; padding-bottom:10px;">Please copy the following code manually：</h2><textarea  name="textarea" onclick="this.select()" style="width:100%; height:100px; border:none;" readonly>'+$(this).attr("data-copyText")+'</textarea></div>'}
+				});
+			})
+		})
+
+	</script>
+	{/literal}
+</body>
+</html>

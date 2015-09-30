@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css?2014112001">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="mainBox" class="mt15 pb20 clearfix">
+		<div class="article_R">
+			<div class="article">
+			
+		        <!--文章内容-->
+                {$article.content}
+                <!--文章内容-->
+                
+            	
+
+			</div><!--end .article-->
+		</div><!--end .article_R-->
+
+		<div class="article_l">
+           {foreach from=$center_cat_list key=k1 item=cat}
+            <dl {if $cat.cat_id==$article_cat_id}class="show"{/if}>
+				<dt><a href="javascript:void(0);"><i class="triangle"></i>{$cat.cat_name}</a></dt>
+				<dd>
+					<ul>
+                        {foreach from=$cat._child item=acticle}
+						{if $acticle.article_id!=102}
+						<li><a href="/{$cur_lang_url}m-article-id-{$acticle.article_id}.htm" rel="nofollow" {if $id==$acticle.article_id}class="on"{/if}>{$acticle.title}</a></li>
+						{/if}
+                        {/foreach}
+					</ul>
+				</dd>
+			</dl>
+           {/foreach}
+		</div><!--end .article_l-->
+
+	</div><!--end .mainBox-->
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+
+	{literal}
+	<script>
+		$("div.article_l").on("click","dt",function(event) {
+			/* Act on the event */
+			var $this = $(this);
+			var $parent = $this.parents("dl");
+			var $article_l = $this.parents("div.article_l");
+
+			if(!$parent.find('dd').is(":visible")){
+				$article_l.find('dd').slideUp();
+				$parent.find('dd').slideDown(function(){
+					$article_l.find('dl.show').removeClass('show');
+					$parent.addClass('show');
+				});
+			}
+
+		});
+
+	</script>
+    {/literal}
+
+    {*用户调查问卷的js*}
+	{literal}
+	<script type="text/javascript">
+		$LAB
+			.script(JS_IMG_URL+"minjs/jquery.validate.min.js")
+	        .wait(function(){
+	        	
+	        	//数据提交
+			    var Jform = $("#js_customerSurvey");
+
+			    if(Jform.length){
+		        	//评分
+				    (function(){
+				    	$.each($('.rate5'), function(index, val) {
+				    		 /* iterate through array or object */
+				    		var _this = $(val).find('b');
+					        _this.mouseover(function(){ 
+					            _this = this;
+					            var index = $(_this).index() + 1;
+					            rateSet(index, _this);
+					        });
+					        
+
+					        $(_this).parents('.rates').mouseout(function(){
+					            var startRateVal = parseInt($(this).parent('.user_rate').find('.startRate').val()); 
+
+					            if( !startRateVal){
+					                $(this).find('.big_rate_up').width(0);
+					            }else{
+					                rateSet(startRateVal, _this);
+					            }
+					        });
+
+					        _this.click(function(){ 
+					            $(this).parents('.user_rate').find("label.error").remove();
+					            $(this).parents('.user_rate').find('.startRate').val($(this).index()+1);
+					        });
+				    	});
+				        
+				        
+				        function rateSet(index, _this) {
+				            var width = (16 * index) + 'px';
+				            var $rates = $(_this).parents('.rates');
+				            var $big_rate_up = $rates.find('.big_rate_up');
+				            $big_rate_up.width(width);
+				            // $rates.find('b').click(function(){
+				            //  $(".user_rate").find("label.error").remove();
+
+				            //  $rates.find('.startRate').val(index.toString());
+				            // });
+				            
+				        }
+				    })($);
+
+				    (function(){
+				    	//数据提交
+		
+			    		Jform.validate({
+					        rules: {
+					            rate_overall_1:{required: true},
+					            rate_overall_2:{required: true},
+					            rate_overall_3:{required: true},
+					            rate_overall_4:{required: true},
+					            rate_overall_5:{required: true},
+					            rate_overall_6:{required: true},
+					            email: {
+				                    required: true,
+				                    maxlength: 60,
+				                    email: true
+				                }
+					        },
+					        messages: {
+					            rate_overall_1:{required: jsLg.formMsg.vote},
+					            rate_overall_2:{required: jsLg.formMsg.vote},
+					            rate_overall_3:{required: jsLg.formMsg.vote},
+					            rate_overall_4:{required: jsLg.formMsg.vote},
+					            rate_overall_5:{required: jsLg.formMsg.vote},
+					            rate_overall_6:{required: jsLg.formMsg.vote},
+					            email: {
+					                required: jsLg.formMsg.email_require_msg,
+					                maxlength: jsLg.formMsg.email_maxlength,
+					                email: jsLg.formMsg.email_require_msg
+					            }
+					        },
+			
+					        ignore: ""  ,
+					        submitHandler: function() {
+				                upform(Jform);
+				            },
+					        errorPlacement:function(error,element){
+					            element.parent().find("label.checked").remove();
+					            error.appendTo(element.parent());
+
+					        },
+					        success: function(label) {
+					            label.remove();
+					        }                    
+   						});
+
+						function upform (Jform){
+							$("#js_upFormBtn").prop({"disabled": true});
+							
+							
+							$.ajax({
+								url: Jform.attr("action"),
+								type: 'GET',
+								dataType:'json',
+								data: Jform.serialize(),
+							})
+							.done(function(data) {
+								//清空表单
+								Jform[0].reset();
+
+								if(data.statue == 1){
+									$("#couponCode").text(data.code);
+									$(".big_rate_up").width(0);
+									$(".startRate").val(" ");
+									GLOBAL.PopObj.openPop( {offset : [($(window).height()-240)/2+'px' , '50%'],page : {dom:"#couponPop"}});
+								}else if(data.statue == 0){
+									options = {
+									   msg : data.code,
+									   typeTag :0
+								   }
+								   GLOBAL.PopObj.alert(options);
+								}else if(data.statue == 2){
+									window.location.href=HTTPS_LOGIN_DOMAIN+'/'+JS_LANG+"m-users-a-sign.htm?ref="+window.location.href;
+								}
+								
+								$("#js_upFormBtn").prop({"disabled": false});
+							})
+
+						}
+				   
+				    })($,Jform);
+
+				    (function(){
+			    	    var _black;
+			    		$("#js_customerSurvey").submit(function(){
+			    	        if(_black){clearTimeout(_black)}
+			    	        _black = setTimeout(function(){ 
+			    	            var labelEror = $("#js_customerSurvey").find("label.error").eq(0);
+			    	            if(labelEror.length){
+			    	            
+			    	                var top = labelEror.offset().top-100;
+			    	                $("html,body").animate({scrollTop :top},500);			    	                
+			    	            }
+			    	        },300);
+			    	    });
+				    })($)
+				}
+	        })
+			
+	</script>
+	{/literal}
+	{*用户调查问卷的js*}
+
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

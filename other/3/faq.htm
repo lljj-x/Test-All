@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css?2015041301">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+	<div id="mainBox">
+		<div class="mt10"><img src="{$imgcache_url}images/domeimg/article/faq/faqBanner.jpg" width="100%"></div>
+		<div class="faqMain">
+			<div class="faqLeft">
+				<ul>
+					{foreach from=$lang.title item=item name=title}
+					<li {if $smarty.foreach.title.index == 0}class="on"{/if}><a href="javascript:void(0);">{$item}</a></li>
+					{/foreach}
+				</ul>
+			</div><!--end .faqLeft-->
+
+			<div class="faqTextBox" >
+				{foreach from=$lang.content key=key item=item name=title}
+				<section class="faqBoxList {if $smarty.foreach.title.index == 0}rgis{/if} howHide">
+					<h4>{$lang.title[$key]}</h4>
+					<div class="faqBoxShow">
+						{$item}
+					</div>
+				</section>
+				{/foreach}			
+			</div>
+		</div><!--end .faqMain-->
+	</div>
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	{literal}	
+	<script>
+	$(function(){
+		$("div.faqLeft").on("click","li",function(){
+			var $this = $(this), $target = $("div.faqTextBox section:eq("+$this.index()+")");
+
+			$(this).addClass('on').siblings('li').removeClass('on');
+			 $target.show().siblings('section').hide();
+		});
+
+		$("section.howHide ").find('dt').click(function(event) {
+			/* Act on the event */
+			var $this = $(this), $dl = $this.closest('dl'),$dlSiblings = $dl.siblings();
+
+			
+			$dlSiblings.find('dd').slideUp();
+			$dlSiblings.find("dt").find('i').html("+");
+
+			$dl.find('dd').slideDown();
+			$dl.find("dt").find('i').html("-");
+			
+		});
+	})
+	</script>
+    {/literal}
+	{include file="tongji.htm"}
+</body>
+
+</html>

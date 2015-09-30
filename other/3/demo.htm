@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}dist/css/category_min.css?2015071602"> 
+</head>
+<body>
+	<header>
+        {include file="public_top.htm"}
+	</header>
+    <div id="mainWrap" class="w"><br><br><br>
+	current ip: {$user_ip}    
+    </div>
+	<footer id="pageFooter">
+	<!-- Criteo code -->	
+	<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+	<script type="text/javascript">
+	{literal}
+	window.criteo_q = window.criteo_q || [];
+	window.criteo_q.push(
+	        { event: "setAccount", account: [{/literal}{$criteo.setAccount}{literal}] },
+	        { event: "setHashedEmail", email: "c86aa32ebcf3091a473dd0d1fab9a9a8" },
+	        { event: "setSiteType", type: "d" },
+	        { event: "trackTransaction" , id: "", currency: "USD", item:"",
+	});
+	{/literal}
+	</script>
+		<footer id="footer">
+			{include file="foot.htm"}
+		</footer><!-- #footer -->
+		<script type="text/javascript">		
+		{literal}
+			$LAB.script("category.min.js?2015080401").wait(function(){});
+		{/literal}
+		</script>
+	</div><!-- #page -->
+</body>
+</html>

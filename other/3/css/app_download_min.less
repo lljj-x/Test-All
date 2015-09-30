@@ -1,0 +1,213 @@
+.top_header,#nav,.top_main_inner{display: none};
+#mainBox{
+	.app_logo{float: left;}
+	.menu{float: right;overflow: hidden;
+		li{float: left;line-height: 1em; margin-top: 18px; padding: 0 34px;border-left: 2px solid #bbb;margin-left: -2px}
+		a{text-transform: uppercase;font-weight: bold;}
+	}
+}
+// #banner_wrap{text-align: center;position: relative;
+// 	.top_banner{height: 575px;overflow: hidden;
+// 				li{position:absolute;left: 0; display:inline-block;width: 100% !important;left: 0;height: 575px;overflow: hidden;}
+// 				a{position:absolute;left: 50%;margin-left: -960px};
+// 			}
+// 	.bx-controls{position: absolute; left: 0; bottom: 20px; width: 100%; height: 15px; text-align: center;z-index: 98;
+// 		.bx-pager-item{display: inline-block; margin: 0 5px; vertical-align: top;}
+// 		.bx-pager{height: 15px;}
+// 		a{display: inline-block; width: 12px; height: 12px; vertical-align: top; font-size: 0; background-color:#fff;opacity: 0.4; border-radius: 15px;
+// 			&:hover,&.active{opacity: 1;} 
+// 		}
+// 	}
+// }
+// #downloadWrap{text-align: center;
+// 	#android,#ios{display: inline-block;position: relative; padding: 0 120px;margin: 50px 0;}
+// 	a:hover{opacity: .8}
+// 	#ios{border-left: 1px dashed #888} 
+// 	.pop{position: absolute;left: 222px;top: -120px;z-index: 999; width: 340px;/*height: 226px;*/padding: 25px 45px; background: #efefef;display:none;
+// 		.description{text-align: left;
+// 			img,div{float: left;}img{padding-right: 20px;padding-top: 9px}
+// 			h3{font-weight: bold;font-size: 20px;color: #353535;}
+// 			span{display: block; color: #888;font-size: 12px;}			
+// 		}
+// 		.get_app{margin-top: 14px;text-align: left;
+// 			.btn{width: 200px;float: left}
+// 			.core{float:right;font-size: 12px;margin-top:-25px;} 
+// 		}
+// 		.close{position: absolute;right: 10px;top: 10px;cursor:pointer; width: 12px;height: 12px; padding: 4px;background: url(../images/app_download/close.png) no-repeat 50% 50%;}
+// 	}
+// 	.pop_center{left: 50%;top: 50%;position: fixed;margin: -113px 0 0 -190px;}
+
+// 	#mask{position: fixed;top: 0;left: 0; width: 100%;height: 100%;background: #000;z-index: 99;display:none;cursor: pointer;}
+// }
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+
+  100% {
+    opacity: 1;
+  	transform: translate3d(0, 0, 0);;
+  }
+}
+
+.fadeOutDown {
+   transform: translate3d(0, 20%, 0);
+   transition:all .5s;
+}
+.fadeOutUp{
+	transform: translate3d(0, 0, 0);
+}
+
+.animate-in {
+	transform:translate3d(0, 0, 0);
+	transition:all .5s;
+	opacity: 1;
+}
+
+
+.pre-animate{
+	transform:translate3d(0, 40%, 0);
+	opacity: 0;
+}
+#appPage{
+	.banner{ width: 100%; height: 600px; overflow: hidden; position: relative;
+		.main_inner{height: 600px;}
+		.bannerbg{ position: absolute; left: 0; top: 0; width: 100%; height: 100%;	}
+		
+		.bannerPro{position: absolute; right: 0; bottom: 20px;}
+
+		.siteCode{width: 198px; position: absolute; left: 100px; top: 40px;}
+		.bannerT{width: 216px; position: absolute; left: 340px; top: 130px;
+			.title{margin-bottom: 130px;} 
+		}
+		&.banner-iphone{
+			.bannerPro{ right: 0; bottom: 0;}
+		}
+		&.banner-ipad{
+			.bannerPro{ bottom: 0;}
+		}
+		// &.banner-android{
+		// 	.bannerPro{ right: 0; bottom: 20px;}
+		// }
+	}
+	#appInfoBox{position: relative; z-index: 2; margin-top: -100px; background-color: transparent;}
+	.appNav{height: 100px;  width: 100%; position: absolute; top:0; left: 0; z-index: 10;  background-color:rgba(243,243,243,0.6);background-color:transparent\9;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType = 1,startColorstr = '#99f3f3f3',endColorstr = '#99f3f3f3');zoom:1; 
+	
+		.appNavWrap{width: 100%; height: 100%;}
+		ul{width: 900px; margin: 0 auto;}
+		li{ height: 100px; float: left; padding-right: 60px;
+			a{float: left; height: 100%; padding-left: 50px; color: #787878; text-decoration: none;
+				&.on{color:#ff3248; border-bottom: 2px solid #ff3248; height: 98px;}
+			}
+			span{ float: left; margin:30px 0 0 -50px; width: 40px; height: 48px; background-image: url(../images/mobile/app/icon.png); background-repeat: no-repeat; display: block;}
+			p{line-height:100px; font-size: 30px; }
+
+			&.ipad{
+				span{background-position: 0 0;}
+				.on{ 
+					span{background-position: 0 -48px;}
+				}
+			}
+			&.iphone{
+				span{background-position: -40px 0;}
+				.on{ 
+					span{background-position: -40px -48px;}
+				}
+			}
+			&.android{
+				span{background-position: -80px 0;}
+				.on{ 
+					span{background-position: -80px -48px;}
+				}
+			}
+		}
+	}
+	
+
+	.app-container{
+		.graybg{background-color: #f2f2f2;}
+		.low{overflow: hidden; position: relative; width: 1100px; margin: 0 auto;}
+		.lowPro,.lowText{position: absolute;}
+	}
+	.iphoneContainer{
+		.low1{height: 768px; 
+			.lowPro{ top: 50px; left: 80px;}
+			.lowText{top: 285px; right: 80px;}
+		}
+		.low2{height: 828px;
+			.lowPro{ top: 58px; left: 50%; margin-left: -488px;}
+			.lowText{bottom: 50px; left: 50%; margin-left: -511px;}
+		}
+		.low3{height: 730px;
+			.lowPro{ top: 60px; left: 0;}
+			.lowText{bottom:115px; right: 30px;}
+		}
+		.low4{ height: 730px; 
+			.lowPro1{top: 30px; left: 80px; position: absolute;
+				&.animate-in{transition: all 1s;}
+			}
+			.lowPro2{ top: 50px;left: 299px;  position: absolute;}
+			.lowText{bottom:250px; right: 80px;}
+		}
+
+		.bottomLow{ padding: 90px 0; font-family: "Myriad Pro" Arial;
+			h4{font-size: 36px; padding-bottom: 10px;}
+			p{font-size: 18px; padding-bottom: 10px;}
+		}
+	}
+
+	.androidContainer{
+		.low1{height: 700px; 
+			.lowPro1{ top: 20px; left: 0; position: absolute;
+				&.animate-in{transition: all 1s;}
+			}
+			.lowPro2{ top: 100px;left: 290px;  position: absolute;}
+			.lowText{top: 313px; right: 0;}
+		}
+		.low2{ height: 735px;
+			.lowPro{bottom:0px; right: 0;}
+			.lowText{bottom: 170px; left: 0;}
+		}
+		.low3{height: 895px;
+			.lowPro{top:55px;left: 50%; margin-left: -532px;}
+			.lowText{bottom: 70px; left: 50%; margin-left: -226px;}
+		}
+		.low4{height: 870px;
+			.lowPro{top:100px; right: 0;}
+			.lowText{bottom: 110px; left: 0; }
+		}
+
+		.bottomLow{ padding: 90px 0; font-family: "Myriad Pro" Arial;
+			h4{font-size: 36px; padding-bottom: 10px;}
+			p{font-size: 18px; padding-bottom: 10px;}
+		}
+	}
+
+	.ipadContainer{
+		.low1{height: 768px; 
+			.lowPro{ top: 20px; left: 50%; margin-left: -390px;
+				
+			}
+			.lowText{bottom:20px; left: 50%; margin-left: -488px;}
+
+			
+		}
+		.low2{height: 822px; 
+			.lowPro{ top: 50px; left: 50%; margin-left: -492px;}
+			.lowText{bottom: 60px; left: 50%; margin-left: -511px;}
+		}
+		.low3{height: 822px; 
+			.lowPro{ bottom: 0; left: 0;}
+			.lowText{bottom: 207px; left: 630px;}
+		}
+		.low4{height: 808px; 
+			.lowPro{ top: 60px; left: 0;}
+			.lowText{bottom: 125px; left: 580px;}
+		}
+		.bottomLow{ padding: 90px 0; font-family: "Myriad Pro" Arial;
+			h4{font-size: 36px; padding-bottom: 10px;}
+			p{font-size: 18px; padding-bottom: 10px;}
+		}
+	}
+}

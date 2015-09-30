@@ -1,0 +1,15 @@
+{*分类列表广告模板*}
+<div class="cateTopBanner">
+        {if $category_banner}
+	<img src="{$category_banner.pic_url}" title="{$category_banner.title}">
+        {/if}
+	{if $trendsList}
+	<div class="btnWrap">
+		{foreach from=$trendsList item=trends}
+		<a href="{$trends.link}" class="btn"><span>{$trends.keywords}</span></a>
+		{/foreach}
+	</div>
+	{/if}
+</div>
+
+

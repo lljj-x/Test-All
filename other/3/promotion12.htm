@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+  {include file="top.htm"}
+
+  {include file="foot_common_js.htm"}
+</head>
+<body>
+
+<header id="header">
+    {include file="public_top.htm"}
+</header>
+{if $active == 129}
+    {literal}
+    <style>
+        .walletUser{width: 1000px;margin-left:auto; margin-right: auto; font-family: Arial;}
+        .walletUser h3{ padding: 30px 0; font-size: 26px; text-transform: uppercase; font-weight: bold; text-align: center;}
+        #type1{border-bottom: 1px solid #ddd;}
+        .walletUser .type{padding-bottom: 20px;}
+        .walletUser h4{font-size: 16px; font-weight: bold; color: #f60; line-height: 20px;}
+        .walletUser h4 strong{color: #fff; font-weight: bold; background-color: #f60; display: inline-block; zoom: 1; padding:2px 5px; margin-right: 10px;}
+        .walletUser h5{ padding: 10px 0; font-weight: bold;}
+
+    </style>
+    {/literal}
+    <div class="walletUser">
+        <div class="banner"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/banner.jpg" usemap="#Map">
+             <map name="Map">
+                <area shape="rect" coords="566,192,712,234" href="#type1">
+                <area shape="rect" coords="730,192,878,236" href="#type2">
+            </map>
+        </div>
+        <h3>{$lang.wallet.0}</h3>
+
+        <div class="type" id="type1">
+            <h4>{$lang.wallet.1}</h4>
+
+            <h5>{$lang.wallet.2}</h5>
+            <p class="pb10"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/type1_1.jpg" alt=""></p>
+
+            <h5>{$lang.wallet.3}</h5>
+            <p class="pb10"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/type1_2.jpg" alt=""></p>
+
+            <h5>{$lang.wallet.4}</h5>
+            <p class="pb10"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/type1_3.jpg" alt=""></p>
+
+            <h5>{$lang.wallet.5}</h5>
+            <p class="pb10"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/type1_4.jpg" alt=""></p>
+        </div>
+
+        <div class="type pt20" id="type2">
+            <h4>{$lang.wallet.6}</h4>
+            <h5>{$lang.wallet.7}</h5>
+            <p class="pb10"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/type2_1.jpg" alt=""></p>
+
+            <h5>{$lang.wallet.8}</h5>
+            <p class="pb10"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/type2_2.jpg" alt=""></p>
+            
+            <h5>{$lang.wallet.9}</h5>
+            <p class="pb10"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/type2_3.jpg" alt=""></p>
+
+            <h5>{$lang.wallet.10}</h5>
+            <p class="pb10"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/type2_4.jpg" alt=""></p>
+
+            <h5>{$lang.wallet.11}</h5>
+            <p class="pb10"><img src="{$imgcache_url}images/domeimg/walletuser/{$cur_lang}/type2_5.jpg" alt=""></p>
+        </div>
+    </div>
+{/if}
+
+{if $active == 128}
+{literal}
+<style>
+.banner{ width:1200px; margin:0 auto; text-align:center;}
+.notice_main{ width:1100px; margin:0 auto; font-size:14px; color:#999; line-height:24px; padding:50px; font-family:Verdana, Geneva, sans-serif;}
+.notice_main em{ font-style:normal; color:#333; font-size:24px; font-weight:bold;}
+.notice_main strong{ font-weight:bold; color:#333;}
+.notice_main strong.red{ color:#ef0339}
+.notice_main p.coupon{ display:block; background-color:#ef0339; font-size:45px; font-weight:bold; color:#fff; padding:20px; width:300px; height:50px; line-height:50px; margin:30px auto; text-align:center;}
+.notice_main a{ color:#00F; text-decoration:underline;}
+</style>
+{/literal}
+<div class="banner"><img src="{$imgcache_url}images/pageimg/homebanner/{$cur_lang}/notice.jpg" width="1200" height="548" /></div>
+<div class="notice_main">
+{$lang.2015_Chinese_Lunar_New_Year}
+</div>
+
+{/if}
+
+
+
+
+{if $active == 127}
+
+<style type="text/css">
+    {literal}
+    @-webkit-keyframes upIn {
+        from{opacity: 0; -webkit-transform: translateY(80px);}
+        to{opacity: 1; -webkit-transform: translateY(0px);}
+    }
+    @-moz-keyframes upIn {
+        from{opacity: 0; -moz-transform: translateY(80px);}
+        to{opacity: 1; -moz-transform: translateY(0px);}
+    }
+    @-o-keyframes upIn {
+        from{opacity: 0; -o-transform: translateY(80px);}
+        to{opacity: 1; -o-transform: translateY(0px);}
+    }
+    @keyframes upIn {
+        from{opacity: 0; transform: translateY(80px);}
+        to{opacity: 1; transform: translateY(0px);}
+    }
+    .banner{width: 100%; height: 808px; background: url(http://css.sammydress.com/imagecache/S/images/pageimg/superSaturday/{/literal}{$cur_lang}{literal}/bannerbg.jpg) no-repeat center center; position: relative;}
+    .banner .upImg{width: 606px; height: 190px; position: absolute; left: 50%; top: 243px; margin-left: -303px; -webkit-animation: upIn 1s;-moz-animation: upIn 1s;-o-animation: upIn 1s;animation: upIn 1s; text-align: center;}
+    .banner .textImg{width: 1098px; height: 218px; position: absolute; left: 50%; top: 483px; margin-left: -501px;-webkit-animation: upIn 2s .5s;-moz-animation: upIn 2s .5s;-o-animation: upIn 2s .5s;animation: upIn 2s .5s;text-align: center;}
+
+    .superSaturday{ padding-bottom: 40px; background: url(http://css.sammydress.com/imagecache/S/images/pageimg/superSaturday/bg.jpg) no-repeat center bottom;}
+    .item,.broadcast{width: 1000px; margin-left: auto; margin-right: auto;}
+    .broadcast{height: 30px; font:bold 16px/30px Arial; }
+    .broadcast dt{ float: left; padding-right: 10px; padding-right: 20px;}
+    .broadcast dd{width: 800px; float: left;}
+    .broadcast .slider{height: 30px; overflow: hidden;}
+    .broadcast .slider li{ width: 800px;}
+    .broadcast strong{font-weight: bold; color: #fa8373;}
+
+    .item{width: 980px; border: 5px solid #fa8373; padding: 5px; margin-top: 30px; height: 255px; background: #fff; position: relative;}
+    .item_img{float: right; display: block; width: 670px; height: 255px;}
+    .item section{overflow: hidden; padding: 20px 0; text-align: center; font-family: "Times New Roman", Times, serif;}
+    .item h4{ height:84px; font: bold 28px/28px "Times New Roman", Times, serif; text-align: center; text-transform: uppercase;}
+    .item .cutOff{font-size: 18px; font-weight: bold;text-transform: uppercase;}
+    .item .cutOff strong{ font-size: 56px; font-weight: bold; color: #fa8373;}
+    .cutTimeWrap i{ display: inline-block; zoom: 1;background: url(http://css.sammydress.com/imagecache/S/images/pageimg/superSaturday/click.gif) no-repeat left top; width: 40px; height: 32px; vertical-align:-8px; *vertical-align: middle;}
+    .cutTime{  font-size: 18px;font-weight: bold;text-transform: uppercase; line-height: 32px; margin: 15px auto; height: 32px; width: 200px; text-align: left;}
+
+    .mask{position: absolute; z-index: 1; left: 0; top: 0; width: 100%; height: 100%;}
+    .maskBox{width: 100%; height: 100%; background-color: #000;opacity: .5;filter: alpha(opacity=50);}
+    .mask .text{position: absolute; left: 0; top: 50%; margin-top: -30px; z-index: 2; width: 100%; font-size: 60px; text-align: center; line-height: 60px; color: #fff;font-family: "Times New Roman", Times, serif;  text-transform: uppercase;}
+{/literal}
+</style>
+
+
+<div class="banner">
+    <div class="upImg">
+        <img src="{$imgcache_url}images/pageimg/superSaturday/{$cur_lang}/upoff.png"  height="190" />
+    </div>
+    <div class="textImg">
+        <img src="{$imgcache_url}images/pageimg/superSaturday/{$cur_lang}/bannerTitle.png?2014120401" height="218" />
+    </div>
+</div><!-- .banner -->
+
+<div class="superSaturday">
+    <div class="broadcast">
+        <dl>
+            <dt>{$lang.The_Lastest_News}:</dt>
+            <dd id="js_broadcastList">
+                <ul class="slider">
+					{foreach from=$pcode item=data name=list}
+                    <li><strong>{$data.email}</strong> {$lang.got} <strong>{$data.income} S</strong> {$lang.points} </li>
+                    {/foreach}
+                </ul>
+            </dd>
+        </dl>
+    </div><!-- .broadcast -->
+
+     <div class="item">
+        <a href="/{$cur_lang}/Wholesale-New-Arrival-Shoes-c-11218.html" class="item_img"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/pageimg/superSaturday/07.jpg" width="670" height="255" class="js_lazy" /></a>
+   
+        <section>
+            <h4>{$lang.Stunning_Winter_Shoes}</h4>
+
+            <div class="cutOff">
+                {$lang.UP_TO} <strong>60%</strong> {$lang.OFF}
+            </div>
+
+            <div class="cutTimeWrap"><i></i><span  class="cutTime" data-cuttime="{$super6.Stunning_Winter_Shoes[3]}"></span></div>
+        </section>
+
+        {if $super6.Stunning_Winter_Shoes[1]==0 || $super6.Stunning_Winter_Shoes[1]==2}
+		<div class="mask">
+            <span class="text">{$super6.Stunning_Winter_Shoes[2]}</span>
+            <div class="maskBox"></div>
+        </div>
+		{/if}
+      </div><!-- .item -->  
+
+      <div class="item hasmask">
+        <a href="/{$cur_lang}/Wholesale-New-Arrival-Tops-c-11213.html" class="item_img"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/pageimg/superSaturday/03.jpg" width="670" height="255" class="js_lazy" /></a>
+   
+        <section>
+            <h4>{$lang.Festive_Fashion_Tops}</h4>
+
+            <div class="cutOff">
+                {$lang.UP_TO} <strong>68%</strong> {$lang.OFF}
+            </div>
+
+            <div class="cutTimeWrap"><i></i><span  class="cutTime" data-cuttime="{$super6.Festive_Fashion_Tops[3]}"></span></div>
+        </section>
+
+        {if $super6.Festive_Fashion_Tops[1]==0 || $super6.Festive_Fashion_Tops[1]==2}
+		<div class="mask">
+            <span class="text">{$super6.Festive_Fashion_Tops[2]}</span>
+            <div class="maskBox"></div>
+        </div>
+		{/if}
+    </div><!-- .item -->    
+
+    <div class="item">
+        <a href="/{$cur_lang}/Wholesale-New-Arrival-Outerwear-c-11215.html" class="item_img"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/pageimg/superSaturday/04.jpg" width="670" height="255" class="js_lazy" /></a>
+   
+        <section>
+            <h4>{$lang.Essential_Winter_Outerwear}</h4>
+
+            <div class="cutOff">
+                {$lang.UP_TO} <strong>63%</strong> {$lang.OFF}
+            </div>
+
+            <div class="cutTimeWrap"><i></i><span  class="cutTime" data-cuttime="{$super6.Essential_Winter_Outerwear[3]}"></span></div>
+        </section>
+
+        {if $super6.Essential_Winter_Outerwear[1]==0 || $super6.Essential_Winter_Outerwear[1]==2}
+		<div class="mask">
+            <span class="text">{$super6.Essential_Winter_Outerwear[2]}</span>
+            <div class="maskBox"></div>
+        </div>
+		{/if}
+    </div><!-- .item -->  
+    
+    <div class="item">
+        <a href="/{$cur_lang}/Wholesale-New-Arrival-Bottoms-c-11214.html" class="item_img"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/pageimg/superSaturday/05.jpg" width="670" height="255" class="js_lazy" /></a>
+   
+        <section>
+            <h4>{$lang.Stylish_Seasonal_Bottoms}</h4>
+
+            <div class="cutOff">
+                {$lang.UP_TO} <strong>70%</strong> {$lang.OFF}
+            </div>
+
+            <div class="cutTimeWrap"><i></i><span  class="cutTime" data-cuttime="{$super6.Stylish_Seasonal_Bottoms[3]}"></span></div>
+        </section>
+
+        {if $super6.Stylish_Seasonal_Bottoms[1]==0 || $super6.Stylish_Seasonal_Bottoms[1]==2}
+		<div class="mask">
+            <span class="text">{$super6.Stylish_Seasonal_Bottoms[2]}</span>
+            <div class="maskBox"></div>
+        </div>
+		{/if}
+    </div><!-- .item -->
+
+	<div class="item">
+        <a href="/{$cur_lang}/Wholesale-New-Arrival-Dresses-c-11211.html" class="item_img"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/pageimg/superSaturday/01.jpg" width="670" height="255" class="js_lazy" /></a>
+        <section>
+            <h4>{$lang.Top_Trending_Dresses}</h4>
+
+            <div class="cutOff">
+                {$lang.UP_TO} <strong>70%</strong> {$lang.OFF}
+            </div>
+
+             <div class="cutTimeWrap"><i></i><span  class="cutTime" data-cuttime="{$super6.Top_Trending_Dresses[3]}"></span></div>
+        </section>
+        
+		{if $super6.Top_Trending_Dresses[1]==0 || $super6.Top_Trending_Dresses[1]==2}
+		<div class="mask">
+            <span class="text">{$super6.Top_Trending_Dresses[2]}</span>
+            <div class="maskBox"></div>
+        </div>
+		{/if}
+        
+
+    </div><!-- .item -->
+
+    <div class="item">
+        <a href="/{$cur_lang}/Wholesale-Cozy-Sweaters-Cardigans-c-11262.html" class="item_img"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/pageimg/superSaturday/02.jpg" width="670" height="255" class="js_lazy" /></a>
+   
+        <section>
+            <h4>{$lang.Cozy_Sweaters_Cardigans}</h4>
+
+            <div class="cutOff">
+                {$lang.UP_TO} <strong>65%</strong> {$lang.OFF}
+            </div>
+
+            <div class="cutTimeWrap"><i></i><span  class="cutTime" data-cuttime="{$super6.Cozy_Sweaters_Cardigans[3]}"></span></div>
+        </section>
+
+		{if $super6.Cozy_Sweaters_Cardigans[1]==0 || $super6.Cozy_Sweaters_Cardigans[1]==2}
+		<div class="mask">
+            <span class="text">{$super6.Cozy_Sweaters_Cardigans[2]}</span>
+            <div class="maskBox"></div>
+        </div>
+		{/if}
+
+       
+     </div><!-- .item -->
+
+	 <div class="item">
+        <a href="/{$cur_lang}/Wholesale-New-Arrival-Jewelry-c-11216.html" class="item_img"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/pageimg/superSaturday/06.jpg" width="670" height="255" class="js_lazy" /></a>
+   
+        <section>
+            <h4>{$lang.Sparkling_Decorative_Jewelry}</h4>
+
+            <div class="cutOff">
+                {$lang.UP_TO} <strong>75%</strong> {$lang.OFF}
+            </div>
+
+            <div class="cutTimeWrap"><i></i><span  class="cutTime" data-cuttime="{$super6.Sparkling_Decorative_Jewelry[3]}"></span></div>
+        </section>
+        
+        {if $super6.Sparkling_Decorative_Jewelry[1]==0 || $super6.Sparkling_Decorative_Jewelry[1]==2}
+		<div class="mask">
+            <span class="text">{$super6.Sparkling_Decorative_Jewelry[2]}</span>
+            <div class="maskBox"></div>
+        </div>
+		{/if}
+      </div><!-- .item -->
+
+</div><!-- .superSaturday -->
+
+<script type="text/javascript">
+    $LAB.script("{$imgcache_url}minjs/jquery.flexslider.min.js")
+    {literal}
+    .wait(function(){ 
+            
+            //banner 滚动
+            $('#js_broadcastList').flexslider({
+                namespace:"",
+                animation: "slide",
+                selector: ".slider > li",
+                direction: "vertical", 
+                pauseOnAction:false,
+                controlNav:false,
+                animationLoop: true,
+                slideshow:true,  
+                directionNav:false,
+                slideshowSpeed: 3000,
+                animationSpeed: 1000
+                
+            });
+
+
+            (function(){
+                /**
+                 * 倒计时对象
+                 * @param {jquery 对象} $cutBox 用来显示倒计时的容器
+                 * @param {String} cutTime 记录结束时间的，如 “02/12/2013 08:59:59 AM”
+                 * @param {Number} msec 是否显示毫秒，1不显示，0或者不填显示
+                 */
+                GLOBAL.Untime = function($cutBox,cutTime,msec){
+                    this.timeBox = $cutBox;
+                    this.cutTime = cutTime*1000;
+                    this._bland = "";
+                    this.msec = msec;
+                    this.ini();
+                }
+                GLOBAL.Untime.prototype.ini = function(){
+                    var that = this;
+                    var a1,a2;
+                    var cutTime = this.cutTime;
+                    if($.isNumeric(cutTime)){
+                        // a1 = cutTime[0].split("/");
+                        // a2 = cutTime[1].split(":");          
+                        that.setCutTime(cutTime);
+                    }   
+                }
+                GLOBAL.Untime.prototype.n8 = function(n){
+                    if(n < 10){return "0" + n.toString()};
+                    return n.toString();
+                }
+                GLOBAL.Untime.prototype.n3 = function(n){
+                    if(n < 10){return "00" + n.toString()};
+                    if(n < 100){return "0" + n.toString()};
+                    return n.toString();
+                }
+
+                GLOBAL.Untime.prototype.setCutTime = function(d){
+                    var that = this;
+                    var time_h,tmme_m,time_s,time_ms,time_day;
+                    var d1 = new Date();
+                    //var zone =  d1.getHours()-d1.getUTCHours();
+                    var n = d;
+                    var daytext = jsLg.day; 
+                    //n = d*1000;
+
+                    if(n > 0){
+                        time_ms = that.n3(n % 1000);
+                        n = (n - n % 1000) / 1000;
+                        time_s = that.n8(n % 60);
+                        n = (n - n % 60) / 60;
+                        tmme_m = that.n8(n % 60);
+                        n = (n - n % 60) / 60;
+                        time_h = that.n8(n % 24);
+                        n = (n - n % 24) / 24;
+
+                        //daytext = n > 1 ? "day" : "day";
+
+                        if(this.msec == 1 ){
+                            if(n > 0){
+                                that.timeBox.html(n +" "+ daytext+" " +time_h+":"+tmme_m+":"+time_s)
+                            }else{
+                                that.timeBox.html(time_h+":"+tmme_m+":"+time_s)
+                            }
+                            
+                        }else{
+                            if(n>0){
+                                that.timeBox.html(n+" "+ daytext+" " +time_h+":"+tmme_m+":"+time_s+":"+time_ms)
+                            }else{
+                                that.timeBox.html(time_h+":"+tmme_m+":"+time_s+":"+time_ms)
+                            }
+                        }
+                        that._bland = setTimeout(function(){
+                            that.setCutTime(d-1)
+                        }, 1);
+                    }else{
+                        that.timeBox.html("00 : 00 : 00");
+                        if(that._bland){
+                            clearTimeout(that._bland);
+                        }
+                    }
+                }//倒计时对象结束
+
+                $.each($(".cutTime"), function(index, val) {
+                     /* iterate through array or object */
+                    var Jval = $(val);
+
+                    if($.isNumeric(Jval.data("cuttime")-0) ){
+                        new GLOBAL.Untime(Jval,Jval.data("cuttime"));
+                    }
+                });
+
+                // if($(".cutTime").length){
+
+                //     $.get(window.location.href,{act:"get_promo_left"}, function(data) {
+                //         /*optional stuff to do after success */
+                //         var Timecut = new GLOBAL.Untime($("#js_good_time"),data,1);
+                //         Timecut.ini();
+                //     });
+                
+                // }
+                
+            })(); 
+    })
+    {/literal}
+</script>
+
+{/if}
+
+
+
+{if $active == 126}
+{literal}
+<style type="text/css">
+
+#snowfall{display: none\9;}
+
+.banner{ height: 560px; width: 100%; position: relative; overflow: hidden;}
+.bannerBg{ position: absolute; left: 0; top: 0; min-width: 1940px;}
+.bannerText{ position: absolute; left: 50%; margin-left: -593px; top: 0;}
+.line{background: url(http://css.sammydress.com/imagecache/S/images/pageimg/christmas/BARGAINS/merry_04.gif) repeat-x 0 0; height:4px;}
+
+.icon{background-image: url(http://css.sammydress.com/imagecache/S/images/pageimg/christmas/BARGAINS/merryTag.png); background-repeat: no-repeat;}
+.navWrap{width: 100%; background: #fff;}
+#chiristmasMain{width: 1200px; margin-left: auto; margin-right: auto; font-family: Arial;}
+
+#navlist{border-bottom: 1px solid #ddd;  padding-bottom: 10px; position: relative; margin: 0 auto; background: #fff; width: 1200px; font-family: Arial;height: 110px;}
+#navlist li{width: 133px; float: left; text-align: center;}
+#navlist li i{display: block; width: 80px;height: 80px; margin: 0 auto;}
+#navlist li.nav_1 i{background-position: 0 0;}
+#navlist li.nav_1.hover i{background-position: 0 -120px;}
+#navlist li.nav_2 i{background-position: -120px 0;}
+#navlist li.nav_2.hover i{background-position: -120px -120px;}
+#navlist li.nav_3 i{background-position: -240px 0;}
+#navlist li.nav_3.hover i{background-position: -240px -120px;}
+#navlist li.nav_4 i{background-position: -360px 0;}
+#navlist li.nav_4.hover i{background-position: -360px -120px;}
+#navlist li.nav_5 i{background-position: -480px 0;}
+#navlist li.nav_5.hover i{background-position: -480px -120px;}
+#navlist li.nav_6 i{background-position: -600px 0;}
+#navlist li.nav_6.hover i{background-position: -600px -120px;} 
+#navlist li.nav_7 i{background-position: -720px 0;}
+#navlist li.nav_7.hover i{background-position: -720px -120px;}
+#navlist li.nav_8 i{background-position: -840px 0;}
+#navlist li.nav_8.hover i{background-position: -840px -120px;}
+#navlist li.nav_9 i{background-position: -960px 0;}
+#navlist li.nav_9.hover i{background-position: -960px -120px;}
+
+#navlist li a{font-size: 14px; font-weight: bold; text-decoration: none;}
+#navlist li.hover a{ color: #e81c1c;}
+#navlist li a:hover{ color: #e81c1c;}
+.hideIcon #navlist{height: auto;}
+.hideIcon #navlist li i{display: none;}
+
+.tab-arrow{position: absolute; left: 0; bottom: 0; width: 80px; height: 5px; background-color: #e81c1c; margin-left: 26px;}
+.tab-arrow b{ position: absolute;  margin-left: -8px; left: 50%; top: 2px; display: inline-block; *zoom: 1; width: 0; height: 0; border-width:8px 8px 0; border-style: solid; border-color:#e81c1c transparent transparent ;}
+.christmasProlist{padding-bottom: 30px;}
+.christmasProlist h4{background: url(http://css.sammydress.com/imagecache/S/images/pageimg/christmas/BARGAINS/titlebg.jpg) repeat-x 0 0; height: 39px; line-height: 39px;  text-align: center; }
+.christmasProlist h4 a{color: #fff; font-size: 14px; font-weight: bold; text-decoration: none;}
+.christmasProlist li{margin-top: 20px; float: left; width: 220px; padding: 0 10px;}
+.christmasProlist .pic{width:220px; height: 220px; border: 1px solid #ddd;}
+.christmasProlist .pic .zhekou{ background-position: -1240px 0; position: absolute; right: -10px; top: -10px; display: block; padding-top: 20px; width: 44px; height: 33px; color: #fff; font-size: 12px; line-height: 13px;}
+.christmasProlist .pic .zhekou strong{font-size:16px; font-weight: bold;}
+.christmasProlist .pic .zhekou i{font-style: normal;}
+.christmasProlist .price{line-height: 40px; height: 40px; padding-top: 10px; text-align: center;}
+.christmasProlist .costPrice{ display: inline-block; *display: none; *zoom:1; text-decoration: line-through; font-size: 14px;}
+.christmasProlist .markPrice{display: inline-block;  *display: none; *zoom:1; margin-left: 10px; font-size: 24px; font-weight: bold; color: #e81c1c;}
+
+.christmasProlist .btn{width: 100%; height: 30px; line-height: 30px; background-color: #9c000b; color: #fff; text-align: center;}
+.christmasProlist .btn a{display: block; color: #fff; font-size: 14px; font-weight: bold; text-decoration: none;}
+.christmasProlist .btn i{background-position: -1240px -80px;display: inline-block; width: 13px; height: 18px; vertical-align: middle;}
+
+</style>
+{/literal}
+
+<div class="banner tc">
+    <div class="bannerBg"><img src="{$imgcache_url}images/pageimg/christmas/BARGAINS/bannerbg.jpg" width="100%" /></div>
+    <div class="bannerText"><img src="{$imgcache_url}images/pageimg/christmas/BARGAINS/{$cur_lang}.png" width="1187" height="560"/></div>
+    
+</div>
+
+
+
+<div class="pb15" style="height:166px;">
+    <div class="navWrap" id="js_navWrap">
+        <div class="line" id="js_line"></div>
+        
+        <div id="navlist" class="pt10">
+            <ul class="clearfix">
+                <li class="nav_1 hover">
+                    <a href="javascript:void(0)">
+                        <i class="icon"></i>
+                        {$lang.WOMEN}
+                    </a>
+                </li>
+                <li class="nav_2">
+                    <a href="javascript:void(0)">
+                        <i class="icon"></i>
+                        {$lang.MEN}
+                    </a>
+                </li>
+                <li class="nav_3">
+                    <a href="javascript:void(0)">
+                        <i class="icon"></i>
+                        {$lang.JEWELRY}
+                    </a>
+                </li>
+                <li class="nav_4">
+                    <a href="javascript:void(0)">
+                        <i class="icon"></i>
+                        {$lang.BAGS}
+                    </a>
+                </li>
+                <li class="nav_5">
+                    <a href="javascript:void(0)">
+                        <i class="icon"></i>
+                        {$lang.SHOES}
+                    </a>
+                </li>
+                <li class="nav_6">
+                    <a href="javascript:void(0)">
+                        <i class="icon"></i>
+                        {$lang.WATCHES}
+                    </a>
+                </li>
+                <li class="nav_7">
+                    <a href="javascript:void(0)">
+                        <i class="icon"></i>
+                        {$lang.BEAUTY}
+                    </a>
+                </li>
+                <li class="nav_8">
+                    <a href="javascript:void(0)">
+                        <i class="icon"></i>
+                        {$lang.HOME}
+                    </a>
+                </li>
+                <li class="nav_9">
+                    <a href="javascript:void(0)">
+                        <i class="icon"></i>
+                        {$lang.KID}
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-arrow"><b></b></div>
+        </div><!-- #navlist -->
+    </div><!-- .navHover -->
+</div>
+
+<div  id="chiristmasMain">
+   {foreach from=$goods_list item=goods key=key}
+    <section class="christmasProlist">
+        <h4><a href="{$goods.cat_url}"> {$goods.cat_name}  >> </a></h4>
+        <div class="list">
+            <ul class="clearfix">
+				{foreach from=$goods.list item=list key=key}
+                <li>
+                    <p class="pic pr tc">
+                        <a href="{$list.url_title}"><img src="{$list.goods_img}" height="220"/></a>
+                        <span class="zhekou icon"><strong>{$list.discount}</strong>% <i>OFF</i></span>
+                    </p>
+
+                    <div class="price">
+                        <p class="costPrice">
+                            <span class="bizhong">USD</span><span class="my_shop_price" orgp="{$list.market_price}">{$list.market_price}</span>
+                        </p>
+                        <p class="markPrice">
+                            <span class="bizhong">USD</span><span class="my_shop_price" orgp="{$list.shop_price}">{$list.shop_price}</span>
+                        </p>
+                    </div>
+
+                    <div class="btn">
+                        <a href="{$list.url_title}">
+                            <i class="icon"></i>
+                            {$lang.BUY_NOW}
+                        </a>
+                    </div>
+
+                </li>
+			{/foreach}
+            </ul>
+        </div>
+    </section><!-- .christmasProlist -->
+{/foreach}
+</div>
+
+<script type="text/javascript" src="{$imgcache_url}minjs/snow.min.js"></script>
+{literal}
+<script type="text/javascript">
+    (function(){
+        var WscrollObj = {
+            JnavWrap : $("#js_navWrap"),
+            Jnav : $("#navlist"),
+            JnavHeight : $("#js_navWrap").height(),
+            //Jsarder : $("#asideBar"),
+            titleArr : [],
+
+            JnavOffset : function(){
+                return this.Jnav.offset();
+            },
+
+            ini : function(){
+                var that = this;
+
+                this.windScroll();
+                this.setTitleVal();
+                that.Jnav.on("click","li",function(){
+                    var index = $(this).index();
+
+                    $("html,body").animate({scrollTop:that.titleArr[index]-that.JnavHeight-10}, 200);
+                });
+
+                // that.Jsarder.on("click","li",function(){
+                //     var index = $(this).index();
+
+                //     $("html,body").animate({scrollTop:that.titleArr[index]-that.JnavHeight-10}, 200);
+                // });
+
+                
+            },
+            setTitleVal : function(){
+                var that = this;
+
+                $.each( $(".christmasProlist"), function(index, val) {
+                     /* iterate through array or object */
+                    that.titleArr.push($(val).offset().top);
+                    
+                });
+            },
+            getScrollBlock:function(scroollTop){
+                var that = this;
+                var arr = that.titleArr;
+                var topNavHeight = that.JnavHeight;
+                var index = 0;
+
+                $.each(arr, function(i, val) {
+                     /* iterate through array or object */
+                    
+                    if(scroollTop > val - topNavHeight-30) {
+                        index = i;
+                    }
+                });
+
+                
+                return index;
+            },
+            windScroll : function(){
+               
+                var Jnav = this.Jnav,
+                    JnavOffset = this.JnavWrap.offset();
+
+                var asideTop = $("#js_line").offset().top;
+
+                var that = this;
+
+
+                
+               $(window).scroll(function(){
+                   
+                   var _this = $(this);
+                   var Jcurli = null;
+                   var JasideLi = null;
+
+                   that.JnavHeight = $("#js_navWrap").height();
+                  
+                   if(_this.scrollTop() > JnavOffset.top+that.JnavHeight ){
+                       that.JnavWrap.css({position:"fixed",left:0,top:0,zIndex:100}).addClass('hideIcon');
+
+                       //that.Jsarder.css({position:"fixed",top:0}).addClass('asideBarShow');
+                   }else{
+                        that.JnavWrap.css({position:"relative",left:"0",top:0,marginLeft:"0",zIndex:1}).removeClass('hideIcon');
+
+                        //that.Jsarder.css({position:"absolute",top:_this.scrollTop}).removeClass('asideBarShow');
+                   }
+
+                   
+                   that.index = that.getScrollBlock(_this.scrollTop());
+
+                   Jcurli = that.Jnav.find("li").eq(that.index);
+                   Jcurli.addClass('hover').siblings('li').removeClass('hover');
+                   that.Jnav.find(".tab-arrow").stop().animate({left:133*that.index}, 100);
+
+                   //JasideLi = that.Jsarder.find("li").eq(that.index);
+                   //JasideLi.addClass('hover').siblings('li').removeClass('hover');
+               }) 
+            }
+        }
+
+        WscrollObj.ini();
+        
+    })();
+    (function(){
+       // 调用及控制方法
+       var snow = new snowFall({maxFlake:200,fallSpeed:1.5,flakeSize:8});
+       snow.start(); 
+
+    })()
+</script>
+{/literal}
+
+{/if}
+
+<footer>
+	{include file="tongji.htm"}
+    {include file="footerhelp.htm"}
+    <div class="f_copyrit tc mb10">Copyright &copy; 2011-2015 <span id="welcome-msg-name-foot">SammyDress.com</span>. All Rights Reserved.</div>
+
+    {literal}
+    <script type="text/javascript">
+        var query_url = window.location.href;
+
+        //aff source
+        var aff_source = _GET('utm_source', query_url);//"{$smarty.get.utm_source}";
+
+        if(aff_source)
+        {
+            $.cookie('aff_source',aff_source, {expires: 60, path: '/',domain:COOKIESDIAMON});
+        }
+        //aff source end
+    </script>
+    {/literal}
+  </footer>
+</body>
+
+</html>

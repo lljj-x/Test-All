@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/vote_min.css?2014110101">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top_vote.htm"}
+	</header>
+
+
+	<div class="s_voteWrap">
+		<!-- banner以及导航条按钮 -->
+		<div class="s_votebg">
+		    <!-- s_voteMainContent是宽度为990px且居中对齐的div -->
+		    <div class="s_voteMainContent">
+		        <!-- tabs 四个链接 -->
+		        <div id="vote_tabs" class="clearfix">
+		          <div class="tabsWrap">
+		          	<a href="#go_vote" class="active">Vote</a>
+		            <a href="javascript:void(0);">How to Enter</a>
+		            <a href="javascript:void(0);">Prizes</a>
+		            <a href="javascript:void(0);">Upload your Style</a>
+		          </div><!-- .tabsWrap --> 
+		        </div><!-- #vote_tabs -->
+				
+				<!-- tabs四个链接的相关内容 -->
+				<div class="vote_tabs_conWrap">
+					<div class="vote_con">
+						<div class="voteNow_alink"><a href="#go_vote"></a></div>
+					</div><!-- .vote_con -->
+					
+					<div class="howToEnter_con none">
+						<h4>How to Enter</h4>
+						<p class="p_pic"><img src="{$imgcache_url}images/domeimg/vote2014/How_to_Enter.jpg?2014110101" alt="" height="225"/></p>
+						<p class="p_text">
+							<!-- <span class="span_strong">If you share the contest, you can get FIVE (5) more chances to vote every day!</span> --><br/>
+							<span class="color_red">*Voting will automatically enter you into our lucky draw where you stand to win fabulous prizes.</span>
+							<!-- <span class="seeprizes_alink"><a href="javascript:void(0);">See Prizes > </a></span> -->
+						</p>
+					</div><!-- .howToEnter_con -->
+
+					<div class="prizes_con none">
+						<p class="prizes_text">
+							Our Lucky Draw will be conducted every Monday. Don’t miss it!<br/>
+							<span class="color_red">If your vote number is selected, you’ll win a prize!</span>
+							<span class="voteNow_alink"><a href="#go_vote">Vote Now > </a></span>
+						</p>
+						<p class="prizes_pic"><img src="{$imgcache_url}images/domeimg/vote2014/prizes_pic.jpg" alt="" height="200"/></p>
+						<p class="prizes_tips">
+							Please do not forget to check our <a href="#maodian_link" class="color_red" style="text-decoration: underline;">event page</a>, or Facebook on Monday as <br/>
+							<span class="color_red">you may be the next winner!</span> All winners will be notified via email.
+						</p>
+					</div><!-- .prizes_con -->		
+
+					<div class="uploadStyle_con none">
+						<div class="upload_left fl">
+							<p><img src="{$imgcache_url}images/domeimg/vote2014/uploadStyle_pic1.jpg" alt="" height="40"/></p>
+							<p class="upload_text">
+								Share what you wear and <br/>
+								WIN <span class="color_red">500</span> S Points! 
+							</p>
+							<p class="upload_pic"><a href="/m-users.htm"><img src="{$imgcache_url}images/domeimg/vote2014/uploadStyle_icon.jpg" alt="" height="130"/></a></p>
+							<p><img src="{$imgcache_url}images/domeimg/vote2014/uploadStyle_pic2.jpg" alt="" height="50"/></p>
+						</div>
+
+						<div class="upload_right fr">
+							<img src="{$imgcache_url}images/domeimg/vote2014/Upload_your_Style.jpg" alt="" height="330"/>
+						</div>
+					</div><!-- .uploadStyle_con -->
+				</div><!-- .vote_tabs_conWrap -->
+
+		    </div><!-- .s_voteMainContent --> 
+		</div><!-- .s_votebg -->
+
+		<!-- 投票入口 -->
+		<div class="votingEntrance">
+			<a name="go_vote" class="go_voteAnchor"></a>
+			<ul>
+				<li><a href="javascript:{if $vote_cishu.dress<2}go_vote('dress');{else}void(0);{/if}" class="{if $vote_cishu.dress>=2}moreThan_two_noShare{elseif $vote_cishu.dress<2}{else}tenVote_fiveShare{/if}"><img src="{$imgcache_url}images/domeimg/vote2014/votingEntrance_1.png" alt="" height="207"/></a></li>
+
+				<li><a href="javascript:{if $vote_cishu.tops<2}go_vote('tops');{else}void(0);{/if}" class="{if $vote_cishu.tops>=2}moreThan_two_noShare{elseif $vote_cishu.tops<2}{else}tenVote_fiveShare{/if}"><img src="{$imgcache_url}images/domeimg/vote2014/votingEntrance_2.png" alt="" height="207"/></a></li>
+
+				<li><a href="javascript:{if $vote_cishu.bottoms<2}go_vote('bottoms');{else}void(0);{/if}" class="{if $vote_cishu.bottoms>=2}moreThan_two_noShare{elseif $vote_cishu.bottoms<2}{else}tenVote_fiveShare{/if}"><img src="{$imgcache_url}images/domeimg/vote2014/votingEntrance_3.png" alt="" height="207"/></a></li>
+
+				<li><a href="javascript:{if $vote_cishu.outwear<2}go_vote('outwear');{else}void(0);{/if}" class="{if $vote_cishu.outwear>=2}moreThan_two_noShare{elseif $vote_cishu.outwear<2}{else}tenVote_fiveShare{/if}"><img src="{$imgcache_url}images/domeimg/vote2014/votingEntrance_4.png" alt="" height="207"/></a></li>
+
+				<li class="enter_5"><a href="javascript:{if $vote_cishu.jewelry<2}go_vote('jewelry');{else}void(0);{/if}" class="{if $vote_cishu.jewelry>=2}moreThan_two_noShare{elseif $vote_cishu.jewelry<2}{else}tenVote_fiveShare{/if}"><img src="{$imgcache_url}images/domeimg/vote2014/votingEntrance_5.png" alt="" height="207"/></a></li>
+			</ul>
+		</div><!-- .votingEntrance -->
+
+		<!-- S网投票首页 第三部分内容（News/LuckyDrawResults） -->
+		<div class="voteList_thirdWrap">
+			<div class="NewsWrap">
+				<h3>News</h3>
+				<p class="winner_title"><span class="winner_name">Name</span><span class="winner_gift">voted for</span></p>
+
+				<div class="js_scroll_demo scroll_demo">
+					<div class="js_scroll_demo1">
+						<ul>
+							{foreach from=$last_vote_user item=last_vote_user_item name=last_vote_user_name}
+							<li style="display: block;">
+								<p class="fbr_user">   
+								{if $last_week_vote_winner_item.fb_link}	
+								<a href="{$last_week_vote_winner_item.fb_link}" target="_blank">
+								{/if}
+
+								{if $last_week_vote_winner_item.avatar}
+									<img src="{$last_week_vote_winner_item.avatar}" width="60" height="60" border="0">
+								{else}
+									<img src="http://www.sammydress.com/temp/skin4/images/domeimg/portrait.gif" width="60" height="60" border="0">
+								{/if}
+
+								{if $last_week_vote_winner_item.fb_link}
+								</a>
+								{/if}
+								</p>
+								<p class="fbr_text"><strong>{$last_vote_user_item.show_date}</strong><br>{$last_vote_user_item.show_email}</p>
+								<p class="fbr_img">
+									<img src="{$last_vote_user_item.pic}{$goods_img_version}" width="60" height="60" border="0"/>              
+								</p>
+							</li>
+							{/foreach}
+						</ul>
+					</div>
+
+					<div class="js_scroll_demo2">
+					</div>
+				</div>				
+			</div><!-- .s_voteNewsWrap -->
+			
+			<a href="javascript:void(0);" id="maodian_link"></a>
+			{if !$last_week_vote_winner}
+			<!-- 第一周 -->
+			<div class="luckyResultsWrap">
+				<h3>Lucky Draw Results</h3>
+				<p class="lucky_firstMonPic"><img src="{$imgcache_url}images/domeimg/vote2014/vote_firstMon.jpg" alt="" height="280"/></p>
+				<p class="lucky_firstMonTxt">
+					<span class="span1">VOTE for Your Fave SAMMY Style</span>
+					<span class="span2">and you'll be entered into our Weekly Lucky Draw! </span>
+					<span class="span3">Come in and try your luck! </span>
+				</p>
+			</div><!-- .luckyResultsWrap -->
+			{else}
+			<!-- 第二周开始 -->
+			<div class="luckyResultsWrap">
+				<h3>Lucky Draw Results<span>(Next Draw Date:11/17/2014)</span></h3>
+				<div class="luckyListWrap">
+					<!-- <p class="title">Monday 09/29/2014</p> -->
+					<p class="li_title">
+						<span class="span_division">Division</span>
+						<span class="span_prize">Prize</span>
+						<span class="span_winningNum">Number</span>
+						<span class="span_name">Name</span>
+					</p>
+					
+					<div class="js_scroll_demo3 scroll_demo3">
+						<div class="js_scroll_demo4">
+							<!-- ul列表 -->
+							<ul class="clearfix">
+							  {foreach from=$last_week_vote_winner name=last_week_vote_winner_name item=last_week_vote_winner_item}              
+								 <li class="clearfix">
+									<p class="division">{if $last_week_vote_winner_item.sort_num==1}Grand Prize{else}Runner Up Prize{/if}</p>
+									<p class="prize">{if $last_week_vote_winner_item.sort_num==1}$200.00{else}$50.00{/if}</p>
+									<p class="winning_num">{$last_week_vote_winner_item.id}</p>
+									<p class="img">
+									{if $last_week_vote_winner_item.fb_link}	
+									<a href="{$last_week_vote_winner_item.fb_link}" target="_blank">
+									{/if}
+
+									{if $last_week_vote_winner_item.avatar}
+										<img src="{$last_week_vote_winner_item.avatar}" width="60" height="60" border="0">
+									{else}
+										<img src="http://www.sammydress.com/temp/skin4/images/domeimg/portrait.gif" width="60" height="60" border="0">
+									{/if}
+
+									{if $last_week_vote_winner_item.fb_link}
+									</a>
+									{/if}
+									</p>
+									<p class="fbr_text"><span>10/07/2014</span><br/>{$last_week_vote_winner_item.email}</p>
+								 </li>               
+							  {/foreach}
+							</ul>
+						</div>
+
+						<div class="js_scroll_demo5"></div>
+					</div>
+					
+				</div>
+			</div><!-- .luckyResultsWrap -->
+			{/if}
+
+			
+		</div><!-- .voteList_thirdWrap -->
+
+	</div><!-- .s_voteWrap -->
+
+	<div class="tips_imgWrap" style="height:0; overflow:hidden;">
+		<img src="{$imgcache_url}images/domeimg/vote2014/moreThanTwo_noShare.gif" id="js_moreThanTwo_noShare" alt="" height="327"/>
+		<img src="{$imgcache_url}images/domeimg/vote2014/tenVote_fiveShare.gif" id="js_tenVote_fiveShare" alt="" height="189"/>
+	</div>
+
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	{include file="tongji.htm"}
+
+	{literal}
+	<script>
+		// 投票页面的tabs鼠标触碰效果
+		(function(){
+			$(function(){
+				var $div_tabsWrap_a = $(".tabsWrap").find("a");
+
+				$div_tabsWrap_a.hover(function(){
+					
+					$(this).addClass('active').siblings().removeClass('active');
+					var index = $div_tabsWrap_a.index(this);
+					$(".vote_tabs_conWrap > div").eq(index).show().siblings().hide();
+
+				});
+			});
+		})();
+
+		// 投票页面的两个向上滚动效果
+		(function(){
+			$(function(){
+				// 投票首页左边向上滚动效果
+				var speed=40;
+				var FGDemo=$(".js_scroll_demo");
+				var FGDemo1=$(".js_scroll_demo1");
+				var FGDemo2=$(".js_scroll_demo2");
+				FGDemo2[0].innerHTML=FGDemo1[0].innerHTML;
+
+				function Marquee1(){
+					if(FGDemo2[0].offsetHeight-FGDemo[0].scrollTop<=0){
+						FGDemo[0].scrollTop-=FGDemo1[0].offsetHeight;
+					}else{
+						FGDemo[0].scrollTop++;
+					}
+				}
+
+				var MyMar1=setInterval(Marquee1,speed);
+				FGDemo.bind("mouseover",function(){  
+				    clearInterval(MyMar1);  
+				});
+				FGDemo.bind("mouseout",function(){  
+				    MyMar1=setInterval(Marquee1,speed);
+				});
+
+				// 投票首页右边向上滚动效果--------------第一周，页面中没有以下代码，防止报错
+				var speed2=80;
+				var FGDemo3=$(".js_scroll_demo3");
+				var FGDemo4=$(".js_scroll_demo4");
+				var FGDemo5=$(".js_scroll_demo5");
+				FGDemo5[0].innerHTML=FGDemo4[0].innerHTML;
+
+				function Marquee2(){
+					if(FGDemo5[0].offsetHeight-FGDemo3[0].scrollTop<=0){
+						FGDemo3[0].scrollTop-=FGDemo4[0].offsetHeight;
+					}else{
+						FGDemo3[0].scrollTop++;
+					}
+				}
+
+				var MyMar2=setInterval(Marquee2,speed2);
+
+				FGDemo3.bind("mouseover",function(){  
+				    clearInterval(MyMar2);  
+				});
+				FGDemo3.bind("mouseout",function(){  
+				    MyMar2=setInterval(Marquee2,speed2);
+				});
+			});
+		})();
+
+		
+
+		// 投票操作超过相应次数，弹窗效果
+		(function(){
+			$(function(){
+
+				// 超过每天限制的投票次数，没有通过分享获得新的次数
+				$('.moreThan_two_noShare').on('click', function(){
+					// alert("click---");
+				    var i = $.layer({
+				        type : 1,
+				        time : 12,
+				        title : false,
+				        fix : true,
+				        offset:['' , ''],
+				        border: [10, 0.3, '#000'],
+				        area : ['558px','327px'],
+				        page : {dom : '#js_moreThanTwo_noShare'}
+				    });
+				});
+
+				// 10次投票_5次分享得到的投票数都用完，出现的文字
+				$('.tenVote_fiveShare').on('click', function(){
+					// alert("click---");
+				    var i = $.layer({
+				        type : 1,
+				        time : 12,
+				        title : false,
+				        fix : true,
+				        offset:['' , ''],
+				        border: [10, 0.3, '#000'],
+				        area : ['600px','189px'],
+				        page : {dom : '#js_tenVote_fiveShare'}
+				    });
+				});
+
+
+			});
+
+
+		
+
+		})();
+
+			//投票     
+			function go_vote(vote_name){
+				if(0 == vote_name){
+					$('#js_home_link').hover();
+					window.scroll(0,550);
+				}else{
+					location.href="/v-"+vote_name+"-buyer-show.html?vote_name="+vote_name;
+				}
+			}
+	</script>
+	{/literal}
+
+</body>
+
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/sign_min.css?2014123001">
+	<script src="{$imgcache_url}minjs/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+	<div id="signBox" class="pr">
+		<!-- <header id="header">
+			<div class="sign_log">
+				<a href="{$DOMAIN}{$cur_lang_url}" titel="{$lang.user_logo}"><img src="{$imgcache_url}images/domeimg/logo.gif" width="248" height="40"/></a>
+			</div>
+		</header> -->
+
+		<section class="loginBox">
+			<header class="clearfix">
+
+				<a href="{$DOMAIN}/{$cur_lang_url}" titel="{$lang.user_logo}" class="fl ml30"><img src="{$imgcache_url}images/domeimg/logo.gif?2014051201" width="217" height="35"/></a>
+
+				<div class="loginWithGg fr mr30">
+					<button id="customBtn"><b><img src="{$imgcache_url}images/domeimg/google.png" width="32" height="32"/></b>{$lang.Log_in_with_Google}</button>
+
+					
+				</div>
+
+				<div class="loginWithFb fr mr20"><a onClick="facebook_signup();" href="javascript:void(0);" class="fl"><b>f</b>{$lang.Log_in_with_Facebook}</a></div>
+
+				<div class="loginWithPaypal fr">
+					<div><span id="myContainer"></span></div>
+            		<div id="fb-root"></div>
+				</div>
+
+			</header>
+
+			{if $smarty.get.type == 1 || $smarty.get.type == ''}
+			<!--登录模块-->
+			<div class="s_valid">
+				<section class="operalBox operalBoxL">
+					<h3>{$lang.user_member_sign_in}</h3>
+					<div class="operalForm mt20">
+						<p class="tc msg_error none"></p>
+						<form id="signinform" method="post" novalidate>
+							<input name="flow" type="hidden" id="flow" value="{$smarty.get.flow}">
+							<input name="ref" type="hidden" id="ref" value="{$smarty.get.ref}">
+							<div class="ipt_t">
+								<input type="text" class="inputText email" id="email" name="email" placeholder="{$lang.user_email}" autocomplete="off">
+							</div>
+
+							<div class="ipt_t">
+								<input type="password" class="inputText password" data-pas="1" id="passwordsign" name="passwordsign" placeholder="{$lang.user_password}">
+							</div>
+
+							<div class="autoLogin">
+								<input type="checkbox" name="autologin" value="1" id="js_autologin">
+								<span id="js_autologin_msg" data-tips="{$lang.autologin.1}">{$lang.autologin.0}</span>
+							</div>
+
+							<div class="ipt_b mt20"><button type="submit" id="js_signInBtn" class="redBtn"><em><span><i></i>{$lang.user_sign_in}</span></em></button></div>
+
+							<p class="forgetPas"><a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-reset_password.htm">{$lang.user_forgot_your_password}</a></p>
+						</form>
+					</div><!--end .operalForm-->
+				</section><!--end .operalBoxL-->
+
+				<section class="operalBox operalBoxR">
+					<h3>{$lang.user_new_to_sammydress}</h3>
+					<p class="tips">{$lang.user_new_to_sammydress_1}</p>
+					<div class="gotoBtn">
+						<a href="{$HTTPS_LOGIN_DOMAIN}/{$cur_lang_url}m-users-a-sign.htm?type=2" class="pinkBtn"><span>{$lang.user_register}</span></a>
+					</div>
+				</section><!--end .operalBoxL-->
+			</div><!--end .s_valid-->
+			<!--登录模块END-->
+			{/if}
+
+			{if $smarty.get.type == 2}
+			<!--注册模块-->
+			<div class="s_valid">
+				<section class="operalBox operalBoxL">
+					<div class="operalForm mt50">
+						<p class="tc msg_error none"></p>
+						<form id="signupform" method="post" novalidate>
+							<input name="flow" type="hidden" id="flow" value="{$smarty.get.flow}">
+							<input name="ref" type="hidden" id="ref" value="{$smarty.get.ref}">
+							<div class="ipt_t">
+								<input type="text" class="inputText email" id="reg_email" name="email" placeholder="{$lang.user_email}" autocomplete="off">
+							</div>
+
+							<div class="ipt_t">
+								<input type="password" class="inputText password" data-pas="1" id="password" name="password" placeholder="{$lang.user_password}">
+							</div>
+
+							<div class="ipt_t">
+								<input type="password" class="inputText password" value=""  data-pas="1" id="password_confirm" name="password_confirm" placeholder="{$lang.user_re_ennter_password}"/>
+							</div>
+
+							<div class="ipt_b mt20"><button type="submit" id="js_registBtn" class="pinkBtn"><em><span><i></i>{$lang.user_register}</span></em></button></div>
+
+							<div class="agrrementWarp ">
+								<input type="checkbox" value="checkbox" name="agreement" id="agreement" checked="checked">
+								<span>{$lang.user_i_agree} <a class="unl gray6" target="_blank" href="m-article-id-36.html">{$lang.user_terms_and_conditions}</a></span>
+							</div><!--end .agrrementWarp-->
+						</form>
+					</div><!--end .operalForm-->
+				</section><!--end .operalBoxL-->
+
+				<section class="operalBox operalBoxR">
+					<h3>{$lang.user_return_to_login}</h3>
+					<p class="tips">{$lang.user_already_have_an_account}</p>
+					<div class="gotoBtn">
+						<a href="{$HTTPS_LOGIN_DOMAIN}/{$cur_lang_url}m-users-a-sign.htm?type=1" class="redBtn"><span>{$lang.user_sign_in}</span></a>
+					</div>
+				</section><!--end .operalBoxL-->
+			</div><!--end .s_valid-->
+			<!--注册模块END-->
+			{/if}
+
+			<footer>
+				<div class="downApp fr">
+
+					<span  class="c_tagbg ios ">
+						<a href="https://itunes.apple.com/us/app/sammydress/id970849297?ls=1&mt=8" class="mr5" target="_blank">ipad</a> 
+						| 
+						<a href="https://itunes.apple.com/us/app/sammydress/id966062498?ls=1&mt=8" class="ml5" target="_blank">{$lang.iPhone}</a>
+					</span>
+
+			        <a href="https://play.google.com/store/apps/details?id=com.globalegrow.app.sammydress" class="c_tagbg android" target="_blank">{$lang.Android}</a>
+				</div><!--end .downApp-->
+
+				<div class="f_copyrit fl">Copyright © 2011-2015 <span id="welcome-msg-name-foot">SammyDress.com</span>. All Rights Reserved.</div>
+			</footer>
+		</section><!--end .signBox-->
+
+		<div id="imgbg" data-imgsrc="{$imgcache_url}images/domeimg/signbg/signbg_1.jpg|{$imgcache_url}images/domeimg/signbg/signbg_2.jpg|{$imgcache_url}images/domeimg/signbg/signbg_3.jpg|{$imgcache_url}images/domeimg/signbg/signbg_4.jpg"></div>
+	</div><!--end .mainBox-->
+
+	{*facebook 手机用户输入邮箱弹出框*}
+	<div class="fbEMail" id="js_fbEMail">
+		<h4>{$lang.fblogin_email}</h4>
+		<div class="operalBoxL">
+			<P class="fbmsg_error"></P>
+			<form id="fb_EMailForm" method="post">
+				<div class="ipt_t">
+					<input type="text" class="inputText email" id="fb_email" name="email" placeholder="Email" autocomplete="off">
+				</div>
+				<div class="ipt_b mt20"><button type="submit" id="js_fb_signInBtn" class="redBtn"><em><span>{$lang.Submit}</span></em></button></div>
+			</form>
+		</div><!-- .operalBoxL -->
+	</div><!-- .fbEMail -->
+
+	{include file="foot_common_js.htm"}
+
+	{literal}
+	<script>
+
+	$LAB.script(JS_IMG_URL+"/minjs/sign.min.js?2014123001")
+		.wait()
+		.script(JS_IMG_URL+"/minjs/google.min.js?2014121902")
+
+
+	</script>
+	
+	<!--payPal登录-->
+	<script src="https://www.paypalobjects.com/js/external/api.js"></script>
+
+	<script>
+		paypal.use( ["login"], function(login) {
+		  login.render ({
+			"appid": "AebuKRCRZcQzrqVS3plbWxUC7gYyLl98ajPRioJileVipkCXPTJeE02Ct5mT",
+			//"authend": "sandbox",
+			"scopes": "profile email address phone https://uri.paypal.com/services/expresscheckout",
+			"containerid": "myContainer",
+			"locale": "en-us",
+			"returnurl": "http://user.sammydress.com/paypal_api/login.php"
+		  });
+		});
+	</script>
+	{/literal}
+	{literal}
+	<script type="text/javascript">
+		$(function(){
+			var pp_login_ref = _GET('flow', window.location.href);
+			if( pp_login_ref=='checkout' ){
+				$.cookie('pp_login_ref','cart', {expires: 7, path: '/',domain: '.sammydress.com'});
+			}else{
+				$.cookie('pp_login_ref','login', {expires: 7, path: '/',domain: '.sammydress.com'});
+			}
+		});
+	</script>
+	{/literal}
+	<!--payPal登录end-->
+
+	<script type="text/javascript" src="{$imgcache_url}minjs/facebook_v2.min.js"></script>
+	{include file="tongji.htm"}
+</body>
+
+</html>

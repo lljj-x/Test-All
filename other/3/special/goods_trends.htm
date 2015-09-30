@@ -1,0 +1,179 @@
+<div class="g_trends">
+	{if $special.banner neq ''}
+	<div class="w_banner tc">
+		<img src="{$special.banner}">
+	</div><!-- w_banner -->
+	{/if}
+	<div class="g_trendsBox">
+			
+		<div class="cate-top-bar" id="js_cate-top-bar">
+			<div class="cateTopBarInner  clearfix">
+				<div class="fl change-cate">
+					<div class="operate_list">
+						<div class="operateT">
+							<span>{$cat_info.title}</span>
+							<i class="triangle"></i>
+						</div>
+
+						<ul class="none">
+                                                    {php}
+	                                    $this->_tpl_vars['_cdn_querystring'] = isset($this->_tpl_vars['cdn_querystring']) ? preg_replace('/&cat_id=\d*/', '', $this->_tpl_vars['cdn_querystring']) : '';
+	                                    {/php}
+                                            {php}
+	                                    $this->_tpl_vars['current_url'] = isset($this->_tpl_vars['current_url']) ? preg_replace('/-page-\d*/', '', $this->_tpl_vars['current_url']) : '';
+	                                    {/php}
+                                                    <!--<li><a href="#" rel="nofollow">Sweaters & Cardigans</a></li>-->
+                                                    {foreach from=$cat_info.list item=item key=key}
+                                                    <li><a href="{$current_url}?cat_id={$key}{$_cdn_querystring}" rel="nofollow">{$item}</a></li>
+                                                    {/foreach}
+					    </ul>
+					</div>
+				</div>
+				
+				<div class="operate_list ">
+	                    {*cdn缓存,处理参数,如排序,每页显示数等 by mashanling on 2013-09-18 14:53:22*}
+						{php}
+						$this->_tpl_vars['_cdn_querystring'] = isset($this->_tpl_vars['cdn_querystring']) ? preg_replace('/&odr=[^=]*/', '', $this->_tpl_vars['cdn_querystring']) : '';
+						{/php}
+					<div class="operateT">
+						<span>
+						{if $odr == "recommended" || $odr == ""}{$lang.Recommended}
+						{elseif $odr == "hot"}{$lang.Hot}
+						{elseif $odr == "new"}{$lang.New}
+						{elseif $odr == "low2high"}{$lang.Price_low2high}
+						{elseif $odr == "high2low"}{$lang.Price_high2low}
+						{/if}
+						</span>
+						<i class="triangle"></i>
+					</div>
+	                            
+					<ul class="none">
+						<li><a href="{$index_page}?odr=recommended{$_cdn_querystring}">{$lang.Recommended}</a></li>
+						{if $smarty.get.m!='new_goods'}
+						<li><a href="{$index_page}?odr=hot{$_cdn_querystring}">{$lang.Hot}</a></li>
+						{/if}
+						<li><a href="{$index_page}?odr=new{$_cdn_querystring}">{$lang.New}</a></li>
+						{if $smarty.get.m!='collections'}
+						<li><a href="{$index_page}?odr=low2high{$_cdn_querystring}">{$lang.Price_low2high}</a></li>
+						<li><a href="{$index_page}?odr=high2low{$_cdn_querystring}">{$lang.Price_high2low}</a></li>
+						{/if}
+					</ul>
+				</div>
+
+				<div class="operate_list">
+					<div class="operateT">
+						<span>{$page_size}</span>
+						<i class="triangle"></i>
+					</div>
+
+					<ul class="none">                        
+			            {php}
+	                                $this->_tpl_vars['_cdn_querystring'] = isset($this->_tpl_vars['cdn_querystring']) ? preg_replace('/&page_size=\d*/', '', $this->_tpl_vars['cdn_querystring']) : '';
+	                                {/php}
+	                                {foreach from=$layoutpage item=list}
+	                                    <li><a href='{$index_page}?page_size={$list}{$_cdn_querystring}' title="Per page {$list}" rel="nofollow">{$list}</a></li>
+	                                {/foreach}
+					</ul>
+				</div>
+			</div><!-- cateTopBarInner -->
+		</div>
+		
+
+		<div class="good_list pt15">
+			<ul class="clearfix">
+				<!--<li>
+					<div class="proImgBox">
+						<a href="http://www.sammydress.com/product1600581.html">
+							<img src="http://css.sammydress.com/imagecache/S/images/domeimg/lazyload.gif" data-original="http://gloimg.sammydress.com/S/2015/201504/goods-img/1429480411491-P-2570939.jpg" class="js_lazy" height="250" >
+						</a>
+					</div>
+
+					<div class="proName">
+						<a href="http://www.sammydress.com/product1654337.html">Alluring Halter Plus Size Fringe Design Printed High-Waisted Bikini Set For Women</a>
+					</div>
+
+					<div class="price">
+						<p><span class="bizhong"></span><span class="my_shop_price fb f16" orgp="8.38">8.38</span></p>
+						<p class="market_price"><span class="bizhong"></span><span class="my_shop_price" orgp="10.38">10.38</span></p>
+						<span class="cutOff">
+							-30%
+						</span>
+					</div>
+
+				</li>-->
+				 {foreach from=$data item=item name=loop key=key}
+                                <li>
+					<div class="proImgBox">
+						<a href="{$item.link_url}">
+							<img src="http://css.sammydress.com/imagecache/S/images/domeimg/lazyload.gif" data-original="{$item.goods_img}" class="js_lazy" height="250" >
+						</a>
+					</div><!-- proImgBox -->
+
+					<div class="proName">
+						<a href="{$item.link_url}">{$item.goods_title}</a>
+					</div>
+
+					<div class="price">
+						<p><span class="bizhong"></span><span class="my_shop_price fb f16" orgp="{$item.shop_price}">{$item.shop_price}</span></p>
+						<p class="market_price"><span class="bizhong"></span><span class="my_shop_price" orgp="{$item.market_price}">{$item.market_price}</span></p>
+						<span class="cutOff">
+							{if $zekou_style==1}
+                            {php}
+                                $this->_tpl_vars['_cdn_querystring'] = 100-$this->_tpl_vars['item']['zekou'];
+                                {/php}
+                            -{$_cdn_querystring}%
+                            {else}
+                            {$item.zekou}%
+                            {/if}
+						</span>
+					</div>
+
+				</li>
+                                {/foreach}
+			</ul>
+		</div><!-- good_list -->
+		
+		<div class="pages tc pt20 pb20">
+            <!--<p class="listspan"> 
+            	<span class="text">«Prev</span>  
+            	<span class="current">1</span> 
+            	<a href="#">2</a>
+            	<a href="#">3</a>
+            	<a href="#">4</a>
+            	<a href="#">5</a>
+            	<span class="text">...</span>
+            	<span class="disabled">167</span>
+            	<a href="#" rel="nofollow">Next»</a>
+            </p>-->
+            {$pagestr}
+		</div>
+
+	</div><!-- g_trendsBox -->
+	
+</div><!-- g_trends -->
+
+{literal}
+<script>
+	(function(){
+		$(".operate_list").hover(function(){
+			$(this).addClass('operate_list_hover');
+		},function(){
+			$(this).removeClass('operate_list_hover');
+		});
+
+		$(window).scroll(function(){
+			var topBar =  $("#js_cate-top-bar");
+			var top = topBar.offset().top;
+			var scrollTop = $(this).scrollTop();
+
+			if(top < scrollTop){
+				topBar.children().addClass('fixed')
+			}else{
+				topBar.children().removeClass('fixed')
+			}
+
+		})
+	})()
+
+</script>
+{/literal}

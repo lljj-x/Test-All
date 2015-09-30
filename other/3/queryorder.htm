@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+
+<title>Order No. :{$order.order_sn}</title>
+<script src="http://css.sammydress.com/imagecache/S/minjs/jquery-1.8.0.min.js"></script>
+
+</head>
+
+<body style="font-family:Arial, Helvetica, sans-serif; font-size:13px;">
+{if $smarty.get.a eq 'pointlist'}
+
+
+<table width="100%" border="0" cellpadding="5" cellspacing="1" style="">
+
+    <tr>
+       <th height="29" background="{$imgcache_url}images1/support_Bg.jpg" bgcolor="#f7f7f7" >date</th>
+      <th bgcolor="#f7f7f7" background="{$imgcache_url}images1/support_Bg.jpg" >income</th>
+       <th bgcolor="#f7f7f7" background="{$imgcache_url}images1/support_Bg.jpg" >outgo</th>
+       <th bgcolor="#f7f7f7" background="{$imgcache_url}images1/support_Bg.jpg" >balance</th>
+       <th bgcolor="#f7f7f7" background="{$imgcache_url}images1/support_Bg.jpg" >note</th></tr>
+    <!--{foreach from=$points_record item=r}-->
+    <tr><td height="35" bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.adddate}</td>
+    <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.income}</td>
+    <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.outgo}</td>
+    <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.balance}</td>
+    <td bgcolor="#FFFFFF" style="border-bottom:1px #CCCCCC dashed;">{$r.note}</td>
+    </tr>
+
+	<!--{/foreach}-->
+</table>
+
+<div class="xbpage">
+		<div class="xbpage1"></div>
+		<div class="xbpage2">
+      <div class="bottompage">
+      <div class="pages">{$pagestr}</div>
+      </div>
+	  </div>
+	  <div class="xbpage3"></div>
+	  </div>
+
+{else}
+
+
+            <table width="100%"cellspacing="0" cellpadding="4"  border="1"  style='border-collapse:
+ collapse;' bordercolor="#999999" >
+              <tr>
+                <td width="19%" >Order No :</td>
+                <td width="81%" ><span class="red">{$order.order_sn}</span></td>
+              </tr>
+              <tr>
+                <td >Order Status :</td>
+                <td ><span  style="font-size:14px; font-weight:bold;">{$order.order_status_str}</span>
+                  {if $ship_info && $type==1}
+                	<table width="100%"cellpadding="4" cellspacing="0"  border="1"  style='border-collapse:collapse;' bordercolor="#999999">
+                	{foreach from=$ship_info item=ship key=k} 
+                		<tr>
+	                	<td bgcolor="#ffffff" align="center">
+	                	{if $is_display_traking_number==1}Reference Number{else}Tracking Number{/if}: 
+                        <b>{$ship.shipping_no}</b>  &nbsp;   By {if $ship.shipping_name neq 'ChinaPost'}<a href="{$ship.ship_url}" target="_blank"  class="f6">{$ship.shipping_name}</a>{else}{$ship.shipping_name}{/if} update on: {$ship.add_time} PST <br>{$lang.delivery_estimate} {$ship.ship_desc}. {$lang.exact_time_depends}  {if $ship.demo}<br><i style="padding-left:30px;">{$ship.demo}</i>{/if}
+	                	</td>
+	                	{if $order.is_display_track_goods == 1}
+		                	<td bgcolor="#ffffff" align="center">
+		                		{foreach from=$ship.track_goods item=track_goods }
+		                			{$track_goods.goods_sn} X {$track_goods.goods_num}<br>
+		                		{/foreach}
+		                	</td>
+	                	{/if}
+	                </tr>
+                    {if $ship.display_tracking && $is_display_traking_number==0}{*2012-11-01 后显示物流轨迹 by mashanling on 2012-11-16 14:06:31*}
+                    <tr>
+                        <td colspan="3">
+                          {*
+                            <iframe style="width: 100%; border: none;" src="http://119.81.26.82/cgi-bin/GInfo.dll?EmmisTrackE&cno={$ship.shipping_no}"></iframe>
+                          *}
+                          <p>
+                              <a href="javascript:void(0);" class="js_showtrackInfo" id="" data-key="{$k}" data-trackno="{$ship.shipping_no}">View Tracking Message</a>
+                          </p>
+                           <dl id="js_trackingInfoBox{$k}" style="max-height:180px; overflow-y:auto; line-height:24px; display:none">
+                                <dd>
+                                </dd>
+                           </dl>
+
+                           {literal}
+                           <script>
+                                $(function(){
+                                    //查看物流信息
+                                    $(".js_showtrackInfo").click(function(){
+                                        var $this = $(this);
+                                        var key = $this.data('key');
+                                        var html = '';
+                                        var $targetBox = $("#js_trackingInfoBox"+key);
+
+                                        if($this.data("isShow") != 1){
+
+                                            $this.data("isShow",1);
+
+                                            $.get('/fun?act=get_tracking', {trackno:$(this).attr("data-trackno")}, function(data) {
+                                                /*optional stuff to do after success */
+                                                if(data.status && data.list.length){
+                                                    html += '<ul>';
+                                                    $.each(data.list, function(index, val) {
+                                                         /* iterate through array or object */
+														 html += '<li><span class="mr15">'+ val.ondate +'</span>'+ val.status +' <strong class="ml15 fb">'+ val.area +'</strong></li>';
+                                                    });
+                                                    
+                                                    html += '</ul>';
+
+                                                }else{
+                                                    html = '<p style="font-size:20px; text-align: center; margin:50px 0;">Sorry, your shipping information has not updated yet</p>';
+                                                }
+
+                                               $targetBox.slideDown()
+                                                                        .find('dd').html(html);
+                                            },'jsonp');
+                                                
+                                        }else{
+                                            $targetBox.slideToggle();
+                                        }
+                                    })
+                                })
+                           </script>
+                           {/literal}
+                        </td>
+                    </tr>
+                    {/if}
+                	{/foreach}
+                	</table>
+                {/if}  
+                </td>
+              </tr>
+              <tr>
+                <td >{$lang.trade_links} : </td>
+                <td ><table width="100%"cellpadding="4" cellspacing="0"  border="1"  style='border-collapse:collapse;' bordercolor="#999999">
+                    <tr>
+                      <th width="37%" align="center" >goods title</th>
+                      <th width="15%" align="center" >Goods SN</th>
+                      <!--<th>{$lang.market_price}</th>-->
+                      <th width="16%" align="center" >goods price
+                        <!-- {if $order.extension_code eq "group_buy"} -->
+                        {$lang.gb_deposit}
+                        <!-- {/if} --></th>
+                      <th width="18%" align="center" >goods number</th>
+                      <th width="14%" align="center" >subtotal</th>
+                    </tr>
+                    <!-- {foreach from=$goods_list item=goods} -->
+                    <tr>
+                      <td ><!-- {if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'} 商品 -->
+                        <a href="{$goods.url_title}" target="_blank" class="f6">{$goods.goods_name}
+                            {if $goods.goods_type eq 3} (<span style="color:#cd011f">{$lang.presale1}</span>)
+                        {elseif $goods.goods_type eq 1}(<span style="color:#cd011f">{$lang.sale}</span>)
+                        {elseif $goods.goods_type eq 5}(<span style="color:#cd011f">{$lang.clearance}</span>)
+                        {/if}</a>
+                        <!-- {elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'} -->
+                        <a href="javascript:void(0)" onclick="setSuitShow({$goods.goods_id})" class="f6">{$goods.goods_name}</a>
+                        <div id="suit_{$goods.goods_id}" style="display:none">
+                          <!-- {foreach from=$goods.package_goods_list item=package_goods_list} -->
+                          <a href="{$goods.url_title}" target="_blank" class="f6">{$package_goods_list.goods_name}</a><br />
+                          <!-- {/foreach} -->
+                        </div>
+                        <!-- {/if} --><br>{$goods.goods_attr}</td>
+                      <td align="center" >{$goods.goods_sn}</td>
+                      <!--<td align="right">{$goods.market_price}</td>-->
+                      <td align="right" >
+                      {if $goods.goods_off}
+                <span style="color:#F00;">
+                {if $goods.goods_off eq '100'}
+                    Free!
+                {else}
+                    {$goods.goods_off}%off
+                {/if}
+                </span>
+             <br />
+              {/if}
+                      
+                   
+  {$goods.goods_price} {$order.order_currency} </td>
+                      <td align="center" >{$goods.goods_number}</td>
+                      <td align="right" >{$goods.subtotal} {$order.order_currency}</td>
+                    </tr>
+                    {if $goods.custom_size}
+            <tr bgcolor="#fff">
+                <td  colspan="5" bgcolor="#FFFFFF" >
+                    {include file='custom_size.htm'}
+                </td>
+          </tr>
+              {/if}    
+                    
+                    <!-- {/foreach} -->
+                    <tr>
+                      <td colspan="5"  align="right"> <!-- {if $order.promotion_code_youhuilv && $type==1} -->
+            Promotion Code Offers : {$order.promotion_code_youhuilv} ({$order.promotion_code})
+            <!-- {/if} -->  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  shopping money
+                        : {$order.goods_amount} {$order.order_currency} &nbsp; {if ($order.order_sn|truncate:2:"" == "MA" || $order.order_sn|truncate:2:"" == "MB") && $type==1}(App 8% OFF){/if}</td>
+                    </tr>
+                  </table>
+                  <div class="blank"></div>
+                  <h5><span>{$lang.fee_total}</span></h5>
+                  <div class="blank"></div>
+                  <table width="100%"  cellpadding="4" cellspacing="0"  border="1"  style='border-collapse:
+ collapse;' bordercolor="#999999">
+                    <tr>
+                      <td align="right" > subtotal : {$order.goods_amount}
+                       <!-- {if $order.used_wallet > 0} -->
+                        - Used {$order.used_wallet} Sammy wallet : <span class="my_shop_price" orgp="{$order.used_wallet}">{$order.used_wallet}</span>
+                        <!-- {/if}-->
+                      	<!-- {if $order.point_money > 0 && $type==1} -->
+                         - Used {$order.used_point} S point saving: <span class="my_shop_price" orgp="{$order.point_money}">{$order.point_money}</span>
+                        <!-- {/if} -->
+                        <!-- {if $order.shipping_fee > 0} -->
+                        + shipping fee: {$order.formated_shipping_fee}
+                        <!-- {/if} -->
+                        <!-- {if $order.insure_fee > 0} -->
+                        + insure fee: {$order.formated_insure_fee}
+                        <!-- {/if} -->
+                        <!-- {if $order.pay_fee > 0} -->
+                        + pay fee: {$order.formated_pay_fee}
+                        <!-- {/if} -->
+                        <!-- {if $order.free_shipping_fee > 0} -->
+                        + free shipping fee: {$order.formated_free_shipping_fee}
+                        <!-- {/if} -->
+                       
+                       
+ <!-- {if $order.free_shipping_fee > 0} -->
+                        + Fast Freight: <span class="my_shop_price" orgp="{$order.free_shipping_fee}">{$order.free_shipping_fee}</span>
+                        <!-- {/if} -->
+                        
+                       <!-- {if $order.Need_Traking_number > 0} -->
+                        + Traking number: <span class="my_shop_price" orgp="{$order.Need_Traking_number}">{$order.Need_Traking_number}</span>
+                        <!-- {/if} -->            
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                      <td align="right" >Order amount: {$order.order_amount} {$order.order_currency}
+                      {if $order.point_money} &nbsp; &nbsp;
+  <span onclick="showjifen();" style="cursor:pointer;">Points record</span>    <iframe id="jifendetails" src="/m-users-a-pointlist.htm?user_id={$order.user_id}" width="100%" height="0" ></iframe> {/if}
+                      </td>
+                    </tr>
+                  </table></td>
+              </tr>
+              {if $order.Tracking_NO}
+              <tr>
+                <td >{$lang.consignment} : </td>
+                <td >{$order.shipping_method} :    {$order.Tracking_NO} &nbsp;   {if $order.shipping_time ne 0}{$lang.shipping_time}{$order.shipping_time|date_format:"%m/%d/%Y %H:%M:%S %p"}{/if}</td>
+              </tr>
+              {/if}
+              <tr>
+                <td >{$lang.consignee_name} : </td>
+                <td >{$order.consignee}</td>
+              </tr>
+              <tr>
+                <td >{$lang.address} :</td>
+                <td >{$order.address}
+                  <!-- {if $order.zipcode} -->
+                  [{$lang.postalcode}: {$order.zipcode}]
+                  <!--{/if}--></td>
+              </tr>
+              <tr>
+                <td >{$lang.city} :</td>
+                <td >{$order.city }</td>
+              </tr>
+              <tr>
+                <td >{$lang.states} :</td>
+                <td >{$order.province}</td>
+              </tr>
+              <tr>
+                <td >{$lang.country} :</td>
+                <td >{$order.country}</td>
+              </tr>
+              <tr>
+                <td >{$lang.zip} : </td>
+                <td >{$order.zipcode}</td>
+              </tr>
+              
+             
+                  <tr>
+                    <td >{$lang.Phone_Number} : </td>
+                    <td >{$order.tel} </td>
+                  </tr>
+                {*{if !$order.order_status}
+                 <tr >
+                    <td >{$lang.e_mail} : </td>
+                    <td >{$order.email}</td>
+                  </tr>
+                 {/if}*}
+              <tr>
+                <td >Shipping : </td>
+                <td >{$order.shipping_name}</td>
+              </tr>
+              <tr>
+                <td >Payment : </td>
+                <td >{$order.pay_name}   {if $order.pay_time ne 0}{$lang.pay_time} : {$order.pay_time|date_format:"%m/%d/%Y %H:%M:%S %p"}{/if}</td>
+              </tr>
+
+              <tr>
+                <td >Invoice : </td>
+                <td >{if $order.Invoice eq 0}{$lang.no_need_Invoice} {else}{$lang.need_Invoice} {/if}</td>
+              </tr>
+              {if $order.postscript}
+              <tr>
+                <td >{$lang.your_message} : </td>
+                <td >{$order.postscript}</td>
+              </tr>{/if}
+              <tr>
+                <td >{$lang.order_date} : </td>
+                <td >{$order.add_time|date_format:"%m/%d/%Y %H:%M:%S %p"}</td>
+              </tr>
+              <tr>
+                <td >Last IP : </td>
+                <td >{$order.last_ip}</td>
+              </tr>
+            </table>
+
+            {/if}
+
+{literal}
+<script language="javascript">
+ function showjifen(){
+	 if (document.getElementById("jifendetails").height == '0'){
+		 document.getElementById("jifendetails").height = '260';
+	 }else{
+		 document.getElementById("jifendetails").height = '0';
+	 }
+ }
+</script>
+{/literal}
+</body>
+</html>

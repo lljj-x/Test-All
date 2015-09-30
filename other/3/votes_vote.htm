@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/vote_min.css?2014091903">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top_vote.htm"}
+	</header>
+
+
+
+	<!-- 投票具体页面 -->
+	<div class="s_vote_voteWrap">
+		  <div class="vote_matchupWrap">
+		    
+		    <!-- 投票主题 -->
+		    <!-- <div class="vote_sub">
+		    	<span>Dresses</span>
+		    </div> --><!-- .vote_sub -->
+		    
+		    <!-- 投票选择 -->
+		    <div id="matchup">
+		        <div id="matchup_content" class="clearfix">
+		              <!-- 产品一 -->
+		             <div id="contestant_1" class="contestant_wrapper" role="button">
+		                <div class="contestant clearfix clickable">
+		                   <div class="contestant_image" data-index="1">
+		                      <div class="contestant_image_overlay" id="left_img"></div>
+		                    </div>
+		                    <div class="contestant_name" id="left_name"></div>
+		                </div>
+		             </div>
+		              <!-- 产品二 -->
+		             <div id="contestant_2" class="contestant_wrapper" role="button">
+		                <div class="contestant clearfix clickable">
+		                     <div class="contestant_image" data-index="0">
+		                         <div class="contestant_image_overlay" id="right_img"></div>
+		                      </div>
+		                      <div class="contestant_name" id="right_name"></div>
+		                </div>
+		             </div>
+		              <!-- or 图片 -->
+		             <div id="contestant_separator">
+		                 <div id="round_indicator"><span>6</span></div>
+		             </div>
+		        </div><!-- #matchup_content -->
+		    </div><!-- #matchup -->
+
+		  </div><!-- .vote_matchupWrap -->
+
+	</div><!-- .s_vote_voteWrap -->
+
+
+
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	{include file="tongji.htm"}
+
+	
+	<script>
+		var vote_goods = {$vote_goods};
+		{literal}
+
+	    (function(data){//这里data是 ： vote_goods是后台给的数据作为参数
+
+	        function vote(data){//vote方法
+	        	this.data = eval(data);
+	        	this.arr = [0,1,2,3,4,5,6];//所有数据
+	        	this.$arr_len = 7;//定义数据的长度，后期会逐渐变为0
+	        	this.$index = null;//定义box元素的索引（此例为click_demo的索引）
+	        	this.arr_t = [];//临时
+	        	this.goods_list = []; //记录投票选择的循序，传递给后台使用
+	        }
+
+	        vote.prototype ={	//定义vote原型
+	         	init : function(){
+	         		var that = this;
+	         		var $jindu = 6;
+	         		that.setHtmFirst(that.arr);	//第一轮，展示两张图片
+	         	
+ 			   	    $(".contestant_image").click(function(event){	//点击图片事件
+ 			   	     	$index = $(this).data().index;	//获取box元素的data属性值
+
+ 			   	     	//获取选择的图片
+ 			   	     	var num = $(this).data("num");
+ 			   	     	that.arr_t.unshift(num);// 将一个或多个新元素添加到数组开始，数组中的元素自动后移，返回数组新长度
+ 			   	     	// that.arr_t.length = 1;
+ 			   	     	// console.log(that.arr_t);
+
+ 		   				if($arr_len == 0){
+ 		   					// console.log("--------------------" + that.arr.length);
+ 		   					$(this).unbind('click');
+
+ 		   					//拼接选择的商品的goods_sn，传给后台
+ 		   					var goosList_goods_sn = [];
+ 		   					$.each(that.arr_t, function(index, val) {
+ 		   					    /* iterate through array or object */
+ 		   					    goosList_goods_sn.push(data.data[val].goods_sn);
+ 		   					});
+
+ 		   					$.ajax({
+ 		   					  type: "POST",
+ 		   					  url: "/m-votes-a-result.html",
+ 		   					  data: { goods_list : goosList_goods_sn.join(','), goods_sn: data.data[that.arr_t[0]].goods_sn, cat_id: data.data[that.arr_t[0]].cat_id, is_ajax:1},
+							  success: function(msg){
+								 if(msg)
+								 {
+									location.href='/v-buyer-show-result.html?vote_name='+data.vote_name;
+								 }
+							   }
+
+ 		   					});
+ 		   				}else{
+ 		   					that.setHtm(that.arr);
+ 		   					$jindu --;
+ 		   					$("#round_indicator").html('<span>' + $jindu + '</span>');
+ 		   				}
+
+ 			   	    });
+	         	},
+
+   				// 第一轮首先展示两张图片
+	         	setHtmFirst : function(arr){
+	         		var that = this;
+	         		var f_l_j = that.getRandom(arr);
+	         		var f_r_j = that.getRandom(arr);
+
+	         		$("#contestant_1").find(".contestant_image").data("num",f_l_j).html('<img src='+that.data.data[f_l_j].pic+' />');
+	         		$("#left_name").html('<a href="'+that.data.data[f_l_j].goods_link+'" target="_blank">'+that.data.data[f_l_j].goods_title+'</a>');
+
+	         		$("#contestant_2").find(".contestant_image").data("num",f_r_j).html('<img src='+that.data.data[f_r_j].pic+' />');
+	         		$("#right_name").html('<a href="'+that.data.data[f_r_j].goods_link+'" target="_blank">'+that.data.data[f_r_j].goods_title+'</a>');
+	         	},
+
+	         	// 第二轮开始，每次点击更换一张图片
+	         	setHtm : function(arr){
+	         		var that = this;
+	                var l_j = that.getRandom(arr);
+	   
+					if($index == 1){
+						$(".contestant_wrapper").find(".contestant_image").eq(1).data("num",l_j).html('<img src='+that.data.data[l_j].pic+'  />');
+						$(".contestant_name").eq(1).html('<a href="'+that.data.data[l_j].goods_link+'" target="_blank">'+that.data.data[l_j].goods_title+'</a>');
+					}else{
+						$(".contestant_wrapper").find(".contestant_image").eq(0).data("num",l_j).html('<img src='+that.data.data[l_j].pic+' />');
+						$(".contestant_name").eq(0).html('<a href="'+that.data.data[l_j].goods_link+'" target="_blank">'+that.data.data[l_j].goods_title+'</a>');
+					}	
+	         	},
+
+	         	//取得随机数，并删除已经取出来的数字
+	         	getRandom : function(arr){
+	                var j =0 ,returnNum =0,that =this;
+	                j = Math.floor(parseInt(Math.random()*arr.length,10));
+	                returnNum = arr[j];                
+	                arr.splice(j,1);
+	                $arr_len = arr.length;
+					// console.log("end-----------------" + arr.length);
+					// console.log(returnNum);
+	                return returnNum;
+	         	}
+	        }
+
+			var VoteAction = new vote(data);//创建实例
+				VoteAction.init();//调用实例的方法属性
+
+	    })(vote_goods)
+
+		{/literal}
+	</script>
+	
+</body>
+
+</html>

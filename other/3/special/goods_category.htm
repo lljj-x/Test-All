@@ -1,0 +1,31 @@
+<div class="w_auto">
+  <div class="w_box clearfix">
+	{if $special.banner neq ''}
+    <div class="w_banner"><img src="{$special.banner}"></div>
+	{/if}
+    <div class="w_main">
+      <div class="prod_main">
+        
+          {foreach from=$data item=list key=key}
+		  <ul class="clearfix">
+			  <h3><a href="{$list.url}" target="_blank">{$list.name}</a></h3>
+				{foreach from=$list.data item =item }
+					<li class="switch-{$list.position_id}">
+					<p class="img"><a href="{$item.link_url}" target="_blank"><img alt="{$item.goods_title}" src="{$item.goods_img}" height="220" /></a></p>
+					<p class="name"><a href="{$item.link_url}" target="_blank">{$item.goods_title}</a></p>
+					<p class="was"> <span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$item.shop_price}">{$item.shop_price}</span>  <span class="market_price"><span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$item.market_price}">{$item.market_price}</span></span></p>
+					<p class="buynow"><a href="{$item.link_url}" rel="nofollow" target="_blank">{$lang.BUY_NOW}</a></p>
+					{if $item.zekou}
+					<div class="off_s"><span>{$item.zekou}</span>%</div>
+					{/if} 
+				  </li>
+			  {/foreach}
+		   </ul>
+          {/foreach}
+       
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="yourtext">{$special.remark}</div>
+  </div>
+</div>

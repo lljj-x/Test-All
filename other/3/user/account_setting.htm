@@ -1,0 +1,340 @@
+<div id="myAccount">
+	<ul class="title">
+		<li class="{if $tab==1}on{/if}"><a href="javascript:void(0);">{$lang.personal_information}</a></li>
+		<li class="{if $tab==2}on{/if}"><a href="javascript:void(0);">{$lang.address_book}</a></li>
+		<li class="{if $tab==3}on{/if}"><a href="javascript:void(0);">{$lang.Email_Setting}</a></li>
+		<li class="{if $tab==4}on{/if}"><a href="javascript:void(0);">{$lang.change_password}</a></li>
+		<li class="{if $tab==5}on{/if}"> <a href="javascript:void(0);">{$lang.change_email_address}</a></li>
+	</ul>
+	<div class="content">
+		<div class="cnt cnt1 {if $tab==1}cnt_on{/if}">
+			<form id="checkprofile" method="get" action="m-users.htm" name="formEdit" novalidate>
+			<input name="a" type="hidden" value="edit_profile" />
+			<ul>
+				<li>
+					<p class="p_fl"><span>*</span>{$lang.nickname}:</p>
+					<div><input type="text" value="{$profile.firstname|escape}" name="firstname"></div>
+				</li>
+				<li>
+					<p class="p_fl">{$lang.gender}:</p>
+					<div class="pad">
+						<label><input type="radio" name="sex" value="0" {if $profile.sex==0}checked="checked"{/if}>{$lang.privacy}</label>
+						<label><input type="radio" name="sex" value="1" {if $profile.sex==1}checked="checked"{/if}>{$lang.male}</label>
+						<label><input type="radio" name="sex" value="2" {if $profile.sex==2}checked="checked"{/if}>{$lang.female}</label>
+					</div>
+
+				</li> 
+				<li>
+					<p class="p_fl">{$lang.email_address}:</p>
+					<div class="pad">{$profile.email}</div>
+					{if $is_validated == 0}
+					<div class="verifiInfo">
+						<a href="javascript:void(0)"class="verifiBtn" id="js_resendEmailBtn">{$lang.Resend}</a>
+						
+
+						<div class="helpInfo">
+							<i class="helpIcon"></i>
+							<div class="helpText">
+								<span class="helpStri"></span>
+								<h4>{$lang.account_s4}</h4>
+								<ul>
+									<li>• {$lang.verfiy_obtain}</li>
+									<li>• {$lang.verfiy_points}</li>
+									<li>• {$lang.verfiy_every}</li>
+									<li>• {$lang.verfiy_discount}</li>
+									<li>• {$lang.account_s5}</li>
+									<li>• {$lang.verfiy_very}</li>
+									<li>• {$lang.verfiy_parti}</li>
+									<li>• {$lang.account_s6}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					{/if}
+				</li>
+				<li>
+					<p class="p_fl">{$lang.mobile_phone}:</p>
+					<div><input type="text" value="{$profile.phone}" name="other[phone]"></div>
+				</li>
+			</ul>
+			<div class="btn"><button type="submit"><span class="allBtn">{$lang.confirm_edit}</span></button></div>
+			</form>
+			
+			{*==== 删除手动手动邮箱引导验证============
+
+			{if $is_validated == 0 && $confirm_code == ''}
+			<section class="verified verified_1">
+				<header>
+					<div class="vTitkle_1">{$lang.account_s1}</div>
+					<div class="vTitkle_2">{$lang.account_s2}</div>
+					<div class="vTitkle_3">{$lang.Success}</div>
+				</header>
+
+				<div class="verifiedText">
+					<p class="v_title">{$lang.user_email}：{$email}</p>
+					<div class="v_btn"><a href="javascript:void(0)" id="js_confirmBtn">{$lang.Submit}</a></div>
+				</div>
+			</section>
+			{/if}
+			<section class="verified verified_2 {if $is_validated != 0 || $confirm_code == ''}none{/if}">
+				<header>
+					<div class="vTitkle_1">{$lang.account_s1}</div>
+					<div class="vTitkle_2">{$lang.account_s2}</div>
+					<div class="vTitkle_3">{$lang.Success}</div>
+				</header>
+
+				<div class="verifiedText">
+					<p class="v_title">{$lang.verfiy_was}：<strong>{$email}</strong></p>
+					<p class="v_tips">{$lang.verfiy_soon}</p>
+					<div class="no_recevid">
+						<span>{$lang.verfiy_received}</span>
+							<p>1. {$lang.verfiy_folder}</p>
+							<p>2. {$lang.verfiy_either} </p>
+						</ul>
+					</div>
+					<div class="v_btn"><a href="javascript:void(0)" id="js_resendEmailBtn">{$lang.Resend}</a></div>
+				</div>
+			</section>
+			<!-- {if $is_validated == 1}
+			<section class="verified verified_3">
+				<header>
+					<div class="vTitkle_1">{$lang.account_s1}</div>
+					<div class="vTitkle_2">{$lang.account_s2}</div>
+					<div class="vTitkle_3">{$lang.Success}</div>
+				</header>
+
+				<div class="verifiedText">
+					<div class="success">
+						<i></i>
+						Congratulations! Your email has been successfully verified!
+					</div>
+				</div>
+			</section>
+			{/if} -->
+			*}
+		</div>
+		
+		<div class="cnt cnt3 {if $tab==2}cnt_on{/if}">
+			<div class="address">
+				<section>
+					<h4>{$lang.billing_address}</h4>
+					{if $bill_addr_info==''}
+					<a href="javascript:void(0);" class="allBtn" id="addBillingAddr">{$lang.add_a_new_address}</a>
+					{else}
+					<div class="info">
+						<div class="list">
+							<ul>
+								<li class="li_name">
+									<span class="js_firstName">{$bill_addr_info.firstname|escape}</span> 
+									<span class="js_lastName">{$bill_addr_info.lastname|escape}</span>
+								</li>
+								<li class="js_addrLine1">{$bill_addr_info.addressline1|escape}</li>
+								<li class="js_addrLine2">{$bill_addr_info.addressline2|escape}</li>
+								<li><span class="js_city">{$bill_addr_info.city|escape}</span>, <span class="js_province">{$bill_addr_info.province|escape}</span>, <span class="js_zipcode">{$bill_addr_info.zipcode|escape}</span></li>
+								<li class="js_country_str">{$bill_addr_info.country_str|escape}</li>
+								<li>{$lang.mobile_phone}:<span class="js_tel">{$bill_addr_info.tel|escape}</span></li>
+								<li>{$lang.user_email}:<span class="js_email">{$bill_addr_info.email|escape}</span></li>
+							</ul>
+							<input type="hidden" class="js_country" value="19" />
+							<!--data-type="1"表示为编辑的是billing address-->
+							<div class="btn addr_list_btns">
+								<a href="javascript:void(0);" class="allBtn js_billingAttr_edit js_attr_editBtn" data-type="1" data-address_id="{$bill_addr_info.address_id}">{$lang.edit}</a>
+							</div>
+							<span class="selectFlag userBg"></span>
+							<em class="listBg"></em>
+						</div>
+					</div>
+					{/if}
+				</section>
+				<section>
+					<h4>{$lang.shipping_address}</h4>
+					{if $address_num<5}
+					<a href="javascript:void(0);" class="allBtn" id="addShipAddr">{$lang.add_a_new_address}</a>
+					{/if}
+				</section>
+			</div>
+			<div class="info" id="ship_addr_list">
+				{foreach from=$consignee_list item=consignee key=sn}
+				<div class="list">
+					<ul>
+						<li>
+							<span class="js_firstName">{$consignee.firstname|escape}</span> 
+							<span class="js_lastName">{$consignee.lastname|escape}</span>
+						</li>
+						<li class="js_addrLine1">{$consignee.addressline1|escape}</li>
+						<li class="js_addrLine2">{$consignee.addressline2|escape}</li>
+						<li><span class="js_city">{$consignee.city|escape}</span>, <span class="js_province">{$consignee.province|escape}</span>, <span class="js_zipcode">{$consignee.zipcode|escape}</span></li>
+						<li class="js_country_str">{$consignee.country_str|escape}</li>
+						<li>{$lang.mobile_phone}:<span class="js_tel">{$consignee.tel|escape}</span></li>
+						<li>{$lang.user_email}:<span class="js_email">{$consignee.email|escape}</span></li>
+					</ul>
+					<input type="hidden" class="js_country" value="{$consignee.country|escape}" />
+					<!--data-type="1"表示为编辑的是billing address-->
+					<div class="btn addr_list_btns">
+						<a href="javascript:void(0);" class="allBtn js_billingAttr_edit js_attr_editBtn" data-type="0" data-address_id="{$consignee.address_id}">{$lang.edit}</a>
+						<a href="javascript:void(0);" class="hBtn js_attr_deleteBtn" data-addrId="{$consignee.address_id}">{$lang.delete}</a>
+					</div>
+					<span class="selectFlag userBg"></span>
+					<em class="listBg"></em>
+				</div>
+				{/foreach}
+			</div>
+			<div class="wInfo" id="shipping_address_wrap">
+				<p id="bill_address_p">
+					<input type="checkbox" name="mycheckbox" value="1" id="bill_address_checkbox"><label for="bill_address_checkbox">{$lang.same_as_shipping_address}</label>
+				</p>
+				<form action="m-users-a-edit_address.htm" method="post" name="theForm" class="theAddressForm" id="addressfrom">
+				<input type="hidden" id="country_json" value='{$country_json}'>
+				<ul>
+					<li>
+						<p class="p_fl"><span>*</span>{$lang.firstname}:</p>
+						<div><input name="firstname" type="text" class="inputText" id="firstname" value="" /></div>
+					</li>
+					<li>
+						<p class="p_fl"><span>*</span>{$lang.lastname}:</p>
+						<div><input name="lastname" type="text" class="inputText" id="lastname" value="" size="15" /></div>
+					</li>
+					<li>
+						<p class="p_fl"><span>*</span>{$lang.email_address}:</p>
+						<div><input name="email" type="text" class="inputText" id="email" value="" /></div>
+					</li>
+					<li>
+						<p class="p_fl"><span>*</span>{$lang.address_line1}:</p>
+						<div><input name="addressline1" type="text" class="inputText long" id="addressline1" value="" /></div>
+					</li>
+					<li>
+						<p class="p_fl">{$lang.address_line2}:</p>
+						<div><input name="addressline2" type="text" class="inputText long" id="addressline2" value="" /></div>
+					</li>
+					<li>
+						<p class="p_fl"><span>*</span>{$lang.country_region}:</p>
+						<div>
+							<select name="country"  class="choiceCountry js_choiceCountry" data-key="0"><!--data-key的值为标签{$sn}的值-->
+							  <option value="">{$lang.Please_select_country}</option>
+							  {foreach from=$country_list item=country}
+							  <option value="{$country.region_id}" {if $consignee.country eq $country.region_id}selected{/if}>{$country.region_name}</option>
+							  {/foreach}
+							</select>
+						</div>
+					</li>
+					<li>
+						<p class="p_fl"><span>*</span>{$lang.state_county}:</p>
+						<div class="state_0_0">
+							{if $consignee.states neq ''}
+								<select name="province">
+									{foreach from=$consignee.states item=state}
+									<option value="{$state}" {if $state eq $consignee.province}selected{/if}>{$state}</option>
+									{/foreach}
+								</select>
+								{if $consignee.province_not_in eq 1 }
+								<span style="color: red" id="not_in">{$consignee.province} {$lang.not_in_list}</span>
+								{/if}
+							{else}
+								<input name="province" type="text" class="inputText i_table_w150" value="" />
+							{/if}
+						</div>
+					</li>
+					<li>
+						<p class="p_fl"><span>*</span>{$lang.city}:</p>
+						<div><input name="city" type="text" class="inputText"  value="" id="city" /></div>
+					</li>
+					<li>
+						<p class="p_fl"><span>*</span>{$lang.phone_number}:</p>
+						<div>
+						<span class="code_0" name="countryCode">+590<input type="hidden" name="code" value="590"/></span>
+						<input name="tel" type="text" class="inputText long"  value="" id="tel" />
+						</div>
+					</li>
+					<li>
+						<p class="p_fl"><span>*</span>{$lang.zip_code}:</p>
+						<div><input name="zipcode" type="text" class="inputText"  value="" id="zipcode" /></div>
+					</li>
+				</ul>
+				<div class="btn">
+					<input type="hidden" id="address_id" name="address_id" value="0"/>
+					<button type="submit"><span class="allBtn">{$lang.confirm_edit}</span></button>
+				</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="cnt cnt_email {if $tab==4}cnt_on{/if}" style="padding-left:0;">
+			
+			<iframe style="width:630px; height:540px; border:none;overflow:hidden;" src="http://edm.sammydress.com/{$cur_lang_url}?type=1&email={$profile.email}"></iframe>
+		</div>
+		
+		<div class="cnt cnt2 {if $tab==4}cnt_on{/if}">
+			<form id="modpassword" class="userform" method="post" action="m-users-a-edit_password.htm" name="formPassword" novalidate>
+			<ul>
+				<li>
+					<p class="p_fl"><span>*</span>{$lang.original_password}:</p>
+					<div><input type="password" value="" name="old_password"></div>
+				</li>
+				<li>
+					<p class="p_fl"><span>*</span>{$lang.new_password}:</p>
+					<div><input type="password" value="" name="new_password" id="new_password"></div>
+				</li>
+				<li>
+					<p class="p_fl"><span>*</span>{$lang.confirm_password}:</p>
+					<div><input type="password" value="" name="comfirm_password"></div>
+				</li>
+			</ul>
+			<div class="btn"><button type="submit"><span class="allBtn">{$lang.confirm_edit}</span></button></div>
+			</form>
+		</div>
+		
+		<div class="cnt cnt4 {if $tab==5}cnt_on{/if}">
+			{if $change_account_mail_info}
+			<p class="alert mb10 {if $change_account_mail_info.status==0}error{else}success{/if}">{* 一开始是隐藏的。 如果修改是成功的class为 “success” 如果是错误的的class为“error” *}{$change_account_mail_info.msg}</p>
+			{/if}
+		
+			<div class="oldEmaiInfo">
+				<div class="oldEmail clearfix">
+					<strong class="fl fb f14">{$profile.email}</strong>
+					
+					<div class="resendEmail">
+						{if $is_validated==0}
+						<a class="icon" href="javascript:void(0);" title=""></a>
+						<div class="text">
+							{$pls_check_your_email} <a class="resendEmailBtn" href="javascript:void(0);">{$lang.resend_email}</a>
+							<em></em>
+						</div>
+						{else}
+						<a class="icon ok" href="javascript:void(0);" title="{$lang.confirmed}"></a>
+						{/if}
+					</div>
+					
+				</div><!-- .oldEmail-->
+				
+				<section class="changUserEmail">
+					
+					
+					<h4 class="fb f14">{$lang.change_user_email.0}</h4>
+					<div class="formBox pt5">
+						<p><span>*</span>{$lang.change_user_email.1}</p>
+						
+						<form id="changUserEmailForm" method="post" action="m-users-a-change_account_mail.htm" name="formEdit" autocomplete="off" >
+							<ul>
+								<li>
+									<p class="p_fl"><span>*</span>{$lang.change_user_email.2}:</p>
+									<div>
+										<input type="password" name="existing_password">
+									</div>
+								</li>
+								<li>
+									<p class="p_fl"><span>*</span>{$lang.change_user_email.3}:</p>
+									<div>
+										<input id="login-email-address1" type="text" value="" name="new_email">
+									</div>
+								</li>
+							</ul>
+							<div class="btn"><button type="submit"><span class="allBtn">{$lang.change_user_email.4}</span></button></div>
+						</form>
+						
+					</div>
+				</section>
+				
+			</div><!--.oldEmaiInfo-->
+		</div><!--.cnt4-->
+	</div>
+</div>

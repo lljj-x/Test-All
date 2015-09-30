@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}mincss/others_min.css" />
+
+{assign var=aff_source value=$smarty.cookies.aff_source}{*aff 来源*}
+{assign var=admitad_uid value=$smarty.cookies.admitad_uid}
+{assign var=utm_campaign value=$smarty.cookies.utm_campaign}
+</head>
+
+<body>
+    {include file="include_pay_ok_stat_js.htm"}
+	<header id="header">
+	{include file="public_top.htm"}
+	</header>
+
+    <div id="mainWrap" class="clearfix">
+        <section class="msgBox">
+			<div class="systyleMsg {if $message.type eq 'info'}msgIsWarn{elseif $message.type eq 'warning'}msgIsWrong{elseif $message.type eq 'success'}msgIsRight{/if}"><!--msgIsRight,msgIsWrong,msgIsWarn 分别表示“对”，“错”，“警告”-->
+				<p class="fb pb10 title">{$message.content}{if $auto_redirect}&nbsp;&nbsp;(<span id="spanSeconds">{$auto_redirect}</span> {$lang.Second}){/if}</p>
+				<div class="systyleMsg_jump">
+                    {if $message.url_info}
+                        {foreach from=$message.url_info key=info item=url}
+                        <p class="link">
+                             {if $info}
+                                <a href="{$url}"> {$info}<i class="triangle right_tri"></i></a>
+                              {/if}
+                        </p>
+                         {/foreach}
+                    {/if}
+	            </div><!--end.systyleMsg_jump-->
+            </div><!--end .systyleMsg-->
+        </section><!--end .msgBox-->
+
+
+	</div><!--end #mainWarp-->
+
+{if $order_sn}
+<!-- Getprice.com.au sales tracking system -->
+<img height="1" width="1" border="0" src="https://secure.getprice.com.au/affsale.asp?shopid=3394&price={$amount}&sid={$order_sn}">
+<!-- End Getprice.com.au -->
+
+<img src="https://www.myshopping.com.au/sale.asp?mid=19529982&amount={$amount}&order={$order_sn}" height="0" width="0">
+<img src="https://www.shopbot.com.au/tracking/sale?shopID=44x36d01hw&amount={$amount}&orderID={$order_sn}" width="0" height="0">
+<img src="https://www.shopbot-inc.com/tracking/sale?shopID=cb26ez3yx6&amount={$amount}&orderID={$order_sn}" width="0" height="0">
+
+{*
+{if ($aff_source=='cj' || $aff_source==null) && $reg_20pre==1}
+<img src="https://www.emjcd.com/u?AMOUNT={$amount}&DISCOUNT=0&CID=1513535&OID={$order_sn}&TYPE=330905&CURRENCY=USD&METHOD=IMG" height="1" width="20">
+{/if}
+*}
+{*Shopping.com ROI 追踪代码*}
+<script type="text/javascript">
+var _roi = _roi || [];
+_roi.push(['_setMerchantId', '518781']);
+_roi.push(['_setOrderId', '{$order_sn}']);
+_roi.push(['_setOrderAmount', '{$amount}']);
+_roi.push(['_trackTrans']);
+</script>
+<script type="text/javascript" src="https://stat.dealtime.com/ROI/ROI2.js"></script>
+{*Shopping.com ROI 追踪代码*}
+
+<!-- <webgains tracking code> -->
+{if ($aff_source=='webgains' || $aff_source==null) && $cur_lang!='fr'}
+<script language="javascript" type="text/javascript">
+
+var wgOrderReference = "{$order_sn}";
+var wgOrderValue = "{$amount}";
+var wgEventID = 14185;
+var wgComment = "";
+var wgLang = "en_US";
+var wgsLang = "javascript-client";
+var wgVersion = "1.2";
+var wgProgramID = 8765;
+var wgSubDomain = "track";
+var wgCheckSum = "{$amount}";
+var wgItems = "";
+var wgVoucherCode = "{$order.promotion_code}";
+var wgCustomerID = "";
+var wgCurrency = "USD";
+
+if(location.protocol.toLowerCase() == "https:") wgProtocol="https";
+else wgProtocol = "http";
+
+wgUri = wgProtocol + "://" + wgSubDomain + ".webgains.com/transaction.html" + "?wgver=" + wgVersion + "&wgprotocol=" + wgProtocol + "&wgsubdomain=" + wgSubDomain + "&wgslang=" + wgsLang + "&wglang=" + wgLang + "&wgprogramid=" + wgProgramID + "&wgeventid=" + wgEventID + "&wgvalue=" + wgOrderValue + "&wgchecksum=" + wgCheckSum + "&wgorderreference="  + wgOrderReference + "&wgcomment=" + escape(wgComment) + "&wglocation=" + escape(document.referrer) + "&wgitems=" + escape(wgItems) + "&wgcustomerid=" + escape(wgCustomerID) + "&wgvouchercode=" + escape(wgVoucherCode) + "&wgCurrency=" + escape(wgCurrency);
+document.write('<sc'+'ript language="JavaScript"  type="text/javascript" src="'+wgUri+'"></sc'+'ript>');
+
+</script>
+<noscript>
+<img src="http://track.webgains.com/transaction.html?wgver=1.2&wgprogramid=8765&wgrs=1&wgvalue={$amount}&wgeventid=14185&wgorderreference={$order_sn}&wgitems=&wgvouchercode={$order.promotion_code}&wgcustomerid=&wgCurrency=USD" alt="" />
+</noscript>
+{/if}
+
+
+{if $cur_lang=='fr'} 
+<script language="javascript" type="text/javascript">
+
+	var wgOrderReference = "{$order_sn}";
+	var wgOrderValue = "{math equation='(x-y)*z' x=$order.order_amount y=$order.shipping_fee z=$order.order_rate format='%.2f'}";
+	var wgVoucherCode = "{$order.promotion_code}";
+	var wgEventID = 18269;
+	var wgComment = "";
+	var wgLang = "fr_FR";
+	var wgsLang = "javascript-client";
+	var wgVersion = "1.2";
+	var wgProgramID = 10725;
+	var wgSubDomain = "track";
+	var wgCheckSum = "";
+	var wgItems = "{foreach from=$order.goodsListArr item=goods name=loop}18269::{math equation='x*y' x=$goods.goods_price y=$order.order_rate format='%.2f'}::{$goods.goods_name}::{$goods.goods_sn}::{$order.promotion_code}{if !$smarty.foreach.loop.last}|{/if}{/foreach}";
+	var wgCustomerID = "";
+	var wgCurrency = "{$order.order_currency}";
+
+	if(location.protocol.toLowerCase() == "https:") wgProtocol="https";
+	else wgProtocol = "http";
+
+	wgUri = wgProtocol + "://" + wgSubDomain + ".webgains.com/transaction.html" + "?wgver=" + wgVersion + "&wgprotocol=" + wgProtocol + "&wgsubdomain=" + wgSubDomain + "&wgslang=" + wgsLang + "&wglang=" + wgLang + "&wgprogramid=" + wgProgramID + "&wgeventid=" + wgEventID + "&wgvalue=" + wgOrderValue + "&wgchecksum=" + wgCheckSum + "&wgorderreference="  + wgOrderReference + "&wgcomment=" + escape(wgComment) + "&wglocation=" + escape(document.referrer) + "&wgitems=" + escape(wgItems) + "&wgcustomerid=" + escape(wgCustomerID) + "&wgvouchercode=" + escape(wgVoucherCode) + "&wgCurrency=" + escape(wgCurrency);
+	document.write('<sc'+'ript language="JavaScript"  type="text/javascript" src="'+wgUri+'"></sc'+'ript>');
+
+</script>
+<noscript>
+	<img src="http://track.webgains.com/transaction.html?wgver=1.2&wgprogramid=10725&wgrs=1&wgeventid=18269&wgorderreference={$order_sn}&wgvalue={math equation='(x-y)*z' x=$order.order_amount y=$order.shipping_fee z=$order.order_rate format='%.2f'}&wgvouchercode={$order.promotion_code}&wgitems={foreach from=$order.goodsListArr item=goods name=loop}18269::{$goods.goods_price}::{$goods.goods_name}::{$goods.goods_sn}::{$order.promotion_code}{if !$smarty.foreach.loop.last}|{/if}{/foreach}&wgcustomerid=&wgCurrency={$order.order_currency}" alt="" />
+</noscript>
+{/if} 
+<!-- </webgains tracking code> -->
+
+<!-- Google Code for payment success-30 Remarketing List -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1024596584;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "GPsJCKDLuQMQ6LTI6AM";
+var google_conversion_value = 0;
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=GPsJCKDLuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<script language="Javascript">
+var merchant_account_id='148117';
+var m_order_id='{$order_sn}';
+var m_order_value='{$amount}';
+</script>
+<script language="Javascript" src="https://merchant.pronto.com/js/roi.js"></script>
+
+ 
+ 
+
+<script type="text/javascript">
+{literal}var fb_param = {};{/literal}
+fb_param.pixel_id = '6008921409530';
+fb_param.value = '{$amount}';
+fb_param.currency = 'USD';{literal}
+(function(){
+  var fpw = document.createElement('script');
+  fpw.async = true;
+  fpw.src = '//connect.facebook.net/en_US/fp.js';
+  var ref = document.getElementsByTagName('script')[0];
+  ref.parentNode.insertBefore(fpw, ref);
+})();{/literal}
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6008921409530&amp;value={$amount}&amp;currency=USD" /></noscript>
+
+<!-- twitter -->
+<script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+<script type="text/javascript">twttr.conversion.trackPid('l6dcd', {literal}{{/literal}tw_sale_amount: {$order.order_amount}, tw_order_quantity: {$order.goodsListArr|@count} {literal}}{/literal});</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l6dcd&p_id=Twitter&tw_sale_amount={$order.order_amount}&tw_order_quantity={$order.goodsListArr|@count}" />
+<img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l6dcd&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+</noscript>
+<!-- twitter -->
+
+{/if}
+
+{if $auto_redirect}
+<script language="JavaScript">
+<!--
+var seconds = {$auto_redirect};
+var defaultUrl = "{$default_url}";
+
+{literal}
+onload = function()
+{
+  if (defaultUrl == 'javascript:history.go(-1)' && window.history.length == 0)
+  {
+    document.getElementById('redirectionMsg').innerHTML = '';
+    return;
+  }
+
+  window.setInterval(function(){redirection()}, 1000);
+}
+function redirection()
+{
+  if (seconds <= 0)
+  {
+    window.clearInterval();
+    return;
+  }
+
+  seconds --;
+  document.getElementById('spanSeconds').innerHTML = seconds;
+
+  if (seconds == 0)
+  {
+    window.clearInterval();
+    location.href = defaultUrl;
+  }
+}
+//-->
+</script>
+{/literal}
+{/if}
+<footer>
+    {include file="footerhelp.htm"}
+    {include file="footer.htm"}
+	{include file="tongji.htm"}
+</footer>
+</body>
+</htm>

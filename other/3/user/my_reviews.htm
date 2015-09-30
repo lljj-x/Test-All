@@ -1,0 +1,56 @@
+<div id="myShows" class="mt15"> 
+	<div class="revList">			
+		<ul>
+		{foreach from=$review.review_list item=r key=key}
+			<li class="revListBox cleafix">	
+				<div class="rev_main">
+					<div class="rev_inner">
+						<h3 class="f14 mb20"><a href="/product{$r.goods_id}.html">{$r.goods_name}</a></h3>
+						<p class="rev_time">
+							<span class="c_tagbg start start_{$r.rate_overall} fl"><i class="c_tagbg">{$r.rate_overall}</i></span>
+							<!-- <span class="startNum fl">5</span> -->
+							<i class="time fl">{$r.adddate}</i>
+						</p>
+						<p class="rev_goodInfo">
+                        	<span>{if $r.color}Color: {$r.color}{/if}</span>                                <span>{if $r.size}Size: {$r.size}{/if}</span>                                
+                        </p>
+						<div class="rev_text">{$r.pros}</div>
+					</div>
+				</div><!--end .rev_main-->
+				<div class="rev_user">
+					<a href="/product{$r.goods_id}.html"><img src="http://cloud.faout.com/{$r.goods_img}" width="160" alt="{$r.goods_name}"></a>			
+                </div><!--end .rev_user-->
+                {if $r.pic}
+                <div class="rev_img">
+					<ul class="slides">
+                        <li>
+							<a href="javascript:void(0)" class="js_reviews_img" data-uid="/m-review_img-rid-{$r.pic.0.rid}.htm"><img src="{$DOMAIN_IMG}/{$r.pic.0.thumb_paths}" width="80" height="120"></a>
+						</li>
+                    </ul>
+				</div>
+				{/if}
+			</li>
+		{/foreach}
+		</ul>
+	</div>
+	<div class="pages tc mt20 mb50">
+		{$pages}
+	</div>
+</div>
+<script>
+{literal}
+//查看用户上传的图片
+$("li.revListBox").on("click","a.js_reviews_img",function(){
+	var options = {
+		area: ['810px','490px'],
+		offset : [($(window).height()-490)/2 +"px", '50%'],
+		//index是用来标记点击图片是同类图片中的第几张
+		iframe : {src : $(this).data("uid")+"?index="+$(this).index()}
+	}
+	//options是弹出iframe框的配置信息
+	GLOBAL.PopObj.iframe(options);
+	return false;
+
+});
+{/literal}
+</script>

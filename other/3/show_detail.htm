@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}/mincss/show_min.css?2015092401">
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}/mincss/jquery.mCustomScrollbar_min.css">
+
+</head> 
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div class="show_detail pt15 pb20">
+		<div id="mainBox" class="clearfix">
+			<div class="show_dMain">
+				<div class="show_d_img">
+					<header>
+						<div class="addthis_toolbox addthis_default_style fr">
+							<a class="addthis_button_preferred_1"></a>
+							<a class="addthis_button_preferred_2"></a>
+							<a class="addthis_button_preferred_3"></a>
+							<a class="addthis_button_preferred_4"></a>
+							<a class="addthis_button_compact"></a>
+							<a class="addthis_counter addthis_bubble_style"></a>
+						</div>
+						<div class="collectBox fr">
+							<a class="addToCollect {if $liked}addToCollectCur{/if}" data-num="{$review.like_count}" data-flag="{if $liked}0{else}1{/if}" data-href="/m-show-a-like.htm?rid={$review.rid}" href="javascript:void(0);"><i class="c_tagbg"></i><span>{$review.like_count}</span> {if $review.like_count gt 1}{$lang.likes}{else}{$lang.like}{/if}</a>
+						</div>
+
+						<div class="path"><a href="/buyers-show">{$lang.buyers_show}</a><i>&gt;</i><span>{$lang.display_photos}</span></div>
+					</header>
+					
+					<div class="detailBox_warp">
+						<table>
+							<tr>
+								<td class="detail_Box" id="js_detailBox"></td>
+							</tr>
+						</table>
+						
+						<div class="detail_thumb">
+							<div class="bg"></div>
+							<ul>
+								{foreach from=$arr_pic item=item}
+								<li class="on"><a href="javascript:void(0)" data-bigImg="{$item.paths}"><img src="{$item.thumb_paths}" width="80" height="120"/></a></li>
+								{/foreach}
+							</ul>
+						</div>
+					</div><!-- end .detailBox_warp-->
+
+				</div><!--end .show_d_img-->
+				<div class="show_d_info mt20">
+					<div class="inner">
+						<img src="{$review.avatar}" width="50" height="50"/>
+						<div class="gPop_userInfo">
+							{if $review.review_size.wight}
+							<span><strong>{$lang.weight}:</strong>{$review.review_size.wight}$_LANG['review_size_title']['Lbs']</span>
+							{/if}
+							{if $review.review_size.height}
+							<span><strong>{$lang.height}:</strong>{$review.review_size.height}</span>
+							{/if}
+							{if $review.review_size.bust}
+							<span><strong>{$lang.bust_size}:</strong>{$review.review_size.bust}</span>
+							{/if}
+							{if $review.review_size.body_shape}
+							<span><strong>{$lang.body_shape}:</strong>{$review.review_size.body_shape}</span>
+							{/if}
+						</div>
+						<p class="fb">{$review.nickname}</p>
+					
+						<p class="time">{$review.wrap_adddate}</p>
+						<div class="gPop_userInfo gPop_userInfoB">
+							{if $review.review_size.size}<span><strong>{$lang.size}:</strong>{$review.review_size.size}</span>
+							{/if}
+							{if $review.review_size.color}
+							<span><strong>{$lang.color}:</strong>{$review.review_size.color}</span>
+							{/if}
+						</div>
+
+						<div class="text">{$review.pros}</div>
+
+						
+					</div>
+				</div><!--end .show_d_info-->
+			</div><!--end .show_dMain-->
+
+			<div class="show_sader">
+				<section class="r_box proDesc">
+					<h4>{$lang.product_description}</h4>
+					<div class="r_text">
+						<div class="g_img pt10" id="js_g_img">
+							<ul class="slides">
+								{php}
+									$this->_tpl_vars['tmp_url'] = get_position_product_link(NULL, POSITION_SALE_GOODS_ARRIVALS, $this->_tpl_vars['goods']['cat_id']);
+								{/php}
+								{if empty($pictures)}
+								
+								<li><a href="/{$cur_lang_url}product{$goods.goods_id}.html{$tmp_url}"><img src="{$goods.goods_grid}"/></a></li>
+								{else}
+								<li>
+									<a href="/{$cur_lang_url}product{$goods.goods_id}.html{$tmp_url}">
+									<img src="{$goods.goods_grid}"/>
+									</a>
+								</li>
+								{foreach from=$pictures item=val}
+								<li>
+									<a href="/{$cur_lang_url}product{$goods.goods_id}.html{$tmp_url}">
+										<img src="{$val.img_url}" height="150"/>
+									</a>
+								</li>
+								{/foreach}
+								{/if}
+							</ul>
+					  </div><!--end .g_img-->
+
+						<p class="pt10 name"><a href="/{$cur_lang_url}product{$goods.goods_id}.html{$tmp_url}" target="_blank" class="gray3">{$goods.goods_title}</a></p>
+
+						<p class="fb price"><span class="bizhong"></span> <span id="unit_price" class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span></p>
+
+						<div class="pro_grade clearfix">
+							<span class="c_tagbg start start_{$review.avg_rate_img} fl"><i class="c_tagbg" >{$review.avg_rate_img}</i></span>
+							({$review.review_count})
+						</div>
+
+						<div class="pb15 pt10"><a href="/{$cur_lang_url}product{$goods.goods_id}.html{$tmp_url}" class="redBtn"><span>{$lang.add_to_bag}</span></a></div>
+					</div>
+				</section><!--end .r_box-->
+
+				<section class="r_box custPhotoList">
+					<h4>{$lang.customer_reviews_with_photos}</h4>
+					<div class="r_text">
+						{if count($arr_pic_1) > 0}
+						<div class="custPhoto js_scrooThem">
+							<ul class="clearfix">
+								{foreach from=$arr_pic_1 key=key item=i}
+								<li>
+									<a href="/{$cur_lang_url}m-review_media-a-view_image-goods_id-{$i.goods_id}-mid-{$i.id}.htm">
+										<img src="{$imgcache_url}/images/domeimg/lazyload1.gif" data-original="{$i.thumb_paths}" class="js_lazy" width="76" height="113"/>
+									</a>
+								</li>
+								{/foreach}
+							</ul>
+						</div>
+						{else}
+						<div class="cus_info">
+							{$lang.no_reviews_yet}
+						</div>
+						{/if}
+					</div>
+				</section><!--end .r_box-->
+
+				<section class="r_box revieList">
+					<h4>{$lang.related_reviews}</h4>
+					<div class="r_text">
+						<div class="r_revieBox js_scrooThem">
+							<ul>
+								{foreach from=$reviews item=item}
+								<li>
+									<p class="name">By <strong> {$item.nickname}</strong></p>
+									<div class="pro_grade clearfix">
+										<span class="c_tagbg start start_{$item.rate_overall} fl"><i class="c_tagbg" >{$item.rate_overall}</i></span>
+										<strong class="fl fb">{$item.subject}</strong>
+									</div>
+									<p class="pt10">{$item.pros}</p>
+								</li>
+								{/foreach}
+							</ul>
+						</div><!--end .r_revieBox-->
+					</div>
+					<p class="more pb5">
+						<a href="/{$cur_lang_url}m-review-a-view_review-goods_id-{$goods.goods_id}.htm">{$lang.all_reviews} &gt;&gt;</a>
+					</p>
+				</section><!--end .r_box-->
+
+			</div><!--end .show_sader-->
+
+		</div><!--#mainBox-->
+	</div>
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	{literal}
+	<script>
+		$LAB.script(JS_IMG_URL+"/minjs/jquery.flexslider.min.js")
+			.script(JS_IMG_URL+"/minjs/jquery.mousewheel.min.js")
+			.script(JS_IMG_URL+"/minjs/jquery.mCustomScrollbar.min.js")
+		
+			.wait(function(){
+				if($('#js_g_img').find('li').length > 1){
+
+					$('#js_g_img').flexslider({
+					 	namespace:"c_",
+					    animation: "slide",
+					    selector: ".slides > li",
+					    pauseOnAction:false,
+					    controlNav:false,
+					    animationLoop:false
+					});	
+				}
+
+				$(".js_scrooThem").mCustomScrollbar({
+					theme:"dark"
+				});
+
+				$("div.detail_thumb").find('li').click(function(event) {
+					/* Act on the event */
+					setBigImg($(this),$("#js_detailBox"),$(this).find('a').data("bigimg"),function(){
+
+						$("div.detail_thumb").addClass('detail_animate');
+					});
+
+
+				}).eq(0).trigger('click');
+
+				function setBigImg($evenElem,$targetElem,bigImgUrl,callBack){
+
+					var $bigImg = $('<img src="'+bigImgUrl+'"/>');
+
+					$targetElem.html("").addClass("loading");
+
+					$evenElem.addClass('on')
+							 .siblings().removeClass('on');
+
+					$bigImg.load(function() {
+						/* Act on the event */
+						$targetElem.append($bigImg).removeClass('loading');
+
+						if($.isFunction(callBack)){
+							callBack($bigImg)
+						}
+					});
+				};
+				//改变like状态
+				function changeLike($this) {
+					var url = $this.attr("data-href"),
+						num = parseInt($this.attr("data-num"),10),
+						flag = $this.attr("data-flag"),
+						curNum;
+
+					//如果已经like则取消
+					if ($this.hasClass('addToCollectCur')) {
+						$this.removeClass('addToCollectCur');
+						$this.attr("data-num",num - 1);
+						curNum = num - 1;
+						//$this.find("span").html(num - 1);
+						flag = 0;
+					} else {
+						$this.addClass('addToCollectCur');
+						$this.attr("data-num",num - 0+1);
+						//$this.find("span").html(num - 0 + 1);
+						curNum = num - 0 + 1
+						flag = 1;
+					}
+					curNum > 1 ? $this.html('<i class="c_tagbg"></i><span>'+curNum+'</span> likes') : $this.html('<i class="c_tagbg"></i><span>'+curNum+'</span> like');
+					
+					$.get(url + '&flag=' +flag , function(data) {
+
+					});
+				};
+				//点击like
+				$("a.addToCollect").click(function(){
+					changeLike($(this));
+				});
+			})
+	</script>
+	{/literal}
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4ecb5f810b6d71c1"></script>
+	{include file="tongji.htm"}
+</body>
+
+</html>

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/vote_min.css?2014110101">
+
+	<meta property="og:title" content="SammyDress.com: VOTE for Your Favorite Style and for a chance to WIN UP TO $200!" />
+	<meta property="og:type" content="product" />
+	<meta property="og:url" content="http://www.sammydress.com/v-buyer-show-result.html?vote_name={$vote_name}&vote_num={$goods.vote_num}" />
+	<meta property="og:image" content="http://css.sammydress.com/imagecache/S/images/pageimg/homebanner/buyershow_01.jpg" />
+	<meta property="og:site_name" content="sammydress" />
+	<meta property="og:description" content="5 winners every week! Come in and try YOUR luck!"/>
+
+	<meta property="fb:admins" content="100003136903167" />
+	<meta property="fb:page_id" content="220612487992157"/>
+	
+
+</head>
+<body>
+	<header id="header">
+		{include file="public_top_vote.htm"}
+	</header>
+
+	
+
+
+	<div class="voteResultWrap">
+		
+		<!-- 把投票结果分享到fb等 -->
+		<div class="vote_share">
+			<div class="voteShare_list">
+				<span>share this:</span>
+				<div class="shareList" id="js_shareList" data-link="http://www.sammydress.com/v-buyer-show-result.html?vote_name={$vote_name}&vote_num={$goods.vote_num}" data-pic="http://css.sammydress.com/imagecache/S/images/pageimg/homebanner/buyershow_01.jpg" data-title="SammyDress.com: VOTE for Your Favorite Style and for a chance to WIN UP TO $200!" data-desc="5 winners every week! Come in and try YOUR luck!">
+					<a href="https://twitter.com/share?url=http://www.sammydress.com/v-buyer-show-result.html?vote_name={$vote_name}&vote_num={$goods.vote_num}" class="twitter-share-button" data-dnt="true" data-count="none" data-via="twitterdev">Tweet</a>
+					<a href="javascript:void(0);" data-type="fb" class="fb_link"></a>
+					<!-- <a href="javascript:void(0);" data-type="twttr"  class="tw_link"></a> -->
+					<a href="javascript:void(0);" data-type="google" class="g_link"></a>
+					<a href="javascript:void(0);" data-type="tumblr" class="t_link"></a>
+					<!-- <a href="javascript:void(0);" class="email_link"></a> -->
+				</div>
+				<!-- <a href="javascript:void(0);" class="moreChance_pop moreChance_tips">*more chances to vote > -->
+				<a href="/v-buyer-show.html#maodian_link" style="font-size: 14px; color: #000;">*View the draw results</a>
+			</div> 
+		</div><!-- .vote_share -->		
+		
+		<!-- 投票结果页主体部分 -->
+		<div class="voteResultMainWrap clearfix">
+			<!-- left_1 -->
+			<div class="overAll_youPicks fl">
+				<h3>OVERALL TOP PICKS</h3>
+				<div class="pro_overAll">
+					<ul>
+						{foreach from=$top_goods name=top_goods_name item=top_goods_item}
+						<li>
+							<div class="pro_pic"><a href="{$top_goods_item.goods_link}"><img src="{$top_goods_item.goods_grid}{$goods_img_version}" alt="" height="140"/></a></div>
+							<div class="vote_num">{$top_goods_item.votes} <span class="color_red">votes</span></div>
+							<div class="rank_num">{$smarty.foreach.top_goods_name.index+1}</div>
+						</li>
+						{/foreach}   
+					</ul>
+				</div><!-- .pro_overAll -->
+
+			</div><!-- .overAll_youPicks -->
+
+			<!-- left_2 -->
+			<div class="youHaveVoted fl">
+				<h3>You Have Voted</h3>
+				<div class="youVoted_pro">
+					<p class="pro_name"><a href="{$goods.goods_link}">{$goods.goods_title}</a></p>
+					<p class="pro_pic"><a href="{$goods.goods_link}"><img src="{$goods.pic}" alt="" height="440"/></a></p>
+
+					<!-- surprise sale -->
+					{if $vote_coupon}
+					<div class="surpriseSale">
+						<span class="span1">Get 7% off</span>
+						<span class="span2">for this item</span>
+						<span class="span3">CODE:<i>{$vote_coupon}</i></span>
+						<span class="span4">Valid until Nov 31</span>
+					</div>
+					{/if}
+				</div>
+
+			</div><!-- .youHaveVoted -->
+
+			<!-- right_1 -->
+			<div class="voteResult_rightWrap fr">
+				<div class="voteNum">Thanks for voting! Your vote number is: <span class="color_red">{$goods.vote_num}</span></div>
+				<div class="alink_again">
+					<a href="javascript:{if $vote_cishu.$vote_name<2}go_vote('{$vote_name}');{else}void(0);{/if}" class="playAgain_alink {if $vote_cishu.$vote_name<2}{else}moreThan_ten{/if}">Play again</a>
+					<a href="/v-buyer-show.html" class="">Vote for other categories</a>
+				</div><!-- .alink_again -->
+				
+				<div class="text">
+					<span class="span1">Our Lucky Draw</span>
+					<span class="span2">will be conducted every Monday.</span>
+					<span class="span3">Keep coming back to try your luck!</span>
+				</div>
+
+				<p class="voteResult_giftPic"><img src="{$imgcache_url}images/domeimg/vote2014/voteResult_giftPic.jpg" alt="" height="260"/></p>
+
+			</div><!-- .voteResult_rightWrap -->
+
+			
+		</div><!-- .voteResultMainWrap -->
+
+	</div><!-- .voteResultWrap -->
+
+
+	<div class="tips_imgWrap" style="height:0; overflow:hidden;">
+		<img src="{$imgcache_url}images/domeimg/vote2014/moreThan_ten.gif" id="js_moreThanTen" alt="" height="327"/>
+		<img src="{$imgcache_url}images/domeimg/vote2014/moreChance_tips.gif" id="js_moreChance_tips" alt="" height="189"/>
+	</div>
+
+
+
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	{include file="tongji.htm"}
+
+	
+	<script>
+		{literal}
+		// 投票操作超过相应次数，弹窗效果
+		(function(){
+			$(function(){
+
+				// 超过每天限制的10次投票
+				$('.moreThan_ten').on('click', function(){
+					// alert("click---");
+				    var i = $.layer({
+				        type : 1,
+				        time : 8,
+				        title : false,
+				        fix : true,
+				        offset:['' , ''],
+				        border: [10, 0.3, '#000'],
+				        area : ['558px','327px'],
+				        page : {dom : '#js_moreThanTen'}
+				    });
+				});
+
+				// 点击more chances to vote 弹窗
+				$('.moreChance_tips').on('click', function(){
+					// alert("click---");
+				    var i = $.layer({
+				        type : 1,
+				        time : 8,
+				        title : false,
+				        fix : true,
+				        offset:['' , ''],
+				        border: [10, 0.3, '#000'],
+				        area : ['600px','189px'],
+				        page : {dom : '#js_moreChance_tips'}
+				    });
+				});
+
+			});
+		})();
+		
+		//投票     
+		function go_vote(vote_name){
+			location.href="/v-"+vote_name+"-buyer-show.html?vote_name="+vote_name;
+			//"/m-votes-a-vote.html?vote_name="+vote_name;
+		}
+
+		{/literal}
+	</script>
+	{literal}
+	<script type="text/javascript">
+
+	(function(){
+	  	//facebook 
+	    window.fbAsyncInit = function() {
+	        FB.init({
+	          appId      : '1406009852948446',
+	          xfbml      : true,
+	          version    : 'v2.1'
+	        });
+	    };
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		
+
+		function shareFaceBook(link,pic,caption,desc){
+			FB.ui({
+           	  method: 'share',
+           	  name: 'Facebook Dialogs',
+           	  href: link
+           	 
+           	},function(response) {
+           		if (response && response.post_id) {
+           			alert('Post was published.');
+           		} else {
+           			alert('Post was not published.');
+           		}
+           });
+		} 
+
+		
+
+		
+
+		$("#js_shareList").on("click","a",function(){
+			var $this = $(this);
+			var dtaElem = $("#js_shareList");
+
+			var link = dtaElem.data("link"),
+				desc = dtaElem.data("desc"),
+				title = dtaElem.data("title"),
+				pic = dtaElem.data("pic");
+
+			var iWidth=650;                          //弹出窗口的宽度;
+			var iHeight=500;                        //弹出窗口的高度;
+			var iTop = (window.screen.availHeight-30-iHeight)/2;       //获得窗口的垂直位置;
+			var iLeft = (window.screen.availWidth-10-iWidth)/2;        //获得窗口的水平位置;
+
+			switch($this.data("type")){
+				case 'fb':
+					shareFaceBook(link,pic,title,desc);
+					break;
+				case "twttr" :
+					url = 'https://twitter.com/share?url='+encodeURIComponent(link)+'&text='+desc;
+					window.open(url,'', 'width='+iWidth+',height='+iHeight+',top='+iTop+',left='+iLeft);
+					break;
+				case "google" :
+					url ='https://plus.google.com/share?url='+encodeURIComponent(link)+"&t="+encodeURIComponent(desc);
+					window.open(url,'', 'width='+iWidth+',height='+iHeight+',top='+iTop+',left='+iLeft);
+					break;
+				case "tumblr" :
+					url ="http://www.tumblr.com/share/link?url=" + encodeURIComponent(link) + "&name=" + encodeURIComponent(title) + "&description=" + encodeURIComponent(desc);
+					window.open(url,'', 'width='+iWidth+',height='+iHeight+',top='+iTop+',left='+iLeft);
+					break;
+					
+			}
+
+		})
+
+		
+	})();
+	(function(){
+		window.twttr = (function (d, s, id) {
+		  var t, js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src= "https://platform.twitter.com/widgets.js";
+		  fjs.parentNode.insertBefore(js, fjs);
+		  return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+		}(document, "script", "twitter-wjs"));
+			
+		twttr.ready(function (twttr) {
+			twttr.events.bind(
+			  'tweet',
+			  function (event) {
+			    // Do something there
+			    //console.log(event)
+			  }
+			);
+		 
+		});
+	})()
+	</script>
+	{/literal}
+</body>
+
+</html>

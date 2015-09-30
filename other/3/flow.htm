@@ -1,0 +1,11 @@
+{if $step == 'cart'}
+    {include file='cart/cart.htm'}
+{elseif $step == 'checkout' || $step == 'exp_checkout'}
+    {include file='cart/checkout.htm'}
+{elseif $step == 'consignee'}
+    {include file='cart/address.htm'}
+{elseif $step == 'done'}
+    {include file='cart/done.htm'}
+{elseif $step == 'paypal_10486'}
+    {include file='cart/paypal_10486.htm'}
+{/if}

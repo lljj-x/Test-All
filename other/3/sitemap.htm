@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="mainBox">
+	
+		<div class="path">
+			<a href="{$DOMAIN}{$cur_lang_url}">{$lang.home}</a>
+			<i>&gt;</i>
+			<span>{$lang.Sitemap_Index}</span>
+		</div>
+		<h2 class="categories">{$lang.Sitemap_Index_Categories}</h2>
+		<section id="sitemap">
+			{foreach from=$catArr item=top_cat key=key}
+				<h4><a href="{$top_cat.url}">{$top_cat.cat_name}</a></h4>
+				{if $top_cat.child_node}
+					<ul class="clearfix">
+					{foreach from=$top_cat.child_node item=child_node key=key1}
+						<li><a href="{$child_node.url}">{$child_node.cat_name}</a></li>
+					{/foreach}
+					</ul>
+				{/if}
+			{/foreach}		
+		</section>
+		
+		
+	</div><!--end .mainBox-->
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

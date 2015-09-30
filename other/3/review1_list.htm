@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css">
+	<!--弹出层插件-->
+	<link rel="stylesheet" href="{$imgcache_url}mincss/skin/bluebar/ymPrompt.css" />
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+	
+
+	<div class="path rev_path main_inner">
+		<a href="/{$cur_lang_url}" title="{$shop_name} {$lang.home}">{$lang.home}</a>{$nav_title}
+		<!-- <i>&gt;</i>
+		<a href="{$nav_url_title}">{$cat_name}</a> -->
+		<i>&gt;</i>
+		<span>{$lang.sammydress_reviews}</span>
+	</div><!--end .path-->
+	
+	
+	<div class="rs_l_head">
+		<div class="main_inner">
+			<a href="{$nav_url_title}" class="redBtn fr"><span>{$lang.GO_BACK} {$cat_name|capitalize}</span></a>
+			<strong>{$lang.reviews_by_category}</strong>
+		</div>
+	</div><!--end .rs_l_head-->
+
+	<div class="rs_l_nav">
+		<div class="main_inner">
+			
+            {$leftreviewscate}
+			
+		</div>
+	</div><!--end .rs_l_nav-->
+
+	<div id="mainBox" class="mb20">
+		<div class="revBy_cate">
+			<ul class="clearfix">
+                {foreach from=$goods_reviews_list item=goods name=list}
+				<li>
+					<p class="img"><a href="{$goods.reviews_view_url}"><img src="{$goods.goods_img}" height="217"/></a></p>
+					<p class="name">{$goods.subject}</p>
+					<p class="text">{$goods.pros}</p>
+					<p class="clearfix  pt5">
+						<span class="bizhong fr"></span><span class="my_shop_price fb fr" orgp="{$goods.price}"></span>
+						<span class="c_tagbg fl start start_{$goods.avg_rate_img}"><i class="c_tagbg">{$goods.avg_rate}</i></span>
+					</p>
+					<p class="clearfix btn">
+						<strong class="fl"><i class="c_tagbg"></i><a href="{$goods.reviews_write_url}">{$lang.write_a_review}</a></strong>
+						<a href="{$goods.reviews_view_url}" class="fr">{$lang.read_full_reviews}</a>
+					</p>
+				</li>
+				{/foreach}
+			</ul>
+
+			<div class="pages tc revPage">
+                {$pagestr}
+			</div>
+
+		</div><!--end .revBy_cate-->
+		
+
+	</div><!--end #mainBox-->
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	
+	<script>
+		$LAB.script("{$imgcache_url}minjs/jquery.infinitescroll-masonry.min.js")
+        {literal}
+			.wait(function(){
+				$("#ms_warp").masonry({ 
+		          itemSelector: ".ms_brick",
+		          columnWidth: 292,
+		          gutter: 10,
+		          animate: true,
+		          isFitWidth:true,
+		          singleMode: true
+		        });
+			})
+         {/literal}
+	</script>
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

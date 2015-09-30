@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/others_min.css">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="mainBox">
+	
+		<div class="path">
+			<a href="{$DOMAIN}{$cur_lang_url}">{$lang.home}</a>
+			<i>&gt;</i>
+			<a href="/wholesale-product-{$k}.html">{$lang.Quick_Index}</a>
+			<i>&gt;</i>
+			<span>{$lang.Index} {$k}</span>
+		</div>
+		<section  id="abckeyWrap">
+		<div class="p5 bd1 tc abckey mb10" >
+			<div id="abckey">
+				<strong>{$lang.Quick_Index}:&nbsp;&nbsp;</strong>
+				{foreach from=$abcArr item=list name=abclist}
+					<a href="{$DOMAIN}/wholesale-product-{$list}.html">{$list}</a>
+					{if not $smarty.foreach.abclist.last} &nbsp; {/if}
+				{/foreach}
+			 </div>		
+		</div>
+			
+		<div class="bd1 pt10 pb10 mb10 clearfix">
+			<ul class="clearfix abcList">
+				{foreach from=$keyword_arr item=item}
+                   <li><a href="{$item|get_search_url}">{$item}</a></li>
+                 {/foreach}  
+			</ul>
+			<div class="pages fr tr pr10">
+				{$pagestr}
+			</div><!--end.pages-->
+		</div>
+		
+		<div class="p1 bd1 tc abckey mb10">
+			<div id="abckey">
+				<strong>{$lang.Quick_Index}:&nbsp;&nbsp;</strong>
+				{foreach from=$abcArr item=list name=abclist}
+					<a href="{$DOMAIN}/wholesale-product-{$list}.html">{$list}</a>
+					{if not $smarty.foreach.abclist.last} &nbsp; {/if}
+				{/foreach}
+		    </div>
+		</div>
+		</section >
+		
+	</div><!--end .mainBox-->
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	
+
+	{include file="tongji.htm"}
+</body>
+
+</html>

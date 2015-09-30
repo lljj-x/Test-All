@@ -1,0 +1,62 @@
+<div id="myShows" class="mt15"> 
+	{if $action eq 'my_shows'}
+	{if $cat_count}
+	<section class="nav">
+		<ul>
+			<li><a href="/m-users-a-my_shows" {if empty($smarty.get.cat_id)}class="current"{/if}>{$lang.all_categories} <span class="red">{$cat_total_count}</span></a></li>
+			{foreach from=$cat_count item=item}
+			<li><a href="?cat_id={$item.cat_id}" {if $smarty.get.cat_id eq $item.cat_id}class="current"{/if}>{$item.cat_name} <span class="red">{$item.total}</span></a></li>
+			{/foreach}
+		</ul>
+	</section>
+	{/if}
+	<section class="wantShows">
+		<dl>
+			<dt>{$lang.want_people_to_see_you_shows}</dt>
+			<dd>{$click_to_shows_page_msg}</dd>
+		</dl>
+	</section>
+	
+	
+	<section class="showsWrap">
+		{foreach from=$myshows item=item}
+		<div class="showBox">
+		<ul>
+			<li><a href="{$item.detail_url}"><img class="js_lazy" src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$domain_img}/{$item.thumb_paths}" width="155px"></a></li>
+			<li><a href="javascript:void(0);" class="userBg like"></a> <strong>{$item.like_count}</strong> {if $item.like_count gt 1}{$lang.likes}{else}{$lang.like}{/if}</li>
+		</ul>
+		</div>
+		{/foreach}		
+		<div class="pages cb tc">
+			{if count($myshows) > 0}
+			{$spagestr}
+			{/if}
+		</div>
+	</section>
+	{elseif $action eq 'my_message'}
+	<h2 class="u_model"><span></span>{$lang.message_stream}</h2>
+		
+	<section class="u_messageWrap">
+		{foreach from=$msg_stream item=item}
+		<div class="list">
+			<div class="p10">
+				<p class="img"><a href="{$item.detail_url}"><img class="js_lazy" src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$DOMAIN_IMG}/{$item.thumb_paths}" ></a></p>
+				<ul>
+					{$item.point_msg}
+					{if $item.type ne 3}
+					<li class="li4">{$item.re_content}</li>
+					{/if}
+					<li class="li3">{$item.wrap_adddate}</li>
+				</ul>
+				<span class="userBg"></span>
+			</div>
+		</div>
+		{/foreach}
+		<div class="pages cb tc">
+			{if count($msg_stream) > 0}
+			{$mpagestr}
+			{/if}
+		</div>
+	</section>
+	{/if}
+</div>

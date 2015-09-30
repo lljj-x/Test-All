@@ -1,0 +1,166 @@
+@color3:#333;
+@color6:#666;
+@colorf:#fff;
+@colord:#ddd;
+@colorRed:#da3439;
+@colortr:transparent;
+
+@font_fV:Verdana;
+@font_fA:Arial;
+@bord_d:1px solid #ddd;
+html,body{height: 100%;}
+
+@keyframes fromleft{from{left:40px;} to{left: 54px;}}
+@keyframes fromright{from{right: 40px;} to{ right:56px;}}
+@keyframes bounceIn{0%{opacity:0;transform:scale(.3)}50%{opacity:1;transform:scale(1.05)}70%{transform:scale(.9)}100%{transform:scale(1)}
+}
+@keyframes transform { from{transform:rotate(0deg); } to{transform:rotate(360deg); } }
+
+.icon,.direction-nav a{background-image: url(../images/domeimg/turkey/icon.png); background-repeat: no-repeat;}
+#pageMain{background: url(../images/domeimg/turkey/bg.jpg) repeat 0 0; padding-bottom: 60px;}
+.w1200{width: 1200px; margin-left: auto; margin-right: auto;
+	.topShare{ position: absolute; right:65px; top: -50px; z-index:100px; 
+		iframe{vertical-align: middle;}
+	}
+	.banner{height: 260px; background:url(../images/domeimg/turkey/titlebg.png) no-repeat center bottom; position: relative; }
+	.turkeyimg,.tweedimg,.starimg,.title{position: absolute;}
+	.turkeyimg{ left: 54px; top: 10px; animation: fromleft 1s ease 0s alternate none infinite;}
+	.tweedimg{ right: 56px; top: 0; animation: fromright 1s ease 0s alternate none infinite;}
+	.title{top: 43px; left: 348px;  animation: bounceIn .5s .5s ease both ;}
+	.starimg{left: 302px; top: 14px; animation:transform 4s linear 0s  none infinite;}
+
+	.voice{ line-height: 20px; width: 650px; padding-top: 215px; margin-left: auto; margin-right: auto; font-size: 12px;
+		.voiceRight{float: left;
+			i{float: left; margin-top: 2px; width: 20px; height: 14px; background-position: 0 0;}
+		}
+		.voiceLis{float: left; padding-left: 5px; height: 20px; overflow: hidden; width: 397px;
+			li{white-space: nowrap;}
+			span{color: #ff0057;}
+		}
+	}
+
+	.activityBox{border: 5px solid #da243b; background-color: @colorf;
+		h4{font-size: 0; width: 240px; height: 40px; margin-left: 28px;}
+		.row{padding: 35px 22px;}
+		.shareList{ float: left; overflow: hidden; width: 780px; height: 120px; overflow: hidden;
+			.slide{
+				li{float: left;width: 130px; text-align: center; animation: bounceIn .5s 1s ease both ;
+					img{vertical-align: top;}
+				}
+			}
+			
+		}
+		.numBoxWrap{width: 350px; float: right; height: 120px; position: relative;
+			.img{position: absolute; left: 0; bottom: -5px;}
+		
+			.btn{position: absolute;left: 0; top: -70px; height: 52px; margin-right: 54px;
+				a{display: block; float: right; background: url(../images/domeimg/turkey/btnbg.gif) repeat left 0; padding-left: 15px; height: 52px;  color: @colorf; font:bold 18px/52px @font_fA; text-decoration: none;
+					i{ position: absolute; right: -54px; top: 0; display: block; background: url(../images/domeimg/turkey/btnbg.gif) repeat right 0; height: 52px; width: 54px; text-align: center; font-style: normal;}
+				}
+			}
+			.numBox{position: absolute;right: 0; bottom:0;
+				strong{ display: block; width:131px; height: 49px; background: url(../images/domeimg/turkey/numbg.gif) repeat left 0; font: bold 25px/49px @font_fA; color: @colorRed; letter-spacing: 15px; text-align: right; }
+
+				p{font-size: 14px; font-weight: bold; color: @colorRed; text-align: center; padding-top: 10px;}
+			}
+		}
+
+		.row2{ padding: 0 22px 20px; display: none; position: relative;
+			.upRow2{ position: absolute; left: 464px; top: -20px; width: 0; height: 0; border-width: 0 20px 20px 20px; border-style: solid; border-color: @colortr @colortr #fdef6b; cursor: pointer;}
+			.proList{float: left; overflow: hidden; width: 930px; height: 158px; overflow: hidden; background-color: #fdef6b;}
+			.shareAndTwitter{background: url(../images/domeimg/turkey/shareandwin.gif) 0 0 no-repeat; display: inline-block; zoom: 1; vertical-align: middle; width: 100px; height:20px; font-size: 14px; font-weight: bold; padding-top: 10px;}
+			.slide{
+				li{float: left;width: 153px; text-align: center; margin: 5px 0; position: relative;
+					img{vertical-align: top;}
+					p{position: absolute; left: 50%;bottom: 0; width: 148px; height: 25px; margin-left: -74px; transition: all .5s;
+						span{display: block; width: 100%; height: 100%;background-color: @color3; opacity: .5; filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);}
+						a{width: 20px; height: 20px; display: block; position: absolute; top: 3px;}
+						iframe{ position: absolute; top: 3px;}
+					}
+					.shareFb{background-position: -41px 0; left: 20px;}
+					iframe {right: 20px;}
+					
+					&:hover{
+						p{bottom: 0;}
+					}
+				}
+
+			}
+			.direction-nav{ position: relative; width: 100%; height: 0;
+				a{ position: absolute; top: -105px; width: 27px; height: 56px; font-size: 0;
+					&.prev{background-position: -40px -40px; left: 0; }
+					&.next{background-position: 0 -40px; right: 0; }
+				}
+			}
+			.tips{ width: 200px; padding-left: 15px; font-size: 16px; text-align: left; float: left; font-weight: bold; font-family: @font_fA;}
+		}
+	}
+	.turkeyT{
+		h4{background-position: 0 -100px;}
+	}
+	.tweedyT{border-top: 2px solid #da243b;
+		h4{background-position: 0 -163px;}
+		.numBoxWrap{
+			.img{bottom: -30px;}
+		}
+	}
+}
+
+//弹出框
+.xubox_main .xubox_close {background-color: @colorf; border-radius: 30px;}
+.turkeyPop{ font-family:  @font_fA;
+	strong{color: @colorRed;}
+}
+.hasChoiceTeam,.waintNextGame {background: url(../images/domeimg/turkey/popbg.png) repeat left 0; width: 416px; height: 277px;
+	p{font-size: 20px; padding: 80px 60px;}
+} 
+.waintNextGame{
+	.waintNextGameT{padding-top: 80px; font-size: 24px; text-align: center; font-weight: bold;}
+	.cutTime {font-size: 45px; text-transform: uppercase;}
+}
+
+//分享次数超过5次
+.maxShare{ 
+	.tipsbox{width: 224px; float: right; padding: 62px 38px 0 0; font-size: 12px;line-height: 22px;}
+	.btn{height: 30px; padding-top: 10px; text-align: center;
+		a{  display: inline-block; *zoom:1; line-height: 30px; margin:0 auto; height: 30px;  padding: 0 10px; color: @colorf; background-color: @colorRed; text-decoration: none; border-radius: 3px;}
+	}
+}
+.turkey_pop{width: 550px; height: 277px; background: url(../images/domeimg/turkey/popbg_trukey.png) repeat left 0; }
+.tweedy_pop{width: 501px; height: 277px; background: url(../images/domeimg/turkey/popbg_tweedy.png) repeat left 0;}
+//游戏结束
+.gameover{background: url(../images/domeimg/turkey/popbg.png) repeat left 0; width: 416px; height: 277px; 
+	.tipsbox{width: 305px; margin: 0 auto; padding: 40px;}
+	h4{font-size: 26px; padding-bottom: 10px; color: @colorRed;font-weight: bold; text-transform: uppercase; text-align: center;}
+	p{font-size: 14px;}
+	a{color: @colorRed; text-decoration: underline;}
+	
+}
+//分享成功
+.shareOk{
+	.tipsbox{width: 230px; float: right; font-size: 14px; line-height: 26px; padding: 50px 40px 0 0;
+		strong{font-weight: bold; color: @colorRed;}
+	}
+}
+//侧边
+.mui-mbar{font-family: @font_fA; position: fixed; right: -280px; top: 0; height: 100%; width: 315px; z-index: 10000;
+	
+	.mui-mbar-tabs,.mui-mbar-plugins{position: absolute; z-index: 9999; top: 0; height: 100%;}
+	.mui-mbar-tabs{left: 0; background-color:#000; width: 35px;
+		.mui-barTag{position: absolute; width: 138px; height: 146px; left: 50%; top: 50%; margin:-73px -121px; cursor: pointer;}
+	}
+	.mui-mbar-plugins{left: 35px; background-color: @colorf; width: 280px; font-size: 12px; 
+		.mui-mbar-pluginsInner{height: 650px; position: absolute; left: 0; top: 50%; margin-top: -325px;}
+		.f18{font-size: 18px;}
+		.howtoplay{ border-top: 1px dotted #333;
+			dl{text-align: left; padding-left: 10px;}
+			dt{font-size: 16px;color: @colorRed; font-weight: bold;}
+			dd{font-weight: bold; color: #000;}
+		}
+		.prize{border-top: 1px dotted #333;text-align: left; padding-left: 10px;
+			h4{text-align: center;}
+			.colorRedx{color: @colorRed;}
+		}
+	}
+
+} 

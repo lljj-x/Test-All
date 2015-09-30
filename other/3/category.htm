@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+	{include file="top.htm"}
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/category_min.css?2015092501">
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/jquery.mCustomScrollbar_min.css">
+	<link rel="stylesheet" type="text/css" href="{$imgcache_url}mincss/fullscreen_min.css?2015092401">
+</head>
+<body>
+	<header id="header">
+		{include file="public_top.htm"}
+	</header>
+
+	<div id="cate_mainBox" class="mb20 clearfix">	
+
+		<div class="cateMain">
+			<div class="c_tagbg showCateBar none" id="js_showCateBar"></div>
+			<div class="cateMainInner" id="js_cateWrap">
+                {if $goods_list_flag eq 'yes'}
+				<div class="catAd">
+                    {include file="category_ad.htm"}
+				</div>
+                {/if}
+                
+               
+                {if $goods_list_flag neq 'yes'}
+                <div class="path">
+				<span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/{$cur_lang_url}" title="Sammydress.com {$lang.home}" itemprop="url"><strong itemprop="title">{$lang.home}</strong></a></span>
+				{$nav_title}
+				</div>
+                {/if}
+				
+
+				{if $cur_lang == $default_lang}
+
+
+<!-- 					搜索推荐词         -->
+			        {if $cat_keywords_list && $smarty.get.m eq 'search'}
+					<div id="js_search_key" class="search_key">
+			            <strong>Related Searches: </strong>
+			            {foreach from=$cat_keywords_list item=cat_keywords key=myId name=cat}
+			            <span><a href="{$cat_keywords.url}">{$cat_keywords.keywords}</a>, </span>
+			            {/foreach}
+			            
+			        </div>
+			        {/if}
+			        
+			        
+					
+			    {/if}
+
+				<section class="cateTopBar" >
+					<div class="cateTopBarInner clearfix" id="js_cateTopBar">
+						<h1>
+							<strong>
+							{if $search_keyword && $search_cat_id}
+								{$search_keyword} in {$search_cat_name}
+							{elseif $search_keyword}
+								{$search_keyword}
+						    {else}
+								{$cat_name}
+							{/if}
+							</strong>
+							
+						</h1>
+							
+						<div class="fr">
+                            {if $smarty.get.m!='collections'}
+							<div class="operate_list">
+								<a href="{$index_page}?is_freeshipping={if $is_freeshipping eq 'y'}n{else}y{/if}{if $cdn_querystring}{$cdn_querystring|regex_replace:'/&is_freeshipping=[a-z]/':''}{/if}" class="c_tagbg cateTag fs_tag {if $is_freeshipping eq 'y'}fs_tag_on{/if} js_tips" data-tips="{$lang.freeShip}">{$lang.freeShip}</a><!--当前状态添加class "fs_tag_on"-->
+                                {if $smarty.get.m!='new_goods'}
+								<a href="{$index_page}?24h_ship={if $24h_ship eq 't'}f{else}t{/if}{if $cdn_querystring}{$cdn_querystring|regex_replace:'/&24h_ship=[a-z]/':''}{/if}" class="c_tagbg cateTag sih_tag {if $24h_ship eq 't'}sih_tag_on{/if} js_tips" data-tips="{$lang.ship_in_24_hrs}">{$lang.ship_in_24_hrs}</a><!--当前状态添加class "sih_tag_on"-->
+                                {/if}
+                                {if $smarty.get.m != 'clearance' &&  $smarty.get.m!='new_goods'}
+                                <a href="{$index_page}?is_clearance={if $is_clearance eq 'y'}n{else}y{/if}{if $cdn_querystring}{$cdn_querystring|regex_replace:'/&is_clearance=[a-z]/':''}{/if}" class="c_tagbg cateTag onsale_tag {if $is_clearance eq 'y'}onsale_tag_on{/if} js_tips" rel="nofollow" data-tips="{$lang.on_sale}">{$lang.clearance}</a>
+                                {/if} 
+							</div><!--end .operate_list-->
+
+							<div class="operate_list ">
+								<div class="operateT">
+									<span>{$page_size}</span>
+									<i class="triangle"></i>
+								</div>
+
+								<ul>
+                                {*cdn缓存,处理参数,如排序,每页显示数等 by mashanling on 2013-09-18 14:53:22*}
+                                {php}
+                                $this->_tpl_vars['_cdn_querystring'] = isset($this->_tpl_vars['cdn_querystring']) ? preg_replace('/&page_size=\d+/', '', $this->_tpl_vars['cdn_querystring']) : '';
+                                {/php}
+
+                                {foreach from=$layoutpage item=list}
+                                    <li><a href='{$index_page}?page_size={$list}{$_cdn_querystring}' title="Per page {$list}" rel="nofollow">{$list}</a></li>
+                                {/foreach}
+								</ul>
+							</div><!--end .operate_list-->
+                            {/if}
+
+							<div class="operate_list">
+								<div class="operateT">
+									<span>
+                                    {if $odr == "hot"}{$lang.Hot}
+                                    {elseif $odr == "new"}{$lang.New}
+                                    {elseif $odr == "likes"}{$lang.Facebook_Likes}
+                                    {elseif $odr == "conversion"}{$lang.Recommended}
+                                    {elseif $odr == "recommendation"}{$lang.Recommendation}
+                                    {elseif $odr == "low2high"}{$lang.Price_low2high}
+                                    {elseif $odr == "high2low"}{$lang.Price_high2low}
+                                    {elseif $odr == "reviews"}{$lang.reviews}
+                                    {/if}
+                                    </span>
+									<i class="triangle"></i>
+								</div>
+								<ul>
+                                    {*cdn缓存,处理参数,如排序,每页显示数等 by mashanling on 2013-09-18 14:53:22*}
+                                    {php}
+                                    $this->_tpl_vars['_cdn_querystring'] = isset($this->_tpl_vars['cdn_querystring']) ? preg_replace('/&odr=\w+/', '', $this->_tpl_vars['cdn_querystring']) : '';
+                                    {/php}
+
+									{if $smarty.get.m!='new_goods'}
+                                    <li><a href="{$index_page}?odr=hot{$_cdn_querystring}">{$lang.Hot}</a></li>
+                                    {/if}
+									<li><a href="{$index_page}?odr=new{$_cdn_querystring}">{$lang.New}</a></li>
+
+									{if $smarty.get.m!='new_goods' && $smarty.get.m!='collections'}
+                                    <li><a href="{$index_page}?odr=likes{$_cdn_querystring}">{$lang.Facebook_Likes}</a></li>
+                                    {/if}
+
+                                    {if $smarty.get.m!='new_goods' && $smarty.get.m!='collections' && $smarty.get.m != 'clearance'}
+                                    <li><a href="{$index_page}?odr=conversion{$_cdn_querystring}">{$lang.Recommended}</a></li>
+                                    {/if}
+
+                                    {if $smarty.get.m == 'clearance'}
+                                    <li><a href="{$index_page}?odr=recommendation{$_cdn_querystring}">{$lang.Recommendation}</a></li>
+                                    {/if}
+
+                                    {if $smarty.get.m!='collections'}
+									<li><a href="{$index_page}?odr=low2high&odr_value=1{$_cdn_querystring|regex_replace:'/&odr_value=[12]/':''}">{$lang.Price_low2high}</a></li>
+									<li><a href="{$index_page}?odr=high2low&odr_value=2{$_cdn_querystring|regex_replace:'/&odr_value=[12]/':''}">{$lang.Price_high2low}</a></li>
+                                    {/if}
+          
+									{if $smarty.get.m!='new_goods' && $smarty.get.m!='collections'}
+                                    <li><a href="{$index_page}?odr=reviews{$_cdn_querystring}">{$lang.Reviews}</a></li>
+                                    {/if}
+								</ul>
+							</div><!--end .operate_list-->
+
+						</div>
+					</div><!--end .cateTopBarInner-->
+				</section><!--end .cateTopBar-->
+
+				{if $goods_list}
+				<div class="catePro_ListBox">
+					<ul class="clearfix" id="js_cateListUl">
+                    {foreach from=$goods_list item=goods name=list}
+						<li>
+							<div class="proImgBox">
+								<a href="{$goods.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$goods.goods_img}" class="js_lazy" height="230"/></a>
+								<a href="javascript:void(0);" data-goodsid="{$goods.goods_id}" class="lookFast" data-url="/{$cur_lang}/m-goods_fast-a-info.htm?goods_id={$goods.goods_id}&ids={$goods_id_list}"><span class="c_tagbg"></span>{$lang.quick_shop}</a>
+								{if $goods.promote_zhekou || $is_super6==1}
+								<span class="cutOff_tag c_tagbg {if $is_super6==1} superSaturdayCutOff{/if}"><strong>{$goods.promote_zhekou}</strong>% <i>{$lang.off}</i></span>
+								{/if}
+								{if $goods.is_presale}
+								<span class="presale_tag c_tagbg">PRE SALE</span>
+								{/if}
+							</div>
+							<p class="proName">
+								<a href="{$goods.url_title}">{$goods.goods_title}</a>
+							</p>
+							<p class="proPrice">
+								{if $goods.is_24h_ship == 1}<i class="c_tagbg shipInHrsTag js_tips" data-tips="{$lang.ship_in_24_hrs}"></i><!--24小时图标-->{/if}
+								{if $goods.is_free_shipping == 1}<i class="c_tagbg freeShipTag js_tips" data-tips="{$lang.freeShip}"></i><!--免邮图标-->{/if}
+								{*<i class="c_tagbg faceBookLike js_tips" data-tips="{$lang.facebook_like} ({$goods.facebook_like_count})"></i>*}<!--facebook like-->
+
+								<i class="c_tagbg cateReviews js_tips" data-tips="{$goods.review_count|default:'0'} {if $goods.review_count gt 1}{$lang.reviews}{else}{$lang.review}{/if}"></i>
+
+								<span class="bizhong"></span>
+								<span class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span>
+								{if $is_super6==1}
+								<span class="costPrice"><span class="bizhong"></span><span id="unit_price" class="my_shop_price " orgp="{$goods.market_price}">{$goods.market_price}</span></span>
+								{/if}
+							</p>
+						</li>
+					{/foreach}	 
+					</ul>
+				</div><!--end .catePro_ListBox-->
+				
+                <div class="pages tc">
+                {$pagestr}
+				</div><!--end .pages-->
+				{if $guide_keywords}
+				<!-- 推荐词 -->
+				<div class="shopByTrends clearfix">
+					<span class="left_text fl">SHOP BY <b>TRENDS</b></span>
+					<p class="fl">
+						{foreach from=$guide_keywords item=guide_keywords_item}
+							<span><i></i><a href="{$guide_keywords_item.link}">{$guide_keywords_item.keywords}</a></span>
+						{/foreach}          
+					</p>
+				</div>	
+				{/if}
+				{*
+				<div itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate" class="reviewCount">
+			        <span itemprop="itemreviewed" class="mr5">{if $custom_keywords}{$custom_keywords}{else}Cheap {$cat_name}{/if}</span>
+					<span itemprop="rating" itemscope="" itemtype="http://data-vocabulary.org/Rating" class="c_tagbg start start_5">
+						<i class="c_tagbg" itemprop="average">5</i>
+						<b itemprop="best" class="none">5</b>
+					</span>
+
+			        <span itemprop="votes" class="ml30">{$cat_review_num} Reviews</span>
+			    </div>
+				*}
+                {else}
+				<!--如果没有搜索到商品-->
+				<div class="noGoods">
+					<div class="pageN_img">
+						<img src="{$imgcache_url}images/domeimg/pagenotfindimg.jpg" width="200" height="212" alt="">
+						{$lang.noGoods}<!--end .noGoods_tips-->
+					</div><!--end .pageN_img-->
+				</div><!--end .noGoods-->
+                
+                {if $search_congzu_goods_list}
+				<section class="mb15">
+					<h4 class="sectionBox_h">{$lang.Recommendation}</h4>
+					<div class="scrollBox">
+						<textarea  class="js_slide none">
+							<ul class="slides">
+                                {foreach from =$search_congzu_goods_list item=search_congzu_goods_info}
+								<li>
+									<a href="{$search_congzu_goods_info.url_title}" class="i_proImg"><img src="{$search_congzu_goods_info.goods_img}" height="216"/></a>
+									<p class="proName"><a href="{$search_congzu_goods_info.url_title}">{$search_congzu_goods_info.goods_title}</a></p>
+									<p class="proPrice"><span class="bizhong"></span><span class="my_shop_price fb f14" orgp="{$search_congzu_goods_info.shop_price}"></span></p>
+								</li>
+                                {/foreach}
+							</ul> 
+						</textarea>
+					</div><!--end .scrollBox-->
+				</section>
+                {/if}
+				
+                {/if}
+
+			</div><!--end .cateMainInner-->
+		</div><!--end .cateMain-->
+
+		{include file="left.htm"}
+
+	</div><!--end .mainBox-->
+	{if $goods_list_flag eq 'yes'}
+	{include file="upimg_list.htm"}
+	{/if}
+
+	<footer>
+		{include file="footerhelp.htm"}
+		{include file="footer.htm"}
+	</footer>
+	
+	<script>
+	
+	$LAB.script("{$imgcache_url}minjs/jquery.flexslider.min.js")
+		.script("{$imgcache_url}minjs/jquery.mousewheel.min.js")
+		.script("{$imgcache_url}minjs/jquery.mCustomScrollbar.min.js")
+    {literal}
+		.wait(function(){ 
+			
+			function userImgCakkBack(htmls,$warp){
+				$warp.flexslider({
+				 	namespace:"",
+				    animation: "slide",
+				    selector: ".slides > li",
+				    pauseOnAction:false,
+				    itemWidth: 140,
+				    controlNav:false,
+				    animationLoop:false
+
+				});
+			}
+			GLOBAL.lazyLoad.creatEle("textarea.js_userImg",userImgCakkBack);
+
+			$(".selectListBox").mCustomScrollbar({
+				theme:"dark"
+			});
+			
+			function scrollCallBack(htmls,$warp){
+				$warp.flexslider({
+				 	namespace:"",
+				    animation: "slide",
+				    selector: ".slides > li",
+				    pauseOnAction:false,
+				    controlNav:false,
+				    itemWidth: 236,
+				    animationLoop:false,
+				    minItems: 3,
+				    maxItems: 10
+				});
+			}
+			//元素懒加载
+			GLOBAL.lazyLoad.creatEle("textarea.js_slide",scrollCallBack);
+		})
+    {/literal}
+		.script("{$imgcache_url}minjs/category.min.js?2015070801")
+
+	</script>
+    
+	<!-- twitter -->
+	<!-- <script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	twttr.conversion.trackPid('l4tg7');
+	</script>
+	<noscript>
+	<img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=l4tg7&p_id=Twitter" />
+	<img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=l4tg7&p_id=Twitter" />
+	</noscript> -->
+	<!-- twitter -->
+
+	{include file="tongji.htm"}
+    
+
+	{if $goods_list_top3 neq ''}
+	{literal}
+	<script>
+	fbq.push(
+	  'track', 
+	  'ViewContent',
+	  {
+	    content_type: 'product',
+	    content_ids: [{/literal}{$goods_list_top3}{literal}]
+	  }
+	);
+	</script>
+	{/literal}
+	{/if}
+    {if $cat_id}
+    <script type="text/javascript">
+        window.ad_category = "{$cat_id}";   // required
+        {literal}
+        window._retag = window._retag || [];
+        window._retag.push({code: "9ce8886b29", level: 1});
+        (function () {
+            var id = "admitad-retag";
+            if (document.getElementById(id)) {return;}
+            var s=document.createElement("script");
+            s.async = true; s.id = id;
+            var r = (new Date).getDate();
+            s.src = (document.location.protocol == "https:" ? "https:" : "http:") + "//cdn.trmit.com/static/js/retag.min.js?r="+r;
+            var a = document.getElementsByTagName("script")[0]
+            a.parentNode.insertBefore(s, a);
+        })()
+        {/literal}
+    </script>
+    {/if}
+</body>
+
+</html>

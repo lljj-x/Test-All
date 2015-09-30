@@ -1,0 +1,118 @@
+    {*属性搜索*}
+    
+    {if $template_attr_info}
+			
+            {foreach from=$template_attr_info.search_templae item=template_attr key=key}
+            	{if !empty($template_attr.search_key)}
+		            {if $template_attr.style_type == 1}
+		            <section class="cateB mt20">
+				        <header class="cateB-header">
+				        	<i class="c_tagbg"></i> 
+				            <h4>{$template_attr.search_attr_name}</h4>
+				        </header>
+				        <div class="cateB-wrap selectListBox">
+				            <ul  class="cateB-list">
+		                        {foreach from=$template_attr.search_key item=att_value key=key1}
+		                            {if $template_attr.is_select >0}
+		                            {if $att_value.goods_num==$total && $total>0 && $att_value.style == 1}
+		                                <li>
+		                                <a href="{$att_value.url}" {if $att_value.style == 1}class="on"{/if}>{$att_value.keyword} ({$att_value.goods_num})</a>
+		                                </li>
+		                            {elseif $att_value.goods_num>$total && $att_value.style == 0}
+		                                <li>
+		                                <a href="{$att_value.url}">{$att_value.keyword} ({$att_value.goods_num})</a>
+		                                </li>
+		                            {/if}
+		                            {else}
+		                                {if $att_value.goods_num > 0}
+		                                <li>
+		                                <a href="{$att_value.url}" {if $att_value.style == 1}class="on"{/if}>{$att_value.keyword} ({$att_value.goods_num})</a>
+		                                </li>
+		                                {/if}
+		                            {/if}
+		                        {/foreach}
+		                    </ul>
+				        </div>
+				    </section>
+		            {/if}
+	            
+		            {if $template_attr.style_type == 2}
+                    <section class="cateB mt20">
+        		        <header class="cateB-header">
+        		        	<i class="c_tagbg"></i> 
+        		            <h4>{$template_attr.search_attr_name}</h4>
+        		        </header>
+        		        <div class="cateB-wrap  cate_color">
+        		            <ul  class="cateB-list clearfix">
+		            
+				        	{foreach from=$template_attr.search_key item=att_value key=key1}
+	                        	{if $template_attr.is_select >0}
+		                            {if $att_value.goods_num==$total && $total>0 && $att_value.style == 1}
+		                                <li {if $att_value.style == 1}class="{$att_value.attr_en|lower} on"{else}class="{$att_value.attr_en|lower}"{/if}>
+		                                <a href="{$att_value.url}" title="{$att_value.keyword}"><i class="c_tagbg"></i></a>
+		                                </li>
+		                            {elseif $att_value.goods_num>$total && $att_value.style == 0}
+		                                <li class="{$att_value.attr_en|lower}">
+		                                <a href="{$att_value.url}" title="{$att_value.keyword}"><i class="c_tagbg"></i></a>
+		                                </li>
+		                            {/if}
+	                            {else}
+	                                {if $att_value.goods_num > 0}
+	                                <li {if $att_value.style == 1}class="{$att_value.attr_en|lower} on"{else}class="{$att_value.attr_en|lower}"{/if}>
+	                                <a href="{$att_value.url}" title="{$att_value.keyword}"><i class="c_tagbg"></i></a>
+	                                </li>
+	                                {/if}
+	                            {/if}
+	                        {/foreach}
+				        	</ul>
+				        </div>
+				    </section>
+				    {/if}
+			    {/if}
+            
+            {/foreach}
+
+    {/if}
+	
+    {*价格搜索*}
+    {if $Price_Arr}
+    <section class="cateB mt20">
+        <header class="cateB-header">
+        	
+            <h4>{$lang.PRICE}</h4>
+        </header>
+        <div class="cateB-wrap">
+            <ul  class="cateB-list">
+               
+				{foreach from=$Price_Arr item=list key=key name=loop}
+				    {assign var=prevkey value=$key-1}
+				    {if $Price_Arr.$prevkey.1==''}
+				    {assign var=prevkey value=$key-2}
+				    {/if}
+				    {if $list.goods_num>0}
+				        {if $price_num > 0 && $price_num == $key}
+				            <li class="pb_select">
+				                <span class="bizhong">{if $lang_bizhong eq 'euros'}EUR{else}USD{/if}</span><span class="my_shop_price" orgp="{if $Price_Arr.$prevkey.1==''}0.01{else}{$Price_Arr.$prevkey.1}.01{/if}"></span>
+				                --
+				                <span class="bizhong">{if $lang_bizhong eq 'euros'}EUR{else}USD{/if}</span><span class="my_shop_price" orgp="{$list.1}"></span> ({$list.goods_num})
+				                <a href="{$list.url}" class="pb_select_close c_tagbg">x</a>	
+				            </li>
+				        {/if}
+
+				        {if $price_num==0}
+				        <li>
+				            <a href="{$list.url}" title="{$cat_name} {$lang_attr} {$list.1} {$lang_bizhong}" {if $price_num > 0 && $price_num == $key}class="on"{/if}>
+				                <span class="bizhong">{if $lang_bizhong eq 'euros'}EUR{else}USD{/if}</span><span class="my_shop_price" orgp="{if $Price_Arr.$prevkey.1==''}0.01{else}{$Price_Arr.$prevkey.1}.01{/if}"></span>
+				                --
+				                <span class="bizhong">{if $lang_bizhong eq 'euros'}EUR{else}USD{/if}</span><span class="my_shop_price" orgp="{$list.1}">{$list.1}</span> ({$list.goods_num})
+				            </a>
+				        </li>
+				        {/if}
+				    {/if}
+				{/foreach}
+
+            </ul>
+        </div>
+    </section>
+    
+    {/if}

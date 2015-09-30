@@ -1,0 +1,16 @@
+<div class="goto_show mb15 cb" >
+	<!-- <a href="/{$cur_lang_url}buyers-show" class="goto_show_img">
+		<img src="{$imgcache_url}images/domeimg/gotoshowe/{$cur_lang}_show.gif" width="220" height="210"/>
+	</a> -->
+	<!-- <div class="goto_show_right"> -->
+		<div class="goto_show_list" id="js_goto_show_list">
+		<textarea  class="js_userImg none">
+				<ul class="slides">
+                {foreach from=$review_img item=img name=myimg}
+					<li><a href="/{$cur_lang_url}m-review_media-a-view_image-goods_id-{$img.goods_id}-mid-{$img.mid}.htm"><img src="{$img.review_img}" width="140" height="210"/><p>{$lang.Get_to_look} &gt;</p></a></li>
+				{/foreach}	 
+				</ul>
+		</textarea>
+		</div><!--end .goto_show_list-->
+	<!-- </div> --><!--end .goto_show_right-->
+</div><!--end .goto_show-->

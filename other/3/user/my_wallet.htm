@@ -1,0 +1,275 @@
+<div class="myWallet">
+
+    <ul class="tabletitle mt20">
+        <li {if $action eq 'wallet'}class="on"{/if}><a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-wallet.htm">{$lang.my_wallet}</a></li>
+        <li {if $action eq 'wallet_list'}class="on"{/if}><a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-wallet_list.htm">{$lang.my_wallet_transaction_record}</a></li>
+        <li {if $action eq 'wallet_password' || $action eq 'retrieve_wallet_password'}class="on"{/if}><a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-wallet_password.htm">{$lang.my_wallet_account_management}</a></li>
+    </ul>
+    
+    {if $action eq 'wallet'}
+    {*第一步 My wallet*}
+    <div class="walletInfo mt20">
+    
+		  <div class="info clearfix">
+            <div class="fl pr15 mr15">
+				<p>{$lang.my_wallet_available_balance}</p>
+               <p><span class="bizhong"></span><span class="my_shop_price" orgp="{$my_wallet_info.wallet_effective_amount}">{$my_wallet_info.wallet_effective_amount}</span></p>
+            </div>
+
+            <div class="fl pl15">
+                <p>{$lang.my_wallet_balance_reserved}</p>
+				<p><span class="bizhong"></span><span class="my_shop_price" orgp="{$my_wallet_info.wallet_invalid_amount}">{$my_wallet_info.wallet_invalid_amount}</span></p>
+            </div>
+
+            <i class="walletIcon"></i>
+        </div><!-- info -->
+
+    </div>
+
+	<section class="note mt20">
+        <h4 class="fb">{$lang.my_wallet_notes}:</h4>
+        <p>1.{$lang.my_wallet_notes_1} <a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-wallet_password.htm">{$lang.my_wallet_set_up_transaction_password}</a></p>
+        <p>2.{$lang.my_wallet_notes_2} </p>
+		<p>3.{$lang.my_wallet_notes_3} </p>
+    </section>
+    {*第一步 end*}
+    {/if}
+    
+    {if $action eq 'wallet_list'}
+    {*第二步 Transaction Record*}
+    <div id="transactionTable" class="mt20">
+        <header>
+            {$lang.my_wallet_available_balance}: <span class="bizhong"></span><span class="my_shop_price" orgp="{$my_wallet_info.wallet_effective_amount}">{$my_wallet_info.wallet_effective_amount}</span>
+            {$lang.my_wallet_balance_reserved}: <span class="bizhong"></span><span class="my_shop_price" orgp="{$my_wallet_info.wallet_invalid_amount}">{$my_wallet_info.wallet_invalid_amount}</span>
+        </header>
+
+        <div class="tablelink" id="js_tableChange">{$lang.my_wallet_transaction_status}:  <a {if $type eq ''}class="on"{/if} href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-wallet_list.htm">{$lang.my_wallet_all}</a>  | <a {if $type eq 'refund'}class="on"{/if} href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-wallet_list.htm?type=refund">{$lang.my_wallet_refund}</a> | <a {if $type eq 'expense'}class="on"{/if} href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-wallet_list.htm?type=expense">{$lang.my_wallet_expense}</a></div>
+
+        <div class="tableBox">
+            <h4>{$lang.my_wallet_total_transactions}:</h4>
+
+            <div class="p15" id="jsTableList">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{$lang.my_wallet_date}</th>
+                            <th>{$lang.my_wallet_transaction_number}</th>
+                            <th>{$lang.my_wallet_status}</th>
+                            <th>{$lang.my_wallet_disbursement}</th>
+                            <th>{$lang.my_wallet_income}</th>
+                            <th>{$lang.my_wallet_available_balance}</th>
+                            <th>{$lang.my_wallet_balance_reserved}</th>
+                            <th>{$lang.my_wallet_total_detail}</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                    	{if my_wallet_list}
+                    		{foreach from=$my_wallet_list item=list name=loopname}
+	                        <tr>
+	                            <td>{$list.add_time}</td>
+	                            <td>{$list.source_transaction}</td>
+	                            <td><strong class="fb">{$list.transaction_type}</strong></td>
+	                            <td class="red"><span class="bizhong"></span><span class="my_shop_price" orgp="{if $list.expense_amount == 0}0.00{else}{$list.expense_amount}{/if}">{if $list.expense_amount == 0}0.00{else}{$list.expense_amount}{/if}<span></td>
+	                            <td class="green"><span class="bizhong"></span><span class="my_shop_price" orgp="{if $list.refund_amount == 0}0.00{else}{$list.refund_amount}{/if}">{if $list.refund_amount == 0}0.00{else}{$list.refund_amount}{/if}<span></td>
+	                            <td><span class="bizhong"></span><span class="my_shop_price" orgp="{$list.balance_amount}">{$list.balance_amount}<span></td>
+	                            <td><span class="bizhong"></span><span class="my_shop_price" orgp="{$list.balance_reserved}">{$list.balance_reserved}<span></td>
+	                            <td>{$list.note}</td>
+	                        </tr>
+	                        {/foreach}
+                        {/if}
+                    </tbody>
+                    
+                </table>
+                
+                <div class="pages tr pt10">{$pagestr}</div>
+                
+            </div>
+        </div><!-- .tableBox -->
+    </div><!-- #transactionTable -->
+    {*第二步 end*}
+    {/if}
+
+    {if $action eq 'wallet_password' || $action eq 'retrieve_wallet_password'}
+    {*第三步My Account Management*}
+    
+	{if $action eq 'wallet_password'}
+    {*设置密码和重置密码*}
+    <div class="accountManage mt20">
+        
+        <div class="ps_text mt20">
+            <h4 class="fb f14">{$lang.my_wallet_transaction_password}:</h4>
+            <p>{$lang.my_wallet_transaction_password_note} </p>
+			
+            {if $my_wallet_info.is_set_pay_password == 0}
+	            <div class="btns mt20">
+	                <a href="javascript:void(0);" class="btn allBtn" id="js_setWalletPasBtn">{$lang.my_wallet_set_up_transaction_password} &gt;</a>
+	            </div>
+            {else}
+	            <div class="btns mt20">
+	                <a href="javascript:void(0);" class="btn allBtn" id="js_resetWalletPasBtn">{$lang.my_wallet_reset_transaction_password} </a>
+	                <a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-retrieve_wallet_password.htm" class="btn allBtn redBtb">{$lang.my_wallet_retrieve_transaction_password} </a>
+	            </div>
+            {/if}
+        </div>
+    </div><!-- .accountManage -->
+
+	<section class="note mt20">
+        <h4 class="fb">{$lang.my_wallet_notes}:</h4>
+        <p>{$lang.my_wallet_password_note}</p>
+	</section>
+
+    {*设置密码弹出框*}
+    <div class="none" id="js_setWalletPopBox">
+        <div class="walletPop">
+            <h4>{$lang.my_wallet_set_up_transaction_password}</h4>
+            <div class="popForm" style="height:280px;">
+               <form action="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-wallet.htm" method="post" class="walletForm" id="js_setWalletPassForm">
+                    <p class="pb20"><i class="walletIcon"></i>{$lang.my_wallet_password_error}</p>
+
+                    <div class="form-group ">
+                        <label class="formLabel"><strong >*</strong>{$lang.my_wallet_new_password}:</label>
+                        <input type="password" class="contrl-form js_setWalletpassword" name="password" maxlength="10" />
+
+                    </div>
+                    <div class="form-group ">
+                        <label class="formLabel"><strong >*</strong>{$lang.my_wallet_confirm_new_password}:</label>
+                        <input type="password" class="contrl-form" name="password_confirm" maxlength="10"/>
+                    </div>
+                    <div class="form-group mt20">                    
+                       <button type="submit"><span class="btn allBtn">{$lang.my_wallet_confirm}</span></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div><!-- .setWalletPopBox -->
+
+    {*设置密码成功弹出框*}
+    <div class="walletPop tc none" id="js_setWalletSucPop">
+        <div class="walletSetSuc p10">
+            <strong><i class="walletIcon"></i> {$lang.my_wallet_success}</strong>
+            <p>{$lang.my_wallet_success_note}</p>
+        </div>
+    </div>
+
+
+
+    {*重置密码弹出框*}
+    <div class="none" id="js_resetWalletPopBox">
+        <div class="walletPop resetWalletPopBox">
+            <h4>{$lang.my_wallet_reset_transaction_password}</h4>
+            <div class="popForm" style="height:330px;">
+               <form action="#" method="post" class="walletForm" id="js_resetWalletPassForm">
+                    <p class="pb20"><i class="walletIcon"></i>{$lang.my_wallet_password_error} </p>
+
+                    <div class="form-group ">
+                        <label class="formLabel"><strong >*</strong>{$lang.my_wallet_current_password}:</label>
+                        <input type="password" class="contrl-form" name="curPassword" maxlength="10"/>
+                        <a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-retrieve_wallet_password.htm">{$lang.my_wallet_forgot_password} &gt;&gt; </a>
+                    </div>
+                    <div class="form-group ">
+                        <label class="formLabel"><strong >*</strong>{$lang.my_wallet_new_password}:</label>
+                        <input type="password" class="contrl-form js_setWalletpassword" name="password"  maxlength="10"/>
+                    </div>
+                    <div class="form-group ">
+                        <label class="formLabel"><strong >*</strong>{$lang.my_wallet_confirm_new_password}:</label>
+                        <input type="password" class="contrl-form" name="password_confirm" maxlength="10"/>
+                    </div>
+
+                    <div class="form-group mt20">
+                       <button type="submit"><span class="btn allBtn">{$lang.my_wallet_confirm}</span></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div><!-- .setWalletPopBox -->
+    
+    {*重置密码成功弹出框*}
+    <div class="walletPop tc none" id="js_resetWalletSucPop">
+        <div class="walletSetSuc p10">
+            <strong><i class="walletIcon"></i> {$lang.my_wallet_success}</strong>
+            <p>{$lang.my_wallet_success_note}</p>
+        </div>
+    </div>
+    {/if}
+
+	{if $action eq 'retrieve_wallet_password'}
+    {*忘记密码*}
+    <div class="walletsetPass mt20">
+        <h4 class="f14 fb">{$lang.my_wallet_find_password_note}</h4>
+        <p>{$lang.my_wallet_find_password_note_1} </p>
+
+       
+        <ul class="stepW {if $step == 'step1' && $send_email == 1 }stepW1{elseif $step == 'step2'}stepW2{elseif $step == 'step3'}stepW3{/if} mt20 clearfix" id="js_stepW">{*如果是第一步就设置class为“setpW1”，第二步为“setpW2”，第三步为“setpW3”*}
+            <li class="step1"><span></span>1.{$lang.my_wallet_find_password_navigation}</li>
+            <li class="step2"><span></span>2.{$lang.my_wallet_find_password_navigation_1} </li>
+            <li class="step3"><span></span>3.{$lang.my_wallet_find_password_navigation_2} </li>
+        </ul>
+
+        {if $step == 'step1'}
+        
+        {*step 1*}
+        <div class="sendEmail mt20">
+            <p class="fb f14">{$lang.my_wallet_find_password_email_address}: {$my_wallet_info.email}</p>
+            <div class="sendEmailBtn mt10">
+                <a href="javascript:void(0);" class="" id="js_sendEmailBtn">{$lang.my_wallet_find_password_application_email_verification}</a>
+            </div>
+			
+            <div class="sendEmailTips mt10 none" id="js_sendEmailTips">
+                <h4>{$lang.my_wallet_find_password_send_succeed}</h4>
+                <p>{$lang.my_wallet_find_password_send_succeed_1}</p>
+                <p>{$lang.my_wallet_find_password_send_succeed_2}</p>
+                <p>{$lang.my_wallet_find_password_send_succeed_3}</p>
+                <p>{$lang.my_wallet_find_password_send_succeed_4}</p>
+               <span></span><i></i>
+            </div>
+        </div><!-- .sendEmail -->
+        {/if}
+
+        {if $step == 'step2'}
+        {*step 2*}
+
+        <div class="setPassForm mt20">
+            <h4>{$lang.my_wallet_set_up_transaction_password}</h4>
+            <form action="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-retrieve_wallet_password.htm?step=step3" method="post" class="walletForm" id="js_stepsetWalletPassForm">
+                <p><i class="walletIcon"></i> {$lang.my_wallet_password_error}</p>
+
+                <div class="form-group mt20">
+                    <label class="formLabel"><strong >*</strong>{$lang.my_wallet_new_password}:</label>
+                     <input type="password" class="contrl-form js_setWalletpassword" name="password" maxlength="10"/>
+
+                </div>
+                <div class="form-group mt20">
+                    <label class="formLabel"><strong >*</strong>{$lang.my_wallet_confirm_new_password}:</label>
+                    <input type="password" class="contrl-form" name="password_confirm" maxlength="10"/>
+                </div>
+                
+                <div class="form-group mt20">
+                   <input type="hidden" name="verifycode" value="{$verifycode}">    
+                   <button type="submit"><span class="btn allBtn">{$lang.my_wallet_confirm}</span></button>
+                </div>
+            </form>
+        </div><!-- .setPassForm -->
+
+        {*step 2*}
+        {/if}
+        
+        {if $step == 'step3'}
+        <div class="walletSetSuc mt20">
+            <strong><i class="walletIcon"></i> {$lang.my_wallet_success}</strong>
+            <p>{$lang.my_wallet_success_note}</p>
+        </div>
+        {/if}
+
+    </div>
+	{*第三步 end*}
+    
+    {*忘记密码 End*}
+    {/if}
+    
+    {*第三步My Account Management End*}
+    {/if}
+</div><!-- .myWallet -->
+

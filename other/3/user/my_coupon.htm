@@ -1,0 +1,110 @@
+<div id="mycupon"> 	
+	<section class="allInfo">
+		<ul class="title">
+			<li {if $type eq 'unused'}class="on" {/if}><a href="/{$cur_lang_url}m-users-a-coupon.htm">{$lang.Unused_Coupon}</a></li>
+			<li {if $type eq 'used'}class="on"{/if} ><a href="/{$cur_lang_url}m-users-a-coupon.htm?type=used">{$lang.Used_Coupon}</a></li>
+			<li {if $type eq 'expired'}class="on"{/if}><a href="/{$cur_lang_url}m-users-a-coupon.htm?type=expired">{$lang.Expired_Coupon}</a></li>
+		</ul>
+		{if $type eq 'unused'}
+		{*page-- Unused Coupon*}
+		<div class="content mt15">
+			<div class="cnt cnt1 cnt_on">
+				<table class="userTable tc">
+					<tr class="title">
+						<th>{$lang.Coupon_Code}</th>
+						<th>{$lang.Coupon_Type}</th>
+						<th>{$lang.Saving}</th>
+						<th>{$lang.Conditions_of_Use}</th>
+						<th>{$lang.Expiry_Date}</th>
+						<!-- <th>{$lang.Source}</th> -->
+						<th>{$lang.status}</th>
+					</tr>
+					{foreach from=$pcode_data item=list}
+					<tr>
+						<td class="f14">{$list.code} </td>
+						<td>{$list.code_type}</td>
+						<td class="f14">{if $list.fangshi != 1}<span class="bizhong"></span><span orgp="{$list.youhui}" class="my_shop_price">{$list.youhui}</span>{else} <span class="colorRed">{$list.youhui}</span>{/if}</td>
+						<td>{if $list.consume}{$lang.Subtotal_items_over} <span class="bizhong"></span><span orgp="{$list.consume}" class="my_shop_price">{$list.consume}</span> {elseif $list.goods}{$lang.SKU_for}:{$list.goods}{elseif $list.cat_id}{$list.cat_name}{else}{$lang.No_limit}{/if} </td>
+						<td>{$list.exp_time}</td>
+						<!-- <td>{$list.source}</td> -->
+						<td>{if $list.cishu gt 0}{$lang.used}{else}{$lang.Unused}{/if} </td>
+					</tr>
+					{foreachelse}
+					<tr>
+						<td colspan="6"><div class="empty tc">{$lang.no_unused_coupon_yet}</div></td>
+					</tr>
+					{/foreach}
+				</table>
+				
+			</div>
+		</div><!-- .content -->		
+		{elseif $type eq 'used'}
+
+		{*page-- Used Coupon*}
+		<div class="content mt15">
+			<div class="cnt cnt1 cnt_on">
+				<table class="userTable tc">
+					<tr class="title">
+						<th>{$lang.Coupon_Code}</th>
+						<th>{$lang.Coupon_Type}</th>
+						<th>{$lang.Saving}</th>
+						<th>{$lang.date_used}</th>
+						<th>{$lang.order_reference}</th>
+					</tr>
+					{foreach from=$pcode_data item=list}
+					<tr>
+						<td class="f14">{$list.code}</td>
+						<td>{$list.code_type}</td>
+						<td class="f14">{if $list.fangshi != 1}<span class="bizhong"></span><span orgp="{$list.youhui}" class="my_shop_price">{$list.youhui}</span>{else} <span class="colorRed">{$list.youhui}</span>{/if}</td>
+						<td>{$list.exp_time}</td>
+						<td><a href='{$list.order_url}'>{$list.order_sn}</a></td>
+					</tr>
+					{foreachelse}
+					<tr>
+						<td colspan="4"><div class="empty tc">{$lang.no_used_coupon_yet}</div></td>
+					</tr>
+					{/foreach}
+				</table>
+				
+			</div>
+                    </div>
+		{elseif $type eq 'expired'}	
+		{*page-- Expired Coupon*}
+		<div class="content mt15">
+			<div class="cnt cnt1 cnt_on">
+				<table class="userTable tc">
+					<tr class="title">
+						<th>{$lang.Coupon_Code}</th>
+						<th>{$lang.Coupon_Type}</th>
+						<th>{$lang.Saving}</th>
+						<th>{$lang.Expiry_Date}</th>
+						<th>{$lang.status} </th>
+					</tr>
+					{foreach from=$pcode_data item=list}
+					<tr>
+						<td class="f14">{$list.code} </td>
+						<td>{$list.code_type}</td>
+						<td class="f14">{if $list.fangshi != 1}<span class="bizhong"></span><span orgp="{$list.youhui}" class="my_shop_price">{$list.youhui}</span>{else}<span class="colorRed">{$list.youhui}</span>{/if}</td>
+						<td>{$list.exp_time}</td>
+						<td>{if $list.cishu gt 0}{$lang.used}{else}{$lang.Unused}{/if} </td>
+					</tr>
+					{foreachelse}
+					<tr>    
+						<td colspan="5"><div class="empty tc">{$lang.no_expired_coupon_yet}</div></td>
+					</tr>
+					{/foreach}
+				</table>
+                            </div>
+                        </div>
+			{/if}
+			<!--10条信息出现滚动条-->
+			{if $pcode_data}
+			<div class="pages pt10 pb10 tc">
+				<p class="listspan">
+					{$pagestr}
+				</p>				
+			</div><!--end .pages-->
+			{/if}
+
+	</section>
+</div>

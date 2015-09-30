@@ -1,0 +1,120 @@
+<div id="myShows"> 
+	{if $cat_count}
+	<section class="nav">
+		<ul>
+			<li><a href="/m-users-a-collection_list.htm" {if empty($smarty.get.cat_id)}class="current"{/if}>{$lang.all_categories} <span class="red">{$cat_total_count}</span></a></li>
+			{foreach from=$cat_count item=item}
+			<li><a href="m-users-a-collection_list-cat_id-{$item.cat_id}.htm" {if $smarty.get.cat_id eq $item.cat_id}class="current"{/if}>{$item.cat_name} <span class="red">{$item.total}</span></a></li>
+			{/foreach}
+		</ul>
+	</section>
+	{/if}
+	
+	<section class="sort">
+		<ul class="left">
+			<li><a href="/{$cur_lang_url}m-users-a-collection_list.htm" {if empty($type)}class="current"{/if}>{$lang.All_Favorites}</li>
+			<li><a href="/{$cur_lang_url}m-users-a-collection_list-type-promotion.htm" {if $type eq 'promotion'}class="current"{/if}>{$lang.promotion}</a></li>
+			<li><a href="/{$cur_lang_url}m-users-a-collection_list-type-outofstock.htm" {if $type eq 'outofstock'}class="current"{/if}>{$lang.out_of_stock}</a></li>
+			<li><a href="/{$cur_lang_url}m-users-a-collection_list-type-addtime.htm" {if $type eq 'addtime'}class="current"{/if}>{$lang.add_time}<span class="userBg l_ico1"></span></a></li>
+		</ul>
+		<div class="right">
+			<ul>
+				<li><a href="/{$cur_lang_url}m-users-a-collection_list-view-list.htm" {if $view eq 'list' || empty($view)}class="current"{/if}><span class="userBg r_ico1"></span></a></li>
+				<li><a href="/{$cur_lang_url}m-users-a-collection_list-view-grid.htm" {if $view eq 'grid'}class="current"{/if}><span class="userBg r_ico2"></span></a></li>
+			</ul>
+		</div>
+	</section>
+	
+	
+	<section class="showsWrap cb favWrap">
+		{if $view eq 'list'}
+		<div class="allBox">
+			<input type="checkbox" name="" id="selectAll"> {$lang.select_all} <a href="javascript:void(0);" class="userBg delete js_deleteProALL"></a>
+		</div>
+		<div class="iconBox proWrap">
+			{foreach from=$goods_list item=goods key=key}
+			{php}
+	            $this->_tpl_vars['tmp_url'] = get_position_product_link($this->_tpl_vars['goods']['url_title'], POSITION_SALE_FREQUENTLY_BOUGHT_TOGETHER_WITH, $this->_tpl_vars['goods']['cat_id']);
+	        {/php}
+			<ul class="list clearfix" data-objid="{$goods.rec_id}" data-url="/m-users-a-delete_collection.htm">
+				<li><a href="{$tmp_url}"><img class="js_lazy" src="{$imgcache_url}/images/domeimg/lazyload.gif" data-original="{$goods.goods_grid}"></a></li>
+				<li class="title ellipsis"><input type="checkbox" name="" class="checkbox"><a href="{$tmp_url}">{$goods.goods_title}</a></li>
+				<li class="price">
+                {if $goods.promote_price}
+                <i class="costPrice"><span class="bizhong"></span><span class="my_shop_price" orgp="{$goods.market_price}" style="font-weight:normal">{$goods.market_price}</span></i>
+                {/if}
+                <span class="bizhong"></span><span class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span>
+                </li>
+				<li class="operation">
+					<a href="javascript:void(0);" class="userBg delete js_deletePro"></a>
+					<a href="javascript:void(0);" data-goods_id="{$key}" class="userBg icon_addCart js_icon_addCart"></a>
+				</li>
+			</ul>
+			{/foreach}
+		</div>
+		{elseif $view eq 'grid'}
+		<div class="listBox proWrap">
+			{foreach from=$goods_list item=goods key=key}
+			{php}
+	            $this->_tpl_vars['tmp_url'] = get_position_product_link($this->_tpl_vars['goods']['url_title'], POSITION_SALE_FREQUENTLY_BOUGHT_TOGETHER_WITH, $this->_tpl_vars['goods']['cat_id']);
+	        {/php}
+			<div class="list clearfix" data-objid="{$goods.rec_id}" data-url="/m-users-a-delete_collection.htm">
+				<div class="product">
+					<p><a href="{$tmp_url}"><img class="js_lazy" src="{$imgcache_url}/images/domeimg/lazyload.gif" data-original="{$goods.goods_grid}"></a></p>
+					<dl>
+						<dd class="title"><a href="{$tmp_url}">{$goods.goods_title}</a></dd>
+						<dd class="prices">
+                        {if $goods.promote_price}
+                        <i class="costPrice"><span class="bizhong"></span><span class="my_shop_price" orgp="{$goods.market_price}" style="font-weight:normal">{$goods.market_price}</span></i>
+                        {/if}
+                        <span class="bizhong"></span><span class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span>
+                        </dd>
+						<dd class="operation">
+							<a href="javascript:void(0);" class="userBg delete js_deletePro"></a>
+							<a href="javascript:void(0);" data-goods_id="{$key}" class="userBg icon_addCart js_icon_addCart"></a>
+						</dd>
+					</dl>
+				</div>
+				
+				<aside class="recomBox">
+					<div class="topBox">
+						<h4>{$lang.SIMILAR}</h4>
+						<p><a href="{$goods.cat_url}" class="more">···</a></p>
+					</div>
+					<div class="similarBox">
+					<textarea  class="js_slideSimilar none cb">
+						<ul class="slides clearfix">
+							{foreach from=$goods.same_cat_goods item=sgoods}
+							{php}
+					            $this->_tpl_vars['tmp_url'] = get_position_product_link($this->_tpl_vars['sgoods']['url_title'], POSITION_SALE_FREQUENTLY_BOUGHT_TOGETHER_WITH, $this->_tpl_vars['sgoods']['cat_id']);
+					        {/php}
+							<li>
+								<a href="{$tmp_url}" class="i_proImg"><img src="{$sgoods.goods_grid}"/></a>
+								<p class="proName"><a href="{$tmp_url}">{$sgoods.goods_title}</a></p>
+								<p class="proPrice"><span class="bizhong"></span><span class="my_shop_price fb f14" orgp="{$sgoods.shop_price}">{$sgoods.shop_price}</span></p>
+							</li>
+							{/foreach}
+						</ul> 
+					</textarea>
+					</div>
+				</aside><!--end .scrollBox-->
+			</div>
+			{/foreach}
+		</div>
+		{/if}
+		{if empty($goods_list)}
+		<div class="empty">
+			{$lang.no_favorite_yet}
+		</div>
+		{/if}
+		<div class="pages cb tc">
+			{$pagestr}
+		</div>
+		
+		<input type="hidden"class="js_empty" data-not="{$lang.no_order_yet}">
+	</section>
+	
+</div>
+
+<div class="popAddCart none" id="js_popAddCart">
+</div><!-- .popAddCart -->

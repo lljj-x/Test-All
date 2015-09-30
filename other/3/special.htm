@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" id="sammyDress">
+<head>
+    {include file="top.htm"}
+    <link href="{$imgcache_url}mincss/special_min.css?2015090801" type="text/css" rel="stylesheet">
+    {if $special.css_path}<link href="{$special.css_path}" type="text/css" rel="stylesheet">{/if}
+    {include file="foot_common_js.htm"}
+<body>
+<header id="header">
+    {include file="public_top.htm"}
+</header>
+
+<div id="mainWrap" class="clearfix">
+  <div class="path goodsPath">
+    <a href="/" title="{$shop_name} {$lang.home}">{$lang.home}</a> &raquo;{$nav_title}
+  </div>
+{if 1 == $_temp}
+    {include file='special/goods_special.htm'}
+{elseif $_temp == 2}
+    {include file='special/goods_category.htm'}
+{elseif $_temp == 3}
+    {include file='special/goods_google.htm'}
+{elseif $_temp == 4}
+	{include file='special/goods_trends.htm'}
+{elseif $_temp == 5}
+	{include file='special/goods_anniversary.htm'}
+{elseif $_temp == 6}
+    {include file='special/goods_three_column.htm'}
+{/if}
+</div>
+
+
+<footer>
+    {include file="footerhelp.htm"}
+    <div class="f_copyrit tc mb10">Copyright © 2011-2015 <span id="welcome-msg-name-foot">SammyDress.com</span>. All Rights Reserved.</div>
+
+    {literal}
+    <script type="text/javascript">
+        var query_url = window.location.href;
+
+        //aff source
+        var aff_source = _GET('utm_source', query_url);//"{$smarty.get.utm_source}";
+
+        if(aff_source)
+        {
+            $.cookie('aff_source',aff_source, {expires: 60, path: '/',domain:COOKIESDIAMON});
+        }
+        //aff source end
+    </script>
+    {/literal}
+  </footer>
+  {include file="tongji.htm"}
+</body>
+</html>

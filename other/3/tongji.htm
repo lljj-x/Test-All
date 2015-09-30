@@ -1,0 +1,558 @@
+{*统计代码*}
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 982286904;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/982286904/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+{if $cmodel eq 'index'}
+<!-- Criteo code -->
+{literal}
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+window.criteo_q = window.criteo_q || [];
+window.criteo_q.push(
+        { event: "setAccount", account: [{/literal}{$criteo.setAccount}{literal}] },
+        { event: "setHashedEmail", email: "{/literal}{$criteo.setHashedEmail}{literal}" },
+        { event: "setSiteType", type: "{/literal}{$criteo.setSiteType}{literal}" },
+        { event: "viewHome" }
+);
+</script>
+{/literal}
+<!-- Criteo code -->
+
+<!-- Google Code for home page-30 Remarketing List -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1024596584;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "2AKyCMjGuQMQ6LTI6AM";
+var google_conversion_value = 0;
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=2AKyCMjGuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- Google Code for home page-30 -->
+<!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1024596584;
+var google_conversion_label = "2AKyCMjGuQMQ6LTI6AM";
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=1.000000&amp;label=2AKyCMjGuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+{elseif $cact eq 'cart'}
+
+<!-- Criteo code -->
+{literal}
+<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+<script type="text/javascript">
+window.criteo_q = window.criteo_q || [];
+window.criteo_q.push(
+        { event: "setAccount", account: [{/literal}{$criteo.setAccount}{literal}] },
+        { event: "setHashedEmail", email: "{/literal}{$criteo.setHashedEmail}{literal}" },
+        { event: "setSiteType", type: "{/literal}{$criteo.setSiteType}{literal}" },
+		{ event: "viewBasket",currency: "{/literal}{$criteo.currency}{literal}", item: {/literal}{$criteo.viewBasket}{literal}}
+);
+</script>
+{/literal}
+<!-- Criteo code -->
+
+<!-- Google Code for shopping cart-30 Remarketing List -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1024596584;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "eoeaCLjIuQMQ6LTI6AM";
+var google_conversion_value = 0;
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=eoeaCLjIuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+{elseif $cmodel eq 'category' or $cmodel eq 'goods'}
+    <!-- Criteo code -->
+	{if $cmodel eq 'category'}
+		{literal}
+		<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+		<script type="text/javascript">
+		window.criteo_q = window.criteo_q || [];
+		window.criteo_q.push(
+				{ event: "setAccount", account: [{/literal}{$criteo.setAccount}{literal}] },
+				{ event: "setHashedEmail", email: "{/literal}{$criteo.setHashedEmail}{literal}" },
+				{ event: "setSiteType", type: "{/literal}{$criteo.setSiteType}{literal}" },
+				{ event: "viewList", item: ["{/literal}{$criteo.viewList}{literal}"] }
+		);
+		</script>
+		{/literal}
+	{/if}
+
+	{if $cmodel eq 'goods'}
+		{literal}
+		<script type="text/javascript" src="//static.criteo.net/js/ld/ld.js" async="true"></script>
+		<script type="text/javascript">
+		window.criteo_q = window.criteo_q || [];
+		window.criteo_q.push(
+				{ event: "setAccount", account: [{/literal}{$criteo.setAccount}{literal}] },
+				{ event: "setHashedEmail", email: "{/literal}{$criteo.setHashedEmail}{literal}" },
+				{ event: "setSiteType", type: "{/literal}{$criteo.setSiteType}{literal}" },
+				{ event: "viewItem", item: ["{/literal}{$criteo.viewItem}{literal}"] }
+		);
+		</script>
+		{/literal}
+	{/if}
+	<!-- Criteo code -->
+
+{if $current_cat_id eq '140' || $father_cat_id eq '140'} <!--handbag-->
+		<!-- Google Code for Handbags-30 Remarketing List -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_language = "en";
+		var google_conversion_format = "3";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "NWr3CIjduQMQ6LTI6AM";
+		var google_conversion_value = 0;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=NWr3CIjduQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+		
+  {elseif $current_cat_id eq '207' || $father_cat_id eq '207'}  <!--men shoes-->
+		<!-- Google Code for Men&#39;s Shoes-30 Remarketing List -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_language = "en";
+		var google_conversion_format = "3";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "zFZ_CNjiuQMQ6LTI6AM";
+		var google_conversion_value = 0;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=zFZ_CNjiuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+		
+  {elseif $current_cat_id eq '171' || $father_cat_id eq '171'}  <!-- women shoes-->
+		<!-- Google Code for Women&#39;s Shoes-30 Remarketing List -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_language = "en";
+		var google_conversion_format = "3";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "90MtCOjguQMQ6LTI6AM";
+		var google_conversion_value = 0;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=90MtCOjguQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+		
+  {elseif $current_cat_id eq '242' || $father_cat_id eq '242'}  <!-- Outerwear-->
+		<!-- Google Code for Outerwear30 Remarketing List -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_language = "en";
+		var google_conversion_format = "3";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "_ncWCPjtuQMQ6LTI6AM";
+		var google_conversion_value = 0;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=_ncWCPjtuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript> 
+		
+  {elseif $current_cat_id eq '94' || $father_cat_id eq '94'}  <!-- men Jackets & Outerwear14-->
+		<!-- Google Code for men Jackets &amp; Outerwear-30 Remarketing List -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_language = "en";
+		var google_conversion_format = "3";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "sYYkCJjbuQMQ6LTI6AM";
+		var google_conversion_value = 0;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=sYYkCJjbuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+  
+  {elseif $current_cat_id eq '243' || $father_cat_id eq '243'}  <!-- Bottoms-->
+		<!-- Google Code for women bottom-30 Remarketing List -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_language = "en";
+		var google_conversion_format = "3";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "JGsACMjVuQMQ6LTI6AM";
+		var google_conversion_value = 0;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=JGsACMjVuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+  
+  
+  {elseif $current_cat_id eq '241' || $father_cat_id eq '241'}  <!-- women top-->
+		<!-- Google Code for women tops-30 Remarketing List -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_language = "en";
+		var google_conversion_format = "3";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "rXdqCOjRuQMQ6LTI6AM";
+		var google_conversion_value = 0;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=rXdqCOjRuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+  
+  {elseif $current_cat_id eq '2' || $father_cat_id eq '2'}  <!-- Dresses-->
+		<!-- Google Code for dress -30 Remarketing List -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_language = "en";
+		var google_conversion_format = "3";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "7Zf-CPjPuQMQ6LTI6AM";
+		var google_conversion_value = 0;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1024596584/?value=0&amp;label=7Zf-CPjPuQMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+	
+	{elseif $current_cat_id eq '5' || $father_cat_id eq '5'}  <!-- Sweaters & Cardigans -->
+		<!-- Google Code for women sweater30 -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_label = "rD1XCOD_9QMQ6LTI6AM";
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;label=rD1XCOD_9QMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+		
+	{elseif $current_cat_id eq '90' || $father_cat_id eq '90'}  <!-- Men's Shirts  -->
+		<!-- Google Code for men-shirt30 -->
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 1024596584;
+		var google_conversion_label = "qn8PCOj-9QMQ6LTI6AM";
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+		</script>
+		<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+		</script>
+		<noscript>
+		<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;label=qn8PCOj-9QMQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+		</div>
+		</noscript>
+    {elseif $current_cat_id eq '93' || $father_cat_id eq '93'}  <!-- Sweaters-Cardigans  -->
+        <!-- Google Code for 30 men sweater -->
+        <!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
+        <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1024596584;
+        var google_conversion_label = "XeFnCIDbqAQQ6LTI6AM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+        </script>
+        <noscript>
+        <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;label=XeFnCIDbqAQQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+        </div>
+        </noscript>
+    {elseif $current_cat_id eq '161' || $father_cat_id eq '161'}  <!-- necklace  -->
+        <!-- Google Code for 30 necklace -->
+        <!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
+        <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1024596584;
+        var google_conversion_label = "KA-oCPjbqAQQ6LTI6AM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+        </script>
+        <noscript>
+        <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;label=KA-oCPjbqAQQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+        </div>
+        </noscript>
+    {elseif $current_cat_id eq '163' || $father_cat_id eq '163'}  <!-- earring  -->
+        <!-- Google Code for 30 earrring -->
+        <!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
+        <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1024596584;
+        var google_conversion_label = "NyU2CPDcqAQQ6LTI6AM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+        </script>
+        <noscript>
+        <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;label=NyU2CPDcqAQQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+        </div>
+        </noscript>
+    {elseif $current_cat_id eq '162' || $father_cat_id eq '162'}  <!-- bracelet  -->
+        <!-- Google Code for 30 bracelet -->
+        <!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
+        <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1024596584;
+        var google_conversion_label = "U24mCOjdqAQQ6LTI6AM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+        </script>
+        <noscript>
+        <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;label=U24mCOjdqAQQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+        </div>
+        </noscript>
+  {elseif $current_cat_id eq '158' || $father_cat_id eq '158'}  <!-- men long sleeve  -->
+        <!-- Google Code for men long sleeve 30 -->
+        <!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
+        <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1024596584;
+        var google_conversion_label = "mUMsCOCRuwQQ6LTI6AM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+        </script>
+        <noscript>
+        <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;label=mUMsCOCRuwQQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+        </div>
+        </noscript>
+  {elseif $current_cat_id eq '277' || $father_cat_id eq '277'}  <!-- men jean  -->
+        <!-- Google Code for men jean 30 -->
+        <!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
+        <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1024596584;
+        var google_conversion_label = "PXcJCNiSuwQQ6LTI6AM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+        </script>
+        <noscript>
+        <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;label=PXcJCNiSuwQQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+        </div>
+        </noscript>
+  {elseif $current_cat_id eq '91' || $father_cat_id eq '91'}  <!-- men t-shirt  -->
+        <!-- Google Code for men t-shirt 30 -->
+        <!-- Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. For instructions on adding this tag and more information on the above requirements, read the setup guide: google.com/ads/remarketingsetup -->
+        <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1024596584;
+        var google_conversion_label = "TNiGCNCTuwQQ6LTI6AM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+        </script>
+        <noscript>
+        <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;label=TNiGCNCTuwQQ6LTI6AM&amp;guid=ON&amp;script=0"/>
+        </div>
+        </noscript>
+
+  {/if}
+  
+
+
+{/if}
+
+{if $google_tag_params.legal eq '1'}
+{literal}
+<script type="text/javascript">
+var google_tag_params = {
+{/literal}
+	ecomm_prodid: {$google_tag_params.prodid},
+	ecomm_pagetype: {$google_tag_params.pagetype},
+	ecomm_totalvalue: {$google_tag_params.totalvalue},
+	ecomm_currency: {$google_tag_params.currency},
+	ecomm_pcat: {$google_tag_params.pcat}
+{literal}
+};
+</script>
+{/literal}
+{/if}
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1024596584;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<div style="height:0;overflow:hidden;">
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+</div>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1024596584/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+
+
+{*GA 流量新代码*}
+{php}
+if($_GET['a'] != 'done' && !preg_match("/turn\d/",$_GET['a']) && empty($_GET['use_one_click'])){
+{/php}
+{literal}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-23493272-2', 'auto');
+  ga('require', 'ec');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+{/literal}
+{php}}{/php}
+
+<!-- BEGIN LivePerson Monitor. -->
+{*live chat代码*}
+
+{literal}
+<!-- BEGIN LivePerson Monitor. -->
+<script type="text/javascript"> window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){window.lpTag={site:'26431572'||'',section:lpTag.section||'',autoStart:lpTag.autoStart===false?false:true,ovr:lpTag.ovr||{},_v:'1.5.1',_tagCount:1,protocol:location.protocol,events:{bind:function(app,ev,fn){lpTag.defer(function(){lpTag.events.bind(app,ev,fn);},0);},trigger:function(app,ev,json){lpTag.defer(function(){lpTag.events.trigger(app,ev,json);},1);}},defer:function(fn,fnType){if(fnType==0){this._defB=this._defB||[];this._defB.push(fn);}else if(fnType==1){this._defT=this._defT||[];this._defT.push(fn);}else{this._defL=this._defL||[];this._defL.push(fn);}},load:function(src,chr,id){var t=this;setTimeout(function(){t._load(src,chr,id);},0);},_load:function(src,chr,id){var url=src;if(!src){url=this.protocol+'//'+((this.ovr&&this.ovr.domain)?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site;}var s=document.createElement('script');s.setAttribute('charset',chr?chr:'UTF-8');if(id){s.setAttribute('id',id);}s.setAttribute('src',url);document.getElementsByTagName('head').item(0).appendChild(s);},init:function(){this._timing=this._timing||{};this._timing.start=(new Date()).getTime();var that=this;if(window.attachEvent){window.attachEvent('onload',function(){that._domReady('domReady');});}else{window.addEventListener('DOMContentLoaded',function(){that._domReady('contReady');},false);window.addEventListener('load',function(){that._domReady('domReady');},false);}if(typeof(window._lptStop)=='undefined'){this.load();}},start:function(){this.autoStart=true;},_domReady:function(n){if(!this.isDom){this.isDom=true;this.events.trigger('LPT','DOM_READY',{t:n});}this._timing[n]=(new Date()).getTime();},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],ev:lpTag.ev||[]};lpTag.init();}else{window.lpTag._tagCount+=1;} </script>
+<!-- END LivePerson Monitor. -->
+
+<!-- BEGIN Static button from customer website  header part -->
+<div id="LP_DIV_1433818219862" class="liveChatBtnHidden" style="display:none;"></div>
+<!-- END Static button from customer website  header part -->
+{/literal}
+
+<!-- END LivePerson Monitor. -->
+{if $cur_lang eq 'en' or $cur_lang eq 'fr'}
+<!-- Start Ve Interactive Code -->
+<script src="//configusa.veinteractive.com/tags/4B9ACCA9/87BA/40DD/8196/AE1DC71EFE31/tag.js" type="text/javascript" async></script>
+<!-- End Ve Interactive Code -->
+{/if}
+
+{literal}
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+// Insert Your Facebook Pixel ID below. 
+fbq('init', '292648400913765');
+fbq('init', '472345859566150');
+fbq('track', 'PageView');
+</script>
+{/literal}
+<!--test code-->

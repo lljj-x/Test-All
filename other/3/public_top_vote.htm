@@ -1,0 +1,219 @@
+{literal}
+<!--[if lte IE 8]>
+<script>
+	function setIeLowVer(){
+		document.getElementsByTagName("body")[0].className = document.documentElement.clientWidth >= 1300 ? "w1200" : "w980";
+	}
+	setIeLowVer();
+</script>
+<![endif]-->
+{/literal}
+<div id="topPop" class="clearfix none">
+	<div class="topPopMain">
+		<div class="topPopI">
+			<h5>SammyDress</h5>
+			<p class="js_iosShow">Download to get 8% off today</p>
+			<p class="startW js_iosShow"><span class="start"></span><strong>(18)</strong></p>
+			<p class="topPoPtips js_iosShow">FREE-On the App Store</p>
+
+			<p class="js_androidShow none">8% OFF sitewide today</p>
+			<p class="topPoPtips pt10 none js_androidShow">FREE-On Google Play Store</p>
+		</div>
+	</div>
+	<div class="topP_logo">
+		<div class="topP_logoWrap">
+			<a href="https://itunes.apple.com/us/app/sammydress/id592321859?ls=1&mt=8" class='appLogo js_iosShow'>sammydress</a>
+			<a href="https://play.google.com/store/apps/details?id=com.globalegrow.app.sammydress" class='appLogo none js_androidShow'>sammydress</a>
+		</div>
+		<span class="close" id="js_Topclose"><i class='line1'></i><i  class='line2'></i></span>
+	</div>
+
+	<div class="topP_Btn">
+		<a href="https://itunes.apple.com/us/app/sammydress/id592321859?ls=1&mt=8" class="js_iosShow">install</a>
+		<a href="https://play.google.com/store/apps/details?id=com.globalegrow.app.sammydress" class="none js_androidShow">install</a>
+	</div>
+</div><!--end .topPop-->
+    {literal}
+   <script type="text/javascript">
+        (function(){
+
+            var clickCloseBtn = function(){
+                document.getElementById("js_Topclose").onclick = function(){
+                    document.getElementById("topPop").style.display = "none";
+                   localStorage.setItem('topPop',1);
+                }
+            };
+            var fBrowserRedirect = function(){
+                var sUserAgent  = navigator.userAgent.toLocaleLowerCase();
+                var bIsIpad  =  sUserAgent.match(/ipad/i) == "ipad";
+                var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+                var andriodOs = sUserAgent.match(/android/i) == "android";
+
+                if(bIsIphoneOs ){ $(".js_androidShow").hide();$(".js_iosShow").show();
+
+                    if(localStorage.getItem('topPop') != 1){
+                        document.getElementById("topPop").style.display = "block";
+                        clickCloseBtn();
+                    }
+                }else if(andriodOs){
+                	$(".js_androidShow").show();$(".js_iosShow").hide();
+                	if(localStorage.getItem('topPop') != 1){
+                        document.getElementById("topPop").style.display = "block";
+                        clickCloseBtn();
+                    }
+                }
+            }
+            fBrowserRedirect();
+        })()
+   </script>
+   {/literal}
+
+
+<div id="top_nav">
+	<div class="top_nav_inner">
+
+		<ul class="fl clearfix top_nav_left">
+			<li class="{if $cur_lang eq 'en' or $cur_lang eq''}on{else}{/if}"><a href="{$DOMAIN}{$request_uri}">English</a></li>
+			<li class="{if $cur_lang eq 'fr'}on{else}{/if}"><a href="{$DOMAIN}/fr/">Français</a></li>
+			<li class="{if $cur_lang eq 'es'}on{else}{/if}"><a href="{$DOMAIN}/es/">Español</a></li>
+			<li class="{if $cur_lang eq 'ru'}on{else}{/if}"><a href="{$DOMAIN}/ru/">Русский</a></li>
+			<li class="{if $cur_lang eq 'pt'}on{else}{/if}"><a href="{$DOMAIN}/pt/">Português</a></li>
+            <!-- <li class="{if $cur_lang eq 'it'}on{else}{/if}"><a href="{$DOMAIN}/it/">Italiano</a></li>
+            <li class="{if $cur_lang eq 'de'}on{else}{/if}"><a href="{$DOMAIN}/de/">Deutsch</a></li> -->
+		</ul>
+		<div class="fr top_nav_right">
+			<!-- 手机二维码 -->
+			<dl class="top_operate top_moblie">
+				<dt><a href="/sammydress-app.html" target="_blank" rel="nofollow">{$lang.mobile}</a><i class="triangle bottom_tri"></i></dt>
+				<dd>
+					<img src="{$imgcache_url}images/liantu.png?2014060501" alt="">
+					<a href="javascript:void(0);" target="_blank">{$lang.mobile_site}</a>
+					<i class="arrow"></i>
+				</dd>
+			</dl>
+			<dl class="top_operate top_account">
+				<dt><a href="{$DOMAIN_USER}/{$cur_lang_url}m-users.htm" rel="nofollow">{$lang.my_account}</a><i class="triangle bottom_tri"></i></dt>
+				<dd>
+					<ul>
+	                	<li><a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-points_record.htm" rel="nofollow">{$lang.my_s_points}</a></li>
+	                    <li><a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-order_list.htm" rel="nofollow">{$lang.my_order}</a></li>
+	                    <li><a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-collection_list.htm" rel="nofollow">{$lang.my_favorites}</a></li>
+	                    <li><a href="{$DOMAIN_USER}/{$cur_lang_url}m-users-a-profile.htm" rel="nofollow">{$lang.personal_data}</a></li>
+	                </ul>
+	                <i class="triangle bord_tri"></i><i class="triangle bg_tri"></i>
+				</dd>
+			</dl>
+			<dl class="top_operate top_currency">
+				<dt><span class="js_showBZ"><label>$</label>USD</span><i class="triangle bottom_tri"></i></dt>
+				<dd class="js_bzList">
+					<ul>
+						<li data-bizhong="USD" data-icon="$"><label>$</label>USD</li>
+						<li data-bizhong="EUR" data-icon="€"><label>€</label>EUR</li>
+						<li data-bizhong="GBP" data-icon="£"><label>£</label>GBP</li>
+						<li data-bizhong="AUD" data-icon="AU $"><label>AU$</label>AUD</li>
+						<li data-bizhong="CAD" data-icon="C $"><label>C$</label>CAD</li>
+						<li data-bizhong="CHF" data-icon="CHF"><label>₣</label>CHF</li>
+						<li data-bizhong="HKD" data-icon="HK$"><label>HK$</label>HKD</li>
+						<li data-bizhong="CNY" data-icon="¥"><label>¥</label>CNY</li>
+						<li data-bizhong="RUB" data-icon="руб."><label>руб.</label>RUB</li>
+		                <li data-bizhong="NZD" data-icon="NZ$"><label>NZ$</label>NZD</li>
+		                <li data-bizhong="JPY" data-icon="円"><label>円</label>JPY</li>
+		                <li data-bizhong="BRL" data-icon="R$"><label>R$</label>BRL</li>
+		                <li data-bizhong="CLP" data-icon="CLP $"><label>$</label>CLP</li>
+		                <li data-bizhong="NOK" data-icon="NOK"><label>kr.</label>NOK</li>
+		                <li data-bizhong="DKK" data-icon="kr."><label>kr.</label>DKK</li>
+		                <li data-bizhong="SEK" data-icon="kr"><label>Kr.</label>SEK</li>
+		                <!-- <li data-bizhong="KRW"><label>₩</label>KRW</li> -->
+		                <li data-bizhong="ILS" data-icon="₪"><label>₪</label>ILS</li>
+					</ul>
+					<i class="triangle bord_tri"></i><i class="triangle bg_tri"></i>
+				</dd>
+			</dl>
+			<dl class="top_operate top_liveChat">
+				<dt>{$lang.live_chat.0}<i class="triangle bottom_tri"></i></dt>
+				<dd class="top_liveChat_Box">
+					<p class="pb10">
+						<strong>{$lang.live_chat.1}</strong>
+					    {$lang.live_chat.2}
+						<a href="javascript:void(0);" rel="nofollow" onclick="lpButtonCTTUrl='http://server.iad.liveperson.net/hc/26431572/?cmd=file&file=visitorWantsToChat&site=26431572&imageUrl='+location.protocol+'//server.iad.liveperson.net/hcp/Gallery/ChatButton-Gallery/English/General/1a&referrer='+escape(document.location);lpButtonCTTUrl = (typeof(lpAppendVisitorCookies) != 'undefined' ?lpAppendVisitorCookies(lpButtonCTTUrl) : lpButtonCTTUrl);window.open(lpButtonCTTUrl,'chat26431572','width=475,height=400,resizable=yes');return false; " class="unl">{$lang.live_chat.3}</a>
+					</p>
+					<p>
+						<strong>{$lang.live_chat.4}</strong>
+					    {$lang.live_chat.5}
+						<a rel="nofollow" target="_blank" href="http://support.sammydress.com/?lang={$cur_lang}"  class="unl">{$lang.live_chat.6}</a>
+					</p>
+					<i class="triangle bord_tri"></i><i class="triangle bg_tri"></i>
+				</dd>
+			</dl>
+		</div><!--end .top_nav_right-->
+
+	</div><!--end .top_nav_inner--> 
+</div><!--end #top_nav-->
+
+<div id="top_main">
+	<!--<div id="signOffTips">
+		<a href="{$HTTPS_LOGIN_DOMAIN}/{$cur_lang_url}m-users-a-sign.htm?type=2">{$lang.new_sign_up}</a>
+	</div><!-->
+        
+	<div class="top_main_inner pr">
+		<div class="top_header clearfix">
+			<div class="topSeachForm">
+				<form class="js_topSeachForm" name="searchFrom" method="post">
+					<div class="top_seachBox">
+						<div class="searchInput fl">
+							<input type="text" name="k1" class="searchArea js_k2" placeholder="{if $kk == ''}{$lang.products_keyword}{/if}" maxlength="150" value="{$kk}">
+						</div>
+						<button type="submit" class="fl js_topSearch seachBtn"><span class="t_hidden">{$lang.search}</span></button>
+						<input type="hidden" name="category" value="0" class="category"/>
+					</div><!--end .top_seachBox-->
+				</form>
+			</div>
+
+			<div class="logo"><a href="/{$cur_lang_url}" titel="SammyDress logo"><img src="{$imgcache_url}images/domeimg/logo.gif?2014051201" width="248" height="40"/></a></div>
+
+			<div class="top_main_right">
+
+
+				<div class="loginBox none" id="js_isNotLogin">
+					<a href="{$HTTPS_LOGIN_DOMAIN}/{$cur_lang_url}m-users-a-sign.htm" rel="nofollow">{$lang.login}</a>
+					<!-- <div class="top_loginBox">
+						<form id="js_topSign">
+							<h4 class="tc pb5">Sign in</h4>
+							<p>
+								<label for="txt-topEmail">Email Address</label>
+								<input type="text" name="email" id="txt-topEmail" class="textInput" value="" autocomplete="off" />
+							</p>
+							<p>
+								<label for="txt-topPwd">Password</label>
+								<input type="password" name="password" id="txt-topPwd" class="textInput">
+							</p>
+							<button type="submit" id="js_topSignBtn">sign in</button>
+							<div class="top_loginOther pt5">Login from other: &nbsp;<a href="#" rel="nofollow" class="top_faceBook">facebook</a></div>
+						</form>
+					</div> --><!--end .top_loginBox-->
+				</div><!--end .loginBox-->
+
+				<div class="isLoginBox" id="js_isLoginInfo"></div><!--end .isLoginBox-->
+
+				<div class="top_cartWarp" id="js_topBagWarp">
+					<a href="{$DOMAIN_CART}/{$cur_lang_url}m-flow-a-cart.htm" rel="nofollow" class="cartItems">{$lang.MY_BAG}<span class="fw_n">(<span id="js_cart_items">0</span>)</span></a>
+					<div class="topBagText none">
+						{$lang.top_bag_desc}
+					</div>
+				</div>
+
+
+			</div><!--end .top_main_right-->
+		</div><!--end .top_header-->
+
+        {if $is_flow!=1}
+		<nav id="nav">
+			<ul class="clearfix">
+				<li><a class="nav_t" href="/{$cur_lang_url}new-products.html">{$lang.what_is_new}</a></li>
+				{$left_catArr}
+			</ul>
+		</nav>
+        {/if}
+
+	</div><!--end .top_main_inner-->
+</div><!--end #top_main-->

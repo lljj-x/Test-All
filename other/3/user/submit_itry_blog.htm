@@ -1,0 +1,92 @@
+{if $action eq 'submit_itry_blog'}
+	{if $flag==0 || $flag==2}
+		<div class="u_blogger">
+			<h2 class="u_model"><span></span>{$lang.iTry_Blogger_Program}</h2>
+
+			<div class="blog_header">
+				<div class="pplicy">Read Policy</div>
+				<div class="icon">Get Promotion Icon </div>
+				<div class="form step">Complete our Form  <i class="triangle tri_bord"></i><i class="triangle tri_f"></i></div>
+				<div class="first_acion"></div>
+				<div class="second_acion"></div>
+			</div>
+
+			<h4>Please provide the URL of your blog which should feature our promotion icons.</h4>
+			
+			<div class="aboutYourBlog">
+				<h3>ABOUT YOUR BLOG</h3>
+				
+				<form action="/{$cur_lang_url}m-users-a-save_itry_blog.htm" method="post" id="myform">
+					<ul class="itry_Blog_form clearfix">
+						<li>
+							<p class="fl i_table_l"><strong class="red fb">*</strong>Your Blog's URL:</p>
+							<div class="fl i_table_r i_table_r_URL">
+								http://
+								<input type="text" size="50" value="{$blog_info.blog_url}" id="blog_url" class="inputText i_table_w350" name="blog_url">
+								<p class="color9">(eg. http://www.yourDomain.com)</p>
+								<p><span class="red fb">Attention:</span> If your blog URL does not adhere to our policy and/or you did not add our icon, we will not be able to approve your application.</p>
+							</div>
+						</li>
+						<li>
+							<p class="fl i_table_l">Your Blog's Traffic Information:	</p>
+							<div class="fl i_table_r">
+								<input type="text" class="inputText i_table_w350" value="{$blog_info.traffic}" size="50" id="traffic" name="traffic">
+								<p>(Traffic information must include (a) page views per day/week and (b) number of unique visitors per day/week. Please make sure you include both sets of information.</p>
+							</div>
+						</li>
+						<li>
+							<p class="fl i_table_l">Additional URLs:</p>
+							<div class="fl i_table_r">
+								<textarea style="height:100px;" class="inputText i_table_w350" rows="5" cols="60" id="additional_url" name="additional_url">{$blog_info.additional_url}</textarea>
+								<p>(For example: Pinterest, Wanelo, Chictopia, Youtube, Facebook and Lookbook)</p>
+								<p>Please make sure the URLs you typed in were in different lines. ( by press "Enter" button)</p>
+							</div>
+						</li>
+						<li>
+							<p class="fl i_table_l">Short Intro of yourself and your readers:</p>
+							<div class="fl i_table_r">
+								<textarea style="height:100px;" class="inputText i_table_w350" rows="5" cols="60" id="intro" name="intro">{$blog_info.intro}</textarea>
+							</div>
+						</li>
+						<li class="btn">
+							<p class="fl i_table_l">&nbsp;</p>
+							<div class="fl i_table_r">
+								<input type="hidden" value="{$email}" id="email" name="email">
+								<button title="submit" class="userRedBtn itrySub" type="submit">SUBMIT</button>
+							</div>
+						</li>
+					</ul>
+				</form>
+				
+				<div class="itryFooter clearfix">
+					<ul class="box">
+						<li class="li1"><span class="userBg"></span></li>
+						<li class="li2"><p class="pt20"><a href="mailto:market@sammydress.com">market@sammydress.com</a></p></li>
+						<li class="li3"><div style="width:325px" class="pt10">
+							<p>To review our Blogger Program Policy, please click here or email us at <a href="mailto:market@sammydress.com">market@sammydress.com</a></p>
+						</div>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+		{if $submit_success=="ok"}
+		    {literal}
+		    <script>
+		        $(document).ready(function(){
+		            function slideHd(){window.location.href='/m-users-a-submit_itry_blog.htm';}
+		            ymPrompt.alert({message:jsLg.affiliates.submit_Success,width:350,height:150,title:"System Message",handler:slideHd,btn:[["OK"]]});
+		        })
+		    </script>
+		    {/literal}
+		{/if}
+	{else}
+	<div class="ur_box p10">
+		<p class="pt20 pb20  tc">
+		Congratulation ! Your application has been approved ! You have Got our iTry gift card valued ${if $blog_info.money==-1}{$blog_info.custom_money}{else}{$blog_info.money}{/if} !<br> 
+		Click <a href="http://www.sammydress.com/gift-card.html" class="red">how to use gift card</a> to realize it . Make an order valued ${if $blog_info.money==-1}{$blog_info.custom_money}{else}{$blog_info.money}{/if} and we will pay it for you.
+		</p>
+	</div>
+	{/if}
+{/if}

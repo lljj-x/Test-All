@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>coupon</title>
+	<style>
+		html, body, p {margin:0; padding:0;}
+		html {overflow: hidden;}
+		.wrap {padding: 60px 45px 0 45px; width: 580px;}
+		.wrap-inner {font: 14px/1.5 normal normal Arial,Helvetica,sans-serif; color: #000;}
+		.wrap-inner p {text-align: center;}
+		.wrap-inner .title {font-family: "Times New Roman",serif; font-weight: bold; font-style: italic; font-size: 40px; line-height: 1;}
+		.wrap-inner .sub-title {font-family: "Century Gothic",Arial,sans-serif; font-size: 30px; line-height: 1; margin: 20px 0 30px 0;}
+		.wrap-inner strong {font-weight: bold; color: #de190a;}
+		.wrap-inner .coupon-wrap {margin: 30px auto 15px auto;  width: 424px; height: 74px; overflow: hidden; padding: 10px 12px; background: url(http://css.sammydress.com/imagecache/S/images/styleimg/couponbg.png) no-repeat;}
+		.wrap-inner .coupon {height: 73px; width: 425px; line-height: 76px; font-weight: bold; font-size: 20px; color: #fff;}
+		.wrap-inner .tip-wrap {display: none; height: 65px; overflow: hidden;}
+		.wrap-inner .tip-wrap .tip {margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid #d9d9d9; font-family: "Century Gothic",Arial,sans-serif; color: #666;}
+		.wrap-inner .action {margin-bottom: 20px; font-family: "Century Gothic",Arial,sans-serif; font-size: 20px;}
+		.social-wrap {text-align: center;}
+		.social-wrap>span{vertical-align: bottom;}
+		.social-wrap .IGF .ig-count{position: absolute;top: 0;left: 0;min-width:49px;height: 34px;line-height: 1.8;margin: 0;}
+		.social-wrap .IGF .ig-background{margin-top: 41px;}
+		.social-wrap .ig-count i, .social-wrap .ig-count u { border:4px transparent solid; left: 0; margin: 0 0 -4px 5px;border-top-color: #aaa; border-bottom: 0; bottom: 0; top: auto; }
+		.social-wrap .ig-count u { margin-bottom: -3px; border-top-color: #fff; padding: 0px !important; }
+		.social-wrap .ig-count a{font-size: 13px !important;}
+	</style>
+	<script src="http://css.sammydress.com/imagecache/S/minjs/jquery-1.8.0.min.js"></script>
+</head>
+<body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=1406009852948446";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<div class="wrap">
+		<div class="wrap-inner">
+			<p class="title">Join our Social Media community!</p>
+			<p class="sub-title">SAVE 8% OFF YOUR ORDER</p>
+			<p>JUST CLICK THE <strong>LIKE</strong> OR <strong>FOLLOW</strong> BUTTON BELOW</p>
+			<p>GET 8% OFF COUPON CODE AND SAVE IN STYLE</p>
+			<div class="coupon-wrap">
+				<div class="coupon" id="coupon">
+					<p>UNCOVER YOUR COUPON CODE</p>
+					<p>SAMMYDRESSLIKE</p>
+				</div>
+			</div>			
+			<div class="tip-wrap" id="tipWrap"><p class="tip" id="tip">Enter this prom code at checkout page.</p></div>
+			<p class="action">Follow Us to Reveal Your Coupon Code</p>
+		</div>
+		<div class="social-wrap">
+			<span class="fb-like" data-href="https://www.facebook.com/sammydress" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></span>
+			<span class="ig-follow" data-id="71f68cec85" data-handle="sammydressfashion" data-count="true" data-size="small" data-username="false"></span>
+		</div>
+	</div>
+	<script>(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src="//x.instagramfollowbutton.com/follow.js";s.parentNode.insertBefore(g,s);}(document,"script"));</script>
+	<script type="text/javascript">
+		var COUPON_STATUS = {yes: 'yes', no: 'no'};
+		var COOKIE_NAME = 'showFbLikeCoupon';
+		var EXPIREDAYS = 7;
+		var DURATION = 500; // 动画事件
+
+		window.fbAsyncInit = function() {
+	        // like事件，之前已经like不会触发
+	        FB.Event.subscribe('edge.create', function() {
+	        	showCoupon();	        	
+	        });
+	        // “取消like”事件
+			FB.Event.subscribe('edge.remove', function() {
+				hideCoupon();				
+			});	
+		};
+		
+		function showCoupon(check) {
+			var couponEl, tipEl;
+
+			if (true === check && !checkCoupon()) {
+				return;
+			}
+
+			$('#coupon').children().first().fadeOut(DURATION);
+			$('#tipWrap').slideDown(DURATION);
+
+			setCookie(COOKIE_NAME, COUPON_STATUS.yes, 7);
+
+			window.parent.GLOBAL.promoCodePop.setHeight(590, DURATION);
+		}
+
+		function hideCoupon() {
+			$('#coupon').children().first().fadeIn(DURATION);
+			$('#tipWrap').slideUp(DURATION);
+
+			setCookie(COOKIE_NAME, COUPON_STATUS.no, 7);
+
+			window.parent.GLOBAL.promoCodePop.setHeight(514, DURATION);
+		}
+
+		// 检查缓存
+		function checkCoupon() {
+			return COUPON_STATUS.yes === getCookie(COOKIE_NAME);
+		}
+
+		function getCookie(c_name) {
+			if (document.cookie.length > 0) {
+			    var c_start = document.cookie.indexOf(c_name + "=");
+
+			    if (c_start != -1) {
+			        c_start = c_start + c_name.length + 1;
+			        var c_end = document.cookie.indexOf(";", c_start);
+
+			        if (c_end == -1) c_end = document.cookie.length;
+
+			        return unescape(document.cookie.substring(c_start, c_end))
+			    }
+			}
+			return "";
+		}
+
+		function setCookie(c_name, value, expiredays) {
+			var exdate = new Date();
+		    exdate.setDate(exdate.getDate() + expiredays);
+		    document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
+		}
+
+		// 页面加载完检查是否显示coupon
+		$(function() {
+			showCoupon(true);
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<div id="myShows"> 
+
+	{if $cat_count}
+	<section class="nav">
+		<ul>
+			<li><a href="/m-users-a-notify_in_stock_list.htm" {if empty($smarty.get.cat_id)}class="current"{/if}>{$lang.all_categories} <span class="red">{$cat_total_count}</span></a></li>
+			{foreach from=$cat_count item=item}
+			<li><a href="m-users-a-notify_in_stock_list-cat_id-{$item.cat_id}.htm" {if $smarty.get.cat_id eq $item.cat_id}class="current"{/if}>{$item.cat_name} <span class="red">{$item.total}</span></a></li>
+			{/foreach}
+		</ul>
+	</section>
+	{/if}
+
+	<section class="showsWrap cb favWrap">
+		{if count($goods_list) > 0}
+		<div class="allBox">
+			<input type="checkbox" name="" id="selectAll"> {$lang.select_all} <a href="javascript:void(0);" class="userBg delete js_deleteProALL"></a>
+		</div>
+		<div class="iconBox proWrap">
+			{foreach from=$goods_list item=goods}
+			{php}
+				$this->_tpl_vars['tmp_url'] = get_position_product_link($this->_tpl_vars['goods']['url_title'], 10, $this->_tpl_vars['goods']['cat_id']);
+			{/php}
+			<ul class="list clearfix" data-objid="{$goods.rec_id}" data-url="/m-users-a-delete_notify_in_stock.htm">
+				<li><a href="{$tmp_url}"><img class="js_lazy" src="{$imgcache_url}/images/domeimg/lazyload.gif" data-original="{$goods.goods_grid}"></a></li>
+				<li class="title ellipsis"><input type="checkbox" name="" class="checkbox"><a href="{$tmp_url}">{$goods.goods_title}</a></li>
+				<li class="price"><span class="bizhong"></span><span class="my_shop_price" orgp="{$goods.shop_price}">{$goods.shop_price}</span></li>
+				<li class="operation"><a href="javascript:void(0);" class="userBg delete js_deletePro"></a></li>
+				{if $goods.out_of_stock}
+				<li class="userBg state stateRed">{$lang.OUT_OF_STOCK}</li>
+				{else}
+				<li class="userBg state stateGreen">{$lang.BACK_IN_STOCK}</li>
+				{/if}
+			</ul>
+			{/foreach}
+			
+		</div>
+		{else}
+		<div class="empty cb">
+			{$lang.no_notify_yet}
+		</div>
+		{/if}
+		<div class="pages cb tc">
+			{if count($goods_list) > 0}
+			{$pagestr}
+			{/if}
+		</div>
+		
+		<input type="hidden"class="js_empty" data-not="{$lang.no_order_yet}">
+	</section>
+	
+</div>

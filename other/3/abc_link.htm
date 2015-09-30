@@ -1,0 +1,7 @@
+<div class="abckeyList bd1">
+<strong>{$lang.Quick_Index}:&emsp;</strong>
+{foreach from=$abcArr item=list name=abclist}<a href="{$DOMAIN}/wholesale-product-{$list}.html">{$list}</a>{if not $smarty.foreach.abclist.last}&emsp;{/if}
+{/foreach}
+&emsp;{if $home_flag=='_s'}<a href="{$DOMAIN}/{$cur_lang_url}m-sitemap.html">{$lang.sitemap}</a>{/if}
+{if $cur_lang=='en'}&emsp;<a href="http://m.sammydress.com">Mobile Site</a>{/if}
+</div>

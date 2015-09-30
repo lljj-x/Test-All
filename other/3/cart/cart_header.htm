@@ -1,0 +1,13 @@
+<div class="flow
+{if $step == 'cart'}flowing_1
+{elseif $step == 'checkout' || $step == 'exp_checkout'}flowing_2
+{elseif $step == 'done'}flowing_3
+{/if}"><!-- 第一步 添加class “flowing_1” 第二步添加class“flowing_2” 第三步添加class“flowing_3” -->
+	<div class="flow_state"><div class="flowing cartBg"></div></div>
+	<div class="state"><span class="state_1 flow_state_on"></span><span class="state_2"></span><span class="state_3"></span></div>
+	<ul>
+		<li class="step_1 flow_on">{$lang.Step_1}: <a href="/{$cur_lang_url}m-flow-a-cart.htm">{$lang.Bag}</a></li>
+		<li class="step_2">{$lang.Step_2}: <a href="{$HTTPS_ORDER_DOMAIN}/{$cur_lang_url}m-flow-a-checkout.htm">{$lang.Payment_Shipping}</a></li>
+		<li class="step_3">{$lang.Step_3}: <span>{$lang.Place_Order}</span></li>
+	</ul>
+</div>

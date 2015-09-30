@@ -1,0 +1,419 @@
+<div id="myOrders"> 
+	{if $action eq 'order_list'}
+	<!--订单列表-->
+	<div class="filter">
+		<ul class="left">
+			{*<li><span><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=shipped">{$lang.shipped}</a>  {if $smarty.get.status eq 'shipped'}<strong>{$totals.shipped}</strong>{else}{$totals.shipped}{/if}</span></li>
+			<li class="paid"><span><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=paid">{$lang.paid}</a> {if $smarty.get.status eq 'paid' or empty($smarty.get.status)}<strong>{$totals.paid}</strong>{else}{$totals.paid}{/if}</span></li>
+			<li><span><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=unpaid">{$lang.unpaid}</a>  {if $smarty.get.status eq 'unpaid'}<strong>{$totals.unpaid}</strong>{else}{$totals.unpaid}{/if}</span></li>*}
+
+			<li><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=cancel">{$lang.cancel}:</a> <strong class="color_red">{$totals.cancel}</strong></li>
+			<li><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=unpaid">{$lang.unpaid}:</a> <strong class="color_red">{$totals.unpaid}</strong></li>
+			<li class="paid"><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=paid">{$lang.paid}:</a> <strong class="color_blue">{$totals.paid}</strong></li>
+			<li><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=shipped">{$lang.shipped}:</a> <strong class="color_green">{$totals.shipped}</strong></li>
+			<li><a href="/{$cur_lang_url}m-users-a-order_list.htm?status=refund">{$lang.my_wallet_refund}:</a> <strong class="color_green">{$totals.refund}</strong></li>
+		</ul>
+		{*
+		<select class="right" onchange="switchStatus('month', this.value)">
+			<option value="3" {if $smarty.get.month eq 3}selected{/if}>{$lang.last} 3 {$lang.month}</option>
+			<option value="4" {if $smarty.get.month eq 4}selected{/if}>{$lang.last} 4 {$lang.month}</option>
+		</select>
+		*}
+	</div>
+	<div class="ordersList">
+		<table>
+			<tr class="title">
+				<th>{$lang.order_infomation}</th>
+				<th width="15%">{$lang.total}</th>
+				<th width="20%">{$lang.status}</th>
+				<th width="22%">{$lang.operation}</th>
+			</tr>
+			{foreach from=$orders item=item}
+			<tr class="number">
+				<td colspan="4">
+					<a href="/{$cur_lang_url}m-users-a-order_detail-order_id-{$item.order_id}.htm">{$item.order_sn}</a> 
+					<span>{$item.order_time}</span>
+				</td>
+			</tr>
+			<tr class="info">
+				<td class="td1">
+				{if $item.goods}
+					{foreach from=$item.goods item=goods}
+					{if $goods.goods_thumb == 'temp/skin1/images/no_pic.jpg' }
+					<a href="javascript:void(0);"><img class="js_lazy" src="{$imgcache_url}images/domeimg/portrait.gif"></a>
+					{else}
+					<a href="{$cur_lang_url}/product{$goods.goods_id}.html" target="_blank"><img class="js_lazy" src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$goods.goods_thumb}"></a>
+					{/if}
+					{/foreach}
+				{else}
+					<a href="javascript:void(0);"><img class="js_lazy" src="{$imgcache_url}images/domeimg/portrait.gif" data-original=""/></a>
+				{/if}
+				</td>
+				<td class="td2">{$item.order_currency} {$item.total_fee}</td>
+				<td class="td3">{$item.order_status_str}</td>
+				<td class="td4">
+					{if $item.order_status ==0 || $item.order_status ==8}
+					{if $item.order_status ==0}<a href="javascript:void(0);" class="js_cancelOrder" data-orderid="{$item.order_id}"><span class="userBg cancel"></span>{$lang.cancel}</a>{/if}
+						{if $item.pay_id=='PayPal' || $item.pay_id=='CreditCard'}
+						<a href="/{$cur_lang_url}m-users-a-payment_order-order_sn-{$item.order_sn}.htm"><span class="userBg pay"></span>{$lang.pay}</a>
+						{else}
+						<a href="/{$cur_lang_url}m-users-a-order_detail-order_id-{$item.order_id}.htm"><span class="userBg pay"></span>{$lang.pay}</a>
+						{/if}
+					{elseif $item.order_status >=1 and $item.order_status <=7}
+						{if $item.is_reviewed && !$item.is_delete}
+						<a href="javascript:"><span class="userBg review"></span>{$lang.reviewed}</a>
+						{elseif $item.is_delete}
+						<a href="javascript:">{$lang.delete_removed}</a>
+						{else}
+						<a href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$item.goods[0].goods_id}.htm?goods_ids={$item.goods_ids}"><span class="userBg review"></span>{$lang.write_a_review}</a>
+						{/if}
+					{elseif $item.order_status eq 11}
+					{*<a href="javascript:void(0);" class="js_deleteOrder" data-orderid="{$item.order_id}"><span class="userBg delete"></span>{$lang.delete}</a>*}
+					{else}
+	                <a href="m-users-a-order_detail-order_id-{$item.order_id}.htm"><span class="userBg view"></span>{$lang.view}</a>
+	                {/if}
+				</td>
+			</tr>
+			{/foreach}
+		</table>
+		
+		<div class="pages tc">
+			{if $orders}
+			{$pagestr}
+			{/if}
+		</div>
+		<!--end .pages-->
+		{if empty($orders)}
+		<div class="empty"><!--没有订单--> 
+			{if $coupon_words}
+			{$coupon_words}
+			{else}
+			{$lang.no_order_yet}
+			{/if}
+		</div>
+		{/if}
+	</div>
+	{/if}
+	{if $action eq 'order_detail'}
+	<!--订单详情-->
+	<div id="operationWrap">
+	<section class="operation" id="js_operation">
+		<ul class="left">
+			<li>{$lang.order_number}: {$order.order_sn}</li>
+			<li>{$lang.status}: <strong>{$order.order_status_str}</strong></li>
+			<li>{$lang.order_time}: {$order.formated_add_time}</li>
+		</ul>
+		<div class="right"> 
+		
+		
+		{if $order.order_amount gt 0 and $order.order_status==0 || $order.order_status==8}
+		{if ($order.pay_id=='PayPal' || $order.pay_id=='CreditCard')}
+		<div class="paypalWrap">
+			<a href="/{$cur_lang_url}m-users-a-payment_order-order_sn-{$order.order_sn}.htm" class="allBtn">{$lang.paypal_payment_immediately}</a>
+		</div>
+	   {else}
+		<div class="paypalWrap" id="js_Paypal">
+			<a href="javascript:void(0);" class="allBtn">{$order.pay_name}</a>
+			<div class="paypalDown" id="js_PaypalDown">
+				{$order.pay_online}
+				<i class="triangle bord_tri"></i>
+				<i class="triangle bg_tri"></i>
+			</div>
+		</div>
+		{/if}
+		{/if}
+		
+		<div class="supportWrap">
+			<a href="http://support.sammydress.com/?lang={$cur_lang}" class="hBtn">{$lang.support_center}</a> 
+		</div>
+		
+		</div>
+		
+		<div class="clear"></div>
+	</section>
+	</div>
+	
+    {*
+	<div class="shoppingInfo">
+		<div class="flow {if $order.order_status==0}
+            step1
+            {elseif $order.order_status==1}
+            step2
+            {elseif $order.order_status==2}
+            step3
+            {elseif $order.order_status==3 || $order.order_status==4}
+            step4
+			{elseif $order.order_status==11}
+            step0
+            
+            {/if}"><!--步骤1 .step1 步骤2 .step2 步骤3 .step3 步骤4 .step4-->
+			<ul class="flow_top">
+				<li class="li1">{$lang.order_received}</li>
+				<li class="li2">{$lang.payment_received}</li>
+				<li class="li3">{$lang.all_shipped}</li>
+			</ul>
+			<ul class="flow_bottom">
+				<li class="li1">{$lang.pending}</li>
+				<li class="li2">{$lang.processing}</li>
+			</ul>
+			<div class="flowStatus"></div>
+			<div class="flowing {if $order.order_status==0 || $order.order_status==8}
+            flow1
+            {elseif $order.order_status==1}
+            flow2
+            {elseif $order.order_status==2}
+            flow3
+            {elseif $order.order_status==3 || $order.order_status==4}
+            flow4
+            {/if}"></div>
+			<!--步骤1 .flow1 步骤2 .flow2 步骤3 .flow3 步骤4 .flow4-->
+			<div class="ico"><span class="ico1">●</span><span class="ico2">●</span><span class="ico3">●</span></div>
+		</div>
+	</div>
+    *}
+    
+    <div class="orderStatusInfo">
+        <ul class="status clearfix mb30" id="js_status" data-step="{if $order.order_status == 0}1{elseif $order.order_status == 11}2{elseif $order.order_status == 1 or $order.order_status == 8}3{elseif $order.order_status == 2}4{elseif $order.order_status == 10}5{elseif $order.order_status == 3 || $order.order_status == 4}6{/if}">{*通过改变data-step的值改变状态*}
+            <li class="on">
+                <i></i>
+                <b></b>
+                <span>{$lang.order_received}</span>
+            </li>
+            <li>
+                <i></i>
+                <b></b>
+                <span>{$lang.os.11}</span>
+            </li>
+            <li>
+                <i></i>
+                <b></b>
+                <span>{if $order.order_status == 8} {$lang.os.8}{else}{$lang.payment_received}{/if}</span>
+            </li>
+            <li>
+                <i></i>
+                <b></b>
+                <span>{$lang.processing}</span>
+            </li>
+            <li>
+                <i></i>
+                <b></b>
+                <span>{$lang.os.10}</span>
+            </li>
+            <li>
+                <i></i>
+                <b></b>
+                <span>{$lang.os.3}</span>
+            </li>
+        </ul><!-- .status -->
+    </div>
+    
+    {literal}
+    <script type="text/javascript">
+        (function(){
+            var Jstatus = $("#js_status");
+            var step = Jstatus.data("step");
+            if(step>=3){
+                //step = step -1;
+                Jstatus.find("li").eq(1).hide();
+            }
+            if(step ==1){
+                Jstatus.find("li").eq(4).hide();
+				Jstatus.find("li").eq(1).hide();
+            }
+            if(step ==2){
+                Jstatus.find("li:gt(1)").hide();
+                
+            }
+            if(step ==3){
+                Jstatus.find("li").eq(4).hide();
+                
+            }
+            if(step == 4 || step == 6){
+                Jstatus.find("li").eq(4).hide();
+            }
+            if(step == 5){//订单退款状态，隐藏备货和出货状态
+                Jstatus.find("li").eq(3).hide();
+                Jstatus.find("li").eq(5).hide();
+            }
+            Jstatus.find('li:lt('+ step +')').addClass('on');
+
+
+        })()
+
+    </script>
+    {/literal}
+
+	{if $ship_info}
+	<section class="tracking">
+		{foreach from=$ship_info item=ship key=k} 
+		<p><strong>{if $is_display_traking_number==1}{$lang.reference_number}{else}{$lang.tracking_number}{/if}: <span>{$ship.shipping_no}</span> {$lang.by} <a href="{$ship.ship_url}" target="_blank">{$ship.shipping_name}</a></strong> {$lang.update_date}: {$ship.add_time}  PST <a href="javascript:void(0);" class="showtrackInfo js_showtrackInfo" data-key="{$k}"  data-trackno="{$ship.shipping_no}">{$lang.View_Tracking_Message}</a></p>
+        {if $ship.ship_img_url neq ''}
+        	<div class="js_showImg"><a href="javascript:void(0);"><img src="{$ship.ship_img_url}" height="100px;" /></a></div>
+        {/if}
+
+        <dl class="trackingInfo none" id="js_trackingInfoBox{$k}">
+        	<dt>{$lang.Tracking_Information}</dt>
+        	<dd>
+        	</dd>
+        </dl>
+		
+		{if $ship.display_tracking}{*2012-11-01 后显示物流轨迹 by mashanling on 2012-11-16 14:05:43*}
+		{*
+		<ul>
+		    <li>
+		    	
+		        <iframe style="width: 100%; border: none;" src="http://119.81.26.82/cgi-bin/GInfo.dll?EmmisTrackE&cno={$ship.shipping_no}"></iframe>
+		    	
+
+		    </li>
+		</ul>
+		*}
+		{/if}
+		{*<ul>
+			{foreach from=$ship_info item=ship} 
+			<li>{$ship.add_time}  {if $ship.demo}{$ship.demo}{/if}</li>
+			{/foreach}
+		</ul>*}
+		{/foreach}
+		
+	</section>
+	{/if}
+	<section class="orderDetails">
+		<h2>{$lang.order_details}</h2>
+		<div class="item">
+			<h4>{$lang.consignee_information}</h4>
+			<ul class="list">
+				<li>{$lang.consignee_name}: {$order.consignee}</li>
+				<li>{$lang.address}: {$order.address}</li>
+				<li>{$lang.city}: {$order.city}</li>
+				<li>{$lang.states}: {$order.province}</li>
+				<li>{$lang.zip_code}: {$order.zipcode}</li>
+				<li>{$lang.country}: {$order.country}</li>
+				<li>{$lang.e_mail}: {$order.email}</li>
+				<li>{$lang.tel}: {$order.tel}</li>
+			</ul>
+		</div>
+		<div class="item">
+			<h4>{$lang.Payment_Shipping}</h4>
+			<ul class="list">
+				<li>{$lang.shipping_method}:  {$order.shipping_name}</li>
+				<li>{$lang.payment_method}:  {$order.pay_name}</li>
+			</ul>
+		</div>
+		<div class="item">
+			<h4>{$lang.invoice}</h4>
+			<ul class="list">
+				<li>{if $order.Invoice}{$lang.need_invoice}{else}{$lang.dont_need_invoice}{/if}</li>
+			</ul>
+		</div>
+		<div class="item">
+			<h4>{$lang.items_list}</h4>
+			<table>
+				<tr class="title">
+					<th>{$lang.product}</th>
+					<th>{$lang.sku}</th>
+					<th>{$lang.unit_price}</th>
+					<th>{$lang.quantity}</th>
+					<th>{$lang.total_price}</th>
+					<th>{$lang.operation}</th>
+					
+				</tr>
+				{foreach from=$goods_list item=goods}
+				<tr class="info">
+					<td class="td1">
+					{if $goods.goods_thumb == 'temp/skin1/images/no_pic.jpg' }
+					<a href="{$goods.url_title}" class="proImg"><img class="js_lazy" src="{$imgcache_url}images/domeimg/portrait.gif"/></a>
+					{else}
+					<a href="{$goods.url_title}" class="proImg"><img class="js_lazy" src="{$imgcache_url}images/domeimg/lazyload.gif" data-original="{$goods.goods_thumb}"></a>
+					{/if}	
+					<a href="{$goods.url_title}" class="proTitle">{$goods.goods_name}
+                    </a></td>
+					<td class="td2">{$goods.goods_sn}</td>
+					<td class="td3">{$order.order_currency} {$goods.goods_price|rate_price_format:$order.order_rate}</td>
+					<td class="td4">{$goods.goods_number}</td>
+					<td class="td5">{$order.order_currency} {$goods.subtotal|rate_price_format:$order.order_rate}</td>			
+
+					<td class="opt" style="text-align: center;">
+                    {if $order.order_status >= 1 and $order.order_status <= 7}
+						{if $goods.is_reviewed && $goods.goods_thumb != '/temp/skin4/images/domeimg/portrait.gif'}
+						<a href="javascript:void(0);" title="{$lang.reviewed}"><span class="userBg review"></span>{$lang.reviewed}</a>
+						{elseif $goods.goods_thumb == '/temp/skin4/images/domeimg/portrait.gif'}
+						<a href="javascript:void(0);" title="{$lang.delete_removed}">{$lang.delete_removed}</a>
+						{else}
+						<a href="/{$cur_lang_url}m-review-a-write_review-goods_id-{$goods.goods_id}.htm?goods_ids={$goods_id_str}" title="{$lang.write_a_review}"><span class="userBg review"></span>{$lang.write_a_review}</a>
+						{/if}
+						{*
+						<a href="{$review_pic_upload_url}&goods_id={$goods.goods_id}" class="js_showBuyerShow"><span class="userBg show"></span>{$lang.buyers_show}</a>
+						*}
+                    {/if}
+					{if $order.order_status == 0}
+						{$order.order_status_str}
+					{/if}
+					</td>
+				
+				</tr>
+				{/foreach}
+			</table>
+			<div class="proPrices">
+				<ul class="prices">
+					<li><p>{$lang.commodity_price}: </p> <div>{$order.order_currency} {$order.yuan_goods_amount}</div></li>
+					
+					<li><p>{$lang.delivery_price}: </p> <div>{$order.order_currency} {$order.formated_shipping_fee}</div></li>
+
+					{if $order.formated_insure_fee>0}
+					<li><p>{$lang.insurance}: </p> <div>{$order.order_currency} {$order.formated_insure_fee}</div></li>
+					{/if}
+
+					{if $order.pay_id=='WesternUnion' || $order.pay_id=='WiredTransfer'}
+					<li><p>Discount: </p> <div>- {$order.order_currency} {$order.formated_order_amount*0.05|string_format:"%.2f" }</div></li>
+					{/if}
+
+					{if $order.point_money>0}
+					<li><p>{$lang.SPoints_Saving}: </p> <div>- {$order.order_currency} {$order.point_money|string_format:"%.2f"}</div></li>
+					{/if}
+
+					{if $order.promotion_code!=''}
+					<li><p>{$lang.coupon_saving}: </p> <div>- {$order.order_currency} {$order.yuan_goods_amount-$order.formated_goods_amount}</div></li>
+					{/if}
+
+					{if $order.Need_Traking_number>0}
+					<li><p>{$lang.tracking_number}: </p> <div>{$order.order_currency} {$order.Need_Traking_number}</div></li>
+					{/if}
+                    {if $order.used_wallet > 0}
+                    <li> <p>{$lang.Sammy_Wallet}:</p> <div>-{$order.order_currency} {$order.formated_used_wallet}</div></li>
+					{/if}
+				</ul>
+				<ul class="totalPrice">
+					<li><p>{$lang.total_price}: </p> <div>{$order.order_currency} {if $order.pay_id=='WesternUnion' || $order.pay_id=='WiredTransfer'}{$order.formated_order_amount*0.95|string_format:"%.2f" }{else}{$order.formated_order_amount}{/if}</div></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	{/if}
+</div>
+{literal}
+<script type="text/javascript">
+function switchStatus(name, value){
+	var url = window.location.href;
+	var index = url.indexOf('?');
+	if(!name || !value){
+		var reg = new RegExp('&'+name+'=[^&]*|'+name+'=[^&]*',"gi");
+		// var reg = new RegExp('(.+\?.*)('+name+'=[^&]*|&'+name+'=[^&]*)(.*)',"gi");
+		url = url.replace(reg, "");
+		if(url.indexOf("?&") > 0){
+			url = url.replace("?&", "?");
+		}
+		window.location.href = url;
+		return;
+	}
+	if(url.indexOf(name+"=") > 0){
+		var reg = new RegExp('(.+\?.*)('+name+'=[^&]*)(.*)',"gi");
+		url = url.replace(reg, "$1"+name+'='+value+"$3");
+	}else{
+		var addstr = index > 0 ? (index+1==url.length?'':'&') : '?';
+		url += addstr+name+'='+value;
+	}
+	window.location.href = url;
+}
+</script>
+{/literal}

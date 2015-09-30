@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+<head>
+{include file="top.htm"}
+<link rel="stylesheet" href="{$imgcache_url}mincss/review_write_min.css" />
+</head>
+
+<body>
+	<header id="header">
+    {include file="public_top.htm"}
+	</header>
+
+    {if $act=="view_video"}
+	<!--================视频播放页开始====================-->
+    <div id="mainWrap" class="clearfix">
+		<div class="path"><a href="/{$cur_lang_url}" title="Sammydress.com Home">{$lang.home}</a>&nbsp;»{$nav_title}</div>
+    	<section id="miain" class="fr">
+			
+			<section class="bd1 mb10 reviewsList">
+				<header class="rwm_title">
+					<div class="addthis_toolbox addthis_default_style fr">
+						<a class="addthis_button_preferred_1"></a>
+						<a class="addthis_button_preferred_2"></a>
+						<a class="addthis_button_preferred_3"></a>
+						<a class="addthis_button_preferred_4"></a>
+						<a class="addthis_button_compact"></a>
+						<a class="addthis_counter addthis_bubble_style"></a>
+						<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4ecb5f810b6d71c1"></script>
+                    </div>
+ 
+					<h1 class="fb red">{$review1.nickname}{$lang._s_videos_reviews} -{$review1.subject|truncate:50}</h1>
+
+
+ 
+				</header><!--end .rwm_title-->
+				
+				<div class="item clearfix">
+					<div class="fl reviews_userInfo">
+						<p>{$lang.By}&nbsp;<strong class="gray3">{$review1.nickname}</strong></p>
+						<p class="verifiedBuyerTag">{$lang.Verified Buyer}</p>
+						<p>{$review1.adddate}</p>
+					</div><!--end .reviews_userInfo-->
+					<p class="reviews_title"><span class="start_{$review.avg_rate_img}"><i>{$review.avg_rate_img} satrts</i></span><strong class="pl5 fb">{$review1.subject}</strong></p>
+					<p class="reviews_text">{$review1.pros}</p>
+				</div><!--end .item-->
+				
+				<div class="rwm_mediaShow clearfix">
+					<div id="divEnlarge" class="fl" style="width:570px;"></div><!--这是视频框-->
+					<section class="fr popularVideos bd1">
+						<h5 class="rwm_title fb red tc">{$lang.Top_Popular_Videos}</h5>
+						<p class="pt10"><img src="http://cloud4.faout.com/imagecache/S/ximages/gallery/logo.jpg"></p>
+						<ul>
+                            {foreach from=$arr_video item=v}
+							<li>
+								<p> 
+									<a href="/{$cur_lang_url}m-review_media-a-view_video-goods_id-{$v.goods_id}-mid-{$v.id}.htm"><img src="http://img.youtube.com/vi/{$v.paths}/default.jpg" alt="uploaded by  {$v.nickname}-&nbsp;{$goods.goods_title}" width="120" height="90"/></a>
+								</p>
+								<p>{$lang.By} {$v.nickname}</p>
+							</li>
+			                {/foreach}
+						</ul>
+					</section><!--end .popularVideos-->
+				</div><!--end .rwm_mediaShow-->
+				
+			</section><!--end .reviewsList-->
+			
+			<section class="reviewsList mb10">
+				<header class="rwm_title pr10" style="border-bottom:none;">
+ 
+					<a href="/{$cur_lang_url}m-review-a-view_review-goods_id-{$goods.goods_id}.htm" class="fr gray3">{$lang.All_Reviews}</a>
+					<h4 class="fb red f14">{$lang.Related_Reviews}</h4>
+ 
+					
+				</header>
+				<!-- 留言列表循环 begin-->
+                {foreach from=$reviews.review_list key=key item=r}
+				<div class="item clearfix">
+					<div class="fl reviews_userInfo">
+						<p>{$lang.By}&nbsp;<strong class="gray3">{$r.nickname}</strong></p>
+						<p class="verifiedBuyerTag">{$lang.Verified Buyer}</p>
+						<p>{$r.adddate}</p>
+					</div>
+					
+					<p class="reviews_title"><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} satrts</i></span><strong class="pl5 fb">{$r.subject}</strong></p>
+					<p class="reviews_text pr10">{$r.pros}</p>
+				</div><!--end .item-->
+				{/foreach}
+				 
+				
+			</section><!--end .reviewsList-->
+			
+		</section><!--end #miain-->
+		
+		<!--左边 侧栏开始-->
+		<aside id="sideBar" class="fl">
+			<section class="mb10 proDescrip">
+				<h4>{$lang.Product_Description}</h4>
+				<div class="bd1 p10">
+					<a href="{$goods.url_title}" target="_blank" class="proD_img"><img src="{$goods.goods_grid}" alt="{$goods.goods_title}" width="150" height="150" /></a>
+					<p class="pb10"><a href="{$goods.url_title}" target="_blank" class="gray3">{$goods.goods_title}</a></p>
+					<p class="list_price">{$lang.Was}:&nbsp;<span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$goods.market_price}">{$goods.market_price}</span></p>
+					<p class="fb red f14">{$lang.Now}:&nbsp;<span class="bizhong fb red">USD</span> <span id="unit_price" class="my_shop_price fb red" orgp="{$goods.shop_price}">{$goods.shop_price}</span></p>
+					<p>{$lang.Average_Rating}:</p>
+					<p><span class="start_{$reviews.avg_rate_img}"><i>{$reviews.avg_rate} satrts</i></span> <span class="fb">{$reviews.avg_rate}</span><span>(<a rel="nofollow" href="#js_Reviews" class="no_unl gray6 ">{$reviews.review_count}</a>{$lang.Reviews})</span></p>
+					<p><a href="{$goods.url_title}" class="proD_addToCar">{$lang.add_to_cart}</a></p>
+				</div>
+			</section><!--end .proDescrip-->
+			
+			<section class="bd1 mb10">
+				<h4 class="linear_gray proD_title">{$lang.Customer_Reviews_With_Videos}</h4>
+				<div class="p10 customerUpList">
+                    {foreach from=$arr_v_1 key=key item=i}
+					<p><a href="/{$cur_lang_url}m-review_media-a-view_video-goods_id-{$i.goods_id}-mid-{$i.id}.htm">{$i.pros|truncate:130}</a></p>
+                    {foreachelse}
+                    <p>{$lang.No_reviews_yet}</p>
+                    {/foreach}
+				</div>
+			</section>
+			
+		</aside><!--end #sideBar-->
+		
+	</div><!--end #mainWarp-->
+	
+	<script type="text/javascript">
+		play('{$c_path}','{$c_caption}','{$c_up_by}');
+    {literal} 
+		function play(videoCode, caption, username) {
+			document.getElementById("divEnlarge").innerHTML = "<object width=\"570\" height=\"340\"><param name=\"movie\" value=\"http://www.youtube.com/v/" + videoCode + "&rel=1&autoplay=1\"></param><param name=\"wmode\" value=\"transparent\"></param><embed src=\"http://www.youtube.com/v/" + videoCode + "&rel=1&autoplay=1\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"570\" height=\"340\"></embed></object><p class=\" mt10\"><a class=\" gray6\" rel=\"nofollow\" target=\"_blank\" href=\"http://www.youtube.com/watch?v=" + videoCode + "\">Open in YouTube</a></p>";
+		}
+	</script>
+    {/literal}
+	<!--================视频播放页结束=====================-->
+	{/if}
+
+
+
+
+
+
+
+    {if $act=="view_image"}
+	<!--================图片预览开始=====================-->
+	 <div id="mainWrap" class="clearfix">
+ 
+		<div class="path"><a href="/{$cur_lang_url}" title="Sammydress.com Home">{$lang.home}</a>&nbsp;»{$nav_title} </div>
+ 
+		
+    	<section id="miain" class="fr">
+			
+			<section class="bd1 mb10 reviewsList">
+				<header class="rwm_title">
+					<div class="addthis_toolbox addthis_default_style fr">
+						<a class="addthis_button_preferred_1"></a>
+						<a class="addthis_button_preferred_2"></a>
+						<a class="addthis_button_preferred_3"></a>
+						<a class="addthis_button_preferred_4"></a>
+						<a class="addthis_button_compact"></a>
+						<a class="addthis_counter addthis_bubble_style"></a>
+						<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4ecb5f810b6d71c1"></script>
+                    </div>
+
+					<h1 class="fb red f16" style="word-wrap:normal;">{$review1.nickname}{$lang._s_photos_reviews} -{$review1.subject|truncate:50}</h1>
+
+				</header><!--end .rwm_title-->
+				
+				<div class="item clearfix">
+					<div class="fl reviews_userInfo">
+						<p>{$lang.By}&nbsp;<strong class="gray3">{$review1.nickname}</strong></p>
+						<p class="verifiedBuyerTag">{$lang.Verified Buyer}</p>
+						<p>{$review1.adddate}</p>
+					</div><!--end .reviews_userInfo-->
+					<p class="reviews_title"><span class="start_{$review.avg_rate_img}"><i>{$review.avg_rate} satrts</i></span><strong class="pl5 fb">{$review1.subject}</strong></p>
+					<p class="reviews_text pr10">{$review1.pros}</p>
+				</div><!--end .item-->
+				
+				<div class="rwm_mediaShow clearfix">
+					<div id="divEnlarge" class="fl" style="width:570px;">
+						
+					</div>
+					<ul class="rwm_thumbImg ml10 fl" id="rwm_thumbImg">
+					      {foreach from=$arr_pic item=pic}
+                          <li>
+                          <a href="javascript:void(0);" data-url="{$DOMAIN_IMG}/{$pic.paths}">
+                          <img width="120" height="100" src="{$DOMAIN_IMG}/{$pic.thumb_paths}">
+                          </a>
+                          </li>
+                          {/foreach} 
+					</ul>
+				</div><!--end .rwm_mediaShow-->
+				
+			</section><!--end .reviewsList-->
+			
+			<section class="reviewsList mb10">
+				<header class="rwm_title pr10" style="border-bottom:none;">
+                    <a href="/{$cur_lang_url}m-review-a-view_review-goods_id-{$goods_id}.htm" class="fr gray3">{$lang.All_Reviews}</a>
+					<h4 class="fb red f14">{$lang.Related_Reviews}</h4>	
+				</header>
+				<!-- 留言列表循环 begin-->
+                {foreach from=$reviews.review_list key=key item=r}
+				<div class="item clearfix">
+					<div class="fl reviews_userInfo">
+						<p>{$lang.By}&nbsp;<strong class="gray3">{$r.nickname}</strong></p>
+						<p class="verifiedBuyerTag">{$lang.Verified Buyer}</p>
+						<p>{$r.adddate}</p>
+					</div>
+					
+					<p class="reviews_title"><span class="start_{$r.rate_overall}"><i>{$r.rate_overall} satrts</i></span><strong class="pl5 fb">{$r.subject}</strong></p>
+					<p class="reviews_text">{$r.pros}</p>
+				</div><!--end .item-->
+                {/foreach}
+				
+				 
+				
+			</section><!--end .reviewsList-->
+			
+		</section><!--end #miain-->
+		
+		<!--左边 侧栏开始-->
+		<aside id="sideBar" class="fl">
+			<section class="mb10 proDescrip">
+				<h4>{$lang.Product_Description}</h4>
+				<div class="bd1 p10">
+					<a href="{$goods.url_title}" target="_blank" class="proD_img"><img src="{$goods.goods_grid}" alt="{$goods.goods_title}" width="150" height="150" /></a>
+					<p class="pb10"><a href="{$goods.url_title}" target="_blank" class="gray3">{$goods.goods_title}</a></p>
+					<p class="list_price">{$lang.Was}:&nbsp;<span class="bizhong">USD</span> <span class="my_shop_price" orgp="{$goods.market_price}">{$goods.market_price}</span></p>
+					<p class="fb red f14">{$lang.Now}:&nbsp;<span class="bizhong fb red">USD</span> <span id="unit_price" class="my_shop_price fb red" orgp="{$goods.shop_price}">{$goods.shop_price}</span></p>
+					<p>{$lang.Average_Rating}:</p>
+					<p><span class="start_{$reviews.avg_rate_img}"><i>{$reviews.avg_rate} satrts</i></span> <span class="fb">{$reviews.avg_rate}</span><span>(<a rel="nofollow" href="#js_Reviews" class="no_unl gray6 ">{$reviews.review_count}</a>{$lang.Reviews})</span></p>
+					<p><a href="{$goods.url_title}" class="proD_addToCar">{$lang.add_to_cart}</a></p>
+				</div>
+			</section><!--end .proDescrip-->
+			
+			<section class="bd1 mb10">
+				<h4 class="linear_gray proD_title">{$lang.Customer_Reviews_With_Photos}</h4>
+				<div class="p10 customerUpList">
+                  {foreach from=$arr_pic_1 key=key item=i}
+                      <p class="bianbt" style="word-break:break-all;padding:5px;"><a href="/{$cur_lang_url}m-review_media-a-view_image-goods_id-{$i.goods_id}-mid-{$i.id}.htm">{$i.pros|truncate:130}</a></p>
+                  {foreachelse}
+                  <p>{$lang.No_reviews_yet}</p>
+                  {/foreach}
+				</div>
+			</section>
+			
+		</aside><!--end #sideBar-->
+		
+	</div><!--end #mainWarp-->
+    {literal}
+	<script type="text/javascript">
+		$("#rwm_thumbImg").find("a").click(function(){
+			var url = $(this).data("url");
+			enlarge(url);
+		});
+		
+		$("#rwm_thumbImg").find("a").eq(0).trigger("click");
+		
+		function enlarge(url, caption, username) {
+			document.getElementById("divEnlarge").innerHTML = "<a href='javascript:window.close();'><img src=\"" + url + "\" alt=\"\"  style=\"width:570px; height:460px; \" /></a>";
+		}
+	</script>
+    {/literal}
+	<!--================图片预览结束=====================-->
+    {/if}
+	
+	<footer id="footer">{include file="footerhelp.htm"}{include file="footer.htm"}</footer><!--end #footer-->
+	
+</body>
+</html>
