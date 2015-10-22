@@ -38,7 +38,7 @@
 
                 detectionEmail : '没有发现退订代码  ... <span>{$email}</span>  ...',
                 detectionTableMerger : '第 {0} 行： 包含 <span>{2}</span> 标签',
-                detectionTagA : '第 {0} 行： 链接 {2} 格式错误'
+                detectionTagA : '第 {0} 行： 链接 {1} <span>包含换行</span>'
             },
             // 获取错误文字
             setError: function (funNam,options,arrParams) {
@@ -170,11 +170,44 @@
                     return reBool;
                 },
                 detectionTagA : function (text, lineNum, funNam, options) {
-                    // 多个a标签就会出错。。
-                    // var reg = /(<\s*a.*?)(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/g;
+                    /*
+                    多个a标签以及xx就会出错。。 fasdfsaf<a href="#">test</a>fasdfasdf<a href="xxxx"
+                    var reg = /(<\s*a.*?)(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/g;
 
-                    text.search(/<\s*a.*?/)
+                    通过多次操作:
+                        <a 分割 得到：
+                            fasdfsaf
+                            <a href="">fasdf</a>fasdffasfdasdf
+                            <a href="fasdf"
+                        没有结束标签 >则提示错误
 
+                    */
+
+                    // 包含 a 标签再做判断
+
+                    if(text.search(/<\s*a/) >-1){
+                        var splitStr = '|SPLITSTR|',  // 个性的分隔符
+                            reBool = true;
+                        var hasSplitStr = text.replace(/<\s*a/g,splitStr + '<a');
+
+                        var arrStrBySplit= hasSplitStr.split(splitStr);
+
+                        // 包含开始 a ，没有结束 提示错误
+
+                        for(var i in arrStrBySplit){
+                            if(arrStrBySplit.hasOwnProperty(i)){
+                                //
+                                if(arrStrBySplit[i].search(/<a/) > -1 && arrStrBySplit[i].search(/>/) < 0){
+                                    $.textDetection.validate.setError(funNam, options, [lineNum,arrStrBySplit[i]]);
+                                    reBool = false;
+                                }
+                            }
+                        }
+
+                        return reBool;
+                    }else{
+                        return true;
+                    }
                 },
                 // 全文检测方法参数不要 lineNum
                 detectionEmail : function (text, funNam, options) {
@@ -239,7 +272,7 @@
                     }
                 }
 
-                // 执行用户配置的检测类型
+                // 按行检测
                 for (var validateNum in self.config) {
                     if(self.config.hasOwnProperty(validateNum)){
                         methodNotHasHasError = true;  // 默认每种检测方法没有错误
@@ -271,7 +304,7 @@
          */
         setlineNums: function () {
             var html = "",
-                nums = this.getLineNums();
+                nums = this.getLineNum();
 
             for (var i = 0; i <= nums - 1; i++) {
                 html += '<span>' + (i + 1) + '</span>';
@@ -291,7 +324,7 @@
         /**
          *  获取输入框行数
          */
-        getLineNums: function () {
+        getLineNum: function () {
             return this.inputDataArr.length;
         }
     };
