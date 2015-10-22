@@ -1,5 +1,5 @@
-"use strict";
 (function ($) {
+    "use strict";
     // 核心检测方法
     $.textDetection = {
         // 默认参数
