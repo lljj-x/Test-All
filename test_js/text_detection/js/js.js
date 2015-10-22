@@ -1,11 +1,11 @@
 "use strict";
 (function ($) {
-    // 所有操作不能重写该方法
+    // 核心检测方法
     $.textDetection = {
         // 默认参数
         defaults: {
-            config: ["detectionUrl","detectionLength","detectionImgAttr","detectionTagP","detectionTableMerger"],  // 按行匹配
-            configTitle:["检测代码出现链接不规范或图片命名不规范：", "检测代码超过了500字符：", "检测代码未添加alt/height/width信息：", "检测代码包含p标签：", "检测代码包含 rowspan / colspan 属性："],
+            config: ["detectionUrl","detectionLength","detectionImgAttr","detectionTagP","detectionTableMerger","detectionTagA"],  // 按行匹配
+            configTitle:["检测代码出现链接不规范或图片命名不规范：", "检测代码超过了500字符：", "检测代码未添加alt/height/width信息：", "检测代码包含p标签：", "检测代码包含 rowspan / colspan 属性：","检测代码链接错误信息："],
 
             fullTextSearchConfig : ["detectionEmail"], // 全文搜索
             fullTextSearchConfigTitle : ["检测是否包含退订代码："],
@@ -31,13 +31,14 @@
                 detectionUrlSpace: '第 {0} 行： 链接 "{1}" 中存在 <span>空格</span>',
                 detectionUrlSlash: '第 {0} 行： 链接 "{1}" 以 <span>/</span> 结尾',
                 detectionUrlQmark: '第 {0} 行： 链接 "{1}" 中包含 <span>?</span>',
-                detectionUrlImageNum: "第 {0} 行： 图片 '{1}' 图片命名中包含有 <span>数字</span>",
+                detectionUrlImageNum: '第 {0} 行： 图片 "{1}" 图片命名中包含有 <span>数字</span>',
                 detectionLength : '第 {0} 行： 代码超过 <span>500</span> 字符',
-                detectionImgAttr : "第 {0} 行： 图片 '{1}' 未添加 <span>alt/height/width</span> 信息",
+                detectionImgAttr : '第 {0} 行： 图片 "{1}" 未添加 <span>alt/height/width</span> 信息',
                 detectionTagP : '第 {0} 行： 代码 "{1}" 包含 <span>p</span> 标签',
 
-                detectionEmail : "没有发现退订代码  ... <span>{$email}</span>  ...",
-                detectionTableMerger : '第 {0} 行： 包含 <span>{2}</span> 标签'
+                detectionEmail : '没有发现退订代码  ... <span>{$email}</span>  ...',
+                detectionTableMerger : '第 {0} 行： 包含 <span>{2}</span> 标签',
+                detectionTagA : '第 {0} 行： 链接 {2} 格式错误'
             },
             // 获取错误文字
             setError: function (funNam,options,arrParams) {
