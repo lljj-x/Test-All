@@ -1,5 +1,5 @@
 "use strict";
-(function ($, window) {
+(function ($) {
     // 所有操作不能重写该方法
     $.textDetection = {
         // 默认参数
@@ -12,31 +12,6 @@
 
             inputElm: "#js_inputText",
             consoleWrap : $("#js_consoleWrap")
-        },
-
-        htmlEncode: function (str) {
-            var s;
-            if (str.length == 0) return "";
-            s = str.replace(/&/g, ">");
-            s = s.replace(/</g, "<");
-            s = s.replace(/>/g, ">");
-            s = s.replace(/ /g, " ");
-            s = s.replace(/\'/g, "'");
-            s = s.replace(/\"/g, '"');
-            s = s.replace(/\n/g, "<br>");
-            return s;
-        },
-        htmlDecode : function (str) {
-            var s;
-            if (str.length == 0) return "";
-            s = str.replace(/>/g, "&");
-            s = s.replace(/</g, "<");
-            s = s.replace(/>/g, ">");
-            s = s.replace(/ /g, " ");
-            s = s.replace(/'/g, "\'");
-            s = s.replace(/"/g, "\"");
-            s = s.replace(/<br>/g, "\n");
-            return s;
         },
 
         // 输出提示信息
@@ -69,7 +44,9 @@
                 var msgText = this.defaultError[funNam];
                 if(arguments.length > 2){
                     for(var i in arrParams){
-                        msgText = msgText.replace('{' + i + '}',arrParams[i]);
+                        if(arrParams.hasOwnProperty(i)){
+                            msgText = msgText.replace('{' + i + '}',arrParams[i]);
+                        }
                     }
                 }
                 $.textDetection.consoleLog(msgText,options.consoleWrap,"fail");
@@ -233,7 +210,7 @@
          */
         bindEvent: function () {
             var self = this;
-            self.$instans.on("click", function (event) {
+            self.$instans.on("click", function () {
 
                 self.options.consoleWrap.empty();
                 self.inputElmVal = self.$inputElm.val();
@@ -246,37 +223,43 @@
 
                 // 全文搜索
                 for(var i in self.fullTextSearchConfig){
-                    methodNotHasHasError = true;  // 默认每种检测方法没有错误
-                    $.textDetection.consoleLog(cIndex + ' 、' + self.options.fullTextSearchConfigTitle[i], self.options.consoleWrap,"validate-title");
-                    if($.textDetection.validate.method[self.fullTextSearchConfig[i]] != undefined){
-                        methodNotHasHasError = $.textDetection.validate.method[self.fullTextSearchConfig[i]](self.inputElmVal, self.fullTextSearchConfig[i], self.options) && methodNotHasHasError;
-                    }else {
-                        alert('fullTextSearchConfig 配置有误，' + self.fullTextSearchConfig[i] + ' 方法不存在');
-                    }
+                    if(self.fullTextSearchConfig.hasOwnProperty(i)){
+                        methodNotHasHasError = true;  // 默认每种检测方法没有错误
+                        $.textDetection.consoleLog(cIndex + ' 、' + self.options.fullTextSearchConfigTitle[i], self.options.consoleWrap,"validate-title");
+                        if($.textDetection.validate.method[self.fullTextSearchConfig[i]] != undefined){
+                            methodNotHasHasError = $.textDetection.validate.method[self.fullTextSearchConfig[i]](self.inputElmVal, self.fullTextSearchConfig[i], self.options) && methodNotHasHasError;
+                        }else {
+                            alert('fullTextSearchConfig 配置有误，' + self.fullTextSearchConfig[i] + ' 方法不存在');
+                        }
 
-                    methodNotHasHasError && $.textDetection.consoleLog('木有错误 \\(^o^)/', self.options.consoleWrap,"success");
-                    globalNotHasHasError = globalNotHasHasError && methodNotHasHasError;
-                    cIndex ++ ;
+                        methodNotHasHasError && $.textDetection.consoleLog('木有错误 \\(^o^)/', self.options.consoleWrap,"success");
+                        globalNotHasHasError = globalNotHasHasError && methodNotHasHasError;
+                        cIndex ++ ;
+                    }
                 }
 
                 // 执行用户配置的检测类型
                 for (var validateNum in self.config) {
-                    methodNotHasHasError = true;  // 默认每种检测方法没有错误
-                    $.textDetection.consoleLog(cIndex + ' 、' + self.options.configTitle[validateNum], self.options.consoleWrap,"validate-title");
-                    var currentMethod = $.textDetection.validate.method[self.config[validateNum]];
-                    if(currentMethod != undefined){
-                        for(var lineNum in self.inputDataArr){
-                            // 剔除首尾空格
-                            var lineText = self.inputDataArr[lineNum].replace(/(^\s*)|(\s*$)/g,'');
-                            if(lineText == "") continue;  // 空行不检测
-                            methodNotHasHasError = currentMethod(lineText, lineNum - 0 + 1, self.config[validateNum],self.options) && methodNotHasHasError;
+                    if(self.config.hasOwnProperty(validateNum)){
+                        methodNotHasHasError = true;  // 默认每种检测方法没有错误
+                        $.textDetection.consoleLog(cIndex + ' 、' + self.options.configTitle[validateNum], self.options.consoleWrap,"validate-title");
+                        var currentMethod = $.textDetection.validate.method[self.config[validateNum]];
+                        if(currentMethod != undefined){
+                            for(var lineNum in self.inputDataArr){
+                                if(self.inputDataArr.hasOwnProperty(lineNum)){
+                                    // 剔除首尾空格
+                                    var lineText = self.inputDataArr[lineNum].replace(/(^\s*)|(\s*$)/g,'');
+                                    if(lineText == "") continue;  // 空行不检测
+                                    methodNotHasHasError = currentMethod(lineText, lineNum - 0 + 1, self.config[validateNum],self.options) && methodNotHasHasError;
+                                }
+                            }
+                        }else{
+                            alert('config 配置有误，' + self.config[validateNum] + ' 方法不存在');
                         }
-                    }else{
-                        alert('config 配置有误，' + self.config[validateNum] + ' 方法不存在');
+                        methodNotHasHasError && $.textDetection.consoleLog('木有错误 \\(^o^)/', self.options.consoleWrap,"success");
+                        globalNotHasHasError = globalNotHasHasError && methodNotHasHasError;
+                        cIndex ++ ;
                     }
-                    methodNotHasHasError && $.textDetection.consoleLog('木有错误 \\(^o^)/', self.options.consoleWrap,"success");
-                    globalNotHasHasError = globalNotHasHasError && methodNotHasHasError;
-                    cIndex ++ ;
                 }
                 globalNotHasHasError && $.textDetection.consoleLog('猴赛雷 ✪ ω ✪ ,一个错误都木有 ！！！' , self.options.consoleWrap,"global-success");
             });
@@ -318,7 +301,7 @@
         });
     };
 
-})(jQuery, window);
+})(jQuery);
 
 $(function () {
     /**
