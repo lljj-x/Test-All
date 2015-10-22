@@ -103,7 +103,7 @@
                             }
 
                             // ③ 检测链接地址是否 包含 ？
-                            if (matchUrl.indexOf('?') > -1 && matchUrl.indexOf('{track_code}') < 0) {
+                            if (matchUrl.indexOf('?') > -1 && matchUrl.indexOf('{track_code}') < 0 && matchUrl.indexOf('{$email}') < 0) {
                                 reBool = false;
                                 $.textDetection.validate.setError(funNam + 'Qmark', options, [lineNum, matchUrl]);
                             }
@@ -191,7 +191,13 @@
                     }
                     return reBool;
                 },
+                detectionTagA : function (text, lineNum, funNam, options) {
+                    // 多个a标签就会出错。。
+                    // var reg = /(<\s*a.*?)(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/g;
 
+                    text.search(/<\s*a.*?/)
+
+                },
                 // 全文检测方法参数不要 lineNum
                 detectionEmail : function (text, funNam, options) {
                     // 整个文档直接检测 所以不要 lineNum
