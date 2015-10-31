@@ -6,25 +6,20 @@
         defaults: {
             config: ["detectionUrl","detectionLength","detectionImgAttr","detectionTagP","detectionTableMerger","detectionTagA"],  // 按行匹配
             configTitle:["检测代码出现链接不规范或图片命名不规范：", "检测代码超过了500字符：", "检测代码未添加alt/height/width信息：", "检测代码包含p标签：", "检测代码包含 rowspan / colspan 属性：","检测代码链接错误信息："],
-
             fullTextSearchConfig : ["detectionEmail"], // 全文搜索
             fullTextSearchConfigTitle : ["检测是否包含退订代码："],
-
             inputElm: "#js_inputText",
             consoleWrap : $("#js_consoleWrap")
         },
-
         // 输出提示信息
         consoleLog: function (msg, $consoleWrap,className) {
             className = className || "fail";
-
             // 过滤 html 标签只留 span
             var html = $("<p />").text(msg).html().replace('&lt;span&gt;',"<span>").replace('&lt;/span&gt;',"</span>");
             $("<p />").html(html).attr({
                 "class": className
             }).appendTo($consoleWrap);
         },
-
         validate: {
             // 默认错误
             defaultError: {
@@ -35,7 +30,6 @@
                 detectionLength : '第 {0} 行： 代码超过 <span>500</span> 字符',
                 detectionImgAttr : '第 {0} 行： 图片 "{1}" 未添加 <span>alt/height/width</span> 信息',
                 detectionTagP : '第 {0} 行： 代码 "{1}" 包含 <span>p</span> 标签',
-
                 detectionEmail : '没有发现退订代码  ... <span>{$email}</span>  ...',
                 detectionTableMerger : '第 {0} 行： 包含 <span>{2}</span> 标签',
                 detectionTagA : '第 {0} 行： 链接 {1} <span>包含换行</span>'
@@ -57,35 +51,28 @@
                 detectionUrl: function (text, lineNum, funNam, options) {
                     var reg = /"(\s)*(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)(\s)*"/g,
                         matchUrlArr = text.match(reg);
-
                     // 首先匹配到 " "首尾包含 0- 个空白的url
                     if (matchUrlArr) {
                         var reBool = true,
                             matchUrl;
-
                         for (var i =0;i<matchUrlArr.length;i++) {
                             // url 检测使用一个方法，错误信息 要区分开来，不直接默认使用方法名对应错误信息
-
                             matchUrl = matchUrlArr[i].toString().replace(/(^"*)|("*$)/g, '');
-
                             // ① 检测是否包含首尾空格
                             if (/(^\s+)|(\s+$)/.test(matchUrl)) {
                                 reBool = false;
                                 $.textDetection.validate.setError(funNam + 'Space', options, [lineNum, matchUrl]);
                             }
-
                             // ② 检测是否 / 结尾
                             if (/\/\s*$/.test(matchUrl)) {
                                 reBool = false;
                                 $.textDetection.validate.setError(funNam + 'Slash', options, [lineNum, matchUrl]);
                             }
-
                             // ③ 检测链接地址是否 包含 ？
                             if (matchUrl.indexOf('?') > -1 && matchUrl.indexOf('{track_code}') < 0 && matchUrl.indexOf('{$email}') < 0) {
                                 reBool = false;
                                 $.textDetection.validate.setError(funNam + 'Qmark', options, [lineNum, matchUrl]);
                             }
-
                             // ④ 图片命名包含数字 (直接匹配最后一个搞不定 ，只能分割 ( ▼-▼ ))
                             if (/\.(png|jpg|gif)\s*$/.test(matchUrl)) {
                                 // 图片
@@ -115,19 +102,15 @@
                     // 不贪婪
                     var reg = /(<\s*img\s+).*?(\/?\s*>)/g,
                         imgTagArr = text.match(reg);
-
                     if (imgTagArr) {
                         var imgTag,
                             reBool = true;
-
                         // 一行可能存在多个匹配
                         for (var i=0;i<=imgTagArr.length;imgTagArr++) {
                             imgTag = imgTagArr[i].toString();
                             // img 标签未添加 alt/height/width eg : alt alt="" alt = "" alt = " "
-
                             // 过滤掉空格
                             var noBankimgTag = imgTag.replace(/\s*/g,'');
-
                             if(noBankimgTag.search(/alt="(?!").+?"/) <0 || noBankimgTag.search(/height="(?!").+?"/) < 0 || noBankimgTag.search(/width="(?!").+?"/) <0 -1){
                                 // 不包含 alt width height 中任何一个 返回错误
                                 reBool = false;
@@ -162,7 +145,6 @@
                         $.textDetection.validate.setError(funNam, options, [lineNum,text,'colspan']);
                         reBool = false;
                     }
-
                     if(text.indexOf('rowspan') > -1){
                         $.textDetection.validate.setError(funNam, options, [lineNum,text,'rowspan']);
                         reBool = false;
@@ -171,29 +153,22 @@
                 },
                 detectionTagA : function (text, lineNum, funNam, options) {
                     /*
-                    多个a标签以及xx就会出错。。 fasdfsaf<a href="#">test</a>fasdfasdf<a href="xxxx"
-                    var reg = /(<\s*a.*?)(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/g;
-
-                    通过多次操作:
-                        <a 分割 得到：
-                            fasdfsaf
-                            <a href="">fasdf</a>fasdffasfdasdf
-                            <a href="fasdf"
-                        没有结束标签 >则提示错误
-
-                    */
-
+                     多个a标签以及xx就会出错。。 fasdfsaf<a href="#">test</a>fasdfasdf<a href="xxxx"
+                     var reg = /(<\s*a.*?)(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/g;
+                     通过多次操作:
+                     <a 分割 得到：
+                     fasdfsaf
+                     <a href="">fasdf</a>fasdffasfdasdf
+                     <a href="fasdf"
+                     没有结束标签 >则提示错误
+                     */
                     // 包含 a 标签再做判断
-
                     if(text.search(/<\s*a/) >-1){
                         var splitStr = '|SPLITSTR|',  // 个性的分隔符
                             reBool = true;
                         var hasSplitStr = text.replace(/<\s*a/g,splitStr + '<a');
-
                         var arrStrBySplit= hasSplitStr.split(splitStr);
-
                         // 包含开始 a ，没有结束 提示错误
-
                         for(var i in arrStrBySplit){
                             if(arrStrBySplit.hasOwnProperty(i)){
                                 //
@@ -203,7 +178,6 @@
                                 }
                             }
                         }
-
                         return reBool;
                     }else{
                         return true;
@@ -222,7 +196,6 @@
             }
         }
     };
-
     var TextDetection = function (selector, options) {
         this.$instans = $(selector);
         this.options = options;
@@ -230,7 +203,6 @@
         this.fullTextSearchConfig = this.options.fullTextSearchConfig;  // 全文搜索 params Array
         this.init();
     };
-
     TextDetection.prototype = {
         init: function () {
             // init
@@ -238,23 +210,19 @@
             this.$inputElm = $(this.options.inputElm);
             this.bindEvent();
         },
-
         /**
          * 绑定事件
          */
         bindEvent: function () {
             var self = this;
             self.$instans.on("click", function () {
-
                 self.options.consoleWrap.empty();
                 self.inputElmVal = self.$inputElm.val();
                 self.inputDataArr = self.inputElmVal.split(/\r?\n|\r/); // 先更新数据
-
                 //self.setlineNums();     // 显示行号
                 var globalNotHasHasError = true,
                     methodNotHasHasError,
                     cIndex = 1;           // 当前检测方法 index
-
                 // 全文搜索
                 for(var i in self.fullTextSearchConfig){
                     if(self.fullTextSearchConfig.hasOwnProperty(i)){
@@ -265,13 +233,11 @@
                         }else {
                             alert('fullTextSearchConfig 配置有误，' + self.fullTextSearchConfig[i] + ' 方法不存在');
                         }
-
                         methodNotHasHasError && $.textDetection.consoleLog('木有错误 \\(^o^)/', self.options.consoleWrap,"success");
                         globalNotHasHasError = globalNotHasHasError && methodNotHasHasError;
                         cIndex ++ ;
                     }
                 }
-
                 // 按行检测
                 for (var validateNum in self.config) {
                     if(self.config.hasOwnProperty(validateNum)){
@@ -298,29 +264,24 @@
                 globalNotHasHasError && $.textDetection.consoleLog('猴赛雷 ✪ ω ✪ ,一个错误都木有 ！！！' , self.options.consoleWrap,"global-success");
             });
         },
-
         /**
          *  显示行号
          */
         setlineNums: function () {
             var html = "",
                 nums = this.getLineNum();
-
             for (var i = 0; i <= nums - 1; i++) {
                 html += '<span>' + (i + 1) + '</span>';
             }
-
             this.$lineNums.html(html);
             this.setTextAreaHeight(this.$lineNums.outerHeight());
         },
-
         /**
          *  设置 textarea 高度
          */
         setTextAreaHeight: function (height) {
             this.$inputElm.height(height - 10 * 2 + 5); // padding : 10  +5 滚动条
         },
-
         /**
          *  获取输入框行数
          */
@@ -328,15 +289,12 @@
             return this.inputDataArr.length;
         }
     };
-
     $.fn.textDetection = function (options) {
         this.each(function () {
             new TextDetection(this, $.extend({}, $.textDetection.defaults, options));
         });
     };
-
 })(jQuery);
-
 $(function () {
     /**
      * @params options
