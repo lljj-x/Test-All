@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {include file='top.htm'}
-	<link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+	<link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css?2015100701">
 </head>
 <body>
 <header id="header">
@@ -63,7 +63,8 @@
                             <input name="money" class="money" placeholder="请输入转出金额">
                         </span>
                     </label>
-                    <p class="label-right mt10">
+                    <p class="mt10">
+                        <span class="form-label">&nbsp;</span>
                         <a class="btn btn-default js_toCash" href="#" onclick="return false;">确认提现</a>
                     </p>
                 </form>
@@ -87,7 +88,7 @@
 </footer><!--end #footer -->
 {literal}
 <script>
-    $LAB.script("user.min.js")
+    $LAB.script("user.min.js?2015100701")
         .wait(function () {
             // 用户中心佣金提现表单
             if($("#to-cash-form").length > 0){

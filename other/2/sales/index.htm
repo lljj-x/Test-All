@@ -10,8 +10,7 @@
 </header>
 <div class="active-wrap">
     <section id="banner">
-        <div class="hf">
-            
+        <div class="my-hf hf ">
             <a href="/sales.html?a=yuehui" class="raiders-btn block-img" target="_blank">
                 <img src="/temp/skin1/dist/specialActivity/20767/images/raiders_btn.png" alt="优惠攻略"/>
             </a>
@@ -19,7 +18,7 @@
     </section>
     <div class="cate-warp" id="cate-warp">
         <section id="bg0">
-        <div class="hf">
+        <div class="my-hf hf">
             <div class="spike-warp">
                 <div class="spike-tab-wrap">
                     <ul id="spike-tabs" class="clearfix">
@@ -241,7 +240,7 @@
         
         <!--其他版块-->
         <section id="bg{$k+1}">
-            <div class="hf">
+            <div class="my-hf hf">
                 <div class="goods-bg">
                     <ul class="goods-list-wrap clearfix">
                     	{if $k == 0}
@@ -333,9 +332,9 @@
                                 <p class="goods-o-price">
                                     市场价：￥{$goods.market_price}
                                 </p>
-                                {if $goods.promote_price > 0}
+                                {if $goods.is_sales == 1}
                                 <p class="goods-price">
-                                    约惠价 <span class="price-text">￥{$goods.promote_price}</span>
+                                    促销价 <span class="price-text">￥{$goods.promote_price}</span>
                                 </p>
                                 {else}
                                  <p class="goods-price">

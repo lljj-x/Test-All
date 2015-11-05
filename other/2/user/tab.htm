@@ -102,7 +102,7 @@
 							<tr class="order-info">
 								<td class="pro-img td7_1">
                                 {foreach from=$order.goods item = goods}
-									<img src="{$goods.goods_thumb}" width="60" height="60" alt="">
+									<img src="{$goods.goods_thumb}" width="60" height="60">
                                 {/foreach}
 								</td>
 								<!--<td class="customer-service td7_2">陈玉玲</td>-->
@@ -190,7 +190,7 @@
 								<tr class="product-List">
 									<td class="td4_1">
 										<div class="pro-img-wrap clearfix">
-											<span class="img-wrap fl"><a href="{$goods.url_title}" target="_blank"><img src="{$goods.goods_grid}" width="80" height="80" alt=""></a></span>
+											<span class="img-wrap fl"><a href="{$goods.url_title}" target="_blank"><img src="{$goods.goods_grid}" width="80" height="80"></a></span>
 											<span class="product-title fl">{$goods.goods_title}</span>
 										</div>
 									</td>
@@ -258,7 +258,7 @@
 						<tbody>
 							<tr class="returns-info">
 								<td class="pro-img td7_1">
-									<img src="{$apply.goods.goods_grid}" width="60" height="60" alt="">
+									<img src="{$apply.goods.goods_grid}" width="60" height="60">
 								</td>
 								<td class="goods-price td7_2">￥{$apply.goods.goods_price}</td>
 								<td class="refund-amount td7_3">￥{$apply.apply_money}</td>
@@ -299,7 +299,7 @@
 							<p class="mb20">
 								退款凭证<br/>
                                 {foreach from =$apply.apply_detail.apply_img_arr item = imgurl }
-								<img src="{$imgurl.img_url}" width="80" height="80" alt="">
+								<img src="{$imgurl.img_url}" width="80" height="80">
                                 {/foreach}
 							</p>
 						</div><!-- .returns-details-content -->
@@ -313,7 +313,7 @@
 			<div class="item consultingGoods-info-item none">
             	{if $type eq 1}
 				<div class="goods-info-wrap clearfix mb25">
-					<div class="goods-img fl"><img src="{$goods_detail.goods_grid}" width="250" height="250" alt=""></div>
+					<div class="goods-img fl"><img src="{$goods_detail.goods_grid}" width="250" height="250"></div>
 					<div class="goods-info fr">
 						<p class="goods-title fb">{$goods_detail.goods_title}</p>
 						<p class="goods-price-wrap"><span class="shop_price fb">￥{$goods_detail.shop_price}</span>  <span class="market_price">市场价：{$goods_detail.market_price}</span></p>
@@ -341,7 +341,7 @@
 						<tr class="product-List">
 							<td class="td3_1">
 								<div class="pro-img-wrap clearfix">
-									<span class="img-wrap fl"><a href="{$cart.url}" target="_blank"><img src="{$cart.img}" width="80" height="80" alt=""></a></span>
+									<span class="img-wrap fl"><a href="{$cart.url}" target="_blank"><img src="{$cart.img}" width="80" height="80"></a></span>
 									<span class="product-title fl">{$cart.title}</span>
 								</div>
 							</td>
@@ -399,5 +399,6 @@
 		})();
 	</script>
 {/literal}
+{include file='tongji_js.htm'}
 </body>
 </html>

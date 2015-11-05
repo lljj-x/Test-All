@@ -9,6 +9,9 @@
      */
     window.USER = {
         allAjaxUrl: {
+            // 获取手机验证码接口
+            getPhoneCodeUrl : '/m-users-a-giftsms.html',
+
             // 银行卡提现post 地址
             commissionToCashUrl: '/m-users-a-take_cash.htm',
 
@@ -36,6 +39,7 @@
 
             // 实名认证
             shippingAddressVerifiedUrl: '/m-users-a-verified_cardid.htm', //实名验证
+            getVerifiedDataUrl : '/temp/skin1/html/address.json',    // 获取实名认证信息
 
             // 售后管理
             applyListUrl : '/m-users-a-apply_list.htm',
@@ -79,22 +83,7 @@
             // 佣金提现表单
             form: '',
             validate: function () {
-                $.validator.setDefaults({
-                    debug: false,
-                    success: "valid",
-                    ignore: ""
-                });
-
-                this.form.validate({
-                    errorClass: "form-error",
-                    wrapper: "p",
-                    success: function (label) {
-                        label.remove();
-                    },
-                    errorPlacement: function (error, element) {
-                        element.parent().parent().find(".error").remove();
-                        error.addClass("error").appendTo(element.parent().parent());
-                    },
+                USER.otherGlobal.getMyValidate(this.form,{
                     rules: {
                         username: {
                             required: true,
@@ -137,7 +126,7 @@
                             digits: "请输入正确的提现金额"
                         }
                     }
-                })
+                });
             },
             checkForm: function (formId) {
                 // 佣金提现 方法
@@ -175,22 +164,7 @@
             form: '',
             validate: function () {
                 var that = this;
-                $.validator.setDefaults({
-                    debug: false,
-                    success: "valid",
-                    ignore: "hidden"
-                });
-
-                this.form.validate({
-                    errorClass: "form-error",
-                    wrapper: "p",
-                    success: function (label) {
-                        label.remove();
-                    },
-                    errorPlacement: function (error, element) {
-                        element.parent().parent().find(".error").remove();
-                        error.addClass("error").appendTo(element.parent().parent());
-                    },
+                USER.otherGlobal.getMyValidate(this.form,{
                     rules: {
                         status: {
                             required: true
@@ -233,7 +207,7 @@
                             max: "请输入数量少于 {0}"
                         }
                     }
-                })
+                });
             },
             bindNumModifiedEvent: function () {
                 // 售后 修改数量事件
@@ -289,22 +263,7 @@
             form: '',
             validate: function () {
                 // 撤销售后验证
-                $.validator.setDefaults({
-                    debug: false,
-                    success: "valid",
-                    ignore: ""
-                });
-
-                this.form.validate({
-                    errorClass: "form-error",
-                    wrapper: "p",
-                    success: function (label) {
-                        label.remove();
-                    },
-                    errorPlacement: function (error, element) {
-                        element.parent().parent().find(".error").remove();
-                        error.addClass("error").appendTo(element.parent().parent());
-                    },
+                USER.otherGlobal.getMyValidate(this.form,{
                     rules: {
                         cencel: {
                             required: true
@@ -315,7 +274,7 @@
                             required: "请选择撤销原因"
                         }
                     }
-                })
+                });
             },
             checkUndoForm: function () {
                 // 撤销售后事件
@@ -377,26 +336,10 @@
             form: '',
             validate: function () {
                 USER.otherGlobal.setValidateCnMessage();
-                $.validator.setDefaults({
-                    debug: false,
-                    success: "valid",
-                    ignore: ""
-                });
-
-                this.form.validate({
-                    meta: "validate",
-                    errorClass: "form-error",
-                    wrapper: "p",
-                    success: function (label) {
-                        label.remove();
-                    },
-                    errorPlacement: function (error, element) {
-                        element.parent().parent().find(".error").remove();
-                        error.addClass("error").appendTo(element.parent().parent());
-                    },
+                USER.otherGlobal.getMyValidate(this.form,{
                     rules: {},
                     messages: {}
-                })
+                });
             },
             setStart: function ($elm, num) {
                 var inputObj = $elm.siblings(".js_inputStart")[0];
@@ -424,11 +367,11 @@
                 });
 
                 // 坑爹的快速评价内容同步
-                that.form.find(".js_parent").keyup(function (event) {
+                that.form.find(".js_parent").keyup(function () {
                     var parentValue = this.value;
                     clearTimeout(timer);
                     timer = setTimeout(function () {
-                        that.form.find(".js_child").text(parentValue);
+                        that.form.find(".js_child").val(parentValue);
                     }, 200);
                 });
             },
@@ -453,8 +396,7 @@
             // 订单相关操作
             /**
              *
-             * @param orderSn 订单Sn
-             * @param isAuto 是否为自动取消，不弹窗 ，不触发 全局 ajax 事件
+             * @param $form 订单Sn
              */
             cancelOrderFormValidate : function ($form) {
                 // 表单验证
@@ -499,7 +441,7 @@
                 var $form = $("<form />");
                 $form.attr({
                     class : "user-global-form cancel-order-form none"
-                }).html('<input type="hidden" name="is_auto" value="0"/><input type="hidden" name="order_sn" class="js_orderSn" value=""/><label><span class="form-label"><span class="required">*</span>取消原因</span><span class="reason-wrap"><select name="cencel"><option value="">请选择取消原因</option><option value="我不想买了">我不想买了</option><option value="信息填写错误，重新拍">信息填写错误，重新拍</option><option value="付款遇到困难">付款遇到困难</option><option value="4">拍错了</option><option value="重复下单">重复下单</option><option value="忘记使用优惠券">忘记使用优惠券</option><option value="其他原因">其他原因</option></select></span></label><p class="label-right mt20"><a class="btn btn-default js_submit" href="javascript:;" onclick="return false;">确定</a><a class="btn btn-outline js_cancel ml30" href="javascript:;" onclick="return false;">取消</a></p>');
+                }).html('<input type="hidden" name="is_auto" value="0"/><input type="hidden" name="order_sn" class="js_orderSn" value=""/><label><span class="form-label"><span class="required">*</span>取消原因</span><span class="reason-wrap"><select name="cencel"><option value="">请选择取消原因</option><option value="我不想买了">我不想买了</option><option value="信息填写错误，重新拍">信息填写错误，重新拍</option><option value="付款遇到困难">付款遇到困难</option><option value="4">拍错了</option><option value="重复下单">重复下单</option><option value="忘记使用优惠券">忘记使用优惠券</option><option value="其他原因">其他原因</option></select></span></label><p class="mt20"><span class="form-label">&nbsp;</span><a class="btn btn-default js_submit" href="javascript:;" onclick="return false;">确定</a><a class="btn btn-outline js_cancel ml30" href="javascript:;" onclick="return false;">取消</a></p>');
 
                 $form.appendTo("body"); // layer
                 this.cancelOrderFormValidate($form);    //表单验证
@@ -614,7 +556,7 @@
                                 shade: 0.8,
                                 area: ['550px', '400px'],
                                 content: result.msg,
-                                success: function(layero, index){
+                                success: function(layero){
                                     var $layerDiv = $("<div />").css({
                                         display: "block",
                                         position: "absolute",
@@ -648,7 +590,7 @@
             }
         },
         coupon: {
-            getCoupon: function (event) {
+            getCoupon: function () {
                 // 用户中心 去掉获取优惠券功能
                 var url = $(this).attr("href");
                 USER.userAjax.getAjaxPromise({
@@ -717,9 +659,16 @@
                     event.preventDefault();
                     that.verified($(this)[0], event);
                 });
+                $parent.on("click", ".js_editVerified", function (event) {
+                    // 验证
+                    event.preventDefault();
+                    that.editVerified($(this)[0], event);
+                });
+
                 $parent.on("click", ".js_setDefault", function (event) {
                     // 设置默认
                     event.preventDefault();
+                    if($(this).hasClass("selected")) return false;
                     that.setDefault($(this)[0], event);
                 });
             },
@@ -741,31 +690,54 @@
                 }, function () {
                 });
             },
-            verified: function (elm, event) {
-                var that = this;
+            editVerified : function(elm, event){
+                var self = this;
+
+                /*
+                USER.userAjax.getAjaxPromise({
+                    url : USER.allAjaxUrl.getVerifiedDataUrl
+                }).done(function (result) {
+                    if(result.status == 0){
+                        // 弹窗
+                        self.verified(elm, event,result);
+                    }
+                })
+                */
+                self.verified(elm, event,$(elm).data("img-list"));
+            },
+            verified: function (elm, event,result) {
                 var $parent = $("#js_pop");
                 $parent.find(".js_name").text($(elm).data("username"));
-                $parent.find(".js_cardId").text($(elm).data("cart-id"));
-                $parent.find(".js_cardId2").val($(elm).data("cart-id"));
-
+                $parent.find(".js_cardId").text($(elm).data("card-id"));
+                $parent.find(".js_cardId2").val($(elm).data("card-id"));
                 $parent.find(".js_addressId").val($(elm).data("address-id"));
+
+                if(result != undefined){
+                    // 修改实名验证
+                    (typeof(result) != "object") && (result = $.parseJSON(result));
+                    var insertText = '',imgList = result;
+                    for(var i=0;i<imgList.length;i++){
+                        insertText += '<li><i class="user-icon icon-remove js_remove remove" data-delete-url = ' + imgList[i].delete_url + '></i><img src="' + imgList[i].img_url + '"/><input type="hidden" name="' + 'file[]" value="' + imgList[i].img_url + '"/></li>';
+                    }
+                    $parent.find('.js_files').append(insertText);
+                }
+                ($parent.find(".js_files").find("li").length >= 2) ? $parent.find(".file-upload-warp").hide() : $parent.find(".file-upload-warp").show();
                 USER.otherGlobal.openPop({
                     title: "实名认证",
-                    area: ['520px', "420px"], //宽高
+                    area: ['530px', "430px"], //宽高
                     end: function () {
-                        // 删除服务器已上传图片
-                        $parent.find(".js_remove").each(function () {
-                            USER.userAjax.getAjaxPromise({
-                                url: $(this).data("delete-url"),
-                                type: "GET",
-                                global: false
-                            }, false);
-                        });
+                        // 只有新添加才执行图片删除操作
+                        if(result == undefined){
+                            $parent.find(".js_remove").each(function () {
+                                USER.userAjax.getAjaxPromise({
+                                    url: $(this).data("delete-url"),
+                                    type: "GET",
+                                    global: false
+                                }, false);
+                            });
+                        }
                         $parent.find(".js_files").empty();
                         $parent.find(".error").hide();
-
-                        // 设置当前上传图片数为 0
-                        $parent.find(".js_files").data("end-clear",1);
                     }
                 }, true);
             },
@@ -792,35 +764,15 @@
                     layer.alert("操作失败，点击确定重试", function () {
                         window.location.reload(true);
                     });
-                })
+                });
                 return promise;
             },
-            /* 取消身份证 验证 20150914 -liu
-            validate: function () {
-                this.valideta = USER.otherGlobal.getMyValidate($("#" + this.verifiedFormId),{
-                    success: function (label,element) {
-                        $(element).parent().removeClass("form-error");
-                    },
-                    errorPlacement: function (error, element) {
-                        element.parent().addClass("form-error");
-                    },
-                    rules: {
-                        "files[]": {
-                            required: true
-                        }
-                    },
-                    messages: {
-                        "files[]": {
-                            required: "请上传图片"
-                        }
-                    }
-                });
-            },
-            */
             verifiedForm: function () {
                 var that = this;
                 $(".js_verifiedBtn").on("click", function () {
-                    if ($("#verified-form").find(".js_remove").length == 2) {
+                    var $form = $("#verified-form");
+
+                    if ($form.find(".js_remove").length == 2) {
                         // 提交数据
                         that.operate({
                             url: USER.allAjaxUrl.shippingAddressVerifiedUrl,
@@ -832,7 +784,7 @@
                             }
                         });
                     }else{
-                        $("#verified-form").find(".error").html('<span class="form-error" style="display: inline;">' + '请先上传身份证正反面2张照片' + '</span>').show();
+                        $form.find(".error").html('<span class="form-error" style="display: inline;">' + '请先上传身份证正反面2张照片' + '</span>').show();
                     }
                 });
             }
@@ -842,22 +794,7 @@
             changePassFormObj: '',    // jQuery 对象
 
             profileValidate: function () {
-                $.validator.setDefaults({
-                    debug: false,
-                    success: "valid",
-                    ignore: ""
-                });
-
-                this.profileFormObj.validate({
-                    errorClass: "form-error",
-                    wrapper: "p",
-                    success: function (label) {
-                        label.remove();
-                    },
-                    errorPlacement: function (error, element) {
-                        element.parent().parent().find(".error").remove();
-                        error.addClass("error").appendTo(element.parent().parent());
-                    },
+                USER.otherGlobal.getMyValidate(this.profileFormObj,{
                     rules: {
                         nickname: {
                             rangelength: [2, 25]
@@ -874,7 +811,7 @@
                             email: "请输入正确的邮箱地址"
                         }
                     }
-                })
+                });
             },
             profileForm: function ($form) {
                 var that = this;
@@ -912,8 +849,6 @@
                     });
 
             },
-            // ... .. .. . .
-
             changePassValidate: function () {
                 USER.otherGlobal.getMyValidate(this.changePassFormObj,{
                     rules: {
@@ -994,7 +929,154 @@
                             }
                         });
                     });
+            },
+            paymentForm: function ($form) {
+                $LAB.script("jquery.validate.min.js")
+                    .wait(function () {
+                        jQuery.validator.addMethod("mobile", function(value, element) {
+                            var length = value.length;
+                            var mobile =  /^(((13[0-9]{1})|(15[0-9]{1})|(17[6-8]{1})|(14[5-7]{1})|(18[0-9]{1}))+\d{8})$/;
+                            return (length == 11 && mobile.test(value));
+                        }, "手机号码格式错误");
+
+                        // 只做纯数字和纯字母判断
+                        jQuery.validator.addMethod("passwordStrength", function(value, element) {
+                            return (!(/^\d+$/.test(value)) && !(/^[a-zA-Z]+$/.test(value)));
+                        }, "密码过于简单，请输入数字字母组合");
+
+                        USER.otherGlobal.getMyValidate($form,{
+                            rules: {
+                                password: {
+                                    required: true,
+                                    maxlength: 6,
+                                    notEqualTo: "#js_currentPass",
+                                    passwordStrength : true
+                                },
+                                password_confirm: {
+                                    required: true,
+                                    maxlength: 6,
+                                    equalTo: $("#js_password")
+                                },
+                                security_code: {
+                                    required: true
+                                },
+                                phone:{
+                                    required: true,
+                                    mobile : true
+                                },
+                                phone_code:{
+                                    required: true
+                                }
+                            },
+                            messages: {
+                                password: {
+                                    required: "请输入新密码",
+                                    maxlength: "密码长度必须6位",
+                                    notEqualTo: "请设置不同的密码"
+                                },
+                                password_confirm: {
+                                    required: "请确认密码",
+                                    maxlength: "密码长度必须6位",
+                                    equalTo: '两次输入密码不一致！'
+                                },
+                                security_code: {
+                                    required: "请输入验证码"
+                                },
+                                phone:{
+                                    required: "请输入手机号码"
+                                },
+                                phone_code:{
+                                    required: "请输入短信验证码"
+                                }
+                            }
+                        });
+
+                        // 显示form
+                        $(".js_showForm").on("click", function () {
+                             $form.show();
+                        });
+
+                        // 刷新验证码
+                        $form.find(".js_refresh").click(function () {
+                            var img = document.getElementById('img-verifycode');
+                            img.src = img.getAttribute('data-src') + "&" + (new Date()).getTime();
+                        });
+
+                        // 手机 + 验证码 获取短信
+                        var $cElm = $(".js_phoneNum,.js_securityCode");
+                        var $getPhoneCode = $(".js_getPhoneCode");
+                        $cElm.keyup(function () {
+                            var hasError = false; // 默认没有错误
+                            $cElm.each(function () {
+                                if($(this).val() == ''){
+                                    hasError = true;
+                                    return false;
+                                }
+                            });
+                            // 上面验证通过验证手机
+                            if(!hasError){
+                                var mobile =  /^(((13[0-9]{1})|(15[0-9]{1})|(17[6-8]{1})|(14[5-7]{1})|(18[0-9]{1}))+\d{8})$/;
+                                hasError = !(mobile.test($(".js_phoneNum").val()));
+                            }
+
+                            hasError ? $getPhoneCode.addClass("disabled") : $getPhoneCode.removeClass("disabled");
+                        });
+
+                        var codeTimer = null;
+                        // 获取手机码
+                        $getPhoneCode.on("click", function () {
+                            if($(this).hasClass("disabled")){
+                                return false;
+                            }else{
+                                USER.userAjax.getAjaxPromise({
+                                    url : USER.allAjaxUrl.getPhoneCodeUrl,
+                                    data : {
+                                        phone:$form.find(".js_phoneNum").val(),
+                                        type:1,
+                                        code:$form.find(".js_securityCode").val()
+                                    }
+                                },false).done(function(result){
+                                    if(result.status != 0){
+                                        layer.alert(result.msg);
+                                    }else{
+                                        // 傻缺需求 ...
+                                        var $codeLabel = $(".js_codeLabel");
+                                        $getPhoneCode.addClass("disabled");
+                                        $codeLabel.slideUp(200);
+                                        var timer = 60;
+                                        codeTimer = setInterval(function(){
+                                            $getPhoneCode.text(timer);
+                                            (timer == 0) && (clearInterval(codeTimer),$getPhoneCode.removeClass("disabled").text('获取短信验证码'),$codeLabel.slideDown(200));
+                                            timer --;
+                                        },1000);
+                                    }
+                                }).fail(function () {
+                                    layer.alert("获取验证码失败");
+                                });
+                            }
+                        });
+
+                        // form submit
+                        $form.find(".js_submit").on("click", function (event) {
+                            event.preventDefault();
+                            if ($form.valid()) {
+                                USER.userAjax.getAjaxPromise({
+                                    url: $form.attr("action"),
+                                    data: $form.serialize()
+                                }, true)
+                                    .done(function (result) {
+                                        if (result.status == 0) {
+                                            USER.otherGlobal.layerAlertReload(result.msg);
+                                        }
+                                    })
+                                    .fail(function () {
+                                        USER.otherGlobal.layerAlertReload("修改支付密码失败，点击确定重试！");
+                                    });
+                            }
+                        });
+                    });
             }
+
         },
         otherGlobal: {
             layerIndex: "",    // 控制 弹窗关闭
@@ -1091,7 +1173,6 @@
                     },"Each element should have a different value"
                 );
 
-
                 jQuery.validator.setDefaults({
                     debug: false,
                     success: "valid",
@@ -1106,6 +1187,7 @@
                     },
                     errorPlacement: function (error, element) {
                         element.parent().parent().find(".error").remove();
+                        error.prepend('<span class="span-form-label">&nbsp;</span>');
                         error.addClass("error").appendTo(element.parent().parent());
                     }
                 },options);

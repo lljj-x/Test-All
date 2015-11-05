@@ -14,8 +14,2051 @@
 	<header id="header">
 		{include file="public_top.htm"}
 	</header>
-    {if $active == 2}
 
+    {if $active == 10} {*营养健康分会场*}
+    {literal}
+    <style>
+        .active-body{background:#6abe10;padding-bottom:50px;}
+        .active-w1000{width:1000px;margin-left:auto;margin-right:auto;}
+        .active-banner{width:100%;height:660px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/jiankang/banner.jpg") no-repeat center top;}
+        .active-section-nav{margin:20px auto 12px;}
+        .active-section-nav li{width:20%;float:left;}
+        .active-section-nav li a{display:block;height:60px;line-height:60px;text-align:center;background:#8035fb;color:#fff;text-decoration:none;font-size:24px;}
+        .active-section-nav li a .nav-icon{display:none;width:24px;height:35px;vertical-align:middle;padding-right:5px;padding-bottom:3px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/icon_rocket.png") no-repeat 0 0;}
+        .active-section-nav li a:hover{background:#662ac8;}
+        .active-section-nav li a.active{background:#431096;}
+        .active-section-nav li a.active .nav-icon{display:inline-block;}
+        .active-section-list{width:1100px;}
+        .active-section-list li{width:244px;background:#fff;font-family:"microsoft yahei";float:left;margin-right:8px;margin-top:8px;}
+        .active-section-list li .goods-img{width:200px;height:200px;margin:0 auto;}
+        .active-section-list li img{width:200px;height:200px;}
+        .active-section-list li .goods-title{font-size:14px;padding:8px 15px 10px;border-bottom:1px solid #e4dbfd;height:38px;overflow:hidden;}
+        .active-section-list li .goods-title a{color:#000;text-decoration:none;font-weight:bold;display: block;height: 38px;overflow: hidden;}
+        .active-section-list li .goods-title a:hover{text-decoration:underline;}
+        .active-section-list li .goods-price{padding:8px 15px 0;}
+        .active-section-list li .goods-price strong{color:#e61773;font-size:20px;font-weight:bold;}
+        .active-section-list li .goods-price .unit-price{margin-left:10px;margin-top:2px;height:20px;border:1px dotted #e61773;line-height:20px;color:#e61773;font-weight:bold;padding:0 8px;}
+        .active-section-list li .goods-price .unit-price i{width:0;height:0;left:-1px;bottom:-1px;display:block;border-style:solid;border-width:0 7px 7px 0px;border-color:transparent transparent #e61773 transparent;}
+        .active-section-list li .goods-price .goods-discount{width:40px;height:19px;margin-left:10px;margin-top:4px;line-height:19px;font-size:14px;color:#fff;padding-left:17px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/icon_discount.png") no-repeat center top;}
+        .active-section-list li .goods-price .goods-discount em{font-weight:normal;font-size:12px;padding-left:3px;}
+        .active-section-list li .goods-market-price{font-size:12px;color:#999;padding:3px 15px 8px;}
+        .active-section-list li .goods-market-price del{text-decoration:line-through;}
+        .active-section-list li .goods-off-tip{width:100%;height:33px;text-align:center;line-height:33px;background:#764df7;font-size:18px;color:#fff;font-weight:bold;}
+        /*左侧导航*/
+        .left-nav{position:absolute;height:100%;top:auto;z-index:10;left:0;width:120px;background:#000;}
+        .left-nav dt{padding-top:15px;padding-left:8px;margin-bottom:15px;}
+        .left-nav dd{padding:1px 5px;font-family:"simsun";}
+        .left-nav dd a{display:block;color:#fff;text-decoration:none;width:90px;height:30px;line-height:30px;padding:0 10px;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon.png") no-repeat 100px center;}
+        .left-nav dd a:hover,.left-nav dd a.current{color:#feda2a;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon_hover.png") no-repeat 100px center;}
+        /*侧边导航*/
+        .side-nav{width:145px;position:fixed;right:100px;top: 50px;left: 50%;margin-left: 520px;}
+        .side-nav-cover{width:145px;height:130px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_cover.png") no-repeat center top;}
+        .side-nav-content{width:128px;float:right;background:#541342;}
+        .side-nav-content ul{padding:10px 0;}
+        .side-nav-content li{width:110px;margin:8px auto;}
+        .side-nav-content li a{display:block;height:32px;text-align:center;line-height:32px;background:#8035fb;color:#fff;text-decoration:none;font-size:14px;font-family:"simsun"}
+        .side-nav-content li a span{font-family:Arial;font-weight:bold;padding-right:5px;}
+        .side-nav-content li a:hover{background:#5b26b3;}
+        .side-nav-content li.active a{background:#5b26b3;} 
+        .side-nav-contact a{width:128px;height:51px;float:right;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_service.png") no-repeat center top;}
+        .side-nav-top a{width:128px;height:56px;float:right;cursor:pointer;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_top.png") no-repeat center top;}
+    </style>
+    {/literal}
+        <div class="active-body">
+            <div class="active-banner"></div>
+            {foreach from=$data key = sk item=special}
+            <div class="active-section active-w1000" id="model_{$sk+1}">                
+                <nav class="active-section-nav">
+                    <ul class="clearfix">
+                        {foreach from=$data  item=s}
+                        <li><a href="javascript:;" class="js_itemNav {if $special.name eq $s.name}active{/if}"><i class="nav-icon"></i>{$s.name}</a></li>
+                    	{/foreach}
+                    </ul>
+                </nav>
+                <div class="active-section-list">
+                    <ul class="clearfix">
+                       {foreach from = $special.data key = k item = goods}
+                        <li>
+                            <p class="goods-img"><a href="{$goods.link_url}" target="_blank"><img src="{$goods.goods_img}"/></a></p>
+                            <p class="goods-title"><a href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a></p>
+                            <p class="goods-price clearfix">
+                                <strong class="fl">￥{$goods.shop_price}</strong>
+                               <!-- <span class="unit-price pr fl db none"><i class="pa"></i>折合单件￥156.00</span>-->
+                                <span class="goods-discount pr fl db"><i class="pa"></i>{$goods.zekou}<em>折</em></span>
+                            </p>
+                            <p class="goods-market-price">国内参考价<del>￥{$goods.market_price}</del></p>
+                            <p class="goods-off-tip">{if $goods.shop_price < 299 } 满299减50 {else}满499减100{/if}</p>
+                        </li>
+                     {/foreach}
+                    </ul>
+                </div>                
+            </div>
+			{/foreach}
+        </div>
+
+        <div class="left-nav">
+            <dl>
+                <dt><a href="{$DOMAIN}/sales.html?a=d11&s=13"><img src="{$imgcache_url}images/promotion/shangoujie/left_nav_logo.png"/></a></dt>
+                <dd><a href="{$DOMAIN}/sales.html?a=d11&s=13" target="_blank">闪购节主会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-7.html" target="_blank">大牌母婴分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-9.html" target="_blank">美容护肤分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-10.html" target="_blank" class="current">健康营养分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-8.html" target="_blank">家居个护分会场</a></dd>
+            </dl>
+        </div>
+
+
+        <div class="side-nav none" id="sortTopNav">
+            <p class="side-nav-cover"></p>
+            <div class="side-nav-content">
+                <ul>
+                   {foreach from=$data key=k  item=s}
+                    <li><a href="javascript:;"><span>{$k+1}F</span>{$s.name}</a></li>
+                   {/foreach}
+                </ul>                
+            </div>
+            <p class="side-nav-contact"><a href="javascript:;" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698&info=',900,600);"></a></p>
+            <p class="side-nav-top"><a href="#"></a></p>
+        </div>
+
+        <script>
+        {literal}
+            //左侧浮动导航
+            (function(){
+                var topHeight = $("#header").outerHeight(true),
+                    windowHeight = $(window).outerHeight();
+                $(".left-nav").css({top:topHeight});
+                $(window).on("scroll",function(e){                
+                    var $this = $(this),
+                        scrollTop = $this.scrollTop();
+                    if(scrollTop>=topHeight){
+                        $(".left-nav").css({
+                            top:0,
+                            position:"fixed"
+                        });
+
+                        if(scrollTop+windowHeight>=$("footer").offset().top){
+                            $(".left-nav").css({
+                                top:"auto",
+                                bottom:scrollTop+windowHeight - $("footer").offset().top,
+                                position:"fixed"
+                            });
+                        }
+
+                    }
+                    else{
+                        $(".left-nav").css({
+                            top:topHeight,
+                            position:"absolute"
+                        });
+                    }        
+                });
+            })();
+
+            //滑动页面顶部tab切换
+            function SetScrollTop(obj,targetObj){
+                this.index = 0;
+                this.obj = $(obj);
+                this.targetObj = $(targetObj);
+                this.ini();
+            }
+            SetScrollTop.prototype.ini = function(){
+                var that = this;
+
+                $(window).scroll(function(event) {
+                    var $this = $(this),
+                        widnScroll = $this.scrollTop(),
+                        firstTargetTop = that.obj.eq(0).offset().top;
+
+                    if(widnScroll > firstTargetTop){//如果页面滑动到第一个目标对象区域块
+                        that.targetObj.removeClass('none');
+                    }else{
+                        that.targetObj.addClass('none');
+                    }
+
+                    $.each(that.obj, function(index, val) {
+                         var $targetItem = $(val);
+                         var targetTop = $targetItem.offset().top;
+
+                         if(widnScroll >= targetTop){
+                            that.targetObj.find("li").eq(index).addClass('active').siblings('li').removeClass('active');
+                         }
+                    });
+                });
+
+                that.chooseItem();
+                that.chooseItemNav();
+            };
+            SetScrollTop.prototype.chooseItem = function(){
+                var that = this;
+
+                that.targetObj.on("click","li",function(){
+                    var $this = $(this);
+                    var targetIndex = that.targetObj.find("li").index($(this));
+                    var huadongLength = that.obj.eq(targetIndex).offset().top; 
+
+                    $this.addClass('active').siblings('li').removeClass('active');
+
+                    $("html,body").animate({scrollTop:huadongLength}, 500);
+                });
+            };
+            SetScrollTop.prototype.chooseItemNav = function(){
+                var that = this,$js_itemNav = $(".js_itemNav");
+
+                $js_itemNav.click(function(){
+                    var $this = $(this),
+                        thisParent = $this.closest('.active-section'),
+                        index = thisParent.find(".js_itemNav").index($this),
+                        huadongLength = that.obj.eq(index).offset().top; 
+
+                    $("html,body").animate({scrollTop:huadongLength}, 500);
+                });
+
+            };
+            // 页面滑动tab切换
+            new SetScrollTop(".active-section","#sortTopNav");
+        {/literal}
+    </script>
+    {/if}
+
+
+    {if $active == 9} {*美容护肤分会场*}
+    {literal}
+    <style>
+        .active-body{background:#ff097c;padding-bottom:50px;}
+        .active-w1000{width:1000px;margin-left:auto;margin-right:auto;}
+        .active-banner{width:100%;height:660px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/hufu/banner.jpg") no-repeat center top;}
+        .active-section-nav{margin:20px auto 12px;}
+        .active-section-nav li{width:25%;float:left;}
+        .active-section-nav li a{display:block;height:60px;line-height:60px;text-align:center;background:#8035fb;color:#fff;text-decoration:none;font-size:24px;}
+        .active-section-nav li a .nav-icon{display:none;width:24px;height:35px;vertical-align:middle;padding-right:5px;padding-bottom:3px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/icon_rocket.png") no-repeat 0 0;}
+        .active-section-nav li a:hover{background:#662ac8;}
+        .active-section-nav li a.active{background:#431096;}
+        .active-section-nav li a.active .nav-icon{display:inline-block;}
+        .active-section-list{width:1100px;}
+        .active-section-list li{width:244px;background:#fff;font-family:"microsoft yahei";float:left;margin-right:8px;margin-top:8px;}
+        .active-section-list li .goods-img{width:200px;height:200px;margin:0 auto;}
+        .active-section-list li img{width:200px;height:200px;}
+        .active-section-list li .goods-title{font-size:14px;padding:8px 15px 10px;border-bottom:1px solid #e4dbfd;height:38px;overflow:hidden;}
+        .active-section-list li .goods-title a{color:#000;text-decoration:none;font-weight:bold;display: block;height: 38px;overflow: hidden;}
+        .active-section-list li .goods-title a:hover{text-decoration:underline;}
+        .active-section-list li .goods-price{padding:8px 15px 0;}
+        .active-section-list li .goods-price strong{color:#e61773;font-size:20px;font-weight:bold;}
+        .active-section-list li .goods-price .unit-price{margin-left:10px;margin-top:2px;height:20px;border:1px dotted #e61773;line-height:20px;color:#e61773;font-weight:bold;padding:0 8px;}
+        .active-section-list li .goods-price .unit-price i{width:0;height:0;left:-1px;bottom:-1px;display:block;border-style:solid;border-width:0 7px 7px 0px;border-color:transparent transparent #e61773 transparent;}
+        .active-section-list li .goods-price .goods-discount{width:40px;height:19px;margin-left:10px;margin-top:4px;line-height:19px;font-size:14px;color:#fff;padding-left:17px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/icon_discount.png") no-repeat center top;}
+        .active-section-list li .goods-price .goods-discount em{font-weight:normal;font-size:12px;padding-left:3px;}
+        .active-section-list li .goods-market-price{font-size:12px;color:#999;padding:3px 15px 8px;}
+        .active-section-list li .goods-market-price del{text-decoration:line-through;}
+        .active-section-list li .goods-off-tip{width:100%;height:33px;text-align:center;line-height:33px;background:#764df7;font-size:18px;color:#fff;font-weight:bold;}
+        /*左侧导航*/
+        .left-nav{position:absolute;height:100%;top:auto;z-index:10;left:0;width:120px;background:#000;}
+        .left-nav dt{padding-top:15px;padding-left:8px;margin-bottom:15px;}
+        .left-nav dd{padding:1px 5px;font-family:"simsun";}
+        .left-nav dd a{display:block;color:#fff;text-decoration:none;width:90px;height:30px;line-height:30px;padding:0 10px;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon.png") no-repeat 100px center;}
+        .left-nav dd a:hover,.left-nav dd a.current{color:#feda2a;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon_hover.png") no-repeat 100px center;}
+        /*侧边导航*/
+        .side-nav{width:145px;position:fixed;right:100px;top: 50px;left: 50%;margin-left: 520px;}
+        .side-nav-cover{width:145px;height:130px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_cover.png") no-repeat center top;}
+        .side-nav-content{width:128px;float:right;background:#541342;}
+        .side-nav-content ul{padding:10px 0;}
+        .side-nav-content li{width:110px;margin:8px auto;}
+        .side-nav-content li a{display:block;height:32px;text-align:center;line-height:32px;background:#8035fb;color:#fff;text-decoration:none;font-size:14px;font-family:"simsun"}
+        .side-nav-content li a span{font-family:Arial;font-weight:bold;padding-right:5px;}
+        .side-nav-content li a:hover{background:#5b26b3;}
+        .side-nav-content li.active a{background:#5b26b3;} 
+        .side-nav-contact a{width:128px;height:51px;float:right;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_service.png") no-repeat center top;}
+        .side-nav-top a{width:128px;height:56px;float:right;cursor:pointer;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_top.png") no-repeat center top;}
+    </style>
+    {/literal}
+        <div class="active-body">
+            <div class="active-banner"></div>
+            {foreach from=$data key = sk item=special}
+            <div class="active-section active-w1000" id="model_{$sk+1}">                
+                <nav class="active-section-nav">
+                    <ul class="clearfix">
+                        {foreach from=$data  item=s}
+                        <li><a href="javascript:;" class="js_itemNav {if $special.name eq $s.name}active{/if}"><i class="nav-icon"></i>{$s.name}</a></li>
+                    	{/foreach}
+                    </ul>
+                </nav>
+                <div class="active-section-list">
+                    <ul class="clearfix">
+                     {foreach from = $special.data key = k item = goods}
+                        <li>
+                            <p class="goods-img"><a href="{$goods.link_url}" target="_blank"><img src="{$goods.goods_img}"/></a></p>
+                            <p class="goods-title"><a href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a></p>
+                            <p class="goods-price clearfix">
+                                <strong class="fl">￥{$goods.shop_price}</strong>
+                               <!-- <span class="unit-price pr fl db none"><i class="pa"></i>折合单件￥156.00</span>-->
+                                <span class="goods-discount pr fl db"><i class="pa"></i>{$goods.zekou}<em>折</em></span>
+                            </p>
+                            <p class="goods-market-price">国内参考价<del>￥{$goods.market_price}</del></p>
+                            <p class="goods-off-tip">{if $goods.shop_price < 299 } 满299减50 {else}满499减100{/if}</p>
+                        </li>
+                     {/foreach}
+                    </ul>
+                </div>                
+            </div>
+			{/foreach}
+        </div>
+
+        
+        <div class="left-nav">
+            <dl>
+                <dt><a href="{$DOMAIN}/sales.html?a=d11&s=13"><img src="{$imgcache_url}images/promotion/shangoujie/left_nav_logo.png"/></a></dt>
+                <dd><a href="{$DOMAIN}/sales.html?a=d11&s=13" target="_blank">闪购节主会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-7.html" target="_blank">大牌母婴分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-9.html" target="_blank" class="current">美容护肤分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-10.html" target="_blank">健康营养分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-8.html" target="_blank">家居个护分会场</a></dd>
+            </dl>
+        </div>
+        
+
+        <div class="side-nav none" id="sortTopNav">
+            <p class="side-nav-cover"></p>
+            <div class="side-nav-content">
+                <ul>
+                     {foreach from=$data key=k  item=s}
+                    <li><a href="javascript:;"><span>{$k+1}F</span>{$s.name}</a></li>
+                    {/foreach}
+                </ul>                
+            </div>
+            <p class="side-nav-contact"><a href="javascript:;" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698&info=',900,600);"></a></p>
+            <p class="side-nav-top"><a href="#"></a></p>
+        </div>
+
+        <script>
+        {literal}
+            //左侧浮动导航
+            (function(){
+                var topHeight = $("#header").outerHeight(true),
+                    windowHeight = $(window).outerHeight();
+                $(".left-nav").css({top:topHeight});
+                $(window).on("scroll",function(e){                
+                    var $this = $(this),
+                        scrollTop = $this.scrollTop();
+                    if(scrollTop>=topHeight){
+                        $(".left-nav").css({
+                            top:0,
+                            position:"fixed"
+                        });
+                        if(scrollTop+windowHeight>=$("footer").offset().top){
+
+                            $(".left-nav").css({
+                                top:"auto",
+                                bottom:scrollTop+windowHeight - $("footer").offset().top,
+                                position:"fixed"
+                            });
+                        }
+
+                    }
+                    else{
+                        $(".left-nav").css({
+                            top:topHeight,
+                            position:"absolute"
+                        });
+                    }        
+                });
+            })();
+            //滑动页面顶部tab切换
+            function SetScrollTop(obj,targetObj){
+                this.index = 0;
+                this.obj = $(obj);
+                this.targetObj = $(targetObj);
+                this.ini();
+            }
+            SetScrollTop.prototype.ini = function(){
+                var that = this;
+
+                $(window).scroll(function(event) {
+                    var $this = $(this),
+                        widnScroll = $this.scrollTop(),
+                        firstTargetTop = that.obj.eq(0).offset().top;
+
+                    if(widnScroll > firstTargetTop){//如果页面滑动到第一个目标对象区域块
+                        that.targetObj.removeClass('none');
+                    }else{
+                        that.targetObj.addClass('none');
+                    }
+
+                    $.each(that.obj, function(index, val) {
+                         var $targetItem = $(val);
+                         var targetTop = $targetItem.offset().top;
+
+                         if(widnScroll >= targetTop){
+                            that.targetObj.find("li").eq(index).addClass('active').siblings('li').removeClass('active');
+                         }
+                    });
+                });
+
+                that.chooseItem();
+                that.chooseItemNav();
+            };
+            SetScrollTop.prototype.chooseItem = function(){
+                var that = this;
+
+                that.targetObj.on("click","li",function(){
+                    var $this = $(this);
+                    var targetIndex = that.targetObj.find("li").index($(this));
+                    var huadongLength = that.obj.eq(targetIndex).offset().top; 
+
+                    $this.addClass('active').siblings('li').removeClass('active');
+
+                    $("html,body").animate({scrollTop:huadongLength}, 500);
+                });
+            };
+            SetScrollTop.prototype.chooseItemNav = function(){
+                var that = this,$js_itemNav = $(".js_itemNav");
+
+                $js_itemNav.click(function(){
+                    var $this = $(this),
+                        thisParent = $this.closest('.active-section'),
+                        index = thisParent.find(".js_itemNav").index($this),
+                        huadongLength = that.obj.eq(index).offset().top; 
+
+                    $("html,body").animate({scrollTop:huadongLength}, 500);
+                });
+
+            };
+            // 页面滑动tab切换
+            new SetScrollTop(".active-section","#sortTopNav");
+        {/literal}
+    </script>
+        
+    {/if}
+    
+
+    {if $active == 8} {*个人护理分会场*}
+    {literal}
+    <style>
+        .active-body{background:#792cd0;padding-bottom:50px;}
+        .active-w1000{width:1000px;margin-left:auto;margin-right:auto;}
+        .active-banner{width:100%;height:660px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/gehu/banner.jpg") no-repeat center top;}
+        .active-section-nav{margin:20px auto 12px;}
+        .active-section-nav li{width:25%;float:left;}
+        .active-section-nav li a{display:block;height:60px;line-height:60px;text-align:center;background:#8035fb;color:#fff;text-decoration:none;font-size:24px;}
+        .active-section-nav li a .nav-icon{display:none;width:24px;height:35px;vertical-align:middle;padding-right:5px;padding-bottom:3px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/icon_rocket.png") no-repeat 0 0;}
+        .active-section-nav li a:hover{background:#662ac8;}
+        .active-section-nav li a.active{background:#431096;}
+        .active-section-nav li a.active .nav-icon{display:inline-block;}
+        .active-section-list{width:1100px;}
+        .active-section-list li{width:244px;background:#fff;font-family:"microsoft yahei";float:left;margin-right:8px;margin-top:8px;}
+        .active-section-list li .goods-img{width:200px;height:200px;margin:0 auto;}
+        .active-section-list li img{width:200px;height:200px;}
+        .active-section-list li .goods-title{font-size:14px;padding:8px 15px 10px;border-bottom:1px solid #e4dbfd;height:38px;overflow:hidden;}
+        .active-section-list li .goods-title a{color:#000;text-decoration:none;font-weight:bold;display: block;height: 38px;overflow: hidden;}
+        .active-section-list li .goods-title a:hover{text-decoration:underline;}
+        .active-section-list li .goods-price{padding:8px 15px 0;}
+        .active-section-list li .goods-price strong{color:#e61773;font-size:20px;font-weight:bold;}
+        .active-section-list li .goods-price .unit-price{margin-left:10px;margin-top:2px;height:20px;border:1px dotted #e61773;line-height:20px;color:#e61773;font-weight:bold;padding:0 8px;}
+        .active-section-list li .goods-price .unit-price i{width:0;height:0;left:-1px;bottom:-1px;display:block;border-style:solid;border-width:0 7px 7px 0px;border-color:transparent transparent #e61773 transparent;}
+        .active-section-list li .goods-price .goods-discount{width:40px;height:19px;margin-left:10px;margin-top:4px;line-height:19px;font-size:14px;color:#fff;padding-left:17px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/icon_discount.png") no-repeat center top;}
+        .active-section-list li .goods-price .goods-discount em{font-weight:normal;font-size:12px;padding-left:3px;}
+        .active-section-list li .goods-market-price{font-size:12px;color:#999;padding:3px 15px 8px;}
+        .active-section-list li .goods-market-price del{text-decoration:line-through;}
+        .active-section-list li .goods-off-tip{width:100%;height:33px;text-align:center;line-height:33px;background:#764df7;font-size:18px;color:#fff;font-weight:bold;}
+        /*左侧导航*/
+        .left-nav{position:absolute;height:100%;top:auto;z-index:10;left:0;width:120px;background:#000;}
+        .left-nav dt{padding-top:15px;padding-left:8px;margin-bottom:15px;}
+        .left-nav dd{padding:1px 5px;font-family:"simsun";}
+        .left-nav dd a{display:block;color:#fff;text-decoration:none;width:90px;height:30px;line-height:30px;padding:0 10px;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon.png") no-repeat 100px center;}
+        .left-nav dd a:hover,.left-nav dd a.current{color:#feda2a;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon_hover.png") no-repeat 100px center;}
+        /*侧边导航*/
+        .side-nav{width:145px;position:fixed;right:100px;top: 50px;left: 50%;margin-left: 520px;}
+        .side-nav-cover{width:145px;height:130px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_cover.png") no-repeat center top;}
+        .side-nav-content{width:128px;float:right;background:#541342;}
+        .side-nav-content ul{padding:10px 0;}
+        .side-nav-content li{width:110px;margin:8px auto;}
+        .side-nav-content li a{display:block;height:32px;text-align:center;line-height:32px;background:#8035fb;color:#fff;text-decoration:none;font-size:14px;font-family:"simsun"}
+        .side-nav-content li a span{font-family:Arial;font-weight:bold;padding-right:5px;}
+        .side-nav-content li a:hover{background:#5b26b3;}
+        .side-nav-content li.active a{background:#5b26b3;} 
+        .side-nav-contact a{width:128px;height:51px;float:right;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_service.png") no-repeat center top;}
+        .side-nav-top a{width:128px;height:56px;float:right;cursor:pointer;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_top.png") no-repeat center top;}
+    </style>
+    {/literal}
+        <div class="active-body">
+            <div class="active-banner"></div>
+            {foreach from=$data key = sk item=special}
+            <div class="active-section active-w1000" id="model_{$sk+1}">                
+                <nav class="active-section-nav">
+                    <ul class="clearfix">
+                    	{foreach from=$data  item=s}
+                        <li><a href="javascript:;" class="js_itemNav {if $special.name eq $s.name}active{/if}"><i class="nav-icon"></i>{$s.name}</a></li>
+                    	{/foreach}
+                    </ul>
+                </nav>
+                <div class="active-section-list">
+                    <ul class="clearfix">
+                        {foreach from = $special.data key = k item = goods}
+                        <li>
+                            <p class="goods-img"><a href="{$goods.link_url}" target="_blank"><img src="{$goods.goods_img}"/></a></p>
+                            <p class="goods-title"><a href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a></p>
+                            <p class="goods-price clearfix">
+                                <strong class="fl">￥{$goods.shop_price}</strong>
+                               <!-- <span class="unit-price pr fl db none"><i class="pa"></i>折合单件￥156.00</span>-->
+                                <span class="goods-discount pr fl db"><i class="pa"></i>{$goods.zekou}<em>折</em></span>
+                            </p>
+                            <p class="goods-market-price">国内参考价<del>￥{$goods.market_price}</del></p>
+                            <p class="goods-off-tip">{if $goods.shop_price < 299 } 满299减50 {else}满499减100{/if}</p>
+                        </li>
+                     	{/foreach}
+                    </ul>
+                </div>                
+            </div>
+			{/foreach}
+        </div>
+
+        <div class="left-nav">
+            <dl>
+                <dt><a href="{$DOMAIN}/sales.html?a=d11&s=13"><img src="{$imgcache_url}images/promotion/shangoujie/left_nav_logo.png"/></a></dt>
+                <dd><a href="{$DOMAIN}/sales.html?a=d11&s=13" target="_blank">闪购节主会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-7.html" target="_blank">大牌母婴分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-9.html" target="_blank">美容护肤分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-10.html" target="_blank">健康营养分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-8.html" target="_blank" class="current">家居个护分会场</a></dd>
+            </dl>
+        </div>
+
+
+        <div class="side-nav none" id="sortTopNav">
+            <p class="side-nav-cover"></p>
+            <div class="side-nav-content">
+                <ul>
+                    {foreach from=$data key=k  item=s}
+                    <li><a href="javascript:;"><span>{$k+1}F</span>{$s.name}</a></li>
+                    {/foreach}
+                </ul>                
+            </div>
+            <p class="side-nav-contact"><a href="javascript:;" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698&info=',900,600);"></a></p>
+            <p class="side-nav-top"><a href="#"></a></p>
+        </div>
+
+        <script>
+        {literal}      
+
+            //左侧浮动导航
+            (function(){
+                var topHeight = $("#header").outerHeight(true),
+                    windowHeight = $(window).outerHeight();
+                $(".left-nav").css({top:topHeight});
+                $(window).on("scroll",function(e){                
+                    var $this = $(this),
+                        scrollTop = $this.scrollTop();
+                    if(scrollTop>=topHeight){
+                        $(".left-nav").css({
+                            top:0,
+                            position:"fixed"
+                        });
+                        if(scrollTop+windowHeight>=$("footer").offset().top){
+
+                            $(".left-nav").css({
+                                top:"auto",
+                                bottom:scrollTop+windowHeight - $("footer").offset().top,
+                                position:"fixed"
+                            });
+                        }
+
+                    }
+                    else{
+                        $(".left-nav").css({
+                            top:topHeight,
+                            position:"absolute"
+                        });
+                    }        
+                });
+            })();
+
+
+            //滑动页面顶部tab切换
+            function SetScrollTop(obj,targetObj){
+                this.index = 0;
+                this.obj = $(obj);
+                this.targetObj = $(targetObj);
+                this.ini();
+            }
+            SetScrollTop.prototype.ini = function(){
+                var that = this;
+
+                $(window).scroll(function(event) {
+                    var $this = $(this),
+                        widnScroll = $this.scrollTop(),
+                        firstTargetTop = that.obj.eq(0).offset().top;
+
+                    if(widnScroll > firstTargetTop){//如果页面滑动到第一个目标对象区域块
+                        that.targetObj.removeClass('none');
+                    }else{
+                        that.targetObj.addClass('none');
+                    }
+
+                    $.each(that.obj, function(index, val) {
+                         var $targetItem = $(val);
+                         var targetTop = $targetItem.offset().top;
+
+                         if(widnScroll >= targetTop){
+                            that.targetObj.find("li").eq(index).addClass('active').siblings('li').removeClass('active');
+                         }
+                    });
+                });
+
+                that.chooseItem();
+                that.chooseItemNav();
+            };
+            SetScrollTop.prototype.chooseItem = function(){
+                var that = this;
+
+                that.targetObj.on("click","li",function(){
+                    var $this = $(this);
+                    var targetIndex = that.targetObj.find("li").index($(this));
+                    var huadongLength = that.obj.eq(targetIndex).offset().top; 
+
+                    $this.addClass('active').siblings('li').removeClass('active');
+
+                    $("html,body").animate({scrollTop:huadongLength}, 500);
+                });
+            };
+            SetScrollTop.prototype.chooseItemNav = function(){
+                var that = this,$js_itemNav = $(".js_itemNav");
+
+                $js_itemNav.click(function(){
+                    var $this = $(this),
+                        thisParent = $this.closest('.active-section'),
+                        index = thisParent.find(".js_itemNav").index($this),
+                        huadongLength = that.obj.eq(index).offset().top; 
+
+                    $("html,body").animate({scrollTop:huadongLength}, 500);
+                });
+
+            };
+            // 页面滑动tab切换
+            new SetScrollTop(".active-section","#sortTopNav");
+        {/literal}
+    </script>
+    {/if}
+
+
+    {if $active == 7} {*母婴分会场*}
+    {literal}
+    <style>
+        .active-body{background:#f80;padding-bottom:50px;}
+        .active-w1000{width:1000px;margin-left:auto;margin-right:auto;}
+        .active-banner{width:100%;height:660px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/muying/banner.jpg") no-repeat center top;}
+        .active-section-nav{margin:20px auto 12px;}
+        .active-section-nav li{width:20%;float:left;}
+        .active-section-nav li a{display:block;height:60px;line-height:60px;text-align:center;background:#8035fb;color:#fff;text-decoration:none;font-size:24px;}
+        .active-section-nav li a .nav-icon{display:none;width:24px;height:35px;vertical-align:middle;padding-right:5px;padding-bottom:3px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/icon_rocket.png") no-repeat 0 0;}
+        .active-section-nav li a:hover{background:#662ac8;}
+        .active-section-nav li a.active{background:#431096;}
+        .active-section-nav li a.active .nav-icon{display:inline-block;}
+        .active-section-list{width:1100px;}
+        .active-section-list li{width:244px;background:#fff;font-family:"microsoft yahei";float:left;margin-right:8px;margin-top:8px;}
+        .active-section-list li .goods-img{width:200px;height:200px;margin:0 auto;}
+        .active-section-list li img{width:200px;height:200px;}
+        .active-section-list li .goods-title{font-size:14px;padding:8px 15px 10px;border-bottom:1px solid #e4dbfd;height:38px;overflow:hidden;}
+        .active-section-list li .goods-title a{color:#000;text-decoration:none;font-weight:bold;display: block;height: 38px;overflow: hidden;}
+        .active-section-list li .goods-title a:hover{text-decoration:underline;}
+        .active-section-list li .goods-price{padding:8px 15px 0;}
+        .active-section-list li .goods-price strong{color:#e61773;font-size:20px;font-weight:bold;}
+        .active-section-list li .goods-price .unit-price{margin-left:10px;margin-top:2px;height:20px;border:1px dotted #e61773;line-height:20px;color:#e61773;font-weight:bold;padding:0 8px;}
+        .active-section-list li .goods-price .unit-price i{width:0;height:0;left:-1px;bottom:-1px;display:block;border-style:solid;border-width:0 7px 7px 0px;border-color:transparent transparent #e61773 transparent;}
+        .active-section-list li .goods-price .goods-discount{width:40px;height:19px;margin-left:10px;margin-top:4px;line-height:19px;font-size:14px;color:#fff;padding-left:17px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/icon_discount.png") no-repeat center top;}
+        .active-section-list li .goods-price .goods-discount em{font-weight:normal;font-size:12px;padding-left:3px;}
+        .active-section-list li .goods-market-price{font-size:12px;color:#999;padding:3px 15px 8px;}
+        .active-section-list li .goods-market-price del{text-decoration:line-through;}
+        .active-section-list li .goods-off-tip{width:100%;height:33px;text-align:center;line-height:33px;background:#764df7;font-size:18px;color:#fff;font-weight:bold;}
+        /*左侧导航*/
+        .left-nav{position:absolute;height:100%;top:auto;z-index:10;left:0;width:120px;background:#000;}
+        .left-nav dt{padding-top:15px;padding-left:8px;margin-bottom:15px;}
+        .left-nav dd{padding:1px 5px;font-family:"simsun";}
+        .left-nav dd a{display:block;color:#fff;text-decoration:none;width:90px;height:30px;line-height:30px;padding:0 10px;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon.png") no-repeat 100px center;}
+        .left-nav dd a:hover,.left-nav dd a.current{color:#feda2a;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon_hover.png") no-repeat 100px center;}
+        /*侧边导航*/
+        .side-nav{width:145px;position:fixed;right:100px;top: 50px;left: 50%;margin-left: 520px;}
+        .side-nav-cover{width:145px;height:130px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_cover.png") no-repeat center top;}
+        .side-nav-content{width:128px;float:right;background:#541342;}
+        .side-nav-content ul{padding:10px 0;}
+        .side-nav-content li{width:110px;margin:8px auto;}
+        .side-nav-content li a{display:block;height:32px;text-align:center;line-height:32px;background:#8035fb;color:#fff;text-decoration:none;font-size:14px;font-family:"simsun"}
+        .side-nav-content li a span{font-family:Arial;font-weight:bold;padding-right:5px;}
+        .side-nav-content li a:hover{background:#5b26b3;}
+        .side-nav-content li.active a{background:#5b26b3;} 
+        .side-nav-contact a{width:128px;height:51px;float:right;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_service.png") no-repeat center top;}
+        .side-nav-top a{width:128px;height:56px;float:right;cursor:pointer;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_top.png") no-repeat center top;}
+    </style>
+    {/literal}
+        <div class="active-body">
+            <div class="active-banner"></div>
+            {foreach from=$data key = sk item=special}
+            <div class="active-section active-w1000" id="model_{$sk+1}">                
+                <nav class="active-section-nav">
+                    <ul class="clearfix">
+                   		{foreach from=$data  item=s}
+                        <li><a href="javascript:;" class="js_itemNav {if $special.name eq $s.name}active{/if}"><i class="nav-icon"></i>{$s.name}</a></li>
+                    	{/foreach}
+                    </ul>
+                </nav>
+                <div class="active-section-list">
+                    <ul class="clearfix">
+                    {foreach from = $special.data key = k item = goods}
+                        <li>
+                            <p class="goods-img"><a href="{$goods.link_url}" target="_blank"><img src="{$goods.goods_img}"/></a></p>
+                            <p class="goods-title"><a href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a></p>
+                            <p class="goods-price clearfix">
+                                <strong class="fl">￥{$goods.shop_price}</strong>
+                               <!-- <span class="unit-price pr fl db none"><i class="pa"></i>折合单件￥156.00</span>-->
+                                <span class="goods-discount pr fl db"><i class="pa"></i>{$goods.zekou}<em>折</em></span>
+                            </p>
+                            <p class="goods-market-price">国内参考价<del>￥{$goods.market_price}</del></p>
+                            <p class="goods-off-tip">{if $goods.shop_price < 299 } 满299减50 {else}满499减100{/if}</p>
+                        </li>
+                     {/foreach}
+                      
+                    </ul>
+                </div>                
+            </div>
+			{/foreach}
+        </div>
+
+
+        <div class="left-nav">
+            <dl>
+                <dt><a href="{$DOMAIN}/sales.html?a=d11&s=13"><img src="{$imgcache_url}images/promotion/shangoujie/left_nav_logo.png"/></a></dt>
+                <dd><a href="{$DOMAIN}/sales.html?a=d11&s=13" target="_blank">闪购节主会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-7.html" target="_blank" class="current">大牌母婴分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-9.html" target="_blank">美容护肤分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-10.html" target="_blank">健康营养分会场</a></dd>
+                <dd><a href="{$DOMAIN}/m-promotion-active-8.html" target="_blank">家居个护分会场</a></dd>
+            </dl>
+        </div>
+
+
+        <div class="side-nav none" id="sortTopNav">
+            <p class="side-nav-cover"></p>
+            <div class="side-nav-content">
+                <ul>
+                	{foreach from=$data key=k  item=s}
+                    <li><a href="javascript:;"><span>{$k+1}F</span>{$s.name}</a></li>
+                    {/foreach}
+                </ul>                
+            </div>
+            <p class="side-nav-contact"><a href="javascript:;" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698&info=',900,600);"></a></p>
+            <p class="side-nav-top"><a href="#"></a></p>
+        </div>
+
+        <script>
+        {literal}        
+
+            //左侧浮动导航
+            (function(){
+                var topHeight = $("#header").outerHeight(true),
+                    windowHeight = $(window).outerHeight();
+                $(".left-nav").css({top:topHeight});
+                $(window).on("scroll",function(e){                
+                    var $this = $(this),
+                        scrollTop = $this.scrollTop();
+                    if(scrollTop>=topHeight){
+                        $(".left-nav").css({
+                            top:0,
+                            position:"fixed"
+                        });
+                        if(scrollTop+windowHeight>=$("footer").offset().top){
+
+                            $(".left-nav").css({
+                                top:"auto",
+                                bottom:scrollTop+windowHeight - $("footer").offset().top,
+                                position:"fixed"
+                            });
+                        }
+
+                    }
+                    else{
+                        $(".left-nav").css({
+                            top:topHeight,
+                            position:"absolute"
+                        });
+                    }        
+                });
+            })();
+
+            //滑动页面顶部tab切换
+            function SetScrollTop(obj,targetObj){
+                this.index = 0;
+                this.obj = $(obj);
+                this.targetObj = $(targetObj);
+                this.ini();
+            }
+            SetScrollTop.prototype.ini = function(){
+                var that = this;
+
+                $(window).scroll(function(event) {
+                    var $this = $(this),
+                        widnScroll = $this.scrollTop(),
+                        firstTargetTop = that.obj.eq(0).offset().top;
+
+                    if(widnScroll > firstTargetTop){//如果页面滑动到第一个目标对象区域块
+                        that.targetObj.removeClass('none');
+                    }else{
+                        that.targetObj.addClass('none');
+                    }
+
+                    $.each(that.obj, function(index, val) {
+                         var $targetItem = $(val);
+                         var targetTop = $targetItem.offset().top;
+
+                         if(widnScroll >= targetTop){
+                            that.targetObj.find("li").eq(index).addClass('active').siblings('li').removeClass('active');
+                         }
+                    });
+                });
+
+                that.chooseItem();
+                that.chooseItemNav();
+            };
+            SetScrollTop.prototype.chooseItem = function(){
+                var that = this;
+
+                that.targetObj.on("click","li",function(){
+                    var $this = $(this);
+                    var targetIndex = that.targetObj.find("li").index($(this));
+                    var huadongLength = that.obj.eq(targetIndex).offset().top; 
+
+                    $this.addClass('active').siblings('li').removeClass('active');
+
+                    $("html,body").animate({scrollTop:huadongLength}, 500);
+                });
+            };
+            SetScrollTop.prototype.chooseItemNav = function(){
+                var that = this,$js_itemNav = $(".js_itemNav");
+
+                $js_itemNav.click(function(){
+                    var $this = $(this),
+                        thisParent = $this.closest('.active-section'),
+                        index = thisParent.find(".js_itemNav").index($this),
+                        huadongLength = that.obj.eq(index).offset().top; 
+
+                    $("html,body").animate({scrollTop:huadongLength}, 500);
+                });
+
+            };
+            // 页面滑动tab切换
+            new SetScrollTop(".active-section","#sortTopNav");
+        {/literal}
+    </script>
+    {/if}
+
+    {if $active == 5}
+    {literal}
+    <style>
+        .m-hf{width: 1100px;}
+        .inline-block{display: inline-block;*display: inline;*zoom: 1;}
+        #hufu-wrap{background-color: #E9EFF5;}
+        #hufu-wrap .banner{position: relative;overflow: hidden;height: 652px;}
+        #hufu-wrap .banner img{position: absolute;left: 50%;margin-left: -960px;top: 0;}
+        .table{width: 100%; border-collapse: collapse; border-spacing: 0; border: 0 none; padding: 0;}
+        .block-img img{vertical-align: top;width: 100%;height: auto;}
+        .td-img .block-img img{vertical-align: middle;}
+        .coupon{background: url("{/literal}{$imgcache_url}{literal}images/promotion/hufu/coupon_bg.jpg") no-repeat 50% 0;}
+        .coupon-box{padding: 80px 0;text-align: center;font-size: 0;}
+        .coupon-box a{margin-left: 40px;}
+        .coupon-box a:first-child{margin-left: 0;}
+        .goods-wrap{padding-bottom: 100px;background: url("{/literal}{$imgcache_url}{literal}images/promotion/hufu/bg.jpg") repeat-y 50% 0;}
+        .goods-wrap .goods-list{margin-top: 30px;}
+        .goods-wrap .goods-list:first-child{margin-top: 0;}
+        .goods-wrap .goods-list .cate-title {position: relative;padding: 10px 0;}
+        .goods-wrap .goods-list .cate-title .line{position: absolute;width: 100%;height: 3px;top:60px;background-color: #749C24;}
+        .goods-wrap .goods-list .cate-title h2{text-align: center;position:relative;height:103px;line-height:103px;background: #E9EFF5 url("{/literal}{$imgcache_url}{literal}images/promotion/hufu/cate_bg.png") no-repeat 50% 0;font-size: 68px;color: #ffffff;}
+
+        .goods-wrap .cate-des{padding: 20px 0;}
+        .goods-wrap .cate-des p{padding:0 100px;font-size: 36px;line-height: 50px;text-align: center;color: #3c3c3c;}
+
+        .goods-table td{vertical-align: middle;padding-top: 25px;padding-bottom: 25px;}
+        .goods-table .td-img{width: 40%;}
+        .goods-list-wrap{padding-top:10px;}
+        .goods-table .dis-table-cell{vertical-align: middle;}
+        .goods-table .info-box{position: relative;padding: 25px 30px;}
+        .goods-table .info-box .before,.goods-table .info-box .after{display: block;position: absolute; width: 105px; height: 85px;}
+        .goods-table .info-box .before{top: 0; left: 0;border-top: 2px solid #749C24;border-left: 2px solid #749C24;}
+        .goods-table .info-box .after{bottom: 0; right: 0;border-bottom: 2px solid #749C24;border-right: 2px solid #749C24;}
+        .goods-table .td-info{padding: 0 10px;}
+        .goods-table .good-title{font-size: 42px; color: #749C24; padding: 10px 0;}
+        .goods-table .good-title a{font-size: 42px; color: #749C24; text-decoration: none;}
+        .goods-table .goods-des{font-size: 18px;color: #5b5b5b;line-height: 24px;}
+        .goods-table .goods-title2{display: block;padding:25px 0;font-size: 24px;color: #666666;}
+        .goods-table .goods-title2 a{font-size: 24px;color: #666666;text-decoration: none;}
+        .goods-table .goods-title2 .area{color: #333333;}
+        .goods-table .buy-btn .left{display: inline-block; *display: inline;*zoom: 1;vertical-align: top; background-color: #FFFFFF;}
+        .goods-table .buy-btn{display: inline-block;*display: inline;*zoom: 1;font-size: 0;line-height: 0;border: 1px solid #CAD4C2;}
+        .goods-table .buy-btn .left>span{display:block;line-height: 40px; height: 40px; padding: 0 25px 0 5px;}
+        .goods-table .buy-btn .marking-price{font-size: 24px; color: #626262; text-decoration: line-through; position: relative;}
+        .goods-table .buy-btn .marking-price>.line{display: block; position: absolute; width: 95%; left: 0; bottom: 0; height: 1px; background: #333;}
+        .goods-table .buy-btn .price{font-size: 30px;color: #608107;}
+        .goods-table .buy-btn .right{display: inline-block; *display: inline;*zoom: 1;vertical-align: top;line-height: 80px;height: 80px;}
+        .goods-table .buy-btn .right a{display: block; padding: 0 25px; font-size: 26px; color: #e5f7b3; background-color: #749C24; text-decoration: none;}
+
+        .goods-list-neiruo .godos-item{text-align: center;}
+        .goods-list-neiruo .goods-table{width: 450px; float: left; padding: 20px 35px; margin-left: 18px;}
+        .goods-list-neiruo .goods-list-wrap{padding: 30px 0;border: 5px solid #608107;-webkit-border-radius: 20px;-moz-border-radius: 20px;border-radius: 20px; }
+        .goods-list-neiruo .godos-item .goods-title{position:relative;padding-bottom: 10px;line-height: 55px; color: #000000; font-size: 36px; height: 55px; overflow: hidden;}
+        .goods-list-neiruo .godos-item .goods-title .b-line{position: absolute; bottom: 5px; width: 300px; display: block; left: 50%; margin-left: -150px; background-color: #608107; height: 2px;}
+        .goods-list-neiruo .godos-item .goods-des{font-size: 24px; color: #484747; line-height: 30px; height: 60px; overflow: hidden;}
+        .goods-list-neiruo .godos-item .buy-btn{margin-top: 10px;}
+    </style>
+    {/literal}
+
+    <div class="wrap" id="hufu-wrap">
+        <section class="banner">
+            <img src="{$imgcache_url}images/promotion/hufu/banner.jpg" alt="Banner" width="1920" height="652"/>
+        </section>
+        <section class="coupon">
+            <div class="coupon-box hf m-hf">
+                {foreach from=$coupon_list key=key item=coupon}
+                <a href="javascript:void(0);" class="js_getCoupon" data-pcode="{$coupon.code}">
+                    <img src="{$imgcache_url}images/promotion/hufu/coupon{$key+1}.png" alt=""/>
+                </a>
+                {/foreach}
+
+            </div>
+        </section>
+
+        <section class="goods-wrap">
+            {foreach from=$data item=special}
+            
+            <div class="goods-list">
+                <header class="cate-title">
+                    <i class="line"></i>
+                    <h2 class="hf m-hf">{$special.name}</h2>
+                </header>
+                <div class="cate-des hf m-hf">
+                    <p>{$special.memo}</p>
+                </div>
+                <div class="goods-list-wrap hf m-hf">
+                    {*loop 这里需要区分左右，参见设计图*}
+             {foreach from=$special.data key=key item=goods}
+                {if ($key+1)%2==1}
+                    <table class="goods-table table">
+                        <tbody>
+                            <tr>
+                                <td class="td-img">
+                                    <a href="{$goods.link_url}" class="block-img">
+                                        <img src="{$imgcache_url}images/promotion/hufu/goods/goods_{$goods.goods_id}.jpg" alt="{$goods.goods_title}"/>
+                                    </a>
+                                </td>
+                                <td class="td-info">
+                                    <div class="info-box">
+                                        <i class="before"></i>
+                                        <p class="good-title"><a href="{$goods.link_url}">{$goods.goods_name}</a> </p>
+                                        <p class="goods-des">{$goods.maidian}</p>
+                                        <p class="goods-title2">
+                                            <a href="{$goods.link_url}" >{$goods.goods_title}</a>
+                                        </p>
+                                        <p class="buy-btn">
+                                            <span class="left">
+                                                <span class="marking-price"><i class="line"></i>￥{$goods.market_price}</span>
+                                                <span class="price">￥{$goods.shop_price}</span>
+                                            </span>
+                                            <span class="right">
+                                                <a href="{$goods.link_url}">立即抢购</a>
+                                            </span>
+                                        </p>
+                                        <i class="after"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {else}
+                    <table class="goods-table table">
+                        <tbody>
+                        <tr>
+                            <td class="td-info">
+                                <div class="info-box">
+                                    <i class="before"></i>
+                                    <p class="good-title"><a href="{$goods.link_url}">{$goods.goods_name}</a></p>
+                                    <p class="goods-des">{$goods.maidian}</p>
+                                    <p class="goods-title2">
+                                        <span class="area"><a href="{$goods.link_url}">{$goods.goods_title}</a></span> 
+                                    </p>
+                                    <p class="buy-btn">
+                                        <span class="left">
+                                            <span class="marking-price"><i class="line"></i>￥{$goods.market_price}</span>
+                                            <span class="price">￥{$goods.shop_price}</span>
+                                        </span>
+                                        <span class="right">
+                                            <a href="{$goods.link_url}">立即抢购</a>
+                                        </span>
+                                    </p>
+                                    <i class="after"></i>
+                                </div>
+                            </td>
+                            <td class="td-img">
+                                <a href="{$goods.link_url}" class="block-img">
+                                    <img src="{$imgcache_url}images/promotion/hufu/goods/goods_{$goods.goods_id}.jpg" alt="{$goods.goods_title}"/>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                {/if}
+            {/foreach}
+                </div>
+            </div>
+            
+           {/foreach} 
+            
+        </section>
+    </div>
+    <!-- 左侧悬浮框 -->
+    <div id="leftBar" class="m-leftbar">
+        <!-- <span class="icon_qrcode qrcode"></span> -->
+        <a href="http://www.wzhouhui.com/m-users-a-join.htm" target="_blank"><img src="{$imgcache_url}images/domeimg/left_float.png" width="120" height="300"></a>
+    </div><!-- #leftBar -->
+    {literal}
+	<script>
+        $(function () {
+            $(".js_getCoupon").click(function(){
+                var $this = $(this),pcode = $this.data("pcode");
+                $.ajax({
+                    url: '/m-coupon-a-get.html',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {pcode: pcode}
+                })
+                .done(function(data) {
+                    var status = data.status;
+                    //status：0表示成功，1表示失败，2表示未登录
+                    if(status === 0){
+                        var layerIndex = layer.open({
+                            content: data.msg,
+                            btn: ['确定']
+                        })
+                    }else if(status === 1){
+                        if( data.msg=='兑换失败,该兑换码已兑换')
+                            data.msg='领取失败,你已领取该优惠券';
+                        layer.open({
+                            btn: ['OK'],
+                            content: data.msg
+                        })
+                    }else{
+                        window.location.href = "/m-users-a-sign.html?ref=" + window.location.href;
+                    }
+                });
+            });
+        });
+
+        $(window).scroll(function() {
+            var $this = $(this),
+                widnScroll = $this.scrollTop(),
+                firstTargetTop = $("#hufu-wrap").offset().top,
+                footOffsetTop = $("#footer").offset().top,
+                windH = $this.height();
+
+            var $leftBar = $("#leftBar");
+            if(widnScroll > firstTargetTop && !(widnScroll >= footOffsetTop - windH) ){//如果页面滑动到第一个目标对象区域块
+                $leftBar.css({position: "fixed",top: "60px"}).show();
+            }else{
+                $leftBar.hide();
+            }
+        });
+	</script>
+	{/literal}
+    
+    {elseif $active == 4}
+    {literal}
+    <style>
+        @keyframes cutrope{
+            0% {transform: rotate(1deg);}
+            50% {transform: rotate(-1deg);}
+            100% {transform: rotate(1deg);}
+        }
+        /* Firefox */
+        @-moz-keyframes cutrope{
+            0% {transform: rotate(1deg);}
+            50% {transform: rotate(-1deg);}
+            100% {transform: rotate(1deg);}
+        }
+        /* Safari 和 Chrome */
+        @-webkit-keyframes cutrope{
+            0% {transform: rotate(1deg);}
+            50% {transform: rotate(-1deg);}
+            100% {transform: rotate(1deg);}
+        }
+        /* Opera */
+        @-o-keyframes cutrope{
+            0% {transform: rotate(1deg);}
+            50% {transform: rotate(-1deg);}
+            100% {transform: rotate(1deg);}
+        }
+
+        @keyframes hide_des{
+            0% {transform: rotate(10deg);}
+            50% {transform: rotate(-10deg);}
+            100% {transform: rotate(10deg);}
+        }
+        /* Firefox */
+        @-moz-keyframes hide_des{
+            0% {transform: rotate(10deg);}
+            50% {transform: rotate(-10deg);}
+            100% {transform: rotate(10deg);}
+        }
+        /* Safari 和 Chrome */
+        @-webkit-keyframes hide_des{
+            0% {transform: rotate(10deg);}
+            50% {transform: rotate(-10deg);}
+            100% {transform: rotate(10deg);}
+        }
+        /* Opera */
+        @-o-keyframes hide_des{
+            0% {transform: rotate(10deg);}
+            50% {transform: rotate(-10deg);}
+            100% {transform: rotate(10deg);}
+        }
+
+        .icon_milk{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/icon_m_milk.png") no-repeat;}
+        .icon_m_cart{ margin-top: 1px; width: 38px; height: 38px; background-position: -170px 0; -webkit-border-radius: 19px; -moz-border-radius: 19px; -ms-border-radius: 19px; -o-border-radius: 19px; border-radius: 19px; cursor: pointer;
+            -webkit-transition: background-position .3s;
+            -moz-transition: background-position .3s;
+            -o-transition: background-position .3s;
+            transition: background-position .3s;
+        }
+        .milk-topics-wrap{ width:100%; min-width: 1200px; font-family: '微软雅黑'; overflow: hidden;}
+        .milk-topics-wrap .m-banner-wrap{ width: 100%; height: 860px; background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/m_banner.jpg") top center no-repeat;}
+        .milk-topics-wrap .m-banner-wrap .milk-cow-wrap{ position: relative; margin: 0 auto; width: 1200px; height: 860px; z-index: 5;}
+        .milk-topics-wrap .m-banner-wrap .milk-cow-wrap .xiala-cow{ position: absolute; display: block; bottom: -172px; right: 1px; z-index: 8; cursor: pointer; 
+            -webkit-animation: cutrope 2s infinite;
+            -moz-animation: cutrope 2s infinite;
+            -o-animation: cutrope 2s infinite;
+            animation: cutrope 2s infinite;
+
+            -webkit-transform-origin:0 0;
+            -moz-transform-origin:0 0;
+            -o-transform-origin:0 0;
+            transform-origin:0 0;
+        }
+        .milk-topics-wrap .m-banner-wrap .milk-cow-wrap img.scissors-cow{ position: absolute;  bottom: -10px; right: -100px; z-index: 6;}
+
+        .milk-topics-wrap .m-description-wrap{ width: 100%; height: 3035px;}
+        .milk-topics-wrap .m-description-wrap .description-section-2{ margin-top: -184px; width: 100%; height: 940px; background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/description_2.jpg") top center no-repeat;}
+        .milk-topics-wrap .m-description-wrap .description-section-3{ width: 100%; height: 1175px; background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/description_3.jpg") top center no-repeat;}
+        .milk-topics-wrap .m-description-wrap .description-section-4{ width: 100%; height: 920px; background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/description_4.jpg") top center no-repeat;}
+        .milk-topics-wrap .m-tit-wrap{ position: relative; padding-top: 20px; width: 100%; background: #fff; z-index: 1;}
+        .milk-topics-wrap .m-tit-wrap h1{ position: relative; width: 100%; height: 197px; background: #b2f3ff url("{/literal}{$imgcache_url}{literal}images/promotion/milk/m_tit_b.png") bottom center no-repeat; z-index: 1;}
+        .milk-topics-wrap .m-tit-wrap h1 img{ position: absolute; top: -150px; left: 50%; margin-left: -387px; width: 773px; height: 247px;}
+
+        .milk-topics-wrap .m-description-wrap .click-hide-des-wrap{ margin: 0 auto; width: 1200px; height: 920px;}
+        .milk-topics-wrap .m-description-wrap .click-hide-des-wrap a{ float: right; display: block; padding-top: 100px; width: 180px; height: 234px;}
+        .milk-topics-wrap .m-description-wrap .click-hide-des-wrap .img-cow-hide-des{
+            -webkit-animation: hide_des 2s infinite;
+            -moz-animation: hide_des 2s infinite;
+            -o-animation: hide_des 2s infinite;
+            animation: hide_des 2s infinite;
+        }
+
+        /*品牌奶粉产品*/
+        .pro-main-bg{ width: 100%; min-width: 1000px; background: #b2f3ff;}
+        .m-product-list-wrap{ position: relative; margin: -70px auto 0; width: 1000px; z-index: 3;}
+        .pro-list-wrap{ margin-bottom: 20px; width: 1000px; background: #b2f3ff; overflow: hidden;}
+        .pro-list-wrap .tit{ margin-bottom: 15px; padding: 93px 165px 10px 235px; height: 60px; line-height: 20px; color: #fff; font-size: 14px; overflow: hidden;}
+        .pro-list-wrap .tit.brand-bg-1{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_1.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-2{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_2.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-3{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_3.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-4{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_4.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-5{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_5.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-6{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_6.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-7{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_7.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-8{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_8.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-9{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_9.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-10{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_10.png") no-repeat;}
+        .pro-list-wrap .tit.brand-bg-11{ background: url("{/literal}{$imgcache_url}{literal}images/promotion/milk/brand_bg_11.png?2015102101") no-repeat;}
+
+        .p-proList{ width: 1008px;}
+        .p-proList li{ position: relative; z-index: 1; float: left; margin:0 8px 8px 0; padding: 20px 15px 10px; width: 212px; height: 350px; background: #fff; border: 1px solid #e4e4e4; text-align: center;}
+        .p-proList li:hover .p_price_cart_wrap .icon_m_cart{
+            -webkit-transition: background-position .3s;
+            -moz-transition: background-position .3s;
+            -o-transition: background-position .3s;
+            transition: background-position .3s;
+            background-position: -100px 0;
+        }
+        .p-proList li .o-icon{ position: absolute; top: 0; left: 0; padding-bottom: 10px; width: 72px; height: 44px; line-height: 44px; color: #fff; font-size: 14px; font-weight: bold; text-align: center;}
+        .p-proList li .o-icon strong{ font-family: Arial; font-size: 30px; font-weight: bold;}
+        .p-proList li .p_img{ margin-bottom: 20px;}
+        .p-proList li .p_name{ margin-bottom: 10px; height: 40px; line-height: 20px; font-size: 14px; color: #fff; overflow: hidden;}
+        .p-proList li .p_name a{ color: #000; text-decoration: none;}
+        .p-proList li .p_name a:hover{ color: #e61773; text-decoration: underline;}     
+        .p-proList li .p_name strong{ font-weight: bold;}
+        .p-proList li .p_price_cart_wrap .p_price{ height: 40px; line-height: 40px;}
+        .p-proList li .p_price_cart_wrap .p_price strong{ color: #e61773; font-size: 20px; font-weight: bold;}
+        .p-proList li .p_price_cart_wrap .p_price span{ color: #bbb; font-size: 16px; text-decoration: line-through;}
+
+        .m-leftbar{ margin-right: 520px; z-index:9999;}
+        .active-right-fixed{ position: fixed; top: 10px; left: 50%; margin-left: 520px; width: 132px; z-index: 9999;}
+        .active-right-fixed .right-tit{ position: relative; margin-bottom: -5px; width: 132px; height: 134px; z-index: 4;}
+        .active-right-fixed .right-sort-nav li{ position: relative; margin: 0 auto; display: block; width: 120px; height: 36px; overflow: hidden; border-bottom: 1px solid #fff;}
+        .active-right-fixed .right-sort-nav li .bg-layer{ position: absolute; top: 0; left: 0; width: 0; height: 100%; border-left: none; background: #fff; -webkit-transition: width .4s ease; transition: width .4s ease;}
+        .active-right-fixed .right-sort-nav li a{ display: block; width: 100%; height: 36px; line-height: 36px; color: #fff; font-size: 16px; text-align: center; background: #0186fc; overflow: hidden; text-decoration: none; transition: color 0.4s ease;}
+        .active-right-fixed .right-sort-nav li a:hover .bg-layer{ width: 100%;}
+        .active-right-fixed .right-sort-nav li a:hover{ color:#0186fc;}
+        .active-right-fixed .right-sort-nav li a .sidebar-text{position: relative;z-index: 2;}
+        .active-right-fixed .right-sort-nav li.on a{ color: #0186fc; font-size: 18px; font-weight: bold; background: #fff;}
+        .active-right-fixed .goto-top{ margin: 0 auto; padding-top: 24px; display: block; width: 120px; height: 46px; line-height: 46px; color: #0186fc; font-size: 18px; font-weight: bold; background: #0186fc url("{/literal}{$imgcache_url}{literal}images/promotion/milk/go_top.png") bottom center no-repeat; text-align: center; text-decoration: none;}
+        .active-right-fixed .goto-top:hover{ color: #000;}
+    </style>
+    {/literal}
+        
+
+    <div class="milk-topics-wrap">
+        <div class="m-banner-wrap description-section-1">
+            <div class="milk-cow-wrap">
+                <a href="javascript:void(0);" class="xiala-cow" id="js_clickMilkCow"><img src="{$imgcache_url}images/promotion/milk/milk_cow.png" height="355" width="186"></a>
+                <img class="scissors-cow" src="{$imgcache_url}images/promotion/milk/scissors.gif?2015101901" height="308" width="627">
+            </div>
+        </div><!-- .m-banner-wrap -->
+
+        <div class="js_mainBgWrap">
+            
+            <!-- 奶粉介绍 -->
+            <div class="m-description-wrap none" id="js_sectionDescriptionMilk">
+                <div class="description-section-2"></div>
+                <div class="description-section-3"></div>
+                <div class="description-section-4">
+                    <div class="click-hide-des-wrap clearfix">
+                        <a href="javascript:void(0);" id="js_clickHideMilkDes"><img class="img-cow-hide-des" src="{$imgcache_url}images/promotion/milk/click_hide_des.gif" height="234" width="180"></a>
+                    </div>
+                </div>
+            </div><!-- .m-description-wrap -->
+            
+            <div id="js_sectionProListWrap">
+                <!-- 奶粉诞生标题 -->
+                <div class="m-tit-wrap js_sectionTargetWrap">
+                    <h1><img src="{$imgcache_url}images/promotion/milk/milk_tit.png" height="247" width="773"></h1>
+                </div>
+
+                <!-- 品牌奶粉产品 -->
+                <div class="pro-main-bg">
+                    <div class="m-product-list-wrap">
+                        {foreach from=$data key=key item=special} 
+                        <div class="pro-list-wrap js_sectionTargetWrap" id="model_{$key+1}" name="model_{$key+1}">
+                            <h3 class="tit brand-bg-{$key+1}">{$special.memo}</h3>
+                            <ul class="p-proList clearfix">
+                                {foreach from = $special.data key=sk item=goods}
+                                 <li>
+                                    <p class="p_img tc">
+                                        <a target="_blank" href="{$goods.link_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="210" height="210" data-original="{$goods.goods_img}" alt="{$goods.goods_title}" style="display: inline;"></a>
+                                    </p>
+                                    <p class="p_name tl"><a target="_blank" href="{$goods.link_url}">{$goods.goods_title}</a></p>
+                                    <div class="p_price_cart_wrap clearfix">
+                                        <p class="p_price fl"><strong>￥{$goods.shop_price}</strong> <span>￥{$goods.market_price}</span></p>
+                                        <a href="{$goods.link_url}" target="_blank"><span class="icon_milk fr icon_m_cart"></span></a>
+                                    </div>
+                                    <span class="icon_milk o-icon"><strong>{$goods.zekou}</strong>折</span>
+                                </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                        {/foreach}
+                        
+                    </div><!-- .m-product-list-wrap -->
+                </div>
+            </div>
+        </div>
+    </div><!-- .milk-topics-wrap -->
+
+
+
+    <!-- 左侧悬浮框 -->
+    <div id="js_leftBar" class="m-leftbar">
+        <a href="http://www.wzhouhui.com/m-users-a-join.htm" target="_blank"><img src="{$imgcache_url}images/promotion/milk/left_float.png" width="120" height="300"></a>
+    </div><!-- #leftBar -->
+
+    <!-- 右边悬浮分类nav -->
+    <div class="active-right-fixed none" id="sortTopNav">
+        <h1 class="right-tit"><img src="{$imgcache_url}images/promotion/milk/right_nav_tit.png" height="134" width="132"></h1>
+        <ul class="right-sort-nav">
+            <li><a href="javascript:void(0);"><span class="bg-layer"></span><span class="sidebar-text">奶粉诞生记</span></a></li>
+            {foreach from=$data item=special}
+            <li><a href="javascript:void(0);"><span class="bg-layer"></span><span class="sidebar-text">{$special.name}</span></a></li>
+            {/foreach}
+        </ul><!-- .right-sort-nav -->
+        <a href="javascript:void(0);" class="goto-top js_goToTop">TOP</a>
+    </div><!-- .active-right-fixed --> 
+
+
+
+    {literal}
+    <script>
+        //剪断绳子 & 隐藏奶粉介绍
+        function changeShowDescription(obj){
+            this.target = $(obj);
+        }
+        changeShowDescription.prototype = {
+            cutDownRope : function(){
+                var that = this;
+
+                that.target.click(function(event){
+                    $("#js_sectionDescriptionMilk").slideDown(1000);
+                    that.target.siblings('.scissors-cow').hide();
+                    that.target.animate({"bottom":"-800px","opacity":"0"},2000,function(){
+                        that.target.css({
+                            "bottom":"-172px",
+                            "opacity":"1"
+                        }).hide();
+                    });
+                });
+            },
+            _hideDes : function(targetShowObj){
+                var that = this;
+                var targetShowObj = $(targetShowObj);
+                var js_sectionProListWrapTop = parseInt($("#js_sectionProListWrap").offset().top) -150;
+
+                that.target.click(function(event){
+                    $("#js_sectionDescriptionMilk").slideUp(1000);
+                    targetShowObj.show().siblings('.scissors-cow').show();
+                    $("html,body").animate({scrollTop: js_sectionProListWrapTop},1000);
+                });
+            }
+        }
+
+        var cutDown = new changeShowDescription("#js_clickMilkCow");
+        cutDown.cutDownRope();
+
+        var hideDes = new changeShowDescription("#js_clickHideMilkDes");
+        hideDes._hideDes("#js_clickMilkCow");
+
+        //滑动页面顶部tab切换
+        function SetScrollTop(obj,targetObj){ 
+            this.index = 0;
+            this.obj = $(obj);
+            this.targetObj = $(targetObj);
+            this.ini();
+        }
+        SetScrollTop.prototype = {
+            ini: function(){
+                var that = this;
+
+                $(window).scroll(function(event) {
+                    var $this = $(this),
+                        widnScroll = $this.scrollTop(),
+                        firstTargetTop = that.obj.eq(0).offset().top,
+                        footOffsetTop = $("#footer").offset().top,
+                        windH = $this.height(),
+                        windW = $this.width();
+
+                    var $leftBar = $("#js_leftBar");
+
+                    if(widnScroll > firstTargetTop && !(widnScroll >= footOffsetTop - windH) ){//如果页面滑动到第一个目标对象区域块
+                        that.targetObj.removeClass('none');
+                        $leftBar.css({position: "fixed",top: "60px"}).show();
+                    }else{
+                        that.targetObj.addClass('none');
+                         $leftBar.hide();
+                    }
+
+                    $.each(that.obj, function(index, val) {
+                        var $targetItem = $(val);
+                        var targetTop = $targetItem.offset().top;
+
+                        if(widnScroll >= targetTop){
+                            that.targetObj.find("li").eq(index).addClass('on').siblings('li').removeClass('on');
+                        }
+                    });
+                });
+
+                that.chooseItem();
+            },
+            chooseItem : function(){
+                var that = this;
+
+                that.targetObj.on("click","li",function(){
+                    var $this = $(this);
+                    var targetIndex = that.targetObj.find("li").index($(this));
+                    var huadongLength = that.obj.eq(targetIndex).offset().top; 
+
+                    $this.addClass('on').siblings('li').removeClass('on');
+
+                    $("html,body").animate({scrollTop:huadongLength}, 500);
+                });
+            }
+        }
+
+        // 页面滑动tab切换
+        new SetScrollTop(".js_sectionTargetWrap","#sortTopNav");
+
+        //点击回到顶部
+        $(function(){
+            //页面一进来就触发点击剪断事件，5秒钟后再触发收回
+            if(!(window.location.hash.indexOf("model") === 1)){
+                $("#js_clickMilkCow").trigger("click");
+                setTimeout(function(){
+                    $("#js_clickHideMilkDes").trigger('click');
+                }, 5000);
+            }else{
+                var itemScrollTop  = window.location.hash.length > 0 ? $(window.location.hash).offset().top : 0;
+                $("html,body").animate({scrollTop:itemScrollTop}, 500);
+            }
+           
+            $(".js_goToTop").click(function(){
+                $("html,body").animate({scrollTop:0}, 500);
+            });
+        });
+    </script>
+    {/literal}
+
+    {elseif $active == 3}
+	{literal}
+	<style>
+		.promtion-wrap{overflow: hidden;}
+		.promtion-wrap .p-banner{height: 689px;width:100%;position: relative;overflow: hidden;}
+		.promtion-wrap .p-banner img{display: block;position: absolute;width:1920px;height: 689px;left: 50%;margin-left: -960px;top: 0}
+		.promtion-wrap .p-banner .rules{position: absolute; color: #FFFFFF; font-size: 14px; bottom: 150px; left: 50%; margin-left: -326px;}
+		.wrap{width: 1005px;padding-bottom:100px;min-width:1005px;position: relative;height: auto;margin: 0 auto;background-color: #FFFFFF;}
+		.wrap img{vertical-align: top;}
+		area{outline: none;}
+        .goods-list{width: 1005px;}
+        .goods-list a{text-decoration: none;}
+		.goods-list li{float: left;width: 294px;padding: 0 20px;margin-top: 20px;}
+        .goods-list .goods-img{text-align: center;}
+        .goods-list .goods-title{font-size: 20px;font-weight: bold;line-height: 34px;border-bottom: 1px solid #C3695D;}
+        .goods-list .goods-title-2{font-size: 14px;line-height: 24px;border-bottom: 1px solid #C3695D;}
+        .goods-list .goods-des{font-size: 12px;line-height: 20px;height: 40px;overflow: hidden;}
+        .goods-list .goods-buy{position:relative;text-align: center;margin-top: 20px;}
+        .goods-list .goods-buy img{width: 80%;}
+        .goods-list .goods-buy .price{color: #FFFFFF; font-size: 20px; display: block; position: absolute; top: 6px; left: 60px;}
+
+        .goods-women{background-color: #FDEDD2;}
+        .goods-list-women .goods-title-2,.goods-list-women .goods-title{color: #a00606;}
+        .goods-list-women .goods-des{color: #a20b01}
+
+        .goods-man-wrap{background-color: #FDF7ED;}
+        .goods-list-man .goods-title-2,.goods-list-man .goods-title{color: #791d04;}
+        .goods-list-man .goods-des{color: #791d04;}
+
+        .goods-old-wrap{background-color: #FDEBD6;}
+        .goods-list-old .goods-title-2,.goods-list-old .goods-title{color: #682e01;}
+        .goods-list-old .goods-des{color: #682e01;}
+
+        .goods-baby-wrap{background-color: #FDF7EC;}
+        .goods-list-baby .goods-title-2,.goods-list-old .goods-title{color: #d52e00;}
+        .goods-list-baby .goods-des{color: #d52e00;}
+
+        .top-wrap{background-color: #882812;padding: 10px 0;}
+	</style>
+	{/literal}
+	<!--sb sb sb sb dsb-->
+	<div class="promtion-wrap">
+		<div class="p-banner r-img wrap">
+			<img src="{$imgcache_url}images/promotion/xinqiu/banner.jpg" alt="banner" width="1920" height="689"/>
+		</div>
+		<div class="goods-wrap wrap">
+			<div class="goods-women pb20">
+				<div class="goods-hot">
+					<img src="{$imgcache_url}images/promotion/xinqiu/women_hot.jpg" width="1005" height="773" usemap="#xinqiuMap1"/>
+					<map name="xinqiuMap1">
+						<area shape="rect" coords="69,166,825,442" href="http://www.wzhouhui.com/product40.html" target="_blank">
+						<area shape="rect" coords="131,518,980,753" href="http://www.wzhouhui.com/product54.html" target="_blank">
+					</map>
+				</div>
+				<ul class="goods-list goods-list-women clearfix">
+					<li>
+						<p class="goods-img">
+							<a href="http://www.wzhouhui.com/product369.html" target="_blank">
+								<img src="{$imgcache_url}images/promotion/xinqiu/women/goods_1.jpg" width="255" height="235"/>
+							</a>
+						</p>
+						<p class="goods-title">
+							促进受孕 提供孕期营养
+						</p>
+						<p class="goods-title-2">
+							备孕期或孕期6个月内
+						</p>
+						<p class="goods-des">
+							【保税】Blackmores澳佳宝 孕前黄金营养素 56粒
+						</p>
+						<p class="goods-buy">
+							<a href="http://www.wzhouhui.com/product369.html" target="_blank">
+								<img src="{$imgcache_url}images/promotion/xinqiu/women/btn.png" alt="立即购买"/>
+                                <span class="price">￥176</span>
+                            </a>
+						</p>
+					</li>
+
+					<li>
+						<p class="goods-img">
+							<a href="http://www.wzhouhui.com/product370.html" target="_blank">
+								<img src="{$imgcache_url}images/promotion/xinqiu/women/goods_2.jpg" width="255" height="235"/>
+							</a>
+						</p>
+						<p class="goods-title">
+							调节血脂 保护心脑健康
+						</p>
+						<p class="goods-title-2">
+							长期用脑、眼部疲劳、三脂高者
+						</p>
+						<p class="goods-des">
+							【保税】Blackmores 澳佳宝 欧米伽3深海鱼油软胶囊 400粒
+						</p>
+						<p class="goods-buy">
+							<a href="http://www.wzhouhui.com/product370.html" target="_blank">
+								<img src="{$imgcache_url}images/promotion/xinqiu/women/btn.png" />
+							</a>
+							<span class="price">￥149</span>
+						</p>
+					</li>
+
+					<li>
+						<p class="goods-img">
+							<a href="http://www.wzhouhui.com/product195.html" target="_blank">
+								<img src="{$imgcache_url}images/promotion/xinqiu/women/goods_3.jpg" width="255" height="235"/>
+							</a>
+						</p>
+						<p class="goods-title">
+							补充所需营养 促进胎儿发育
+						</p>
+						<p class="goods-title-2">
+							备孕中、孕期及哺乳期女性
+						</p>
+						<p class="goods-des">
+							【保税】美国MeadJohnson美赞臣 孕妇DHA 海藻油脑黄金
+						</p>
+						<p class="goods-buy">
+							<a href="http://www.wzhouhui.com/product195.html" target="_blank">
+								<img src="{$imgcache_url}images/promotion/xinqiu/women/btn.png" />
+							</a>
+							<span class="price">￥148</span>
+						</p>
+					</li>
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product360.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/women/goods_4.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            纤体瘦身 清肠排毒
+                        </p>
+                        <p class="goods-title-2">
+                            成年女性、活力保健
+                        </p>
+                        <p class="goods-des">
+                            【保税】SanaExpert 巴西莓 抗氧化纤体胶囊 60粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product360.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/women/btn.png" />
+                            </a>
+                            <span class="price">￥216</span>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product193.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/women/goods_5.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            调整肠道 抗肿瘤
+                        </p>
+                        <p class="goods-title-2">
+                            消化不良、腹泻、腹胀、便秘
+                        </p>
+                        <p class="goods-des">
+                            【保税】Blackmores澳佳宝 乳酸菌胶囊90粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product193.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/women/btn.png" />
+                            </a>
+                            <span class="price">￥159</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product191.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/women/goods_6.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            排毒通便 净肠美肤
+                        </p>
+                        <p class="goods-title-2">
+                            便秘、肠道不畅
+                        </p>
+                        <p class="goods-des">
+                            【保税】Nu-Lax 乐康膏果蔬润肠膏 500g
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product191.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/women/btn.png" />
+                            </a>
+                            <span class="price">￥95</span>
+                        </p>
+                    </li>
+				</ul>
+			</div>
+
+            <div class="goods-man-wrap pb20">
+                <div class="goods-hot">
+                    <img src="{$imgcache_url}images/promotion/xinqiu/man_hot.jpg" width="1005" height="773" usemap="#xinqiuMap2"/>
+                    <map name="xinqiuMap2">
+                        <area shape="rect" coords="198,182,992,468" href="http://www.wzhouhui.com/product1144.html" target="_blank">
+                        <area shape="rect" coords="37,484,723,743" href="http://www.wzhouhui.com/product205.html" target="_blank">
+                    </map>
+                </div>
+                <ul class="goods-list goods-list-man clearfix">
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product192.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/goods_1.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            改善痤疮 提高精子活力
+                        </p>
+                        <p class="goods-title-2">
+                            精子备孕、成年男性
+                        </p>
+                        <p class="goods-des">
+                            【保税】Blackmores澳佳宝 成人锌片 168粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product192.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/btn.png" alt="立即购买"/>
+                                <span class="price">￥153</span>
+                            </a>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product365.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/goods_2.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            改善生殖系统 保护肝脏
+                        </p>
+                        <p class="goods-title-2">
+                            应酬多、常抽烟、饮食不规律
+                        </p>
+                        <p class="goods-des">
+                            【保税】Blackmores澳佳宝 男士综合维生素 100片
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product365.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/btn.png" />
+                            </a>
+                            <span class="price">￥200</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product177.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/goods_3.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            缓解焦虑  改善睡眠
+                        </p>
+                        <p class="goods-title-2">
+                            情绪焦虑、过于疲劳、抑郁
+                        </p>
+                        <p class="goods-des">
+                            【保税】汤普森咔哇草本精华（抗抑郁） 60粒/瓶
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product177.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/btn.png" />
+                            </a>
+                            <span class="price">￥268</span>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product194.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/goods_4.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            增强肝脏解毒功能 护肝养肝
+                        </p>
+                        <p class="goods-title-2">
+                            应酬多、常饮酒、嗜好抽烟
+                        </p>
+                        <p class="goods-des">
+                            【保税】Blackmores 澳佳宝 奶蓟草护肝片 42粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product194.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/btn.png" />
+                            </a>
+                            <span class="price">￥119</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product206.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/goods_5.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            抗疲劳，维护心脑血管健康
+                        </p>
+                        <p class="goods-title-2">
+                            精神压力大、常应酬、饮食不规律
+                        </p>
+                        <p class="goods-des">
+                            【保税】Swisse男士复合维生素片 120粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product206.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/btn.png" />
+                            </a>
+                            <span class="price">￥249</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product359.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/goods_6.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            提高男性的生育能力和性能力
+                        </p>
+                        <p class="goods-title-2">
+                            便秘、肠道不畅
+                        </p>
+                        <p class="goods-des">
+                            【保税】SanaExpert L精氨酸 α-硫辛酸 胶囊 60粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product359.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/man/btn.png" />
+                            </a>
+                            <span class="price">￥310</span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="goods-old-wrap pb20">
+                <div class="goods-hot pr">
+                    <img src="{$imgcache_url}images/promotion/xinqiu/old/banner.jpg" width="1005" height="816" usemap="#xinqiuMap3"/>
+                    <map name="xinqiuMap3">
+                        <area shape="rect" coords="338,221,891,448" href="http://www.wzhouhui.com/product203.html" target="_blank">
+                        <area shape="rect" coords="67,559,985,804" href="http://www.wzhouhui.com/product79.html" target="_blank">
+                    </map>
+                    <a href="http://www.wzhouhui.com/product203.html" target="_blank" style="display: block; position: absolute; top: 160px; left: -59px;">
+                        <img src="{$imgcache_url}images/promotion/xinqiu/old/c.png"/>
+                    </a>
+                </div>
+                <ul class="goods-list goods-list-old clearfix">
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product361.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/goods_1.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            缓解关节疼痛 促进软骨再生
+                        </p>
+                        <p class="goods-title-2">
+                            关节炎、肩周炎
+                        </p>
+                        <p class="goods-des">
+                            【保税】SanaExpert 微量元素配方 关节灵胶囊 60粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product361.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/btn.png" alt="立即购买"/>
+                                <span class="price">￥183</span>
+                            </a>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product366.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/goods_2.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            抗氧化 让心脏更年轻
+                        </p>
+                        <p class="goods-title-2">
+                            心脏病、病毒性肝炎、老年痴呆症
+                        </p>
+                        <p class="goods-des">
+                            【保税】Blackmores 澳佳宝 辅酶Q10胶囊75mg 30粒
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product366.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/btn.png" />
+                            </a>
+                            <span class="price">￥109</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product602.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/goods_3.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            调节血糖平衡 缓解糖尿困扰
+                        </p>
+                        <p class="goods-title-2">
+                            胆固醇高、血糖高、压力过大
+                        </p>
+                        <p class="goods-des">
+                            【保税】Blackmores 澳佳宝 血糖平衡片 90片
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product602.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/btn.png" />
+                            </a>
+                            <span class="price">￥117</span>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product372.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/goods_4.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            天然VC 增强免疫力
+                        </p>
+                        <p class="goods-title-2">
+                            坏血病、白内障、嗜好抽烟者
+                        </p>
+                        <p class="goods-des">
+                            【保税】汤普森Vitamin C 汤姆森维他命C咀嚼片 150粒/瓶
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product372.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/btn.png" />
+                            </a>
+                            <span class="price">￥147</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product175.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/goods_5.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            维护心脑血管健康 预防脑血栓
+                        </p>
+                        <p class="goods-title-2">
+                            易疲劳、关节疼痛、偏头痛
+                        </p>
+                        <p class="goods-des">
+                            【保税】汤普森 超级奥米茄3浓缩鱼油 60粒/瓶
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product175.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/btn.png" />
+                            </a>
+                            <span class="price">￥115</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product378.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/goods_6.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            预防老年性痴呆 保护肝功能
+                        </p>
+                        <p class="goods-title-2">
+                            三高、糖尿病、胆结石
+                        </p>
+                        <p class="goods-des">
+                            【保税】汤普森super lecithin 超级卵磷脂 200粒/瓶
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product378.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/old/btn.png" />
+                            </a>
+                            <span class="price">￥159</span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="goods-baby-wrap pb20">
+                <div class="goods-hot pr">
+                    <img src="{$imgcache_url}images/promotion/xinqiu/baby/banner.jpg" width="1005" height="843" usemap="#xinqiuMap4"/>
+                    <map name="xinqiuMap4">
+                        <area shape="rect" coords="152,200,984,485" href="http://www.wzhouhui.com/product1138.html" target="_blank">
+                        <area shape="rect" coords="35,518,777,772" href="http://www.wzhouhui.com/product183.html" target="_blank">
+                    </map>
+                </div>
+                <ul class="goods-list goods-list-baby clearfix">
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product137.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/goods_1.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            促进脑部发育 均衡营养
+                        </p>
+                        <p class="goods-title-2">
+                            半岁以上、身体虚弱
+                        </p>
+                        <p class="goods-des">
+                            【保税】Childlife童年时光DHA软胶囊 90粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product137.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/btn.png" alt="立即购买"/>
+                                <span class="price">￥78</span>
+                            </a>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product138.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/goods_2.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            全面均衡营养 改善宝宝体质
+                        </p>
+                        <p class="goods-title-2">
+                            6个月以上宝宝
+                        </p>
+                        <p class="goods-des">
+                            【保税】Childlife童年时光基础营养液 237ml
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product138.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/btn.png" />
+                            </a>
+                            <span class="price">￥85</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product134.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/goods_3.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            提高免疫力  促进心脑发育
+                        </p>
+                        <p class="goods-title-2">
+                            6个月-12岁婴幼儿
+                        </p>
+                        <p class="goods-des">
+                            【保税】Childlife童年时光鳕鱼肝油 237ml
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product134.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/btn.png" />
+                            </a>
+                            <span class="price">￥97</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product135.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/goods_4.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            增强免疫力 预防感冒
+                        </p>
+                        <p class="goods-title-2">
+                            6个月以上宝宝
+                        </p>
+                        <p class="goods-des">
+                            【保税】美国童年时光ChildLife童年时光维c营养液 118.5ml
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product135.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/btn.png" />
+                            </a>
+                            <span class="price">￥58</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product182.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/goods_5.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            保护视力 增强肌体免疫力
+                        </p>
+                        <p class="goods-title-2">
+                            厌食、抵抗力下降、腹泻
+                        </p>
+                        <p class="goods-des">
+                            【保税】Bio Island婴幼儿小熊补锌咀嚼片 120粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product182.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/btn.png" />
+                            </a>
+                            <span class="price">￥112</span>
+                        </p>
+                    </li>
+
+                    <li>
+                        <p class="goods-img">
+                            <a href="http://www.wzhouhui.com/product1147.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/goods_6.jpg" width="255" height="235"/>
+                            </a>
+                        </p>
+                        <p class="goods-title">
+                            赠强记忆力 保护视力
+                        </p>
+                        <p class="goods-title-2">
+                            1-12岁儿童
+                        </p>
+                        <p class="goods-des">
+                            澳大利亚Swisse 儿童深海鱼油咀嚼胶囊 90粒
+                        </p>
+                        <p class="goods-buy">
+                            <a href="http://www.wzhouhui.com/product1147.html" target="_blank">
+                                <img src="{$imgcache_url}images/promotion/xinqiu/baby/btn.png" />
+                            </a>
+                            <span class="price">￥110</span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+		</div>
+        <div class="top-wrap tc wrap">
+            <a href="#"><img src="{$imgcache_url}images/promotion/xinqiu/top.jpg" /></a>
+        </div>
+        <div class="bottom-cate-wrap wrap r-img pb50">
+            <img src="{$imgcache_url}images/promotion/xinqiu/bottom_cate.jpg" border="0" usemap="#xinqiuMap5">
+            <map name="#xinqiuMap5">
+                <area shape="rect" coords="-1,-1,330,165" href="http://www.wzhouhui.com/brand-27.html" target="_blank">
+                <area shape="rect" coords="336,2,666,163" href="http://www.wzhouhui.com/category-c-25.html?ord=recommend&orderBy=desc&brand_id=62" target="_blank">
+                <area shape="rect" coords="679,6,1001,162" href="http://www.wzhouhui.com/brand-26.html" target="_blank">
+                <area shape="rect" coords="1,171,330,331" href="http://www.wzhouhui.com/baby.html" target="_blank">
+                <area shape="rect" coords="335,169,666,330" href="http://www.wzhouhui.com/m-promotion-special-4.html" target="_blank">
+                <area shape="rect" coords="676,167,1006,335" href="http://www.wzhouhui.com/m-promotion-special-2.html" target="_blank">
+            </map>
+        </div>
+    </div>
+
+	{elseif $active == 2}
 	{literal}
 	<style type="text/css">
 		.r-img img{width: 100%;height: auto;vertical-align: top;}
@@ -107,37 +2150,37 @@
 			<div class="hot-goods-wrap hot-bg" id="js_cate1">
 				<div class="hot-goods hot-goods-bg w1000">
 					<h3 class="cate-name r-img">
-						<img src="{$imgcache_url}images/promotion/guoqing/cate_1.jpg" width="330" height="379" alt="">
+						<img src="{$imgcache_url}images/promotion/guoqing/cate_1.jpg" width="330" height="379">
 					</h3>
 					<ul class="hot-goods-list clearfix">
 						<li>
 							<a href="http://www.wzhouhui.com/product588.html" target="_blank" class="goods-a">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_1.png" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_1.png">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/m-goods-id-1141.htm?islan=1" target="_blank" class="goods-a">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_2.png" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_2.png">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/product587.html" target="_blank" class="goods-a">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_3.png" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_3.png">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/m-goods-id-1139.htm?islan=1" target="_blank" class="goods-a">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_4.png" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_4.png">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/product562.html" target="_blank" class="goods-a">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_5.png" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_5.png">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/m-goods-id-1140.htm?islan=1" target="_blank" class="goods-a">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_6.png" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="379" data-original="{$imgcache_url}images/promotion/guoqing/hot_goods_6.png">
 							</a>
 						</li>
 					</ul>
@@ -149,7 +2192,7 @@
 					{foreach from = $data key = k item = pro}
 					<div class="pt30 ">
 						<h3 class="cate-name r-img" id="js_cate{$k+2}">
-							<img src="{$imgcache_url}images/promotion/guoqing/cate_{$k+2}.jpg" width="330" height="379" alt="">
+							<img src="{$imgcache_url}images/promotion/guoqing/cate_{$k+2}.jpg" width="330" height="379">
 						</h3>
 						<div class="bg-color">
 							<ul class="goods-list p-proList clearfix">
@@ -157,7 +2200,7 @@
 								<li>
 									<p class="p_img tc">
 										<a target="_blank" href="{$goods.link_url}">
-											<img src="{$goods.goods_img}" width="210" height="210" data-original="{$goods.goods_img}" alt="" style="display: inline;">
+											<img src="{$goods.goods_img}" width="210" height="210" data-original="{$goods.goods_img}" style="display: inline;">
 										</a>
 									</p>
 									<p class="p_name tl"><a target="_blank" href="{$goods.link_url}">{$goods.goods_title}</a></p>
@@ -168,7 +2211,7 @@
 									<span class="icon_child o-icon"><strong>{$goods.zekou}</strong>折</span>
 								</li>
                                 {/foreach}
-								
+
 							</ul>
 						</div>
 					</div>
@@ -178,32 +2221,32 @@
 					<ul class="cate-list clearfix">
 						<li>
 							<a href="http://www.wzhouhui.com/brand-41.html" target="_blank">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_1.jpg" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_1.jpg">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/brand-7.html" target="_blank">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_2.jpg" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_2.jpg">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/brand-26.html" target="_blank">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_3.jpg" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_3.jpg">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/category-c-3.html?brand_id=5&ord=recommend&orderBy=desc" target="_blank">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_4.jpg" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_4.jpg">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/category-c-19.html" target="_blank">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_5.jpg" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_5.jpg">
 							</a>
 						</li>
 						<li>
 							<a href="http://www.wzhouhui.com/category-b-38.html" target="_blank">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_6.jpg" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="330" height="155" data-original="{$imgcache_url}images/promotion/guoqing/b_cate_6.jpg">
 							</a>
 						</li>
 					</ul>
@@ -211,14 +2254,14 @@
 
 				<div class="top-wrap">
 					<a class="top js_toTop" href="javascript:;">
-						<img src="{$imgcache_url}images/promotion/guoqing/top.png" alt="">
+						<img src="{$imgcache_url}images/promotion/guoqing/top.png">
 					</a>
 				</div>
 			</div>
 		</div>
 
 		<aside class="right-aside aside r-img js_aside">
-			<img src="{$imgcache_url}images/promotion/guoqing/right_bar.png" alt="">
+			<img src="{$imgcache_url}images/promotion/guoqing/right_bar.png">
 		</aside>
 		<aside class="left-aside aside js_aside">
 			<ul class="left-aside-list" id="js_leftSide">
@@ -235,7 +2278,7 @@
 				</li>
 			</ul>
 			<div class="go-top r-img js_toTop">
-				<img src="{$imgcache_url}images/promotion/guoqing/left_top.png" alt="">
+				<img src="{$imgcache_url}images/promotion/guoqing/left_top.png">
 			</div>
 		</aside>
 	</div>
@@ -335,7 +2378,7 @@
 				}
 			}
 		})(jQuery);
-		
+
 		$(function () {
 			var rulesHtml = '',
 				isSupportsAnimation = GLOBAL.otherGlobal.supports('animation');
@@ -351,7 +2394,7 @@
 			});
 			var getRulesHtml = function(){
 				if(rulesHtml == ''){
-					rulesHtml = '<div class="pop-wrap"><div class="con-box"><div class="line"><div class="inline-block title">活动时间:</div><div class="inline-block content">2015年9月29日0点--2015年10月10日24点</div></div><div class="line"><div class="inline-block title">返券规则:</div><div class="inline-block content">凡在活动期间内下单购买的用户，都可获得300元的返券，每个用户有且只有1次返券机会；<br />返券发放如下：全场通用券99减10现金券4张、全场通用券299减20现金券4张、全场通用券满399减40现金券2张、全场满50减50现金券2张；</div></div><div class="line"><div class="inline-block title">券有效期:</div><div class="inline-block content">2015年10月10日-2015年11月10日</div></div><div class="line"><div class="inline-block title">使用规则:</div><div class="inline-block content">仅限在现金券的有效期内使用，不可与其他优惠券同时叠加使用；使用优惠劵的订单发生退货时，现金券将无法退回。</div></div></div><div class="copyright-wrap"><p class="copyright">本次活动最终解释权归“五洲会海购商城”所有。</p><a href="javascript:;" class="js_closePopBtn btn btn-default mt5">我知道了</a></div></div>';
+					rulesHtml = '<div class="pop-wrap"><div class="con-box"><div class="line"><div class="inline-block title">活动时间:</div><div class="inline-block content">2015年9月29日0点--2015年10月10日24点</div></div><div class="line"><div class="inline-block title">返券规则:</div><div class="inline-block content">凡在活动期间内下单金额满300的用户，都可获得300元的返券，每个用户有且只有1次返券机会；<br />返券发放如下：全场通用券99减10现金券4张、全场通用券299减20现金券4张、全场通用券满399减40现金券2张、全场满500减50现金券2张；</div></div><div class="line"><div class="inline-block title">券有效期:</div><div class="inline-block content">2015年10月10日-2015年11月10日</div></div><div class="line"><div class="inline-block title">使用规则:</div><div class="inline-block content">仅限在现金券的有效期内使用，不可与其他优惠券同时叠加使用；使用优惠劵的订单发生退货时，现金券将无法退回。</div></div></div><div class="copyright-wrap"><p class="copyright">本次活动最终解释权归“五洲会海购商城”所有。</p><a href="javascript:;" class="js_closePopBtn btn btn-default mt5">我知道了</a></div></div>';
 				}
 				return rulesHtml;
 			};
@@ -447,7 +2490,7 @@
 
 			<div class="custom-pro">
 				<div class="item img-left clearfix">
-					<a  target="_bland" href="http://www.wzhouhui.com/product392.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-1.jpg" alt=""></a>
+					<a  target="_bland" href="http://www.wzhouhui.com/product392.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-1.jpg"></a>
 					<div class="pro-text">
 						<h4><a target="_bland" href="http://www.wzhouhui.com/product392.html">深层美白补水，打造紧致Q弹肌</a></h4>
 						<h5>韩国SNP海豹动物补水面膜（10片）</h5>
@@ -458,7 +2501,7 @@
 				</div>
 
 				<div class="item clearfix">
-					<a  target="_bland" href="http://www.wzhouhui.com/product267.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-2.jpg" alt=""></a>
+					<a  target="_bland" href="http://www.wzhouhui.com/product267.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-2.jpg"></a>
 					<div class="pro-text">
 						<h4><a  target="_bland" href="http://www.wzhouhui.com/product267.html">贴心呵护成长，千万妈咪的共同选择</a></h4>
 						<h5>日本原装进口花王宝宝纸尿裤（L54片）</h5>
@@ -470,7 +2513,7 @@
 
 
 				<div class="item img-left clearfix">
-					<a   target="_bland" href="http://www.wzhouhui.com/product588.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-3.jpg" alt=""></a>
+					<a   target="_bland" href="http://www.wzhouhui.com/product588.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-3.jpg"></a>
 					<div class="pro-text">
 						<h4><a   target="_bland" href="http://www.wzhouhui.com/product588.html">温和无刺激，准妈咪的贴心选择</a></h4>
 						<h5>澳洲Goat soap羊奶皂随机组合套餐 （100g*3）</h5>
@@ -481,7 +2524,7 @@
 				</div>
 
 				<div class="item clearfix">
-					<a  target="_bland" href="http://www.wzhouhui.com/product199.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-4.jpg" alt=""></a>
+					<a  target="_bland" href="http://www.wzhouhui.com/product199.html" class="pro-img"><img src="{$imgcache_url}images/promotion/yiqingchun/pro-4.jpg"></a>
 					<div class="pro-text">
 						<h4><a  target="_bland" href="http://www.wzhouhui.com/product199.html">每天1杯，开启1天新动力</a></h4>
 						<h5>澳大利亚Devondale德运高钙速溶全脂奶粉（1kg）</h5>
@@ -557,6 +2600,5 @@
 
 		{include file="foot_statistics.htm"}
 	</footer>
-
 </body>
 </html>

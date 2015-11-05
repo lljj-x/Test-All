@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {include file='top.htm'}
-   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css?2015100701">
 </head>
 <body>
 <header id="header">
@@ -83,7 +83,8 @@
                             <input type="hidden" name="apply_money" value="{$order.goods.refund_money}" />
                             <input type="hidden" name="apply_id" value="{$apply_id}" />
                             <input type="hidden" name="number" value="{$order.goods.goods_number}" />
-                            <input name="money" placeholder="请输入退款金额" disabled value="{$order.goods.refund_money}"> <span class="prompt">（最多 499 元，含发货邮费0.00元）</span>
+                            <input name="money" type="hidden" disabled value="{$order.goods.refund_money}">
+                            <input name="total_money" placeholder="请输入退款金额" disabled value="{$order.goods_refund_price|string_format:"%.2f"}"> <span class="prompt">（退款金额会按支付方式不同，原路退回）</span>
                         </span>
                     </label>
 
@@ -125,7 +126,8 @@
 
                     <p class="label-right prompt">每张图片大小不超过5M，最多3张，支持GIF、JPG、PNG、BMP格式</p>
 
-                    <p class="label-right mt30">
+                    <p class="mt30">
+                        <span class="form-label">&nbsp;</span>
                         <a class="btn btn-default js_submit" href="#" onclick="return false;">提交申请</a>
                     </p>
                 </div>
@@ -168,7 +170,8 @@
                             <p><span class="left">运费：</span> {$order.formated_shipping_fee}元</p>
                             <p><span class="left">优惠券：</span>-{$order.promotion_code_youhuilv}元</p>
                             <p><span class="left">佣金：</span>-{$order.user_cash}元</p>
-                            <p><span class="left">实付金额：</span>{$order.total_fee}元</p>
+                            <p><span class="left">礼品卡：</span>-{$order.gift_money}元</p>
+                            <p><span class="left">实付金额：</span>{$order.pay_fee}元</p>
                             <p><span class="left">成交时间：</span>{$order.pay_time}</p>
                         </div>
                     </li>
@@ -184,7 +187,7 @@
 </footer><!--end #footer -->
 {literal}
 <script>
-    $LAB.script("user.min.js")
+    $LAB.script("user.min.js?2015100701")
         .wait(function () {
             // 申请售后form
             if($("#sale-apply-form").length > 0){

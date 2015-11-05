@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
 {include file="top.htm"}
 	<link rel="stylesheet" href="{$imgcache_url}mincss/category_min.css?2015080603">
 	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
 </head>
 <body>
 	<header id="header">
-		
 		{include file="public_top.htm"}
 	</header>
-
-
 	<div class="wrap pb40">
+		<!-- 广告位置 -->
 		{*if $banner_list}
         <div class="topBannerWrap clearfix">
             <div class="slider" id="js_banner">
                 <ul class="slideList clearfix">
-                
-                {foreach from=$banner_list item=v}
-                    
-                        <li><a href="{$v.url}"><img src="{$v.pic_url}" alt="" height="440"></a></li>
+              	  	{foreach from=$banner_list item=v}
+                        <li><a href="{$v.url}"><img src="{$v.pic_url}" height="440"></a></li>
                     {/foreach}
-                    
                 </ul>
             </div>
         </div><!-- .topBannerWrap -->
@@ -31,61 +25,10 @@
 		
 		<!-- 主体部分 start -->
 		<div class="js_mainBgWrap">
-
-			
 			<!-- 条件筛选 -->
 			<div class="conditionFilterWrap w1200">
 				<div class="c-f-wrap">
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				{*<div class="sortNav_tab clearfix">
-                    <div class="title fl mr10">分类:</div>
-                    <ul class="navTab fl clearfix" id="js_sortNavTab">
-                        {foreach from=$catList key=k item=v}
-                        <li {if $k eq 0}class="on" {/if}><a href="javascript:void(0);">{$v.cat_name}</a></li>
-                        {/foreach}
-                        
-                    </ul>
-                </div>
-				{foreach from=$catList key=k item=v}
-                <div class="sort js_sortWrap {if $k neq 0}none{/if}">
-                    
-                    {if $v.brand_list}
-                    <div class="brandsWrap pr clearfix ">
-                        <div class="title fl mr10">品牌:</div>
-                        
-                        <ul class="brands fl js_brands clearfix">
-                            {foreach from=$v.brand_list key=kB item=vB}
-                            <li><a href="{$vB.cat_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="110" height="60" data-original="{$vB.brand_logo}" alt=""></a></li>
-                            {/foreach}
-                            
-                        </ul>
-                        <span class="showMore pa js_morebrand">更多<i class="pa ci-right">◇</i></span>
-                    </div><!-- .brandsWrap -->
-                    {/if}
-                    {if $v.attr_list}
-                    <div class="attributeWrap clearfix">
-                        <div class="title fl mr10">适用年龄:</div>
-                        <div class="attribute fl">
-                        {foreach from=$v.attr_list item=vA}
-                            <a href="{$vA.cat_url}" >{$vA.search_attr_name}</a>
-                        {/foreach}
-                            
-                            
-                        </div>
-                    </div><!-- .attributeWrap -->
-                    {/if}
-                </div><!-- .sort -->
-            {/foreach}
-            *}
-				
+				<!-- 分类 -->
 				{if $catList}
                     <div class="attributeWrap clearfix">
                         <div class="title fl mr10">分类:</div>
@@ -95,8 +38,9 @@
                             {/foreach}
                         </ul>
                     </div><!-- .attributeWrap -->
-                   {/if} 
+               	{/if} 
 			
+				<!-- 品牌 -->
 				{if $brand_list}
 				    <div class="brandsWrap pr clearfix">
                         <div class="title fl mr10">品牌:</div>
@@ -104,7 +48,7 @@
                             {foreach from=$brand_list item=v}
                             <li {if $brand_id == $v.id}class="on"{/if}>
                             	<a href="{$v.url}">
-                            		<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="110" height="60" data-original="{$v.brand_logo}" alt="">
+                            		<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="110" height="60" data-original="{$v.brand_logo}" alt="{$v.brand_name}">
                             		<div class="brand-tit"><p>{$v.brand_name}</p></div>
                             	</a>
                             </li>
@@ -112,27 +56,24 @@
                         </ul>
                         <span class="showMore pa js_morebrand none">更多<i class="pa ci-right">◇</i></span>
                     </div><!-- .brandsWrap -->
-                   {/if} 
+               	{/if} 
                     
-					
-					{if $attr_list}
+                <!-- 年龄段 -->
+				{if $attr_list}
                     {foreach from=$attr_list item=vA}
                     <div class="attributeWrap clearfix">
                         <div class="title fl mr10">{$vA.search_attr_name}{*适用年龄*}:</div>
                         <div class="attribute fl">
                         {foreach from=$vA.search_value key=k item=vAs}
-                             
                             <a href="{$vAs.cat_url}" {if $sm == $k} style="color:#ff405c" {/if}>{$vAs.search_name}</a>
-                            
                         {/foreach}
-                            
-                            
                         </div>
                     </div><!-- .attributeWrap -->
                     {/foreach}
-                    {/if}
-					
-              {if $select_arr}
+                {/if}
+                
+                <!-- 已选条件 -->
+              	{if $select_arr}
 					<div class="haveChoosedWrap clearfix">
 						<div class="title fl mr10">已选条件:</div>
 						<ul class="have-choose fl clearfix">
@@ -141,7 +82,8 @@
 							{/foreach}
 							
 						</ul>
-					</div><!-- .haveChoosedWrap -->{/if}
+					</div><!-- .haveChoosedWrap -->
+				{/if}
 				</div><!-- .c-f-wrap -->
 			</div><!-- .conditionFilterWrap -->
 			
@@ -151,9 +93,11 @@
 					<div class="b-s-down clearfix">
 						<div class="left fl">排序:</div>
 						<ul class="right fl clearfix">
-						  {foreach from=$orderUrlArr item=v key=k}
-							<li class="search-normal"><a href="{$v.url}" {if $k == $ord} class="on" {/if}>{$v.name}<i class="icon {$v.orderBy}"></i></a></li>
-							{/foreach}
+					 	{foreach from=$orderUrlArr item=v key=k}
+							<li class="search-normal">
+								<a href="{$v.url}" {if $k == $ord} class="on" {/if}>{$v.name}<i class="icon {$v.orderBy}"></i></a>
+							</li>
+						{/foreach}
 							<li class="instock"><a href="{$stockUrl}"><i class="icon icon_checkbox {if $stock}selected{/if}"></i>只显示有货商品</a></li>
 							<li class="allProNum">共计<strong>{$total_count}</strong>个商品</li>
 						</ul>
@@ -161,17 +105,17 @@
 				</div>
 			</div><!-- .brand-sort-wrap -->
 
-
-
-
 			<!-- 品牌产品列表 -->
 			<div class="proListWrap w1200">
 				<ul class="p-proList clearfix">
-				
 				    {foreach from=$goods_list key=k item=v}
                     <li>
-                        <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt=""></a></p>
-                        <p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+                        <p class="p_img tc">
+                        	<a target="_blank" href="{$v.url_title}">
+                        		<img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt="{$v.goods_title}">
+                        	</a>
+                        </p>
+                        <p class="p_name tl"><a target="_blank" href="{$v.url_title}">{*<strong>{$v.goods_remarks}</strong>*}{$v.goods_title}</a></p>
                         <div class="p_price_cart_wrap clearfix">
                             <p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
                             <span class="icon_child fr js_addToCart {if $v.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
@@ -187,56 +131,58 @@
 			<!-- 分页 -->
 			<div class="pageWrap w1200">
 				<div class="page tc">
-				
-					<div class="p-wrap">
-					{$pagestr}
-						
-						<!-- <span class="p-num">
-							<a href="#" class="prev">上一页</a>
-							<a href="#" class="cur">1</a>
-							<a href="#">2</a>
-							<a href="#">3</a>
-							<a href="#">4</a>
-							<a href="#">5</a>
-							<a href="#" class="next">下一页</a>
-						</span>
-						<span class="p-skip">
-							<em>共<b>5</b>页，&nbsp;&nbsp;到第</em>
-							<input type="text" value="1" class="input-txt">
-							<em>页</em>
-							<a href="#" class="btn-go">确定</a>
-						</span> -->
-					</div>
+					<div class="p-wrap">{$pagestr}</div>
 				</div>
 			</div><!-- .pageWrap -->
-            {*if $pageDownAd}
-			<div class="smallBannerWrap w1200 clearfix" style="margin-top:30px;">
-				{foreach from=$pageDownAd key=k item=v}
-                <p {if $k eq 0} class="fl" {else} class="fr" {/if}><a href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="590" height="180" data-original="{$v.pic_url}" alt="" ></a></p>
-            {/foreach}
-			</div><!-- .smallBannerWrap -->
-            {/if*}
+			
 			<!-- 相关品牌专区 -->
-			{if $brand_list}
+            <div class="m-recommend-wrap w1200">
+				<div class="line"></div>
+				<h3 class="title">关注此品牌的用户还关注</h3>
+				{if $brand_list}
+				<ul class="recommend-items clearfix">
+				    {foreach from=$brand_list key=k  item=v}
+                     {if $k<4} 
+					<li>
+						<a href="/brand-{$v.id}.html">
+							<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="588" height="252" data-original="{$v.banner_logo}" alt="{$v.brand_name}">
+							<div class="from">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="31" height="31" data-original="/temp/skin1/dist/images/domeimg/country/{$v.country_css}.png" class="logo">
+								<span class="from-c">{$v.country_note}</span>
+							</div>
+							<div class="info">
+								<span class="discount"><strong>{$v.lowprice}</strong></span>
+								<span class="name">{$v.brand_name}</span>
+							</div>
+						</a>
+					</li>
+                    {/if}
+					{/foreach}
+					
+				</ul>
+				{/if}
+			</div>
+            
+            
+            
+            
+			{*{if $brand_list}
 			<div class="other-brandZone w1200">
 				<div class="line"></div>
 				<h3 class="title">相关品牌专区</h3>
-
 				<ul class="brandZone_List clearfix">
 				{foreach from=$brand_list key=k item=v}
-				    {if $k <4}
+				    {if $k < 4}
 					<li>
-						<a href="{$v.brand_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="398" data-original="{$v.zhuanqu_logo}" alt=""></a>
+						<a href="{$v.brand_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="398" data-original="{$v.zhuanqu_logo}" alt="{$v.brand_name}"><!--<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="398" data-original="{$v.zhuanqu_logo}" alt="{$v.brand_name}">--></a>
 					</li>
 					{/if}
 				{/foreach}
-					
 				</ul>
 			</div><!-- .m-recommend-wrap -->
-			{/if}
+			{/if}*}
 		</div><!-- .js_mainBgWrap -->
 		<!-- 主体部分 end -->
-
 	</div><!-- .wrap -->
 
 	<!-- 分类导航固定在页面顶部 -->

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {include file='top.htm'}
-   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css?2015091401">
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css?2015100701">
 </head>
 <body>
 <header id="header">
@@ -27,10 +27,10 @@
                 </div>
                 <table id="js_shippingAddressTable" class="table shipping-address-table tc mt30">
                     <colgroup>
-                        <col width="10%">
+                        <col width="8%">
                         <col width="20%">
                         <col width="25%">
-                        <col width="12%">
+                        <col width="14%">
                         <col width="23%">
                     </colgroup>
                     <thead>
@@ -54,7 +54,8 @@
                             </td>
                             <td>{$address_list.tel}</td>
                             <td><a href="/m-users-a-user_address.htm?edit_address_id={$address_list.address_id}" data-address-id="{$address_list.address_id}" class="js_eidt">修改</a><span class="split">|</span><a href="javascript:;" data-address-id="{$address_list.address_id}" class="js_delete">删除</a>
-                               {if $address_list.card_img neq 1} <span class="split">|</span><a href="#" data-address-id="{$address_list.address_id}" data-username="{$address_list.username}" data-cart-id="{$address_list.card_id}" class="js_verified">实名认证</a>{/if}</td>
+                               {if $address_list.card_img neq 1} <span class="split">|</span><a href="javascript:;" data-address-id="{$address_list.address_id}" data-username="{$address_list.username}" data-card-id="{$address_list.card_id}" class="js_verified">实名认证</a> 
+                               {else} <span class="split">|</span><a href="javascript:;" data-address-id="{$address_list.address_id}" data-username="{$address_list.username}" data-card-id="{$address_list.card_id}" data-img-list='{$address_list.img_list}' class="js_editVerified">修改实名认证</a>{/if}</td>
                             <td><span class="cart_icon1 icon-checkbox js_setDefault {if $address_id == $address_list.address_id}selected {/if}" data-address-id="{$address_list.address_id}"></span></td>
                         </tr>
 
@@ -74,6 +75,7 @@
                                 <ul class="js_files files clearfix"></ul>
                                 <div class="file-upload-warp">
                                     <i class="icon-plus"></i>
+                                    <p>请上传身份证 <br/>正反面照片</p>
                                     <input type="file" id="js_fileupload" class="file-upload" name="files[]" multiple="">
                                 </div>
                             </div>
@@ -134,34 +136,33 @@
                             </select>
                         </span>
                     </p>
-                    <label>
+                    <label class="js_formRow">
                         <span class="form-label"><span class="required">*</span>详细地址</span>
-                    <span class="address_street_wrap">
-                        <textarea maxlength="50" name="addressline" class="address_street" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息">{$user_address.addressline}</textarea>
-                    </span>
+                        <span class="address_street_wrap">
+                            <textarea maxlength="50" name="addressline" class="address_street" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息">{$user_address.addressline}</textarea>
+                        </span>
                     </label>
-                    <label>
+                    <label class="js_formRow">
                         <span class="form-label"><span class="required">*</span>收货人姓名</span>
-                        <span>
-                            <input maxlength="15" type="text" name="username" class="username" placeholder="长度不超过25个字符" value="{$user_address.username}"/>
+                        <span class="input-wrap">
+                            <input maxlength="15" type="text" name="username" class="username js_myPlaceholder" placeholder="长度不超过25个字符" value="{$user_address.username}"/>
                         </span>
                     </label>
-                    <label>
+                    <label class="js_formRow">
                         <span class="form-label"><span class="required">*</span>手机号码</span>
-                        <span>
-                            <input maxlength="11" type="text" name="tel" class="phone" placeholder="电话号码、手机号码必须填一项" value="{$user_address.tel}">
+                        <span class="input-wrap">
+                            <input maxlength="11" type="text" name="tel" class="phone js_myPlaceholder" placeholder="电话号码、手机号码必须填一项" value="{$user_address.tel}">
                         </span>
                     </label>
-                    <label>
+                    <label class="js_formRow">
                         <span class="form-label">或固定电话</span>
-                        <span><input maxlength="4" type="text" name="areacode" class="areacode item-150" placeholder="区号" value="{$user_address.areacode}"/></span>
-                        <span><input maxlength="8" type="text" name="telephone" class="telephone item-150" placeholder="电话号码" value="{$user_address.telephone}"/></span>
-                        <span><input maxlength="4" type="text" name="ext" class="ext item-150" placeholder="分机号(可选)" value="{$user_address.ext}"/></span>
+                        <span class="input-wrap"><input maxlength="4" type="text" name="areacode" class="js_myPlaceholder areacode item-150" placeholder="区号" value="{$user_address.areacode}"/></span>
+                        <span class="input-wrap"><input maxlength="8" type="text" name="telephone" class="js_myPlaceholder telephone item-150" placeholder="电话号码" value="{$user_address.telephone}"/></span>
+                        <span class="input-wrap"><input maxlength="4" type="text" name="ext" class="js_myPlaceholder ext item-150" placeholder="分机号(可选)" value="{$user_address.ext}"/></span>
                     </label>
-                    <label>
+                    <label class="js_formRow">
                         <span class="form-label"><span class="required">*</span>身份证号码</span>
-                        <span><input maxlength="18" type="text" name="card_id" class="idnumber" placeholder="请填写收货人身份证信息" value="{$user_address.card_id}"/></span>
-
+                        <span class="input-wrap"><input maxlength="18" type="text" name="card_id" class="js_myPlaceholder idnumber" placeholder="请填写收货人身份证信息" value="{$user_address.card_id}"/></span>
                         <div class="cart_icon1 icon-msg">
                             <div class="msg-drop-box idnumber-drop none">
                                 根据海关规定，免税店、跨境直邮商品需要办理清关手续，需您提供收货人身份信息进行认证。以确保您购买的商品顺利通过海关检查。（五洲会承诺会对您的身份证信息加密保管，绝不对外泄露！）
@@ -169,13 +170,15 @@
                             </div>
                         </div>
                     </label>
-
-                    <p class="label-right">
+                    {if $address_id !=$user_address.address_id}
+                    <p>
+                        <span class="form-label">&nbsp;</span>
                         <span class="cart_icon1 icon-checkbox js_checkbox {if $address_id ==$user_address.address_id}selected{/if}"></span>设置为默认收货地址
-                        <input type="checkbox" class="js_inputCheckbox none" {if $address_id ==$user_address.address_id}checked{/if} name="is_default_address" value="1">
+                        <input type="checkbox" class="js_inputCheckbox none"  name="is_default_address" value="1">
                     </p>
-
-                    <p class="label-right mt30">
+                    {/if}
+                    <p class="mt30">
+                        <span class="form-label">&nbsp;</span>
                         <a class="address_confirm_submit btn btn-default" href="#">保存</a>
                     </p>
                 </form>
@@ -191,8 +194,8 @@
 </footer><!--end #footer -->
 {literal}
 <script>
-    $LAB.script("addressForm.min.js")
-        .script("user.min.js?2015092101")
+    $LAB.script("addressForm.min.js?2015100701")
+        .script("user.min.js?2015100701")
         .wait(function () {
             // 表单事件
             var $addressForm = $("#delivery_address_form");

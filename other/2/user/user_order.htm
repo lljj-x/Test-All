@@ -174,11 +174,19 @@
                                             <span class="goods-num">数量:{$goods.goods_number}</span>
                                         </p>
                                     </div>
+                                    {if $goods.is_refund eq ''}
                                     <div class="inline-block goods-operate">
                                         <p class="">
                                             <a href="/m-users-a-apply_refund.htm?order_id={$order.order_id}&goods_id={$goods.goods_id}">申请售后</a>
                                         </p>
                                     </div>
+                                    {elseif $goods.is_refund eq '0' || $goods.is_refund eq '1'}
+                                    <div class="inline-block goods-operate">
+                                        <p class="">
+                                            <a href="javascript:;">售后申请中</a>
+                                        </p>
+                                    </div>
+                                    {/if}
                                 </div>
                          {/foreach}
                             </td>
@@ -246,11 +254,19 @@
                                             <span class="goods-num">数量:{$goods.goods_number}</span>
                                         </p>
                                     </div>
+                                    {if $goods.is_refund eq ''}
                                     <div class="inline-block goods-operate">
                                         <p class="">
                                             <a href="/m-users-a-apply_return.htm?order_id={$order.order_id}&goods_id={$goods.goods_id}">申请售后</a>
                                         </p>
                                     </div>
+                                    {elseif $goods.is_refund eq '0' || $goods.is_refund eq '1'}
+                                    <div class="inline-block goods-operate">
+                                        <p class="">
+                                            <a href="javascript:;">售后申请中</a>
+                                        </p>
+                                    </div>
+                                    {/if}
                                 </div>
                            {/foreach}
                             </td>

@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
 {include file="top.htm"}
-	<link rel="stylesheet" href="{$imgcache_url}mincss/category_min.css?2015080603">
+	<link rel="stylesheet" href="{$imgcache_url}mincss/category_min.css?2015102001">
 	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
 </head>
 <body>
 	<header id="header">
-		
 		{include file="public_top.htm"}
 	</header>
-
-
 	<div class="wrap pb40">
 		<!-- 主体部分 start -->
 		<div class="js_mainBgWrap">
-			
 			<!-- 品牌专区top 品牌介绍 -->
 			<div class="brand_introduction w1200">
 				<div class="b-i-wrap clearfix">
 					<div class="b-side-left fl">
-						<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="700" height="300" data-original="{$brandInfo.banner_logo}" alt="">
+						<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="700" height="300" data-original="{$brandInfo.banner_logo}">
 					</div><!-- .b-side-left -->
 
 					<div class="b-side-right">
 						<div class="m-info-logo">
-						 	<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="150" height="90" data-original="{$brandInfo.brand_logo}" alt="">
+						 	<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="150" height="90" data-original="{$brandInfo.brand_logo}">
 						</div>
 
 						<div class="m-detail">
-						 	<h3 class="clearfix">
-						 		<span class="mart-name fl">{$brandInfo.brand_name}</span>
+						 	<div class="brand-name-wrap clearfix">
+						 		<h1 class="mart-name fl">{$brandInfo.brand_name}</h1>
 						 		<em class="mart-price"><span>{$brandInfo.lowprice}</span></em>
-						 	</h3>
+						 	</div>
 						 	<div class="description js_description">
 						 		{$brandInfo.description}
 						 		<span class="iconWrap clearfix">
@@ -77,8 +72,12 @@
 				<ul class="p-proList clearfix">
 					{foreach from=$goods_list key=k item=v}
                     <li>
-                        <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt=""></a></p>
-                        <p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+                        <p class="p_img tc">
+                        	<a target="_blank" href="{$v.url_title}">
+                        		<img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt="{$v.goods_title}">
+                        	</a>
+                        </p>
+                        <p class="p_name tl"><a target="_blank" href="{$v.url_title}">{*<strong>{$v.goods_remarks}</strong>*}{$v.goods_title}</a></p>
                         <div class="p_price_cart_wrap clearfix">
                             <p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
                             <span class="icon_child fr js_addToCart {if $v.goods_number==0}disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
@@ -94,9 +93,7 @@
 			<!-- 分页 -->
 			<div class="pageWrap w1200">
 				<div class="page tc">
-					<div class="p-wrap">
-						{$pagestr}
-					</div>
+					<div class="p-wrap">{$pagestr}</div>
 				</div>
 			</div><!-- .pageWrap -->
 			
@@ -109,9 +106,9 @@
 				    {foreach from=$brand_list item=v}
 					<li>
 						<a href="/brand-{$v.id}.html">
-							<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="588" height="252" data-original="{$v.banner_logo}" alt="">
+							<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="588" height="252" data-original="{$v.banner_logo}" alt="{$v.brand_name}">
 							<div class="from">
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="31" height="31" data-original="/temp/skin1/dist/images/domeimg/country/{$v.country_css}.png" alt="" class="logo">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="31" height="31" data-original="/temp/skin1/dist/images/domeimg/country/{$v.country_css}.png" class="logo">
 								<span class="from-c">{$v.country_note}</span>
 							</div>
 							<div class="info">

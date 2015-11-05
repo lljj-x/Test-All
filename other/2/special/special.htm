@@ -17,7 +17,7 @@
 	<div class="active-wrap">
 
 		<div class="banner">
-			<img src="{$special.banner}" width="1920" height="660" alt="">
+			<img src="{$special.banner}" width="1920" height="660">
 		</div>
 
 		<!-- 自定义顶部banner背景图 -->
@@ -29,7 +29,7 @@
 		<div class="active-main-wrap w1100">
 		  
 		  {foreach from=$data item=d key=k}
-			<div class="js_sectionTargetWrap">
+			<div class="js_sectionTargetWrap" id="model_{$d.position_id}">
 				<table class="nav-wrap" width="100%" cellspacing="0" cellpadding="0">
 					<tbody>
 						<tr>
@@ -44,7 +44,7 @@
 					<ul class="pro-list clearfix">
 						{foreach from=$d.data item=v}
 						<li>
-							<p class="p-img tc"><a target="_blank" href="{$v.link_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$v.goods_grid}" alt=""></a></p>
+							<p class="p-img tc"><a target="_blank" href="{$v.link_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$v.goods_grid}"></a></p>
 							<p class="p-name tl"><a target="_blank" href="{$v.link_url}">{$v.goods_title}</a></p>
 							<div class="price-buy-wrap clearfix">
 								<p class="p-price fl"><strong>￥{$v.shop_price}</strong> <span>市场价￥{$v.market_price}</span></p>
@@ -66,7 +66,7 @@
 		
 		<!-- 右边悬浮分类nav -->
 		<div class="active-right-fixed none" id="sortTopNav">
-			<h1 class="tit-qrcode icon-active"><img src="{$imgcache_url}images/domeimg/special/qrcode.jpg" width="103" height="103" alt=""></h1>
+			<h1 class="tit-qrcode icon-active"><img src="{$imgcache_url}images/domeimg/special/qrcode.jpg" width="103" height="103"></h1>
 			<ul class="right-sort-nav">
 			{foreach from=$data item=d}
 				<li class="icon-active on"><a href="javascript:void(0);">{$d.name}</a></li>

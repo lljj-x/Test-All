@@ -105,7 +105,7 @@
 	}
  }
 .mobile-exclusive-main{ margin: 0 auto; padding-bottom: 70px; overflow: hidden;
-	h1.title{ margin: 20px 0; width: 100%; height: 30px; line-height: 30px; font-size: 24px;
+	.title{ margin: 20px 0; width: 100%; height: 30px; line-height: 30px; font-size: 24px;
 		span{ font-size: 16px;}
 	}
 	.p-proList{ padding-bottom: 30px; width: 1220px;
@@ -279,5 +279,113 @@
 			strong{ margin-bottom: 10px; display: block; line-height: 40px; color: @color_main; font-size: 30px; font-weight: bold;}
 			span{ line-height: 20px; color: @color9; font-size: 16px;}
 		}
+	}
+}
+
+//网站地图页面 add by luochongfei 20151031
+@brandc:#e61773;
+
+.sitemap_container{
+    width:1012px;
+    font-size:18px;
+}
+.sitemap_title{
+    padding:25px 0 15px 65px;
+    background:url(../images/styleimg/bg_sitemap_titlebg.png) no-repeat;
+    border-bottom:2px solid #41001d;
+}
+.sitemap_cont{
+    width:816px;
+}
+.sitemap_recom{
+    width:170px;
+}
+.sitemap_cont h3{
+    font-weight:bold;
+    color:#ff0202;
+}
+.brand_wrap{
+	padding:25px 0 15px 0;
+    border:solid #bab9ba;
+	border-width:1px 0;
+	dt,dd{
+		display:inline-block;
+		*zoom:1;
+		*display:inline;
+		vertical-align: top;
+	}
+	a{
+		display: inline-block;
+		padding-bottom:10px;
+		text-decoration: none;
+	}
+	dt{
+		width:88px;
+	}
+	dd{
+		&.brandList{
+			width:670px;
+			-vertical-align: top;
+		}
+		a{
+			padding-left:10px;
+			padding-right:10px;
+			color:@color0;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.brand_wrap dt a{
+    color:@brandc;
+	font-weight:normal;
+	&:hover{
+		color:darken(@brandc,15%);
+	}
+}
+div.onlybrand{
+	dt{
+		width:auto;
+	}
+	dd{
+		padding:0 10px;
+	}
+}
+.sitemap_cont .h3_coopera{
+	color:@color0;
+}
+
+.sitemap_recom{
+	border:1px solid #707170;
+	h3{
+		padding-bottom:7px;
+		height:23px;
+		background:#be68e7 url(../images/styleimg/bg_sitemap_recbg.png) repeat-x left bottom;
+		line-height:28px;
+		font-weight:bold;
+		font-size:15px;
+		color:#fff;
+		text-align: center;
+	}
+	img{
+		display: block;
+		margin:5px auto 0;
+		width:164px;
+		height:74px;
+	}
+	a{
+		text-decoration: none;
+	}
+	strong{
+		display:block;
+		padding:10px 0 5px;
+		text-overflow:ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		text-align: center;
+		font-size:12px;
+		color:@color0;
 	}
 }

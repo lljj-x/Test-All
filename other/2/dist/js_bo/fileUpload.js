@@ -13,7 +13,7 @@
             isUploadAvatar:false,   // （区分修改头像页面）
             url: 'http://www.wzhouhui.egocdn.com/temp/skin1/html/uploadFile/index.php',
             dataType: 'json',
-            maxFileSize: 5000000,   //5M
+            maxFileSize: 5242880,   //5M
             autoUpload: true,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i
         },options);
@@ -58,41 +58,35 @@
 
             .wait(function () {
                 $elms.each(function () {
-                    var $parent = $(this).closest(options.parentSelector);
+                    var $parent = $(this).closest(options.parentSelector),
+                        $upbtnWrap = $(this).closest(".file-upload-warp"),
+                        name = $(this).data("id");
 
-                    var name = $(this).data("id");
-                    var currentFileNum = $parent.find('.js_files').children("li").length;
-
-                    var removeImagesCall = function ($parent) {
-                        $parent.on("click",".js_remove", function () {
-                            removeError($parent);
-                            USER.userAjax.getAjaxPromise({
-                                url: $(this).data("delete-url"),
-                                type: "GET",
-                                global: false
-                            }, false);
-                            $(this).parent("li").fadeOut(300, function () {
-                                $(this).remove();
-                                currentFileNum --;
-                            });
+                    //删除图片
+                    $parent.on("click",".js_remove", function () {
+                        removeError($parent);
+                        USER.userAjax.getAjaxPromise({
+                            url: $(this).data("delete-url"),
+                            type: "GET",
+                            global: false
+                        }, false);
+                        $(this).parent("li").fadeOut(300, function () {
+                            $(this).remove();
+                            $upbtnWrap.show();
                         });
-                    };
+                    });
 
-                    removeImagesCall($parent,currentFileNum); //删除图片
                     $(this).fileupload(options)
                         .on('fileuploadchange', function (e, data) {
-                            if($parent.find(".js_files").data("end-clear") == '1'){
-                                // 越改越乱...
-                                currentFileNum = 0;
-                                $.removeData($parent.find(".js_files")[0]);
-                            }
+
                             removeError($parent);
-                            var fileCount = data.files.length + currentFileNum;
+                            var fileCount = data.files.length + $parent.find('.js_files').children("li").length;
                             if (fileCount > options.maxFiles) {
                                 setError($parent,'最多只能上传 ' + options.maxFiles + ' 张图片，请先删除');
                                 // data.abort();
                                 return false;
                             }
+                            fileCount == options.maxFiles && $upbtnWrap.hide();
                         })
                         .on('fileuploadadd', function (e, data) {
                             //
@@ -101,6 +95,7 @@
                             var index = data.index;
                             var file = data.files[index];
                             if (file.error) {
+                                $upbtnWrap.show();
                                 setError($parent,file.error);
                             }
                         })
@@ -112,10 +107,7 @@
                         .on('fileuploaddone', function (e, data) {
                             // 上传完成
                             options.fileUploadDoneBeforeCall(); //添加图片之前
-
                             addImages($parent,data.result.files,name);
-                            currentFileNum += data.files.length;
-
                             options.fileUploadDoneCall();       // 添加图片之后
                         }).on('fileuploadfail', function (e, data) {
                             // 上传失败

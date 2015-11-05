@@ -20,7 +20,7 @@
 				<ul class="slideList clearfix">
 					{foreach from=$banner_list item=v}
 					
-						<li><a href="{$v.url}"><img src="{$v.pic_url}" alt="" height="440"></a></li>
+						<li><a href="{$v.url}"><img src="{$v.pic_url}" height="440"></a></li>
 					{/foreach}
 				</ul>
 			</div>
@@ -36,8 +36,8 @@
 				<ul class="p-proList clearfix">
 					{foreach from=$baoKuan key=k item=v}
 					<li>
-						<p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt=""></a></p>
-						<p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+						<p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt="{$v.goods_title}"></a></p>
+						<p class="p_name tl"><a target="_blank" href="{$v.url_title}">{*<strong>{$v.goods_remarks}</strong>*}{$v.goods_title}</a></p>
 						<div class="p_price_cart_wrap clearfix">
 							<p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
 							<span class="icon_child fr js_addToCart {if $v.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
@@ -55,18 +55,18 @@
 
 				<div class="r-b-wrap clearfix">
 				
-					<div class="w398 h399 fl bord_r1 bord_b1"><a href="/brand-{$brandList[0].id}.html" class="w398 bigBrand"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="398" height="399" data-original="{$brandList[0].recommend_logo}" alt="" ></a></div>
+					<div class="w398 h399 fl bord_r1 bord_b1"><a href="/brand-{$brandList[0].id}.html" class="w398 bigBrand"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="398" height="399" data-original="{$brandList[0].recommend_logo}" alt="{$brandList[0].brand_name}" ></a></div>
 
 					<div class="w399 h399 fl bord_r1 bord_b1">
 						<div class="w399 h199 bord_b1">
-							<a href="/brand-{$brandList[1].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="399" height="196" data-original="{$brandList[1].recommend_logo}" alt="" ></a>
+							<a href="/brand-{$brandList[1].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="399" height="196" data-original="{$brandList[1].recommend_logo}" alt="{$brandList[1].brand_name}" ></a>
 						</div>
 						<div class="w399 h199 clearfix">
 							<div class="w199 h199 fl bord_r1">
-								<a href="/brand-{$brandList[2].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[2].recommend_logo}" alt="" ></a>
+								<a href="/brand-{$brandList[2].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[2].recommend_logo}" alt="{$brandList[2].brand_name}" ></a>
 							</div>
 							<div class="w199 h199 fl">
-								<a href="/brand-{$brandList[3].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[3].recommend_logo}" alt="" ></a>
+								<a href="/brand-{$brandList[3].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[3].recommend_logo}" alt="{$brandList[3].brand_name}" ></a>
 							</div>
 						</div>
 					</div>
@@ -74,16 +74,16 @@
 					<div class="w400 h400 fl">
 						<ul class="clearfix">
 							<li class="w199 h199 fl bord_r1 bord_b1">
-								<a href="/brand-{$brandList[4].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[4].recommend_logo}" alt="" ></a>
+								<a href="/brand-{$brandList[4].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[4].recommend_logo}" alt="{$brandList[4].brand_name}" ></a>
 							</li>
 							<li class="w199 h199 fl bord_r1 bord_b1">
-								<a href="/brand-{$brandList[5].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[5].recommend_logo}" alt="" ></a>
+								<a href="/brand-{$brandList[5].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[5].recommend_logo}" alt="{$brandList[5].brand_name}" ></a>
 							</li>
 							<li class="w199 h199 fl bord_r1 bord_b1">
-								<a href="/brand-{$brandList[6].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[6].recommend_logo}" alt="" ></a>
+								<a href="/brand-{$brandList[6].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[6].recommend_logo}" alt="{$brandList[6].brand_name}" ></a>
 							</li>
 							<li class="w199 h199 fl bord_r1 bord_b1">
-								<a href="/brand-{$brandList[7].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[7].recommend_logo}" alt="" ></a>
+								<a href="/brand-{$brandList[7].id}.html" class="h196 bord_b3"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="199" height="196" data-original="{$brandList[7].recommend_logo}" alt="{$brandList[7].brand_name}" ></a>
 							</li>
 						</ul>
 					</div>
@@ -95,14 +95,14 @@
 			<!-- 沐浴润肤 -->
 			{foreach from=$catList key=k item=v}
 			<div class="{$catInfo.cat_css_name}_section w1200 js_sectionTargetWrap">
-				<h1 class="icon_child icon_title tc"><a href="{$v.url}">{if $v.cat_pic}<img class="sort-title-icon" src="{$v.cat_pic}" width="45" height="45" alt=""/>{/if} {$v.cat_name}</a></h1>
+				<h1 class="icon_child icon_title tc"><a href="{$v.url}">{if $v.cat_pic}<img class="sort-title-icon" src="{$v.cat_pic}" width="45" height="45"/>{/if} {$v.cat_name}</a></h1>
 
 				<ul class="p-proList clearfix">
 				{foreach from=$v.goods_list key=kG item=cG}
 					
 					<li>
-						<p class="p_img tc"><a target="_blank" href="{$cG.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$cG.goods_grid}" alt=""></a></p>
-						<p class="p_name tl"><a target="_blank" href="{$cG.url_title}"><strong>{$cG.goods_remarks}</strong>{$cG.goods_title}</a></p>
+						<p class="p_img tc"><a target="_blank" href="{$cG.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$cG.goods_grid}" alt="{$cG.goods_title}"></a></p>
+						<p class="p_name tl"><a target="_blank" href="{$cG.url_title}">{*<strong>{$cG.goods_remarks}</strong>*}{$cG.goods_title}</a></p>
 						<div class="p_price_cart_wrap clearfix">
 							<p class="p_price fl"><strong>￥{$cG.shop_price}</strong> <span>￥{$cG.market_price}</span></p>
 							<span class="icon_child fr js_addToCart {if $cG.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$cG.goods_id}" data-proimg="{$cG.goods_grid}"></span>
@@ -114,7 +114,7 @@
 					
 					{if ($v.goods_list|@count) ==11}
 					<li class="last_more">
-						<a href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="400" data-original="{$v.cat_more_pic}" alt=""></a>
+						<a href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="400" data-original="{$v.cat_more_pic}"></a>
 					</li>
 					{/if}
 				</ul><!-- .p-proList -->
@@ -123,7 +123,7 @@
 			
 			<div class="smallBannerWrap w1200 clearfix">
 			{foreach from=$pageDownAd key=k item=v}
-				<p {if $k eq 0} class="fl" {else} class="fr" {/if}><a href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="590" height="180" data-original="{$v.pic_url}" alt="" ></a></p>
+				<p {if $k eq 0} class="fl" {else} class="fr" {/if}><a href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="590" height="180" data-original="{$v.pic_url}" ></a></p>
 			{/foreach}
 			
 			</div><!-- .smallBannerWrap -->

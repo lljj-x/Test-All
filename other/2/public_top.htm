@@ -2,7 +2,7 @@
 
 <div id="docHead">
 	<div id="docHeadWrap" class="clearfix">
-		<a href="/" class="logowzhouhui" title="五洲汇"></a>
+		<a href="/" class="logowzhouhui" title="五洲会"></a>
 
 		<div class="topSearchWrap fl">
 			<i class="search_loading pa" id="js_seachLoading"></i>
@@ -10,7 +10,7 @@
 				<form action="/s/" method='get'>
 					<i class="icon-search icon"></i>
 					<input type="hidden" value="0" name="category">
-					<input type="text" class="search" value="{if $smarty.get.keyword}{$smarty.get.keyword}{else}{$searchKeywordList.0.word}{/if}" name='keyword' autofocus="true" placeholder="{if $smarty.get.keyword}{$smarty.get.keyword}{else}{$searchKeywordList.0.word}{/if}" id="js_topSearch" autocomplete="off"/>
+					<input type="text" class="search" value="{if $smarty.get.keyword}{$smarty.get.keyword}{else}{$searchKeywordList.0.word}{/if}" name='keyword' autofocus="true" placeholder="{$searchKeywordList.0.word}" id="js_topSearch" autocomplete="off"/>
 					<input class="search-btn tc" type="submit" value="搜索" id="js_topSearchBtn" hidefocus="true"/>
 				</form>
 			</div>
@@ -18,7 +18,7 @@
 			<!-- 默认类型 -->
 			<div class="search_complete_box pa f14 none" id="js_seachComplete">
 				<ul>
-					<li><a href="javascript:void(0);"><span>铁元素</span></a></li>
+					<li><a href="javascript:void(0);"><span>铁元</span></a></li>
 					<li><a href="javascript:void(0);"><span>爱他美</span></a></li>
 					<li><a href="javascript:void(0);"><span>宝宝辅食</span></a></li>
 					<li><a href="javascript:void(0);"><span>保湿</span></a></li>
@@ -26,20 +26,22 @@
 			</div><!-- .search_complete_box -->
 			
 			<div class="hot-sort clearfix">
-			{foreach from=$searchKeywordList item=v}
-			 {if $v.is_default==0}
-				<a href="{$v.url}">{$v.word}</a>
-				{/if}
-			{/foreach}
-				
+				{foreach from=$searchKeywordList item=v}
+				 {if $v.is_default==0}
+					<a href="{$v.url}">{$v.word}</a>
+					{/if}
+				{/foreach}
 			</div>
 		</div><!-- .topSearchWrap -->
-
-		<div class="main-logo-slogan fr cleafix">
-			<a href="/guarante.html#authenticity-guarantee" class="true tl"><i class="icon_true icon"></i><span>100%自营正品</span></a>
-			<a href="/guarante.html#overseas" class="overseas_stock tc"><i class="icon_stock icon"></i><span>海外直采</span></a>
-			<a href="/guarante.html#returns" class="free_returns tr"><i class="icon_returns icon"></i><span>7天无忧退货</span></a>
-		</div>
+        <div class="top-cart-wrap">
+            <a href="/m-flow-a-cart.html" class="cart-btn" id="js_topCartBtn">
+                <i class="icon-cart-w icon"></i>
+                <span class="num" id="js_topCartNum">0</span>
+                <span class="text">购物车</span>
+                <i class="icon-tri-b icon"></i>
+            </a>
+            <div id="js_minCart" class="min-cart cart-none none"></div>
+        </div>
 	</div><!-- #docHeadWrap -->
 </div><!-- #docHead -->
 
@@ -77,11 +79,72 @@
 <div id="topTabBox">
 	<div id="topTab" class="clearfix">
 		<ul id="funcTab" class="clearfix">
+                    {if !$menuArr && $nav_str}
 			{$nav_str}
+                    {/if}
+                    {if $menuArr}
+                     <!--导航开始-->                                               
+                    {foreach from=$menuArr key=key item=menu}
+			<li class="{if ($menu.url!='/' && strpos($smarty.server.REQUEST_URI,$menu.url)!==false) || ($menu.url=='/' && $smarty.server.REQUEST_URI=='/')}active{/if} js_category">
+                            <a href="{$menu.url}">{$menu.name}</a>
+                             {if $menu._child}
+				<div class="js_subNav sub-nav-box hf none">
+					<ul class="clearfix list">
+						<li class="sort">
+							<ul class="sort-list">
+                                                            {foreach from=$menu._child key=k1 item=son}
+                                                                {if $son._child}
+								<li class="sort-item">
+									<h3 class="sort-title">{$son.name}</h3>
+									<p class="sort-con">
+                                                                            {foreach from=$son._child key=k2 item=grandson}
+										<a href="{if $grandson.url}{$grandson.url} {else} /s/?category=0&keyword={$grandson.name}{/if}" {if $grandson.hightlight==1} class="color-increase" {/if}>{$grandson.name}</a>
+									    {/foreach}
+                                                                        </p>
+								</li>
+
+                                                                {/if}
+							{/foreach}
+							</ul>
+						</li>
+                                                {if $menu.brand_category}
+						<li class="brand">
+							<h3 class="sort-title">品牌特卖</h3>
+							{foreach from=$menu.brand_category key=k item=v}
+							{if $k < 18}
+							<a href="/brand-{$v.id}.html">
+								<img class="js_subNavImg" src="{$imgcache_url}images/domeimg/lazyload1.gif" width="99" height="59" data-src="{$v.brand_logo}" alt="{$v.brand_name}">
+							</a>
+							{/if}
+							{/foreach}
+						</li>
+                                                {/if}
+                                                {if $menu.banner_url}
+						<li class="img">
+							<a target="_blank" href="{$menu.banner_link_url}">
+								<img class="js_subNavImg" src="{$imgcache_url}images/domeimg/lazyload1.gif" data-src="{$menu.banner_url}" width="220" height="420">
+							</a>
+						</li>
+                                               {/if}
+					</ul>
+				</div>
+                             {/if}
+			</li>
+                        {/foreach}
+                    {/if}
+
+			<!-- 闪购节导航入口 begin-->
+			<li class="js_category">
+				<a href="/sales.html?a=d11&s=13" style="padding:0; line-height:0; height:40px;" title="闪购节">
+					<img src="{$imgcache_url}images/navimg_sgj.gif" alt="闪购节">
+				</a>
+			</li>
+			<!-- 闪购节导航入口 end-->
+
 		</ul><!-- #funcTab -->
 
 		{*<div class="mobileExclusive">
-			<a href="#"><img src="{$imgcache_url}images/domeimg/wifi.gif" alt=""></a>
+			<a href="#"><img src="{$imgcache_url}images/domeimg/wifi.gif"></a>
 		</div>*}<!-- .mobileExclusive -->
 	</div><!-- #topTab -->
 </div><!-- #topTabBox -->

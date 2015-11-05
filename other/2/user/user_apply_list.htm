@@ -67,10 +67,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p>￥{$apply.order_amount}</p>
+                                        <p>￥{$apply.order_amount|string_format:'%0.2f'}</p>
                                     </td>
                                     <td>
-                                        <p class="color-increase bold">￥{$apply.apply_money}</p>
+                                        <p class="color-increase bold">￥{$apply.apply_amount|string_format:'%0.2f'}</p>
                                     </td>
                                     <td>
                                         <p>{$apply.add_time}</p>

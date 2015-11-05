@@ -2,57 +2,50 @@
 <html lang="en">
 <head>
 	{include file="top.htm"}
-
 	<link rel="stylesheet" href="{$imgcache_url}mincss/category_min.css?2015080603">
 	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
 </head>
 <body>
 	<header id="header">
-		
 		{include file="public_top.htm"}
 	</header>
-
-
 	<div class="wrap pb40">
 	   {if $banner_list}
 		<div class="topBannerWrap clearfix">
 			<div class="slider" id="js_banner">
 				<ul class="slideList clearfix">
-				
-				{foreach from=$banner_list item=v}
-					
-						<li><a href="{$v.url}"><img src="{$v.pic_url}" alt="" height="440"></a></li>
+					{foreach from=$banner_list item=v}
+						<li><a href="{$v.url}"><img src="{$v.pic_url}" alt="{$v.name}" height="440"></a></li>
 					{/foreach}
-					
 				</ul>
 			</div>
 		</div><!-- .topBannerWrap -->
 		{/if}
+		
 		<!-- 主体部分 start -->
 		<div class="js_mainBgWrap">
-			<!-- 分类导航 -->
 			<div class="sortWrap w1200">
+				<!-- 商品分类 -->
 				<div class="sortNav_tab clearfix">
 					<div class="title fl mr10">分类:</div>
 					<ul class="navTab fl clearfix" id="js_sortNavTab">
 						{foreach from=$catList key=k item=v}
 						<li {if $k eq 0}class="on" {/if}><a href="javascript:void(0);">{$v.cat_name}</a></li>
 						{/foreach}
-						
 					</ul>
 				</div>
-             {foreach from=$catList key=k item=v}
+				
+             	{foreach from=$catList key=k item=v}
 				<div class="sort js_sortWrap {if $k neq 0}none{/if}">
-					
+					<!-- 品牌 -->
 					{if $v.brand_list}
 					<div class="brandsWrap pr clearfix ">
 						<div class="title fl mr10">品牌:</div>
-						
 						<ul class="brands fl js_brands clearfix">
 							{foreach from=$v.brand_list key=kB item=vB}
 							<li>
 								<a href="{$vB.cat_url}">
-									<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="110" height="60" data-original="{$vB.brand_logo}" alt="">
+									<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="110" height="60" data-original="{$vB.brand_logo}" alt="{$vB.brand_name}">
 									<div class="brand-tit"><p>{$vB.brand_name}</p></div>
 								</a>
 							</li>
@@ -62,39 +55,32 @@
 						<span class="showMore pa js_morebrand">更多<i class="pa ci-right">◇</i></span>
 					</div><!-- .brandsWrap -->
 					{/if}
+					
+					<!-- 年龄 -->
 					{if $v.attr_list}
 					{foreach from=$v.attr_list item=vA}
 					<div class="attributeWrap clearfix">
 						<div class="title fl mr10">{$vA.search_attr_name}{*适用年龄*}:</div>
 						<div class="attribute fl">
 						{foreach from=$vA.search_value item=vAs}
-						     
 							<a href="{$vAs.cat_url}" >{$vAs.search_name}</a>
-							
 						{/foreach}
-							
-							
 						</div>
 					</div><!-- .attributeWrap -->
 					{/foreach}
 					{/if}
 				</div><!-- .sort -->
-			{/foreach}
-				
-
-				
-
+				{/foreach}
 			</div><!-- .sortWrap -->
 
 			<!-- 爆款 -->
 			<div class="hotGoods w1200">
 				<h1 class="child-title">爆款/<span>国际大牌 安全放心</span></h1>
-
 				<ul class="p-proList clearfix">
 					{foreach from=$baoKuan key=k item=v}
 					<li>
-						<p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt=""></a></p>
-						<p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+						<p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt="{$v.goods_title}"></a></p>
+						<p class="p_name tl"><a target="_blank" href="{$v.url_title}">{*<strong>{$v.goods_remarks}</strong>*}{$v.goods_title}</a></p>
 						<div class="p_price_cart_wrap clearfix">
 							<p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
 							<span class="icon_child fr js_addToCart {if $v.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
@@ -110,43 +96,31 @@
 			<!-- 大牌奶粉 -->
 			<div class="section_oneWrap w1200 js_sectionTargetWrap">
 				<h1 class="icon_child icon_title tc"><a href='{$catList[0].cat_more_url}'>{$catList[0].cat_name}</a></h1>
-				
 				<ul class="public_pro_List clearfix">
 					{foreach from=$catList[0].brand_list item=v key=k}
 					{if $k<12}
-					<li>
-						<a href="{$v.brand_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="398" data-original="{$v.zhuanqu_logo}" alt=""></a>
-					</li>
+						<li>
+							<a href="{$v.brand_url}">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="398" data-original="{$v.zhuanqu_logo}" alt="{$v.brand_name}">
+							</a>
+						</li>
 					{/if}
 					{/foreach}
-					
 				</ul>
 			</div><!-- .section_oneWrap -->
 
 			<!-- 纸尿裤 -->
 			<div class="section_twoWrap w1200 js_sectionTargetWrap">
 				<h1 class="icon_child icon_title tc"><a href='{$catList[1].cat_more_url}'>{$catList[1].cat_name}</a></h1>
-				
-				<ul class="public_pro_List clearfix">
-					{foreach from=$catList[1].brand_list item=v}
+                <ul class="p-proList clearfix">
+					{foreach from=$catList[1].goods_list key=k item=v}
 					<li>
-						<a href="{$v.brand_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="398" data-original="{$v.zhuanqu_logo}" alt=""></a>
-					</li>
-					{/foreach}
-					
-				</ul>
-			</div><!-- .section_twoWrap -->
-			
-			<!-- 营养保健 -->
-			<div class="section_threeWrap w1200 js_sectionTargetWrap">
-				<h1 class="icon_child icon_title tc"><a href='{$catList[2].cat_more_url}'>{$catList[2].cat_name}</a></h1>
-
-				<ul class="p-proList clearfix">
-					{foreach from=$catList[2].goods_list key=k item=v}
-					
-					<li>
-						<p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt=""></a></p>
-						<p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+						<p class="p_img tc">
+							<a target="_blank" href="{$v.url_title}">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt="{$v.goods_title}">
+							</a>
+						</p>
+						<p class="p_name tl"><a target="_blank" href="{$v.url_title}">{*<strong>{$v.goods_remarks}</strong>*}{$v.goods_title}</a></p>
 						<div class="p_price_cart_wrap clearfix">
 							<p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
 							<span class="icon_child fr js_addToCart {if $v.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
@@ -155,26 +129,61 @@
 						{if $v.goods_number ==0 }<a target="_blank" href="{$v.url_title}" class="soldOut_thisProduct"><i class="icon_soldOut"></i></a>{/if}
 					</li>
 					{/foreach}
-					
-					
-					
-					{if ($catList[2].goods_list|@count) == 7}
+					{if ($catList[1].goods_list|@count) == 11}
 					<li class="last_more">
-						<a href="{$catList[2].cat_more_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="400" data-original="{$catList[2].cat_more_pic}" alt=""></a>
+						<a href="{$catList[1].cat_more_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="400" data-original="{$catList[1].cat_more_pic}" ></a>
+					</li>
+					{/if}
+				</ul><!-- .p-proList -->
+                
+                
+                
+				{*<ul class="public_pro_List clearfix">
+					{foreach from=$catList[1].brand_list item=v}
+					<li>
+						<a href="{$v.brand_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="398" data-original="{$v.zhuanqu_logo}" alt="{$v.brand_name}"></a>
+					</li>
+					{/foreach}
+				</ul>*}
+			</div><!-- .section_twoWrap -->
+			
+			<!-- 宝宝食品 -->
+			<div class="section_threeWrap w1200 js_sectionTargetWrap">
+				<h1 class="icon_child icon_title tc"><a href='{$catList[2].cat_more_url}'>{$catList[2].cat_name}</a></h1>
+				<ul class="p-proList clearfix">
+					{foreach from=$catList[2].goods_list key=k item=v}
+					<li>
+						<p class="p_img tc">
+							<a target="_blank" href="{$v.url_title}">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt="{$v.goods_title}">
+							</a>
+						</p>
+						<p class="p_name tl"><a target="_blank" href="{$v.url_title}">{*<strong>{$v.goods_remarks}</strong>*}{$v.goods_title}</a></p>
+						<div class="p_price_cart_wrap clearfix">
+							<p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
+							<span class="icon_child fr js_addToCart {if $v.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
+						</div>
+						<span class="icon_child o-icon"><strong>{$v.promote_zhekou}</strong>折</span>
+						{if $v.goods_number ==0 }<a target="_blank" href="{$v.url_title}" class="soldOut_thisProduct"><i class="icon_soldOut"></i></a>{/if}
+					</li>
+					{/foreach}
+					{if ($catList[2].goods_list|@count) == 11}
+					<li class="last_more">
+						<a href="{$catList[2].cat_more_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="400" data-original="{$catList[2].cat_more_pic}" ></a>
 					</li>
 					{/if}
 				</ul><!-- .p-proList -->
 			</div><!-- .section_threeWrap -->
 
-			<!-- 日常洗护 -->
+			<!-- 宝宝用品 -->
 			<div class="section_fourWrap w1200 js_sectionTargetWrap">
 				<h1 class="icon_child icon_title tc"><a href='{$catList[3].cat_more_url}'>{$catList[3].cat_name}</a></h1>
 
 				<ul class="p-proList clearfix">
 					{foreach from=$catList[3].goods_list key=k item=v}
 					<li>
-						<p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt=""></a></p>
-						<p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
+						<p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="250" height="250" data-original="{$v.goods_grid}" alt="{$v.goods_title}"></a></p>
+						<p class="p_name tl"><a target="_blank" href="{$v.url_title}">{*<strong>{$v.goods_remarks}</strong>*}{$v.goods_title}</a></p>
 						<div class="p_price_cart_wrap clearfix">
 							<p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
 							<span class="icon_child fr js_addToCart {if $v.goods_number ==0 }disabled{else}icon_cart{/if}" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
@@ -183,9 +192,9 @@
 						{if $v.goods_number ==0 }<a target="_blank" href="{$v.url_title}" class="soldOut_thisProduct"><i class="icon_soldOut"></i></a>{/if}
 					</li>
 					{/foreach}
-					{if ($catList[3].goods_list|@count) == 7}
+					{if ($catList[3].goods_list|@count) == 11}
 					<li class="last_more">
-						<a href="{$catList[3].cat_more_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="400" data-original="{$catList[3].cat_more_pic}" alt=""></a>
+						<a href="{$catList[3].cat_more_url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="283" height="400" data-original="{$catList[3].cat_more_pic}" ></a>
 					</li>
 					{/if}
 				</ul><!-- .p-proList -->
@@ -193,7 +202,7 @@
             {if $dailyDownAd}
 			<div class="smallBannerWrap w1200 clearfix">
 			{foreach from=$dailyDownAd key=k item=v}
-				<p {if $k eq 0} class="fl" {else} class="fr" {/if}><a href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="590" height="180" data-original="{$v.pic_url}" alt="" ></a></p>
+				<p {if $k eq 0} class="fl" {else} class="fr" {/if}><a href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="590" height="180" data-original="{$v.pic_url}"  ></a></p>
 			{/foreach}
 				
 			</div><!-- .smallBannerWrap -->
@@ -312,6 +321,6 @@
 	</script>
 {/literal}
 
-
+{$smarty.session.user_id}
 </body>
 </html>

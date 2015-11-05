@@ -27,7 +27,7 @@
 				<a href="/" class="color-main">立即使用</a>
 			</p>
 
-			<p class="banner"><img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="1000" height="600" data-original="/temp/skin1/dist/images/domeimg/login/reg_success_banner.jpg" alt=""></p>
+			<p class="banner"><img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="1000" height="600" data-original="/temp/skin1/dist/images/domeimg/login/reg_success_banner.jpg"></p>
 		</div><!-- .reg-success-msg-main -->
 	</div><!-- .js_mainBgWrap -->
 
@@ -35,13 +35,11 @@
 	<footer id="footer" class="footer-bgf3">
 		{include file='foot.htm'}
 	</footer><!--end #footer -->
-{literal}
+	{if $uid}
 	<script>
-		$LAB.script("")
-			.wait(function(){
-
-			})	
+	_smq.push(['custom', 'registerpage', 'registerpage_registerbutton', '{$uid}']);
+	_smq.push(['custom', 'registerpage', 'registerpage_successpage', '注册成功页面']);
 	</script>
-{/literal}
+	{/if}
 </body>
 </html>

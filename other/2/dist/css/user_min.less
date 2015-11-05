@@ -22,6 +22,7 @@
 }
 td,tr{border: 0 none;}
 .vem{vertical-align: middle};
+.vt{vertical-align: top;}
 a{color: @color_base; text-decoration: none;}
 
 // 通用样式
@@ -31,7 +32,7 @@ a{color: @color_base; text-decoration: none;}
 .bold(){font-weight: bold;font-size: 14px;}
 .bold16(){font-weight: bold;font-size: 16px;}
 .bold18(){font-weight: bold;font-size: 18px;}
-
+.fs18{font-size: 18px;}
 .title{font-size: 24px;position: relative;font-weight: bold;color: @color_base;padding-bottom: 16px;}
 .title2{font-size: 14px;color: @color_base;font-weight: bold;line-height: 30px;border-bottom: 1px solid @color_assist;}
 
@@ -42,8 +43,10 @@ a{color: @color_base; text-decoration: none;}
 .color-increase {color: @color_increase}
 .color-success {color: @color_success}
 .original-price{color: @color9 !important;text-decoration: line-through;}
-
-.icons(){background: url("../images/styleimg/user_icons.png?03") no-repeat;.inline-block;}
+.msg-box{padding: 20px 10px;line-height: 35px;background-color: @color_mainBg;margin-top: 50px;
+  p{margin: 0;}
+}
+.icons(){background: url("../images/styleimg/user_icons.png?2015100901") no-repeat;.inline-block;}
 .user-icon{.icons;vertical-align: text-bottom;line-height: 20px;width: 20px;height: 20px;margin-right: 8px;
   &.icon-order{background-position: -82px -0px ;}
   &.icon-asset{background-position: -22px -20px ;}
@@ -66,6 +69,7 @@ a{color: @color_base; text-decoration: none;}
   &.icon-status-wait{background-position: -102px -40px;}
   &.icon-status-fail{background-position: -122px -40px;}
   &.icon-status-success{background-position: -122px -20px;}
+  &.icon-gift-card-sm{background-position: -142px -0px;}
 }
 .user-icons-l{.icons;vertical-align: text-bottom;line-height: 30px;width: 30px;height: 30px;
   &.icon-step{background-position: -26px -107px;;
@@ -87,13 +91,17 @@ a{color: @color_base; text-decoration: none;}
   display:block;background-position: -40px -59px;
 }
 
+.icon-gift-card,.icon-card,.icon-msg-warning,.icon-msg-success{width: 35px; height: 35px;vertical-align: top;}
+.icon-gift-card{background-position: -145px -63px;}
+.icon-card{background-position: -183px -63px;}
+.icon-msg-warning{background-position: -144px -103px;}
+.icon-msg-success{background-position: -184px -103px;}
 
 .icon-rank{background: url("../images/styleimg/rank.png?01") no-repeat;.inline-block;width: 65px;height: 65px;
   &.rank1{background-position: -5px 0;}
   &.rank2{background-position: -5px -70px;}
   &.rank3{background-position: -5px -140px;}
 }
-
 
 .footer-bg .footBgWrap{background-color: @color_mainBg;}
 .pointer{cursor: pointer;}
@@ -224,12 +232,22 @@ a{color: @color_base; text-decoration: none;}
 
 // 收货地址table
 .shipping-address-table{.border;
-  th{font-size:12px;line-height:20px;background-color: @color_mainBg;padding: 10px 0px ;.border-bottom;text-align: center;
+  th{font-size:12px;line-height:20px;background-color: @color_mainBg;padding: 10px 0 ;.border-bottom;text-align: center;
     .icon-chat{margin-right: 2px;vertical-align: top;*vertical-align: text-bottom;}
   }
-  td{padding: 20px 15px;vertical-align: top;.border-top}
+  td{padding: 20px 5px;vertical-align: top;.border-top}
   .split{padding: 0 8px;color: @color_assist;}
 }
+
+// 礼品卡table
+
+.gift-card-table{
+  td{
+    border-bottom: 1px dashed @color_assist;padding: 10px 150px 5px 0;
+  }
+  tr:first-child{td{padding-top: 0;}}
+}
+
 
 // table 商品展示
 .goods-img,.goods-operate,.goods-des{vertical-align: top;}
@@ -300,7 +318,7 @@ a{color: @color_base; text-decoration: none;}
   li{position: relative;margin-top: 20px;
     &.user-center-li{margin-top: 0;}
   }
-  a{.bold;display: block;padding: 10px;transition: color 0.4s ease;
+  a{.bold;display: block;padding: 10px 45px;transition: color 0.4s ease;text-align: left;
     .bg-layer{border-left:none;background-color: #F3E4EA;transition: width 0.4s ease;position: absolute;width: 0;height: 100%;left: 0;top: 0;}
     .sidebar-text{position: relative;z-index: 2;}
     &:hover,&.current{ color: @color_increase;
@@ -319,7 +337,7 @@ a{color: @color_base; text-decoration: none;}
 .file-warp{.inline-block;vertical-align: top;height: 125px;
   .file-upload-warp{position: relative;overflow: hidden;.inline-block;width: 100px;height: 100px;.border;text-align: center;color: @color-icon;font-size: 12px;cursor: pointer;
     .file-upload{position: absolute;cursor:pointer;top: 0;right: 0;margin: 0;opacity: 0;-ms-filter: 'alpha(opacity=0)';font-size: 200px;direction: ltr;cursor: pointer;}
-    .file-upload {*filter: alpha(opacity=0);*font-size: 100%;*height: 100%;}
+    .file-upload {*filter:~"alpha(opacity=0)";*font-size: 100%;*height: 100%;}
   }
   .progress-warp{width:300px;height: 3px;margin-top: 10px;}
   .progress{display: none;height: 3px;overflow: hidden;background-color: #f5f5f5;border-radius: 4px;-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
@@ -377,7 +395,7 @@ a{color: @color_base; text-decoration: none;}
 #user-order {
   .order-form{
     .order-search{.border;line-height: 20px;.border;padding: 3px 5px;}
-    input{border: 0 none;outline: none;
+    input{border: 0 none;outline: none;vertical-align: middle;
       &.icon-search{font-size: 0;line-height: 0;color: transparent;border: 0 none;cursor: pointer;}
     }
   }
@@ -402,9 +420,7 @@ a{color: @color_base; text-decoration: none;}
   .order-info{width: auto;
     .left{width: 300px;margin-right: 130px;}
   }
-  .msg-box{display:inline-block;*display: inline;*zoom: 1;padding:5px 10px;background-color: #FFF8DB;border: 1px solid @color_assist;
-
-  }
+  .msg-box{display:inline-block;*display: inline;*zoom: 1;padding:5px 10px;background-color: #FFF8DB;border: 1px solid @color_assist;}
   .order-detail-qr{position: absolute;bottom:0;right: 0;display: none;}
   .qr-code-drop{.border;top: -37px; left: -110px;}
   .view-shipping{.color-increase;padding-left: 20px;}
@@ -462,6 +478,26 @@ a{color: @color_base; text-decoration: none;}
   }
 }
 //- -- - - -- - - - - - -- - -  优惠券 End   - -- - - -- - - - - - -- - -
+
+//- - -- - - -- - - - - - -- - -  礼品卡 - -- - - -- - - - - - -- - - ---
+
+
+//-- - -- - - -- - - - - - -- - - 礼品卡  End- -- - - -- - - - - - -- - -
+#user-gitf-card{
+  .pay-pass-btn{padding-top: 10px;}
+  .gift-msg{font-size: 20px;}
+  .a-btn.on .icon-tri{transform: rotate(90deg); .inline-block;}
+  .gift-card-list{
+    &>ul{
+      li{margin-top: 35px;line-height: 35px;padding: 0 5px;}
+    }
+    .gift-card-used-list{width:85%;margin-top: 35px;text-align: left;float: right;}
+    .box .fl{font-size: 20px;margin-left: 40px;
+      &:first-child{margin-left: 0;}
+      &.fs16{font-size: 16px;color: @color9;}
+    }
+  }
+}
 
 //- -- - - -- - - - - - -- - -  佣金   - -- - - -- - - - - - -- - - -
   //index
@@ -559,13 +595,14 @@ a{color: @color_base; text-decoration: none;}
     }
   }
   .file-warp{height: 125px;margin-top: 10px;
-    .icon-plus{margin-top: 30px;}
+    .icon-plus{margin-top: 14px;}
     .progress-warp{margin-top: 5px;}
     .line-wrap{font-size: 0;}
     .files,.file-upload-warp{.inline-block;}
     .error{text-align: left;}
     .form-error{font-size: 12px;text-align: left;}
   }
+  .cart_icon1.icon-checkbox.selected{cursor: default;}
 }
 //- -- - - -- - - - - - -- - -  收货地址管理 END  -  - - -- - - - - - -- - - -
 
@@ -622,4 +659,19 @@ a{color: @color_base; text-decoration: none;}
     .file-warp .progress-warp{width: 352px;}
   }
 }
-//- -- - - -- - - - - - -- - -  用户资料 END  -  - - -- - - - - - -- - - -
+//- -- - - -- - - - - - -- - -  用户资料 END  -  - - -- - - - - - -- - - --
+
+
+//- - --- -- - - ---- -------- 账号安全 - --- -- - - ---- --------- --- ---
+#user-payment-pass{
+  .refresh{*vertical-align: top;*margin-top: 3px;cursor: pointer;margin-left: 5px;
+    img{width: auto;height: 30px;}
+  }
+  .code-warp{.inline-block;vertical-align: middle;line-height: 20px;}
+  .security-code{width: 170px;}
+
+  .phone-code{width: 170px;}
+  .get-code-btn{padding: 6px 11px;vertical-align: top;margin-left: 5px;}
+}
+
+//- - --- -- - - ---- -------- 账号安全 End --- -- - - ---- --------- --- -

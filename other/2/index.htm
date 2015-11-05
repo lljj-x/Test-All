@@ -2,198 +2,343 @@
 <html lang="en">
 <head>
 	{include file="top.htm"}
-	<link rel="stylesheet" href="{$imgcache_url}mincss/index_min.css?2015080301">
+	<link rel="stylesheet" href="{$imgcache_url}mincss/index_min.css?2015103101">
 	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
 </head>
 <body>
 	<header id="header">
-		
 		{include file="public_top.htm"}
 	</header>
-
-
 	<div class="wrap pb40">
 	   {if $banner_list}
 		<div class="topBannerWrap clearfix">
 			<div class="slider" id="js_banner">
 				<ul class="slideList clearfix">
 					{foreach from=$banner_list item=v}
-					
-						<li><a target="_blank" href="{$v.url}"><img src="{$v.pic_url}" alt="" height="440"></a></li>
+						<li><a target="_blank" href="{$v.url}"><img src="{$v.pic_url}" alt="{$v.name}" height="440"></a></li>
 					{/foreach}
-					
 				</ul>
 			</div>
 		</div><!-- .topBannerWrap -->
 		{/if}
-		<div class="js_mainBgWrap">
-			<!-- 今日推荐 -->
-			<div class="todayRecommended w1200">
-				<h1 class="index-title">爆款推荐 / <span>五洲会海购为你精挑细选</span></h1>
 
-				<div class="proWrap clearfix">
-					<div class="w460 fl"><a target="_blank" href="{$today_recommend_list[0].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="458" height="401" data-original="{$today_recommend_list[0].pic_url}" alt=""></a></div>
-					<div class="w370 fl">
-						<div class="h200"><a target="_blank" href="{$today_recommend_list[1].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$today_recommend_list[1].pic_url}" alt=""></a></div>
-						<div class="h200"><a target="_blank" href="{$today_recommend_list[2].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$today_recommend_list[2].pic_url}" alt=""></a></div>
-					</div>
-					<div class="w370 fl">
-						<div class="h200"><a target="_blank" href="{$today_recommend_list[3].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$today_recommend_list[3].pic_url}" alt=""></a></div>
-						<div class="h200"><a target="_blank" href="{$today_recommend_list[4].url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$today_recommend_list[4].pic_url}" alt=""></a></div>
+		<div class="genuine-list">
+			<ul class="list hf clearfix">
+				<li>
+					<a href="/guarante.html#authenticity-guarantee">
+						<i class="icon icon-genuine"></i>
+						<p>
+							<strong>100% 正品保证</strong>正品承诺，安全保障
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="/guarante.html#authenticity-guarantee">
+						<i class="icon icon-overseas"></i>
+						<p>
+							<strong>100% 海外直采</strong>海外直采，急速直达
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="/guarante.html#authenticity-guarantee">
+						<i class="icon icon-free"></i>
+						<p>
+							<strong>免税闪购</strong>免税无忧，闪购快送
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="/guarante.html#authenticity-guarantee">
+						<i class="icon icon-seven-apply"></i>
+						<p>
+							<strong>售后无忧</strong>7天无理由退换货
+						</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="js_mainBgWrap main-bg">
+			<!-- 今日爆款 -->
+			<section class="today-hot">
+				<div class="hf">
+					<h1 class="index-title"><i class="icon-index icon-today-ecommended"></i><span><strong>今日爆款 / </strong>五洲会海购为您精挑细选</span></h1>
+					<div class="index-content">
+						<ul class="goods-list clearfix">
+							<li class="banner-item">
+								<a href="#">
+									<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="350" data-original="{$imgcache_url}images/domeimg/indeximg/hot-style.jpg" alt="每日新品爆款" />
+								</a>
+							</li>
+                                                       {foreach from=$hot_list key=key item=goods }
+							<li>
+								<p class="goods-img">
+									<a href="{$goods.url_title}" target="_blank">
+										<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="198" height="198" data-original="{$goods.goods_img}" alt="{$goods.goods_title}">
+									</a>
+								</p>
+								<p class="goods-title">
+									<a href="{$goods.url_title}">
+										<!--<span class="package">3件装 </span>|<span class="address">【保税】</span>Aptamil 德国爱他美 婴儿奶粉-->
+                                                                        {php} 
+                                                                        echo sub_str($this->_tpl_vars['goods']['goods_title'],28); 
+                                                                        {/php}
+									</a>
+								</p>
+								<p class="price">
+									<span>￥{$goods.shop_price}</span>
+									<!--<span class="zhehe"><i class="icon-index icon-tig"></i>折合单件￥156</span>-->
+                                                                         <span class="zhekou icon icon-zhekou"><span class="zhekou-num">{$goods.promote_zhekou}</span> 折 </span>
+								</p>
+								<p class="marking-price">
+									国内参考价<span>￥{$goods.market_price}</span>
+								</p>
+							</li>
+						{/foreach}
+						</ul>
 					</div>
 				</div>
-			</div><!-- .todayRecommended -->
-            {if $todayDownAd}
-			<div class="smallBannerWrap w1200 clearfix">
-			{foreach from=$todayDownAd key=k item=v}
-				<p {if $k eq 0} class="fl" {else} class="fr" {/if}><a target="_blank" href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="590" height="180" data-original="{$v.pic_url}" alt="" ></a></p>
-			{/foreach}
-			
-			</div><!-- .smallBannerWrap -->
-            {/if}
-			<!-- 全球精选 -->
-			<div class="globalSelectWrap w1200">
-				<h1 class="index-title">全球精选 / <span>国际大牌 正品保证</span></h1>
-				
-				<div class="selectWrap clearfix">
-					<div class="leftProListWrap fl">
-						{foreach from=$global_recommend_list item=v}
-						<a target="_blank" href="{$v.url}" class="a-pro-wrap mb30">
-							<div class="pro-wrap pl20 clearfix">
-								<div class="propertyWrap pt20 w300 fl">
-									<p class="p_brand mb30"><img src="{$v.brand_logo}" alt="" height="60"></p>
-									<p class="p_name mb30">{$v.name}</p>
-									<p class="p_zhekou"><strong>{$v.lowprice}</strong></p>
-									<div class="p_from_iconCart clearfix">
-										<p class="country fl clearfix"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="31" height="31" data-original="/temp/skin1/dist/images/domeimg/country/{$v.country_css}.png" class="fl mr10" alt=""/>{$v.country_note}</p>
-										<span class="icon_index icon_cart fr"></span>
-									</div>
-								</div>
+			</section>
 
-								<div class="imgWrap fr">
-									<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="540" height="300" data-original="{$v.pic_url}" alt="" >
-								</div>
-							</div><!-- .pro-wrap -->
-						</a><!-- .a-pro-wrap -->
-						{/foreach}
-						
-						
-					</div><!-- .leftProListWrap -->
+			<!--秒杀-->
+			<section id="js_spikeWrap" class="spike-wrap global-goods"></section>
 
-					<div class="rightWrap fr">
-						<!-- 品牌特卖 -->
-						<div class="brands-saleWrap mb30">
-							<h1 class="title tc">品牌特卖</h1>
-							
-							<div id="js_brandsList" class="brandConListWrap clearfix">
-								<div class="brandConList">
-									
-									
-									<div class="brandCon clearfix js_brandCon_hover">
-									{foreach from=$brand_list key=k item=v}
-										{if $k <=23}
-										<div class="bc pr">
-											<div class="rcn">
-												<a href="/brand-{$v.id}.html">
-													<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="80" height="48" data-s-src="{$v.brand_logo}" alt="">
-												</a>
-											</div>
+            <!--精选专题-->
+            <section class="choice-wrap">
+                <div class="hf">
+                    <h3 class="index-title">
+                        <i class="icon-index icon-choice"></i>
+                        <span><strong>精选专题 / </strong>汇聚全球精选</span>
+                    </h3>
+                    <div class="index-content">
+                        <ul class="choice-list">
+                            {foreach from=$global_recommend_list key=key item=recommend}
+                            <li class="animation-wrap">
+                                <div class="img">
+                                    <a href="{$recommend.url}">
+                                        <img class="animation-img" src="{$imgcache_url}images/domeimg/lazyload1.gif" width="345" height="220" data-original="{$recommend.pic_url}" alt="{$recommend.name}" />
+                                    </a>
+                                </div>
+                                <div class="des">
+                                    <p class="event">{$recommend.name}</p>
+                                    <p class="text-in">全场<span class="color-increase">{$recommend.lowprice}</span>元起</p>
+                                    <p class="text-prompt">{$recommend.advert}</p>
+                                    <p class="buy-wrap">
+                                        <a href="{$recommend.url}" class="btn btn-default">立即抢购</a>
+                                    </p>
+                                </div>
+                            </li>
+                            {/foreach}
 
-											<div class="yd none pa">
-												<a href="/brand-{$v.id}.html">
-													<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="310" height="135" data-src="{$v.banner_logo}" alt="">
-													<p class="p1">{$v.brand_name}</p>
-													<div class="zk">{$v.lowprice}</div>
-												</a>
-											</div>
-										</div>
-										{/if}
-									{/foreach}
-										
-									</div><!-- .brandCon -->
-                            {if $brand_list|@count >24}
-									<div class="brandCon clearfix js_brandCon_hover">
-										{foreach from=$brand_list key=k item=v}
-										{if $k <=47 and $k>23}
-										<div class="bc pr">
-											<div class="rcn">
-												<a href="/brand-{$v.id}.html">
-													<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="80" height="48" data-s-src="{$v.brand_logo}" alt="">
-												</a>
-											</div>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-											<div class="yd none pa">
-												<a href="/brand-{$v.id}.html">
-													<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="310" height="135" data-src="{$v.banner_logo}" alt="">
-													<p class="p1">{$v.brand_name}</p>
-													<div class="zk">{$v.lowprice}</div>
-												</a>
-											</div>
-										</div>
-										{/if}
-									{/foreach}
-                           
-										
-									</div><!-- .brandCon -->
-                                {/if}
-									
-								</div><!-- .brandConList -->
+            <!-- 闪购全球 -->
+            <section class="flash-buy-wrap global-goods">
+                <div class="hf">
+                    <h3 class="index-title">
+                        <i class="icon-index icon-flash-buy"></i>
+                        <span><strong>闪购全球 / </strong>精品歪果货  每日必BUY</span>
+                    </h3>
+                    <div class="index-content">
+            {foreach from=$global_list key=key  item=global name=liname}
+                  {if $smarty.foreach.liname.iteration==1}
+                        <ul class="hot-list-wrap">
+                   {/if}
+                   {if $smarty.foreach.liname.iteration <4}
+                            <li class="animation-wrap">
+                                <div class="goods-img">
+                                    <a href="{$global.url_title}" target="_blank">
+                                        <img class="animation-img" src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$global.goods_img}" alt="{$global.goods_title}" width="280" height="280"/>
+                                    </a>
+                                    <div class="area">
+                                        <img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="40" height="40" data-original="/temp/skin1/dist/images/domeimg/country/{$global.country}.png" style="display: inline-block;">
+                                        <p class="mt20">{$country_arr[$global.country]}直采</p>
+                                        <p>{$global.goods_remarks}</p>
+                                    </div>
+                                </div>
+                                <div class="goods-info">
+                                    <h2 class="goods-title">
+                                        <a href="{$global.url_title}">
+<!--                                            <span class="package">3件装 |</span>-->
+                                            <strong>{$global.goods_title} </strong>
+                                            <span class="des">{$global.goods_subtitle}</span>
+                                        </a>
+                                    </h2>
+                                    <p class="goods-txt">
+                                        {$global.maidian}
+                                    </p>
+                                    <p class="price">
+                                        <span class="num"><span class="menoy-flag">￥</span>{$global.shop_price}</span>
+                                        <span class="zhekou icon icon-zhekou"><span class="zhekou-num">{$global.promote_zhekou}</span> 折 </span>
+                                    </p>
+                                    <p class="marking-price">国内参考价 <span>{$global.market_price}</span></p>
+                                    <p class="spike-buy">
+                                        <a href="{$global.url_title}" class="spike-btn">立即抢购</a>
+                                    </p>
+                                </div>
+                            </li>
+                      {/if}
+                      {if $smarty.foreach.liname.iteration==3 || ($global_list.length<3 && $smarty.foreach.liname.iteration==$global_list.length)}     
+                        </ul>
+                     {/if}
+                      {if $smarty.foreach.liname.iteration ==4}  
+                        <ul class="goods-list-wrap">
+                       {/if}
+                       {if $smarty.foreach.liname.iteration >=4}
+                            <li class="animation-wrap">
+                                <div class="goods-info">
+                                    <p class="goods-img">
+                                        <a href="{$global.url_title}" target="_blank">
+                                            <img class="animation-img" src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$global.goods_img}" alt="{$global.goods_title}" width="300" height="300"/>
+                                        </a>
+                                    </p>
+                                    <p class="orig-country">
+                                        <img src="/temp/skin1/dist/images/domeimg/country/{$global.country}.png" width="25" height="25" data-original="/temp/skin1/dist/images/domeimg/country/{$global.country}.png" style="display: inline-block;">
+                                        <span class="ml5">{$global.goods_remarks}</span>
+                                    </p>
+                                    <h2 class="goods-title">
+                                        <a href="{$global.url_title}"><strong>{$global.goods_name}</strong></a>
+                                    </h2>
+                                    <p class="goods-txt">
+                                        {$global.goods_subtitle}
+                                    </p>
+                                    <p class="price">
+                                        <span class="num"><span class="menoy-flag">￥</span>{$global.shop_price}</span>
+<!--                                        <span class="zhehe"><i class="icon-index icon-tig"></i>折合单件￥156</span>-->
+                                    </p>
+                                    <p class="marking-price">国内参考价 <span>￥{$global.market_price}</span></p>
+                                    <p class="spike-buy">
+                                        <a href="{$global.url_title}" class="spike-btn btn-sm">立即抢购</a>
+                                    </p>
+                                </div>
+                            </li>
+                          {/if}
+                       {if $global_list.length>3 && $smarty.foreach.liname.iteration==$global_list.length}     
+                        </ul>
+                      {/if}
+            {/foreach}
+                    </div>
+                </div>
+            </section>
 
-								<ul class="direction-nav"><li><a class="prev" href="#">Previous</a></li><li><a class="next" href="#">Next</a></li></ul>
-
-							</div><!-- #js_brandsList -->
-						</div>
-
-						<!-- 精选专题 -->
-						<div class="selectTopics">
-							<h1 class="title tc">精选专题</h1>
-							{foreach from=$special_list item=v}
-							<div class="st_wrap tc mb20">
-								<p class="img"><a target="_blank" href="{$v.url}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="280" height="125" data-original="{$v.pic_url}" alt=""></a></p>
-								<p class="name"><a target="_blank" href="{$v.url}">{$v.name}</a></p>
-							</div>
-							{/foreach}
-							
-
-						</div><!-- .selectTopics -->
-
-					</div><!-- .rightWrap -->
-				</div><!-- .selectWrap -->
-			</div><!-- .globalSelectWrap -->
-{if $hot_list}
-			<!-- 正在热销 -->
-			<div class="nowHotSale w1200">
-				<h1 class="index-title">正在热销 / <span>100%海外直采 吃的放心</span></h1>
-				<ul class="proHotSaleList clearfix">
-				{assign var='cnt' value=1}
-				{foreach from=$hot_list key=k item=v}
-					<li>
-						<p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="200" height="200" data-original="{$v.goods_grid}" alt=""></a></p>
-						<p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong></strong>{$v.goods_title}</a></p>
-						<div class="p_price_cart_wrap clearfix">
-							<p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{if $v.promote_price}{$v.promote_price}{else}{$v.market_price}{/if}</span></p>
-							<span class="icon_index icon_cart fr js_addToCart" data-goods_id="{$v.goods_id}" data-proimg="{$v.goods_grid}"></span>
-						</div>
-						<em class="icon_index o-icon">TOP{$cnt}</em>
-					</li>
-					{assign var="cnt" value="`$cnt+1`"}   
-					{/foreach}
-					
-				</ul><!-- .proHotSaleList -->
-			</div><!-- .nowHotSale -->
-			{/if}
 		</div><!-- .js_mainBgWrap -->
 	</div><!-- .wrap -->
-
-
+	
 	<footer id="footer">
 		{include file="foot.htm"}
 	</footer>
+	
 {literal}
+    <script id="js_spikeTpl" type="text/html">
+        <div class="hf">
+            {{#
+                var limitTimeData = d.limit_time_arr,
+                    limitGoodsData = d.limit_data;
+                if(typeof (limitTimeData) == 'object' && limitTimeData.length > 0){
+            }}
+
+            <div class="index-title">
+                <i class="icon-index icon-today-spike"></i><span><strong>限时秒杀 / </strong>每日3场 场场有惊喜</span>
+                <ul id="js_spikeTabs" class="clearfix spike-tabs">
+                    {{# for(var t=0;t< limitTimeData.length; t++){ }}
+                    <li>
+                        {{#
+                            var curStartTime = limitTimeData[t].start_time,
+                                curEndTime = limitTimeData[t].end_time;
+                        }}
+                        <a href="#tab-spike-{{t}}" {{# if(curStartTime==0 && curEndTime!=0){ }}class="active"{{# } }}>
+                            <span class="spike-time">{{ limitGoodsData[t].name }}</span><br/>
+                            <span class="spike-status js_spikeStatus">已结束</span>
+                        </a>
+                    </li>
+                    {{# } }}
+                </ul>
+            </div>
+            <div class="index-content">
+                <ul class="spike-tab-contents" id="js_spikeTabContents">
+                    {{# for(var t=0;t< limitTimeData.length; t++){
+                        var curStartTime = limitTimeData[t].start_time,
+                        curEndTime = limitTimeData[t].end_time;
+                    }}
+                    <li class="js_spike" id="tab-spike-{{t}}" {{# if(!(curStartTime==0 && curEndTime!=0)){ }} style="display:none;"{{# } }} data-start-time="{{curStartTime}}" data-end-time="{{curEndTime}}">
+                        <div class="goods-countdown">
+                            <span class="text js_text">抢购已结束</span>
+                            <span class="countdown js_time">
+                                <span class="h time">00</span><span>:</span><span class="m time">00</span><span>:</span><span class="s time">00</span>
+                            </span>
+                        </div>
+                        <ul class="goods-list-wrap clearfix">
+                            {{#
+                                var curGoodsList = limitGoodsData[t].data;
+                                for(var i in curGoodsList){
+                                    if(curGoodsList.hasOwnProperty(i)){
+                                        var curGoods = curGoodsList[i];
+                            }}
+                            <li>
+                                <div class="goods-img">
+                                    <a href="{{curGoods.link_url}}" target="_blank">
+                                        <img src="{{curGoods.pc_goods_url}}" alt="{{curGoods.goods_title}}" width="600" height="330"/>
+                                    </a>
+                                </div>
+                                <div class="goods-des">
+                                    <p class="orig-country">
+                                        <img width="30" height="30" src="{{JS_IMG_URL}}/images/domeimg/country/{{curGoods.country}}.png">
+                                        <span class="ml5">{{curGoods.goods_remarks}}</span>
+                                    </p>
+                                    <div class="goods-info">
+                                        <h2 class="goods-title">
+                                            <a href="{{curGoods.link_url}}">{{curGoods.goods_title}}</a>
+                                        </h2>
+                                        <p class="goods-txt">
+                                            {{curGoods.maidian}}
+                                        </p>
+                                        <p class="goods-spike">
+                                            <i class="icon-index icon-clock"></i>
+                                            <span class="text js_text">抢购已结束</span>
+                                            <span class="countdown js_time">
+                                                <span class="h time">00</span><span>:</span><span class="m time">00</span><span>:</span><span class="s time">00</span>
+                                            </span>
+                                        </p>
+                                        <p class="price">
+                                            <span class="text">秒杀价</span>
+                                            {{#
+                                                var curPrice = (curGoods.promote_price > 0) ? curGoods.promote_price : curGoods.shop_price;
+                                            }}
+                                            <span class="num"><span class="menoy-flag">￥</span>{{curPrice}}</span>
+                                            <!-- <span class="zhehe"><i class="icon-index icon-tig"></i>折合单件￥156</span>-->
+                                            <span class="zhekou icon icon-zhekou"><span class="zhekou-num">{{curGoods.zekou}}</span> 折 </span>
+                                        </p>
+                                        <p class="marking-price">国内参考价 <span>￥{{curGoods.market_price}}</span></p>
+                                        <p class="spike-buy">
+                                            <a href="{{curGoods.link_url}}" class="spike-btn">限时抢</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            {{#
+                                } }
+                            }}
+                        </ul>
+                    </li>
+                    {{#
+                        }
+                    }}
+                </ul>
+            </div>
+            {{#
+               }
+            }}
+        </div>
+    </script>
 
 	<script>
 		$LAB.script("jquery.flexslider.min.js")
-			.wait(function(){})	
+			.wait(function(){})
+            .script('indexSpike.min.js?2015102801')
 			.script("index.min.js?2015091403")
 	</script>
 {/literal}

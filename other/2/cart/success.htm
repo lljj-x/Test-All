@@ -52,10 +52,17 @@
 <footer id="footer" class="cart_footer">
     {include file='foot.htm'}
 </footer><!--end #footer -->
+
+
+{if $baidu_order}
+<script src="//hm.baidu.com/hm.js?0fee07bdf074af72912949b59552450d"></script>
 {literal}
 <script>
-
+    var baiduData = {/literal}{$baidu_order}{literal};
+    _hmt.push(['_trackOrder', baiduData]);
+    
 </script>
 {/literal}
+{/if}
 </body>
 </html>

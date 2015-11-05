@@ -99,12 +99,11 @@ GLOBAL.login={
                 $js_topCartNum = $("#js_topCartNum"),
                 $js_leftCartNum = $("#js_leftCartNum");
 
-            var $js_isLoginName = $('#js_isLoginName');
             //是否登录
             if(firstname){
                 $isNotLogin.hide();
                 $isLogin.show();
-                $js_isLoginName.find("span").html(firstname);
+                $isLogin.find(".js_userName").html(firstname);
             }else{
                 $isNotLogin.show();
                 $isLogin.hide();
@@ -126,188 +125,298 @@ GLOBAL.login={
         $("#isNoLogin").hide();
         $("#isLogin").show();
     }
-}
+};
 
 //*********************购物车相关
 GLOBAL.cart={
-     //更新购物车数量
+    // 20151026 -liu 重写所有购物车相关操作，合并代码 精简方法
+    /**
+     * 完整购物车 可区分min 和cart 页面
+     * @param call
+     */
+    getCartObj : function (call) {
+        if(typeof(CART) == "undefined"){
+            $LAB.script("cart.min.js?2015101002")
+                .wait(function () {
+                    call.call(CART);
+                })
+        }else{
+            call.call(CART);
+        }
+    },
+
+    /**
+     * 显示min 购物车
+     */
+    showMinCart : function (result) {
+        var self = this;
+        var $minCart = $("#js_minCart"),
+            minCartIsEmpty = !($minCart.children().length > 0);
+        clearTimeout(self.minCartTimer);
+        $minCart.stop(true,true).fadeIn(300);
+        self.minCartTimer = setTimeout(function () {
+            if(! $minCart.hasClass("mouse-over") && !$("#js_topCartBtn").hasClass("mouse-over")){
+                $minCart.stop(true,true).fadeOut(300);
+            }else{
+                // 不想重写 直接递归
+                self.showMinCart();
+            }
+        },4000);
+
+        if(minCartIsEmpty || result != undefined) {
+            this.updateMinCart(result);
+        }
+    },
+
+    /**
+     * 更新min购物车，需要依赖 CART 对象
+     * @param result
+     */
+    updateMinCart: function (result) {
+        this.getCartObj(function () {
+            this.init(true,'js_minCart',result);
+        });
+    },
+    
     cartItems:function(){
-        
+        // 不敢删..
     },
-    //详细页面商品数量 每次加1
+
+    /**
+     * 获取购物车数量按钮并缓存
+     * @returns {*|jQuery|HTMLElement}
+     */
+    getGoodsNumInput : function () {
+        (this.goodsNumInput == undefined) && (this.goodsNumInput = $("#js_qty"));
+        return this.goodsNumInput;
+    },
+
+    /**
+     * 获取加入购物车按钮并缓存
+     * @returns {*|jQuery|HTMLElement}
+     */
+    getAddToCartBtn : function () {
+        (this.addToCartBtn == undefined) && (this.addToCartBtn = $("#js_addCart"));
+        return this.addToCartBtn;
+    },
+
+    /**
+     *　获取顶部Fixed加入购物车按钮并缓存
+     * @returns {*|jQuery|HTMLElement}
+     */
+    getFixedAddToCartBtn : function () {
+        (this.fixedAddToCartBtn == undefined) && (this.fixedAddToCartBtn = $("#js_aAddCart"));
+        return this.fixedAddToCartBtn;
+    },
+
+    /**
+     * 获取立即购买按钮并缓存
+     * @returns {*|jQuery|HTMLElement}
+     */
+    getBuyNowBtn : function () {
+        (this.buyNowbtn == undefined) && (this.buyNowbtn = $("#js_buyBtn"));
+        return this.buyNowbtn;
+    },
+
+    /**
+     * 获取Fixed立即购买按钮并缓存
+     * @returns {*|jQuery|HTMLElement}
+     */
+    getFixedBuyNowBtn : function () {
+        (this.fixedBuyNowbtn == undefined) && (this.fixedBuyNowbtn = $("#js_aBuyBtn"));
+        return this.fixedBuyNowbtn;
+    },
+
+    /**
+     * 获取提示1
+     * @returns {*|jQuery|HTMLElement}
+     */
+    getOverAmountTip1 : function () {
+        (this.overAmountTip1 == undefined) && (this.overAmountTip1 = $("#js_overAmountTip_1"));
+        return this.overAmountTip1;
+    },
+
+    /**
+     * 获取提示2
+     * @returns {*|jQuery|HTMLElement}
+     */
+    getOverAmountTip2 : function () {
+        (this.overAmountTip2 == undefined) && (this.overAmountTip2 = $("#js_overAmountTip_2"));
+        return this.overAmountTip2;
+    },
+
+    /**
+     * 获取当前价格
+     */
+    getGoodsPrice : function () {
+        // 获取商品价格
+        (this.goodsPrice == undefined) && (this.goodsPrice = $("#js_currentPrice").attr("value") - 0);
+        return this.goodsPrice;
+    },
+
+    /**
+     *  获取需要更新相同操作按钮 合集
+     */
+    getGoodsBtnCollection: function () {
+        return this.getAddToCartBtn().add(this.getBuyNowBtn()).add(this.getFixedAddToCartBtn()).add(this.getFixedBuyNowBtn());
+    },
+
+    /**
+     * 设置提示信息
+     * @param currentGoodsPrice
+     */
+    setStatusMsg: function (currentGoodsPrice) {
+        // 待修改 。。
+        if(currentGoodsPrice > 500 && currentGoodsPrice < 1000){
+            this.getOverAmountTip1().show();
+            this.getOverAmountTip2().hide();
+            this.getBuyNowBtn().removeClass('disabled');
+            this.getFixedBuyNowBtn().removeClass('disabled');
+        }else if(currentGoodsPrice > 1000){
+            this.getOverAmountTip1().hide();
+            this.getOverAmountTip2().show();
+            this.getBuyNowBtn().addClass('disabled');
+            this.getFixedBuyNowBtn().addClass('disabled');
+        }else{
+            this.getOverAmountTip1().hide();
+            this.getOverAmountTip2().hide();
+            this.getBuyNowBtn().removeClass('disabled');
+            this.getFixedBuyNowBtn().removeClass('disabled');
+        }
+    },
+
+    /**
+     * 商品详细页面更新数量操作
+     * @param num
+     */
+    updateGoodsNumber : function (num) {
+        // 更新数量操作
+        var maxNum = 999999;
+        num = num - 0;
+        num = (num > maxNum) ? maxNum : (num <= 0) ? 1 : num;
+
+        this.getGoodsNumInput().val(num);
+        this.getGoodsBtnCollection().attr('num', num);
+
+        // 检查金额
+        this.setStatusMsg(num * this.getGoodsPrice());
+    },
+
+    /**
+     * 商品详细页面 + 1
+     */
     add:function(){
-        var $numbBox = $("#js_qty");
-        var orig = Number($numbBox.val());
-        $numbBox.val(orig + 1);
-        $numbBox.keyup();
+        // + 1
+        var $numbBox = this.getGoodsNumInput();
+        this.updateGoodsNumber(Number($numbBox.val()) + 1);
     },
-    //详细页面商品数量 每次减1
+
+    /**
+     * 商品详细页面 - 1
+     */
     reduce:function(){
-        var $numbBox = $("#js_qty");
-        var orig = Number($numbBox.val());
-        if(orig >1 ){
-            $numbBox.val(orig - 1);
-            $numbBox.keyup();
-        }
+        // - 1
+        var $goodsNumInput = this.getGoodsNumInput();
+        var orig = Number($goodsNumInput.val()) - 1;
+        (orig>= 1) && this.updateGoodsNumber(orig);
     },
-    //详细页面商品数量 直接填写
-    input_quantity:function(obj){
-        var jGoodsNum = $(obj),
-            jAddToCart = $('#js_addCart'),
-            jaAddCart = $('#js_aAddCart'),
-            jbuyNow = $("#js_buyBtn"),
-            jaBuyBtn = $("#js_aBuyBtn"),
-            js_currentPrice_val = parseInt($("#js_currentPrice").attr("value")),
-            thisGoodsAllCost = 0;
 
-        var qtyNum = jGoodsNum.val();
-
-        var $js_overAmountTip_1 = $("#js_overAmountTip_1"),
-            $js_overAmountTip_2 = $("#js_overAmountTip_2"),
-            $js_buyBtn = $("#js_buyBtn"),
-            $js_aBuyBtn = $("#js_aBuyBtn");
-
-        if(!isNaN(qtyNum)){//如果输入数字
-            //计算该商品购买数量的总价，如果大于1000，给出海关提示。如果大于500，给出分次购买的提醒
-            thisGoodsAllCost = parseInt(qtyNum)*parseInt(js_currentPrice_val);
-
-            if(thisGoodsAllCost > 500 && thisGoodsAllCost < 1000){
-                $js_overAmountTip_1.css("display","block");
-                $js_overAmountTip_2.css("display","none");
-                $js_buyBtn.removeClass('disabled');
-                $js_aBuyBtn.removeClass('disabled');
-            }else if(thisGoodsAllCost > 1000){
-                $js_overAmountTip_1.css("display","none");
-                $js_overAmountTip_2.css("display","block");
-                $js_buyBtn.addClass('disabled');
-                $js_aBuyBtn.addClass('disabled');
+    /**
+     *  手动输入
+     */
+    input_quantity:function(){
+        // 输入
+        var self = this,
+            qtyNum = self.getGoodsNumInput().val();
+        clearTimeout(this.inputTimer);
+        this.inputTimer = setTimeout(function () {
+            if(!isNaN(qtyNum)){
+                self.updateGoodsNumber(qtyNum);
             }else{
-                $js_overAmountTip_1.css("display","none");
-                $js_overAmountTip_2.css("display","none");
-                $js_buyBtn.removeClass('disabled');
-                $js_aBuyBtn.removeClass('disabled');
-
+                layer.open({
+                    btn: ['确定'],
+                    content: '请输入正确的数字',
+                    end: function(){
+                        self.getGoodsNumInput().focus();
+                    }
+                });
+                self.updateGoodsNumber(1);
+                return false;
             }
-
-            if(qtyNum >= 999999){
-                jGoodsNum.val(999999);
-                $(obj).attr("value",999999);
-                jAddToCart.attr('num', 999999);
-                jaAddCart.attr('num', 999999);
-                jbuyNow.attr('num', 999999);
-                jaBuyBtn.attr('num', 999999);
-            }else if(qtyNum >=1 && qtyNum <999999){
-                $(obj).attr("value",qtyNum);
-                jAddToCart.attr('num', qtyNum);
-                jaAddCart.attr('num', qtyNum);
-                jbuyNow.attr('num', qtyNum);
-                jaBuyBtn.attr('num', qtyNum);
-            }else{
-                jGoodsNum.val(1);
-                $(obj).attr("value",1);
-                jAddToCart.attr('num', 1);
-                jaAddCart.attr('num', 1);
-                jbuyNow.attr('num', 1);
-                jaBuyBtn.attr('num', 1);
-            }
-            
-        }else{//如果不是数字
-            layer.open({
-                btn: ['ok'],
-                content: '请输入正确的数字',
-                end: function(){
-                    jGoodsNum.focus();
-                }
-            })
-            jGoodsNum.val(1);
-            $(obj).attr("value",1);
-            jAddToCart.attr('num', 1);
-            jbuyNow.attr('num', 1);
-            return false;
-        }
+        },200);
     },
+
     //添加商品到购物车
     addcart:function(obj,callback){
+        callback = callback || function () {};
         var that = $(obj),
+            self = this,
             goods_id = that.attr("gid"),
-            goods_num = that.attr("num"),
-            express = 0;
+            goodsNum = that.attr("num") - 0,
+            express = that.hasClass('buyNow')?1:0;
 
         //如果购买按钮失效，直接返回
-        if(that.hasClass('disabled')){
-            return false;
-        }
-        if(that.hasClass('buyNow')){//如果是立即购买
-            express = 1;
-        }
+        if(that.hasClass('disabled')) return false;
 
         $.ajax({
             url: '/m-flow-a-add_to_cart.html',
             type: 'POST',
             dataType: 'json',
-            data: {goods_id: goods_id, goods_num: goods_num, express: express}
+            data: {goods_id: goods_id, goods_num: goodsNum, express: express}
         })
         .done(function(data) {
-            var status = data.status,
-                cart_items = data.cart_items;
-
-            var $shopCart = $("#js_shopcart"),
-                $js_topCartNum = $("#js_topCartNum");
-
-            //status:0表示发送成功
-            if(status === 0 && that.hasClass('buyNow')){//立即购买
-                window.location.href = DOMAIN_CART + "/m-flow-a-checkout.html";//跳转到checkout支付页面
-            }else if(status === 0 && that.hasClass('addToCart')){//添加到购物车
-                var $this = $(obj);
-                var windowScrollTop = $(window).scrollTop();
-                var $shopCart = $("#js_shopcart");
-
-                if( window.requestAnimationFrame){
-                    var flyer = $('<img class="u-flyer" src="'+ $this.data("proimg") +'"/>');
-                    flyer.fly({
-                        start: {
-                            left:$this.offset().left,
-                            top: $this.offset().top - windowScrollTop
-                        },
-                        end: {
-                            left: $shopCart.offset().left,
-                            top:  $shopCart.offset().top -$(window).scrollTop(),
-                            width: 20,
-                            height: 20
-                        },
-                        onEnd: function ()//元素飞动完成回调函数
-                        {
-                            $shopCart.find('.num').text(cart_items);
-                            $js_topCartNum.text(cart_items);
-
-                            flyer.remove();
-                        }
-                    });
-                }else{
-                    $shopCart.find('.num').text(cart_items);
-                    $js_topCartNum.text(cart_items);
-                }
-            }
-            else{
+            var $shopCart = $("#js_shopcart");
+            if (data.status !== 0) {
                 layer.open({
-                    btn: ['ok'],
+                    btn: ['确定'],
                     content: data.msg
                 })
+            } else {
+                //跳转到checkout支付页面
+                if (express == 1) window.location.href = DOMAIN_CART + "/m-flow-a-checkout.html";
+
+                // 加入购物车按钮
+                if (that.hasClass('addToCart')) {
+                    var windowScrollTop = $(window).scrollTop();
+
+                    if (window.requestAnimationFrame) {
+                        var flyer = $('<img class="u-flyer" src="' + that.data("proimg") + '"/>');
+                        flyer.fly({
+                            start: {
+                                left: that.offset().left,
+                                top: that.offset().top - windowScrollTop
+                            },
+                            end: {
+                                left: $shopCart.offset().left,
+                                top: $shopCart.offset().top - $(window).scrollTop(),
+                                width: 20,
+                                height: 20
+                            },
+                            onEnd: function ()//元素飞动完成回调函数
+                            {
+                                $shopCart.find('.num').text(data.data.cart_num);
+                                flyer.remove();
+                            }
+                        });
+                    } else {
+                        $shopCart.find('.num').text(cart_items);
+                    }
+                }
+                self.showMinCart(data);
+                callback();
             }
         });
-
     },
     addCartAjaxFn : function(opts,callback){
-        var goods_id = opts.goods_id, goods_num = opts.goods_num;
-
+        var goods_id = opts.goods_id, goods_num = opts.goods_num,self = this;
         $.ajax({
             type: "POST",
             url: "/m-flow-a-add_to_cart.htm",
             data : {goods_id:goods_id,goods_num:goods_num},
             dataType:"jsonp",
             success: function(data){
-                var resultJSON = data;
-
+                // 显示min cart
+                self.showMinCart(data);
                 if(callback && typeof(callback) == 'function'){
                     callback(data);
                 }
@@ -335,7 +444,32 @@ GLOBAL.setFLoatBoxPosition = function(){
         }
     }
 };
+
 GLOBAL.otherGlobal = {
+    /**
+     * requestAnimationFrame 兼容
+     */
+    requestAnimationFrame : function () {
+        var lastTime = 0;
+        var vendors = ['ms', 'moz', 'webkit', 'o'];
+        for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+        }
+        if (!window.requestAnimationFrame) window.requestAnimationFrame = function(callback) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() {
+                callback(currTime + timeToCall);
+            }, timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+        if (!window.cancelAnimationFrame) window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+    },
+
     /**
      * 检查 css 兼容性
      * @param prop
@@ -367,9 +501,8 @@ GLOBAL.otherGlobal = {
         if(limitTime > 0){
             var seconds = limitTime;
             var minutes = Math.floor(seconds/60);
-            var hours = Math.floor(minutes/60);
+            var CHour = Math.floor(minutes/60);
 
-            var CHour = hours;
             var CMinute = minutes % 60;
             var CSecond = seconds % 60;
 
@@ -383,6 +516,44 @@ GLOBAL.otherGlobal = {
                 CSecond='0'+CSecond;
             }
             return {
+                hours : CHour,
+                minutes : CMinute,
+                seconds : CSecond
+            };
+        }else{
+            return false;
+        }
+    },
+    /**
+     * 时间戳 转 天时分秒
+     * @param limitTime
+     * @returns {*}
+     */
+    getTimeWithDay : function(limitTime){
+        if(limitTime > 0){
+            var seconds = limitTime;
+            var minutes = Math.floor(seconds/60);
+            var hours = Math.floor(minutes/60);
+            var CDay = Math.floor(hours/24);
+
+            var CHour = hours % 24;
+            var CMinute = minutes % 60;
+            var CSecond = seconds % 60;
+
+            if (CDay<10) {
+                CDay ='0'+CDay;
+            }
+            if(CHour<10){
+                CHour='0'+CHour;
+            }
+            if(CMinute<10){
+                CMinute='0'+CMinute;
+            }
+            if(CSecond<10){
+                CSecond='0'+CSecond;
+            }
+            return {
+                days: CDay,
                 hours : CHour,
                 minutes : CMinute,
                 seconds : CSecond
@@ -434,9 +605,116 @@ GLOBAL.otherGlobal = {
         var date=new Date();
         date.setTime(date.getTime()-10000);
         document.cookie=name+"=v; expires="+date.toGMTString();
+    },
+
+    /**
+     * 限定form input
+     */
+    inputLimitedDigital : function (elm) {
+        elm.value = elm.value.replace(/\D/g,'');
+    },
+    inputToUpperCase : function (elm) {
+        elm.value = elm.value.toUpperCase();
+    },
+    /**
+     * 模拟 ploaceHolder
+     * @param jqSelector jq选择器
+     */
+    myPlaceholder : {
+        check: function(){
+            return 'placeholder' in document.createElement('input');
+        },
+        init : function($select,height){
+            this.$jqSelector = $select;
+            if(! $select.length > 0) {return false;}
+
+            (! this.check()) && this.create(height);
+        },
+        showHolder : function ($elm,$holder) {
+            $holder.show();
+        },
+        hideHolder : function ($elm,$holder) {
+            $holder.hide();
+        },
+        create : function (height) {
+            var self = this;
+            self.$jqSelector.each(function(){
+                var $this = $(this),
+                    txt = $this.attr('placeholder');
+
+                $this.wrap($('<span></span>').css({display:"block",position:'relative', zoom:'1', border:'none', background:'none', padding:'none', margin:'none'}));
+
+                var h = height || $this.outerHeight(true),
+                    paddingLeft = $this.css('padding-left');
+
+                var $holder = $('<span></span>').text(txt).css({position:'absolute', left:0, top:0, height:h, lineHeight:h + "px", paddingLeft:paddingLeft, color:'#aaa',fontSize:"14px"}).appendTo($this.parent());
+
+                ($this.val() != "") && $holder.hide();
+
+                $this.focusin(function() {
+                    $holder.hide();
+                }).focusout(function() {
+                    ($this.val() == "") && self.showHolder($this,$holder);
+                });
+
+                $holder.on("mousedown",function() {
+                    self.hideHolder($this,$holder);
+                    $this.focus();
+                });
+
+                // 监听自动填充 记住密码等 change 事件
+                if(typeof document.addEventListener == "undefined") {
+                    // ie7 8 不支持 input事件 Placeholder属性
+                    $this.on("propertychange", function () {
+                        ($this.val() == "") ? self.showHolder($this,$holder) : self.hideHolder($this,$holder);
+                    });
+                }else{
+                    // ie9 支持 input事件，不支持 Placeholder 属性
+                    $this.on("input", function () {
+                        ($this.val() == "") ? self.showHolder($this,$holder) : self.hideHolder($this,$holder);
+                    });
+                }
+            });
+        }
+    },
+    minCart : function () {
+        var $minCart = $("#js_minCart");
+        $("#js_topCartBtn").on("mouseenter", function () {
+            GLOBAL.cart.showMinCart();
+            $(this).addClass("mouse-over");
+        }).on("mouseleave", function () {
+            $(this).removeClass("mouse-over");
+        });
+
+        $minCart.on("mouseenter", function () {
+            $minCart.addClass("mouse-over");
+        }).on("mouseleave", function () {
+            clearTimeout(GLOBAL.cart.minCartTimer);
+            $minCart.removeClass("mouse-over").fadeOut(300);
+        });
+    },
+    
+    navEvent: function () {
+        var $parent = $("#funcTab");
+        $parent.on("mouseenter",".js_category", function () {
+            var $subNav = $(this).find(".js_subNav");
+            if ($subNav.length == 0) return;
+            $subNav.show().addClass("img-loaded");
+            if(! $subNav.hasClass("img-loading")){
+                $subNav.find(".js_subNavImg").each(function () {
+                    $(this).attr({
+                        src : $(this).data("src")
+                    })
+                });
+            }
+        });
+        $parent.on("mouseleave",".js_category", function () {
+            var $subNav = $(this).find(".js_subNav");
+            if ($subNav.length == 0) return;
+            $subNav.hide();
+        });
     }
 };
-
 
 ;(function ($) {
     $.fn.toTop = function (options) {
@@ -476,6 +754,15 @@ GLOBAL.otherGlobal = {
 
 
 $(function(){
+    // 兼容requestAnimationFrame
+    GLOBAL.otherGlobal.requestAnimationFrame();
+
+    // minCart
+    GLOBAL.otherGlobal.minCart();
+
+    // 导航
+    GLOBAL.otherGlobal.navEvent();
+
     layer.config({
         skin:'layer-ext-moon',
         extend:'skin/moon/style.css'
@@ -708,26 +995,6 @@ $(function(){
 (function(){
     $('.js_addToCart').on('click', addProduct);
 
-    // requestAnimationFrame 兼容
-    var lastTime = 0;
-    var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
-    }
-    if (!window.requestAnimationFrame) window.requestAnimationFrame = function(callback, element) {
-        var currTime = new Date().getTime();
-        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-        var id = window.setTimeout(function() {
-            callback(currTime + timeToCall);
-        }, timeToCall);
-        lastTime = currTime + timeToCall;
-        return id;
-    };
-    if (!window.cancelAnimationFrame) window.cancelAnimationFrame = function(id) {
-        clearTimeout(id);
-    };
-
     function addProduct(event) {
         var $this = $(event.target);
         var windowScrollTop = $(window).scrollTop();
@@ -766,7 +1033,7 @@ $(function(){
         }else{
             GLOBAL.cart.addCartAjaxFn({goods_id:$this.data("goods_id") , goods_num :1 },setCartNum);
         }
-    };
+    }
 
     function setCartNum (resultJson){
         //程序返回商品数量

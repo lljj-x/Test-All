@@ -39,8 +39,11 @@
 @color_increase_active:#E82E81;
 @color_assist: @colore4;          // 辅助底色。如：线条、边框、底色
 @color_mainBg:@color_bgf3;        // 主题底色。如：底色，状态栏底色
-
+@prompt_color:@color9;
 @cursor-disabled:no-drop;
+
+@color_index_black : #270313;
+@color_index_black_hover : #474445;
 
 // 用户中心配色
 @color-border-danger: #FFDBEB;
@@ -49,7 +52,7 @@
 @color-icon :#cccccc;
 @color_success:#00A652;
 
-@font_main:'微软雅黑','华文细黑';
+@font_main:tahoma,arial,"Hiragino Sans GB","WenQuanYi Micro Hei","微软雅黑","宋体",sans-serif;
 @font_other:Arial, Helvetica, sans-serif;
 
 .border(all,@w:1px,@color:#e4e4e4){
@@ -119,11 +122,7 @@
     /* W3C */
     background-image: linear-gradient(@from, @to);
 }
-.inline-block(){
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-}
+.inline-block(){display: inline-block;*zoom: 1;*display: inline;}
 
 //
 //.btn{.rounded(3px); padding: 5px; text-align: center; display: inline-block; *display: inline; *zoom: 1; vertical-align: middle;

@@ -1,40 +1,60 @@
 {if $banner_top.pic_url}
 <div class="topBanner">
-    <a href="{$banner_top.url}"><img src="{$banner_top.pic_url}" width="1920" height="80" alt=""></a>
+    <a href="{$banner_top.url}"><img src="{$banner_top.pic_url}" width="1920" height="100%"></a>
 </div><!-- .topBanner -->
 {/if}
-
 <div id="topNav">
     <div id="topNavWrap" class="clearfix">
-        <div id="topNavLeft">
-            <a href="javascript:;" class="followUs pr mr30 pl20 no_unl">
-                <i class="icon_followUs pa icon"></i>关注我们
-                <span class="qr_code pa"><img src="{$imgcache_url}images/domeimg/qr_code_app.jpg?2015082701" alt=""></span>
-            </a>
-            <a href="javascript:;" class="app pr mr30 pl20 no_unl">
-                <i class="icon_app pa icon"></i>下载五洲会海购APP
-                <span class="qr_code pa"><img src="{$imgcache_url}images/domeimg/qr_code_app.jpg?2015082701" alt=""></span>
-            </a>
-			<span class="tel pr pl20">
-				<i class="icon_tel pa icon"></i>400-013-8666
-			</span>
-            <!-- <span class="pl10">
-                环球易购旗下五洲会
-            </span> -->
-        </div><!-- #topNavLeft -->
-
-        <ul id="topNavRight" class="clearfix">
-            <li class="isLogin none" id="js_isLoginName"><span></span>，欢迎你！</li>
-            <li class="isLogin none"><a href="/m-users-a-order_list.htm">我的订单</a></li>
-            <li class="isLogin none"><a href="/m-users-a-index.htm">个人中心</a></li>
-            <li class="isNoLogin">欢迎来到五洲会海购！</li>
-            <li>
-                <p class="isNoLogin"><a href="/m-users-a-sign.html">登录</a><a href="/m-users-a-join.htm" class="fast-register">快速注册</a></p>
-            </li>
-            <li><a href="/m-flow-a-cart.html">购物车(<span id="js_topCartNum">0</span>)</a></li>
-            <li><a href="/help.html">帮助中心</a></li>
-            <li><a href="/business/1/" class="color-increase">招商合作</a></li>
-            <li class="isLogin js_isLoginUserCenter none"><a href="/m-users-a-logout.html">退出</a></li>
-        </ul><!-- #topNavRight -->
+        <div class="top-nav-left fl">
+            <ul class="list clearfix">
+                <li>欢迎来到五洲会海购！ </li>
+                <li><span class="split split-empty">&nbsp;</span></li>
+                <li>
+                    <p class="isNoLogin login-box">
+                        <a href="/m-users-a-sign.html">登录</a><span class="split">|</span>
+                        <a href="/m-users-a-join.htm" onclick="_smq.push(['custom', 'index', 'index_registerbutton', '注册按钮'])" class="fast-register">快速注册</a><span class="split">|</span>
+                    </p>
+                    <p class="isLogin none login-box">
+                        <span class="js_userName"></span><span class="split">|</span>
+                        <a href="/m-users-a-logout.html">退出</a><span class="split">|</span>
+                    </p>
+                </li>
+                <li>
+                    <a href="javascript:;" class="app pr color-increase drop-box-wrap">
+                        <i class="icon_app icon"></i>下载五洲会海购APP
+                        <span class="qr_code pa drop-box"><img src="{$imgcache_url}images/domeimg/qr_code_app.jpg?2015082701"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="top-nav-right fr">
+            <ul class="list clearfix">
+                <li>
+                    <a href="javascript:;" class="followUs pr drop-box-wrap">
+                        <i class="icon_followUs icon"></i>关注我们
+                        <span class="qr_code pa drop-box"><img src="{$imgcache_url}images/domeimg/qr_code_weixin.jpg?2015082701"></span>
+                    </a>
+                </li>
+                <li><span class="split">|</span></li>
+                <li>
+                    <span class="color-tel drop-box-wrap">
+				        <i class="icon_tel icon"></i>400-013-8666
+			        </span>
+                </li>
+                <li><span class="split">|</span></li>
+                <li><a href="/m-users-a-order_list.htm">我的订单</a></li>
+                <li><span class="split">|</span></li>
+                <li><a href="/m-users-a-index.htm">个人中心</a></li>
+                <li><span class="split">|</span></li>
+                <li>
+                    <a href="/business/1/" class="color-increase">招商合作</a>
+                    <a href=" /business/2/">(Cooperative Project)</a>
+                </li>
+                <li><span class="split">|</span></li>
+                <li><a href="/guarante.html">服务承诺</a></li>
+                <li><span class="split">|</span></li>
+                <li><a href="/help/20/">帮助中心</a></li>
+            </ul>
+        </div>
     </div><!-- #topNavWrap -->
 </div><!-- #topNav -->

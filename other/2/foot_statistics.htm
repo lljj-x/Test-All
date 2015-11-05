@@ -1,22 +1,28 @@
-<!-- 第三方统计代码 -->
 <div style="display:none;">
-<!--官网统计代码-->
 {literal}
-<script type="text/javascript">
+	<script>
 	$(function () {
 		setTimeout(function(){
 			$LAB.script("//hm.baidu.com/hm.js?0fee07bdf074af72912949b59552450d");
-		 /*
-		 var _hmt = _hmt || [];
-		 (function() {
-		   var hm = document.createElement("script");
-		   hm.src = "//hm.baidu.com/hm.js?0fee07bdf074af72912949b59552450d";
-		   var s = document.getElementsByTagName("script")[0]; 
-		   s.parentNode.insertBefore(hm, s);
-		 })();
-		*/
 		},300);
 	});
+
+</script>
+{/literal}
+
+{*adMaster 缁熻浠ｇ爜*}
+{literal}
+<script>
+	var _smq = _smq || [];
+	_smq.push(['_setAccount', '156e66e', new Date()]);
+	_smq.push(['_setDomainName', 'wzhouhui.com']);
+	_smq.push(['pageview']);
+
+	(function() {
+	var sm = document.createElement('script'); sm.type = 'text/javascript'; sm.async = true;
+	sm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdnmaster.com/sitemaster/collect.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sm, s);
+	})();
 </script>
 {/literal}
 </div>

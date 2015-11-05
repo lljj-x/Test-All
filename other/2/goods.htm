@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 {include file="top.htm"}
-	<link rel="stylesheet" href="{$imgcache_url}mincss/goods_min.css?2015092801">
+	<link rel="stylesheet" href="{$imgcache_url}mincss/goods_min.css?20150101901">
 	<script src="{$imgcache_url}minjs/jquery-cart.min.js"></script>
 </head>
 <body>
 	<header id="header">
-		
 		{include file="public_top.htm"}
 	</header>
-
-
 	<div class="wrap pb40">
-		
 		<!-- 主体部分 start -->
 		<div class="js_mainBgWrap">
-
 			<div class="mainWrap w1200">
 				<div class="crumbs">
 					<a href="/">五洲会海购</a> > {$nav_str1} ><span>{$goods.goods_title}</span>
 				</div><!-- .crumbs -->
-				
 				<div class="proInfoWrap clearfix">
 					<div class="pro_img">
 						<div class="n_bigImg" id="js_n_bigImg" ectype="jqzoom_relative">
@@ -31,26 +24,23 @@
 								<div class="magnifyingBegin"></div>
 							    <!-- 放大镜显示的图片 -->
 							    <div class="magnifyingShow"><img src="{$goods.original_img}"></div>
-
-								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" class="myImgs" width="440" height="440" bigimg="{$goods.goods_grid}" data-original="{$goods.original_img}" alt="">
+								<img src="{$imgcache_url}images/domeimg/lazyload1.gif" class="myImgs" width="440" height="440" bigimg="{$goods.goods_grid}" data-original="{$goods.original_img}">
 							</div>
 							{if $goods.source!=1}<span class="c_tagbg icon-goods-mark">{if $goods.source == 2} 极速免税{elseif $goods.source==3}海外直邮{/if}</span>{/if}
 						</div><!--end .n_bigImg-->
 
 						<div class="n_thumbImg clearfix" id="js_n_thumbImg">
 							<a href="javascript:void(0);" class="spec_forward fl" id="js_spec_forward"><i class="icon icon_forward"></i></a>
-
 							<div class="n_thumbImg_item fl">
 								<ul class="js_scrollableDiv clearfix">
-								<li class="thumbnail_list active">
-										<a href="javascript:void(0);"><img src="{$goods.goods_thumb}" data-normal-img="{$goods.goods_grid}" bigimg="{$goods.original_img}" width="74" height="74"/></a>
-								</li>
-								{foreach from=$pictures key=k item=v}
-									<li class="thumbnail_list">
-										<a href="javascript:void(0);"><img src="{$v.thumb_url}" data-normal-img="{$v.img_url}" bigimg="{$v.img_original}" width="74" height="74"/></a>
+									<li class="thumbnail_list active">
+											<a href="javascript:void(0);"><img alt="{$goods.goods_title}" src="{$goods.goods_thumb}" data-normal-img="{$goods.goods_grid}" bigimg="{$goods.original_img}" width="74" height="74"/></a>
 									</li>
-                                {/foreach}
-									
+									{foreach from=$pictures key=k item=v}
+										<li class="thumbnail_list">
+											<a href="javascript:void(0);"><img alt="{$goods.goods_title}" src="{$v.thumb_url}" data-normal-img="{$v.img_url}" bigimg="{$v.img_original}" width="74" height="74"/></a>
+										</li>
+	                                {/foreach}
 								</ul>
 							</div><!--end .n_thumbImg_item-->
 
@@ -60,10 +50,10 @@
 
 					<div class="pro_info">
 						<p class="orig-country">
-							<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="31" height="31" data-original="/temp/skin1/dist/images/domeimg/country/{$goods.country}.png" alt=""/>
+							<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="31" height="31" data-original="/temp/skin1/dist/images/domeimg/country/{$goods.country}.png"/>
 							<span>{$goods.goods_remarks}</span>
 						</p>
-						<h3 class="product-title"><strong>{$goods.goods_title}</strong> </h3>
+						<h1 class="product-title"><strong>{$goods.goods_title}</strong> </h1>
 						<p class="subTitle">{$goods.maidian}</p>
 
                         {if $goods.end_time >0}
@@ -293,7 +283,7 @@
 										<i class="iron_down fl"></i>
 										<span class="txt fl">扫一扫<br/><strong>手机购买更优惠</strong></span>
 										<div class="show_prcode">
-											<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="100" height="100" data-original="{$imgcache_url}images/domeimg/qr_code_weixin.jpg?2015082701" alt="">
+											<img src="{$imgcache_url}images/domeimg/lazyload1.gif" width="100" height="100" data-original="{$imgcache_url}images/domeimg/qr_code_weixin.jpg?2015082701">
 											<i class="triup"></i>
 											<i class="tri_bgf"></i>
 										</div>
@@ -303,8 +293,7 @@
 								<!--分享-->
 								<div class="share-wrap clearfix">
 									<span class="share-tit fl">分享给朋友：</span>
-
-									<div class="bshare-custom fl"><div class="bsPromo bsPromo2"></div><a title="分享到微信" class="bshare-weixin" href="javascript:void(0);"></a><a title="分享到新浪微博" class="bshare-sinaminiblog" href="javascript:void(0);"></a><a title="分享到QQ空间" class="bshare-qzone"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+									<div class="bshare-custom"><div class="bsPromo bsPromo2"></div><a title="分享到微信" class="bshare-weixin" href="javascript:void(0);"></a><a title="分享到新浪微博" class="bshare-sinaminiblog" href="javascript:void(0);"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到QQ好友" class="bshare-qqim" href="javascript:void(0);"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到豆瓣" class="bshare-douban" href="javascript:void(0);"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=1&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
 								</div><!-- .share-wrap -->
 								<!--分享-->
 							</form>
@@ -316,13 +305,12 @@
 				<!-- 相关推荐产品 -->
 				{if $recommendGoods}
 				<div class="pro-recommendList">
-					<h1 class="tit"><strong>相关推荐 /</strong> 购买了该商品的人还买了这些</h1>
+					<h3 class="tit"><strong>相关推荐 /</strong> 购买了该商品的人还买了这些</h3>
 
 					<ul class="pro_list clearfix">
-					
 						{foreach from=$recommendGoods key=k item=v}
 		                    <li>
-		                        <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="180" height="180" data-original="{$v.goods_grid}" alt=""></a></p>
+		                        <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="180" height="180" data-original="{$v.goods_grid}" alt="{$v.goods_title}"></a></p>
 		                        <p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
 		                        <div class="p_price_cart_wrap clearfix">
 		                            <p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
@@ -341,11 +329,11 @@
 				<div id="js_mainBtmWrap" class="mainBtmWrap clearfix">
 					<div class="siderBox fl">
 						<!-- 最近浏览 -->
-						<h1 class="sider_title">最近浏览商品</h1>
+						<h3 class="sider_title">最近浏览商品</h3>
 						<ul class="recentlyViewedProList">
 						{foreach from=$historyList key=k item=v}
                             <li>
-                                <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="240" height="240" data-original="{$v.goods_grid}" alt=""></a></p>
+                                <p class="p_img tc"><a target="_blank" href="{$v.url_title}"><img src="{$imgcache_url}/images/domeimg/lazyload1.gif" width="240" height="240" data-original="{$v.goods_grid}" alt="{$v.goods_title}"></a></p>
                                 <p class="p_name tl"><a target="_blank" href="{$v.url_title}"><strong>{$v.goods_remarks}</strong>{$v.goods_title}</a></p>
                                 <div class="p_price_cart_wrap clearfix">
                                     <p class="p_price fl"><strong>￥{$v.shop_price}</strong> <span>￥{$v.market_price}</span></p>
@@ -390,10 +378,10 @@
 
 									<!-- 中国平安banner -->
 									<p class="mt10 mb10 tc">
-										<img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/domeimg/goodsDetail/authenticity_guarantee.jpg" width="870" height="80" alt="">
+										<img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/domeimg/goodsDetail/authenticity_guarantee.jpg" width="870" height="80">
 									</p>
 									<!-- 产品详情 -->
-									<div style="text-align: center;"><img alt="" src="http://des.wzhouhui.com/uploads/2015/201507/heditor/201507281745496094.jpg"></div>
+									<div style="text-align: center;margin-bottom:10px;"><img src="http://des.wzhouhui.com/uploads/2015/201507/heditor/201507281745496094.jpg"></div>
 									
 									{$goods.goods_desc}
 			
@@ -413,7 +401,7 @@
 											</li>
 											<li>
 												<h3 class="tit">2.关于时间</h3>
-												<p class="cont">五洲会海购与广州保税区、杭州保税区、东莞保税区等6大保税区均有合作，订单在<strong>24小时之内</strong>推送至海关发货，<strong>周六日海关休息，不清关保税区收货需5—8天</strong>，具体时间受海关海关放行速度影响。</p>
+												<p class="cont">五洲会海购与广州保税区、杭州保税区、东莞保税区等6大保税区均有合作，订单在<strong>24小时之内</strong>推送至海关发货，<strong>周六日海关休息，不清关保税区收货需5—8天</strong>，具体时间受海关放行速度影响。</p>
 											</li>
 											<li class="lastLi">
 												<h3 class="tit">3.关于关税</h3>
@@ -473,20 +461,19 @@
 
 	<div class="commWrap">
 	{{# for(var i = 0, len = d.list.eachInfoList.length; i < len; i++){ }}
-		<div class="eachInfo last clearfix">
+		<div class="eachInfo clearfix {{# if (d.list.eachInfoList.length - 1 == i){ }}last{{# } }}">
 			<ul class="commItem_left fl">
 				<li class="commItem_txt">{{ d.list.eachInfoList[i].commItem_txt }}</li>
 				<li class="commItem_date">{{ d.list.eachInfoList[i].commItem_date }}</li>
 				<li class="commItem_showImg">
 					<div class="pic_list clearfix js_smallPicList">
 					{{# for(var j = 0, len_pic = d.list.eachInfoList[i].pic_list.length; j < len_pic; j++){ }}
-						<a href="javascript:void(0);"><img src="{{ d.list.eachInfoList[i].pic_list[j].img }}" width="80" height="80" alt=""></a>
+						<a href="javascript:void(0);"><img src="{{ d.list.eachInfoList[i].pic_list[j].img }}" width="80" height="80"></a>
 					{{# } }}
 					</div>
 
 					<div class="showBigImgList none js_showBigImgList">
 						<a href="javascript:void(0);" class="showPic_forward direction-iron fl js_showPicForward"></a>
-
 						<div class="n_thumbImg_item fl">
 							<ul class="js_scrollableDiv clearfix">
 							{{# for(var k = 0, len_thunbimg = d.list.eachInfoList[i].n_thumbImg_item.length; k < len_thunbimg; k++){ }}
@@ -500,8 +487,19 @@
 						<a href="javascript:void(0);" class="showPic_backward direction-iron fl js_showPicBackward"></a>
 						<a href="javascript:void(0);" class="c_tagbg icon-close js_closeShowBigImg"></a>
 					</div>
-					
 				</li>
+				<!--客服回复 -->
+				{{#
+					var cReply = d.list.eachInfoList[i].reply;
+					if(cReply != undefined && cReply !=''){
+				}}
+				<li class="commItemReplay">
+					<span class="itemDetail">
+						<span class="color-increase">客服回复：</span>
+						{{ cReply }}
+					</span>
+				</li>
+				{{# } }}
 			</ul>
 
 			<ul class="commItem_right fr">

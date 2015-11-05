@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {include file='top.htm'}
-   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css?2015100701">
 </head>
 <body>
 <header id="header">
@@ -65,10 +65,17 @@
                         <i class="user-icon icon-quan"></i>
                         {if $apply.up_time!=''}
                         <h3 class="bold">用户名（手机号）{$nickname}于{$apply.up_time}修改售后申请</h3>
+                        {else if $apply.add_time!=''}
+                        <h3 class="bold">用户名（手机号）{$nickname}于{$apply.add_time}申请售后</h3>
                         {/if}
                         <p class="type">
                             退款类型：{if $apply.apply_type == 0}退款退货{else}仅退款{/if} <br/>
-                            退款金额：<span class="color-increase">￥{$apply.apply_money}</span><br/>
+                            退款金额：<span class="color-increase">￥{$apply.apply_amount|string_format:"%.2f"}</span>
+                            <span style="color:#aaa;font-size:10px;">(退款明细：
+                            {if isset($apply.apply_money) && $apply.apply_money>0}现金应退 ￥{$apply.apply_money|string_format:"%.2f"}&nbsp;&nbsp;{/if}
+                            {if isset($apply.apply_gift_money) && $apply.apply_gift_money>0}礼品卡应退 ￥{$apply.apply_gift_money|string_format:"%.2f"}&nbsp;&nbsp;{/if}
+                            {if isset($apply.user_cash) && $apply.user_cash>0}佣金应退 ￥{$apply.user_cash|string_format:"%.2f"}{/if}
+                            )</span><br/>
                             退款原因：<span class="bold">{$apply.apply_reason}</span>
                         </p>
                         <p class="msg">
@@ -116,7 +123,8 @@
                                 </select>
                             </span>
                         </label>
-                        <p class="label-right mt40">
+                        <p class="mt40">
+                            <span class="form-label">&nbsp;</span>
                             <a class="btn btn-default js_submit" href="#" onclick="return false;">确定</a>
                             <a class="btn btn-outline js_cancel ml30" href="#" onclick="return false;">取消</a>
                         </p>
@@ -144,7 +152,7 @@
                         </h2>
                         <div class="content">
                             <p>退款类型：{if $apply.apply_type == 0 }退款退货{else}仅退款{/if}</p>
-                            <p>退款金额：<span class="color-increase">￥{$apply.apply_money}</span></p>
+                            <p>退款金额：<span class="color-increase">￥{$apply.apply_amount|string_format:"%.2f"}</span></p>
                             <p>退款原因：{$apply.apply_reason}</p>
                         </div>
                     </li>
@@ -171,7 +179,8 @@
                             <p><span class="left">运费：</span> {$order.formated_shipping_fee}元</p>
                             <p><span class="left">优惠券：</span>-{$order.promotion_code_youhuilv}元</p>
                             <p><span class="left">佣金：</span>-{$order.user_cash}元</p>
-                            <p><span class="left">实付金额：</span>{$order.total_fee}元</p>
+                            <p><span class="left">礼品卡：</span>-{$order.gift_money}元</p>
+                            <p><span class="left">实付金额：</span>{$order.pay_fee}元</p>
                             <p><span class="left">成交时间：</span>{$order.pay_time}</p>
                         </div>
                     </li>
@@ -187,7 +196,7 @@
 </footer><!--end #footer -->
 {literal}
 <script>
-    $LAB.script("user.min.js").wait(function () {
+    $LAB.script("user.min.js?2015100701").wait(function () {
         USER.applyDetail.detailInit("undo-form");
     });
 </script>

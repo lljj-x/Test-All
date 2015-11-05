@@ -3,7 +3,7 @@
 <head>
 	{include file="top.htm"}
 
-	<link rel="stylesheet" href="/temp/skin1/dist/mincss/login_min.css">
+	<link rel="stylesheet" href="{$imgcache_url}mincss/login_min.css">
 </head>
 <body>
 	<header id="header">
@@ -13,8 +13,7 @@
 	<!-- 注册主体start -->
 	<div class="login-main-wrap">
 		<div class="public-login-page register-page w1200">
-			<div class="left-pic"><img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="535" height="436" data-original="/temp/skin1/dist/images/domeimg/login/login_left_2.png" alt=""></div>
-
+			<div class="left-pic"><a href="/m-users-a-join.htm"><img src="{$imgcache_url}images/domeimg/login/login_left_2.png" width="535" height="436"></a></div>
 			<div class="public-login-bord register-bord" id="js_loginBord">
 				<form id="js_registerForm" action="/m-users-a-a_join.htm" method="post" autofocus autocomplete="off">
 					<div class="public-tit mb25 clearfix">
@@ -25,7 +24,7 @@
 					<div class="input-group mb25">
 						<i class="login_icon icon_name position-left"></i>
 						<div class="input-wrap">
-							<input type="text" name="phone" maxlength="11" id="js_regPhone" data-type="1" class="phone" placeholder="请输入手机号">
+							<input type="text" name="phone" maxlength="11" id="js_regPhone" data-type="1" class="phone js_myPlaceholder" placeholder="请输入手机号">
 						</div>
 						<span class="position-right"><strong class="color_main f14">*</strong></span>
 					</div>
@@ -33,7 +32,7 @@
 					<div class="input-group message-group mb25" id="js_enterVerifycode">
 						<div class="message-wrap clearfix">
 							<div class="message fl">
-								<input type="text" name="verifycode" id="js_accessCode" class="verifycode" placeholder="输入验证码">
+								<input type="text" name="verifycode" id="js_accessCode" class="verifycode js_myPlaceholder" placeholder="输入验证码">
 							</div>
 							<div class="img-wrap fl"><img id="js_refreshVerifycode" data-src="/fun/?act=verify" src="/fun/?act=verify" width="100" height="40"></div>
 						</div>
@@ -43,7 +42,7 @@
 					<div class="input-group message-group mb25">
 						<div class="message-wrap clearfix">
 							<div class="message fl">
-								<input type="text" name="phoneCode" id="js_regPhoneCode" class="phoneCode" placeholder="短信验证码">
+								<input type="text" name="phoneCode" id="js_regPhoneCode" class="phoneCode js_myPlaceholder" placeholder="短信验证码">
 							</div>
 							<button id="js_smsCode" type="button" class="smscode no-click fr" disabled="disabled">获取短信验证码</button>
 						</div>
@@ -53,7 +52,7 @@
 					<div class="input-group mb25">
 						<i class="login_icon icon_password position-left"></i>
 						<div class="input-wrap">
-							<input type="password" name="password" id="js_regPassword" class="password" placeholder="请输入密码">
+							<input type="password" name="password" id="js_regPassword" class="password js_myPlaceholder" placeholder="请输入密码">
 						</div>
 						<span class="position-right"><strong class="color_main f14">*</strong></span>
 					</div>
@@ -61,7 +60,7 @@
 					<div class="input-group mb25">
 						<i class="login_icon icon_password position-left"></i>
 						<div class="input-wrap">
-							<input type="password" name="password_confirm" id="js_regPasswordConfirm" class="password_confirm" placeholder="确认登录密码">
+							<input type="password" name="password_confirm" id="js_regPasswordConfirm" class="password_confirm js_myPlaceholder" placeholder="确认登录密码">
 						</div>
 						<span class="position-right"><strong class="color_main f14">*</strong></span>
 					</div>
@@ -69,14 +68,14 @@
 					<div class="input-group mb25">
 						<i class="login_icon icon_email position-left"></i>
 						<div class="input-wrap">
-							<input type="text" name="email" id="js_regEmail" class="email" placeholder="E-mail地址">
+							<input type="text" name="email" id="js_regEmail" class="email js_myPlaceholder" placeholder="E-mail地址">
 						</div>
 					</div>
 
 					<div class="input-group mb25">
 						<i class="login_icon icon_birthday position-left"></i>
 						<div class="input-wrap">
-							<input type="text" name="birthday" readonly id="js_regBirthday" class="birthday" placeholder="填写生日有惊喜哦~">
+							<input type="text" name="birthday" readonly id="js_regBirthday" class="birthday js_myPlaceholder" placeholder="填写生日有惊喜哦~">
 						</div>
 					</div>
 					
@@ -98,99 +97,102 @@
 	</footer><!--end #footer -->
 {literal}
 <script>
-		$LAB.script("jquery.validate.min.js")
-			.wait()
-			.script("laydate/laydate.dev.js")
-			.script("login.min.js?2015081301")
-			.wait(function(){
-				//填写注册信息
-				(function(){
-					var $js_registerForm = $("#js_registerForm");
-					if($js_registerForm.length > 0){
-						// 电话
-						$.validator.addMethod("mobile", function(value, element) {
-				                var length = value.length;
-				                var mobile =  /^(((13[0-9]{1})|(15[0-9]{1})|(17[6-8]{1})|(14[5-7]{1})|(18[0-9]{1}))+\d{8})$/;
-				                return this.optional(element) || (length == 11 && mobile.test(value));
-				        }, "手机号码格式错误");
+    $(function () {
+        // 模拟
+        GLOBAL.otherGlobal.myPlaceholder.init($(".js_myPlaceholder"));
+    });
 
-						$js_registerForm.validate({
-							rules: {
-								phone: {
-									required: true,
-									maxlength: 11,
-									mobile:true
-								},
-								verifycode: {
-									required: true,
-									minlength: 4,
-									maxlength: 4
-								},
-								phoneCode: {
-									required: true
-								},
-							    password: {
-							        required: true,
-							        maxlength: 60,
-							        minlength: 6
-							    },
-							    password_confirm: {
-							        required: true,
-							        minlength: 6,
-							        maxlength: 60,
-							        equalTo: $("#js_regPassword")
-							    },
-							    email:{
-							    	email:true
-							    },
-							    isagree: {
-							    	required: true
-							    }
-							},
-							messages: {
-								phone: {
-									required: '请输入大陆地区手机号码',
-									maxlength: '手机号码长度不能超过11位',
-									mobile: '请输入正确的手机格式'
-								},
-								verifycode: {
-									required: '请输入验证码',
-									minlength: '验证码长度不对',
-									maxlength: '验证码长度不对'
-								},
-								phoneCode: {
-									required: '请输入正确的手机验证码'
-								},
-							    password: {
-							        required:  '请设置密码',
-							        minlength: '密码长度必须大于6个字符'
-							    },
-							    password_confirm: {
-							        required:  '请再次确认密码',
-							        minlength: '密码长度必须大于6个字符',
-							        equalTo:   '两次密码输入不一致'
-							    },
-							    email:{
-							    	email:'请输入正确格式的电子邮件'
-							    },
-							    isagree: {
-							    	required: '您未阅读并接受五洲会海购服务条款'
-							    }
-							},
-						   
-							errorPlacement:function(error,element){
-							    element.parent().find("label.checked").remove();
-							    error.appendTo(element.parent());
-						    },
-							success: function(label) {
-							    label.remove();
-							}
-					    });
-					}
-				})();
+    $LAB.script("jquery.validate.min.js")
+        .wait()
+        .script("laydate/laydate.dev.js")
+        .script("login.min.js?2015081301")
+        .wait(function(){
+            //填写注册信息
+            (function(){
+                var $js_registerForm = $("#js_registerForm");
+                if($js_registerForm.length > 0){
+                    // 电话
+                    $.validator.addMethod("mobile", function(value, element) {
+                            var length = value.length;
+                            var mobile =  /^(((13[0-9]{1})|(15[0-9]{1})|(17[6-8]{1})|(14[5-7]{1})|(18[0-9]{1}))+\d{8})$/;
+                            return this.optional(element) || (length == 11 && mobile.test(value));
+                    }, "手机号码格式错误");
 
-				
-			})	
+                    $js_registerForm.validate({
+                        rules: {
+                            phone: {
+                                required: true,
+                                maxlength: 11,
+                                mobile:true
+                            },
+                            verifycode: {
+                                required: true,
+                                minlength: 4,
+                                maxlength: 4
+                            },
+                            phoneCode: {
+                                required: true
+                            },
+                            password: {
+                                required: true,
+                                maxlength: 60,
+                                minlength: 6
+                            },
+                            password_confirm: {
+                                required: true,
+                                minlength: 6,
+                                maxlength: 60,
+                                equalTo: $("#js_regPassword")
+                            },
+                            email:{
+                                email:true
+                            },
+                            isagree: {
+                                required: true
+                            }
+                        },
+                        messages: {
+                            phone: {
+                                required: '请输入大陆地区手机号码',
+                                maxlength: '手机号码长度不能超过11位',
+                                mobile: '请输入正确的手机格式'
+                            },
+                            verifycode: {
+                                required: '请输入验证码',
+                                minlength: '验证码长度不对',
+                                maxlength: '验证码长度不对'
+                            },
+                            phoneCode: {
+                                required: '请输入正确的手机验证码'
+                            },
+                            password: {
+                                required:  '请设置密码',
+                                minlength: '密码长度必须大于6个字符'
+                            },
+                            password_confirm: {
+                                required:  '请再次确认密码',
+                                minlength: '密码长度必须大于6个字符',
+                                equalTo:   '两次密码输入不一致'
+                            },
+                            email:{
+                                email:'请输入正确格式的电子邮件'
+                            },
+                            isagree: {
+                                required: '您未阅读并接受五洲会海购服务条款'
+                            }
+                        },
+
+                        errorPlacement:function(error,element){
+                            element.parent().find("label.error").remove();
+                            error.appendTo(element.closest(".input-wrap"));
+                        },
+                        success: function(label) {
+                            label.remove();
+                        }
+                    });
+                }
+            })();
+        })
 	</script>
 {/literal}
 

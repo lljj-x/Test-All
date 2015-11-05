@@ -148,7 +148,7 @@
                                         <span class="color_increase">手机购买更便宜</span>
                                     </span>
                     <div class="qr_code_drop drop_box none">
-                        <img src="{/literal}{$imgcache_url}{literal}images/domeimg/qr_code_app.jpg?2015082701" alt=""/>
+                        <img src="{/literal}{$imgcache_url}{literal}images/domeimg/qr_code_app.jpg?2015082701"/>
                         App首单减5元
                         <span class="triangle-right"><span class="triangle-right"></span></span>
                     </div>
@@ -163,9 +163,10 @@
 {/literal}
 {literal}
 <script>
-    $LAB.script("laytpl.min.js")
-        .wait()
-        .script("cart.min.js?20150908");
+    $LAB.script("cart.min.js?2015102601")
+        .wait(function () {
+            CART.init(false,'cart_form');
+        });
 </script>
 {/literal}
 </body>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {include file='top.htm'}
-   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+   <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css?2015100701">
 </head>
 <body>
 <header id="header">
@@ -98,7 +98,8 @@
 
                     <p class="label-right prompt">每张图片大小不超过5M，最多3张，支持GIF、JPG、PNG、BMP格式</p>
 
-                    <p class="label-right mt30">
+                    <p class="mt30">
+                        <span class="form-label">&nbsp;</span>
                         <a class="btn btn-default js_submit" href="#" onclick="return false;">提交申请</a>
                     </p>
                 </div>
@@ -155,7 +156,7 @@
 
 {literal}
 <script>
-    $LAB.script("user.min.js")
+    $LAB.script("user.min.js?2015100701")
         .wait(function () {
             // 申请售后form
             if($("#sale-apply-form").length > 0){

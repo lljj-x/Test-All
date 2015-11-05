@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {include file='top.htm'}
-    <link rel="stylesheet" href="{$imgcache_url}mincss/cart_min.css?2015092201">
+    <link rel="stylesheet" href="{$imgcache_url}mincss/cart_min.css?2015101102">
 </head>
 <body>
 <header id="header">
@@ -31,7 +31,6 @@
         </p>
 
         <div class="delivery_address_warp">
-
             <form id="delivery_address_form" class="cart_global_form {if $consignee neq ''}none{/if}">
                 <label>
                     <span>
@@ -39,7 +38,7 @@
                     </span>
                 </label>
 
-                <p class="js_select_address  select_address">
+                <p class="js_select_address select_address js_formRow">
                     <span class="form-label"><span class="required">*</span>所在地址</span>
                     <span class="nselect_wrap">
                         <select name="province" class="selected_province item-select item-150">
@@ -60,33 +59,37 @@
                         </select>
                     </span>
                 </p>
-                <label>
+                <label class="js_formRow">
                     <span class="form-label"><span class="required">*</span>详细地址</span>
                     <span class="address_street_wrap">
                         <textarea maxlength="50" name="addressline" class="address_street" placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息"></textarea>
                     </span>
                 </label>
-                <label>
+                <label class="js_formRow">
                     <span class="form-label"><span class="required">*</span>收货人姓名</span>
-            <span>
-                <input maxlength="15" type="text" name="username" class="username" placeholder="长度不超过25个字符"/>
-            </span>
+                    <span>
+                       <span class="input-wrap">
+                        <input maxlength="15" type="text" name="username" class="username js_myPlaceholder" placeholder="长度不超过25个字符"/>
+                       </span>
+                    </span>
                 </label>
-                <label>
+                <label class="js_formRow">
                     <span class="form-label"><span class="required">*</span>手机号码</span>
-            <span>
-                <input maxlength="11" type="text" name="tel" class="phone" placeholder="电话号码、手机号码必须填一项"/>
-            </span>
+                    <span>
+                        <span class="input-wrap">
+                        <input maxlength="11" type="text" name="tel" class="phone js_myPlaceholder" placeholder="电话号码、手机号码必须填一项"/>
+                        </span>
+                    </span>
                 </label>
-                <label>
+                <label class="js_formRow">
                     <span class="form-label">或固定电话</span>
-                    <span><input maxlength="4" type="text" name="areacode" class="areacode item-150" placeholder="区号"/></span>
-                    <span><input maxlength="8" type="text" name="telephone" class="telephone item-150" placeholder="电话号码"/></span>
-                    <span><input maxlength="4" type="text" name="ext" class="ext item-150" placeholder="分机号(可选)"/></span>
+                    <span class="input-wrap"><input maxlength="4" type="text" name="areacode" class="areacode js_myPlaceholder item-150" placeholder="区号"/></span>
+                    <span class="input-wrap"><input maxlength="8" type="text" name="telephone" class="telephone js_myPlaceholder item-150" placeholder="电话号码"/></span>
+                    <span class="input-wrap"><input maxlength="4" type="text" name="ext" class="ext item-150 js_myPlaceholder" placeholder="分机号(可选)"/></span>
                 </label>
-                <label>
+                <label class="js_formRow">
                     <span class="form-label"><span class="required">*</span>身份证号码</span>
-                    <span><input maxlength="18" type="text" name="card_id" class="idnumber" placeholder="请填写收货人身份证信息"/></span>
+                    <span class="input-wrap"><input maxlength="18" type="text" name="card_id" class="idnumber js_myPlaceholder" placeholder="请填写收货人身份证信息"/></span>
 
                     <div class="cart_icon1 icon_msg">
                         <div class="drop_box idnumber_drop none">
@@ -95,13 +98,14 @@
                         </div>
                     </div>
                 </label>
-
-                <p class="label-right">
+                <p class="js_formRow">
+                    <span class="form-label">&nbsp;</span>
                     <span class="cart_icon1 icon_checkbox selected" onclick="CHECKOUT.setCheckBox(this);"></span>设置为默认收货地址
                     <input type="checkbox" name="is_default_address" checked="checked" value="1" class="hidden-input none"/>
                 </p>
 
-                <p class="label-right mt30">
+                <p class="mt30">
+                    <span class="form-label">&nbsp;</span>
                     <a class="address_confirm_submit btn btn-default" href="javascript:;">保存</a>
                     <a class="js_address_confirm_cancel btn btn-outline none ml30" href="javascript:;">取消</a>
                 </p>
@@ -143,7 +147,7 @@
                 }}
                 <td class="{{# if(cc === 1){}}first{{#}}}{{#if(cc === defaultColumnNum){}}last{{#}}}">
                     <div class="address_wrap">
-                        <div class="js_address_label {{#if(currentItemData.is_default_address == 1){}}js_defaultWarp{{# }}}  address_label address_icon  {{# if(currentItemData.is_default_address == 1){}}checked{{#}}}" data-address-id="{{currentItemData.address_id}}">
+                        <div class="js_address_label {{#if(currentItemData.is_default_address == 1){}}js_defaultWarp{{# }}}  address_label address_icon  {{# if(currentItemData.is_current_address == 1){}}checked{{#}}}" data-address-id="{{currentItemData.address_id}}">
                             <p class="address_title bb clearfix">
                                 <strong>{{currentItemData.username}}&nbsp;&nbsp;收</strong>
                                 {{# var isDefaultAddress = currentItemData.is_default_address;}}
@@ -250,65 +254,72 @@
     </table>
 
 
-
     {{# if((1==1) || d.coupon_list.length > 0 || d.commission_over != 0){}}
-    <div class="clearfix bb">
+    <div class="bb">
         <ul class="order_reduce_info">
-            {{#
-                var couponList = d.coupon_list;
-                var isUseCoupon = d.isUseCoupon;
-                if (couponList.length > 0){
-            }}
+
             <!-- 有优惠券显示-->
             <li class="user_coupon_warp">
-                <span class="ie7_span">
-                    <span class="cart_icon1 icon_checkbox js_use_coupon selected" data-cart-id="0" onclick="CHECKOUT.setCheckBox(this)"></span>使用优惠券
-                    <input checked name="is_use_coupon" type="checkbox" value="1" class="hidden-input none"/>
-                </span>
-                <div class="cart_icon1 icon_msg">
-                    <div class="drop_box coupon_drop none">
-                        每笔订单仅限使用一张优惠券，优惠券不可合并。若使用优惠券的订单发生退货行为，则优惠券不予返还。
-                        <span class="triangle-bottom"><span class="triangle-bottom"></span></span>
-                    </div>
-                </div>
-                <span class="nselect_wrap selected_coupon js_none_show">
-                    <select name="coupon" class="item-select coupon" onchange="CHECKOUT.selectCouponEvent(this);">
-                        <option value="default">选择你要使用的优惠券</option>
-                        {{#
-                            for(var cuc=0;cuc < couponList.length; cuc++){
-                        }}
-                            <option {{# if(couponList[cuc].is_use =="1"){ }} selected{{# }}} value="{{couponList[cuc].code}}">{{ couponList[cuc].msg }}</option>
-                        {{#
-                            }
-                        }}
-                    </select>
-                </span>
-                <span class="coupon_money reduce_money"> -￥{{d.coupon_money}} </span>
-            </li>
-            {{#}}}
-            <li class="user-exchange-coupon-warp">
-                <p>
-                    <span class="ie7_span"><a class="js_userCoponCode color_increase" href="javascript:;"> + 已有优惠码</a></span>
-                    <span class="reduce_money"></span>
-                </p>
-                <p class="pt10 js_couponCodeWarp none">
-                    <span class="coupon_code_warp inline-block vm ">
-                       <input class="coupon-code js_couponCode" name="coupon_code" maxlength="16" type="text" value="" placeholder="请输入优惠码"/>
-                        <a href="javascript:;" class="btn btn-default btn-sm" onclick="CHECKOUT.exchangeCoupon(this)">兑换</a>
+                {{#
+                    var couponList = d.coupon_list;
+                    var isUseCoupon = d.isUseCoupon;
+                    if (couponList.length > 0){
+                }}
+                <div class="use-coupon-wrap mb10">
+                    <span class="ie7_span">
+                        <span class="cart_icon1 icon_checkbox js_use_coupon selected" data-cart-id="0" onclick="CHECKOUT.setCheckBox(this)"></span>使用优惠券
+                        <input checked name="is_use_coupon" type="checkbox" value="1" class="hidden-input none"/>
                     </span>
-                    <span class="reduce_money"></span>
-                </p>
+                    <div class="cart_icon1 icon_msg">
+                        <div class="drop_box coupon_drop none">
+                            每笔订单仅限使用一张优惠券，优惠券不可合并。若使用优惠券的订单发生退货行为，则优惠券不予返还。
+                            <span class="triangle-bottom"><span class="triangle-bottom"></span></span>
+                        </div>
+                    </div>
+                    <span class="nselect_wrap selected_coupon js_noneShow">
+                        <select name="coupon" class="item-select coupon" onchange="CHECKOUT.selectCouponEvent(this);">
+                            <option value="default">选择你要使用的优惠券</option>
+                            {{#
+                            for(var cuc=0;cuc < couponList.length; cuc++){
+                            }}
+                            <option {{# if(couponList[cuc].is_use =="1"){ }} selected{{# }}} value="{{couponList[cuc].code}}">{{ couponList[cuc].msg }}</option>
+                            {{#
+                            }
+                            }}
+                        </select>
+                    </span>
+                    <span class="coupon_money reduce_money"> -￥{{d.coupon_money}} </span>
+                </div>
+                {{#}}}
+
+                <!--兑换优惠码-->
+                <div class="user-exchange-coupon-warp">
+                    <p>
+                        <span class="ie7_span"><a class="js_userCoponCode color_increase" href="javascript:;"> + 已有优惠码</a></span>
+                        <span class="reduce_money"></span>
+                    </p>
+                    <p class="pt10 js_couponCodeWarp none">
+                    <span class="coupon_code_warp inline-block vm ">
+                       <span class="input-wrap">
+                           <input class="coupon-code js_couponCode js_myPlaceholder" name="coupon_code" maxlength="16" type="text" value="" placeholder="请输入优惠码"/>
+                       </span>
+                       <a href="javascript:;" class="btn btn-default btn-sm" onclick="CHECKOUT.exchangeCoupon(this)">兑换</a>
+                    </span>
+                        <span class="reduce_money"></span>
+                    </p>
+                </div>
             </li>
-            <!--有佣金才显示使用佣金-->
+
+
+            <!-- 使用佣金 -->
             {{#
                 var hasCommission = d.commission_over;
                 var isUseCoupon = false;
                 var useCommission = (d.commission_money == "0") ? false : d.commission_money;
                 if(hasCommission != "0"){
             }}
-
             <li class="user_commission_warp">
-                <div class="user_commission_form">
+                <div class="user_commission_form js_errorWrap">
                     <span class="ie7_span use_commission_bg">
                         <span class="cart_icon1 icon_checkbox js_use_commission {{# if (useCommission){}}selected{{# }}}" data-cart-id="0" onclick="CHECKOUT.setCheckBox(this)"></span>使用佣金
                         <input {{# if (useCommission){}}checked{{# }}} name="is_use_commission" type="checkbox" value="1" class="hidden-input none"/>
@@ -321,20 +332,92 @@
                         </div>
                     </div>
                     <!--弹出框和弹出按钮-->
-                    <input name="use_commission_money" disabled class="js_use_commission_money" type="text" value="{{# if (!useCommission){}}{{hasCommission}}{{# }else{}}{{useCommission}}{{#}}}" placeholder="使用金额" onkeyup="CHECKOUT.commissionChangeEvent(this)" data-has-commission ="{{hasCommission}}"/>
-                    <span class="commission_code_warp js_none_show none">
-                        <input name="commission_code" maxlength="6" type="text" value="" onkeyup="CHECKOUT.inputCheckSecurityCodeEvent(this)" placeholder="输入验证码"/>
-                        <a href="javascript:;" class="js_get_commission_code btn btn-default btn-sm">获取验证码</a>
+                    <span class="js_noneShow none">
+                        <span class="input-wrap">
+                            <input name="use_commission_money" disabled class="js_useCommissionMoney js_myPlaceholder" type="text" value="{{# if (!useCommission){}}{{hasCommission}}{{# }else{}}{{useCommission}}{{#}}}" placeholder="使用金额" onkeyup="CHECKOUT.checkMenoyMax(this)" onblur="CHECKOUT.blurMenoyInput(this)"/>
+                        </span>
+                         <span class="commission_code_warp">
+                            <span class="input-wrap">
+                                <input class="js_myPlaceholder" name="commission_code" maxlength="6" type="text" value="" onkeyup="CHECKOUT.inputCodeEvent(this,'.js_useCommissionMoney')" placeholder="输入验证码"/>
+                            </span>
+                            <a href="javascript:;" class="js_get_commission_code btn btn-default btn-sm">获取验证码</a>
+                        </span>
                     </span>
                     <span class="commission_money reduce_money"> -￥{{d.commission_money}} </span>
                 </div>
                 <div class="user_commission_msg">
-                    <span class="commission_money_over">（可用金额：{{hasCommission}}）</span>
+                    <span class="commission_money_over">（可用金额：<span class="js_commisonCanMoney">{{hasCommission}}</span>）</span>
                     <span class="send_code_num js_send_code_msg none">验证码已发送至{{d.tel}}</span>
                 </div>
             </li>
             {{# }}}
-            <!--有佣金才显示使用佣金-->
+            <!-- 使用佣金 End -->
+
+            <!--使用礼品卡-->
+            {{#
+                var giftCartList = d.gift_card_list,
+                    isPayGift = (d.is_pay_gift == 1),
+                    isUseGiftCard = (d.is_use_gift_card == 1),
+                    isSetPayPass = (d.is_set_payment_pass == 1),
+                    giftCardList = d.gift_card_list;
+            }}
+
+            <li class="user-gift-card-warp">
+                <div>
+                    <span class="ie7_span color-increase">
+                        <span class="cart_icon2 js_useGiftCardBtn icon_checkbox{{# if (isUseGiftCard){}} selected{{# }}}" onclick="CHECKOUT.setCheckBox(this)"></span>使用礼品卡支付
+                        <input {{# if (isUseGiftCard){}}checked{{# }}} name="is_use_gift_card" type="checkbox" value="1" class="hidden-input none"/>
+                    </span>
+                    <div class="cart_icon1 icon_msg">
+                        <div class="drop_box gift_drop none">每个订单只能使用一张礼品卡支付
+                            <span class="triangle-bottom"><span class="triangle-bottom"></span></span>
+                        </div>
+                    </div>
+
+                    {{# if(giftCardList.length > 0){ }}
+                        <span class="nselect_wrap selected_coupon js_cardList {{# if (!isUseGiftCard){}}none{{# }}}">
+                            <select name="gift-card" class="item-select js_selectGiftCard" onchange="CHECKOUT.selectGiftCartEvent(this);">
+                                <option value="default">选择你要使用的礼品卡</option>
+                                {{#
+                                    for(var cug=0;cug < giftCartList.length; cug++){
+                                    var optionText = CHECKOUT.encryptionGiftCard(giftCartList[cug].code) + '  卡内余额：￥' + giftCartList[cug].card_over_money;
+                                }}
+                                <option {{# if(giftCartList[cug].is_use =="1"){ }} selected = "selected"{{# }}} value="{{giftCartList[cug].code}}" data-over-money="{{ giftCartList[cug].card_over_money}}">{{optionText}}</option>
+                                {{#
+                                    }
+                                }}
+                                <option value="new-card"> + 激活新的礼品卡</option>
+                            </select>
+                        </span>
+                    {{# } }}
+                    <span class="reduce_money color-increase js_cardMoney"> -￥{{d.gift_money}}</span>
+                </div>
+                <div class="js_hideUseGift use-gift-card{{# if (!isPayGift){}} none{{# }}}">
+                    <div class="gift-use-money">
+
+                        <span>付款金额：<span class="input-wrap"><input class="js_myPlaceholder js_useGiftCardInput" {{# if (!isSetPayPass){}}disabled{{# }}} name="use_gift_money" type="text" value="" onkeyup="CHECKOUT.checkMenoyMax(this)" onblur="CHECKOUT.blurMenoyInput(this)" placeholder="输入使用金额"></span></span>
+                        <span class="reduce_money"></span>
+                    </div>
+                    <div class="gift-use-pass js_errorWrap">支付密码：
+                        <span class="input-wrap">
+                            <input class="js_myPlaceholder" name="use_gift_pass" {{# if (!isSetPayPass){}}disabled{{# }}} maxlength="6" type="password" value="" onkeyup="CHECKOUT.inputCodeEvent(this,'.js_useGiftCardInput')" placeholder="输入支付密码">
+                        </span>
+                        <span class="reduce_money"></span>
+                    </div>
+                    <div class="gift-payment-msg">
+                        <span>
+                            <i class="cart_icon icon-warning-sm"></i>
+                            {{# if (!isSetPayPass){}}
+                            <span class="vm">为保障您的帐户资金安全，首次使用礼品卡，请先<a href="/m-users-a-setpaypwd.html" class="color-increase">开启支付密码</a></span>
+                            {{# }else{ }}
+                            <span class="vm">忘记支付密码，请到 <a href="/m-users-a-setpaypwd.html" class="color-increase" target="_blank">帐户安全</a> 栏目修改</span>
+                            {{# }}}
+                        </span>
+                        <span class="reduce_money"></span>
+                    </div>
+                </div>
+            </li>
+            <!--使用礼品卡 end-->
         </ul>
     </div>
     {{# }}}
@@ -351,11 +434,18 @@
             </tr>
             <tr>
                 <td>应付金额：</td>
-                <td class="cart_total_price color_increase">￥<span>{{d.total.order_amount}}</span></td>
+                <td class="cart_total_price color_increase">￥<span class="js_totalMoney">{{d.total.order_amount}}</span></td>
             </tr>
             </tbody>
         </table>
     </div>
+    <div class="notice_limit js_notice none">
+        <div class="msg_text lh25">
+            <i class="cart_icon icon-warning-sm notice"></i>
+            输入支付密码去结算，或取消使用礼品卡去结算
+        </div>
+    </div>
+
     <div class="cart_checkout pt20 cart_bottom_warp clearfix">
         <div class="back_home fl">
             <a href="/m-flow-a-cart.html">< 返回购物车修改</a>
@@ -363,17 +453,17 @@
         <div class="right_checkout fr clearfix">
             <div class="qr_code_warp fl clearfix">
                 <span class="qr_code_img cart_icon fl"></span>
-                                        <span class="qr_code_text fl">
-                                            扫一扫 <br/>
-                                            <span class="color_increase">手机购买更便宜</span>
-                                        </span>
+                <span class="qr_code_text fl">
+                    扫一扫 <br/>
+                    <span class="color_increase">手机购买更便宜</span>
+                </span>
                 <div class="qr_code_drop drop_box none">
-                    <img src="{/literal}{$imgcache_url}{literal}images/domeimg/qr_code_app.jpg?2015082701" alt=""/>
+                    <img src="{/literal}{$imgcache_url}{literal}images/domeimg/qr_code_app.jpg?2015082701"/>
                     App首单减5元
                     <span class="triangle-right"><span class="triangle-right"></span></span>
                 </div>
             </div>
-            <a href="/m-flow-a-done.html" class="submit btn btn-default btn-xl fl">去结算</a>
+            <a href="/m-flow-a-done.html" class="submit btn btn-default btn-xl fl js_submit {{# if (isPayGift){}} disabled{{# }}}">去结算</a>
         </div>
     </div>
     {{# }}}
@@ -382,8 +472,10 @@
 <script>
     $LAB.script("laytpl.min.js")
         .wait()
-        .script("addressForm.min.js")
-        .script("checkout.min.js?2015092301");
+        .script("addressForm.min.js?2015100701")
+        .script("giftCardPop.min.js?2015101101")
+        .wait()
+        .script("checkout.min.js?2015102001");
 </script>
 {/literal}
 </body>

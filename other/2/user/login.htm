@@ -3,7 +3,7 @@
 <head>
 	{include file='top.htm'}
 
-	<link rel="stylesheet" href="/temp/skin1/dist/mincss/login_min.css">
+	<link rel="stylesheet" href="{$imgcache_url}mincss/login_min.css">
 </head>
 <body>
 	<header id="header">
@@ -13,8 +13,7 @@
 	<!-- 登录主体start -->
 	<div class="login-main-wrap">
 		<div class="js_loginPage public-login-page login-page w1200">
-			<div class="left-pic"><a href="/m-users-a-join.htm"><img src="/temp/skin1/dist/images/domeimg/lazyload1.gif" width="535" height="436" data-original="/temp/skin1/dist/images/domeimg/login/login_left_2.png" alt=""></a></div>
-
+			<div class="left-pic"><a href="/m-users-a-join.htm"><img src="{$imgcache_url}images/domeimg/login/login_left_2.png" width="535" height="436"></a></div>
 			<div class="public-login-bord login-bord" id="js_loginBord">
 				<form id="js_loginForm" action="#" method="post" autocomplete="off">
 					<div class="public-tit mb25 clearfix">
@@ -25,14 +24,14 @@
 					<div class="input-group mb25">
 						<i class="login_icon icon_name position-left"></i>
 						<div class="input-wrap">
-							<input type="text" name="phone" maxlength="11" id="js_loginPhone" class="phone" placeholder="请输入手机号" >
+							<input type="text" name="phone" maxlength="11" id="js_loginPhone" class="phone js_myPlaceholder" placeholder="请输入手机号" >
 						</div>
 					</div>
 
 					<div class="input-group mb25">
 						<i class="login_icon icon_password position-left"></i>
 						<div class="input-wrap">
-							<input type="password" name="password" id="js_loginPassword" class="password" placeholder="请输入密码" >
+							<input type="password" name="password" id="js_loginPassword" class="password js_myPlaceholder" placeholder="请输入密码" >
 						</div>
 					</div>
 					{if $repeat==1}
@@ -40,7 +39,7 @@
                         <input type="hidden" name="repeat" value="1" id="js_repeatNum"/>
 						<div class="message-wrap clearfix">
 							<div class="message fl">
-								<input type="text" name="verifycode" class="verifycode js_verifycode" placeholder="输入验证码">
+								<input type="text" name="verifycode" class="verifycode js_verifycode js_myPlaceholder" placeholder="输入验证码">
 							</div>
 							<div class="img-wrap fl"><img class="js_refreshVerifycode" data-src="/fun/?act=verify" src="/fun/?act=verify" width="100" height="40"></div>
 						</div>
@@ -69,7 +68,7 @@
                     <div class="input-group mb25">
                         <i class="login_icon icon_name position-left"></i>
                         <div class="input-wrap">
-                            <input type="text" name="phone" maxlength="11" id="js_regPhone" data-type="4" class="phone" placeholder="请输入手机号">
+                            <input type="text" name="phone" maxlength="11" id="js_regPhone" data-type="4" class="phone js_myPlaceholder" placeholder="请输入手机号">
                         </div>
                         <span class="position-right"><strong class="color_main f14">*</strong></span>
                     </div>
@@ -77,7 +76,7 @@
                     <div class="input-group message-group mb25" id="js_enterVerifycode">
                         <div class="message-wrap clearfix">
                             <div class="message fl">
-                                <input maxlength="4" type="text" name="verifycode" id="js_accessCode" class="verifycode" placeholder="输入验证码">
+                                <input maxlength="4" type="text" name="verifycode" id="js_accessCode" class="verifycode js_myPlaceholder" placeholder="输入验证码">
                             </div>
                             <div class="img-wrap fl"><img class="js_refreshVerifycode" data-src="/fun/?act=verify" src="/fun/?act=verify" width="100" height="40"></div>
                         </div>
@@ -87,7 +86,7 @@
                     <div class="input-group message-group mb25">
                         <div class="message-wrap clearfix">
                             <div class="message fl">
-                                <input maxlength="6" type="text" name="phoneCode" id="js_regPhoneCode" class="phoneCode" placeholder="短信验证码">
+                                <input maxlength="6" type="text" name="phoneCode" id="js_regPhoneCode" class="phoneCode js_myPlaceholder" placeholder="短信验证码">
                             </div>
                             <button id="js_smsCode" type="button" class="smscode no-click fr" disabled="disabled">获取短信验证码</button>
                         </div>
@@ -107,6 +106,11 @@
 	</footer><!--end #footer -->
 {literal}
 	<script>
+        $(function () {
+            // 模拟
+            GLOBAL.otherGlobal.myPlaceholder.init($(".js_myPlaceholder"));
+        });
+        
 		$LAB.script("jquery.validate.min.js")
 			.wait()
 			.script("login.min.js?2015081301")
@@ -169,11 +173,10 @@
 							        minlength: '密码长度必须大于6个字符'
 							    }
 							},
-						   
-							errorPlacement:function(error,element){
-							    element.parent().find("label.checked").remove();
-							    error.appendTo(element.parent());
-						    },
+                            errorPlacement:function(error,element){
+                                element.parent().find("label.error").remove();
+                                error.appendTo(element.closest(".input-wrap"));
+                            },
                             submitHandler:function(form){
 
                                 var phone = $("#js_loginPhone").val(),
@@ -187,7 +190,7 @@
                                     url: '/m-users-a-act_sign.htm',
                                     type: 'POST',
                                     dataType: 'json',
-                                    data: {phone:phone, password:password, agree_userterm:agree_userterm, verifycode:verifycode, ref:ref},
+                                    data: {phone:phone, password:password, agree_userterm:agree_userterm, verifycode:verifycode, ref:ref}
                                 })
                                 .done(function(data) {
                                     var status = data.status,
@@ -278,10 +281,9 @@
                                     required: '您未阅读并接受五洲会海购服务条款'
                                 }
                             },
-
                             errorPlacement:function(error,element){
-                                element.parent().find("label.checked").remove();
-                                error.appendTo(element.parent());
+                                element.parent().find("label.error").remove();
+                                error.appendTo(element.closest(".input-wrap"));
                             },
                             success: function(label) {
                                 label.remove();

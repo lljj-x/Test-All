@@ -18,7 +18,7 @@
 			        <div style="clear:both; margin:10 auto;">
 			                <ul class="slideList clearfix">
 			                {foreach from=$banner_list item=v}
-			                        <li><a href="{$v.url}"><img src="{$v.pic_url}" alt="" height="100"></a></li>
+			                        <li><a href="{$v.url}"><img src="{$v.pic_url}" height="100"></a></li>
 			                    {/foreach}
 			                </ul>
 			        </div>
@@ -41,7 +41,7 @@
                                 <span class="color-increase">手机购买更便宜</span>
                             </span>
                         <div class="qr-code-drop drop-box none">
-                            <img src="../dist/images/domeimg/qr_code_app.jpg?2015082701" alt=""> App首单减5元
+                            <img src="../dist/images/domeimg/qr_code_app.jpg?2015082701"> App首单减5元
                             <i class="triangle-right"><i class="triangle-right"></i></i>
                         </div>
                     </div>
@@ -52,20 +52,21 @@
                     <ul class="order-shipping">
 
                         {* 这里加判断 如果不是一个快递显示 下面三个 li，否则显示第四个 li *}
+                        {if $shippingnum==1}
                         <li>
                             <span class="prompt">发货方式：</span>快递
                         </li>
                         <li>
-                            <span class="prompt">物流公司：</span>{if $order.shipping_method eq ''}未发货{else}{$order.shipping_method}{/if}
+                            <span class="prompt">物流公司：</span>{if $shipping[0].shipping_name eq ''}未发货{else}{$shipping[0].shipping_name}{/if}
                         </li>
                         <li>
-                            <span class="prompt">运单号码：</span>{if $order.Tracking_NO eq ''}未发货{else}{$order.Tracking_NO}
-                            <a href="javascript:void(0);" target="" class="view-shipping js-view-shipping" data-order-sn="{$order.order_sn}">查看物流</a>
+                            <span class="prompt">运单号码：</span>{if $shipping[0].shipping_no eq ''}未发货{else}{$shipping[0].shipping_no}
+                            <a href="javascript:void(0);" target="" class="view-shipping js-view-shipping" data-shipping-name="{$shipping[0].shipping_name}" data-shipping-no="{$shipping[0].shipping_no}">查看物流</a>
                             {/if}
                         </li>
-						{if $shippingnum>1}
+						{elseif $shippingnum>1}
                         <li>
-                            <p class="msg-box"><span class="color-increase">温馨提示：</span><span>尊敬的客户，由于您的商品在不同库房，所以您的订单将被拆分为多个包裹分开配送，给您带来的不便尽请谅解。</span></p>
+                            <p class="msg-box"><span class="color-increase">温馨提示：</span><span>尊敬的客户，由于您的商品在不同库房，所以您的订单将被拆分为{$shippingnum}个包裹分开配送，给您带来的不便尽请谅解。</span></p>
                         </li>
                         {/if}
                     </ul>
@@ -150,9 +151,9 @@
                                                 <td class="bold">{$goods.subtotal}</td>
                                                 {* 物流信息，rowspan 的值等于你当前订单中 该快递的 商品数量*}
                                                 {if $k==0}
-	                                                {if $shippingnum==0}
-	                                                <td rowspan="{$goods_list|@count}" class="bl"><a href="javascript:void(0);" target="" class="color-increase js-view-shipping" data-order-sn="{$order.order_sn}">查看物流</a></td>
-	                                                {elseif $shippingnum==1}
+	                                                {if $shippingnum==1}
+	                                                <td rowspan="{$goods_list|@count}" class="bl"><a href="javascript:void(0);" target="" class="color-increase js-view-shipping" data-shipping-name="{$shipping[0].shipping_name}"  data-shipping-no="{$shipping[0].shipping_no}">查看物流</a></td>
+	                                                {elseif $shippingnum>1}
 	                                                <td rowspan="{$goods_list|@count}" class="bl"><a href="javascript:void(0);" target="" class="color-increase js-view-shipping" data-shipping-name="{$order.shipping_way.shipping_name}" data-shipping-no="{$order.shipping_way.shipping_no}">查看物流</a></td>
 	                                                {/if}
                                                 {/if}
@@ -207,7 +208,8 @@
                                             <tr>
                                                 <td class="prompt">
                                                     优惠券省{$order.promotion_code_youhuilv}<br/>
-                                                    佣金省{$order.user_cash}
+                                                    佣金省{$order.user_cash}<br/>
+                                                    礼品卡省{$order.gift_money}元<br/>
                                                 </td>
                                                 <!--<td class="prompt">-->
                                                     <!--{$order.tariff}<br/>-->

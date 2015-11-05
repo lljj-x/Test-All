@@ -106,7 +106,7 @@ window.ADDRESSFORM = function(jQaddressForm,callBack){
             that.init();
         });
     return this;
-}
+};
 ADDRESSFORM.prototype = {
     init : function () {
         this.validate();        // 表单验证
@@ -127,7 +127,7 @@ ADDRESSFORM.prototype = {
         })
     },
     selectValidate : function () {
-        $parent = $(".js_select_address");
+        var $parent = $(".js_select_address");
         $parent.find(".form-error").removeClass("form-error");
         $parent.find('p.error').remove();
         var isError = true;
@@ -136,7 +136,7 @@ ADDRESSFORM.prototype = {
             var $this = $(this);
             if($this.is(":visible") && (this.value == "default" )) {    // 傻缺 ie9
                 $this.addClass("form-error");
-                $this.parent().parent().append('<p class="error"><label class="form-error" style="display: inline;">请选择</label></p>');
+                $this.parent().parent().append('<p class="error"><span class="span-form-label">&nbsp;</span><label class="form-error" style="display: inline;">请选择</label></p>');
                 isError = false;
                 return false;
             }
@@ -175,7 +175,7 @@ ADDRESSFORM.prototype = {
         //}, "电话号码格式错误");
 
         $.validator.setDefaults({
-            debug: true,
+            debug: false,
             success: "valid",
             ignore: ".item-select"
         });
@@ -191,8 +191,9 @@ ADDRESSFORM.prototype = {
                 num:"areacode telephone ext"
             },
             errorPlacement: function(error, element) {
-                // element.parent().parent().find(".error").remove();
-                error.appendTo( element.parent().parent());
+                element.parent().parent().find(".error").remove();
+                error.prepend('<span class="span-form-label">&nbsp;</span>');
+                error.addClass("error").appendTo(element.closest(".js_formRow"));
             },
             rules:{
                 //province:{
@@ -300,7 +301,7 @@ ADDRESSFORM.prototype = {
         var $isDefault = $isDefaultInput.siblings(".icon_checkbox");
         ($isDefaultInput[0].checked) ? $isDefault.addClass("selected") : $isDefault.removeClass("selected");
 
-        $parent = $(".js_select_address");
+        var $parent = $(".js_select_address");
         $parent.find(".form-error").removeClass("form-error");
         $parent.find('p.error').remove();
         $parent.find(".nselect_wrap").not(":first").hide();
@@ -324,3 +325,8 @@ ADDRESSFORM.prototype = {
      }
      */
 };
+
+$(function () {
+    // 模拟
+    GLOBAL.otherGlobal.myPlaceholder.init($(".js_myPlaceholder"),31);
+});

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {include file='top.htm'}
-    <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css">
+    <link rel="stylesheet" href="/temp/skin1/dist/mincss/user_min.css?2015100701">
 </head>
 <body>
 <header id="header">
@@ -18,7 +18,10 @@
                     <span class="bline"></span>
                     <ul class="user-action-menu-list clearfix">
                         <li>
-                            <a href="" class="current">帐户信息</a>
+                            <a href="m-users-a-profile.htm" class="current">帐户信息</a>
+                        </li>
+                        <li>
+                            <a href="/m-users-a-setpaypwd.html">账户安全</a>
                         </li>
                     </ul>
                 </div>
@@ -87,7 +90,8 @@
                                
                             </span>
                         </p>
-                        <p class="label-right mt30">
+                        <p class="mt30">
+                            <span class="form-label">&nbsp;</span>
                             <a class="btn btn-default js_submit" href="#">保存</a>
                         </p>
                     </form>
@@ -106,7 +110,7 @@
 </footer><!--end #footer -->
 {literal}
 <script>
-    $LAB.script("user.min.js")
+    $LAB.script("user.min.js?2015100701")
         .wait(function () {
             USER.profile.profileForm($("#user-profile-form"));
         });

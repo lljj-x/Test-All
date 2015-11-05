@@ -1,60 +1,58 @@
 <meta charset="UTF-8">
-
+<meta name="renderer" content="webkit">
 <link rel="shortcut icon" href="/favicon.ico">
 
-<meta name="renderer" content="webkit">
+<!--商品品牌页-->
+{if $cmodel == 'search'}
+<title>{$keyword|cat:" 五洲会海购 "}</title>
+<meta name="keywords" content="{$keyword|cat:",五洲会海购 "}" />
+<meta name="description" content="五洲会,官方认证,正品保证,进口商品海外购物商城。轻松购遍海外进口母婴,进口保健,进口美妆等,100%原装进口,海外直采,保税发货,国内售后,网购海外商品有保障。海淘购物首选,五洲会"/>
 
+<!--商品品牌页-->
+{elseif isset($brandInfo)}
+<title>{$brandInfo.seo_title|default:$brandInfo.brand_name}</title>
+<meta name="keywords" content="{$brandInfo.seo_keywords|default:$brandInfo.brand_name}" />
+<meta name="description" content="{$brandInfo.seo_description|default:$brandInfo.description}"/>
 
-{if $brandInfo.seo_title neq ''}
-<!--品牌-->
-<title>{$brandInfo.seo_title}</title>
-<meta name="keywords" content="{$brandInfo.seo_keywords}" />
-<meta name="description" content="{$brandInfo.seo_description}"/>
-
-
-{elseif $goods.seo_title neq ''}
 <!--商品详情页 -->
-<title>{$goods.seo_title}</title>
-<meta name="keywords" content="{$goods.keywords}" />
-<meta name="description" content="{$goods.seller_note}"/>
+{elseif isset($goods)}
+<title>{$goods.seo_title|default:$goods.goods_title}</title>
+<meta name="keywords" content="{$goods.keywords|default:$goods.goods_title}" />
+<meta name="description" content="{if $goods.seller_note != '' } {$goods.seller_note} {else} {$goods.goods_title} {$goods.maidian } {/if}"/>
 
+<!--商品分类页 b -->
+{elseif isset($catInfo)}
+<title>{$catInfo.seo_title|default:$catInfo.cat_name}</title>
+<meta name="keywords" content="{$catInfo.keywords|default:$catInfo.cat_name}" />
+<meta name="description" content="{$catInfo.description|default:$catInfo.cat_name}"/>
 
-{elseif $catInfo.seo_title neq ''}
-<!--商品分类页 -->
-<title>{$catInfo.seo_title}</title>
-<meta name="keywords" content="{$catInfo.keywords}" />
-<meta name="description" content="{$catInfo.description}"/>
-
-
-{elseif $baby_seo_title eq 1}
 <!--母婴专区 -->
+{elseif $baby_seo_title eq 1}
 <title>母婴专区,婴幼儿奶粉,大牌奶粉,进口奶粉,纸尿裤,母婴食品,母婴用品,五洲会</title>
 <meta name="keywords" content="母婴用品,进口奶粉,纸尿裤,宝宝辅食,奶瓶,花王,贝亲,尿不湿,五洲会海购" />
 <meta name="description" content="五洲会母婴专区，海外直邮婴幼儿奶粉，纸尿裤，母婴食品，母婴用品，主营品牌包括爱他美、喜宝、牛栏、美素、佳贝艾特、美赞臣、雅培、德运、纽康特、林贝尔等，100%海外直采"/>
 
-
-
-{elseif $sea_seo_title eq 1}
 <!--海外直邮 -->
+{elseif $sea_seo_title eq 1}
 <title>海外直邮,海外代购,海外购,包税进口,跨境购，五洲会</title>
 <meta name="keywords" content="海外直邮,海外代购,进口化妆品,跨境购,跨境购平台,五洲会" />
 <meta name="description" content="五洲会海外直邮专场,全球购,海外仓直邮，免关税，五洲会海购"/>
 
-{elseif isset($special_seo_title) && $special_seo_title}
 <!-- 专题 -->
-<title>{$special_seo_title}</title>
-<meta name="keywords" content="{$special_seo_keyword}" />
-<meta name="description" content="{$special_seo_desc}"/>
-{else}
+{elseif isset($special_seo_title)}
+<title>{$special_seo_title|default:"五洲会,进口商品购物商城,环球易购旗下海淘平台,100%海外直采,海购首选"}</title>
+<meta name="keywords" content="{$special_seo_keyword|default:'海淘,海购,代购,进口商品,海外代购,跨境网购,环球易购,五洲会全球购'}" />
+<meta name="description" content="{$special_seo_desc|default:'五洲会,官方认证,正品保证,进口商品海外购物商城。轻松购遍海外进口母婴,进口保健,进口美妆等,100%原装进口,海外直采,保税发货,国内售后,网购海外商品有保障。海淘购物首选,五洲会'}"/>
+
 <!-- 其他 -->
+{else}
 <title>五洲会,进口商品购物商城,环球易购旗下海淘平台,100%海外直采,海购首选</title>
 <meta name="keywords" content="海淘,海购,代购,进口商品,海外代购,跨境网购,环球易购,五洲会全球购" />
 <meta name="description" content="五洲会,官方认证,正品保证,进口商品海外购物商城。轻松购遍海外进口母婴,进口保健,进口美妆等,100%原装进口,海外直采,保税发货,国内售后,网购海外商品有保障。海淘购物首选,五洲会"/>
 {/if}
 
 <link rel="stylesheet" href="{$imgcache_url}mincss/base_min.css">
-<link rel="stylesheet" href="{$imgcache_url}mincss/common_min.css?2015091801">
-
+<link rel="stylesheet" href="{$imgcache_url}mincss/common_min.css?2015103102">
 <script type="text/javascript">
 	var COOKIESDIAMON = '{$COOKIESDIAMON}';
 	var DOMAIN = '{$DOMAIN}';
@@ -78,5 +76,4 @@
 		}
 	}
 </script>
-
 {/literal}
