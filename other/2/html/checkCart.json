@@ -1,0 +1,153 @@
+{
+    "status": 0,
+    "msg": "\u66f4\u65b0\u6210\u529f",
+    "data": {
+        "cart_list": [
+            {
+                "color": "",
+                "size": "",
+                "like": 0,
+                "goods_type": "0",
+                "cart_id": "12715",
+                "sub_total": "140.00",
+                "goods_id": "7",
+                "url": "http:\/\/www.wzhouhui.egocdn.com\/product7.html",
+                "img": "http:\/\/img.wzhouhui.com\/wzhl\/2015\/201508\/thumb-img\/1438385684651-thumb-P-2576034.jpg",
+                "is_presale": 0,
+                "market_price": "190.00",
+                "goods_price": "140.00",
+                "goods_num": "1",
+                "title": "\u3010\u4fdd\u7a0e\u3011\u8377\u5170\u725b\u680fNutrilon \u5a74\u5e7c\u513f\u5976\u7c891\u6bb5 0-6\u4e2a\u6708 \u539f\u88c5\u6b63\u54c1",
+                "cart_goods_des": "",
+                "country": "NL",
+                "shipping_address": "\u8377\u5170\u76f4\u4f9b\u4fdd\u7a0e\u533a\u53d1\u8d27",
+                "is_checkout": "1",
+                "weight": "0.850"
+            },
+            {
+                "color": "",
+                "size": "",
+                "like": 0,
+                "goods_type": "0",
+                "cart_id": "12507",
+                "sub_total": "322.00",
+                "goods_id": "373",
+                "url": "http:\/\/www.wzhouhui.egocdn.com\/product373.html",
+                "img": "http:\/\/img.wzhouhui.com\/wzhl\/2015\/201508\/thumb-img\/1439139970505-thumb-P-2889869.jpg",
+                "is_presale": 0,
+                "market_price": "203.00",
+                "goods_price": "161.00",
+                "goods_num": "2",
+                "title": "\u3010\u4fdd\u7a0e\u3011\u6c64\u666e\u68eemilk thistle \u5976\u84df\u8349\u7cbe\u534e 60\u7c92\/\u74f6",
+                "cart_goods_des": "",
+                "country": "NZL",
+                "shipping_address": "\u65b0\u897f\u5170\u76f4\u4f9b\u4fdd\u7a0e\u533a\u53d1\u8d27",
+                "is_checkout": "0",
+                "weight": "0.300"
+            },
+            {
+                "color": "",
+                "size": "",
+                "like": 0,
+                "goods_type": "0",
+                "cart_id": "12320",
+                "sub_total": "700.00",
+                "goods_id": "586",
+                "url": "http:\/\/www.wzhouhui.egocdn.com\/product586.html",
+                "img": "http:\/\/img.wzhouhui.com\/wzhl\/2015\/201508\/thumb-img\/1439958087875-thumb-P-2981438.jpg",
+                "is_presale": 0,
+                "market_price": "700.00",
+                "goods_price": "700.00",
+                "goods_num": "1",
+                "title": "\u3010\u4fdd\u7a0e\u3011\u6fb3\u6d32lucas pawpaw\u6728\u74dc\u4e07\u7528\u818f 25g*3",
+                "cart_goods_des": "",
+                "country": "AU",
+                "shipping_address": "\u6fb3\u6d32\u76f4\u4f9b\u4fdd\u7a0e\u533a\u53d1\u8d27",
+                "is_checkout": "0",
+                "weight": "0.250"
+            },
+            {
+                "color": "",
+                "size": "",
+                "like": 0,
+                "goods_type": "0",
+                "cart_id": "12138",
+                "sub_total": "765.00",
+                "goods_id": "491",
+                "url": "http:\/\/www.wzhouhui.egocdn.com\/product491.html",
+                "img": "http:\/\/img.wzhouhui.com\/wzhl\/2015\/201507\/thumb-img\/1438211675687-thumb-P-2890487.jpg",
+                "is_presale": 0,
+                "market_price": "335.00",
+                "goods_price": "255.00",
+                "goods_num": "3",
+                "title": "\u3010\u76f4\u90ae\u3011THERMOS\u81b3\u9b54\u5e08 \u771f\u7a7a\u4fdd\u6e29\u676f\u58f6\u8f66\u8f7d\u6c34\u676f\u4e00\u952e\u5f00\u542f JNL-500  \u6df1\u7d2b\u8272",
+                "cart_goods_des": "",
+                "country": "DE",
+                "shipping_address": "\u5fb7\u56fd\u76f4\u4f9b",
+                "is_checkout": "0",
+                "weight": "0.260"
+            },
+            {
+                "color": "",
+                "size": "",
+                "like": 0,
+                "goods_type": "0",
+                "cart_id": "12136",
+                "sub_total": "225.00",
+                "goods_id": "535",
+                "url": "http:\/\/www.wzhouhui.egocdn.com\/product535.html",
+                "img": "http:\/\/img.wzhouhui.com\/wzhl\/2015\/201508\/thumb-img\/1438554807649-thumb-P-2907144.jpg",
+                "is_presale": 0,
+                "market_price": "99.00",
+                "goods_price": "75.00",
+                "goods_num": "3",
+                "title": "\u3010\u76f4\u90ae\u3011\u5b9d\u6d01COSMO \u6db2\u4f53\u7eaf\u68c9\u65e5\u7528\u536b\u751f\u5dfe 27cm  10\u7247",
+                "cart_goods_des": "",
+                "country": "JP",
+                "shipping_address": "\u4fdd\u7a0e\u4ed3\u53d1\u8d27",
+                "is_checkout": "0",
+                "weight": "0.300"
+            }
+        ],
+        "total": {
+            "total_price": "130.00",
+            "order_amount": "130.00",
+            "goods_total": "130.00",
+            "total_save": "10.00",
+            "tariff": "0.00",
+            "cartNum": 1,
+            "shipping": "0.00"
+        },
+        "direct_mail": 0,
+
+        "cart_num": "10",
+        "check_num": "1",
+
+        "commission_money": 0,
+        "commission_over": 199,
+
+        "tel": "18814466522",
+
+        "isUseCoupon": 1,
+
+        "coupon_list": [
+            {
+                "code": "55f13121a6961",
+                "msg": "\u76f4\u51cf10.00",
+                "is_use": 1
+            }
+        ],
+        "coupon_money": "10",
+        "coupon": {
+            "code": "55f13121a6961",
+            "msg": "\u76f4\u51cf10.00",
+            "status": 1
+        },
+
+        "is_set_payment_pass" : 1,
+        "is_use_gift_card" : "0",
+        "gift_money": "10",
+        "gift_card_list": [
+        ]
+    }
+}

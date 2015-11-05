@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file="top.htm"}
+	<link rel="stylesheet" href="{$imgcache_url}mincss/other_min.css?2015103001">
+</head>
+<body>
+    <header id="header">
+        {include file="public_top.htm"}
+    </header>
+    <!--网站地图 begin-->
+    <div class="pt20 pb40 bc sitemap_container">
+        <h2 class="sitemap_title">网站地图</h2>
+        <div class="sitemap_wrap clearfix">
+            <!--左侧内容 begin-->
+            <div class="fl sitemap_cont">
+                <!--分类开始-->                                               
+               {foreach from=$menuArr key=key item=menu}
+               {if $menu._child}
+                <!--母婴专区 begin-->
+                <h3 class="pt30 pb10">{$menu.name}</h3>
+                <div class="brand_wrap">
+                    {foreach from=$menu._child key=k1 item=son}
+                    {if $son._child}
+                    <dl>
+                        <dt>
+                            <a target="_blank"  title="{$son.name}">{$son.name}</a>
+                        </dt>
+                        <dd>|</dd>
+                        <dd class="brandList">
+                            {foreach from=$son._child key=k2 item=grandson}
+                            <a target="_blank" href="{if $grandson.url}{$grandson.url} {else} /s/?category=0&keyword={$grandson.name}{/if}" title="{$grandson.name}">{$grandson.name}</a>
+                            {/foreach}
+                        </dd>
+                    </dl>
+                    {/if}
+                   {/foreach}
+                </div>
+                <!--母婴专区 end-->
+                {/if}
+              {/foreach}
+              <!--分类结束-->  
+
+                <!--招商合作 begin-->
+                <h3 class="pt30 pb10 h3_coopera">招商合作</h3>
+                <div class="brand_wrap onlybrand">
+                    <dl>
+                        <dt>
+                            <a target="_blank" href="http://www.wzhouhui.com/business/2/" title="Cooperative Project">Cooperative Project</a>
+                        </dt>
+                        <dd>|</dd>
+                        <dt>
+                            <a target="_blank" href="http://www.wzhouhui.com/business/1/" title="招商合作">招商合作</a>
+                        </dt>
+                    </dl>
+                </div>
+                <!--招商合作 end-->
+            </div>
+            <!--左侧内容 end-->
+
+            <!--右侧内容 begin-->
+            <div class="fr mt30 sitemap_recom">
+                <h3>精品推荐</h3>
+                {foreach from=$special_list key=key item=special}
+                <!--for 单个ad begin-->
+                <a target="_blank" href="{$special.url}" title="{$special.name}">
+                    <img width="164" height="74" src="{$special.pic_url}" alt="{$special.name}" />
+                    <strong>{$special.name}</strong>
+                </a>
+                <!--for 单个ad begin-->
+                {/foreach}
+                
+            </div>
+            <!--右侧内容 end-->
+        </div>
+    </div>
+    <footer id="footer">
+        {include file="foot.htm"}
+    </footer>
+</body>
+</html>

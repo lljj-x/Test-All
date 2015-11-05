@@ -1,0 +1,108 @@
+<!--品友统计代码部分 start -->
+{if $cmodel neq 'goods'}
+{literal}    
+<script type="text/javascript">
+var _py = _py || [];
+_py.push(['a', 'M2s..UH-EBCNBvkP7cLTMVJsyiX']);
+_py.push(['domain','stats.ipinyou.com']);
+_py.push(['e','']);
+-function(d) {
+	var s = d.createElement('script'),
+	e = d.body.getElementsByTagName('script')[0]; e.parentNode.insertBefore(s, e),
+	f = 'https:' == location.protocol;
+	s.src = (f ? 'https' : 'http') + '://'+(f?'fm.ipinyou.com':'fm.p0y.cn')+'/j/adv.js';
+}(document);
+</script>
+<noscript>
+<img src="//stats.ipinyou.com/adv.gif?a=M2s..UH-EBCNBvkP7cLTMVJsyiX&e=" style="display:none;"/>
+</noscript>
+{/literal}
+{/if}
+
+{if $cmodel eq 'goods'}
+<script type = "text/javascript"> 
+var goods_id = "{$goods.goods_id}";
+var category = "{$goods.all_category}";
+var is_on_sale = "{$goods.is_on_sale}";
+var cat_id = "{$goods.cat_id}";
+var title = "{$goods.goods_title}";
+var shop_price = "{$goods.shop_price}";
+var goods_thumb = "{$goods.goods_thumb}";
+var product_url = window.location.href;
+var Domain = "{$DOMAIN}";
+var market_price = "{$goods.market_price}";
+var zhekou = "{$goods.zhekou}";
+var Brand =  "{$goods.brand}";
+var all_category = "{$goods.all_category}";
+
+{literal}
+if(is_on_sale==0){
+    is_on_sale=1;
+}
+if(is_on_sale==1){
+    is_on_sale=0;
+}
+
+var _goodsData ={
+id: goods_id, 
+soldOut: is_on_sale, // 状态 1下架，0在售
+category:all_category, // 所属分类完整路径 （必填）
+categoryId:cat_id, // 所属分类ID （必填）
+name: title, // 商品名称（必填）
+price:shop_price, // 商品售价（必填）
+imgUrl:goods_thumb, // 商品预览图 （必填）
+productUrl:product_url, // 商品URL地址 （必填）
+domain:Domain, // 分站（如有分站必填）
+brand:Brand, // 商品品牌(选填)
+//promotion:'热卖', // 促销信息 (选填)
+discount:zhekou, // 折扣数字(选填)
+origPrice:market_price // 商品原价(选填)
+};
+var _py = _py || [];
+_py.push(['a', 'M2s..UH-EBCNBvkP7cLTMVJsyiX']);
+_py.push(['domain','stats.ipinyou.com']);
+_py.push(['pi',_goodsData]);
+_py.push(['e','']);
+-function(d) {
+var s = d.createElement('script'),
+e = d.body.getElementsByTagName('script')[0]; e.parentNode.insertBefore(s, e),
+f = 'https:' == location.protocol;
+s.src = (f ? 'https' : 'http') + '://'+(f?'fm.ipinyou.com':'fm.p0y.cn')+'/j/adv.js';
+}(document);
+{/literal} 
+</script>
+<noscript><img src="//stats.ipinyou.com/adv.gif?a=M2s..UH-EBCNBvkP7cLTMVJsyiX&e=" style="display:none;"/></noscript>
+{/if}
+
+{if $cmodel eq 'flow' && $caction eq 'payment'}
+<script>
+var _orderno='{$order_detail.order_sn}';
+var _money='{$order_detail.yuan_goods_amount}';   
+//var goodsList = '{$order_detail.goods_list}';
+var _productList='';
+{foreach from=$order_detail.goods_list item=goods}
+_productList += "{$goods.goods_id},{$goods.goods_number};"
+{/foreach}
+    
+{literal}    
+!function(w,d,e){
+var b=location.href,c=d.referrer,f,s,g=d.cookie,h=g.match(/(^|;)\s*ipycookie=([^;]*)/),i=g.match(/(^|;)\s*ipysession=([^;]*)/);if (w.parent!=w){f=b;b=c;c=f;};u='//stats.ipinyou.com/cvt?a='+e('M2s.pzs.iB3KnoWR8LQp4JglWppI_P')+'&c='+e(h?h[2]:'')+'&s='+e(i?i[2].match(/jump\%3D(\d+)/)[1]:'')+'&u='+e(b)+'&r='+e(c)+'&rd='+(new Date()).getTime()+'&OrderNo='+e(_orderno)+'&Money='+e(_money)+'&ProductList='+e(_productList)+'&e=';
+function _(){if(!d.body){setTimeout(_(),100);}else{s= d.createElement('script');s.src = u;d.body.insertBefore(s,d.body.firstChild);}}_();
+}(window,document,encodeURIComponent);
+{/literal}
+</script>
+{/if}
+
+{if $cmodel eq 'users' && $caction eq 'reg_msg'}
+<script>
+var tel = "{$smarty.session.tel}";    
+{literal}        
+!function(w,d,e){
+var _orderno= tel;  //替换此处!;
+var b=location.href,c=d.referrer,f,s,g=d.cookie,h=g.match(/(^|;)\s*ipycookie=([^;]*)/),i=g.match(/(^|;)\s*ipysession=([^;]*)/);if (w.parent!=w){f=b;b=c;c=f;};u='//stats.ipinyou.com/cvt?a='+e('M2s.izs.X9V5L8BOfD-2f1B0UXBON_')+'&c='+e(h?h[2]:'')+'&s='+e(i?i[2].match(/jump\%3D(\d+)/)[1]:'')+'&u='+e(b)+'&r='+e(c)+'&rd='+(new Date()).getTime()+'&OrderNo='+e(_orderno)+'&e=';
+function _(){if(!d.body){setTimeout(_(),100);}else{s= d.createElement('script');s.src = u;d.body.insertBefore(s,d.body.firstChild);}}_();
+}(window,document,encodeURIComponent);
+{/literal}
+</script>
+{/if}
+<!--品友统计代码部分 end -->

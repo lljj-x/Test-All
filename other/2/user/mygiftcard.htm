@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/user_min.css?2015101001">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-gitf-card" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="user-index-wrap clearfix">
+            <div class="user-conent-warp fr">
+                <div class="user-action-menu-warp clearfix">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list fl clearfix">
+                        <li>
+                            <a href="javascript:;" class="current">我的礼品卡</a>
+                        </li>
+                    </ul>
+                    <a href="/m-users-a-setpaypwd.html" class="fr pay-pass-btn">支付密码管理 ></a>
+                </div>
+
+                <div class="gift-msg mt50 msg-box">
+                    <p class="color-increase clearfix">
+                        <span class="fl"><i class="user-icon icon-gift-card"></i><span class="inline-block vt">我有新的礼品卡</span></span>
+                        <span class="fr"><a href="javascript:;" class="btn btn-default js_bindGiftCard">立即激活</a></span>
+                    </p>
+                </div>
+
+                <div class="gift-card-list">
+                    <ul class="card-list">
+                        {foreach from=$giftcard item=gift}
+                        <li class="js_parent clearfix">
+                            <div class="box clearfix">
+                                <span class="fl"><i class="user-icon icon-card"></i><span class="inline-block vt">{$gift.card_no}</span></span>
+                                <span class="fl fs16" style="width:100px">余额：{$gift.balance_amount}</span>
+                                <span class="fl fs16">有效期至：{$gift.exp_time}</span>
+                                <span class="fr"><a href="javascript:;" class="js_giftCardUseList a-btn">礼品卡使用记录 <span class="icon-tri">></span></a></span>
+                            </div>
+                            <table class="table gift-card-table gift-card-used-list none js_giftCardList">
+                                <tbody>
+                                
+                                {foreach from=$gift.record item=gi}
+                                <tr>
+                                    <td>{$gi.add_time}</td>
+                                    <td>{if $gi.status==1}支付：{$gi.amount}{else if $gi.status==2}退款：{$gi.amount}{/if}</td>
+                                    <td>余额：{$gi.balance_amount}</td>
+                                </tr>
+                                {/foreach}
+                                {if isset($gift.record)}
+                                <tr>
+                                    <td>{$gift.add_time}</td>
+                                    <td>激活成功</td>
+                                    <td>余额：{$gift.amount}</td>
+                                </tr>
+                                {/if}
+                                </tbody>
+                            </table>
+                        </li>
+                        {/foreach}
+						{*
+                        <li class="js_parent clearfix">
+                            <div class="box clearfix">
+                                <span class="fl"><i class="user-icon icon-card"></i><span class="inline-block vt">188******660</span></span>
+                                <span class="fr"><a href="javascript:;" class="js_giftCardUseList a-btn">礼品卡使用记录 <span class="icon-tri">></span></a></span>
+                            </div>
+                            <table class="gift-card-used-list none js_giftCardList table gift-card-table">
+                                <tbody>
+                                <tr>
+                                    <td>2015--10-2 14:20:56</td>
+                                    <td>支付：30.5</td>
+                                    <td>余额：29.5</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+
+                        <li class="js_parent clearfix">
+                            <div class="box clearfix">
+                                <span class="fl"><i class="user-icon icon-card"></i><span class="inline-block vt">188******660</span></span>
+                                <span class="fr"><a href="javascript:;" class="js_giftCardUseList a-btn">礼品卡使用记录 <span class="icon-tri">></span></a></span>
+                            </div>
+                            <table class="table gift-card-table gift-card-used-list ">
+                                <tbody>
+                                <tr>
+                                    <td>2015--10-2 14:20:56</td>
+                                    <td>支付：30.5</td>
+                                    <td>余额：29.5</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </li>
+						*}
+                    </ul>
+
+                </div>
+
+            </div>
+            {include file="user/user_left.htm"}
+
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $(function () {
+        $(".js_giftCardUseList").on("click", function () {
+            var $this = $(this),
+                $parent = $this.closest(".js_parent");
+
+            if($this.hasClass("on")){
+                // hide
+                $this.removeClass("on");
+                $parent.find(".js_giftCardList").hide();
+            }else{
+                $this.addClass("on");
+                $parent.find(".js_giftCardList").show();
+                $parent.siblings()
+                        .find(".js_giftCardUseList").removeClass("on")
+                        .end()
+                        .find(".js_giftCardList").hide();
+
+            }
+
+        })
+    });
+    
+    $LAB.script("user.min.js")
+        .script("giftCardPop.min.js").wait(function () {
+            $(".js_bindGiftCard").on("click", function () {
+                var cardPop = new GiftCardForm(function(layerIndex){
+                    USER.userAjax.getAjaxPromise({
+                        //  这里改成你的 接口 地址
+                        url : '/m-users-a-bindgiftcard.html',
+//                        url : '/temp/skin1/html/checkCart.json',
+                        data : this.serialize()
+                    })
+                    .fail(function(){
+                        layer.alert("绑定礼品卡失败，点击确定重试",function(){
+                            //USER.otherGlobal.windowReload();
+                        });
+                    })
+                    .done(function (result) {
+                        if(result.status == 0){
+                            USER.otherGlobal.windowReload();
+                        }
+                    })
+                    .always(function(){
+                        layer.close(layerIndex);
+                    });
+                });
+                cardPop.open();
+            });
+        })
+</script>
+{/literal}
+</body>
+</html>

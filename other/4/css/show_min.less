@@ -1,0 +1,171 @@
+/*引入公共变量*/
+@import (less) 'publice.less';
+
+#myShowImg{background-color: #fbfbfb; padding-left: 1%; padding-right: 1%; padding-bottom: 20px;
+	header{ padding: 20px 0;}
+	.changeData{ border: @bord_d; border-radius: 4px; overflow: hidden; box-shadow: 0 0 5px @colord;
+		a{ padding: 0 15px; border-left: @bord_d; margin-left: -1px; background-color:  @colorf; text-decoration: none; font-size: 0.75em; color: @color6; line-height: 30px;
+			&:hover{ background-color: #f7f7f7;} 
+		}
+		.on{ color: @colorRed; background-color: #f7f7f7;}
+	}
+}
+#myShowList{ position: relative; margin-left: auto; margin-right: auto; min-height: 400px; display: none;
+	.myshow_b{left: 0; right: 0; width: 235px; margin:0 10px 20px; overflow: hidden; background-color: @colorf; border:@bord_d; box-shadow: 0 1px 3px @colord; display: inline; float: left;
+		-webkit-transition: all .3s ease-in-out;
+		-moz-transition: all .3s ease-in-out;
+		-ms-transition: all .3s ease-in-out;
+		-o-transition: all .3s ease-in-out;
+		transition: all .3s ease-in-out;
+		&:hover{ opacity: 0.8;
+			.myshow_heart{
+				img{ display: block;}
+			}
+		}
+	}
+	.myshow_img{ font-size: 0;}
+	.myshow_heart{ height: 30px; position: relative; text-align: center; padding-top: 5px;
+		img{ position: absolute; top: -15px; left: 10px; display: none;}
+		a{ color: @color6; line-height: 18px; text-decoration: none; font-size: 14px;
+			i{ display: inline-block; zoom:1; width: 16px; height: 16px; margin-right: 5px; background-position: -48px -168px; vertical-align: -3px;}
+			&:hover{color: @colorRed;
+				i{background-position: -72px -168px;}
+			}
+			&.addToCollectCur{color: @colorRed;
+				i{background-position: -48px -192px;}
+			}
+		}
+
+	}
+}
+
+#infscr-loading { display: none; text-align: center;z-index: 100; position: fixed;left: 45%;bottom: 40px;width: 200px;padding: 10px;background: #000;opacity: 0.8;color: #FFF;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;_position: absolute;}
+
+/* show detail page */
+.show_detail{ background-color: #fbfbfb;}
+.show_dMain{width: 710px; float: right;}
+.show_sader{ width: 270px; float: left;}
+.show_d_img,.show_d_info,.r_box{ border: @bord_d; background-color: @colorf; box-shadow: 0 1px 3px @colord;}
+
+/* 右边 */
+.show_d_img,.show_d_info{ padding: 20px;}
+.show_d_img{
+	header{ height: 20px; line-height: 20px; padding-bottom: 20px;
+		.collectBox {font-size: 0.75em;}
+		a{ color: @color6; line-height: 18px; text-decoration: none;
+			i{ display: inline-block; zoom:1; width: 16px; height: 16px; margin-right: 5px; background-position: -48px -168px; vertical-align: -3px;}
+			&:hover{color: @colorRed;
+				i{background-position: -72px -168px;}
+			}
+			&.addToCollectCur{color: @colorRed;
+				i{background-position: -48px -192px;}
+			}
+		}
+		.addthis_toolbox { width: 138px; margin:1px 0 0 20px;}
+		.path{ padding: 0;}
+	}
+	.detailBox_warp{ background-color:@color3;  position: relative; overflow: hidden;width: 670px; height: 670px; 
+		table{ border: 0; border-spacing: 0; border-collapse: 0;}
+	}
+	.loading{background: url(../images/domeimg/6RMhx.gif) no-repeat center center;}
+	.detail_Box{overflow: hidden; width: 670px; height: 670px;  text-align: center; vertical-align: middle;
+		img{ max-width: 670px; max-height: 670px;}
+	}
+	.detail_thumb{position: absolute; bottom: 0; left: 0; width: 100%; height: 154px;
+		.bg{position: absolute; width: 100%; height: 100%; background: #000; opacity: 0.5; filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);}
+		ul{ position: absolute; width: 100%; height: 100%;}
+		li{ display: inline; float: left; margin: 12px 0 0 15px; padding: 4px;
+			a{ display: block; width: 80px; height: 120px; overflow: hidden;}
+			&:hover{background-color: #C2C2C2;}
+			&.on{ background-color: #C2C2C2;}
+		}
+	}
+
+	.detail_animate{ bottom:-154px;
+		-webkit-transition: bottom .3s .3s ease-in-out;
+		-moz-transition: bottom .3s .3s ease-in-out;
+		-ms-transition: bottom .3s .3s ease-in-out;
+		-o-transition: bottom .3s .3s ease-in-out;
+		transition: bottom .3s .3s ease-in-out;
+	}
+
+	&:hover{
+		.detail_animate{ bottom:0;
+		-webkit-transition: bottom .3s ease-in-out;
+		-moz-transition: bottom .3s ease-in-out;
+		-ms-transition: bottom .3s ease-in-out;
+		-o-transition: bottom .3s ase-in-out;
+		transition: bottom .5s  ease-in-out;
+	}
+	}
+}
+
+.show_d_info { font-family: @font_fA;
+	.inner{ padding-left: 70px; min-height: 70px;}
+	img{ display: inline; float: left; margin-left: -70px;}
+	.time{ font-size: 14px; color: @color9;}
+	.text{ padding-top: 10px; font-family:'Palatino Linotype', 'Book Antiqua', Palatino, serif; color: @color6; font-size: 24px;
+		&:after{ content:'"'; margin-left: 5px;}
+		&:before{ content:'"'; margin-right: 5px;}
+	}
+	.gPop_userInfo{width: 100%; overflow: hidden; font-size: 12px;
+		span{padding-left:5px; margin-right: 5px; margin-left: -5px; border-left: @bord_d;}
+		strong{font-weight: bold; padding-right: 3px;}
+	}
+	.gPop_userInfoB{color: @color9;}
+
+}
+
+/* 左边 */
+.r_box{ margin-bottom: 20px;
+	h4{ line-height: 40px; background-color: #f9f9f9; padding: 0 10px; font-size: 14px; font-weight: bold; color: @colorRed;}
+	.r_text{ padding: 0 15px;}
+}
+.show_sader{
+	.proDesc{
+		.g_img{ height: 150px; width: 150px; margin: 0 auto; position: relative;}
+		.c_direction-nav {
+			a{ background-image: url(../images/styleimg/user.png); position: absolute; top: 75px; font-size: 0; display: block; width: 16px; height: 24px; 
+				&.c_next { background-position:-96px -120px; right: -40px;}
+				&.c_prev{background-position: -72px -120px; left: -40px;}
+			}
+
+		}
+
+		.slides{ height: 150px; overflow: hidden;
+			li{ display: inline; width: 150px; float: left;
+			    a{ display: block; text-align: center;}
+			  }
+		}
+		p,.pro_grade{font-size: 12px;}
+		.name{ line-height: 16px; overflow: hidden; height: 32px;}
+		.price{ padding-top: 10px;  font-size: 16px;}
+		.redBtn span{ font-size: 14px; font-weight: normal; line-height: 30px; padding: 0 15px;}
+		a{ color: @color6;}
+	}
+	.custPhotoList{
+		.r_text{ padding-right: 0;}
+		.custPhoto{ max-height: 346px; overflow-y: scroll; padding-bottom: 5px;}
+		.mCSB_container{ margin-right:18px;}
+		ul{ padding-top: 5px;}
+		li{ width: 76px; height: 113px; float: left; margin: 1px;}
+		.cus_info{ padding: 10px 10px 10px 0;line-height: 20px; font-size: 12px;}
+	}
+	
+
+	.revieList{
+		.r_text{ padding-right: 0;}
+		.r_revieBox{ max-height: 250px; overflow-y: scroll;}
+		ul{ padding-top: 5px; }
+		li{ padding:5px 0  10px 0; font-size: 12px; border-bottom: 1px solid #ddd;}
+		.mCSB_container{ margin-right:18px;}
+		.name{ padding-bottom: 5px; color: @color9;
+			strong{font-weight: bold; color: @color6;}
+		}
+		.more{ line-height:30px; text-align: center; font-size:12px;
+			a{ color: @color6;
+				&:hover{ color: @colorRed; text-decoration: none;}
+			}
+		}
+	}
+}

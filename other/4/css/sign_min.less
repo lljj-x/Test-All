@@ -1,0 +1,134 @@
+/*引入公共变量*/
+@import (less) 'publice.less';
+
+html,body{ display: block; width: 100%; height: 100%;}
+
+#signBox{ overflow: hidden; height:100%; width: 100%; background-color: #eee;}
+#header{background-color:@colorf;}
+.sign_log{ height:40px; padding: 20px 0; text-align: center; }
+#imgbg{ overflow: hidden; width: 100%; height: 100%;}
+
+/*内容区域*/
+.loginBox{ position: absolute; left: 50%; top: 50%; margin:-254px 0 0 -430px; width: 860px; min-height: 480px; background-color: @colorf; overflow: hidden; border-radius: 0 30px;
+	header{ padding: 20px 0; text-align: center; border-bottom: @bord_d;}
+	footer{ height: 30px; padding: 14px 30px; border-top: 1px solid @colorf; background-color: #f6f6f6; 
+		.f_copyrit{ line-height: 30px;}
+	}
+}
+
+/* paypal 和 facebook 登录*/
+.loginWithPaypal,.loginWithFb{ display: inline-block;*display: inline; zoom:1; vertical-align: middle; margin-top: 3px; margin-top: 15px;}
+.loginWithPaypal{ width: 185px; height: 32px; }
+.loginWithFb{  line-height: 40px; font-size: 14px; text-shadow:0 -1px 1px #263154; 
+	b{ display: block; float: left; margin: 1px 0; width: 30px; line-height: 40px; margin-right: 10px; box-shadow: 1px 0 #BDCBEC; border-right: 1px solid #3c5a99;  font: bold 22px/40px arial;  text-align: center;}
+	a{display: block; float: left; color: #fff; line-height: 40px; padding:0 12px 0 5px; background-color: #3c5a98; background-position:5px 7px; color: #fff; border-radius:3px; text-decoration: none; zoom:1;
+		-webkit-transition: background-color 0.5s ease-in-out;
+		-moz-transition: background-color 0.5s ease-in-out;
+		-ms-transition: background-color 0.5s ease-in-out;
+		-o-transition: background-color 0.5s ease-in-out;
+		transition: background-color 0.5s ease-in-out;
+		&:hover{background-color: #1a4398; }
+	}
+}
+//谷歌+
+#loginGoogle { display: inline-block; margin-left: 30px; padding-left: 10px; width: 200px; height: 40px; line-height: 40px; background: #fc6d4c;color: white;border-radius: 5px; *dispaly:inline; *zoom:1;}
+#loginGoogle:hover {background: #cc3732; cursor: pointer;}
+span.buttonText { display: block;vertical-align: middle;padding-left: 30px; font-size: 0.875em; background-image: url(../images/styleimg/login.png); background-repeat: no-repeat; background-position: 0 -190px;
+	b{float: left; border-right: 1px solid #fff;}
+}
+
+/* 有效内容区 */
+.s_valid{ overflow: hidden; border-bottom: @bord_d;
+	.operalBox{display: inline; float: left; margin-left: -1px; padding-left:30px; padding-right: 30px; width:370px;  min-height:327px; font-family: @font_fA; 
+		.msg_error { line-height: 18px; font-size: 0.75em; color: @colorRed; padding-bottom: 10px;}
+	}
+	.operalBoxL{ border-right:@bord_d;}
+	.operalBoxR{ border-left: @bord_d;}
+}
+.operalBoxL{ padding-bottom: 15px;
+	.email,.password{background-image: url(../images/styleimg/sign.gif); background-repeat: no-repeat;}
+
+	h3{font-size: 24px;text-align: center; padding: 30px 0 0; line-height: 30px; }
+	.ipt_t{ padding-bottom:10px; margin: 0 40px;
+		input{ padding: 10px 10px 10px 40px; line-height: 18px; height: 18px; width: 238px; border: @bord_d;}
+	}
+	.ipt_b{text-align: center;
+		button{ font-family: @font_fA; font-size: 18px; 
+			span{ padding:0 40px; line-height: 30px; font-weight: normal;}
+			&.dataUp{
+				i{display: inline-block; *zoom:1; width: 16px; height: 16px; vertical-align: -1px; *vertical-align: middle; margin-right: 5px; background: url(../images/styleimg/signloading.gif) no-repeat center center; }
+				
+			}
+		}
+	}
+	.forgetPas{ text-align: center; padding-top: 10px;
+		a{font-size: 0.75em; line-height: 30px; color: @color6;}
+	}
+	label.error{ display: block; clear: both; line-height: 20px; font-size: 0.75em;}
+	.email{background-position: 5px 7px;}
+	.password{background-position: 5px -41px;}
+	.agrrementWarp{ font-size: 0.75em; text-align: center; padding-top: 10px;
+		a{ color: @color6;}
+	}
+}
+.operalBoxR{
+	h3{font-size: 24px;text-align: center; padding: 90px 0 20px; line-height: 30px;}
+	.tips{font-size: 0.75em; text-align: center; padding-bottom: 10px;}
+	.gotoBtn{text-align: center;
+		a{ font-family: @font_fA; font-size: 18px; 
+			span{ padding:0 40px; line-height: 30px; font-weight: normal;}
+		}
+	}
+}
+
+/*找回密码*/
+.resetPs{ padding: 10px 40px 0; height: 420px; font-family: @font_fA; text-align: center;
+	.email,.password{background-image: url(../images/styleimg/sign.gif); background-repeat: no-repeat;}
+	
+	form{ width: 290px; text-align: left; margin: 0 auto;}
+	.ipt_t{ padding-bottom:10px; width: 100%;
+		input{ padding: 10px 10px 10px 40px; line-height: 18px; height: 18px; width: 238px; border: @bord_d;}
+		.codeInput{ width: 177px; padding: 10px;}
+		.code_img{ width: 80px; height: 40px; margin-left: 10px;}
+		img{ width: 80px; height: 40px;}
+
+	}
+	.ipt_b{text-align: center;
+		button{ font-family: @font_fA; font-size: 18px; 
+			span{ padding:0 40px; line-height: 30px; font-weight: normal;}
+		}
+	}
+
+	
+
+	
+
+	label.error{ display: block; clear: both; line-height: 20px; font-size: 0.75em;}
+	.email{background-position: 5px 7px;}
+	.password{background-position: 5px -41px;}
+}
+
+.resetPsFor{
+	h3{ font-size: 1.5em; padding-top: 20px;}
+	.topTips{ font-size: 0.75em; padding: 10px 0 30px; color:@color9;}
+	.footTips{ padding-top: 30px; font-size: 14px; color: @color9;
+		a{ color: @colorRed;}
+	}
+}
+
+.resetPsTips{
+	h3{ font-size: 1.5em; padding-top: 40px; padding-bottom: 30px; border-bottom: @bord_d;}
+	.topTips{ width: 70%; margin: 0 auto; padding-top: 30px;  padding-bottom: 10px; font-size: 16px; text-align: left; color: @color9;}
+	.find_inner_box{ width: 50%; margin: 0 auto; padding-top:20px; text-align: left;  font-size: 14px; 
+		a{ color: @colorRed; text-decoration: underline;}
+	}
+}
+
+//Facebook 弹出框
+.fbEMail{ padding: 8px 15px 0;  display: none;
+	h4{ padding-bottom: 20px; padding-right: 20px; font-size: 14px; font-weight: bold; }
+	.fbmsg_error{font-weight: bold; font-size: 12px; color: #DA3439;}
+	.ipt_t{ margin: 0 auto;
+		input{width:318px;}
+	}
+}

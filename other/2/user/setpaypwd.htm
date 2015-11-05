@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    <link rel="stylesheet" href="{$imgcache_url}mincss/user_min.css?2015100701">
+</head>
+<body>
+<header id="header">
+    {include file='user_global_top.htm'}
+</header>
+
+<div class="wrap pb40">
+    <div id="user-payment-pass" class="hf">
+        {include file='user/user_breadcrumbs.htm'}
+        <div class="user-index-wrap clearfix">
+            <div class="user-conent-warp fr">
+                <div class="user-action-menu-warp">
+                    <span class="bline"></span>
+                    <ul class="user-action-menu-list clearfix">
+                        <li>
+                            <a href="m-users-a-profile.htm" >帐户信息</a>
+                        </li>
+                        <li>
+                            <a href="/m-users-a-setpaypwd.html" class="current">账户安全</a>
+                        </li>
+                    </ul>
+                </div>
+				{if empty($bind_user)}
+                <div class="msg-box payment-msg">
+                    <p class="clearfix">
+                        <span class="fl"><i class="user-icon icon-msg-warning"></i><span class="inline-block vt"><span class="fs18">支付密码：</span><span>启用支付密码后，在使用礼品卡支付时，需通过支付密码进行身份认证。</span></span></span>
+                        <span class="fr"><a href="javascript:;" class="btn btn-default js_showForm">立即启用</a></span>
+                    </p>
+                </div>
+                {else}
+                <div class="msg-box payment-msg">
+                    <p class="clearfix">
+                        <span class="fl"><i class="user-icon icon-msg-success"></i><span class="inline-block vt"><span class="fs18">支付密码：</span><span>互联网账号存在被盗风险，建议您定期更改密码以保护账户安全。</span></span></span>
+                        <span class="fr"><a href="javascript:;" class="btn btn-default js_showForm">修改</a></span>
+                    </p>
+                </div>
+				{/if}
+                <div class="form-warp">
+                    <form action="/m-users-a-modifygiftcard.html" id="user-card-form" class="user-global-form none" method="post">
+                        <label>
+                            <span class="form-label">手机号码：</span>
+                            <span>
+                                <input class="js_phoneNum" type="tel" name="phone" value="{$phone}" maxlength="11" disabled placeholder="请输入手机号"/>
+                            </span>
+                        </label>
+
+                        <label class="js_codeLabel">
+                            <span class="form-label">验证码：</span>
+                            <span>
+                                <input type="text" autocomplete="off" name="security_code" maxlength="4" value="" placeholder="请输入验证码" class="security-code js_securityCode"/>
+                                <span class="js_refresh refresh inline-block vem">
+                                    <span class="code-warp">
+                                        <img id="img-verifycode" data-src="/fun/?act=verify" src="/fun/?act=verify">
+                                    </span>
+                                </span>
+                            </span>
+                        </label>
+
+                        <label>
+                            <span class="form-label">短信验证码：</span>
+                            <span>
+                                <input class="phone-code" autocomplete="off" type="text" name="phone_code" value="" placeholder="请输入短信验证码"/>
+                                <a class="js_getPhoneCode btn btn-default disabled get-code-btn">获取短信验证码</a>
+                            </span>
+                        </label>
+
+                        <label>
+                            <span class="form-label">支付密码：</span>
+                            <span>
+                                <input id="js_password" autocomplete="off" onkeyup="GLOBAL.otherGlobal.inputToUpperCase(this)" type="password" name="password" value="" maxlength="6" placeholder="请输入6位支付密码"/>
+                            </span>
+                        </label>
+
+                        <label>
+                            <span class="form-label">确认支付密码：</span>
+                            <span>
+                                <input type="password" autocomplete="off" name="password_confirm" onkeyup="GLOBAL.otherGlobal.inputToUpperCase(this)" value="" maxlength="6" placeholder="确认支付密码"/>
+                            </span>
+                        </label>
+
+                        <p class="mt20">
+                            <span class="form-label">&nbsp;</span>
+                            <a class="btn btn-default js_submit" href="#">保存</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            {include file="user/user_left.htm"}
+
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+{literal}
+<script>
+    $LAB.script("user.min.js?2015100701")
+        .wait(function () {
+            USER.profile.paymentForm($("#user-card-form"));
+        });
+</script>
+{/literal}
+</body>
+</html>

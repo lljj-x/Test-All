@@ -1,0 +1,56 @@
+{
+  "status": 0,
+  "msg": "我是错误提示哈哈哈哈哈哈",
+  "data": {
+    "address_list": [
+      {
+        "address_id" : "4",
+        "username": "柳俊",
+        "province" :"湖北省",
+        "city" :"襄阳市",
+        "district":"襄州区",
+        "addressline":"这里是我详细地址地址地址",
+        "tel" :"18014466522",
+        "idnumber" :"420621199111086245",
+        "is_default_address" : "1",
+        "is_current_address" : "1"
+      },
+      {
+        "address_id" : "3",
+        "username": "柳俊",
+        "province" :"湖北省",
+        "city" :"襄阳市",
+        "district":"襄州区",
+        "addressline":"这里是我详细地址地址地址",
+        "tel" :"11814466522",
+        "idnumber" :"420621199111086245",
+        "is_default_address" : "0",
+        "is_current_address" : "0"
+      },
+      {
+        "address_id" : "2",
+        "username": "俊柳",
+        "province" :"湖北省",
+        "city" :"襄阳市",
+        "district":"襄州区",
+        "addressline":"这里是我详细地址地址地址",
+        "tel" :"19814466522",
+        "idnumber" :"420621199111086245",
+        "is_default_address" : "0",
+        "is_current_address" : "0"
+      },
+      {
+        "address_id" : "1",
+        "username": "柳俊",
+        "province" :"湖北省",
+        "city" :"襄阳市",
+        "district":"襄州区",
+        "addressline":"这里是我详细地址地址地址",
+        "tel" :"18014466522",
+        "idnumber" :"420621199111086245",
+        "is_default_address" : "0",
+        "is_current_address" : "0"
+      }
+    ]
+  }
+}

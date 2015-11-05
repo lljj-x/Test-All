@@ -1,0 +1,638 @@
+{* 页面地址 http://www.wzhouhui.egocdn.com/sales.html?a=d11&s=13 *}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='top.htm'}
+    {literal}
+    <style>
+        .animated {-webkit-animation-duration: 1s; animation-duration: 1s; -webkit-animation-fill-mode: both; animation-fill-mode: both;}
+        .animated.infinite {-webkit-animation-iteration-count: infinite; animation-iteration-count: infinite;}
+        .animated.hinge {-webkit-animation-duration: 2s; animation-duration: 2s;}
+
+        @-webkit-keyframes lightSpeedIn {
+            0% {-webkit-transform: translate3d(100%,0,0) skewX(-30deg); transform: translate3d(100%,0,0) skewX(-30deg); opacity: 0;}
+
+            60% {-webkit-transform: skewX(20deg); transform: skewX(20deg); opacity: 1;}
+
+            80% {-webkit-transform: skewX(-5deg); transform: skewX(-5deg); opacity: 1;}
+
+            100% {-webkit-transform: none; transform: none; opacity: 1;}
+        }
+
+        @keyframes lightSpeedIn {
+            0% {-webkit-transform: translate3d(100%,0,0) skewX(-30deg); transform: translate3d(100%,0,0) skewX(-30deg); opacity: 0;}
+
+            60% {-webkit-transform: skewX(20deg); transform: skewX(20deg); opacity: 1;}
+
+            80% {-webkit-transform: skewX(-5deg); transform: skewX(-5deg); opacity: 1;}
+
+            100% {-webkit-transform: none; transform: none; opacity: 1;}
+        }
+
+        .lightSpeedIn {-webkit-animation-name: lightSpeedIn; animation-name: lightSpeedIn; -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out;}
+
+
+        @-webkit-keyframes slideInUp {
+            0% {-webkit-transform: translate3d(0,100%,0); transform: translate3d(0,100%,0); visibility: visible; opacity: 0;}
+
+            100% {-webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); opacity: 1;}
+        }
+
+        @keyframes slideInUp {
+            0% {-webkit-transform: translate3d(0,100%,0); transform: translate3d(0,100%,0); visibility: visible; opacity: 0;}
+
+            100% {-webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); opacity: 1;}
+        }
+
+        .slideInUp {-webkit-animation-name: slideInUp; animation-name: slideInUp;}
+
+        @-webkit-keyframes wave {
+            0% {-webkit-transform: scale(0, 0); transform: scale(0, 0); opacity: 1;}
+
+            100% {-webkit-transform: scale(1.5, 1.5); transform: scale(1.5, 1.5); opacity: 0;}
+        }
+
+        @keyframes wave {
+            0% {-webkit-transform: scale(0, 0); transform: scale(0, 0); opacity: 1;}
+
+            100% {-webkit-transform: scale(1.5, 1.5); transform: scale(1.5, 1.5); opacity: 0;}
+        }
+
+        .wave {-webkit-animation-name: wave; animation-name: wave;}
+
+
+        .animated.animate-one {-webkit-animation-delay: 0; animation-delay: 0;}
+        .animated.animate-two {-webkit-animation-delay: .2s; animation-delay: .2s;}
+        .animated.animate-three {-webkit-animation-delay: .5s; animation-delay: .5s;}
+
+        .d11 {min-width: 1200px; font-family: "微软雅黑",tahoma,arial,"Hiragino Sans GB","WenQuanYi Micro Hei","宋体",sans-serif; line-height: 1;}
+
+        .d11 .hover-up {-webkit-transition: transform .4s; transition: transform .4s;}
+        .d11 .hover-up:hover {-webkit-transform: translateY(-5px); -moz-transform: translateY(-5px); transform: translateY(-5px);}
+
+        /* banner */
+        .d11-banner {position: relative; height: 990px; background: #ff2662 url({/literal}{$imgcache_url}{literal}images/promotion/d11/banner.jpg) top center no-repeat; overflow: hidden;}
+        .d11-banner:after {display: block; position: absolute; left: 0; right: 0; bottom: 0; content: ""; margin-top: 990px; height: 22px; background: #ff2662 url({/literal}{$imgcache_url}{literal}images/promotion/d11/bannerbt.gif) repeat-x;}
+        .d11-coupon {position: absolute; top: 600px; left: 50%; margin-left: -516px; padding-top: 60px; width: 1032px; height: 292px; background: url({/literal}{$imgcache_url}{literal}images/promotion/d11/couponbg.jpg) no-repeat;}
+        .d11-coupon:hover {background-image: url({/literal}{$imgcache_url}{literal}images/promotion/d11/couponbghover.gif);}
+        .d11-coupon-hd {font-size: 14px; color: #fff; text-align: center;}
+        .d11-coupon-hd > h3 {font-weight: bold; font-size: 38px;}
+        .d11-coupon-hd > h3 > span {display: inline-block; margin-left: 15px; width: 114px; height: 38px; line-height: 38px; font-size: 14px; background-color: #ff2662; border-radius: 38px; vertical-align: middle; cursor: pointer;}
+        .d11-coupon-hd > h4 {margin-top: 15px;}
+        .d11-coupon-hd > h4 > span {position: relative; padding: 0 5px; background-color: #b9002b;}
+        .d11-coupon-hd > h4:before {display: block; position: absolute; top: 7px; left: 50%; margin-left: -215px; content: ""; width: 434px; height: 1px; background-color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, .35);}
+        .d11-coupon-bd {margin: 0 auto; margin-top: 30px; width: 878px;}
+        .d11-coupon-bd > li {float: left; position: relative; margin-left: 22px; width: 222px; padding-right: 56px; padding-top: 10px; height: 110px; text-align: center; background: url({/literal}{$imgcache_url}{literal}images/promotion/d11/coupon.png) no-repeat; font-weight: bold; cursor: pointer;}
+        .d11-coupon-bd > li:first-child {margin-left: 0;}
+        .d11-coupon-cnt {font-size: 24px; color: #e9124e;}
+        .d11-coupon-cnt > strong {font-weight: bold; font-size: 66px;}
+        .d11-coupon-tips {margin-top: 10px; font-size: 18px; color: #541342;}
+        .d11-coupon-getit {position: absolute; top: 15px; right: 20px; width: 26px; font-size: 18px; line-height: 23px; color: #fff;}
+
+
+        /* 整点秒杀 */
+        .d11-flash {padding-top: 290px; height: 780px; background: #3e0065 url({/literal}{$imgcache_url}{literal}images/promotion/d11/flashbg.png) center 52px no-repeat;}
+        .d11-flash-bd {margin: 0 auto; margin-top: 25px; padding-bottom: 20px; width: 1000px; background-color: #752aa7;}
+        .d11-flash-time {padding: 35px 0; font-weight: bold; font-size: 30px; color: #fff;}
+        .d11-flash-time i {margin: 0 5px; padding: 5px; background-color: #fff; color: #3e0065; border-radius: 3px; font-style: normal; font-weight: bold; font-size: 36px;}
+        .d11-flash-item {float: left; position: relative; margin-left: 17.5px; padding: 0 15px; padding-top: 20px; width: 280px; height: 470px; background-color: #fff;}
+        .d11-flash-item:hover {box-shadow: 0 0 12px 1px #f6cdd4 inset}
+        .d11-flash-item > .d11-product-name {display: block; margin-top: 10px; height: 48px; line-height: 24px; font-weight: bold; font-size: 20px; color: #000; overflow: hidden; text-decoration: none;}
+        .d11-flash-item > .d11-flash-price {margin-top: 20px; font-weight: bold; font-size: 14px; color: #e61773;}
+        .d11-flash-item > .d11-flash-price > strong {font-weight: bold; font-size: 36px;}
+        .d11-flash-item > .d11-market-price {margin-top: 10px; font-size: 14px; color: #999999;}
+        .d11-flash-item > .d11-flash-status {position: absolute; bottom: 0; right: -2px; padding: 15px; width: 58px; line-height: 30px; font-weight: bold; font-size: 24px; background-color: #ff2662; color: #fff; text-decoration: none;}
+        .d11-flash-item > .d11-flash-tag {position: absolute; top: -5px; right: -5px; width: 113px; height: 112px; background: url({/literal}{$imgcache_url}{literal}images/promotion/d11/flashtag.png) no-repeat;}
+
+        .d11-flash-round.is-ended .d11-flash-price{color: #666;}
+        .d11-flash-round.is-ended .d11-flash-status{background-color: #999;}
+
+        .d11-flash-progress {margin: 0 auto; width: 1000px; padding-left: 20px; height: 90px; padding-top: 12px; background: url({/literal}{$imgcache_url}{literal}images/promotion/d11/progress.png) no-repeat;}
+        .d11-flash-progress > li {float: left; width: 67px; margin-left: 120px;}
+        .d11-round-start-time{font-weight: bold; font-size: 24px; color: #b353f3;}
+        .d11-round-status {display: inline-block; position: relative; margin-top: 10px; margin-bottom: 15px; margin-left: 24px; width: 17px; height: 17px; background-color: #fff; border-radius: 50%; cursor: pointer;}
+        .d11-round-status > b {display: block; position: absolute; content: ""; top: -4px; left: -4px; width: 25px; height: 25px; border-radius: 50%; background-color: #fff; opacity: .3;}
+        .d11-round-status-txt {position: relative; margin: 0 auto; width: 60px; height: 18px; font-size: 12px; font-weight: bold; line-height: 18px; background-color: #b353f3; color: #3e0065; border-radius: 3px; text-align: center;}
+        .d11-round-status-txt:before {display: block; position: absolute; top: -10px; left: 50%; content: ""; margin-left: -4px; border: solid 4px transparent; border-bottom: solid 6px #b353f3;}
+
+        .active > .d11-round-start-time {color: #fefe00;}
+        .active > .d11-round-status, .active > .d11-round-status-txt {background-color: #fefe00;}
+        .active > .d11-round-status-txt:before {border-bottom-color: #fefe00;}
+
+        /* 全球打牌火速购 */
+        .d11-brand {height: 798px; background: url({/literal}{$imgcache_url}{literal}images/promotion/d11/brandbg.jpg) center top no-repeat;}
+        .d11-brand header {padding: 60px 0; font-width: bold; color: #fff; text-align: center;}
+        .d11-brand h3 {font-size: 48px;}
+        .d11-brand h4 {margin-top: 15px; font-size: 18px;}
+        .d11-brand-bd {margin: 0 auto; width: 1000px; height: 495px; /*background: url({/literal}{$imgcache_url}{literal}images/promotion/d11/brand.png) no-repeat;*/}
+
+        /* 低价抢先购 */
+        .d11-promotion {padding-top: 160px; background: #e60e4b url({/literal}{$imgcache_url}{literal}images/promotion/d11/promotionbg.png) center  50px no-repeat;}
+        .d11-promotion-cat-wrap {margin: 0 auto; width: 1000px;}
+        .d11-promotion-cat {margin-left: -8px; margin-top: -8px; padding-bottom: 45px;}
+        .d11-promotion-cat > li {float: left; position: relative; width: 244px; height: 350px; margin-left: 8px; margin-top: 8px; background-color: #fff;}
+        .d11-promotion-cat > li:first-child {height: 708px;}
+        .d11-promotion-cat > li:first-child > a {position: absolute; top: 0; right: 0;}
+        .d11-promotion-cat .d11-product-img {display: block; padding: 0 17px;}
+        .d11-promotion-cat .d11-product-name {display: block; font-weight: bold; font-size: 14px; color: #333333; line-height: 20px; height: 40px; overflow: hidden; text-decoration: none; padding: 0 15px;}
+        .d11-promotion-cat .d11-promotion-price {margin-top: 10px; height: 23px; line-height: 23px; font-weight: bold; font-size: 20px; color: #e61773; padding: 0 15px; padding-top: 7px; border-top: 1px solid #e4dbfd;}
+        .d11-promotion-cat .d11-market-price {margin-top: 10px; font-size: 12px; color: #999; padding: 0 15px;}
+        .d11-promotion-cat .d11-save {margin-top: 5px; height: 32px; line-height: 32px; font-weight: bold; font-size: 18px; background-color: #764df7; color: #fff; text-align: center;}
+        .d11-promotion-cat .d11-line {display: block; position: absolute; top: 265px; left: 0; right: 0; height: 1px; background-color: #e4dbfd;}
+
+        .d11-promotion-cat .d11-cutoff {display: inline-block; margin-left: 10px; padding-left: 17px; width: 40px; height: 19px; line-height: 19px; font-size: 13px; color: #fff; background: url({/literal}{$imgcache_url}{literal}images/promotion/d11/cutoff.png) no-repeat;}
+        .d11-promotion-cat .d11-union-cutoff {display: inline-block; position: relative; margin-left: 10px; border: 1px dashed #e61773; padding: 0 5px; font-weight: bold; font-size: 12px; height: 17px; line-height: 17px;}
+        .d11-promotion-cat .d11-union-cutoff:before {content: ""; display: block; position: absolute; left: -1px; bottom: -1px; border: 4px solid transparent; border-left-color: #e61773; border-bottom-color: #e61773;}
+
+        /* 分会场 */
+        .d11-others {padding-top: 188px; background: #070132 url({/literal}{$imgcache_url}{literal}images/promotion/d11/othersbg.png) center 60px no-repeat;}
+        .d11-others-inner {margin: 0 auto; width: 1000px; padding-bottom: 90px;}
+        .d11-others-inner > ul {margin-top: -20px; margin-left: -20px;}
+        .d11-others-inner li {float: left; margin-top: 20px; margin-left: 20px;}
+        .d11-others-inner a {display: block; width: 490px; height: 200px;}
+
+
+        .d11-coupon-rules {padding-top: 10px; font-size: 14px;}
+        .d11-coupon-rules > p {margin-top: 18px; margin-left: 52px; line-height: 24px; text-indent: -22px; color: #2c2c2c;}
+        .d11-coupon-rules .copyright-wrap {margin-top: 45px; border-top: 1px solid #e4e4e4; padding-top: 15px; text-align: center;}
+        .d11-coupon-rules .copyright {padding-bottom: 20px; color: #000;}
+
+
+        /*左侧导航*/
+        .left-nav{position:absolute;height:100%;top:auto;z-index:10;left:0;width:120px;background:#000;}
+        .left-nav dt{padding-top:15px;padding-left:8px;margin-bottom:15px;}
+        .left-nav dd{padding:1px 5px;font-family:"simsun";}
+        .left-nav dd a{display:block;color:#fff;text-decoration:none;width:90px;height:30px;line-height:30px;padding:0 10px;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon.png") no-repeat 100px center;}
+        .left-nav dd a:hover,.left-nav dd a.current{color:#feda2a;background:#222423 url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/left_nav_icon_hover.png") no-repeat 100px center;}
+        /*侧边导航*/
+        .side-nav{width:145px;position:fixed;right:100px;top: 50px;left: 50%;margin-left: 520px;}
+        .side-nav-cover{width:145px;height:130px;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_cover.png") no-repeat center top;}
+        .side-nav-content{width:128px;float:right;background:#541342;}
+        .side-nav-content ul{padding:10px 0;}
+        .side-nav-content li{width:110px;margin:8px auto;}
+        .side-nav-content li a{display:block;height:32px;text-align:center;line-height:32px;background:#8035fb;color:#fff;text-decoration:none;font-size:14px;font-family:"simsun"}
+        .side-nav-content li a span{font-family:Arial;font-weight:bold;padding-right:5px;}
+        .side-nav-content li a:hover{background:#5b26b3;}
+        .side-nav-content li.active a{background:#5b26b3;}
+        .side-nav-contact a{width:128px;height:51px;float:right;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_service.png") no-repeat center top;}
+        .side-nav-top a{width:128px;height:56px;float:right;cursor:pointer;background:url("{/literal}{$imgcache_url}{literal}images/promotion/shangoujie/sidenav_top.png") no-repeat center top;}
+    </style>
+    {/literal}
+</head>
+<body>
+<header id="header">
+    {include file='public_top.htm'}
+</header>
+
+<div class="d11">
+    <section class="d11-banner">
+        <div class="d11-coupon">
+            <header class="d11-coupon-hd">
+                <h3>百万红包免费领取<span id="js_couponRules">红包说明</span></h3>
+                <h4 class="pr"><span>11月5日起，每天免费领取现金红包</span></h4>
+            </header>
+            <ul class="d11-coupon-bd clearfix" id="js_couponList">
+                <li data-pcode="726krurx">
+                    <p class="d11-coupon-cnt"><strong>10</strong><span>元红包</span></p>
+                    <p class="d11-coupon-tips">（无门槛）</p>
+                    <p class="d11-coupon-getit">立即领取</p>
+                </li>
+                <li data-pcode="46z49nzc">
+                    <p class="d11-coupon-cnt"><strong>50</strong><span>元红包</span></p>
+                    <p class="d11-coupon-tips">（满299元可用）</p>
+                    <p class="d11-coupon-getit">立即领取</p>
+                </li>
+                <li data-pcode="ys2klow7">
+                    <p class="d11-coupon-cnt"><strong>100</strong><span>元红包</span></p>
+                    <p class="d11-coupon-tips">（满499元可用）</p>
+                    <p class="d11-coupon-getit">立即领取</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="d11-flash">
+        <ul class="d11-flash-progress clearfix" id="js_progress">
+        	{foreach from = $limit_data key = k item = d}
+            <li data-id="js_round{$k+1}">
+                <p class="d11-round-start-time">{$d.name}</p>
+                <i class="d11-round-status"><b class="js_wave"></b></i>
+                <p class="d11-round-status-txt js_statusText">敬请期待</p>
+            </li>
+            {/foreach}
+        </ul>
+        <ul class="d11-flash-bd">
+        {foreach from = $limit_data key = k item = d}
+            <li class="d11-flash-round none" id="js_round{$k+1}">
+                <dl class="clearfix">
+                    <dt class="d11-flash-time tc js_timedown" data-start-time-left="{$d.start_time}" data-end-time-left="{$d.end_time}"><span class="js_timeText">距离本场开始还有：</span><span class="js_timeCnt"><i>00</i>天<i>00</i>时<i>00</i>分<i>00</i>秒</span></dt>
+                    {foreach from = $d.data key = k item = goods}
+                    <dd class="d11-flash-item">
+                        <a class="d11-product-img tc" href="{$goods.link_url}" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$goods.goods_img}" alt="{$goods.goods_title}" height="280"></a>
+                        <a class="d11-product-name" href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a>
+                        <p class="d11-flash-price">抢购价：￥<strong>{$goods.promote_price}</strong></p>
+                        <p class="d11-market-price">市场价：<del>￥{$goods.market_price}</del></p>
+                        <a class="d11-flash-status" href="{$goods.link_url}" target="_blank">敬&nbsp;请期&nbsp;待</a>
+                        <i class="d11-flash-tag"></i>
+                    </dd>
+                    {/foreach}
+                </dl>
+            </li>
+        {/foreach}
+        </ul>
+    </section>
+
+    <section class="d11-brand">
+        <header>
+            <h3 class="js_animate none" data-animate="animated lightSpeedIn animate-one">全球大牌火速购</h3>
+            <h4 class="js_animate none" data-animate="animated lightSpeedIn animate-two">牛栏、SNP、爱他美、花王、Comotomo…… 看这里哟！</h4>
+        </header>
+        <div class="js_animate d11-brand-bd none" data-animate="animated slideInUp animate-three">
+            <img usemap="#brand_map" src="{$imgcache_url}images/promotion/d11/brand.png" width:="1000" height="495">
+            <map name="brand_map">
+                <area shape="poly" coords="246,1,369,70,369,209,247,279,126,212,124,70" href="{$DOMAIN}/brand-20.html" target="_blank" alt="美国：低到美国人民都羡慕！" title="美国：低到美国人民都羡慕！">
+                <area shape="poly" coords="499,1,622,70,621,209,499,280,378,211,376,69" href="{$DOMAIN}/brand-7.html" target="_blank" alt="荷兰：挑战你的价格“底”线！" title="荷兰：挑战你的价格“底”线！">
+                <area shape="poly" coords="631,210,752,279,874,210,873,71,752,1,631,68" href="{$DOMAIN}/brand-41.html" target="_blank" alt="韩国：风靡韩国达人的尖货！" title="韩国：风靡韩国达人的尖货！">
+                <area shape="poly" coords="121,215,243,285,243,424,121,494,2,427,1,284" href="{$DOMAIN}/brand-5.html" target="_blank" alt="德国：价格低到不得不尖叫！" title="德国：价格低到不得不尖叫！">
+                <area shape="poly" coords="372,215,496,286,496,426,374,494,253,426,253,283" href="{$DOMAIN}/brand-46.html" target="_blank" alt="澳大利亚：爆款，您这得拥有！" title="澳大利亚：爆款，您这得拥有！">
+                <area shape="poly" coords="626,216,747,285,748,425,626,494,504,425,504,285" href="{$DOMAIN}/brand-18.html" target="_blank" alt="日本：前所未有的划算！" title="日本：前所未有的划算！">
+                <area shape="poly" coords="877,215,998,283,997,428,879,494,756,426,757,284" href="{$DOMAIN}/brand-29.html" target="_blank" alt="新西兰：劲爆，低到老妈都抢不到！" title="新西兰：劲爆，低到老妈都抢不到！">
+            </map>
+        </div>
+    </section>
+    <section class="d11-promotion">
+    {foreach from = $other key = k item = o}
+        <div class="d11-promotion-cat-wrap js_promotionCat" id="model_{$k+1}">
+            <ul class="d11-promotion-cat clearfix">
+                <li class="hover-up">
+                	{if $k == 0}
+                    <a href="{$DOMAIN}/m-promotion-active-7.html" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/promotion/d11/catebanner1.png" alt="" width="274" height="708"></a>
+                    {elseif $k==1}
+                    <a href="{$DOMAIN}/m-promotion-active-9.html" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/promotion/d11/catebanner2.png" alt="" width="334" height="708"></a>
+                    {elseif $k==2}
+                    <a href="{$DOMAIN}/m-promotion-active-10.html" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/promotion/d11/catebanner3.png" alt="" width="315" height="708"></a>
+                    {elseif $k==3}
+                    <a href="{$DOMAIN}/m-promotion-active-7.html#model_4" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/promotion/d11/catebanner4.png" alt="" width="282" height="708"></a>
+                    {else}
+                    <a href="{DOMAIN}/m-promotion-active-8.html" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/promotion/d11/catebanner5.png" alt="" width="312" height="708"></a>
+                    {/if}
+                </li>
+                {foreach from = $o.data key = k item = goods}
+                <li class="hover-up">
+                    <a class="d11-product-img tc" href="{$goods.link_url}" target="_blank"><img class="vm" src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$goods.goods_img}" alt="" height="210"></a>
+                    <a class="d11-product-name" href="{$goods.link_url}" target="_blank">{$goods.goods_title}</a>
+                    <p class="d11-promotion-price"><span class="vm">￥{$goods.shop_price}</span>{*<span class="d11-union-cutoff vm">折合单件￥156</span><span class="d11-cutoff vm">5.0 折</span>*} <span class="d11-cutoff vm">{$goods.zekou} 折</span></p>
+                    <p class="d11-market-price">国内参考价<del>￥{$goods.market_price}</del></p>
+                    <p class="d11-save">{if $goods.shop_price < 299}满299减50{else}满499减100{/if}</p>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    {/foreach}
+    </section>
+    <section class="d11-others">
+        <div class="d11-others-inner">
+            <ul class="clearfix">
+                <li><a href="{$DOMAIN}/m-promotion-active-7.html" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/promotion/d11/other1.jpg" width="490" alt="大牌母婴分会场" width="490" height="200"></a></li>
+                <li><a href="{$DOMAIN}/m-promotion-active-9.html" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/promotion/d11/other2.jpg" width="490" alt="美容护肤分会场" width="490" height="200"></a></li>
+                <li><a href="{$DOMAIN}/m-promotion-active-10.html" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/promotion/d11/other3.jpg" width="490" alt="健康保健分会场" width="490" height="200"></a></li>
+                <li><a href="{$DOMAIN}/m-promotion-active-8.html" target="_blank"><img src="{$imgcache_url}images/domeimg/lazyload1.gif" data-original="{$imgcache_url}images/promotion/d11/other4.jpg" width="490" alt="家居个护分会场" width="490" height="200"></a></li>
+            </ul>
+        </div>
+    </section>
+    <section class="left-nav">
+        <dl>
+            <dt><a href="{$DOMAIN}/sales.html?a=d11&s=13"><img src="{$imgcache_url}images/promotion/shangoujie/left_nav_logo.png" width="98" height="98"/></a></dt>
+            <dd><a href="{$DOMAIN}/sales.html?a=d11&s=13" target="_blank">闪购节主会场</a></dd>
+            <dd><a href="{$DOMAIN}/m-promotion-active-7.html" target="_blank">大牌母婴分会场</a></dd>
+            <dd><a href="{$DOMAIN}/m-promotion-active-9.html" target="_blank">美容护肤分会场</a></dd>
+            <dd><a href="{$DOMAIN}/m-promotion-active-10.html" target="_blank">健康营养分会场</a></dd>
+            <dd><a href="{$DOMAIN}/m-promotion-active-8.html" target="_blank">家居个护分会场</a></dd>
+            
+        </dl>
+    </section>
+    <section class="side-nav none" id="sortTopNav">
+        <p class="side-nav-cover"></p>
+        <div class="side-nav-content">
+            <ul>
+            {foreach from = $other key = k item = o}
+                <li><a href="javascript:;"><span>{$k+1}F</span>{$o.name}</a></li>
+            {/foreach}
+            </ul>
+        </div>
+        <p class="side-nav-contact"><a href="javascript:;" onclick="javascript:openChat('http://v2.live800.com/live800/chatClient/chatbox.jsp?companyID=531713&configID=124972&jid=7057418698&info=',900,600);"></a></p>
+        <p class="side-nav-top"><a href="#"></a></p>
+    </section>
+    <div id="js_couponRulesCtn" class="d11-coupon-rules none">
+        <p>1、同个账户每个面额红包可领取唯一1张；</p>
+        <p>2、领取的红包仅限11月5日-11月15日使用，逾期作废；</p>
+        <p>3、红包可用于购买五洲会任意产品，特价、抢购商品除外；</p>
+        <p>4、红包不得提现，不可转赠他人，一个红包不可多次拆分使用，必须一次性用完；</p>
+        <p>5、10元红包无门槛限制，50元红包购物满299元可使用，100元红包购物满499元可使用；</p>
+        <p>6、用户使用本次活动红包，若订单发生退款，则红包不再退回；</p>
+        <p>7、在获得红包的过程中，如果用户出现违规行为（如作弊领取、恶意套现等），五洲会有权取消其使用资 格，并保留法律追究权利；</p>
+        <p>8、同一登陆账号、同一手机号、同一支付账号、同一IP地址、同一收货地址、同一终端设备或其他合理显示为同一用户的情形，均视为同一用户；</p>
+        <div class="copyright-wrap">
+            <p class="copyright">本次活动最终解释权归“五洲会海购商城”所有。</p>
+            <a href="javascript:;" class="js_closePopBtn btn btn-default mt5">我知道了</a>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="footer-bgf3">
+    {include file='foot.htm'}
+</footer><!--end #footer -->
+
+{literal}
+<script>
+    (function(window, $) {
+        // 红包说明
+        $("#js_couponRules").on("click", function() {
+            layer.open({
+                type: 1,
+                shadeClose: false,
+                title: "红包说明",
+                shade: 0.7,
+                area: ['750px', "600px"],
+                content: $("#js_couponRulesCtn"),
+                success : function (layero, index) {
+                    var $btn = layero.find(".js_closePopBtn");
+                    $btn.off("click");
+                    $btn.on("click",function(){
+                        layer.close(index);
+                    });
+                }
+            });
+        });
+
+        // 领券
+        $("#js_couponList").on("click", "li", function() {
+            $.ajax({
+                url: DOMAIN + "/m-coupon-a-get.html",
+                type: "POST",
+                dataType: "json",
+                data: {pcode: $(this).data("pcode")}
+            }).done(function(data) {
+                var status = data.status;
+
+                //status：0表示成功，1表示失败，2表示未登录
+                if (status === 0) {
+                    layer.open({
+                        content: data.msg,
+                        btn: ["确定"]
+                    });
+                } else if (status === 1) {
+                    layer.open({
+                        content: data.msg == "兑换失败,该兑换码已兑换" ? "领取失败，您已领取过该红包 " : data.msg,
+                        btn: ["确定"]
+                    })
+                }else{
+                    window.location.href = "/m-users-a-sign.html?ref=" + window.location.href;
+                }
+            });
+        });
+
+        // 火速购动画
+        var $win = $(window),
+            winHeight = $win.height(),
+            $brand = $(".d11-brand"),
+            brandTop = $brand.offset().top;
+
+        function showBrandAnimate() {
+            var scrollTop = $win.scrollTop();
+            if(scrollTop + winHeight - brandTop > 200) {
+                $win.off("scroll", showBrandAnimate);
+                $brand.find(".js_animate").each(function(i, v) {
+                    var $this = $(this);
+                    $this.addClass($this.data("animate")).show();
+                });
+            }
+        }
+
+        $win.on("scroll", showBrandAnimate);
+
+
+        // 秒杀tab
+        $("#js_progress").on("click", ".d11-round-status", function() {
+            $("#" + $(this).parent().data("id")).show().siblings().hide();
+        });
+
+        // 秒杀倒计时
+        // cfg: {startTimeLeft: xxx, endTimeLeft: xxx, timeEl: xxx, tabHeadEl: xxx, tabBodyEl: xxx}
+        function Tick(cfg) {
+            this.cfg = cfg || {};
+        }
+
+        Tick.prototype.start = function() {
+            if (this.isStarted()) {
+                if (this.isEnded()) {
+                    this.end();
+                } else {
+                    this.started();
+                }
+            } else {
+                this.beforeStart();
+            }
+        }
+
+        Tick.prototype.tick = function (endCallback) {
+            var timeObj = GLOBAL.otherGlobal.getTimeWithDay(this.leftTime),
+                self = this;
+
+            if (timeObj) {
+                //console.log("tick...");
+                //console.log(timeObj);
+                this.cfg.timeEl.children(".js_timeCnt").html("<i>" +
+                    timeObj.days + "</i>天<i>" +
+                    timeObj.hours + "</i>时<i>" +
+                    timeObj.minutes + "</i>分<i>" +
+                    timeObj.seconds + "</i>秒"
+                );
+                this.leftTime = this.leftTime - 1;
+                setTimeout(function() {
+                    self.tick(endCallback);
+                }, 1000);
+            } else {
+                $.isFunction(endCallback) && endCallback.call(this);
+            }
+        }
+
+        Tick.prototype.isStarted = function() {
+            return this.cfg.startTimeLeft <= 0;
+        }
+
+        Tick.prototype.isEnded = function() {
+            return this.cfg.endTimeLeft <= 0;
+        }
+
+        Tick.prototype.beforeStart = function() {
+            //console.log(this.cfg.tabBodyEl.prop("id") + "beforeStart");
+            this.leftTime = this.cfg.startTimeLeft;
+            this.tick(this.started);
+        }
+
+        Tick.prototype.started = function() {
+            //console.log(this.cfg.tabBodyEl.prop("id") + "started");
+            this.cfg.tabHeadEl.addClass("active")
+                .siblings().removeClass("active")
+                .end()
+                .children(".js_statusText").text("正在疯抢");
+
+            this.cfg.tabBodyEl.find(".d11-flash-status").html("立&nbsp;即抢&nbsp;购");
+            this.cfg.timeEl.children(".js_timeText").text("距离本场结束还有：");
+            this.leftTime = this.isStarted() ? this.cfg.endTimeLeft : this.cfg.endTimeLeft - this.cfg.startTimeLeft;
+            this.tick(this.end);
+        }
+
+        Tick.prototype.end = function() {
+            //console.log(this.cfg.tabBodyEl.prop("id") + "end");
+            var $tabHeadNext = this.cfg.tabHeadEl.next(),
+                $tabBodyNext = this.cfg.tabBodyEl.next();
+
+            this.cfg.tabHeadEl.removeClass("active").children(".js_statusText").text("已结束");
+            this.cfg.timeEl.children(".js_timeText").text("距离本场结束还有：");
+            this.cfg.timeEl.children(".js_timeCnt").html("<i>00</i>天<i>00</i>时<i>00</i>分<i>00</i>秒");
+            this.cfg.tabBodyEl.addClass("is-ended").find(".d11-flash-status").html("已&nbsp;经结&nbsp;束");
+
+            if ($tabHeadNext.length > 0 && $tabBodyNext.length > 0) {
+                this.active(this.cfg.tabHeadEl.next(), this.cfg.tabBodyEl.next());
+            } else {
+                $(".d11-flash").slideUp(function() {
+                    // 这两行代码纯属无奈
+                    brandTop = $brand.offset().top;
+                    $win.trigger("scroll");
+                });
+            }
+        }
+
+        Tick.prototype.active = function($headEl, $bodyEl) {
+            // 头部
+            $headEl.parent().find(".js_wave").removeClass("animated wave hinge infinite");
+            $headEl.find(".js_wave").addClass("animated wave hinge infinite");
+
+            // 产品
+            $bodyEl.show().siblings().hide();
+        }
+
+        var hasFinded = false;
+        $(".js_timedown").each(function() {
+            var $this = $(this),
+                $tabBodyEl = $this.closest(".d11-flash-round"),
+                $tabHeadEl = $("#js_progress").find("li[data-id=" + $tabBodyEl.prop("id") + "]"),
+                tick = new Tick({
+                    startTimeLeft: parseInt($this.data("startTimeLeft")) || 0,
+                    endTimeLeft: parseInt($this.data("endTimeLeft")) || 0,
+                    timeEl: $this,
+                    tabHeadEl: $tabHeadEl,
+                    tabBodyEl: $tabBodyEl
+                });
+
+            // 默认显示第一个未结束的场次（包括未开始）
+            if (!hasFinded && !tick.isEnded()) {
+                hasFinded = true;
+                tick.active(tick.cfg.tabHeadEl, tick.cfg.tabBodyEl);
+            }
+
+            tick.start();
+        });
+    })(window, jQuery);
+
+
+    //------------------------------------------
+    //左侧浮动导航
+    (function(){
+        var topHeight = $("#header").outerHeight(true),
+            windowHeight = $(window).outerHeight();
+        $(".left-nav").css({top:topHeight});
+        $(window).on("scroll",function(e){
+            var $this = $(this),
+                scrollTop = $this.scrollTop();
+            if(scrollTop>=topHeight){
+                $(".left-nav").css({
+                    top:0,
+                    position:"fixed"
+                });
+                if(scrollTop+windowHeight>=$("footer").offset().top){
+
+                    $(".left-nav").css({
+                        top:"auto",
+                        bottom:scrollTop+windowHeight - $("footer").offset().top,
+                        position:"fixed"
+                    });
+                }
+
+            }
+            else{
+                $(".left-nav").css({
+                    top:topHeight,
+                    position:"absolute"
+                });
+            }
+        });
+    })();
+
+    //滑动页面顶部tab切换
+    function SetScrollTop(obj,targetObj){
+        this.index = 0;
+        this.obj = $(obj);
+        this.targetObj = $(targetObj);
+        this.ini();
+    }
+    SetScrollTop.prototype.ini = function(){
+        var that = this;
+
+        $(window).scroll(function(event) {
+            var $this = $(this),
+                widnScroll = $this.scrollTop(),
+                firstTargetTop = that.obj.eq(0).offset().top;
+
+            if(widnScroll > firstTargetTop){//如果页面滑动到第一个目标对象区域块
+                that.targetObj.removeClass('none');
+            }else{
+                that.targetObj.addClass('none');
+            }
+
+            $.each(that.obj, function(index, val) {
+                 var $targetItem = $(val);
+                 var targetTop = $targetItem.offset().top;
+
+                 if(widnScroll >= targetTop){
+                    that.targetObj.find("li").eq(index).addClass('active').siblings('li').removeClass('active');
+                 }
+            });
+        });
+
+        that.chooseItem();
+        that.chooseItemNav();
+    };
+    SetScrollTop.prototype.chooseItem = function(){
+        var that = this;
+
+        that.targetObj.on("click","li",function(){
+            var $this = $(this);
+            var targetIndex = that.targetObj.find("li").index($(this));
+            var huadongLength = that.obj.eq(targetIndex).offset().top;
+
+            $this.addClass('active').siblings('li').removeClass('active');
+
+            $("html,body").animate({scrollTop:huadongLength}, 500);
+        });
+    };
+    SetScrollTop.prototype.chooseItemNav = function(){
+        var that = this,$js_itemNav = $(".js_itemNav");
+
+        $js_itemNav.click(function(){
+            var $this = $(this),
+                thisParent = $this.closest('.active-section'),
+                index = thisParent.find(".js_itemNav").index($this),
+                huadongLength = that.obj.eq(index).offset().top;
+
+            $("html,body").animate({scrollTop:huadongLength}, 500);
+        });
+
+    };
+    // 页面滑动tab切换
+    new SetScrollTop(".js_promotionCat","#sortTopNav");
+</script>
+{/literal}
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "status": 0,
+  "msg": "我是编辑返回的数据",
+
+  "data": {
+    "address_id" : "3",
+    "username": "柳俊",
+    "province" :[
+      {
+        "id" :"1",
+        "value" : "北京",
+        "is_current" : "0"
+      },
+      {
+        "id" :"1",
+        "value" : "天津",
+        "is_current" : "0"
+      },
+      {
+        "id" :"1",
+        "value" : "上海",
+        "is_current" : "1"
+      }
+    ],
+    "city" :[
+      {
+        "id" :"2",
+        "value" : "北京市",
+        "is_current" : "0"
+      },
+      {
+        "id" :"2",
+        "value" : "天津市",
+        "is_current" : "1"
+      },
+      {
+        "id" :"2",
+        "value" : "上海市",
+        "is_current" : "0"
+      }
+    ],
+    "district":[
+      {
+        "id" :"3",
+        "value" : "北京区",
+        "is_current" : "0"
+      },
+      {
+        "id" :"3",
+        "value" : "天津区",
+        "is_current" : "0"
+      },
+      {
+        "id" :"3",
+        "value" : "上海区",
+        "is_current" : "1"
+      }
+    ],
+    "addressline":"这里是我要修改的详细地址",
+    "tel" :"18814466522",
+    "idnumber" :"420621199111086245",
+    "is_default_address" : "1"
+  }
+}

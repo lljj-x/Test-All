@@ -1,0 +1,18 @@
+{
+    "status": 0,
+    "msg": "我是错误提示哈哈哈哈哈哈",
+    "data": {
+        "name": "姓名",
+        "id_card": "12121212121212",
+        "img_list": [
+            {
+                "img_url" : "http://img.wzhouhui.egocdn.com/card/pic/201510/1444256564648823049.jpg",
+                "delete_url" : "/fun/index.php?act=delete&type=card&file=1444285364093522474.png"
+            },
+            {
+                "img_url" : "http://img.wzhouhui.egocdn.com/card/pic/201510/1444256566378254862.jpg",
+                "delete_url" : "/fun/index.php?act=delete&type=card&file=1444285365368712785.png"
+            }
+        ]
+    }
+}

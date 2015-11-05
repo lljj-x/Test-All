@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file='app/app_top.htm'}
+    {literal}
+    <style>
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote { margin: 0; padding: 0;}
+        address, caption, cite, code, dfn, em, strong, th, var { font-style: normal; font-weight: normal; }
+        .mt10{margin-top: 10px;}
+        body{font-size: 12px;margin: 0; padding: 0;color:#3c3c3c;font-family: tahoma, arial, 'Hiragino Sans GB', 'WenQuanYi Micro Hei', 微软雅黑, 宋体, sans-serif;}
+        ol, ul { list-style: none;margin: 0; padding: 0;}
+        a {text-decoration: none;}
+        *{-o-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box;}
+        .wrap{max-width: 640px;margin: 0 auto;}
+        .block-img { max-width: 640px; margin: 0 auto; }
+        .block-img>img { display: block; width: 100%; height: auto; }
+        h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal; }
+        .table{width: 100%; border-collapse: collapse; border-spacing: 0; border: 0 none; padding: 0;}
+        .table td{padding: 0;}
+        .dis-table{display: table;width: 100%;}
+        .dis-table-cell{display: table-cell;}
+        </style>
+    {/literal}
+
+</head>
+<body>
+
+{if $active == 5}
+{literal}
+    <style>
+        #hufu-wrap{background-color: #E9EFF5;}
+        .linear-bg{
+        background-image: -moz-linear-gradient(top, #E3ECF3 0%, #E9EFF5 100%);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E3ECF3), color-stop(100%,#E9EFF5));
+        background-image: -webkit-linear-gradient(top, #E3ECF3 0%,#E9EFF5 100%);
+        background-image: -o-linear-gradient(top, #E3ECF3 0%,#E9EFF5 100%);
+        background-image: -ms-linear-gradient(top, #E3ECF3 0%,#E9EFF5 100%);
+        background-image: linear-gradient(to bottom, #E3ECF3 0%,#E9EFF5 100%);
+        }
+        #hufu-wrap .coupon{margin-top: -30px;padding: 0 7.5px;}
+        .coupon-table .dis-table-cell{width: 50%;vertical-align: top;padding: 0  7.5px;}
+        /*.goods-wrap{margin-top: 20px;}*/
+        .goods-wrap{margin-top: -20px;}
+        .goods-wrap .cate-title{padding: 10px 0;}
+        .goods-wrap .cate-des{padding:0 20px;font-size: 14px;line-height: 16px;text-align: center;}
+        .goods-list-wrap{padding-top:10px;}
+        .goods-table .dis-table-cell{vertical-align: middle;padding: 10px 0;}
+        .goods-table .info-box{position: relative;padding: 5px 10px;}
+        .goods-table .info-box:before,.goods-table .info-box:after{content: "";display: block;position: absolute; width: 30px;height: 30px;}
+        .goods-table .info-box:before{top: 0; left: 0;border-top: 1px solid #749C24;border-left: 1px solid #749C24;}
+        .goods-table .info-box:after{bottom: 0; right: 0;border-bottom: 1px solid #749C24;border-right: 1px solid #749C24;}
+        .goods-table .td-img{width: 45%;}
+        .goods-table .td-info{padding: 0 10px;}
+        .goods-table .good-title{font-size: 14px;color: #729b19;padding: 5px 0;}
+        .goods-table .goods-title2>span{display: block;font-size: 12px;}
+        .goods-table .goods-title2 .area{color: #333333;}
+        .goods-table .goods-title2 .name{color: #666666;font-size: 14px;}
+        .goods-table .buy-btn{display: inline-block;padding: 5px 0;font-size: 0;line-height: 0;}
+        .goods-table .buy-btn .left>span{display: block;line-height: 20px;height:20px;padding: 0 15px 0 5px;}
+        .goods-table .buy-btn .marking-price{font-size: 12px;color:#626262;text-decoration: line-through;position: relative;}
+        .goods-table .buy-btn .marking-price:after{content: ""; display: block; position: absolute; width: 95%; left: 0; bottom: 0; height: 1px; background: #333;}
+        .goods-table .buy-btn .price{font-size: 14px;color: #608107;}
+        .goods-table .buy-btn .left{display: inline-block;vertical-align: top;background-color: #FFFFFF;}
+        .goods-table .buy-btn .right{display: inline-block;vertical-align: top;line-height: 40px;height: 40px;}
+        .goods-table .buy-btn .right a{display:block;padding: 0 3px;font-size: 12px;color: #e5f7b3;background-color: #749C24;}
+    </style>
+{/literal}
+    <div class="wrap" id="hufu-wrap">
+        <section class="block-img banner">
+            <img src="{$imgcache_url}images/app/hufu/banner.jpg" alt="Banner"/>
+        </section>
+        {* app 隐藏优惠券
+        <section class="coupon linear-bg">
+            <div class="dis-table coupon-table">
+                <div class="dis-table-cell block-img">
+                    <a href="#" class="block-img">
+                        <img src="{$imgcache_url}images/app/hufu/coupon_1.png" alt="Banner"/>
+                    </a>
+                </div>
+                <div class="dis-table-cell">
+                    <a href="#" class="block-img">
+                        <img src="{$imgcache_url}images/app/hufu/coupon_2.png" alt="Banner"/>
+                    </a>
+                </div>
+            </div>
+        </section>
+        *}
+
+        <section class="goods-wrap">
+            {foreach from=$data key=k item=special}
+            <div class="goods-list">
+                {* .linear-bg 自在这里添加*}
+                <header class="block-img cate-title linear-bg">
+                    <img src="{$imgcache_url}images/app/hufu/cate{$k+1}.png" alt="{$special.name}"/>
+                </header>
+                <p class="cate-des">
+                   {$special.memo}
+                </p>
+                <ul class="goods-list-wrap">
+               {foreach from=$special.data key=key item=goods}
+                  {if ($key+1)%2==1}
+                    <li class="goods-table dis-table">
+                        <div class="td-img dis-table-cell">
+                            <a href="{$goods.link_url}" class="block-img">
+                                <img src="{$imgcache_url}images/app/hufu/goods/goods_{$goods.goods_id}.jpg" alt="{$goods.goods_title}"/>
+                            </a>
+                        </div>
+                        <div class="td-info dis-table-cell">
+                            <div class="info-box">
+                                <p class="good-title">{$goods.goods_name}</p>
+                                <p class="goods-title2">
+                                    {$goods.goods_title}
+<!--                                    <span class="area">韩国SNP</span>
+                                    <span class="name">海豹补水保湿面膜</span>-->
+                                </p>
+                                <p class="buy-btn">
+                                    <span class="left">
+                                        <span class="marking-price">￥{$goods.market_price}</span>
+                                        <span class="price">￥{$goods.shop_price}</span>
+                                    </span>
+                                    <span class="right">
+                                        <a href="{$goods.link_url}">立即抢购</a>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                  {else}
+                    <li class="goods-table dis-table">
+                        <div class="td-info dis-table-cell">
+                            <div class="info-box">
+                                <p class="good-title">{$goods.goods_name}</p>
+                                <p class="goods-title2">
+                                    {$goods.goods_title}
+<!--                                    <span class="area">韩国Coreana高丽雅娜</span>
+                                    <span class="name">肉毒杆菌涂抹时精华补水面膜</span>-->
+                                </p>
+                                <p class="buy-btn">
+                                    <span class="left">
+                                        <span class="marking-price">￥{$goods.market_price}</span>
+                                        <span class="price">￥{$goods.shop_price}</span>
+                                    </span>
+                                    <span class="right">
+                                        <a href="{$goods.link_url}">立即抢购</a>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="td-img dis-table-cell">
+                            <a href="{$goods.link_url}" class="block-img">
+                                <img src="{$imgcache_url}images/app/hufu/goods/goods_{$goods.goods_id}.jpg" alt="{$goods.goods_title}"/>
+                            </a>
+                        </div>
+                    </li>
+                 {/if}
+              {/foreach} 
+                </ul>
+            </div>
+            {/foreach}
+
+        </section>
+    </div>
+{/if}
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+  "status": 0,
+  "msg": "我是错误提示哈哈哈哈哈哈",
+  "data": {
+    "cart_list": [
+      {
+        "color": "WHITE",
+        "size": "S",
+        "like": "95",
+        "cart_id": "359244",
+        "sub_total":"18",
+        "goods_id": "43900",
+        "stock_num" :"520",
+        "url": "http://www.baidu.com",
+        "img": "http://www.wzhouhui.egocdn.com/temp/skin1/dist/images/domeimg/other/goods_100.jpg",
+        "is_presale": 0,
+        "market_price": "16.41",
+        "goods_price": "9.25",
+        "goods_num": "2",
+        "title": "Mellin 美林 【免税店】西梅泥",
+        "cart_goods_des" : "（100g×2）*2 来自意大利本土",
+        "is_checkout" : 1,
+        "shipping_address" : "海外直供杭州保税区1号仓发货xx",
+        "weight" : "1011"
+      },
+      {
+        "color": "WHITE",
+        "size": "S",
+        "like": "95",
+        "cart_id": "359244",
+        "sub_total":"18",
+        "goods_id": "43900",
+        "stock_num" :"520",
+        "url": "http://www.baidu.com",
+        "img": "http://www.wzhouhui.egocdn.com/temp/skin1/dist/images/domeimg/other/goods_100.jpg",
+        "is_presale": 0,
+        "market_price": "16.41",
+        "goods_price": "9.25",
+        "goods_num": "2",
+        "title": "Mellin 美林 【免税店】西梅泥",
+        "cart_goods_des" : "（100g×2）*2 来自意大利本土",
+        "is_checkout" : 1,
+        "shipping_address" : "海外直供杭州保税区1号仓发货xx",
+        "weight" : "10086"
+      },
+      {
+        "color": "WHITE",
+        "size": "S",
+        "like": "95",
+        "cart_id": "359245",
+        "sub_total":"9.25",
+        "goods_id": "43901",
+        "stock_num" :"999",
+        "url": "#",
+        "img": "http://www.wzhouhui.egocdn.com/temp/skin1/dist/images/domeimg/other/goods_100.jpg",
+        "is_presale": 0,
+        "market_price": "16.41",
+        "goods_price": "9.25",
+        "goods_num": "1",
+        "title": "American Flag Print Tops",
+        "cart_goods_des" : "（100g×2）*2 来自意大利本土",
+        "is_checkout" : 1,
+        "shipping_address" : "海外直供杭州保税区1号仓发货",
+        "weight" : "2"
+      }
+    ],
+    "commission_over" : "99.5",
+    "commission_money" : "11",
+
+    "tel" : "18814466522",
+
+    "coupon_money" : "10",
+    "isUseCoupon" : "1",
+    "coupon_list" : [
+      {
+        "code" : "123465465",
+        "msg" : "描述1",
+        "is_use" : "1"
+      },
+      {
+        "code" : "123465465",
+        "msg" : "描述2",
+        "is_use" :"0"
+      }
+    ],
+    "total": {
+      "total_price": 22.05,
+      "goods_total": 99999.05,
+      "total_save": 0,
+      "shipping" : 10,
+      "tariff":0,
+      "cartNum":2
+    }
+  }
+}
