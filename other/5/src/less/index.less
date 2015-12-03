@@ -2,13 +2,13 @@
 @import "_common/mixins.less";
 @import "common.less";
 
+body{overflow-x: hidden;}
 .img-div{position: absolute;left: 50%;top: 50%;}
 .index-icon{background: url("../assets/img/styimg/index-icons.png") no-repeat;}
 .icon-menu{display:block;position:absolute;width: 50px;height: 50px;top: 50px;right: 50px;
     &.opend{background-position: 0 -50px;}
 }
-
-.index-wrap{overflow: hidden;
+.full-section{position: relative; padding: 0; margin: 0; border: 0; overflow: hidden;
     // slide
     .slider{position: relative;height: 100%;
         .slide-list{width: 100%;height: 100%;overflow: hidden;}

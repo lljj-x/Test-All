@@ -1,12 +1,12 @@
 @charset "utf-8";
 @import "_common/mixins.less";
 
-.fl{float: left;}
-.fr{float: right;}
-.clearfix:after{content:".";display:block;font-size: 0;height:0;clear:both;visibility:hidden;}
-* html .clearfix{height:1%;}.clearfix{display:block;}
-//.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
-//.clearfix{zoom:1}
+.fl{float: left;display: inline;}
+.fr{float: right;display: inline;}
+//.clearfix:after{content:".";display:block;font-size: 0;height:0;clear:both;visibility:hidden;}
+//* html .clearfix{height:1%;}.clearfix{display:block;}
+.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
+.clearfix{zoom:1;display:block;}
 .hf{width: @main_width;margin: 0 auto;}
 .w{width: @main_width;}
 .common-icon{background: url(../assets/img/styimg/common-icons.png) no-repeat;}
@@ -36,11 +36,10 @@ a{text-decoration: none;
             &:hover,&.current{color: @color_nav_active;border-bottom: 2px solid @color_nav_active;}
         }
     }
-
 }
 
 // middle wrap
-#middle-wrap{position: relative;
+#middle-wrap{position: relative;zoom: 1;
     &.container{padding: 42px 0 112px 0;}
     .content-wrap{padding: 40px; background-color: @color_w;
         .banner{img{vertical-align: top;}}
@@ -50,14 +49,13 @@ a{text-decoration: none;
 }
 
 // 底部
-#footer-wrap{position:relative;background-color: @color_nav_bg;font-size: 14px;color: @color_nav;
+#footer-wrap{background-color: @color_nav_bg;font-size: 14px;color: @color_nav;
     .footer{padding: 20px 0;}
     .text-wrap{font-size: 0;
         .b-text{margin-left: 25px;font-size: 14px;}
         .b-text,.icon-logo{.inline-block;vertical-align: middle;}
     }
-    .products-wrap{position: relative;*zoom: 1;font-size: 14px;line-height: 25px;  width: 190px; border: 1px solid @color_assist; padding: 5px 10px;cursor: pointer;
+    .products-wrap{position: absolute;top:20px;right:0;font-size: 14px;line-height: 25px;  width: 190px; border: 1px solid @color_assist; padding: 5px 10px;cursor: pointer;
         .icon-tri{display: block; position: absolute; right: 10px; top: 5px;}
     }
-
 }
