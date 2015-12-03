@@ -95,12 +95,15 @@ $(function () {
 
     //myfun1.sayText.call(myfun2);
 
-
-
     // apply
 
     var arr = [3,2,3,2,42,3,42,342,34];
     Math.max.call(null,arr);
 
 });
+
+
+~ function () {
+    alert("xxx");
+}();
 

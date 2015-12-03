@@ -1,0 +1,19 @@
+{
+  "name": "allpyra",
+  "version": "1.0.0",
+  "description": "allpyra grunt files",
+  "url": "",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-autoprefixer": "^3.0.3",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-htmlmin": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-include-replace": "*",
+    "grunt-replace": "*"
+  }
+}

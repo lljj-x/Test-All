@@ -1,0 +1,49 @@
+@import "_common/reset.less";
+@import "_common/mixins.less";
+@import "common.less";
+
+.img-div{position: absolute;left: 50%;top: 50%;}
+.index-icon{background: url("../assets/img/styimg/index-icons.png") no-repeat;}
+.icon-menu{display:block;position:absolute;width: 50px;height: 50px;top: 50px;right: 50px;
+    &.opend{background-position: 0 -50px;}
+}
+
+.index-wrap{overflow: hidden;
+    // slide
+    .slider{position: relative;height: 100%;
+        .slide-list{width: 100%;height: 100%;overflow: hidden;}
+        li{
+            img{vertical-align: top;height: auto;width: 100%;}
+        }
+        .control-nav{position: absolute; width:100%;left: 0;bottom: -20px;font-size: 0;text-align: center;
+            li{.inline-block;vertical-align: top;margin-left: 20px;
+                &:first-child{margin-left: 0;}
+            }
+            a{display: block;width: 12px;height: 12px;background-color: #E8C79C;border-radius: 50%;cursor: pointer;
+                &.active{background-color: #B28850;}
+            }
+        }
+    }
+
+    // 边栏菜单
+    .bar-menu{position: absolute;top:0;height: 100%;right: 0;width: 500px;background-color: red;z-index: 9;
+        .list{position:relative;height: 100%;}
+        .item{position: relative;}
+        .item-1{height: 25%;}
+        .item-2{height: 50%;}
+        .cate-wrap{position: relative;height: 100%;width: 100%;
+            &.w50{width: 50%;}
+            &.h50{height: 50%;}
+        }
+        .idea-wrap{background-color: #929969;}
+
+        .history-wrap{background-color: #F4C665;
+
+        }
+
+        .brand-wrap{background-color: #B6504F;}
+        .about-wrap{background-color: #A2BEAE;}
+        .contact-wrap{background-color: #756B82;}
+
+    }
+}
