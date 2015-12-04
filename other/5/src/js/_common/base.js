@@ -329,7 +329,16 @@
 				location.href = $(this).attr('href') + '?from=' + (self.param('from') || encodeURIComponent(location.href));
 				return false;
 			})
-		}
+		},
+        currentPath: function () {
+            var currentPath = this.location.pathname,
+                arrPath = currentPath.split('/');
+            if(arrPath.length > 2){
+                return false;
+            }else{
+                return arrPath[1].replace('.html','');
+            }
+        }
 	};
 
 	/**
@@ -378,3 +387,11 @@
 	root.Base = Base;
 
 })(window.jQuery);
+
+$(function () {
+	// common js
+    var cNav ;
+    if(cNav = Base.url.currentPath()){
+        $('.j-nav-' + cNav).addClass('current');
+    }
+});

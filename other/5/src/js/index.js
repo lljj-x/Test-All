@@ -9,9 +9,9 @@
             top : 0,
             minWidth : 1100,
             defaultWidth : 1920,
-            defaultHeight: 750,
-            minHeight: 550,
-            resizeCalculated : 'width'  // resize 计算方式， width / height
+            defaultHeight: 960,
+            minHeight: 520,
+            resizeCalculated : 'height'  // resize 计算方式， width / height
         },options);
 
         this.sections = $section;
@@ -26,22 +26,8 @@
                 self.resize();
             });
         },
-        throttle: function(fn, delay) {
-            var timer = null;
-            return function() {
-                var context = this,
-                    args = arguments;
-                clearTimeout(timer);
-                timer = setTimeout(function() {
-                    fn.apply(context, args);
-                }, delay);
-            };
-        },
         resize: function(){
             this.currentWidth = this.getCurrentWidth();
-
-            // console.log(this.currentWidth);
-
             this.currentHeight = this.getCurrentHeight();
             var self = this;
 
@@ -97,7 +83,10 @@
                 var xx;
                 if(self.options.resizeCalculated === 'height'){
                     // 高度小于默认高度 ，按比例缩放
-                    var tmpCh = (self.currentHeight > self.options.defaultHeight) ? self.options.defaultHeight : self.currentHeight;
+                    // var tmpCh = (self.currentHeight > self.options.defaultHeight) ? self.options.defaultHeight : self.currentHeight;
+
+                    var tmpCh = self.currentHeight;
+
                     xx = tmpCh / self.options.defaultHeight;
                 }else{
                     xx = self.currentWidth / self.options.defaultWidth;
@@ -151,8 +140,7 @@ $(function () {
     new RecruitPage($(".j-full-section"));
 
     //  轮播
-    var $banner = $('#js_banner');
-    $banner.flexslider({
+    $('#js_banner').flexslider({
         namespace:"",
         animation: "fade",
         selector: ".j-slide-list > li",
@@ -162,4 +150,42 @@ $(function () {
         animationSpeed : 600,
         slideshowSpeed: 6000
     });
+
+    // 节点事件
+    var Index = Base.klass.create({
+        elements: {
+            '.j-sidebar-menu': 'elSidebarMenu',
+            '.j-index-wrap' : 'elIndexWrap',
+            '.j-show-menu' : 'elShowMenuBtn'
+        },
+        events: {
+            'click .j-show-menu': 'showMenu'
+        },
+        
+        init: function () {
+            this.menuOpendClass = 'opend';
+        },
+        showMenu : function () {
+            if(this.elShowMenuBtn.hasClass(this.menuOpendClass)){
+                // 关闭
+                this.elShowMenuBtn.removeClass(this.menuOpendClass);
+                this.elIndexWrap.css({width:"100%"});
+                this.elSidebarMenu.hide();
+            }else{
+                // 打开
+                this.menuWidth = this.elSidebarMenu.width();
+
+                this.elShowMenuBtn.addClass(this.menuOpendClass);
+                this.elSidebarMenu.show().css({
+                    right:0
+                });
+                this.elIndexWrap.width(this.elIndexWrap.width() - this.menuWidth) ;
+            }
+        }
+    });
+
+    new Index({
+        el : '.j-full-section'
+    });
+
 });
