@@ -9,9 +9,19 @@
 .clearfix{zoom:1;display:block;}
 .hf{width: @main_width;margin: 0 auto;}
 .w{width: @main_width;}
+
+// common icons
 .common-icon{background: url(../assets/img/styimg/common-icons.png) no-repeat;}
 .icon-logo{width: 45px;height: 45px;background-position: 0 0;}
 .icon-tri{width: 25px; height: 25px; background-position: 0px -55px;}
+
+// sns icons
+.sns-icon{background: url(../assets/img/styimg/sns-icons.png) no-repeat;}
+
+
+
+
+
 .pr{position: relative;}
 
 body{ font-size:14px;color:@color_base;}
@@ -41,7 +51,7 @@ a{text-decoration: none;
 // middle wrap
 #middle-wrap{position: relative;zoom: 1;
     &.container{padding: 42px 0 112px 0;}
-    .content-wrap{padding: 40px; background-color: @color_w;
+    .content-wrap{padding: 40px; background-color: @color_w;min-height: 580px ;
         .banner{img{vertical-align: top;}}
         .content{margin-top:40px;font-size: 14px;color: @color_text;}
 
@@ -50,7 +60,7 @@ a{text-decoration: none;
 
 // 底部
 #footer-wrap{background-color: @color_nav_bg;font-size: 14px;color: @color_nav;
-    .footer{padding: 20px 0;}
+    .footer{position:relative;padding: 20px 0;}
     .text-wrap{font-size: 0;
         .b-text{margin-left: 25px;font-size: 14px;}
         .b-text,.icon-logo{.inline-block;vertical-align: middle;}
