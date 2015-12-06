@@ -159,28 +159,44 @@ $(function () {
             '.j-show-menu' : 'elShowMenuBtn'
         },
         events: {
-            'click .j-show-menu': 'showMenu'
+            'click .j-show-menu': 'toggleMenu'
         },
-        
         init: function () {
             this.menuOpendClass = 'opend';
+            this.isMenuShowed = false;
+            this.bindEvent();
+        },
+        bindEvent: function () {
+            var self = this;
+            $(window).resize(function () {
+                (self.isMenuShowed) && self.hideMenu();
+            })
+        },
+        toggleMenu : function () {
+            if(this.elShowMenuBtn.hasClass(this.menuOpendClass)){
+                this.hideMenu();
+            }else{
+                this.showMenu();
+            }
         },
         showMenu : function () {
-            if(this.elShowMenuBtn.hasClass(this.menuOpendClass)){
-                // 关闭
-                this.elShowMenuBtn.removeClass(this.menuOpendClass);
-                this.elIndexWrap.css({width:"100%"});
-                this.elSidebarMenu.hide();
-            }else{
-                // 打开
-                this.menuWidth = this.elSidebarMenu.width();
+            // 打开
+            this.isMenuShowed = true;
 
-                this.elShowMenuBtn.addClass(this.menuOpendClass);
-                this.elSidebarMenu.show().css({
-                    right:0
-                });
-                this.elIndexWrap.width(this.elIndexWrap.width() - this.menuWidth) ;
-            }
+            this.menuWidth = this.elSidebarMenu.width();
+
+            this.elShowMenuBtn.addClass(this.menuOpendClass);
+            this.elSidebarMenu.show().css({
+                right:0
+            });
+            this.elIndexWrap.width(this.elIndexWrap.width() - this.menuWidth) ;
+        },
+        hideMenu : function () {
+            // 关闭
+            this.isMenuShowed = false;
+            this.elShowMenuBtn.removeClass(this.menuOpendClass);
+            this.elIndexWrap.css({width:"100%"});
+            this.elSidebarMenu.hide();
         }
     });
 
