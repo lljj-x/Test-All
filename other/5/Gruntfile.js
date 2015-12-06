@@ -230,5 +230,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['clear', 'less', 'includereplace', 'replace', 'htmlmin', 'autoprefixer','uglify', 'copy']);
 
 	grunt.registerTask('listen', ['watch']);
-
+	
+	grunt.registerTask('empty', ['clear']);
 };
