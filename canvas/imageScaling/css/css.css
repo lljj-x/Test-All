@@ -1,0 +1,11 @@
+.canvas{
+    width: 350px;
+    height: 600px;
+    background-color: #999999;
+}
+.btn-wrap{
+    position: absolute;
+    top: 100px;
+    left: 400px;
+    font-size: 0;
+}
