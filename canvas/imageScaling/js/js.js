@@ -8,7 +8,6 @@
         config : {
             elCanvas : document.querySelector('.j-myCanvas'),
             elUploadBtn : document.querySelector('.j-uploadBtn')
-
         },
         data :{
             configBgImg : 'image/candle.png',
@@ -51,17 +50,41 @@
             });
             
         },
+        getCtx : function () {
+            if(this.ctx == undefined){
+                if(this.config.elCanvas.getContext){
+                    this.ctx = this.config.elCanvas.getContext('2d')
+                }
+            }
+
+            return this.ctx;
+        },
         drawConfigImage : function () {
-            var img;
+            var self = this,
+                img = new Image(),
+                defaultWH = self.data.width / self.data.height,
+                imgWh,
+                imgW,
+                imgH,
+                curW,
+                curH;
 
-            img = nwe
-
-
-
-
-
-
-            this._drawImg(this.data.configBgImg,this.data.width,this.data.height);
+            img.onload = function () {
+                imgW = img.width;
+                imgH = img.height;
+                imgWh = imgW / imgH;
+                if(imgWh > defaultWH){
+                    // 图片比画布宽
+                    curW = self.data.width;
+                    curH = imgW / imgWh;
+                }else{
+                    // 图片比画布高
+                    curH = self.data.height;
+                    curW = curH * imgWh;
+                }
+                self._drawImg(img,0,0,curW,curH);
+             };
+            img.src = this.data.configBgImg;
         },
         clearCanvas : function () {
 
@@ -71,9 +94,12 @@
 
 
         },
-        _drawImg : function (imgSrc,width,height) {
-            var canvas = this.config.elCanvas;
-            ctx.drawImage(imgSrc,width,height);
+        _drawImg : function () {
+            var args = arguments;
+            if(args.length > 0){
+                CanvasRenderingContext2D.prototype.drawImage.apply(this.getCtx(),Array.prototype.slice.call(args,0));
+                return false;
+            }
         },
         _draw : function () {
 
@@ -148,7 +174,5 @@
             }
         }
     };
-
     imageEditer.init();
-
 }(Hammer);

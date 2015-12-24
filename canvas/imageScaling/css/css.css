@@ -4,8 +4,6 @@
     background-color: #999999;
 }
 .btn-wrap{
-    position: absolute;
-    top: 100px;
-    left: 400px;
+    margin-top: 20px;
     font-size: 0;
 }
