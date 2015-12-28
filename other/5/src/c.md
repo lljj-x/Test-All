@@ -1,18 +1,18 @@
 npm install grunt --save-dev
 
 
-¿ìËÙÇĞ»»Ô´
+å¿«é€Ÿåˆ‡æ¢æº
 http://segmentfault.com/a/1190000000473869
 
-°²×°ÇĞ»»Ô´
+å®‰è£…åˆ‡æ¢æº
 npm install -g nrm
 
-ÁĞ±í
+åˆ—è¡¨
 nrm ls  
 
-ÇĞ»»ÌÔ±¦
+åˆ‡æ¢æ·˜å®
 nrm use taobao  
 
-// È«¾Ö°²×°
+// å…¨å±€å®‰è£…
 npm install -g grunt-cli
 grunt -version
