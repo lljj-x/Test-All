@@ -17,6 +17,7 @@
         init : function () {
             this.getUserParams();
 
+            this.bindEvent();
 
             this.flush();
         },
@@ -29,14 +30,14 @@
         },
         getUserParams : function () {
 
-            
+
         },
         bindEvent : function () {
             // 缩放
-            var canvasHammer = new Hammer(this.config.elCanvas);
+            var canvasHammer = new Hammer(this.config.elCanvas),
+                self = this;
 
-            canvasHammer.on('pinch', function () {
-                console.log(deltaX);
+            canvasHammer.on('pinch', function (ev) {
             });
 
             // 移动
@@ -48,7 +49,33 @@
             canvasHammer.on('rotate', function () {
                 console.log(deltaX);
             });
-            
+
+            // 载入图片
+            this.config.elUploadBtn.addEventListener('change',function(e){
+                self._changeImg(e);
+            });
+        },
+        _changeImg : function (e) {
+            var el = e.target,
+                fileReader,
+                self = this,
+                file = el.files[0];
+
+            if(typeof FileReader == 'undefined'){
+                result.InnerHTML="<p>你的浏览器不支持FileReader接口！</p>";
+                //使选择控件不可操作
+                el.setAttribute("disabled","disabled");
+            }
+
+            if(file.type.indexOf('image') > -1){
+                fileReader = new FileReader();
+                fileReader.onload = function (result) {
+                    self.drawConfigImage(result.target.result);
+                };
+                fileReader.readAsDataURL(file);
+            }else{
+                alert("请上传图片");
+            }
         },
         getCtx : function () {
             if(this.ctx == undefined){
@@ -59,7 +86,9 @@
 
             return this.ctx;
         },
-        drawConfigImage : function () {
+
+        // 图片写入画布
+        drawConfigImage : function (curImg) {
             var self = this,
                 img = new Image(),
                 defaultWH = self.data.width / self.data.height,
@@ -76,7 +105,7 @@
                 if(imgWh > defaultWH){
                     // 图片比画布宽
                     curW = self.data.width;
-                    curH = imgW / imgWh;
+                    curH = curW / imgWh;
                 }else{
                     // 图片比画布高
                     curH = self.data.height;
@@ -84,7 +113,7 @@
                 }
                 self._drawImg(img,0,0,curW,curH);
              };
-            img.src = this.data.configBgImg;
+            img.src = curImg || this.data.configBgImg;
         },
         clearCanvas : function () {
 
@@ -92,13 +121,11 @@
         uploadImgEvent : function (event) {
             // 上传图片
 
-
         },
         _drawImg : function () {
             var args = arguments;
             if(args.length > 0){
                 CanvasRenderingContext2D.prototype.drawImage.apply(this.getCtx(),Array.prototype.slice.call(args,0));
-                return false;
             }
         },
         _draw : function () {
