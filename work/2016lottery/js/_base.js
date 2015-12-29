@@ -252,14 +252,14 @@ var DOMAIN = 'http://m.allpyra.com',
 
 	Base.cookie ={
         /**
-         * 添加cookie
+         * cookie
          * @param options
          */
-        addCookie : function(options){
+        setCookie : function(options){
             options = $.extend({
                 name:'',
                 value : '',
-                expiresHours : 3 * 24,
+                expiresHours : 7 * 24,
                 domain : DOMAIN_COOKIE,
                 path : '/'
             },options);
@@ -277,7 +277,7 @@ var DOMAIN = 'http://m.allpyra.com',
          * @param name
          * @returns {*}
          */
-        getCookie : function (name) {
+        getCookie : function (name){
             var strCookie=document.cookie;
             var arrCookie=strCookie.split("; ");
             for(var i=0;i<arrCookie.length;i++){
@@ -286,16 +286,18 @@ var DOMAIN = 'http://m.allpyra.com',
             }
             return "";
         },
-        /**
-         * delete Cookie
-         * @param name
-         */
-        deleteCookie : function (name) {
-            var date=new Date();
-            date.setTime(date.getTime()-10000);
-            document.cookie=name+"=v; expires="+date.toGMTString();
-        }
-    };
+
+		/**
+		 * 删除cookie
+		 * @param name
+		 */
+		deleteCookie : function(name){
+			var exp = new Date();
+			exp.setTime(exp.getTime() + (-1 * 24 * 60 * 60 * 1000));
+			var cVal = Base.cookie.getCookie(name);
+			document.cookie = name + "=" + cVal + "; expires=" + exp.toGMTString();
+		}
+	};
 
 	/**
 	 * 浏览器相

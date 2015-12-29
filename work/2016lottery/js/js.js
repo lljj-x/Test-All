@@ -11,7 +11,8 @@
            '#j-btn' : 'elBtn'
         },
         events : {
-            'click #j-btn' : 'lotteryEvent'
+            'click #j-btn' : 'lotteryEvent',
+            'click #j-clearList' : 'clearListEvent'
         },
         debug : true,
         params : {
@@ -44,7 +45,6 @@
                     for(var i =0 ;i<userLength;i++){
                         o = String(userArr[i]).split(',');
                         reData.push({
-                            index : i + 1,
                             id : o[0],
                             name : o[1],
                             department : o[2]
@@ -63,27 +63,49 @@
             if(this.params.isPlaying) return false;
             this.elBtn.hasClass(this.params.playFlag) ? this.endLottery() : this.strartLottery();
         },
+        clearListEvent : function () {
+            this.clearWinningedUser();
+            alert("清楚中奖纪录成功");
+        },
 
-        getWinningUser : function () {
+        getWinningedUser : function () {
             return Base.cookie.getCookie(this.params.winningCookieId);
         },
 
-        addWinningUser : function (id) {
-
+        addWinningedUser : function (id) {
+            Base.cookie.setCookie({
+                name: this.params.winningCookieId,
+                value : (this.getWinningedUser() + ',' + id).replace(/^,*/,'')
+            });
         },
-        clearWinningUser : function () {
-
+        clearWinningedUser : function () {
+            Base.cookie.setCookie({
+                name : this.params.winningCookieId,
+                value : ''
+            });
         },
         
-        getRandomNumber: function (length) {
-            length = length || this.params.data.length;
+        getRandomUser: function (length) {
+            var data = this.params.data,
+                winningedUser = this.getWinningedUser(),
+                randomNum;
 
-            var winningUser = this.getWinningUser(),
-                random = Math.ceil(Math.random() * length);
+            length = length || data.length;
 
+            function getRandomNum(){
+                // 未作所有人都中过奖的限定
+                var randomNum = Math.floor(Math.random() * length);
 
+                // 通过 id 检查是否中过奖
+                this.consoleLog(randomNum + '是中过奖' + (winningedUser.indexOf(data[randomNum].id) > -1));
 
-            return random ;
+                randomNum = (winningedUser.indexOf(data[randomNum].id) > -1) ? getRandomNum.call(this,length) : randomNum ;
+                return randomNum;
+            }
+
+            randomNum = getRandomNum.call(this);
+
+            return data[randomNum];
         },
         _aniamte: function () {
 
@@ -98,18 +120,22 @@
             this.elBtn.addClass(this.params.playFlag);
         },
         endLottery : function () {
-            var winNum = this.getRandomNumber();
-
             this.elBtn.removeClass(this.params.playFlag);
 
-            if(winNum){
+            var winUser = this.getRandomUser();
 
+            // 不考虑所有人都中过奖的情况
+            if(winUser){
+                // 添加中奖纪录
+                this.consoleLog('当前中奖用户:');
+                this.consoleLog(winUser);
+                this.consoleLog('\n');
 
-            }else{
-                alert("所有人都中过奖了！xxx");
+                this.addWinningedUser(winUser.id);
+
+                // 提示中奖消息
+
             }
-
-
         }
 
     });
