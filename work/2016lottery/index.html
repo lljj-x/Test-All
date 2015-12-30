@@ -9,13 +9,29 @@
     <script src="js/data.js"></script>
 </head>
 <body>
-    <div class="btn-wrap">
-        <button id="j-btn">抽奖按钮</button>
-        <br/>
-        <button id="j-clearList">清除抽奖记录</button>
+    <div class="container">
+        <div class="lottery-wrap">
+            <div class="bg-img">
+                <img src="img/bg.jpg" alt=""/>
+            </div>
+            <div class="content-wrap">
+                <div class="btn-wrap">
+                    <div class="game">
+                        <img src="img/game.png" alt=""/>
+                        <div class="control-wrap">
+                            <a href="javascript:;" id="j_controlBtn" class="control-btn">开始</a>
+                        </div>
+                        <div class="num-wrap">
+                            <span id="j_num_1" class="num num1"></span>
+                            <span id="j_num_2" class="num num2"></span>
+                            <span id="j_num_3" class="num num3"></span>
+                        </div>
+                    </div>
+                    <button id="j-clearList">清除抽奖记录</button>
+                </div>
+            </div>
+        </div>
     </div>
-
-
     <script src="js/js.js"></script>
 </body>
 </html>

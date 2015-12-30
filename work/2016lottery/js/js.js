@@ -4,18 +4,22 @@
 
 (function ($) {
     "use strict";
-    var lottery;
 
     var Lottery = Base.klass.create({
         elements : {
-           '#j-btn' : 'elBtn'
+           '#j_controlBtn' : 'elBtn',
+            "#j_num_1" : 'elNum1',
+            "#j_num_2" : 'elNum2',
+            "#j_num_3" : 'elNum3'
         },
         events : {
-            'click #j-btn' : 'lotteryEvent',
+            'click #j_controlBtn' : 'lotteryEvent',
             'click #j-clearList' : 'clearListEvent'
         },
         debug : true,
         params : {
+            animateSpeed:100,   // 移动一格 ms,
+            singleHeight : 145,    // 单个高度
             data : null,
             winningCookieId : 'winningId',
             isPlaying : false,
@@ -108,17 +112,48 @@
 
             return data[randomNum];
         },
-        _aniamte: function () {
+        _aniamte: function ($el,options) {
+            options = $.extend({
+                isFree: true,      //随机滚动不停止
+                singleSpeed: this.params.animateSpeed,
+                easing: 'linear',
+                singleHeight : this.params.singleHeight,
+                numberLength : 10,
+                delay : 0   // 延迟开始时间
+            },options);
 
+            var top = 0 - options.singleHeight * (options.numberLength),
+                speed = +(options.singleSpeed) * options.numberLength;
+
+            function toGo(){
+                $el.delay(options.delay).animate({
+                    top : top + "px"
+                },speed,options.easing, function () {
+                    if(options.isFree){
+                        $el.css({top : 0});
+                        options.delay = 0;
+                        toGo();
+                    }
+                });
+            }
+
+            toGo();
         },
         startAniamte: function () {
-
+            this._aniamte(this.elNum1);
+            this._aniamte(this.elNum2,{
+                delay : 200
+            });
+            this._aniamte(this.elNum3,{
+                delay : 400
+            });
         },
         endAnimate : function () {
 
         },
         strartLottery : function () {
             this.elBtn.addClass(this.params.playFlag);
+            this.startAniamte();
         },
         endLottery : function () {
             this.elBtn.removeClass(this.params.playFlag);
@@ -138,12 +173,9 @@
 
             }
         }
-
     });
-
 
     $(function () {
         new Lottery();
     });
-
 })(jQuery);
