@@ -78,6 +78,7 @@
                 value : (this.getWinningedUser() + ',' + id).replace(/^,*/,'')
             });
         },
+
         clearWinningedUser : function () {
             Base.cookie.setCookie({
                 name : this.params.winningCookieId,
