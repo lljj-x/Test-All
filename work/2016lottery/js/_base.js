@@ -264,7 +264,7 @@ var DOMAIN = 'http://m.allpyra.com',
                 path : '/'
             },options);
 
-            var cookieString= options.name + "=" + escape(options.value) + ';path=' + options.path + ';domain=' + options.domain;
+            var cookieString= options.name + "=" + encodeURIComponent(options.value) + ';path=' + options.path + ';domain=' + options.domain;
             if(options.expiresHours > 0){
                 var date=new Date();
                 date.setTime(date.getTime() + options.expiresHours * 3600 * 1000);
@@ -282,7 +282,7 @@ var DOMAIN = 'http://m.allpyra.com',
             var arrCookie=strCookie.split("; ");
             for(var i=0;i<arrCookie.length;i++){
                 var arr=arrCookie[i].split("=");
-                if(arr[0]==name)return arr[1];
+                if(arr[0]==name) return decodeURIComponent(arr[1]);
             }
             return "";
         },

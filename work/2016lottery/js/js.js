@@ -10,11 +10,13 @@
            '#j_controlBtn' : 'elBtn',
             "#j_num_1" : 'elNum1',
             "#j_num_2" : 'elNum2',
-            "#j_num_3" : 'elNum3'
+            "#j_num_3" : 'elNum3',
+            '#j_resultWrap' : 'elResultWrap'
         },
         events : {
             'click #j_controlBtn' : 'lotteryEvent',
-            'click #j-clearList' : 'clearListEvent'
+            'click #j-clearList' : 'clearListEvent',
+            'click #j_layerBg' : 'closeLayerEvent'
         },
         debug : true,
         params : {
@@ -65,13 +67,15 @@
         lotteryEvent : function (e) {
             e.preventDefault();
             if(this.params.isPlaying) return false;
-            this.elBtn.hasClass(this.params.playFlag) ? this.endLottery() : this.strartLottery();
+            this.elBtn.hasClass(this.params.playFlag) ? this.endLottery() : this.startLottery();
         },
         clearListEvent : function () {
             this.clearWinningedUser();
             alert("清楚中奖纪录成功");
         },
-
+        closeLayerEvent: function () {
+            this.elResultWrap.fadeOut();
+        },
         getWinningedUser : function () {
             return Base.cookie.getCookie(this.params.winningCookieId);
         },
@@ -89,13 +93,16 @@
                 value : ''
             });
         },
-        
+
         getRandomUser: function (length) {
             var data = this.params.data,
                 winningedUser = this.getWinningedUser(),
                 randomNum;
 
             length = length || data.length;
+
+            // 所有人中过奖了
+            if(winningedUser.split(',').length >= length) return false;
 
             function getRandomNum(){
                 // 未作所有人都中过奖的限定
@@ -108,18 +115,20 @@
                 return randomNum;
             }
 
-            randomNum = getRandomNum.call(this);
+            // cache 中奖号码
+            this.randomNum = randomNum = getRandomNum.call(this);
 
             return data[randomNum];
         },
-        _aniamte: function ($el,options) {
+        _animate: function ($el,options) {
             options = $.extend({
-                isFree: true,      //随机滚动不停止
+                isFree: true,      //滚动不停止
                 singleSpeed: this.params.animateSpeed,
                 easing: 'linear',
                 singleHeight : this.params.singleHeight,
                 numberLength : 10,
-                delay : 0   // 延迟开始时间
+                delay : 0,   // 延迟开始时间
+                endCall: $.noop
             },options);
 
             var top = 0 - options.singleHeight * (options.numberLength),
@@ -133,44 +142,102 @@
                         $el.css({top : 0});
                         options.delay = 0;
                         toGo();
+                    }else{
+                        options.endCall();
                     }
                 });
             }
 
+            function end(endCall){
+                options.isFree = false;
+                typeof endCall === 'function' && (options.endCall = endCall);
+            }
+
+            // 开始动画
             toGo();
+
+            return {
+                start:toGo,
+                end:end
+            }
         },
-        startAniamte: function () {
-            this._aniamte(this.elNum1);
-            this._aniamte(this.elNum2,{
+        startAnimate: function () {
+            this.animateNum1 = this._animate(this.elNum1);
+            this.animateNum2 = this._animate(this.elNum2,{
                 delay : 200
             });
-            this._aniamte(this.elNum3,{
+            this.animateNum3 = this._animate(this.elNum3,{
                 delay : 400
             });
         },
-        endAnimate : function () {
-
+        fixRandomNum : function (x) {
+            return (x < 10) ? '00' + x : (x < 100) ? '0' + x : x;
         },
-        strartLottery : function () {
+        endAnimate : function () {
+            var num = this.fixRandomNum(this.randomNum),
+                self = this,
+                length = 3,
+                timer = null,
+                limitTimer = 700,
+                resuleTime = 1000;
+
+            self.params.isPlaying = true; //抽奖中
+
+            function control(){
+                clearTimeout(timer);
+
+                timer = setTimeout(function () {
+                    self['animateNum' + length].end(function () {
+                        self['elNum' + length].css({top : 0});
+
+                        self._animate(self['elNum' + length],{
+                            isFree: false,
+                            //singleSpeed  : 2000,
+                            numberLength : +String(num).charAt(length - 1),
+                            endCall: function () {
+                                length --;
+                                if(length != 0 ){
+                                    control();
+                                }else{
+                                    setTimeout(function () {
+                                        self._showResult();
+                                        self.params.isPlaying = false;
+                                    },resuleTime);
+                                }
+                            }
+                        });
+                    })
+                },limitTimer);
+            }
+
+            control();
+        },
+        _showResult : function () {
+            this.elResultWrap.find(".j_id").text(this.winUser.id);
+            this.elResultWrap.find(".j_department").text(this.winUser.department);
+            this.elResultWrap.find(".j_name").text(this.winUser.name);
+            this.elResultWrap.fadeIn();
+        },
+        startLottery : function () {
             this.elBtn.addClass(this.params.playFlag);
-            this.startAniamte();
+            this.startAnimate();
         },
         endLottery : function () {
+            var winUser;
+
             this.elBtn.removeClass(this.params.playFlag);
 
-            var winUser = this.getRandomUser();
+            this.winUser = winUser= this.getRandomUser();
 
-            // 不考虑所有人都中过奖的情况
-            if(winUser){
+            if(winUser != false){
                 // 添加中奖纪录
                 this.consoleLog('当前中奖用户:');
                 this.consoleLog(winUser);
-                this.consoleLog('\n');
-
                 this.addWinningedUser(winUser.id);
 
-                // 提示中奖消息
-
+                this.endAnimate();
+            }else{
+                alert("所有人都中过奖了");
             }
         }
     });

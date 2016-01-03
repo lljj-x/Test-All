@@ -12,12 +12,23 @@
                 &.active{background-position: 0 -71px;}
             }
         }
-        .num-wrap{position: absolute; width: 358px; height: 145px; top: 142px; left: 24%; overflow:hidden; background-color: rgba(0,0,0,0.3);
+        .num-wrap{position: absolute; width: 358px; height: 145px; top: 142px; left: 24%; overflow:hidden;
             .num{position: absolute;display:block;top: 0;width: 85px;height: 1595px;background: url("../img/num.png") no-repeat 50% 0;}
             .num1{left: 17px;}
             .num2{left: 137px;}
             .num3{left: 257px;}
         }
     }
-
+    .result-wrap{display: none;
+        .layer-bg{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background-color: rgba(0,0,0,0.65);}
+        .content{position:absolute;left:50%;top:50%;width: 828px;height: 428px;margin-left:-828/2px;margin-top: -428/2px;background: url("../img/result_bg.png");}
+        .info-wrap {width: 560px; margin: 105px auto 0; color: #fff;}
+        h3,p{font-weight: bold;text-align: center;line-height: 90px;}
+        h3{border-bottom: 1px solid #ffffff;font-size: 40px;}
+        .result{display: table;width: 100%;font-size: 50px;line-height: 115px;
+            span{display: table-cell;width: 33.333%}
+            .id{text-align: left;}
+            .name{text-align: right;}
+        }
+    }
 }
