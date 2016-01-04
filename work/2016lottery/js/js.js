@@ -17,7 +17,7 @@
             'click #j-clearList': 'clearListEvent',
             'click #j_layerBg': 'closeLayerEvent'
         },
-        debug: true,
+        debug: false,
         params: {
             animateSpeed: 100,   // 移动一格 ms,
             singleHeight: 145,    // 单个高度
