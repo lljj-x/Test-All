@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/_base.js"></script>
-    <script src="js/data.js"></script>
 </head>
 <body>
     <div class="container">
@@ -15,8 +14,12 @@
                 <img src="img/bg.jpg" alt=""/>
             </div>
             <div class="content-wrap">
-                <div class="btn-wrap">
-                    <div class="game">
+                <div class="wrap">
+                    <div class="wel-2016" id="j_wel2016">
+                        <img src="img/2016.png" alt="">
+                    </div>
+
+                    <div class="game" id="j_gameWrap">
                         <img src="img/game.png" alt=""/>
                         <div class="control-wrap">
                             <a href="javascript:;" id="j_controlBtn" class="control-btn">开始</a>
@@ -27,20 +30,21 @@
                             <span id="j_num_3" class="num num3"></span>
                         </div>
                     </div>
-                    <button id="j-clearList">清除抽奖记录</button>
+                    <button id="j-clearList" class="clear-list">清除抽奖记录</button>
                 </div>
-            </div>
-        </div>
-        <div class="result-wrap" id="j_resultWrap">
-            <div class="layer-bg" id="j_layerBg"></div>
-            <div class="content">
-                <div class="info-wrap">
-                    <h3 class="info">幸运儿 </h3>
-                    <p class="result">
-                        <span class="id j_id"></span>
-                        <span class="department j_department"></span>
-                        <span class="name j_name"></span>
-                    </p>
+
+                <div class="result-wrap" id="j_resultWrap">
+                    <div class="layer-bg" id="j_layerBg"></div>
+                    <div class="content">
+                        <div class="info-wrap">
+                            <h3 class="info">幸运儿 </h3>
+                            <p class="result">
+                                <span class="id j_id"></span>
+                                <span class="name j_name"></span>
+                                <span class="department j_department"></span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
