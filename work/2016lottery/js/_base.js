@@ -3,7 +3,7 @@
  */
 // 全局配置
 var DOMAIN = 'http://m.allpyra.com',
-    DOMAIN_COOKIE = 'test.local';
+    DOMAIN_COOKIE = window.location.hostname;
 
 (function($) {
 

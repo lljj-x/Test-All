@@ -121,8 +121,10 @@ input[type="submit"] {
   cursor: pointer;
 }
 .container {
-  width: 1024px;
+  width: 100%;
   margin: 0 auto;
+  max-width: 1376px;
+  min-width: 1120px;
 }
 .container img {
   width: 100%;
@@ -145,67 +147,76 @@ input[type="submit"] {
 }
 .container .wel-2016 {
   position: absolute;
-  width: 678px;
-  bottom: 73px;
-  right: 173px;
+  width: 49%;
+  bottom: 22%;
+  right: 26%;
 }
 .container .game {
   display: none;
-  position: relative;
-  margin: 12px auto 0;
-  width: 722px;
-  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -418.5px;
+  margin-top: -319.5px;
+  width: 837px;
+  height: 639px;
 }
 .container .game .control-wrap {
   position: absolute;
   width: 100%;
   height: auto;
-  top: 61%;
+  top: 60%;
   left: 0;
   text-align: center;
-  filter: inherit;
+  -webkit-filter: inherit;
+          filter: inherit;
 }
 .container .game .control-wrap .control-btn {
   position: relative;
-  filter: inherit;
+  -webkit-filter: inherit;
+          filter: inherit;
   display: inline-block;
-  width: 260px;
-  height: 65px;
+  width: 480px;
+  height: 90px;
   line-height: 65px;
   font-size: 0;
   background: url("../img/btn.png") no-repeat;
-  transition: background-position 0.6s ease;
+  -webkit-transition: background-position 0.4s ease;
+          transition: background-position 0.4s ease;
   vertical-align: top;
 }
 .container .game .control-wrap .control-btn.active {
-  background-position: 0 -71px;
+  background-position: 0 -96px;
 }
 .container .game .num-wrap {
   position: absolute;
-  filter: inherit;
-  width: 358px;
-  height: 145px;
-  top: 142px;
+  -webkit-filter: inherit;
+          filter: inherit;
+  width: 432px;
+  height: 185px;
+  top: 138px;
   left: 24%;
   overflow: hidden;
 }
 .container .game .num-wrap .num {
   position: absolute;
-  filter: inherit;
+  -webkit-filter: inherit;
+          filter: inherit;
   display: block;
   top: 0;
-  width: 85px;
-  height: 1595px;
+  width: 114px;
+  height: 2132px;
   background: url("../img/num.png") no-repeat 50% 0;
+  background-size: 109px 2035px;
 }
 .container .game .num-wrap .num1 {
-  left: 17px;
+  left: 8px;
 }
 .container .game .num-wrap .num2 {
-  left: 137px;
+  left: 160px;
 }
 .container .game .num-wrap .num3 {
-  left: 257px;
+  left: 311px;
 }
 .container .result-wrap {
   display: none;
@@ -217,7 +228,8 @@ input[type="submit"] {
 }
 .container .result-wrap .layer-bg,
 .container .result-wrap .content {
-  filter: inherit;
+  -webkit-filter: inherit;
+          filter: inherit;
 }
 .container .result-wrap .layer-bg {
   position: absolute;
@@ -269,7 +281,7 @@ input[type="submit"] {
 }
 .container .result-wrap .result .id,
 .container .result-wrap .result .department {
-  font-size: 35px;
+  font-size: 30px;
   max-width: 187px;
 }
 .container .clear-list {
