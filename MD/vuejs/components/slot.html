@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../script/vue.js"></script>
+
+</head>
+<body>
+    <template id="childTemplate">
+        <div class="child">
+            <h1>我是child 的内容</h1>
+            <slot name="other">
+                <p>我是 slot 中的内容，只有当宿主元素为空才会显示</p>
+            </slot>
+
+            <slot name="one"><p>slot one</p></slot>
+            <slot name="two"><p>slot two</p></slot>
+
+        </div>
+    </template>
+
+    <div id="j_parent">
+        <child>
+            <p>父组件的模板内容</p>
+            <p>只有子组件在包含了 slot 时才会被现实，否则直接抛弃</p>
+
+            <div slot="one"><p>one</p></div>
+            <div slot="two"><p>two</p></div>
+        </child>
+    </div>
+
+    // 多个component 使用同一挂载点
+    <template id="homeTemplate">
+        <p>
+            homeTemplate 组件
+        </p>
+    </template>
+    <template id="postTemplate">
+        <p>
+            postTemplate 组件
+        </p>
+    </template>
+    <template id="archiveTemplate">
+        <p>
+            archiveTemplate 组件
+        </p>
+    </template>
+    <div id="j_parent2">
+        <component :is="currentView"></component>
+        <button @click="this.currentView = 'home'">home</button>
+        <button @click="this.currentView = 'posts'">posts</button>
+        <button @click="this.currentView = 'archive'">archive</button>
+    </div>
+</body>
+<script>
+    Vue.component('child',{
+        template : '#childTemplate'
+    });
+
+    new Vue({
+        el : '#j_parent'
+    });
+
+    new Vue({
+        el: '#j_parent2',
+        data : {
+            currentView : 'home'
+        },
+        components :{
+            home : {
+                template : '#homeTemplate'
+            },
+            posts : {
+                template : '#postTemplate'
+            },
+            archive : {
+                template : '#archiveTemplate'
+            }
+        }
+
+    });
+
+</script>
+</html>
