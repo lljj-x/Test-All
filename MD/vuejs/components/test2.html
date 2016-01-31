@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../script/vue.js"></script>
+</head>
+<body>
+    <div id="j_app">
+        <test-component :input-value.once="inputValue" :int="1"></test-component>
+        <input type="text" v-model="inputValue">
+        <p>父级的 inputValue{{inputValue}}</p>
+
+    </div>
+</body>
+<script>
+    Vue.component('test-component', {
+        data : function () {
+            return {
+                // inputValue : '到底是谁？'
+            }
+        },
+        props:['inputValue','int'],
+        template : '<div>这是我的第一个实际例子 {{inputValue}}</div>' +
+        '<div style="display: none;">数值的传递 int 类型 {{int}}</div>'
+    });
+
+    new Vue({
+        data : {
+            inputValue : '默认inputvalue'
+        },
+        el : '#j_app'
+    })
+</script>
+
+</html>

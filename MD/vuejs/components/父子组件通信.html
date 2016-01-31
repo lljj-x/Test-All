@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../script/vue.js"></script>
+</head>
+<body>
+    <template id="child-template">
+        <input type="text" v-model="msg">
+        <button @click="put">推给父级</button>
+    </template>
+
+    <div id="j_parentWrap">
+        <p>推过来的消息数组【{{msgArr}}】</p>
+        <child v-on:child-msg="handleIt" v-rel:testChild></child>
+    </div>
+</body>
+<script>
+    Vue.filter(function (val) {
+        return val.join(',');
+    });
+    Vue.component('child', {
+        template: '#child-template',
+        methods: {
+            put: function () {
+                if (this.msg.trim()) {
+                    // 推送消息给父级
+                    this.$emit('child-msg', this.msg);
+                    this.msg = '';
+                }
+            }
+        },
+        data: function () {
+            return {
+                msg: 'Put message'
+            }
+        }
+    });
+    var parent = new Vue({
+        el: '#j_parentWrap',
+        data: {
+            msgArr: []
+        },
+        methods:{
+            // 推荐 方法二 ，接受自定义事件
+            handleIt: function (msg) {
+                this.msgArr.push(msg);
+
+            }
+        },
+//        events: {
+//            // 方法一 直接接受父级接收消息
+//            childMsg: function (msg) {
+//                this.msgArr.push(msg);
+//            }
+//        }
+    });
+
+
+</script>
+</html>

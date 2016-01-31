@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../script/vue.js"></script>
+
+</head>
+<body>
+    <div id="j_app">
+        <my-component hel="hellow!"></my-component>
+        <my-component2 msg-test="hellow 2"></my-component2>
+    </div>
+</body>
+<script>
+    var myComponent = Vue.extend({
+        data : function () {
+            return {
+                msg : '这是我的msg'
+            }
+        },
+        props: ['hel'],
+        template : '<div>这是一个组件的模板 {{msg}} {{hel}}</div>'
+    });
+
+    Vue.component('my-component',myComponent);
+
+    Vue.component('my-component2',{
+        template : '<div>这是我的第二个组件测试 {{msgTest}}</div>',
+        props : ['msgTest']
+    });
+
+    new Vue({
+        el : '#j_app'
+    })
+
+</script>
+
+</html>
