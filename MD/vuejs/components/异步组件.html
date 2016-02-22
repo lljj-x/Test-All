@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>编写可复用组件</title>
+    <script src="../../script/vue.js"></script>
+</head>
+<style>
+    [v-cloak] {
+        display: none
+    }
+</style>
+<body>
+<div id="app" v-cloak>
+    <p>
+        {{title}}
+    </p>
+
+    <async-example></async-example>
+</div>
+
+<script>
+
+    Vue.component('async-example', function (resolve,reject) {
+        setTimeout(function () {
+          resolve({
+              template:'<div>I am async!</div>'
+          })
+        },200)
+    });
+
+
+    new Vue({
+        el : '#app',
+        data : {
+            title : '当前页面标题'
+        }
+    });
+
+</script>
+</body>
+</html>
