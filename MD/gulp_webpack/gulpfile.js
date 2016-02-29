@@ -12,7 +12,7 @@ var rename = require("gulp-rename");
 var autoprefixer = require('gulp-autoprefixer');
 var minifyCss = require("gulp-minify-css");
 var uglify = require('gulp-uglify');
-// var gulpif = require('gulp-if');
+var gulpif = require('gulp-if');
 // var useref = require('gulp-useref');
 var replace = require('gulp-replace');
 var htmlmin = require('gulp-htmlmin');
@@ -20,6 +20,8 @@ var webpack = require('gulp-webpack');
 var named = require('vinyl-named');
 var sourcemaps = require('gulp-sourcemaps');
 var imagemin = require('gulp-imagemin');
+
+var sass = require('gulp-sass');
 
 // 错误管理，避免错误后结束进程
 var notify = require('gulp-notify');
@@ -33,6 +35,7 @@ var webpackbuildRoot = 'webpackbuild/';
 
 var partRoot = {
     less: 'less/',
+    sass: 'sass/',
     css: 'css/',
     images: 'images/',
     js: 'js/',
@@ -46,6 +49,7 @@ var copyDir = ['src/assets/**', 'src/javatemplates/**', 'src/dl/**'];
 
 var relevant = {
     less: partRoot.less + '**/*.less',
+    sass: partRoot.sass + '**/*.scss',
     css: partRoot.css + '**/*.css',
     images: partRoot.images + '**/*.+(JPG|jpg|png|gif|svg)',
     js: partRoot.js + '**/*.js',
@@ -77,6 +81,7 @@ function getWebpackConfig(opt) {
     var config = {
         module: {
             loaders: [
+                { test: /\.css$/, loader: 'style!css' },
                 {test: /\.vue$/, loader: 'vue'},
                 {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'},
                 {
@@ -86,10 +91,11 @@ function getWebpackConfig(opt) {
                 }
             ]
         },
+        devtool: 'source-map',
         output: {
             filename: '[name].webpack.js',
-            //path: './webpackbuild',
-            publicPath: partRoot.js
+            // path: './webpackbuild',
+            // publicPath: partRoot.js
         },
         babel: {
             presets: ['es2015'],
@@ -113,23 +119,23 @@ var version = +new Date();
 /* task */
 
 // clean
-gulp.task('clean:css', function () {
-    del(debugRoot + partRoot.css);
+gulp.task('clean:css', function (cb) {
+    del(debugRoot + partRoot.css,cb);
 });
-gulp.task('clean:js', function () {
-    del(debugRoot + partRoot.js);
+gulp.task('clean:js', function (cb) {
+    del(debugRoot + partRoot.js,cb);
 });
-gulp.task('clean:images', function () {
-    del(debugRoot + partRoot.images);
+gulp.task('clean:images', function (cb) {
+    del(debugRoot + partRoot.images,cb);
 });
-gulp.task('clean:debug', function () {
-    del([debugRoot]);
+gulp.task('clean:debug', function (cb) {
+    del([debugRoot],cb);
 });
-gulp.task('clean:build', function () {
-    del([buildRoot]);
+gulp.task('clean:build', function (cb) {
+    del([buildRoot],cb);
 });
-gulp.task('clean', function () {
-    del([debugRoot, buildRoot]);
+gulp.task('clean', function (cb) {
+    del([debugRoot, buildRoot],cb);
 });
 
 // less
@@ -156,6 +162,32 @@ gulp.task('less:watch', function () {
     console.log('less:watch running...');
     gulp.start(['less:debug']);
     gulp.watch(srcRoot + relevant.less, ['less:debug']);
+});
+
+// sass
+gulp.task('sass:debug', function () {
+    return gulp.src([srcRoot + relevant.sass, '!**/_*'], {
+        base: srcRoot + partRoot.sass
+    }).pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer(conf.autoprefixer))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(debugRoot + partRoot.css));
+});
+gulp.task('sass:build', function () {
+    return gulp.src([srcRoot + relevant.sass, '!**/_*'], {
+        base: srcRoot + partRoot.sass
+    }).pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer(conf.autoprefixer))
+        .pipe(minifyCss())
+        .pipe(gulp.dest(buildRoot + partRoot.css));
+});
+gulp.task('sass:watch', function () {
+    console.log('sass:watch running...');
+    gulp.start(['sass:debug']);
+    gulp.watch(srcRoot + relevant.sass, ['sass:debug']);
 });
 
 // scripts
@@ -227,7 +259,7 @@ gulp.task('tpl:watch', function () {
 // webpack
 gulp.task("webpack:debug", function () {
     return gulp.src([srcRoot + relevant.webpack_js, '!**/_*'], {base: srcRoot + partRoot.webpack_js})
-        .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+        .pipe(plumber({errorHandler: notify.onError('webPackError: <%= error.message %>')}))
         .pipe(named())
         .pipe(webpack(getWebpackConfig()))
         .pipe(gulp.dest(debugRoot + partRoot.js));
@@ -253,15 +285,16 @@ gulp.task("webpack:watch", function () {
 
 // Rerun the task when a file changes
 gulp.task('watch', function () {
-    gulp.start(['less:watch', 'js:watch','webpack:watch', 'tpl:watch']);
+    gulp.start(['less:watch', 'sass:watch','js:watch','tpl:watch']);
 });
 
 // The debug task (called when you run `gulp debug` from cli)
 gulp.task('debug', ['clean:debug'], function () {
-    gulp.start(['less:debug', 'js:debug','webpack:debug','tpl:debug']);
+    // gulp.start(['less:debug', 'sass:debug', 'js:debug', 'webpack:debug', 'tpl:debug', 'images:debug', 'copyDir:debug']);
+    gulp.start(['less:debug', 'sass:debug', 'js:debug','webpack:debug', 'tpl:debug', 'images:debug', 'copyDir:debug']);
 });
 
 // The build task (called when you run `gulp build` from cli)
 gulp.task('build', ['clean:build'], function () {
-    gulp.start(['less:build', 'js:build', 'webpack:build','tpl:build']);
+    gulp.start(['less:build', 'sass:build', 'js:build', 'tpl:build', 'images:build', 'copyDir:debug']);
 });
