@@ -1,6 +1,7 @@
 1.自我介绍：除了基本个人信息以外，面试官更想听的是你与众不同的地方和你的优势。
 2.项目及工作简单介绍
 3.平时是如何学习前端开发的？
+4、常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？
 
 html
 1、html5有哪些新特性、移除了那些元素？
@@ -9,27 +10,30 @@ html
 CSS
 1、水平居中、垂直居中简单实现，如何让绝对定位的div居中
 2、css优先级
-3、css3 Flexbox
+3、盒子模型 box-sizing
+4、css3 Flexbox
  
 JS
 1、JavaScript原型，原型链 ? 有什么特点？
 2、传值和传引用 
 3、Javascript如何实现继承？
-4、.call() 和 .apply() 的区别？
-5、谈谈This对象的理解。
-6、什么是闭包（closure），为什么要用它？
-7、如何解决跨域问题?
-8、同步和异步的区别?
-9、模块化开发 
-10、ES6
-11、组建化开发
-
-性能优化
-
+4、XMLHttpRequest —— 这是什么、怎样完整地执行一次GET请求、怎样检测错误。
+5、.call() 和 .apply() 的区别，用法举例 proxy代理
+6、谈谈This对象的理解。
+7、什么是闭包（closure），为什么要用它？
+8、如何解决跨域问题?
+9、原生JavaScript
+10、模板引擎
+11、同步和异步的区别?  promise
+12、模块化开发 AMD CMD
 
 移动端
-Zepto的点透问题如何解决？
-
+Zepto的点透问题如何解决
+需要注意那些问题
+自适应的问题解决方法方案
 
 工程化
-gulp  grunt  webpack  less sass coffee fade ..
+gulp grunt webpack less sass coffee fade ..
+
+性能优化 文件和资源+代码层面
+ES6\Node\MVVM\Web Components\React\React Native\Webpack 组件化
