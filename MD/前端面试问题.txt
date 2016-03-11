@@ -37,3 +37,5 @@ gulp grunt webpack less sass coffee fade ..
 
 性能优化 文件和资源+代码层面
 ES6\Node\MVVM\Web Components\React\React Native\Webpack 组件化
+
+详细介绍下当前的开发模式
