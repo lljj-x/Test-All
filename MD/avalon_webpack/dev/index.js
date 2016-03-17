@@ -19,7 +19,6 @@ avalon.define({
         onBeforeSwitch: function() {
         },
         onSwitch: function() {
-
         },
         multiple: true
     }
