@@ -1,0 +1,1 @@
+define([],function(){var t=function(){this.init()};return t.prototype={init:function(){this.getData()},getData:function(){console.log("goods getData")},setData:function(){console.log("goods setData")}},t});

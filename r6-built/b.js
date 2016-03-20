@@ -1,0 +1,1 @@
+define(["require","a"],function(){return alert("b"),function(e){var r=require("a");return console.log(r.hi),{hi:"b"}}});

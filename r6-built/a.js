@@ -1,0 +1,1 @@
+define(["b"],function(){return alert("a"),{hi:"nihao"}});
