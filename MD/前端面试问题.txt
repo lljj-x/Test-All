@@ -1,7 +1,8 @@
-1.自我介绍：除了基本个人信息以外，面试官更想听的是你与众不同的地方和你的优势。
+1.自我介绍
 2.项目及工作简单介绍
 3.平时是如何学习前端开发的？
 4、常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？
+5、细介绍下当前的开发模式
 
 html
 1、html5有哪些新特性、移除了那些元素？
@@ -18,14 +19,20 @@ JS
 2、传值和传引用 
 3、Javascript如何实现继承？
 4、XMLHttpRequest —— 这是什么、怎样完整地执行一次GET请求、怎样检测错误。
-5、.call() 和 .apply() 的区别，用法举例 proxy代理
 6、谈谈This对象的理解。
 7、什么是闭包（closure），为什么要用它？
 8、如何解决跨域问题?
 9、原生JavaScript
 10、模板引擎
 11、同步和异步的区别?  promise
-12、模块化开发 AMD CMD
+
+12、模块化开发 AMD CMD / 主要是模块怎么划分
+13、 new关键字做了什么事情，和直接执行 function 的区别
+15、在Javascript中什么是伪数组（NodeList跟arguments）？使用标准数组的一些方法？
+5、假如我要计算n个值得和，但是参数长度不能确认，
+.call() 和 .apply() 的区别，用法举例 proxy代理
+14、mvvm vue angular react
+16、商品多属性 sku 算法
 
 移动端
 Zepto的点透问题如何解决
@@ -37,5 +44,3 @@ gulp grunt webpack less sass coffee fade ..
 
 性能优化 文件和资源+代码层面
 ES6\Node\MVVM\Web Components\React\React Native\Webpack 组件化
-
-详细介绍下当前的开发模式
