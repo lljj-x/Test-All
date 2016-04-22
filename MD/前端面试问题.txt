@@ -32,6 +32,7 @@ JS
 15、在Javascript中什么是伪数组（NodeList跟arguments）？使用标准数组的一些方法？
 5、假如我要计算n个值得和，但是参数长度不能确认，
 .call() 和 .apply() 的区别，用法举例 proxy代理
+
 14、mvvm vue angular react
 16、商品多属性 sku 算法
 
