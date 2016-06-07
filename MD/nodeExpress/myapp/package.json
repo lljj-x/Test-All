@@ -1,0 +1,17 @@
+{
+  "name": "nodeex",
+  "version": "1.0.0",
+  "description": "nodejs 安装测试",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "liu.jun",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
