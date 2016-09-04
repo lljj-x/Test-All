@@ -100,6 +100,7 @@ module.exports = {
 };
 
 if (process.env.NODE_ENV === 'production') {
+
     module.exports.plugins = [
         new webpack.optimize.CommonsChunkPlugin({
             name: "common2",
