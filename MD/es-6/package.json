@@ -1,28 +1,41 @@
 {
-  "name": "es6_webpack",
+  "name": "webpack",
   "version": "1.0.0",
-  "description": "test",
+  "description": "webpack vue avalon 通用脚手架",
   "main": "index.js",
+  "config": {
+    "buildDir": "./build/",
+    "devHost": "localhost",
+    "devPort": 3000
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --inline --hot --quiet --port 8081",
-    "build": "webpack --progress --hide-modules",
-    "watch": "webpack --watch"
+    "dev": "node dev-server ./dev.config",
+    "build": "webpack --config ./pro.config",
+    "bie": "webpack ---watch --config ./pro.config ",
+    "bug": "webpack-dev-server --config ./dev.config --hot --inline --devtool eval --progress --colors --content-base dist"
   },
   "dependencies": {
     "text-loader": "^0.0.1",
-    "webpack": "^1.12.14",
-    "css-loader": "^0.23.1",
-    "style-loader": "^0.13.0",
-    "glob": "^7.0.5",
     "babel-core": "^6.1.21",
     "babel-loader": "^6.1.0",
     "babel-plugin-transform-runtime": "^6.1.18",
     "babel-preset-es2015": "^6.1.18",
     "babel-runtime": "^5.8.0",
     "cross-env": "^1.0.5",
+    "avalon2": "^2.1.5",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "glob": "^7.0.5",
+    "html-loader": "^0.4.3",
+    "node-sass": "^3.8.0",
+    "opn": "^4.0.2",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack-dev-server": "^1.12.0"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-merge": "^0.14.0"
   },
   "devDependencies": {
     "html-webpack-plugin": "^2.22.0"
