@@ -5,10 +5,10 @@ var autoprefixer = require('autoprefixer');
 
 // 移动端
 // var pxtorem = require('postcss-px2rem');
-// var mPstcssConfig = [autoprefixer({ browsers: ['> 2%']}), precss, pxtorem({ remUnit: 75 })];
+// var mPstcssConfig = [autoprefixer({ browsers:["android 4", "iOS 6"]}), pxtorem({ remUnit: 75 })];
 
 // pc config
-var pcPostcssConfig = [autoprefixer({ browsers:["android 4", "iOS 6"]})];
+var pcPostcssConfig = [autoprefixer({ browsers: ['last 2 versions']})];
 
 var webpack= require('webpack');
 var pkg=require("./package.json");
@@ -64,7 +64,7 @@ function getEntry(globPath, pathDir) {
                 'webpack/' + outFileName,
                 'common/common-lib',
                 'common/common-wp',
-                'common-css'
+                // 'common-css'
             ],
             filename: '' + outFileName + '.html',
             template: './src/pages/' + pathname + '.ejs',
@@ -95,7 +95,6 @@ module.exports=function (options) {
     var DEBUG = options.debug !==undefined ? options.debug :true;
 
     //生成路径字符串
-    // var cssBundle = path.join('_css', util.format('[name].%s.css', pkg.version));
     var _path = pkg.config.buildDir;
 
     var allEntries = getEntry('src/pages/**/*.js', 'src/pages/');
@@ -161,8 +160,7 @@ module.exports=function (options) {
                 },
                 {
                     test: /\.css$/,
-                    loader: ExtractTextPlugin.extract('style', 'css')
-                    // loader: 'style!css'
+                    loader: ExtractTextPlugin.extract('style', 'css!postcss')
                 },
                 {
                     test: /\.(png|jpg)$/,
@@ -170,7 +168,7 @@ module.exports=function (options) {
                 },
                 {
                     test:/\.scss$/,
-                    loader: ExtractTextPlugin.extract("css!sass!postcss")
+                    loader: ExtractTextPlugin.extract('style','css!postcss!sass')
                     // loader: 'style!css!sass'
                 },
                 {
@@ -186,7 +184,6 @@ module.exports=function (options) {
         postcss:function () {
             return pcPostcssConfig;
         },
-
         resolve: {
             extensions: ['', '.js', '.json'],
             alias: {
