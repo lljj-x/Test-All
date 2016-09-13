@@ -18,18 +18,18 @@ compiler.run(function(err, stats) {
 
     if (jsonStats.errors.length > 0){
         jsonStats.errors.forEach(function (v) {
-            console.error('致命错误！' + v);
+            console.error('\n致命错误！' + v);
         });
         return ;
     }
 
     if (jsonStats.warnings.length > 0) {
         jsonStats.errors.forEach(function (v) {
-            console.warn('警告！' + v);
+            console.warn('\n警告！' + v);
         });
     }
 
-    console.log('success','构建成功 !');
+    console.log('\n构建成功 !');
 });
 
 // gulp run
