@@ -1,6 +1,14 @@
 var path = require('path');
 var glob = require('glob');
 var util = require('util');
+var autoprefixer = require('autoprefixer');
+
+// 移动端
+// var pxtorem = require('postcss-px2rem');
+// var mPstcssConfig = [autoprefixer({ browsers: ['> 2%']}), precss, pxtorem({ remUnit: 75 })];
+
+// pc config
+var pcPostcssConfig = [autoprefixer({ browsers:["android 4", "iOS 6"]})];
 
 var webpack= require('webpack');
 var pkg=require("./package.json");
@@ -11,7 +19,7 @@ var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin; //丑化
 //引入路径
 var node_modules = path.resolve(__dirname, 'node_modules');
 
-//webpack/hot/only-dev-server 如果你喜欢手动更新
+// webpack/hot/only-dev-server 如果你喜欢手动更新
 var webpackHot='webpack/hot/dev-server';
 var webpackClient='webpack-dev-server/client?http://'+pkg.config.devHost+':'+pkg.config.devPort;
 
@@ -50,9 +58,14 @@ function getEntry(globPath, pathDir) {
         pathname = pathname.replace(/\\/g,'/');
         outFileName = outFileName.replace(/\\/g,'/');
 
-        entries['wpjs/' + outFileName] = ['./' + entry];
+        entries['webpack/' + outFileName] = ['./' + entry];
         templates[pathname] = {
-            chunks: ['wpjs/' + outFileName],
+            chunks: [
+                'webpack/' + outFileName,
+                'common/common-lib',
+                'common/common-wp',
+                'common-css'
+            ],
             filename: '' + outFileName + '.html',
             template: './src/pages/' + pathname + '.ejs',
             inject: 'body',
@@ -64,10 +77,11 @@ function getEntry(globPath, pathDir) {
              * 另外，UglifyJsPlugin会在压缩代码的时候连同html一起压缩。
              * 为避免压缩html，需要在html-loader上配置'html?-minimize'，见loaders中html-loader的配置。
              */
-            /* minify: { //压缩HTML文件
-             removeComments: true, //移除HTML中的注释
-             collapseWhitespace: false //删除空白符与换行符
-             }*/
+
+            // minify: { //压缩HTML文件
+            //     removeComments: true, //移除HTML中的注释
+            //     collapseWhitespace: false //删除空白符与换行符
+            // }
         }
     }
     return {
@@ -81,7 +95,6 @@ module.exports=function (options) {
     var DEBUG = options.debug !==undefined ? options.debug :true;
 
     //生成路径字符串
-    // var jsBundle = path.join('_js', util.format('[name].%s.js', pkg.version));
     // var cssBundle = path.join('_css', util.format('[name].%s.css', pkg.version));
     var _path = pkg.config.buildDir;
 
@@ -109,54 +122,56 @@ module.exports=function (options) {
     // }
     //#end
 
-    //config
     var config = {
         entry: Object.assign(entries, {
-            // 用到什么公共lib（例如jquery.js），就把它加进common去，目的是将公用库单独提取打包
-            // 'common': ['jquery','avalon2']
-            'common': ['avalon2']
+            // 用到什么公共lib css（例如jquery.js），就把它加进common去，目的是将公用库单独提取打包
+            'common/common-lib': [
+                'jquery',
+                'avalon2',
+                path.resolve(__dirname, 'src/sass/common.scss')
+            ],
+            // 'common-css':[
+            //     // 全局样式
+            //     path.resolve(__dirname, 'src/sass/common.scss')
+            // ]
         }),
         output: {
             path: path.join(__dirname, _path),
-            publicPath: '/', //这里需要更具具体情况来配置调整 公共路径
+            publicPath: '/',
             // filename: '[name].[hash].js',
-            filename: '[name].js',
+            // filename: '[name].js',
+            filename: '[name].js?[chunkhash]',  // chunkhash是根据具体模块文件的内容计算所得的hash值，所以某个文件的改动只会影响它本身的hash指纹，不会影响其他文件
+
         },
         module: {
             loaders: [
                 {
-                    test: /\.mjs$/,
+                    test: /\.(mjs|js)$/,
                     // excluding some local linked packages.
                     // for normal use cases only node_modules is needed.
                     exclude: /node_modules|dev\/avalon|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
                     loader: 'babel',
                     query: {
                         presets: ['es2015'],
-                        //plugins: [
-                        //    'transform-es2015-typeof-symbol','transform-runtime'
-                        //]
                         plugins: [
-                            'transform-runtime'
-                        ]
+                            'transform-runtime',
+                            // 'transform-es2015-typeof-symbol'
+                        ],
                     }
                 },
                 {
                     test: /\.css$/,
-                    // loader: ExtractTextPlugin.extract('style', 'css'),
-                    loader: 'style!css'
+                    loader: ExtractTextPlugin.extract('style', 'css')
+                    // loader: 'style!css'
                 },
                 {
                     test: /\.(png|jpg)$/,
-                    loader: 'url-loader?limit=8192'
+                    loader: 'url-loader?limit=8192&name=images/[name]-[hash].[ext]'
                 },
-                // {
-                //     test: /\.(png|jpe?g|gif)$/,
-                //     loader: 'url-loader?limit=8192&name=_images/[name]-[hash].[ext]' //这里前缀路路径 publicPath 参数为基础
-                // },
                 {
                     test:/\.scss$/,
-                    // loader: ExtractTextPlugin.extract("css!sass")
-                    loaders: ['style', 'css', 'sass']
+                    loader: ExtractTextPlugin.extract("css!sass")
+                    // loader: 'style!css!sass'
                 },
                 {
                     test: /\.html$/,
@@ -168,36 +183,33 @@ module.exports=function (options) {
                 }
             ]
         },
+        postcss:pcPostcssConfig,
+
         resolve: {
             extensions: ['', '.js', '.json'],
             alias: {
-                // 'jquery': path.resolve(__dirname, 'app/_lib/jQuery-1.11.3.js'),
-                // 'avalon2':path.resolve(__dirname,'app/_lib/avalon.js')
+                'jquery': path.resolve(__dirname, 'src/lib/jquery-1.9.1.min.js'),
+                'avalon':path.resolve(__dirname,'app/lib/avalon.js'),
+
+                'scss': path.resolve(__dirname, 'src/sass'),
+                "components": path.resolve(__dirname, 'src/components'),
+                "images": path.resolve(__dirname, 'src/images')
 
                 // 'avalon2':path.resolve(node_modules,'avalon2/dist/avalon.js')
             }
         },
         plugins: [
-            // new ExtractTextPlugin(cssBundle, {
-            //     allChunks: true
-            // }),
+            new ExtractTextPlugin('css/[name].css?[contenthash]', {
+                allChunks: true
+            }),
             new webpack.ProvidePlugin({
                 $: 'jquery', //加载$全局
                 jQuery: 'jquery' //加载$全局
-                // avalon:'avalon2' //加载 avalon 全局 [******这里必须强制 window.avalon]
             }),
-            // new webpack.optimize.CommonsChunkPlugin({
-            //     name: 'common',     // 将公共模块提取，生成名为`common`的chunk
-            //     chunks: pages,      //提取哪些模块共有的部分
-            //     minChunks: pages.length
-            // }),
-            DEBUG ? function() {} : new UglifyJsPlugin({ //压缩代码
-                sourceMap: false,
-                drop_console: true,
-                compress: {
-                    warnings: false
-                },
-                except: [ '$', 'exports', 'require'] //排除关键字
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'common/common-wp',     // 将公共模块提取，生成名为`common`的chunk
+                chunks: pages,      //提取哪些模块共有的部分
+                minChunks: pages.length
             })
         ].concat(htmlWebpackPluginConfig),
         //使用webpack-dev-server，提高开发效率
@@ -213,7 +225,21 @@ module.exports=function (options) {
             stats: { colors: true }
         }
     };
-    return config;
+
+    !DEBUG && (config.plugins = config.plugins.concat([
+        new UglifyJsPlugin({ //压缩代码
+            sourceMap: false,
+            drop_console: true,
+            compress: {
+                warnings: false
+            },
+            except: [ '$', 'exports', 'require'] //排除关键字
+        }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.DedupePlugin()
+    ]));
+
+    return config
 };
 
 
