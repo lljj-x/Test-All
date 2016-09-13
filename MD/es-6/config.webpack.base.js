@@ -170,7 +170,7 @@ module.exports=function (options) {
                 },
                 {
                     test:/\.scss$/,
-                    loader: ExtractTextPlugin.extract("css!sass")
+                    loader: ExtractTextPlugin.extract("css!sass!postcss")
                     // loader: 'style!css!sass'
                 },
                 {
@@ -183,7 +183,9 @@ module.exports=function (options) {
                 }
             ]
         },
-        postcss:pcPostcssConfig,
+        postcss:function () {
+            return pcPostcssConfig;
+        },
 
         resolve: {
             extensions: ['', '.js', '.json'],
