@@ -192,6 +192,8 @@ module.exports=function (options) {
             //     minChunks: pages.length
             // }),
             DEBUG ? function() {} : new UglifyJsPlugin({ //压缩代码
+                sourceMap: false,
+                drop_console: true,
                 compress: {
                     warnings: false
                 },

@@ -7,8 +7,12 @@ var pkg = require('./package.json');
 var port = pkg.config.devPort;
 var host = pkg.config.devHost;
 
-var configPath = './dev.config';
+var configPath = './config.dev';
 var config = require(configPath);
+
+// gulp run
+var gulpTask = require('./config.gulp.base');
+gulpTask({debug:true});
 
 //如果使用这种模式启动 服务 webpack.devServer, 只是一个配置目录并不依赖
 /*var devServer={
@@ -16,14 +20,14 @@ var config = require(configPath);
 }
 这样引入到下面的函数里面也一样
 */
+
 var server = new WebpackDevServer(
   webpack(config),
   config.devServer
 );
-
 server.listen(port, host, function (err) {
   if (err) { console.log(err); }
   var url = util.format('http://%s:%d', host, port);
-  // console.log('Listening at %s', url);
+  console.log('Listening at %s', url);
   // opn(url+'/_views');
 });
