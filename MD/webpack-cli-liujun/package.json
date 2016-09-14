@@ -1,13 +1,14 @@
 {
-  "name": "webpack",
+  "name": "webpack-cli-liujun",
   "version": "1.0.0",
-  "description": "webpack vue avalon 通用脚手架",
+  "description": "webpack 通用脚手架",
   "main": "index.js",
   "config": {
     "buildDir": "./build/",
     "devHost": "localhost",
     "devPort": 3000
   },
+  "skin":"xxxx",
   "gulpConfig": {
     "copyDir": "./src/static/**",
     "copyDirBasePath": "./src/static/"

@@ -8,7 +8,7 @@ var autoprefixer = require('autoprefixer');
 // var mPstcssConfig = [autoprefixer({ browsers:["android 4", "iOS 6"]}), pxtorem({ remUnit: 75 })];
 
 // pc config
-var pcPostcssConfig = [autoprefixer({ browsers: ['last 2 versions']})];
+var pcPostcssConfig = [autoprefixer({ browsers:  ['last 3 versions','> 5%','ie >= 8','Firefox >= 10','last 3 Safari versions']})];
 
 var webpack= require('webpack');
 var pkg=require("./package.json");
@@ -60,6 +60,7 @@ function getEntry(globPath, pathDir) {
 
         entries['webpack/' + outFileName] = ['./' + entry];
         templates[pathname] = {
+            skin:pkg.skin,
             chunks: [
                 'webpack/' + outFileName,
                 'common/common-lib',
@@ -158,18 +159,10 @@ module.exports=function (options) {
                         ],
                     }
                 },
-                {
-                    test: /\.css$/,
-                    loader: ExtractTextPlugin.extract('style', 'css!postcss')
-                },
+
                 {
                     test: /\.(png|jpg)$/,
                     loader: 'url-loader?limit=8192&name=images/[name]-[hash].[ext]'
-                },
-                {
-                    test:/\.scss$/,
-                    loader: ExtractTextPlugin.extract('style','css!postcss!sass')
-                    // loader: 'style!css!sass'
                 },
                 {
                     test: /\.html$/,
@@ -198,18 +191,11 @@ module.exports=function (options) {
             }
         },
         plugins: [
-            new ExtractTextPlugin('css/[name].css?[contenthash]', {
-                allChunks: true
-            }),
             new webpack.ProvidePlugin({
                 $: 'jquery', //加载$全局
                 jQuery: 'jquery' //加载$全局
             }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'common/common-wp',     // 将公共模块提取，生成名为`common`的chunk
-                chunks: pages,      //提取哪些模块共有的部分
-                minChunks: pages.length
-            })
+
         ].concat(htmlWebpackPluginConfig),
         //使用webpack-dev-server，提高开发效率
         //启用热服务有两种 如果是 api 启动方式, 这里只是一个配置目录,不会被webpack读取,
@@ -226,6 +212,14 @@ module.exports=function (options) {
     };
 
     !DEBUG && (config.plugins = config.plugins.concat([
+        new ExtractTextPlugin('css/[name].css?[contenthash]', {
+            allChunks: true
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common/common-wp',     // 将公共模块提取，生成名为`common`的chunk
+            chunks: pages,      //提取哪些模块共有的部分
+            minChunks: pages.length
+        }),
         new UglifyJsPlugin({ //压缩代码
             sourceMap: false,
             drop_console: true,
@@ -237,6 +231,25 @@ module.exports=function (options) {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.DedupePlugin()
     ]));
+
+    config.module.loaders = config.module.loaders.concat(DEBUG ? [
+        {
+            test: /\.css$/,
+            loader: 'style!css!postcss'
+        },
+        {
+            test:/\.scss$/,
+            loader: 'style!css!postcss!sass'
+        }
+    ] : [{
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css!postcss')
+    },
+    {
+        test:/\.scss$/,
+        loader: ExtractTextPlugin.extract('style','css!postcss!sass')
+        // loader: 'style!css!sass'
+    }]);
 
     return config
 };
