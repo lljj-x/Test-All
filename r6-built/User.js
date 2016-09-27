@@ -1,1 +1,0 @@
-define(["goods"],function(o){var n=new o;return n.setData(),console.log("User init"),{say:function(){console.log("Hello word !!!")}}});
