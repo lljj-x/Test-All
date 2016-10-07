@@ -11,8 +11,8 @@ var configPath = './config.dev';
 var config = require(configPath);
 
 // gulp run
-var gulpTask = require('./config.gulp.base');
-gulpTask({debug:true});
+// var gulpTask = require('./config.gulp.base');
+// gulpTask({debug:true});
 
 //如果使用这种模式启动 服务 webpack.devServer, 只是一个配置目录并不依赖
 /*var devServer={

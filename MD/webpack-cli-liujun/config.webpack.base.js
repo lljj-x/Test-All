@@ -60,12 +60,11 @@ function getEntry(globPath, pathDir) {
 
         entries['webpack/' + outFileName] = ['./' + entry];
         templates[pathname] = {
-            skin:pkg.skin,
+            skin: pkg.skin,
+            mainTitle: pkg.mainTitle,
             chunks: [
-                'webpack/' + outFileName,
                 'common/common-lib',
-                'common/common-wp',
-                // 'common-css'
+                'webpack/' + outFileName,
             ],
             filename: '' + outFileName + '.html',
             template: './src/pages/' + pathname + '.ejs',
@@ -126,22 +125,19 @@ module.exports=function (options) {
         entry: Object.assign(entries, {
             // 用到什么公共lib css（例如jquery.js），就把它加进common去，目的是将公用库单独提取打包
             'common/common-lib': [
-                'jquery',
-                'avalon2',
+                // 'jquery',
+                'avalon',
+                'cookie',
+                'base',    // 基础方法
+                path.resolve(__dirname, 'src/commonjs/filters.js'), // 全局过滤器
                 path.resolve(__dirname, 'src/sass/common.scss')
-            ],
-            // 'common-css':[
-            //     // 全局样式
-            //     path.resolve(__dirname, 'src/sass/common.scss')
-            // ]
+            ]
         }),
         output: {
             path: path.join(__dirname, _path),
             publicPath: '/',
-            // filename: '[name].[hash].js',
-            // filename: '[name].js',
-            filename: '[name].js?[chunkhash]',  // chunkhash是根据具体模块文件的内容计算所得的hash值，所以某个文件的改动只会影响它本身的hash指纹，不会影响其他文件
-
+            filename: '[name].js',
+            // filename: '[name].js?[chunkhash]',  // chunkhash是根据具体模块文件的内容计算所得的hash值，所以某个文件的改动只会影响它本身的hash指纹，不会影响其他文件
         },
         module: {
             loaders: [
@@ -149,7 +145,7 @@ module.exports=function (options) {
                     test: /\.(mjs|js)$/,
                     // excluding some local linked packages.
                     // for normal use cases only node_modules is needed.
-                    exclude: /node_modules|dev\/avalon|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
+                    exclude: /node_modules|lib|dev\/avalon|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
                     loader: 'babel',
                     query: {
                         presets: ['es2015'],
@@ -159,7 +155,7 @@ module.exports=function (options) {
                         ],
                     }
                 },
-
+                {test: /\.tpl/, loader: 'text-loader'},
                 {
                     test: /\.(png|jpg)$/,
                     loader: 'url-loader?limit=8192&name=images/[name]-[hash].[ext]'
@@ -181,20 +177,24 @@ module.exports=function (options) {
             extensions: ['', '.js', '.json'],
             alias: {
                 'jquery': path.resolve(__dirname, 'src/lib/jquery-1.9.1.min.js'),
-                'avalon':path.resolve(__dirname,'app/lib/avalon.js'),
-
+                'avalon':path.resolve(__dirname,'src/lib/avalon-new.js'),
+                'cookie': path.resolve(__dirname, 'src/lib/cookie'),
                 'scss': path.resolve(__dirname, 'src/sass'),
+                'commonjs':path.resolve(__dirname, 'src/commonjs'),
                 "components": path.resolve(__dirname, 'src/components'),
-                "images": path.resolve(__dirname, 'src/images')
-
-                // 'avalon2':path.resolve(node_modules,'avalon2/dist/avalon.js')
+                "images": path.resolve(__dirname, 'src/images'),
+                'base': path.resolve(__dirname, 'src/commonjs/base.js'),
             }
         },
         plugins: [
-            new webpack.ProvidePlugin({
-                $: 'jquery', //加载$全局
-                jQuery: 'jquery' //加载$全局
-            }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'common/common-lib',
+                minChunks: Infinity
+            })
+            // new webpack.ProvidePlugin({
+            //     $: 'jquery', //加载$全局
+            //     jQuery: 'jquery' //加载$全局
+            // }),
 
         ].concat(htmlWebpackPluginConfig),
         //使用webpack-dev-server，提高开发效率
@@ -205,21 +205,29 @@ module.exports=function (options) {
             host:pkg.config.devHost,
             port: pkg.config.devPort,
             hot: true,
-            noInfo: false,
+            noInfo: true,
             inline: true,
-            stats: { colors: true }
+            stats: { colors: true },
+            watchOptions: {
+                aggregateTimeout: 300,
+                poll: 1000
+            },
+            headers: { "X-Custom-Header": "yes" },
+            proxy: {
+                '/api/*': {
+                    target: 'http://iof.wandetech.com',
+                    secure: false
+                }
+            }
         }
     };
 
-    !DEBUG && (config.plugins = config.plugins.concat([
+    // 提供公共js 压缩优化代码 只在build执行
+    config.plugins = config.plugins.concat(!DEBUG ? [
         new ExtractTextPlugin('css/[name].css?[contenthash]', {
             allChunks: true
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'common/common-wp',     // 将公共模块提取，生成名为`common`的chunk
-            chunks: pages,      //提取哪些模块共有的部分
-            minChunks: pages.length
-        }),
+
         new UglifyJsPlugin({ //压缩代码
             sourceMap: false,
             drop_console: true,
@@ -230,8 +238,12 @@ module.exports=function (options) {
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.DedupePlugin()
-    ]));
+    ] : [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
+    ]);
 
+    // 设置提取css插件，只在build提取
     config.module.loaders = config.module.loaders.concat(DEBUG ? [
         {
             test: /\.css$/,
@@ -250,6 +262,9 @@ module.exports=function (options) {
         loader: ExtractTextPlugin.extract('style','css!postcss!sass')
         // loader: 'style!css!sass'
     }]);
+
+    // 设置 outPut
+    !DEBUG && (config.output.filename = '[name].js?[chunkhash]');
 
     return config
 };
