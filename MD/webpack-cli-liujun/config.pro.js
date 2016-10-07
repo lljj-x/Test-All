@@ -4,4 +4,4 @@ var webpack= require('webpack');
 
 var webpack_config = require('./config.webpack.base.js');
 
-module.exports = merge(webpack_config({debug:true}));
+module.exports = merge(webpack_config({debug:false}));

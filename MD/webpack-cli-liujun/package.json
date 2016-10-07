@@ -1,24 +1,26 @@
 {
   "name": "webpack-cli-liujun",
   "version": "1.0.0",
-  "description": "webpack 通用脚手架",
+  "description": "webpack avalon",
   "main": "index.js",
   "config": {
     "buildDir": "./build/",
     "devHost": "localhost",
-    "devPort": 3000
+    "devPort": 100
   },
-  "skin":"xxxx",
+  "skin": "darkblue",
+  "mainTitle": "我的标题",
   "gulpConfig": {
     "copyDir": "./src/static/**",
     "copyDirBasePath": "./src/static/"
   },
   "scripts": {
-    "server": "cd build & http-server -p 3000",
+    "server": "cd build & http-server -p 4000",
     "dev": "node node-dev-server ./config.dev",
+    "bug": "webpack-dev-server --config ./config.dev --hot --inline --devtool eval --progress --colors --content-base build",
     "build": "node node-webpack-build ./config.pro",
-    "bie": "webpack ---watch --config ./config.pro ",
-    "bug": "webpack-dev-server --config ./config.dev --hot --inline --devtool eval --progress --colors --content-base dist",
+    "watch": "webpack --watch --config ./config.dev",
+    "bie": "webpack ---watch --config ./config.pro",
     "build2": "webpack --config ./config.pro"
   },
   "dependencies": {
@@ -32,6 +34,8 @@
     "cross-env": "^1.0.5",
     "css-loader": "^0.23.1",
     "del": "^2.2.2",
+    "es3ify-loader": "^0.2.0",
+    "es5-shim": "^4.5.9",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "glob": "^7.0.5",
